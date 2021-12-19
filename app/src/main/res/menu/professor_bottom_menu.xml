@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/home"
+    <item android:id="@+id/professor_home"
         android:title="Home"
         android:icon="@drawable/ic_home_selector"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/profile"
+    <item android:id="@+id/professor_profile"
         android:title="Profile"
         android:icon="@drawable/ic_user_selector"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/exams"
+    <item android:id="@+id/professor_exams"
         android:title="Exams"
         android:icon="@drawable/ic_exam_selector"
         app:showAsAction="always"/>

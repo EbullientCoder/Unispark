@@ -23,7 +23,7 @@ import com.example.unispark.controller.professor.fragment.AddCommunicationFragme
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
 import com.example.unispark.database.DataBaseHelper;
-import com.example.unispark.model.CourseModel;
+import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
@@ -60,6 +60,7 @@ public class ProfessorHome extends AppCompatActivity implements
     List<HomeworkModel> homeworksItem;
     //Get Intent Extras
     Bundle extras;
+    //Model
     ProfessorModel professor;
 
     private static final String INSTRUCTIONS = "Halo è una serie di videogiochi sparatutto in prima persona di genere fantascienza militare creata da Bungie Studios e sviluppata dalla stessa Bungie (dal primo capitolo a Halo: Reach) e 343 Industries (dal quarto capitolo a Halo Infinite) e pubblicata da Xbox Game Studios (precedentemente Microsoft Game Studios). La serie conta sei capitoli principali, sei spin-off, un remake e una raccolta; al 2021 ha venduto oltre ottanta milioni di copie in tutto il mondo, incassando circa sei miliardi di dollari.";
@@ -72,12 +73,30 @@ public class ProfessorHome extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_home);
 
+        //Getting User Object
+        extras = getIntent().getExtras();
+        professor = (ProfessorModel) extras.getSerializable("UserObject");
+
+
+
         //Menu
         menuButton = findViewById(R.id.btn_menu);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Work in Progress", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Bottom Navigation Menu
+        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.professor_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), professor));
+                overridePendingTransition(0, 0);
+                return true;
             }
         });
 
@@ -137,19 +156,6 @@ public class ProfessorHome extends AppCompatActivity implements
         });
 
 
-        //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
-        MenuVisualSetting(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //MenuFunctionalSetting(item.getItemId());
-                startActivity(MenuFunctionalSetting(item.getItemId()));
-                return true;
-            }
-        });
-
-
 
         //------------------------------------------------------------------------------------------
 
@@ -177,9 +183,6 @@ public class ProfessorHome extends AppCompatActivity implements
 
 
         //Homeworks
-        extras = getIntent().getExtras();
-        professor = (ProfessorModel) extras.getSerializable("ProfessorModel");
-
         rvHomeworks = findViewById(R.id.rv_homeworks);
 
         dataBaseHomework = new DataBaseHelper(getApplicationContext());
@@ -242,7 +245,8 @@ public class ProfessorHome extends AppCompatActivity implements
         intent.putExtra("Home", "ProfessorHome");
         startActivity(intent);
     }
-    //Professor Communication Click
+
+    //University Communication Click
     @Override
     public void onUniClick(int comImage, String title, String date, String communication) {
         Intent intent = new Intent(this, DetailsUniCommunication.class);
@@ -253,22 +257,5 @@ public class ProfessorHome extends AppCompatActivity implements
         intent.putExtra("Communication", communication);
         intent.putExtra("Home", "ProfessorHome");
         startActivity(intent);
-    }
-
-    //BottomNavigationMenu
-    public void MenuVisualSetting(int id){
-        //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
-        //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
-        //Set Home button
-        bottomNavigationView.setSelectedItemId(id);
-    }
-    public Intent MenuFunctionalSetting(int id){
-        switch (id){
-            case R.id.profile: return new Intent(getApplicationContext(), ProfessorHome.class);
-            case R.id.exams: return new Intent(getApplicationContext(), ProfessorHome.class);
-            default: return new Intent(getApplicationContext(), ProfessorHome.class);
-        }
     }
 }

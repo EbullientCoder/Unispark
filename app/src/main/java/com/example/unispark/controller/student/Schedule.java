@@ -15,6 +15,7 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.LessonModel;
+import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class Schedule extends AppCompatActivity{
     private LessonModel lesson7;
     private LessonModel lesson8;
     private LessonModel lesson9;
+    //Get Intent Extras
+    Bundle extras;
+    StudentModel student;
 
 
     //Methods
@@ -50,6 +54,12 @@ public class Schedule extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_schedule);
+
+        //Getting User Object
+        extras = getIntent().getExtras();
+        //student = (StudentModel) extras.getSerializable("UserObject");
+        student = null;
+
 
         //Calendar
         OffsetDateTime offset = OffsetDateTime.now();
@@ -65,7 +75,7 @@ public class Schedule extends AppCompatActivity{
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId()));
+                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
                 overridePendingTransition(0, 0);
                 return true;
             }

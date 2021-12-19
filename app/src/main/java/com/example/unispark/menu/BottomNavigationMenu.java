@@ -5,13 +5,17 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.unispark.controller.professor.ProfessorHome;
+import com.example.unispark.controller.professor.ProfessorProfile;
 import com.example.unispark.controller.student.Links;
 import com.example.unispark.controller.student.Exams;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.controller.student.Profile;
-import com.example.unispark.R;
 import com.example.unispark.controller.student.Schedule;
+import com.example.unispark.model.UserModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.unispark.R;
+
 
 
 public class BottomNavigationMenu extends AppCompatActivity {
@@ -24,13 +28,33 @@ public class BottomNavigationMenu extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(id);
     }
 
-    public static Intent functionalSetting(Context context, int id){
+    public static Intent functionalSetting(Context context, int id, UserModel user){
+        Intent intent = null;
+
         switch (id){
-            case R.id.profile: return new Intent(context, Profile.class);
-            case R.id.exams: return new Intent(context, Exams.class);
-            case R.id.links: return new Intent(context, Links.class);
-            case R.id.schedule: return new Intent(context, Schedule.class);
-            default: return new Intent(context, Home.class);
+            //Student
+            case R.id.profile: intent = new Intent(context, Profile.class);
+            break;
+            case R.id.exams: intent = new Intent(context, Exams.class);
+            break;
+            case R.id.links: intent =  new Intent(context, Links.class);
+            break;
+            case R.id.schedule: intent = new Intent(context, Schedule.class);
+            break;
+
+            //Professor
+            case R.id.professor_home: intent = new Intent(context, ProfessorHome.class);
+            break;
+            case R.id.professor_profile: intent = new Intent(context, ProfessorProfile.class);
+            break;
+            case R.id.professor_exams: intent = new Intent(context, ProfessorHome.class);
+            break;
+
+            //University
+            //case
         }
+        intent.putExtra("UserObject", user);
+
+        return intent;
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,10 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             CourseModel courseModel = (CourseModel) items.get(position);
             ((CourseViewHolder) holder).setLeaveCourseDate(courseModel);
         }
+        else if(type.equals("PROFESSOR")){
+            CourseModel courseModel = (CourseModel) items.get(position);
+            ((CourseViewHolder) holder).setProfessorCourseDate(courseModel);
+        }
     }
 
     @Override
@@ -86,6 +91,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private TextView aa;
         private TextView cfu;
         private Button btnJoinLeave;
+        private LinearLayout lyt_button;
 
 
         //Methods
@@ -96,6 +102,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             aa = itemView.findViewById(R.id.txt_course_aa_date);
             cfu = itemView.findViewById(R.id.txt_course_cfu);
             btnJoinLeave = itemView.findViewById(R.id.btn_join_leave_course);
+            lyt_button = itemView.findViewById(R.id.lyt_contain_course_button);
 
             this.onCourseClickListener = onCourseClickListener;
             itemView.setOnClickListener(this);
@@ -121,6 +128,18 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             session = courseModel.getSession();
             link = courseModel.getLink();
             btnJoinLeave.setText("LEAVE");
+        }
+
+        void setProfessorCourseDate(CourseModel courseModel) {
+            fullName.setText(courseModel.getFullName());
+            shortName = courseModel.getShortName();
+            aa.setText(courseModel.getCourseYear());
+            cfu.setText(courseModel.getCfu());
+            id = courseModel.getId();
+            session = courseModel.getSession();
+            link = courseModel.getLink();
+            btnJoinLeave.setVisibility(View.INVISIBLE);
+            lyt_button.setVisibility(View.INVISIBLE);
         }
 
         @Override

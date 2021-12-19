@@ -15,6 +15,8 @@ import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.FailedExamModel;
 import com.example.unispark.model.exams.ReserveExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
@@ -36,6 +38,9 @@ public class Exams extends AppCompatActivity {
     ImageButton btnPageLeft;
     TextView examsTitle;
     int page;
+    //Get Intent Extras
+    Bundle extras;
+    StudentModel student;
 
     private static final String YEAR = "2020/2021";
 
@@ -47,6 +52,11 @@ public class Exams extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_exams);
 
+        //Getting User Object
+        extras = getIntent().getExtras();
+        //student = (StudentModel) extras.getSerializable("UserObject");
+        student = null;
+
 
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
@@ -54,7 +64,7 @@ public class Exams extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId()));
+                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
                 overridePendingTransition(0, 0);
                 return true;
             }

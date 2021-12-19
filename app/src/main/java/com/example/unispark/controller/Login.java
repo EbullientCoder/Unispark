@@ -83,14 +83,10 @@ public class Login extends AppCompatActivity {
                             break;
                             case "PROFESSOR":
                                 ProfessorModel professor = dataBaseUser.getProfessor(email);
-                                /*Toast.makeText(getApplicationContext(), professor.getFirstName() + "--"
-                                        + professor.getLastName() + "--"
-                                        + professor.getEmail() + "--"
-                                        + professor.getWebsite() + "--"
-                                        + professor.getCourses().get(0).getFullName(), Toast.LENGTH_SHORT).show();*/
-                               // Intent intent = new Intent(getApplicationContext(), ProfessorHome.class);
-                              //  intent.putExtra("professor", professor);
-                              //  startActivity(intent);
+
+                                Intent intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                                intent.putExtra("UserObject", professor);
+                                startActivity(intent);
                             break;
                             //case "UNIVERSITY": startActivity(new Intent(getApplicationContext(), UniversityHome.class));
                             //break;

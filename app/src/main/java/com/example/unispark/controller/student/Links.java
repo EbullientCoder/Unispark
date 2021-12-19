@@ -23,6 +23,7 @@ import com.example.unispark.adapter.ProfessorsAdapter;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LinkModel;
 import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
@@ -51,6 +52,9 @@ public class Links extends AppCompatActivity
     LinksAdapter linkAdapter;
     EditText txtAddLinkName;
     EditText txtAddLink;
+    //Get Intent Extras
+    Bundle extras;
+    StudentModel student;
 
 
     //Methods
@@ -60,13 +64,19 @@ public class Links extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_links);
 
+        //Getting User Object
+        extras = getIntent().getExtras();
+        //student = (StudentModel) extras.getSerializable("UserObject");
+        student = null;
+
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
         BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.links);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId()));
+                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
                 overridePendingTransition(0, 0);
                 return true;
             }

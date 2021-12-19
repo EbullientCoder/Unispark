@@ -284,14 +284,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 -1,
                 "Davide",
                 "Falessi",
-                "https://www.falessi.com",
+                "https://www.binance.com",
                 R.drawable.courses_falessi,
                 null);
 
         ProfessorModel professor2 = new ProfessorModel("lopresti",
                 getHash("lo"),
                 -1,
-                "Boh",
+                "Francesco",
                 "Lo Presti",
                 "https://www.lopresti.com",
                 R.drawable.courses_lo_presti,
@@ -325,6 +325,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         this.addHomework(homework2);
 
+
         //Add courses to DB
         CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW",
@@ -334,7 +335,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "2",
                 "https://google.com");
 
+        CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
+                "ISPW II",
+                "ING. DEL SOFTWARE E PROG. WEB II",
+                "2021/2022",
+                "12.0",
+                "Winter",
+                "https://binance.com");
+
         this.addCourse(course);
+        this.addCourse(course1);
+
 
         //Sample University
         UniversityModel university = new UniversityModel("universita@gmail.com",

@@ -13,6 +13,9 @@
             android:name=".controller.professor.ProfessorHome"
             android:exported="true" />
         <activity
+            android:name=".controller.professor.ProfessorProfile"
+            android:exported="true" />
+        <activity
             android:name=".controller.details.DetailsProfessor"
             android:exported="true" />
         <activity

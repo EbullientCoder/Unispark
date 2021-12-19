@@ -16,6 +16,7 @@ import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
 import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
     ImageButton addCourse;
     //Fragment Course
     SearchCourseFragment searchCourseFragment;
+    //Get Intent Extras
+    Bundle extras;
+    StudentModel student;
 
     private static final String YEAR = "2020/2021";
 
@@ -45,6 +49,11 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
 
+        //Getting User Object
+        extras = getIntent().getExtras();
+        //student = (StudentModel) extras.getSerializable("UserObject");
+        student = null;
+
 
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
@@ -52,7 +61,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId()));
+                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
                 overridePendingTransition(0, 0);
                 return true;
             }

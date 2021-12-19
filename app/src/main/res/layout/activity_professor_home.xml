@@ -128,7 +128,7 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomMenuBar"
+        app:layout_anchor="@id/professor_bottomMenuBar"
         android:src="@drawable/icon_plus"
         android:backgroundTint="#34D2A1"/>
 
@@ -206,7 +206,7 @@
 
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomMenuBar"
+        android:id="@+id/professor_bottomMenuBar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_gravity="bottom"
@@ -216,7 +216,7 @@
         app:fabCradleMargin="10dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomMenuView"
+            android:id="@+id/professor_bottomMenuView"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:menu="@menu/professor_bottom_menu"

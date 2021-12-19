@@ -61,10 +61,12 @@ public class DetailsCourse extends AppCompatActivity {
         txtCFU.setText(course.getCfu());
         txtID = findViewById(R.id.txt_course_id);
         txtID.setText(course.getId());
-        /*txtProf1 = findViewById(R.id.txt_course_prof1);
+        /*
+        txtProf1 = findViewById(R.id.txt_course_prof1);
         txtProf1.setText(prof1);
         txtProf2 = findViewById(R.id.txt_course_prof2);
-        txtProf2.setText(prof2);*/
+        txtProf2.setText(prof2);
+        */
         txtSession = findViewById(R.id.txt_course_session);
         txtSession.setText(course.getSession());
         txtLink = findViewById(R.id.txt_course_link);
