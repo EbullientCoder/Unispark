@@ -1,0 +1,82 @@
+package com.example.unispark.controller.details;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.unispark.R;
+import com.example.unispark.controller.student.Profile;
+import com.example.unispark.model.CourseModel;
+
+public class DetailsCourse extends AppCompatActivity {
+    //Attributes
+    //Button: GoBack
+    ImageView btnGoBack;
+    //Get Intent Extras
+    Bundle extras;
+    CourseModel course;
+    //Set Interface Text
+    TextView txtShortName;
+    TextView txtLongName;
+    TextView txtAA;
+    TextView txtCFU;
+    TextView txtID;
+    TextView txtProf1;
+    TextView txtProf2;
+    TextView txtSession;
+    TextView txtLink;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_course);
+
+        //GoBack Button
+        btnGoBack = findViewById(R.id.btn_detail_course_goback);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Profile.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+
+
+        //Get Intent Extras Data
+        extras = getIntent().getExtras();
+        //Get Text
+        course = (CourseModel) extras.getSerializable("Course");
+        //Set Text
+        txtShortName = findViewById(R.id.txt_course_short_name);
+        txtShortName.setText(course.getShortName());
+        txtLongName = findViewById(R.id.txt_course_full_name);
+        txtLongName.setText(course.getFullName());
+        txtAA = findViewById(R.id.txt_course_aa);
+        txtAA.setText(course.getCourseYear());
+        txtCFU = findViewById(R.id.txt_course_cfu);
+        txtCFU.setText(course.getCfu());
+        txtID = findViewById(R.id.txt_course_id);
+        txtID.setText(course.getId());
+        /*txtProf1 = findViewById(R.id.txt_course_prof1);
+        txtProf1.setText(prof1);
+        txtProf2 = findViewById(R.id.txt_course_prof2);
+        txtProf2.setText(prof2);*/
+        txtSession = findViewById(R.id.txt_course_session);
+        txtSession.setText(course.getSession());
+        txtLink = findViewById(R.id.txt_course_link);
+        txtLink.setText(course.getLink());
+        //Clickable Link
+        txtLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse(course.getLink());
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
+    }
+}

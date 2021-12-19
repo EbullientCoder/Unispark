@@ -1,0 +1,7 @@
+organization=unispark
+projectKey=EbullientCoder_ISPW-Lapiana-Valzano
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.25072
+dashboardUrl=https://sonarcloud.io/dashboard?id=EbullientCoder_ISPW-Lapiana-Valzano
+ceTaskId=AX1TANopU68tB0B-G-E_
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AX1TANopU68tB0B-G-E_
