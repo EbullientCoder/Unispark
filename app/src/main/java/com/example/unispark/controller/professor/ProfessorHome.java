@@ -58,6 +58,9 @@ public class ProfessorHome extends AppCompatActivity implements
     //Homeworks
     RecyclerView rvHomeworks;
     List<HomeworkModel> homeworksItem;
+    //Get Intent Extras
+    Bundle extras;
+    ProfessorModel professor;
 
     private static final String INSTRUCTIONS = "Halo è una serie di videogiochi sparatutto in prima persona di genere fantascienza militare creata da Bungie Studios e sviluppata dalla stessa Bungie (dal primo capitolo a Halo: Reach) e 343 Industries (dal quarto capitolo a Halo Infinite) e pubblicata da Xbox Game Studios (precedentemente Microsoft Game Studios). La serie conta sei capitoli principali, sei spin-off, un remake e una raccolta; al 2021 ha venduto oltre ottanta milioni di copie in tutto il mondo, incassando circa sei miliardi di dollari.";
     private static final String COMMUNICATION = "AVVISO PLC: Lunedi 13 dicembre esercitazione pratica (in Aula 4) con i PLC Siemens S7-1200. Si prevede di terminare l'esercitazione entro le ore 18. Se possibile portare un PC con installato il software TIA Portal e il simulatore PLCSIM, preferibilmente la versione 13 SP2 (vedere indicazioni in questo link: http://control.disp.uniroma2.it/fmartine/AutMan/TIAportal.html ), per la quale sono disponibili alcune licenze che verranno consegnate per il tempo necessario all'esercitazione. Scaricare sul proprio PC anche la dispensa sulla parte di programmazione dei PLC ( http://control.disp.uniroma2.it/fmartine/AutMan/parteIntroPiuPLC.pdf ) nonché questo file zip: http://control.disp.uniroma2.it/fmartine/AutMan/PLC/esempiPLC.zip , contenente alcuni esempi di programmazione dei PLC (gli stessi descritti nella dispensa). Si consiglia di mettere a punto il software prima della lezione verificando se si riesce a seguire i passi presentati nella 19esima videolezione dello scorso anno (in particolare nel video AM19a e nei primi 13 minuti del video AM19b), disponibile in fondo al link http://control.disp.uniroma2.it/fmartine/AutMan/videoLez.htm .";
@@ -174,16 +177,13 @@ public class ProfessorHome extends AppCompatActivity implements
 
 
         //Homeworks
+        extras = getIntent().getExtras();
+        professor = (ProfessorModel) extras.getSerializable("ProfessorModel");
+
         rvHomeworks = findViewById(R.id.rv_homeworks);
 
         dataBaseHomework = new DataBaseHelper(getApplicationContext());
-
-        ProfessorModel professorModel;
-
-        Bundle extras = getIntent().getExtras();
-        professorModel = (ProfessorModel) extras.getSerializable("professor");
-
-        homeworksItem = dataBaseHomework.getAssignedHomework(professorModel);
+        homeworksItem = dataBaseHomework.getAssignedHomework(professor);
 
         rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "PROFESSOR"));
     }

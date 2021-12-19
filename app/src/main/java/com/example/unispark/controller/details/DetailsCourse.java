@@ -41,8 +41,7 @@ public class DetailsCourse extends AppCompatActivity {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
-                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

@@ -49,15 +49,7 @@ public class DetailsHomework extends AppCompatActivity {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(home.equals("StudentHome")) startActivity(new Intent(getApplicationContext(), Home.class));
-                else if(home.equals("ProfessorHome")){
-                    Bundle extras = getIntent().getExtras();
-                    int id = extras.getInt("profID");
-                    Intent intent = new Intent(getApplicationContext(), ProfessorHome.class);
-                    intent.putExtra("profID", id);
-                    startActivity(intent);
-                }
-                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

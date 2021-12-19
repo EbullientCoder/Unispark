@@ -43,8 +43,7 @@ public class DetailsProfCommunication extends AppCompatActivity {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
-                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

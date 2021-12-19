@@ -44,10 +44,7 @@ public class DetailsUniCommunication extends AppCompatActivity {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(home.equals("StudentHome")) startActivity(new Intent(getApplicationContext(), Home.class));
-                else if(home.equals("ProfessorHome"))startActivity(new Intent(getApplicationContext(), ProfessorHome.class));
-
-                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

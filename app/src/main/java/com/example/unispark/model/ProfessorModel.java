@@ -3,7 +3,7 @@ package com.example.unispark.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class ProfessorModel extends UserModel implements Serializable {
+public class ProfessorModel extends UserModel{
     //Attributes
     private int id;
     private String firstName;

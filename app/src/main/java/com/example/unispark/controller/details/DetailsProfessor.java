@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Links;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.ProfessorModel;
 
 import java.util.List;
 
@@ -42,13 +44,14 @@ public class DetailsProfessor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_professor);
 
+
+
         //GoBack Button
         btnGoBack = findViewById(R.id.btn_detail_professor_goback);
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Links.class));
-                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

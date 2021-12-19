@@ -28,7 +28,8 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         String course,
                         String date,
                         String instructions,
-                        String points, int id);
+                        String points,
+                        int id);
     }
 
 
@@ -122,7 +123,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             title = homework.getTitle();
             instructions = homework.getInstructions();
             points = homework.getPoints();
-            id = homework.getTrackProfessor();
+            id = 1;
         }
 
         @Override
