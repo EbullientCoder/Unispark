@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity {
                             //case "UNIVERSITY": startActivity(new Intent(getApplicationContext(), UniversityHome.class));
                             //break;
                         }
-                        //PUSH
+                        //COMMENTO PER EMA
                     }
                     else Toast.makeText(getApplicationContext(), "WRONG CREDENTIALS", Toast.LENGTH_SHORT).show();
                 }
