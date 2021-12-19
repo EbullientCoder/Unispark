@@ -65,7 +65,7 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_student_home);
 
         //Getting User Object
-        extras = getIntent().getExtras();
+        //extras = getIntent().getExtras();
         //student = (StudentModel) extras.getSerializable("UserObject");
         student = null;
 

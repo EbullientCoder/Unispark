@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.unispark.controller.professor.ProfessorExams;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.professor.ProfessorProfile;
 import com.example.unispark.controller.student.Links;
@@ -33,6 +34,8 @@ public class BottomNavigationMenu extends AppCompatActivity {
 
         switch (id){
             //Student
+            case R.id.home: intent = new Intent(context, Home.class);
+                break;
             case R.id.profile: intent = new Intent(context, Profile.class);
             break;
             case R.id.exams: intent = new Intent(context, Exams.class);
@@ -47,7 +50,7 @@ public class BottomNavigationMenu extends AppCompatActivity {
             break;
             case R.id.professor_profile: intent = new Intent(context, ProfessorProfile.class);
             break;
-            case R.id.professor_exams: intent = new Intent(context, ProfessorHome.class);
+            case R.id.professor_exams: intent = new Intent(context, ProfessorExams.class);
             break;
 
             //University

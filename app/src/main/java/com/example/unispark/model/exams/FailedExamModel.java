@@ -1,57 +1,25 @@
 package com.example.unispark.model.exams;
 
-public class FailedExamModel {
+public class FailedExamModel extends ExamModel{
 
     //Attributes
-    private String examName;
-    private String examYear;
-    private String examDate;
-    private String examCFU;
-    private String examResult;
+    private String result;
 
     //Methods
     //Constructor
-    public FailedExamModel(String examName, String examYear, String examDate, String examCFU, String examResult) {
-        this.examName = examName;
-        this.examYear = examYear;
-        this.examDate = examDate;
-        this.examCFU = examCFU;
-        this.examResult = examResult;
+    public FailedExamModel(int id, String name, String year, String date, String CFU, String result) {
+        super(id, name, year, date, CFU);
+        this.result = result;
     }
-
 
     //Getter
-    public String getExamName() {
-        return examName;
-    }
-    public String getExamYear() {
-        return examYear;
-    }
-    public String getExamDate() {
-        return examDate;
-    }
-    public String getExamCFU() {
-        return examCFU;
-    }
-    public String getExamResult() {
-        return examResult;
+    public String getResult() {
+        return result;
     }
 
 
     //Setter
-    public void setExamName(String examName) {
-        this.examName = examName;
-    }
-    public void setExamYear(String examYear) {
-        this.examYear = examYear;
-    }
-    public void setExamDate(String examDate) {
-        this.examDate = examDate;
-    }
-    public void setExamCFU(String examCFU) {
-        this.examCFU = examCFU;
-    }
-    public void setExamResult(String examResult) {
-        this.examResult = examResult;
+    public void setResult(String result) {
+        this.result = result;
     }
 }

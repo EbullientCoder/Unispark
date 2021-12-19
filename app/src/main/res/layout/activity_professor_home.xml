@@ -132,7 +132,7 @@
         android:src="@drawable/icon_plus"
         android:backgroundTint="#34D2A1"/>
 
-    <!-- Floating Button: Exams-->
+    <!-- Floating Button: ExamModel-->
     <TextView
         android:id="@+id/txt_add_exam"
         android:layout_width="wrap_content"

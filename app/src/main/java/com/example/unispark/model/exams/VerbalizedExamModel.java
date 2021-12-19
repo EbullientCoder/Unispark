@@ -1,58 +1,25 @@
 package com.example.unispark.model.exams;
 
-public class VerbalizedExamModel {
+public class VerbalizedExamModel extends ExamModel{
 
     //Attributes
-    private String examName;
-    private String examYear;
-    private String examDate;
-    private String examCFU;
-    private String examResult;
+    private int result;
 
     //Methods
     //Constructor
-    public VerbalizedExamModel(String examName, String examYear, String examDate, String examCFU, String examResult) {
-        this.examName = examName;
-        this.examYear = examYear;
-        this.examDate = examDate;
-        this.examCFU = examCFU;
-        this.examResult = examResult;
+    public VerbalizedExamModel(int id, String name, String year, String date, String CFU, int result) {
+        super(id, name, year, date, CFU);
+        this.result = result;
     }
-
 
     //Getter
-    public String getExamName() {
-        return examName;
-    }
-    public String getExamYear() {
-        return examYear;
-    }
-    public String getExamDate() {
-        return examDate;
-    }
-    public String getExamCFU() {
-        return examCFU;
-    }
-    public String getExamResult() {
-        return examResult;
+    public int getResult() {
+        return result;
     }
 
 
     //Setter
-
-    public void setExamName(String examName) {
-        this.examName = examName;
-    }
-    public void setExamYear(String examYear) {
-        this.examYear = examYear;
-    }
-    public void setExamDate(String examDate) {
-        this.examDate = examDate;
-    }
-    public void setExamCFU(String examCFU) {
-        this.examCFU = examCFU;
-    }
-    public void setExamResult(String examResult) {
-        this.examResult = examResult;
+    public void setResult(int result) {
+        this.result = result;
     }
 }

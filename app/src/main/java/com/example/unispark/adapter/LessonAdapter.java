@@ -56,7 +56,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    //Exams ViewHolder
+    //ExamModel ViewHolder
     static class LessonViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         private TextView lessonName;

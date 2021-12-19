@@ -1,24 +1,45 @@
 package com.example.unispark.model;
 
+import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.FailedExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
+
 import java.util.List;
 
 public class StudentModel extends UserModel{
     //Attributes
+    private int id;
     private int imageID;
     private String firstName;
     private String lastName;
+    private String faculty;
+    private String AA;
     private List<CourseModel> courses;
+    private List<VerbalizedExamModel> vExams;
+    private List<FailedExamModel> fExams;
+    private List<BookExamModel> bExams;
 
     //Methods
     //Constructor
-    public StudentModel(int imageID, String firstName, String lastName, String email, String password, List<CourseModel> courses) {
+    public StudentModel(int imageID,
+                        String firstName,
+                        String password,
+                        String email,
+                        String lastName,
+                        List<CourseModel> courses
+                        ) {
         super(email, password);
+        //this.id = id;
         this.imageID = imageID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.faculty = faculty;
+        //this.AA = AA;
         this.courses = courses;
+        //this.vExams = vExams;
+        //this.fExams = fExams;
+        //this.bExams = bExams;
     }
-
 
     //Getter
     public int getImageID() {

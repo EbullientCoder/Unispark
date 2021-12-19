@@ -4,34 +4,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.adapter.CoursesAdapter;
-import com.example.unispark.controller.details.DetailsCourse;
+import com.example.unispark.adapter.exams.ExamAdapter;
+import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
 import com.example.unispark.menu.BottomNavigationMenu;
-import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.model.exams.UpcomingExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfessorProfile extends AppCompatActivity implements CoursesAdapter.OnCourseClickListener {
+public class ProfessorExams extends AppCompatActivity {
     //Attributes
     //Menu
     ImageButton menuButton;
@@ -46,28 +44,26 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
     Boolean isOpen;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
+    //Menu ExamModel Page
+    ImageButton btnPageRight;
+    ImageButton btnPageLeft;
+    TextView examsTitle;
+    int page;
     //Get Intent Extras
     Bundle extras;
-    int imageID;
-    String firstname;
-    String lastname;
-    String website;
-    //Set Intent Extras
-    ImageView imgProfImage;
-    TextView txtProfName;
-    TextView txtWebsite;
-    //Courses
-    RecyclerView rvCourses;
-    List<CourseModel> coursesItem;
+    //ExamModel
+    RecyclerView rvExams;
+    List<ExamItem> examsExamItem;
     //Model
     ProfessorModel professor;
 
+    private static final String YEAR = "2020/2021";
 
-    //Methods
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_professor_profile);
+        setContentView(R.layout.activity_professor_exams);
 
         //Getting User Object
         extras = getIntent().getExtras();
@@ -86,7 +82,7 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
 
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
-        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.professor_profile);
+        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.professor_exams);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -95,6 +91,36 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
                 return true;
             }
         });
+
+
+        //ExamModel List
+        rvExams = findViewById(R.id.rv_professor_exams);
+        examsExamItem = new ArrayList<>();
+        //ExamModel Page Title
+        examsTitle = findViewById(R.id.txt_professor_exams_title);
+        //ExamModel Page Menu Buttons
+        btnPageRight = (ImageButton) findViewById(R.id.btn_exams_next);
+        btnPageLeft = (ImageButton) findViewById(R.id.btn_exams_previusly);
+        page = 0;
+        //Right Click
+        btnPageRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                page++;
+
+                pageMenu();
+            }
+        });
+        //Left Click
+        btnPageLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                page--;
+
+                pageMenu();
+            }
+        });
+        pageMenu();
 
 
         //Button: Add Homework - Communication
@@ -153,31 +179,7 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
 
 
 
-        //Get Parameters
-        imageID = professor.getImage();
-        firstname = professor.getFirstName();
-        lastname = professor.getLastName();
-        website = professor.getWebsite();
-        coursesItem = professor.getCourses();
-
-        //Display Parameters
-        imgProfImage = findViewById(R.id.img_professor_profile_image);
-        imgProfImage.setImageResource(imageID);
-        txtProfName = findViewById(R.id.txt_professor_fullname);
-        txtProfName.setText(firstname + ' ' + lastname);
-        txtWebsite = findViewById(R.id.txt_professor_website);
-        txtWebsite.setText(website);
-        //Clickable Website
-        txtWebsite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(website);
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
-            }
-        });
-        //Courses
-        rvCourses = findViewById(R.id.rv_professor_courses);
-        rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, "PROFESSOR"));
+        //------------------------------------------------------------------------------------------
     }
 
 
@@ -219,11 +221,46 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
     }
 
 
-    //Course Click
-    @Override
-    public void onCourseClick(int position) {
-        Intent intent = new Intent(this, DetailsCourse.class);
-        intent.putExtra("Course", coursesItem.get(position));
-        startActivity(intent);
+    //Page Menu
+    private void pageMenu(){
+        //Edit the page index
+        if(page > 1 || page < -1) page = 0;
+
+        //Select the Page
+        if(page == 0) upcomingExams();
+        if(page == 1 || page == -1) doneExams();
+
+        rvExams.setAdapter(new ExamAdapter(examsExamItem));
+    }
+
+    //Page: Upcoming ExamModel
+    private void upcomingExams(){
+        //Set Title
+        examsTitle.setText("UPCOMING EXAMS");
+
+        //Clear the ExamModel List
+        examsExamItem.clear();
+
+        //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor ExamModel
+        UpcomingExamModel uExam1 = new UpcomingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
+        UpcomingExamModel uExam2 = new UpcomingExamModel(2,"Ing. del Software e prog. Web II", YEAR, "20/02/2020", "9.0", "L3", "Didattica");
+        UpcomingExamModel uExam3 = new UpcomingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
+        UpcomingExamModel uExam4 = new UpcomingExamModel(4,"Ing. del Software e prog. Web II", YEAR, "25/08/2020", "6.0", "L3", "Didattica");
+
+        examsExamItem.add(new ExamItem(3, uExam1));
+        examsExamItem.add(new ExamItem(3, uExam2));
+        examsExamItem.add(new ExamItem(3, uExam3));
+        examsExamItem.add(new ExamItem(3, uExam4));
+    }
+
+    //Page: Done ExamModel
+    private void doneExams(){
+        //Set Title
+        examsTitle.setText("DONE EXAMS");
+
+        //Clear the ExamModel List
+        examsExamItem.clear();
+
+
     }
 }

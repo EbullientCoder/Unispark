@@ -218,7 +218,7 @@
                     <!-- Legend -->
                     <!-- Average -->
                     <TextView
-                        android:id="@+id/txt_arithmetic_average"
+                        android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
@@ -233,7 +233,7 @@
 
                     <!-- Weighted Average -->
                     <TextView
-                        android:id="@+id/txt_weighted_verage"
+                        android:id="@+id/TextView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"

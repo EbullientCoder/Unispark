@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
 import com.example.unispark.model.exams.FailedExamModel;
-import com.example.unispark.model.exams.ReserveExamModel;
+import com.example.unispark.model.exams.UpcomingExamModel;
+import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Verbalized Exams
+        //Verbalized ExamModel
         if(viewType == 0){
             return new VerbalizedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -39,7 +40,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     )
             );
         }
-        //Failed Exams
+        //Failed ExamModel
         else if(viewType == 1){
             return new FailedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -50,10 +51,20 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             );
         }
         //Reserve Exam
-        else{
-            return new ReserveExamViewHolder(
+        else if(viewType == 2){
+            return new BookExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
-                            R.layout.item_container_reserve_exams,
+                            R.layout.item_container_book_exams,
+                            parent,
+                            false
+                    )
+            );
+        }
+        //Professor Upcoming Exam
+        else{
+            return new UpcomingExamViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.item_container_upcoming_exams,
                             parent,
                             false
                     )
@@ -63,6 +74,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        //verbalized Exams
         if(getItemViewType(position) == 0){
             VerbalizedExamModel vExam = (VerbalizedExamModel) examItems.get(position).getObject();
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
@@ -73,9 +85,14 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((FailedExamViewHolder) holder).setFailedExamDate(fExam);
         }
         //Reserve Exams
-        else{
-            ReserveExamModel rExam = (ReserveExamModel) examItems.get(position).getObject();
-            ((ReserveExamViewHolder) holder).setReserveExamDate(rExam);
+        else if(getItemViewType(position) == 2){
+            BookExamModel rExam = (BookExamModel) examItems.get(position).getObject();
+            ((BookExamViewHolder) holder).setBookExamDate(rExam);
+        }
+        //Professor Upcoming Exams
+        else {
+            UpcomingExamModel uExam = (UpcomingExamModel) examItems.get(position).getObject();
+            ((UpcomingExamViewHolder) holder).setUpcomingExamDate(uExam);
         }
     }
 
@@ -90,7 +107,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
 
-    //Exams ViewHolder
+    //ExamModel ViewHolder
     static class VerbalizedExamViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         private TextView vExamName;
@@ -111,11 +128,11 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
 
         void setVerbalizedExamDate(VerbalizedExamModel exam){
-            vExamName.setText(exam.getExamName());
-            vExamYear.setText(exam.getExamYear());
-            vExamDate.setText(exam.getExamDate());
-            vExamCFU.setText(exam.getExamCFU());
-            vExamResult.setText(exam.getExamResult());
+            vExamName.setText(exam.getName());
+            vExamYear.setText(exam.getYear());
+            vExamDate.setText(exam.getDate());
+            vExamCFU.setText(exam.getCFU());
+            vExamResult.setText(Integer.toString(exam.getResult()));
         }
     }
 
@@ -137,34 +154,69 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
 
         void setFailedExamDate(FailedExamModel exam){
-            fExamName.setText(exam.getExamName());
-            fExamYear.setText(exam.getExamYear());
-            fExamDate.setText(exam.getExamDate());
-            fExamCFU.setText(exam.getExamCFU());
-            fExamResult.setText(exam.getExamResult());
+            fExamName.setText(exam.getName());
+            fExamYear.setText(exam.getYear());
+            fExamDate.setText(exam.getDate());
+            fExamCFU.setText(exam.getCFU());
+            fExamResult.setText(exam.getResult());
         }
     }
 
-    static class ReserveExamViewHolder extends RecyclerView.ViewHolder{
+    static class BookExamViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         private TextView rExamName;
         private TextView rExamYear;
         private TextView rExamDate;
         private TextView rExamCFU;
+        private TextView rExamClassroom;
+        private TextView rExamBuilding;
 
-        public ReserveExamViewHolder(@NonNull View itemView) {
+        public BookExamViewHolder(@NonNull View itemView) {
             super(itemView);
-            rExamName = itemView.findViewById(R.id.txt_reserve_exam_subject_name);
-            rExamYear = itemView.findViewById(R.id.txt_reserve_exam_aa);
-            rExamDate = itemView.findViewById(R.id.txt_reservve_exam_date);
-            rExamCFU = itemView.findViewById(R.id.txt_reserve_exam_cfu);
+            rExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
+            rExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
+            rExamDate = itemView.findViewById(R.id.txt_book_exam_date);
+            rExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
+            rExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
+            rExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
         }
 
-        void setReserveExamDate(ReserveExamModel exam){
-            rExamName.setText(exam.getExamName());
-            rExamYear.setText(exam.getExamYear());
-            rExamDate.setText(exam.getExamDate());
-            rExamCFU.setText(exam.getExamCFU());
+        void setBookExamDate(BookExamModel exam){
+            rExamName.setText(exam.getName());
+            rExamYear.setText(exam.getYear());
+            rExamDate.setText(exam.getDate());
+            rExamCFU.setText(exam.getCFU());
+            rExamClassroom.setText(exam.getClassroom());
+            rExamBuilding.setText(exam.getBuilding());
+        }
+    }
+
+    static class UpcomingExamViewHolder extends RecyclerView.ViewHolder{
+        //Attributes
+        private TextView uExamName;
+        private TextView uExamYear;
+        private TextView uExamDate;
+        private TextView uExamCFU;
+        private TextView uExamBuilding;
+        private TextView uExamClassroom;
+
+        public UpcomingExamViewHolder(@NonNull View itemView) {
+            super(itemView);
+            uExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
+            uExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
+            uExamDate = itemView.findViewById(R.id.txt_upcoming_exam_date);
+            uExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
+            uExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
+            uExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
+        }
+
+        void setUpcomingExamDate(UpcomingExamModel exam){
+            uExamName.setText(exam.getName());
+            uExamYear.setText(exam.getYear());
+            uExamDate.setText(exam.getDate());
+            uExamCFU.setText(exam.getCFU());
+            uExamClassroom.setText(exam.getClassroom());
+            uExamBuilding.setText(exam.getBuilding());
         }
     }
 }
