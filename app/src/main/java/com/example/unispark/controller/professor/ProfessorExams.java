@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
@@ -45,10 +46,7 @@ public class ProfessorExams extends AppCompatActivity {
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //Menu ExamModel Page
-    ImageButton btnPageRight;
-    ImageButton btnPageLeft;
     TextView examsTitle;
-    int page;
     //Get Intent Extras
     Bundle extras;
     //ExamModel
@@ -99,28 +97,9 @@ public class ProfessorExams extends AppCompatActivity {
         //ExamModel Page Title
         examsTitle = findViewById(R.id.txt_professor_exams_title);
         //ExamModel Page Menu Buttons
-        btnPageRight = (ImageButton) findViewById(R.id.btn_exams_next);
-        btnPageLeft = (ImageButton) findViewById(R.id.btn_exams_previusly);
-        page = 0;
-        //Right Click
-        btnPageRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                page++;
+        upcomingExams();
 
-                pageMenu();
-            }
-        });
-        //Left Click
-        btnPageLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                page--;
-
-                pageMenu();
-            }
-        });
-        pageMenu();
+        rvExams.setAdapter(new ExamAdapter(examsExamItem));
 
 
         //Button: Add Homework - Communication
@@ -221,17 +200,6 @@ public class ProfessorExams extends AppCompatActivity {
     }
 
 
-    //Page Menu
-    private void pageMenu(){
-        //Edit the page index
-        if(page > 1 || page < -1) page = 0;
-
-        //Select the Page
-        if(page == 0) upcomingExams();
-        if(page == 1 || page == -1) doneExams();
-
-        rvExams.setAdapter(new ExamAdapter(examsExamItem));
-    }
 
     //Page: Upcoming ExamModel
     private void upcomingExams(){
@@ -241,7 +209,7 @@ public class ProfessorExams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor ExamModel
+        //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor UpcomingExamModel
         UpcomingExamModel uExam1 = new UpcomingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
         UpcomingExamModel uExam2 = new UpcomingExamModel(2,"Ing. del Software e prog. Web II", YEAR, "20/02/2020", "9.0", "L3", "Didattica");
         UpcomingExamModel uExam3 = new UpcomingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
@@ -251,16 +219,5 @@ public class ProfessorExams extends AppCompatActivity {
         examsExamItem.add(new ExamItem(3, uExam2));
         examsExamItem.add(new ExamItem(3, uExam3));
         examsExamItem.add(new ExamItem(3, uExam4));
-    }
-
-    //Page: Done ExamModel
-    private void doneExams(){
-        //Set Title
-        examsTitle.setText("DONE EXAMS");
-
-        //Clear the ExamModel List
-        examsExamItem.clear();
-
-
     }
 }

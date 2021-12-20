@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_homework.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_professor.xml" value="0.24682971014492755" />
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_uni_communication.xml" value="0.24682971014492755" />
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_generic_login.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_professor_exams.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_professor_home.xml" value="0.25" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_professor_profile.xml" value="0.25" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_student_exams.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_student_home.xml" value="0.25" />
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/fragment_add_homework.xml" value="0.4" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_book_exams.xml" value="0.536" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_courses.xml" value="0.25" />
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_homework.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_professors.xml" value="0.24682971014492755" />
+        <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_uni_communication.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_upcoming_exams.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/item_container_verbalized_exams.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/menu/professor_bottom_menu.xml" value="0.25" />

@@ -59,20 +59,177 @@
 
 
         <!-- Main -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="320dp"
-            android:layout_height="580dp"
+            android:layout_height="570dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            android:orientation="vertical">
 
             <!-- Short Name Course -->
-            <!-- Course -->
-            <!-- Title -->
-            <!-- Expiration -->
-            <!-- Instructions -->
-            <!-- Points -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_input_user"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="230dp"
+                android:layout_height="75dp"
+                android:hint="Select Subject"
+                android:textColorHint="#FFFFFF"
+                app:boxBackgroundColor="#272b2f"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="dropdown_menu"
+                app:endIconTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconTint="@color/white">
 
+                <AutoCompleteTextView
+                    android:id="@+id/select_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="none"
+                    android:textColor="#34D2A1"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Course -->
+
+            <!-- Homework Title Field -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_add_homework_title"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="20dp"
+                android:hint="Title"
+                android:textColorHint="#FFFFFF"
+                app:boxBackgroundColor="#272b2f"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_user">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- android:layout_marginTop="20dp" -->
+
+            <!-- Expiration -->
+            <ImageButton
+                android:id="@+id/btn_select_date"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="#0000"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_green_calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_selected_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="DATE"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_select_date"
+                app:layout_constraintStart_toStartOf="@+id/btn_select_date"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_date" />
+
+            <!-- Instructions -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_add_homework_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Instructions"
+                android:textColorHint="#FFFFFF"
+                app:boxBackgroundColor="#272b2f"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_add_homework_title">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito"
+                        android:inputType="textMultiLine"
+                        android:lines="6"
+                        android:textColor="#FFFFFF"
+                        android:gravity="top"
+                        android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Points -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_add_homework_points"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="20dp"
+                android:hint="Points"
+                android:textColorHint="#FFFFFF"
+                app:boxBackgroundColor="#272b2f"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxStrokeWidth="0dp"
+
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_add_homework_instructions">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- Submit Button -->
+        <LinearLayout
+            android:id="@+id/submit_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_login_background"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btn_homework_detail_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:fontFamily="@font/nunito_bold"
+                android:text="ADD"
+                android:textColor="#212529"
+                android:textSize="14sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
