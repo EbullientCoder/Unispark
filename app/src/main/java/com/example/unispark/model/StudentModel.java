@@ -23,9 +23,9 @@ public class StudentModel extends UserModel{
     //Constructor
     public StudentModel(int imageID,
                         String firstName,
-                        String password,
-                        String email,
                         String lastName,
+                        String email,
+                        String password,
                         List<CourseModel> courses
                         ) {
         super(email, password);

@@ -1,7 +1,5 @@
 package com.example.unispark.controller;
 
-import static com.example.unispark.database.Password.getHash;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,18 +14,18 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
-import com.example.unispark.controller.student.Links;
 import com.example.unispark.database.DataBaseHelper;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.StudentModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 
 public class Login extends AppCompatActivity {
 
     //Attributes
+    //Database
+    DataBaseHelper dataBaseUser;
     //User Selector
-    String[] items =  {"STUDENT","PROFESSOR","UNIVERSITY"};
+    String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     String userSelection;
@@ -36,8 +34,6 @@ public class Login extends AppCompatActivity {
     String email;
     TextInputLayout txtPassword;
     String password;
-    //Database
-    DataBaseHelper dataBaseUser;
     //Login Button
     Button loginButton;
 
@@ -57,7 +53,7 @@ public class Login extends AppCompatActivity {
         //DropDown Selector
         userSelection = "";
         autoCompleteTxt = findViewById(R.id.select_user);
-        adapterItems = new ArrayAdapter<>(this,R.layout.item_container_user, items);
+        adapterItems = new ArrayAdapter<>(this,R.layout.item_container_item, users);
         autoCompleteTxt.setAdapter(adapterItems);
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,7 +91,7 @@ public class Login extends AppCompatActivity {
                     }
                     else Toast.makeText(getApplicationContext(), "WRONG CREDENTIALS", Toast.LENGTH_SHORT).show();
                 }
-                else Toast.makeText(getApplicationContext(), "SELECT USER", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "COMPLETE THE CREDENTIALS", Toast.LENGTH_SHORT).show();
 
                 overridePendingTransition(0, 0);
             }

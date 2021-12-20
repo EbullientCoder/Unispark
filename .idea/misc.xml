@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_generic_login.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/fragment_add_homework.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_course.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_user.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_homework.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_professor.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_uni_communication.xml" value="0.24682971014492755" />

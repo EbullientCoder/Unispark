@@ -114,6 +114,144 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.fillHomeworkDB();
     }
 
+    //Sample Database
+    public void fillDB(){
+        //Sample Student
+        StudentModel student = new StudentModel(R.drawable.profile_photo,
+                "Emanuele",
+                "Valzano",
+                "emanuele@gmail.com",
+                getHash("emanuele99"),
+                null);
+        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
+                "Emanuele",
+                "Valzano",
+                "a",
+                getHash("a"),
+                null);
+
+        //Add students to DB
+        this.addStudent(student);
+        this.addStudent(student1);
+
+
+        //Sample Professor
+        ProfessorModel professor1 = new ProfessorModel("falessi",
+                getHash("falessi"),
+                -1,
+                "Davide",
+                "Falessi",
+                "https://www.binance.com",
+                R.drawable.courses_falessi,
+                null);
+
+        ProfessorModel professor2 = new ProfessorModel("lopresti",
+                getHash("lo"),
+                -2,
+                "Francesco",
+                "Lo Presti",
+                "https://www.lopresti.com",
+                R.drawable.courses_lo_presti,
+                null);
+
+        ProfessorModel professor3 = new ProfessorModel("prof",
+                getHash("prof"),
+                -3,
+                "Professore",
+                "Professore",
+                "https://www.lopresti.com",
+                R.drawable.courses_martinelli,
+                null);
+
+        //Add professors to DB and set their id correctly
+        this.addProfessor(professor1);
+        this.addProfessor(professor2);
+        this.addProfessor(professor3);
+        this.setProfessorId(professor1);
+        this.setProfessorId(professor2);
+        this.setProfessorId(professor3);
+
+
+        //Sample University
+        UniversityModel university = new UniversityModel("universita@gmail.com",
+                getHash("SUCA"),
+                "Tor Vergogna",
+                "Via le Mani dal Naso",
+                null,
+                null);
+
+        //Add University to DB
+        this.addUniversity(university);
+
+
+
+        //Add homeworks
+        HomeworkModel homework1 = new HomeworkModel("ISPW",
+                "ING. DEL SOFTWARE E PROG. WEB",
+                "Esame",
+                "DUE OCT 28",
+                INSTRUCTIONS,
+                "1 Points",
+                professor1.getId());
+
+        HomeworkModel homework2 = new HomeworkModel("CALC",
+                "CALCOLATORI ELETTRONICI",
+                "PIPELINE",
+                "DUE OCT 28",
+                INSTRUCTIONS,
+                "1 Points",
+                professor2.getId());
+
+        this.addHomework(homework1);
+        this.addHomework(homework2);
+
+
+        //Add courses to DB
+        CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
+                "ISPW",
+                "ING. DEL SOFTWARE E PROG. WEB",
+                "2021",
+                "12.0",
+                "2",
+                "https://google.com");
+
+        CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
+                "ISPW II",
+                "ING. DEL SOFTWARE E PROG. WEB II",
+                "2021/2022",
+                "12.0",
+                "Winter",
+                "https://binance.com");
+
+        this.addCourse(course);
+        this.addCourse(course1);
+    }
+
+    //Sample Database: Homework(deprecated, not used any more)
+    public void fillHomeworkDB(){
+        List<HomeworkModel> homeworksItem = new ArrayList<>();
+
+        HomeworkModel hom1 = new HomeworkModel("ARL", "AUTOMATICA E ROBOTICA LAB.", "Scorbot","DUE DEC 27", INSTRUCTIONS, "0 Points", 10);
+        HomeworkModel hom2 = new HomeworkModel("CA","CONTROLLI AUTOMATICI", "Nyquist","DUE NOV 1", INSTRUCTIONS, "2 Points", 10);
+        HomeworkModel hom3 = new HomeworkModel("GEOM", "GEOMETRIA", "Matrici","DUE NOV 2", INSTRUCTIONS, "3 Points",10);
+        HomeworkModel hom4 = new HomeworkModel("RO", "RICERCA OPERATIVA","Esame", "DUE NOV 4", INSTRUCTIONS, "4 Points", 10);
+        HomeworkModel hom5 = new HomeworkModel("XXX", "CORSO UNIVERSITARIO", "YYY", "DUE XX YY", INSTRUCTIONS, "5 Points", 10);
+
+        homeworksItem.add(hom1);
+        homeworksItem.add(hom2);
+        homeworksItem.add(hom3);
+        homeworksItem.add(hom4);
+        homeworksItem.add(hom5);
+
+        //For each ExamItem into HomeworksList "addHomework()" will be called and every ExamItem will be put into the DB
+        for (int i = 0; i < homeworksItem.size(); i++) this.addHomework(homeworksItem.get(i));
+    }
+
+
+
+
+
+
     //Add Student to the Database
     public boolean addStudent(StudentModel student){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -152,12 +290,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //Set professor Id
     public boolean setProfessorId(ProfessorModel professor){
         //get id from the database
+        Cursor cursor = null;
         boolean check = false;
+
         String queryString = "SELECT " + PROF_ID + " FROM " + PROFESSORS_TABLE + " WHERE email = '" + professor.getEmail() + "';";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
+        cursor = db.rawQuery(queryString, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             professor.setId(cursor.getInt(0));
             check = true;
         }
@@ -258,106 +398,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    //Sample Database
-    public void fillDB(){
-        //Sample Student
-        StudentModel student = new StudentModel(R.drawable.profile_photo,
-                "Emanuele",
-                "Valzano",
-                "emanuele@gmail.com",
-                getHash("emanuele99"),
-                null);
-        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
-                "Emanuele",
-                "Valzano",
-                "a",
-                getHash("a"),
-                null);
 
-        //Add students to DB
-        this.addStudent(student);
-        this.addStudent(student1);
-
-        //Sample Professor
-        ProfessorModel professor1 = new ProfessorModel("falessi",
-                getHash("falessi"),
-                -1,
-                "Davide",
-                "Falessi",
-                "https://www.binance.com",
-                R.drawable.courses_falessi,
-                null);
-
-        ProfessorModel professor2 = new ProfessorModel("lopresti",
-                getHash("lo"),
-                -1,
-                "Francesco",
-                "Lo Presti",
-                "https://www.lopresti.com",
-                R.drawable.courses_lo_presti,
-                null);
-
-        //Add professors to DB and set their id correctly
-        this.addProfessor(professor1);
-        this.setProfessorId(professor1);
-
-        this.addProfessor(professor2);
-        this.setProfessorId(professor2);
-
-        //Add homeworks
-        HomeworkModel homework1 = new HomeworkModel("ISPW",
-                "ING. DEL SOFTWARE E PROG. WEB",
-                "Esame",
-                "DUE OCT 28",
-                INSTRUCTIONS,
-                "1 Points",
-                professor1.getId());
-
-        this.addHomework(homework1);
-
-        HomeworkModel homework2 = new HomeworkModel("CALC",
-                "CALCOLATORI ELETTRONICI",
-                "PIPELINE",
-                "DUE OCT 28",
-                INSTRUCTIONS,
-                "1 Points",
-                professor2.getId());
-
-        this.addHomework(homework2);
-
-
-        //Add courses to DB
-        CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
-                "ISPW",
-                "ING. DEL SOFTWARE E PROG. WEB",
-                "2021",
-                "12.0",
-                "2",
-                "https://google.com");
-
-        CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
-                "ISPW II",
-                "ING. DEL SOFTWARE E PROG. WEB II",
-                "2021/2022",
-                "12.0",
-                "Winter",
-                "https://binance.com");
-
-        this.addCourse(course);
-        this.addCourse(course1);
-
-
-        //Sample University
-        UniversityModel university = new UniversityModel("universita@gmail.com",
-                getHash("SUCA"),
-                "Tor Vergogna",
-                "Via le Mani dal Naso",
-                null,
-                null);
-
-        //Add University to DB
-        this.addUniversity(university);
-    }
 
     //Add Homework: Put Homeworks into the Database
     public boolean addHomework(HomeworkModel homework){
@@ -378,6 +419,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Get Homework: Return an Homework List to Student Home show into RecyclerView
     public List<HomeworkModel> getHomework(){
@@ -408,6 +450,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return homeworkList;
     }
+
 
     //Get Homework: Return an Homework List to Professor Home show into RecyclerView
     public List<HomeworkModel> getAssignedHomework(ProfessorModel professor){
@@ -443,25 +486,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //Sample Database: Homework(deprecated, not used any more)
-    public void fillHomeworkDB(){
-        List<HomeworkModel> homeworksItem = new ArrayList<>();
-
-        HomeworkModel hom1 = new HomeworkModel("ARL", "AUTOMATICA E ROBOTICA LAB.", "Scorbot","DUE DEC 27", INSTRUCTIONS, "0 Points", 10);
-        HomeworkModel hom2 = new HomeworkModel("CA","CONTROLLI AUTOMATICI", "Nyquist","DUE NOV 1", INSTRUCTIONS, "2 Points", 10);
-        HomeworkModel hom3 = new HomeworkModel("GEOM", "GEOMETRIA", "Matrici","DUE NOV 2", INSTRUCTIONS, "3 Points",10);
-        HomeworkModel hom4 = new HomeworkModel("RO", "RICERCA OPERATIVA","Esame", "DUE NOV 4", INSTRUCTIONS, "4 Points", 10);
-        HomeworkModel hom5 = new HomeworkModel("XXX", "CORSO UNIVERSITARIO", "YYY", "DUE XX YY", INSTRUCTIONS, "5 Points", 10);
-
-        homeworksItem.add(hom1);
-        homeworksItem.add(hom2);
-        homeworksItem.add(hom3);
-        homeworksItem.add(hom4);
-        homeworksItem.add(hom5);
-
-        //For each ExamItem into HomeworksList "addHomework()" will be called and every ExamItem will be put into the DB
-        for (int i = 0; i < homeworksItem.size(); i++) this.addHomework(homeworksItem.get(i));
-    }
 
     //Add course to Database
     public boolean addCourse(CourseModel course){

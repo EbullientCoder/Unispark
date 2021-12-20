@@ -122,7 +122,7 @@ public class ProfessorHome extends AppCompatActivity implements
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamFragment fragment= new AddExamFragment();
+                AddExamFragment fragment= new AddExamFragment(professor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -136,7 +136,7 @@ public class ProfessorHome extends AppCompatActivity implements
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkFragment fragment= new AddHomeworkFragment();
+                AddHomeworkFragment fragment= new AddHomeworkFragment(professor);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -150,7 +150,7 @@ public class ProfessorHome extends AppCompatActivity implements
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddCommunicationFragment fragment= new AddCommunicationFragment();
+                AddCommunicationFragment fragment= new AddCommunicationFragment(professor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });

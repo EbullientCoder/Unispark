@@ -9,13 +9,24 @@ import android.widget.ImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.ProfessorModel;
+
+import java.util.List;
 
 public class AddCommunicationFragment extends DialogFragment{
     //Attributes
     //Dismiss Button
     ImageButton btnDismiss;
+    //Model
+    ProfessorModel professor;
+    List<CourseModel> coursesList;
 
     private static final String JOIN = "JOIN";
+
+    public AddCommunicationFragment(ProfessorModel professor) {
+        this.professor = professor;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

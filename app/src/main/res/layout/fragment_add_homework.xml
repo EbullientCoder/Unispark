@@ -70,7 +70,7 @@
 
             <!-- Short Name Course -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txt_input_user"
+                android:id="@+id/txt_input_course"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="230dp"
                 android:layout_height="75dp"
@@ -86,7 +86,7 @@
                 app:startIconTint="@color/white">
 
                 <AutoCompleteTextView
-                    android:id="@+id/select_user"
+                    android:id="@+id/select_course"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/nunito"
@@ -112,7 +112,7 @@
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_input_user">
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_course">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -211,7 +211,7 @@
 
         <!-- Submit Button -->
         <LinearLayout
-            android:id="@+id/submit_layout"
+            android:id="@+id/add_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -222,7 +222,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <Button
-                android:id="@+id/btn_homework_detail_submit"
+                android:id="@+id/btn_add_homework_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#0000"
