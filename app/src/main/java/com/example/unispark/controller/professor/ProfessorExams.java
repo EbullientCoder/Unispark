@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
@@ -23,7 +22,6 @@ import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.UpcomingExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

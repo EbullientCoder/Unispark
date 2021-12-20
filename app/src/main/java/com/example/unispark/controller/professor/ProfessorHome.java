@@ -57,6 +57,7 @@ public class ProfessorHome extends AppCompatActivity implements
     List<UniversityCommunicationModel> uniCommunicationsItem;
     //Homeworks
     RecyclerView rvHomeworks;
+    HomeworksAdapter homeworkAdapter;
     List<HomeworkModel> homeworksItem;
     //Get Intent Extras
     Bundle extras;
@@ -188,7 +189,9 @@ public class ProfessorHome extends AppCompatActivity implements
         dataBaseHomework = new DataBaseHelper(getApplicationContext());
         homeworksItem = dataBaseHomework.getAssignedHomework(professor);
 
-        rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "PROFESSOR"));
+
+        homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
+        rvHomeworks.setAdapter(homeworkAdapter);
     }
 
 
