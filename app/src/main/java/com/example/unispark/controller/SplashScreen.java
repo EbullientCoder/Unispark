@@ -11,11 +11,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.unispark.R;
-import com.example.unispark.database.DataBaseHelper;
+
+import com.example.unispark.database.others.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
     //Database
-    DataBaseHelper dataBaseHelper;
+    //SQLiteFillSampleDB fillDB;
     //Timeout
     int timeout = 2000; //2000
 
@@ -40,8 +41,8 @@ public class SplashScreen extends AppCompatActivity {
 
 
         //Initializing Database
-        dataBaseHelper = new DataBaseHelper(getApplicationContext());
-        dataBaseHelper.initDatabase();
+        //fillDB = new SQLiteFillSampleDB(getApplicationContext());
+       // fillDB.initDatabase();
 
 
         new Handler().postDelayed(() -> {

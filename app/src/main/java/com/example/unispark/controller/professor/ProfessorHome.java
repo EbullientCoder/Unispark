@@ -22,7 +22,6 @@ import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
-import com.example.unispark.database.DataBaseHelper;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
@@ -38,7 +37,7 @@ public class ProfessorHome extends AppCompatActivity implements
         UniCommunicationsAdapter.OnUniComClickListener{
 
     //Database
-    DataBaseHelper dataBaseHomework;
+    //DataBaseHelper dataBaseHomework;
     //Menu
     ImageButton menuButton;
     //Floating Button
@@ -186,8 +185,8 @@ public class ProfessorHome extends AppCompatActivity implements
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
 
-        dataBaseHomework = new DataBaseHelper(getApplicationContext());
-        homeworksItem = dataBaseHomework.getAssignedHomework(professor);
+        //dataBaseHomework = new DataBaseHelper(getApplicationContext());
+        //homeworksItem = dataBaseHomework.getAssignedHomework(professor);
 
 
         homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");

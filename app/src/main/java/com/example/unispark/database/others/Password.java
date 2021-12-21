@@ -1,4 +1,4 @@
-package com.example.unispark.database;
+package com.example.unispark.database.others;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
-import com.example.unispark.database.DataBaseHelper;
+import com.example.unispark.database.dao.ProfessorDAO;
+import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.model.StudentModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -23,7 +25,7 @@ public class Login extends AppCompatActivity {
 
     //Attributes
     //Database
-    DataBaseHelper dataBaseUser;
+    //DataBaseHelper dataBaseUser;
     //User Selector
     String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
     AutoCompleteTextView autoCompleteTxt;
@@ -48,7 +50,7 @@ public class Login extends AppCompatActivity {
         //Database
         txtEmail = findViewById(R.id.txt_input_email);
         txtPassword = findViewById(R.id.txt_input_password);
-        dataBaseUser = new DataBaseHelper(getApplicationContext());
+        //dataBaseUser = new DataBaseHelper(getApplicationContext());
 
         //DropDown Selector
         userSelection = "";
@@ -70,31 +72,29 @@ public class Login extends AppCompatActivity {
                 email = txtEmail.getEditText().getText().toString();
                 password = txtPassword.getEditText().getText().toString();
 
-                if(!userSelection.equals("") && !email.equals("") && !password.equals("")){
-                    if(dataBaseUser.login(userSelection, email, password)){
-                        switch (userSelection){
-                            case "STUDENT":
-                                //StudentModel student =
-                                startActivity(new Intent(getApplicationContext(), Home.class));
+                if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
+                    Intent intent;
+                    switch (userSelection) {
+                        case "STUDENT":
+                            StudentModel student = StudentDAO.selectStudent(email, password);
+                            intent = new Intent(getApplicationContext(), Home.class);
+                            intent.putExtra("UserObject", student);
+                            startActivity(intent);
                             break;
-                            case "PROFESSOR":
-                                ProfessorModel professor = dataBaseUser.getProfessor(email);
+                        case "PROFESSOR":
+                            ProfessorModel professor = ProfessorDAO.selectProfessor(email, password);
+                            intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                            intent.putExtra("UserObject", professor);
+                            startActivity(intent);
+                            break;
+                        //case "UNIVERSITY": startActivity(new Intent(getApplicationContext(), UniversityHome.class));
+                        //break;
 
-                                Intent intent = new Intent(getApplicationContext(), ProfessorHome.class);
-                                intent.putExtra("UserObject", professor);
-                                startActivity(intent);
-                            break;
-                            //case "UNIVERSITY": startActivity(new Intent(getApplicationContext(), UniversityHome.class));
-                            //break;
-                        }
-                        //PUSH
                     }
-                    else Toast.makeText(getApplicationContext(), "WRONG CREDENTIALS", Toast.LENGTH_SHORT).show();
+                    //overridePendingTransition(0, 0);
                 }
-                else Toast.makeText(getApplicationContext(), "COMPLETE THE CREDENTIALS", Toast.LENGTH_SHORT).show();
-
-                overridePendingTransition(0, 0);
             }
+
         });
     }
 }

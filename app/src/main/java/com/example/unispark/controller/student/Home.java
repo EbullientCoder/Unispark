@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
-import com.example.unispark.database.DataBaseHelper;
+
+import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
@@ -36,7 +37,7 @@ public class Home extends AppCompatActivity
 
     //Attributes
     //Database
-    DataBaseHelper dataBaseHomework;
+    //DataBaseHelper dataBaseHomework;
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
@@ -65,9 +66,9 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_student_home);
 
         //Getting User Object
-        //extras = getIntent().getExtras();
-        //student = (StudentModel) extras.getSerializable("UserObject");
-        student = null;
+        extras = getIntent().getExtras();
+        student = (StudentModel) extras.getSerializable("UserObject");
+
 
 
         //Menu
@@ -140,8 +141,7 @@ public class Home extends AppCompatActivity
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
 
-        dataBaseHomework = new DataBaseHelper(getApplicationContext());
-        homeworksItem = dataBaseHomework.getHomework();
+        homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
 
         rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "STUDENT"));
     }
