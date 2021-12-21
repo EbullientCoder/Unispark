@@ -51,8 +51,8 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
 
         //Getting User Object
         extras = getIntent().getExtras();
-        //student = (StudentModel) extras.getSerializable("UserObject");
-        student = null;
+        student = (StudentModel) extras.getSerializable("UserObject");
+
 
 
         //Bottom Navigation Menu
@@ -79,9 +79,9 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
 
         //Courses
         rvCourses = findViewById(R.id.rv_courses);
-        coursesItem = new ArrayList<>();
+        coursesItem = student.getCourses();
 
-        CourseModel courseModel1 = new CourseModel("0", "ARL", "Automatica e Robotica Lab", YEAR, "12.0","Winter", "https://www.google.com");
+       /* CourseModel courseModel1 = new CourseModel("0", "ARL", "Automatica e Robotica Lab", YEAR, "12.0","Winter", "https://www.google.com");
         CourseModel courseModel2 = new CourseModel("1", "ISPW", "Ing. del Software e prog. Web", YEAR, "12.0", "Winter", "https://www.google.com");
         CourseModel courseModel3 = new CourseModel("2", "CA","Controlli Automatici", YEAR, "9.0", "Winter", "https://www.google.com");
         CourseModel courseModel4 = new CourseModel("3", "CE","Calcolatori Elettronici", YEAR, "9.0", "Winter", "https://www.google.com");
@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         coursesItem.add(courseModel1);
         coursesItem.add(courseModel2);
         coursesItem.add(courseModel3);
-        coursesItem.add(courseModel4);
+        coursesItem.add(courseModel4);*/
 
 
         coursesAdapter = new CoursesAdapter(coursesItem, this, "LEAVE");
