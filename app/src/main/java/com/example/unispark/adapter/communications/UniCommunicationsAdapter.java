@@ -68,6 +68,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
         private TextView txtTitle;
         private String date;
         private String communication;
+        private String faculty;
         private OnUniComClickListener onUniComClickListener;
 
         //Methods
@@ -87,6 +88,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
             txtTitle.setText(universityCommunicationModel.getTitle());
             date = universityCommunicationModel.getDate();
             communication = universityCommunicationModel.getCommunication();
+            faculty = universityCommunicationModel.getFaculty();
         }
 
         @Override

@@ -87,10 +87,10 @@ public class Links extends AppCompatActivity
         rvProfessors = findViewById(R.id.rv_professors);
         professorsItem = new ArrayList<>();
 
-        ProfessorModel prof1 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Davide", "Falessi", "https://www.google.com", R.drawable.courses_falessi, createCourses());
-        ProfessorModel prof2 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Francesco", "Martinelli", "https://www.google.com", R.drawable.courses_martinelli, createCourses());
-        ProfessorModel prof3 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Francesco", "Lo Presti", "https://www.google.com", R.drawable.courses_lo_presti, createCourses());
-        ProfessorModel prof4 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Daniele", "Carnevale", "https://www.google.com", R.drawable.courses_carnevale, createCourses());
+        ProfessorModel prof1 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Davide", "Falessi", "https://www.google.com", R.drawable.courses_falessi, createCourses(), "Ingegneria Informatica");
+        ProfessorModel prof2 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Francesco", "Martinelli", "https://www.google.com", R.drawable.courses_martinelli, createCourses(), "Ingegneria Informatica");
+        ProfessorModel prof3 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Francesco", "Lo Presti", "https://www.google.com", R.drawable.courses_lo_presti, createCourses(), "Ingegneria Informatica");
+        ProfessorModel prof4 = new ProfessorModel("codiocannn", "ciaofrocio",  -1, "Daniele", "Carnevale", "https://www.google.com", R.drawable.courses_carnevale, createCourses(), "Ingegneria Informatica");
 
         professorsItem.add(prof1);
         professorsItem.add(prof2);

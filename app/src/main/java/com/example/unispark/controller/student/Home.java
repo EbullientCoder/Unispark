@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
 
+import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
@@ -100,40 +101,27 @@ public class Home extends AppCompatActivity
 
         //Uni Communications
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
-        uniCommunicationsItem = new ArrayList<>();
-
-        UniversityCommunicationModel uCom1 = new UniversityCommunicationModel(R.drawable.rettorato, "Nuovo Edificio", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom2 = new UniversityCommunicationModel(R.drawable.formula_uno, "Garage", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom3 = new UniversityCommunicationModel(R.drawable.schedule, "Orari Scolastici", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.green_pass, "Green Pass", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.drone, "Gara Droni", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom6 = new UniversityCommunicationModel(R.drawable.blank_img, "PROVA", DATE, COMMUNICATION);
-
-        uniCommunicationsItem.add(uCom1);
-        uniCommunicationsItem.add(uCom2);
-        uniCommunicationsItem.add(uCom3);
-        uniCommunicationsItem.add(uCom4);
-        uniCommunicationsItem.add(uCom5);
-        uniCommunicationsItem.add(uCom6);
-        uniCommunicationsItem.add(uCom6);
-        uniCommunicationsItem.add(uCom6);
+        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
 
         rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
 
 
         //Prof Communications
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
-        profCommunicationsItem = new ArrayList<>();
 
-        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "DAVIDE FALESSI", "10/12/2021", "Exam Result", COMMUNICATION);
-        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", COMMUNICATION);
-        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_carnevale, "CA","Daniele Carnevale", "07/04/2020", "Generic", COMMUNICATION);
-        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", COMMUNICATION);
+        //Create a list of strings of short name courses (Create a method in the applicative controller)
+        List<String> courseShortnames = new ArrayList<>();
+        if(student.getCourses() == null){
+            profCommunicationsItem = null;
+        }
+        else{
+            for(int i = 0; i < student.getCourses().size(); i++)
+            {
+                courseShortnames.add(student.getCourses().get(i).getShortName());
+            }
+            profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames);
+        }
 
-        profCommunicationsItem.add(pCom1);
-        profCommunicationsItem.add(pCom2);
-        profCommunicationsItem.add(pCom3);
-        profCommunicationsItem.add(pCom4);
 
         rvProfCommunications.setAdapter(new ProfCommunicationsAdapter(profCommunicationsItem, this));
 

@@ -22,6 +22,7 @@ import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
+import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.HomeworkModel;
@@ -162,23 +163,10 @@ public class ProfessorHome extends AppCompatActivity implements
 
         //Uni Communications
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
-        uniCommunicationsItem = new ArrayList<>();
+        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-        UniversityCommunicationModel uCom1 = new UniversityCommunicationModel(R.drawable.rettorato, "Nuovo Edificio", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom2 = new UniversityCommunicationModel(R.drawable.formula_uno, "Garage", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom3 = new UniversityCommunicationModel(R.drawable.schedule, "Orari Scolastici", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.green_pass, "Green Pass", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.drone, "Gara Droni", DATE, COMMUNICATION);
-        UniversityCommunicationModel uCom6 = new UniversityCommunicationModel(R.drawable.blank_img, "PROVA", DATE, COMMUNICATION);
 
-        uniCommunicationsItem.add(uCom1);
-        uniCommunicationsItem.add(uCom2);
-        uniCommunicationsItem.add(uCom3);
-        uniCommunicationsItem.add(uCom4);
-        uniCommunicationsItem.add(uCom5);
-        uniCommunicationsItem.add(uCom6);
-        uniCommunicationsItem.add(uCom6);
-        uniCommunicationsItem.add(uCom6);
+
 
         rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
 

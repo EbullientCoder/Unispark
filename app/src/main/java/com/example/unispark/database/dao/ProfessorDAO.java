@@ -32,6 +32,7 @@ public class ProfessorDAO {
         String passwordProfessor;
         String website;
         int image;
+        String faculty;
 
         //Get all professor's attributes from the Database using email and password
         Cursor cursor = QueryLogin.loginProfessor(db, email, password);
@@ -47,7 +48,7 @@ public class ProfessorDAO {
                     null,
                     "",
                     0,
-                    null);
+                    null, null);
             return professorerror;
         }
         professorId = cursor.getInt(0);
@@ -57,6 +58,7 @@ public class ProfessorDAO {
         passwordProfessor = cursor.getString(4);
         website = cursor.getString(5);
         image = cursor.getInt(6);
+        faculty = cursor.getString(7);
 
         //List of courses kept by professor
         List<CourseModel> coursesList = new ArrayList<>();
@@ -76,22 +78,26 @@ public class ProfessorDAO {
 
         if (!cursor.moveToFirst()){
             //throw exception
+            coursesList = null;
+        }
+        else{
+            do{
+                courseId = String.valueOf(cursor.getInt(7));
+                shortName = cursor.getString(1);
+                fullName = cursor.getString(2);
+                courseYear = cursor.getString(3);
+                cfu = cursor.getString(4);
+                session = cursor.getString(5);
+                link = cursor.getString(6);
+
+                //Create a new course and add it to the professor's course list
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
+                coursesList.add(course);
+
+            } while (cursor.moveToNext());
         }
 
-        do{
-            courseId = String.valueOf(cursor.getInt(7));
-            shortName = cursor.getString(1);
-            fullName = cursor.getString(2);
-            courseYear = cursor.getString(3);
-            cfu = cursor.getString(4);
-            session = cursor.getString(5);
-            link = cursor.getString(6);
 
-            //Create a new course and add it to the professor's course list
-            course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
-            coursesList.add(course);
-
-        } while (cursor.moveToNext());
 
         //Create the professor instance
         professor = new ProfessorModel(emailProfessor,
@@ -101,7 +107,8 @@ public class ProfessorDAO {
                 lastName,
                 website,
                 image,
-                coursesList);
+                coursesList,
+                faculty);
 
         //close both the cursor and the db when done.
         cursor.close();

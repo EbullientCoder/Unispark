@@ -20,6 +20,8 @@ import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
+import com.example.unispark.model.communications.ProfessorCommunicationModel;
+import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
@@ -31,7 +33,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String ID = "id";
     public static final String STUDENT_ID = "studentID";
     public static final String PROF_ID = "professorID";
-    public static final String UNI_ID = "universityID";
+    public static final String UNIVERSITY_ID = "universityID";
     public static final String IMAGE = "image";
     public static final String FIRSTNAME = "firstname";
     public static final String LASTNAME = "lastname";
@@ -68,9 +70,15 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
     //Relation table between students and courses
     public static final String STUDENTS_COURSES = "studentscourses";
-
     //STUDENT_ID
     //COURSE_NAME
+
+    //Communications table
+    public static final String COMMUNICATION = "communication";
+    public static final String UNI_COMMUNICATIONS = "universitycommunications";
+    public static final String DATE = "date";
+    public static final String PROF_COMMUNICATIONS = "professorcommunications";
+
 
 
     public SQLiteFillSampleDB(@Nullable Context context) {
@@ -89,13 +97,13 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         //Professors table statement
         createTableStatement = "CREATE TABLE " + PROFESSORS_TABLE + " (" + PROF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + FIRSTNAME + " TEXT, " + LASTNAME + " TEXT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT, " + WEBSITE + " TEXT, " + IMAGE + " INTEGER);";
+                + FIRSTNAME + " TEXT, " + LASTNAME + " TEXT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT, " + WEBSITE + " TEXT, " + IMAGE + " INTEGER, " + FACULTY + " TEXT);";
 
         db.execSQL(createTableStatement);
 
 
         //University table statement
-        createTableStatement = "CREATE TABLE " + UNI_TABLE + " (" + UNI_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT);";
+        createTableStatement = "CREATE TABLE " + UNI_TABLE + " (" + UNIVERSITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT);";
 
         db.execSQL(createTableStatement);
 
@@ -110,7 +118,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Courses table statement
         createTableStatement = "CREATE TABLE " + COURSE_TABLE + " (" + COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 SHORTNAME + " TEXT UNIQUE, " + COURSE_NAME + " TEXT UNIQUE, " + YEAR + " TEXT, " + CFU + " TEXT, " +
-                SESSION + " TEXT, " + LINK + " TEXT, " + TRACK_PROFESSOR + " INTEGER, "/* + COURSE_FACULTY + " TEXT,*/ + "FOREIGN KEY(" + TRACK_PROFESSOR + ") REFERENCES " + PROFESSORS_TABLE + "(" + PROF_ID + "));";
+                SESSION + " TEXT, " + LINK + " TEXT, " + TRACK_PROFESSOR + " INTEGER, "/* + FACULTY + " TEXT,*/ + "FOREIGN KEY(" + TRACK_PROFESSOR + ") REFERENCES " + PROFESSORS_TABLE + "(" + PROF_ID + "));";
 
         db.execSQL(createTableStatement);
 
@@ -121,7 +129,16 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         db.execSQL(createTableStatement);
 
+        //University communications table
+        createTableStatement = "CREATE TABLE " + UNI_COMMUNICATIONS + " (" + UNIVERSITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + IMAGE + " INTEGER, "
+                + TITLE + " TEXT, " + DATE + " TEXT, " + COMMUNICATION + " TEXT, " + FACULTY + " TEXT);";
 
+        db.execSQL(createTableStatement);
+
+        createTableStatement = "CREATE TABLE " + PROF_COMMUNICATIONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SHORTNAME + " TEXT, "
+                + DATE + " TEXT, " + TITLE + " TEXT, " + COMMUNICATION + " TEXT);";
+
+        db.execSQL(createTableStatement);
     }
 
     //Initialize Database
@@ -151,7 +168,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Falessi",
                 "https://www.binance.com",
                 R.drawable.courses_falessi,
-                null);
+                null, "Ingegneria Informatica");
 
         ProfessorModel professor2 = new ProfessorModel("lopresti",
                 getHash("password"),
@@ -160,7 +177,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Lo Presti",
                 "https://www.lopresti.com",
                 R.drawable.courses_lo_presti,
-                null);
+                null, "Ingegneria Informatica");
 
         ProfessorModel professor3 = new ProfessorModel("martinelli",
                 getHash("password"),
@@ -169,7 +186,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Martinelli",
                 "https://www.lopresti.com",
                 R.drawable.courses_martinelli,
-                null);
+                null, "Ingegneria Informatica");
 
         //Add professors to DB and set their id correctly
         this.addProfessor(professor1);
@@ -196,7 +213,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Lapiana",
                 "lapiana",
                 getHash("password"),
-                "Ingegenria Informatica",
+                "Ingegneria Informatica",
                 "2021/2022",
                 "0362977",
                 null);
@@ -206,7 +223,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Fanfarillo",
                 "fanfarillo",
                 getHash("password"),
-                "Ingegenria Informatica",
+                "Ingegneria Informatica",
                 "2021/2022",
                 "0279544",
                 null);
@@ -362,6 +379,32 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Martinelli
         this.addHomework(homework7);
         this.addHomework(homework8);
+
+        //Professors Communications
+        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_carnevale, "CA","Daniele Carnevale", "07/04/2020", "Generic", "Communication");
+        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
+
+        this.addProfessorCommunication(pCom1);
+        this.addProfessorCommunication(pCom2);
+        this.addProfessorCommunication(pCom3);
+        this.addProfessorCommunication(pCom4);
+
+        //University Communications
+        UniversityCommunicationModel uCom1 = new UniversityCommunicationModel(R.drawable.rettorato, "Nuovo Edificio", DATE, COMMUNICATION, "Ingegneria Informatica");
+        UniversityCommunicationModel uCom2 = new UniversityCommunicationModel(R.drawable.formula_uno, "Garage", DATE, COMMUNICATION, "Ingegneria Informatica");
+        UniversityCommunicationModel uCom3 = new UniversityCommunicationModel(R.drawable.schedule, "Orari Scolastici", DATE, COMMUNICATION, "Economia");
+        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.green_pass, "Green Pass", DATE, COMMUNICATION, "");
+        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.drone, "Gara Droni", DATE, COMMUNICATION, "");
+        UniversityCommunicationModel uCom6 = new UniversityCommunicationModel(R.drawable.blank_img, "PROVA", DATE, COMMUNICATION, "Giurisprudenza");
+
+        this.addUniversityCommunication(uCom1);
+        this.addUniversityCommunication(uCom2);
+        this.addUniversityCommunication(uCom3);
+        this.addUniversityCommunication(uCom4);
+        this.addUniversityCommunication(uCom5);
+        this.addUniversityCommunication(uCom6);
     }
 
     //Add Student to the Database
@@ -395,6 +438,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         cv.put(PASSWORD, professor.getPassword());
         cv.put(WEBSITE, professor.getWebsite());
         cv.put(IMAGE, professor.getImage());
+        cv.put(FACULTY, professor.getFaculty());
 
         long insert = db.insert(PROFESSORS_TABLE, null, cv);
 
@@ -491,287 +535,38 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
+    //Add University communication
+    public boolean addUniversityCommunication(UniversityCommunicationModel communication){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
 
-    //Get a Student instance using the email
-   /* public StudentModel getStudent(String email){
-        //Select all student fields marked by the email
-        String queryString = "SELECT * FROM " + STUDENTS_TABLE + " WHERE email = '" + email + "';";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
+        cv.put(IMAGE, communication.getBackground());
+        cv.put(TITLE, communication.getTitle());
+        cv.put(DATE, communication.getDate());
+        cv.put(COMMUNICATION, communication.getCommunication());
+        cv.put(FACULTY, communication.getFaculty());
 
-        //Student attributes
-        StudentModel student = null;
-        int imageID = 0;
-        String firstName = null;
-        String lastName = null;
-        String studentEmail = null;
-        String studentPassword = null;
-        String faculty = null;
-        String academicYear = null;
-        String id = null;
+        long insert = db.insert(UNI_COMMUNICATIONS, null, cv);
 
-        if (cursor.moveToFirst()){
+        if (insert == -1) return false;
+        else return true;
+    }
 
-            imageID = cursor.getInt(5);
-            firstName = cursor.getString(1);
-            lastName = cursor.getString(2);
-            studentEmail = cursor.getString(3);
-            studentPassword = cursor.getString(4);
-            faculty = cursor.getString(6);
-            academicYear = cursor.getString(7);
-            id = cursor.getString(8);
-        }
+    //Add Professor communication
+    public boolean addProfessorCommunication(ProfessorCommunicationModel communication){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
 
-        //List of courses followed by student and their attributes
-        List<CourseModel> coursesList = new ArrayList<>();
+        cv.put(SHORTNAME, communication.getShortCourseName());
+        cv.put(DATE, communication.getDate());
+        cv.put(TITLE, communication.getType());
+        cv.put(COMMUNICATION, communication.getCommunication());
 
-        CourseModel course;
-        String courseId;
-        String shortName;
-        String fullName;
-        String courseYear;
-        String cfu;
-        String session;
-        String link;
+        long insert = db.insert(PROF_COMMUNICATIONS, null, cv);
 
-        //Select all courses followed by studentId
-        queryString = "SELECT " + COURSE_NAME + " FROM " + STUDENTS_COURSES + " WHERE " + STUDENT_ID + " = '" + id + "';";
-        Cursor cursorCourse = db.rawQuery(queryString, null);
-
-        if (cursorCourse.moveToFirst()){
-            String courseName = null;
-
-            do{
-                courseName = cursorCourse.getString(0);
-                queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
-                cursor = db.rawQuery(queryString, null);
-
-                if (cursor.moveToFirst()){
-                    courseId = String.valueOf(cursor.getInt(7));
-                    shortName = cursor.getString(1);
-                    fullName = cursor.getString(2);
-                    courseYear = cursor.getString(3);
-                    cfu = cursor.getString(4);
-                    session = cursor.getString(5);
-                    link = cursor.getString(6);
-
-                    //Create a new course and add it to the student's course list
-                    course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
-                    coursesList.add(course);
-                }
-            } while (cursorCourse.moveToNext());
-        }
-
-        //Create the student instance
-        student = new StudentModel(imageID,
-                firstName,
-                lastName,
-                email,
-                studentPassword,
-                faculty,
-                academicYear,
-                id,
-                coursesList);
-
-        //close both the cursor and the db when done.
-        cursor.close();
-        db.close();
-        return student;
-    }*/
-
-
-
-
-
-
-    //Get a ProfessorModel instance using the email
-    /*public ProfessorModel getProfessor(String email){
-        //Select all professor fields marked by the email
-        String queryString = "SELECT * FROM " + PROFESSORS_TABLE + " WHERE email = '" + email + "';";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        //Professor attributes
-        ProfessorModel professor = null;
-        int professorId = -1;
-        String firtName = null;
-        String lastName = null;
-        String emailProfessor = null;
-        String passwordProfessor = null;
-        String website = null;
-        int image = -1;
-
-        if (cursor.moveToFirst()){
-            professorId = cursor.getInt(0);
-            firtName = cursor.getString(1);
-            lastName = cursor.getString(2);
-            emailProfessor = cursor.getString(3);
-            passwordProfessor = cursor.getString(4);
-            website = cursor.getString(5);
-            image = cursor.getInt(6);
-        }
-
-        //List of courses kept by professor and their attributes
-        List<CourseModel> coursesList = new ArrayList<>();
-        CourseModel course;
-        String courseId;
-        String shortName;
-        String fullName;
-        String courseYear;
-        String cfu;
-        String session;
-        String link;
-
-        //Select all courses marked by professor id
-        queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE trackprofessor = " + professorId + ";";
-        cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()){
-
-            do{
-                courseId = String.valueOf(cursor.getInt(7));
-                shortName = cursor.getString(1);
-                fullName = cursor.getString(2);
-                courseYear = cursor.getString(3);
-                cfu = cursor.getString(4);
-                session = cursor.getString(5);
-                link = cursor.getString(6);
-
-                //Create a new course and add it to the professor's course list
-                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
-                coursesList.add(course);
-
-            } while (cursor.moveToNext());
-        }
-
-        //Create the professor instance
-        professor = new ProfessorModel(emailProfessor,
-                passwordProfessor,
-                professorId,
-                firtName,
-                lastName,
-                website,
-                image,
-                coursesList);
-
-        //close both the cursor and the db when done.
-        cursor.close();
-        db.close();
-
-        return professor;
-    }*/
-
-
-    //Get Homework: Return an Homework List to Student Home show into RecyclerView
-    /*public List<HomeworkModel> getHomework(StudentModel student){
-        List<HomeworkModel> homeworkList = new ArrayList<>();
-
-        //Get courses tracked by studentId
-        String queryString = "SELECT " + COURSE_NAME + " FROM " + STUDENTS_COURSES + " WHERE "
-                + STUDENT_ID + " = '" + student.getId() + "';";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursorCourse = db.rawQuery(queryString, null);
-
-        if (cursorCourse.moveToFirst()){
-            String courseName;
-            Cursor cursorHomework;
-            do{
-                courseName = cursorCourse.getString(0);
-                queryString = "SELECT * FROM " + HOMEWORK_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
-                cursorHomework = db.rawQuery(queryString, null);
-                if (cursorHomework.moveToFirst()){
-                    String shortName;
-                    String fullName;
-                    String title;
-                    String expiration;
-                    String instructions;
-                    String points;
-                    int trackProfessor;
-                    do {
-                        shortName = cursorHomework.getString(1);
-                        fullName = cursorHomework.getString(2);
-                        title = cursorHomework.getString(3);
-                        expiration = cursorHomework.getString(4);
-                        instructions = cursorHomework.getString(5);
-                        points = cursorHomework.getString(6);
-                        trackProfessor = cursorHomework.getInt(7);
-
-                        HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                        homeworkList.add(newHomework);
-                    } while (cursorHomework.moveToNext());
-                }
-                cursorHomework.close();
-
-            } while (cursorCourse.moveToNext());
-        }
-        //close both the cursor and the db when done.
-        cursorCourse.close();
-        db.close();
-        return homeworkList;
-    }*/
-
-
-    //Get Homework: Return an Homework List to Professor Home show into RecyclerView
-    /*public List<HomeworkModel> getAssignedHomework(ProfessorModel professor){
-        List<HomeworkModel> homeworkList = new ArrayList<>();
-
-        //get data from the database
-        String queryString;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
-
-        //Select homework created by professor marked by trackprofessor id
-        queryString = "SELECT * FROM " + HOMEWORK_TABLE + " WHERE " + TRACK_PROFESSOR + " = " + professor.getId() + ";";
-        cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()){
-            do{
-                String shortName = cursor.getString(1);
-                String fullName = cursor.getString(2);
-                String title = cursor.getString(3);
-                String expiration = cursor.getString(4);
-                String instructions = cursor.getString(5);
-                String points = cursor.getString(6);
-                int trackProfessor = cursor.getInt(7);
-
-                HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                homeworkList.add(newHomework);
-            } while (cursor.moveToNext());
-        }
-        //close both the cursor and the db when done.
-        cursor.close();
-        db.close();
-        return homeworkList;
-
-    }*/
-
-
-
-    //Login: Verify that user credentials are into the DB
-    /*public boolean login(String user, String emailText, String passwordText) {
-        String queryString = null;
-
-        if (user == "STUDENT"){
-            queryString = "SELECT email, password FROM " + STUDENTS_TABLE + " where email = '" + emailText + "';";
-        }
-        if (user == "PROFESSOR"){
-            queryString = "SELECT email, password FROM " + PROFESSORS_TABLE + " where email = '" + emailText + "';";
-        }
-        if (user == "UNIVERSITY"){
-            queryString = "SELECT email, password FROM " + UNI_TABLE + " where email = '" + emailText + "';";
-        }
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()){
-            String storedPassword = cursor.getString(1);
-
-            if (checkPassword(passwordText, storedPassword)) return true;
-            else return false;
-        }
-        else return false;
-    }*/
+        if (insert == -1) return false;
+        else return true;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

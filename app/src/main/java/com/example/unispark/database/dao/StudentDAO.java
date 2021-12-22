@@ -77,30 +77,31 @@ public class StudentDAO {
 
         if (!cursorCourse.moveToFirst()){
             //throw exception
+            coursesList = null;
         }
+        else{
+            String courseName;
 
-        String courseName;
+            do{
+                courseName = cursorCourse.getString(0);
+                cursor = QueryCourse.selectCourseName(db, courseName);
 
-        do{
-            courseName = cursorCourse.getString(0);
-            cursor = QueryCourse.selectCourseName(db, courseName);
+                if (!cursor.moveToFirst()){
+                    //throw exception
+                }
+                courseId = String.valueOf(cursor.getInt(7));
+                shortName = cursor.getString(1);
+                fullName = cursor.getString(2);
+                courseYear = cursor.getString(3);
+                cfu = cursor.getString(4);
+                session = cursor.getString(5);
+                link = cursor.getString(6);
 
-            if (!cursor.moveToFirst()){
-                //throw exception
-            }
-            courseId = String.valueOf(cursor.getInt(7));
-            shortName = cursor.getString(1);
-            fullName = cursor.getString(2);
-            courseYear = cursor.getString(3);
-            cfu = cursor.getString(4);
-            session = cursor.getString(5);
-            link = cursor.getString(6);
-
-            //Create a new course and add it to the student's course list
-            course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
-            coursesList.add(course);
-        } while (cursorCourse.moveToNext());
-
+                //Create a new course and add it to the student's course list
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
+                coursesList.add(course);
+            } while (cursorCourse.moveToNext());
+        }
         //Create the student instance
         student = new StudentModel(imageID,
                 firstName,
@@ -118,8 +119,4 @@ public class StudentDAO {
         db.close();
         return student;
     }
-
-
-
-
 }

@@ -11,6 +11,7 @@ public class ProfessorModel extends UserModel{
     private String website;
     private int image;
     private List<CourseModel> courses;
+    private String faculty;
 
 
     //Methods
@@ -19,7 +20,7 @@ public class ProfessorModel extends UserModel{
         super(email, password);
     }
 
-    public ProfessorModel(String email, String password, int id, String firstName, String lastName, String website, int image, List<CourseModel> courses) {
+    public ProfessorModel(String email, String password, int id, String firstName, String lastName, String website, int image, List<CourseModel> courses, String faculty) {
         super(email, password);
         this.id = id;
         this.firstName = firstName;
@@ -27,6 +28,7 @@ public class ProfessorModel extends UserModel{
         this.website = website;
         this.image = image;
         this.courses = courses;
+        this.faculty = faculty;
     }
 
     //Getter
@@ -48,6 +50,7 @@ public class ProfessorModel extends UserModel{
     public List<CourseModel> getCourses() {
         return courses;
     }
+    public String getFaculty(){ return faculty; }
 
 
     //Setter
@@ -69,6 +72,7 @@ public class ProfessorModel extends UserModel{
     public void setCourses(List<CourseModel> courses) {
         this.courses = courses;
     }
+    public void setFaculty(String faculty) { this.faculty = faculty; }
 }
 
 

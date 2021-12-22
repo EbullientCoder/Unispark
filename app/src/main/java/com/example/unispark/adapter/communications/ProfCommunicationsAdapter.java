@@ -87,7 +87,7 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
         void setCommunicationDate(ProfessorCommunicationModel professorCommunicationModel){
             imageProfessor.setImageResource(professorCommunicationModel.getProfilePhoto());
             imageID = professorCommunicationModel.getProfilePhoto();
-            shortName.setText(professorCommunicationModel.getShortName());
+            shortName.setText(professorCommunicationModel.getShortCourseName());
             profName = professorCommunicationModel.getProfessorName();
             date = professorCommunicationModel.getDate();
             type.setText(professorCommunicationModel.getType());

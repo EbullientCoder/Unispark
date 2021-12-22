@@ -7,15 +7,17 @@ public class UniversityCommunicationModel {
     private String title;
     private String date;
     private String communication;
+    private String faculty;
 
 
     //Methods
     //Constructor
-    public UniversityCommunicationModel(int background, String title, String date, String communication) {
+    public UniversityCommunicationModel(int background, String title, String date, String communication, String faculty) {
         this.background = background;
         this.title = title;
         this.date = date;
         this.communication = communication;
+        this.faculty = faculty;
     }
 
     //Getter
@@ -31,6 +33,9 @@ public class UniversityCommunicationModel {
     public String getCommunication() {
         return communication;
     }
+    public String getFaculty() {
+        return faculty;
+    }
 
     //Setter
     public void setBackground(int background) {
@@ -44,6 +49,9 @@ public class UniversityCommunicationModel {
     }
     public void setCommunication(String communication) {
         this.communication = communication;
+    }
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 }
 
