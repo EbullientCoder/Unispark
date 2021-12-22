@@ -144,6 +144,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Add University to DB
         this.addUniversity(university);
 
+
         //Sample Professor
         ProfessorModel professor1 = new ProfessorModel("falessi",
                 getHash("password"),
@@ -180,6 +181,34 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.setProfessorId(professor2);
         this.setProfessorId(professor3);
 
+
+        //Sample Student
+        StudentModel student1 = new StudentModel(0,
+                "Emanuele",
+                "Valzano",
+                "emanuele",
+                getHash("password"),
+                "Ingegneria Informatica",
+                "2021/2022",
+                "0268609",
+                null);
+
+        StudentModel student2 = new StudentModel(0,
+                "Andrea",
+                "Lapiana",
+                "andrea",
+                getHash("password"),
+                "Ingegenria Informatica",
+                "2021/2022",
+                "0362977",
+                null);
+
+        //Add students to DB
+        this.addStudent(student1);
+        this.addStudent(student2);
+
+
+
         //Add courses to DB
         CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW",
@@ -197,8 +226,25 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Winter",
                 "https://binance.com");
 
+        CourseModel course2 = new CourseModel(String.valueOf(professor1.getId()),
+                "CE",
+                "CALCOLATORI ELETTRONICI",
+                "2021/2022",
+                "9.0",
+                "Winter",
+                "https://binance.com");
+
         this.addCourse(course);
         this.addCourse(course1);
+        this.addCourse(course2);
+
+        //Join a new course
+        joinCourse(course, student1);
+        joinCourse(course1, student1);
+        joinCourse(course1, student2);
+        joinCourse(course2, student2);
+
+
 
         //Add homeworks
         HomeworkModel homework1 = new HomeworkModel("ISPW",
@@ -228,38 +274,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addHomework(homework1);
         this.addHomework(homework2);
         this.addHomework(homework3);
-
-        //Sample Student
-
-        StudentModel student1 = new StudentModel(0,
-                "Emanuele",
-                "Valzano",
-                "emanuele",
-                getHash("password"),
-                "Ingegneria Informatica",
-                "2021/2022",
-                "0268609",
-                null);
-
-        StudentModel student2 = new StudentModel(0,
-                "Andrea",
-                "Lapiana",
-                "andrea",
-                getHash("password"),
-                "Ingegenria Informatica",
-                "2021/2022",
-                "0362977",
-                null);
-
-
-        //Add students to DB
-        this.addStudent(student1);
-        this.addStudent(student2);
-
-        //Join a new course
-        joinCourse(course, student1);
-        joinCourse(course1, student1);
-        joinCourse(course1, student2);
     }
 
     //Add Student to the Database

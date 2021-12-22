@@ -22,6 +22,7 @@ import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
+import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
@@ -184,10 +185,7 @@ public class ProfessorHome extends AppCompatActivity implements
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
-
-        //dataBaseHomework = new DataBaseHelper(getApplicationContext());
-        //homeworksItem = dataBaseHomework.getAssignedHomework(professor);
-
+        homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
 
         homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
         rvHomeworks.setAdapter(homeworkAdapter);
