@@ -23,6 +23,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.HomeworksAdapter;
+import com.example.unispark.database.dao.HomeworkDAO;
+import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.others.SQLiteFillSampleDB;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
@@ -34,8 +37,6 @@ import java.util.List;
 
 public class AddHomeworkFragment extends DialogFragment{
     //Attributes
-    //Database
-    //DataBaseHelper db;
     //Dismiss Button
     ImageButton btnDismiss;
     //Add Homework Button
@@ -181,9 +182,7 @@ public class AddHomeworkFragment extends DialogFragment{
                         professor.getId());
 
                 //Adding it into the DB
-                //db = new DataBaseHelper(getContext());
-               // db.addHomework(homework);
-                //db.close();
+                HomeworkDAO.addHomework(homework);
 
                 dismiss();
             }

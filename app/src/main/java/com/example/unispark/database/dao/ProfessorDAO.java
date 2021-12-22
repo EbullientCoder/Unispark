@@ -38,6 +38,17 @@ public class ProfessorDAO {
 
         if (!cursor.moveToFirst()){
             //throw exception
+
+            //Momentaneo
+            ProfessorModel professorerror = new ProfessorModel(null,
+                    null,
+                    0,
+                    null,
+                    null,
+                    "",
+                    0,
+                    null);
+            return professorerror;
         }
         professorId = cursor.getInt(0);
         firtName = cursor.getString(1);

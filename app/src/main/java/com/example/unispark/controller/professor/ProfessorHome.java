@@ -37,8 +37,6 @@ public class ProfessorHome extends AppCompatActivity implements
         HomeworksAdapter.OnHomeworkBtnClickListener,
         UniCommunicationsAdapter.OnUniComClickListener{
 
-    //Database
-    //DataBaseHelper dataBaseHomework;
     //Menu
     ImageButton menuButton;
     //Floating Button
@@ -74,6 +72,8 @@ public class ProfessorHome extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_home);
 
+        //Avvertenza Eccezioni
+        Toast.makeText(getApplicationContext(), "SE LA LISTA DEI COMPITI E' NULLA CRASHA", Toast.LENGTH_LONG).show();
         //Getting User Object
         extras = getIntent().getExtras();
         professor = (ProfessorModel) extras.getSerializable("UserObject");

@@ -2,6 +2,7 @@ package com.example.unispark.database.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
@@ -37,6 +38,18 @@ public class StudentDAO {
 
         if (!cursor.moveToFirst()){
             // throw exception
+
+            //Momentaneo
+            StudentModel student1 = new StudentModel(0,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            return student1;
         }
         imageID = cursor.getInt(5);
         firstName = cursor.getString(1);

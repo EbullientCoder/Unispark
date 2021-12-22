@@ -11,6 +11,7 @@ import com.example.unispark.model.HomeworkModel;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeworkDAO {
@@ -101,6 +102,9 @@ public class HomeworkDAO {
             HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
             homeworkList.add(newHomework);
         } while (cursor.moveToNext());
+
+        //Reverse Homeworks List
+        Collections.reverse(homeworkList);
 
         //close both the cursor and the db when done.
         cursor.close();

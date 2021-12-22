@@ -24,8 +24,6 @@ import com.google.android.material.textfield.TextInputLayout;
 public class Login extends AppCompatActivity {
 
     //Attributes
-    //Database
-    //DataBaseHelper dataBaseUser;
     //User Selector
     String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
     AutoCompleteTextView autoCompleteTxt;
@@ -77,24 +75,33 @@ public class Login extends AppCompatActivity {
                     switch (userSelection) {
                         case "STUDENT":
                             StudentModel student = StudentDAO.selectStudent(email, password);
-                            intent = new Intent(getApplicationContext(), Home.class);
-                            intent.putExtra("UserObject", student);
-                            startActivity(intent);
+
+                            if(student.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                            else{
+                                intent = new Intent(getApplicationContext(), Home.class);
+                                intent.putExtra("UserObject", student);
+                                startActivity(intent);
+                            }
                             break;
+
                         case "PROFESSOR":
                             ProfessorModel professor = ProfessorDAO.selectProfessor(email, password);
-                            intent = new Intent(getApplicationContext(), ProfessorHome.class);
-                            intent.putExtra("UserObject", professor);
-                            startActivity(intent);
+
+                            if(professor.getEmail() == null)Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                            else{
+                                intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                                intent.putExtra("UserObject", professor);
+                                startActivity(intent);
+                            }
                             break;
+
                         //case "UNIVERSITY": startActivity(new Intent(getApplicationContext(), UniversityHome.class));
                         //break;
-
                     }
                     //overridePendingTransition(0, 0);
                 }
+                else Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 }

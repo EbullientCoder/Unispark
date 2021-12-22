@@ -42,8 +42,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String WEBSITE = "website";
 
 
-
-
     //Homework table
     public static final String HOMEWORK_TABLE = "homework";
     public static final String ID_HW = "homeworkID";
@@ -104,7 +102,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         //Homework table statement
         createTableStatement = "CREATE TABLE " + HOMEWORK_TABLE + " (" + ID_HW + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                SHORTNAME + " TEXT UNIQUE, " + COURSE_NAME + " TEXT UNIQUE, " + TITLE + " TEXT, " + EXPIRATION + " TEXT, " +
+                SHORTNAME + " TEXT, " + COURSE_NAME + " TEXT, " + TITLE + " TEXT, " + EXPIRATION + " TEXT, " +
                 INSTRUCTIONS + " TEXT, " + POINTS + " INTEGER, " + TRACK_PROFESSOR + " INTEGER, FOREIGN KEY(" + TRACK_PROFESSOR + ") REFERENCES " + PROFESSORS_TABLE + "(" + PROF_ID + "));";
 
         db.execSQL(createTableStatement);
@@ -127,16 +125,16 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Initialize Database
-    public void initDatabase(){
+    public void initDatabase() {
         this.fillDB();
     }
 
     //Sample Database
-    public void fillDB(){
+    public void fillDB() {
         //Sample University
         UniversityModel university = new UniversityModel("universita",
                 getHash("password"),
-                "Tor Vergogna",
+                "Tor Vergata",
                 "Via le Mani dal Naso",
                 null,
                 null);
@@ -167,8 +165,8 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         ProfessorModel professor3 = new ProfessorModel("martinelli",
                 getHash("password"),
                 -3,
-                "Nome",
-                "Cognome",
+                "Francesco",
+                "Martinelli",
                 "https://www.lopresti.com",
                 R.drawable.courses_martinelli,
                 null);
@@ -183,41 +181,51 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Sample Student
-        StudentModel student1 = new StudentModel(0,
+        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
                 "Emanuele",
                 "Valzano",
-                "emanuele",
+                "valzano",
                 getHash("password"),
                 "Ingegneria Informatica",
                 "2021/2022",
                 "0268609",
                 null);
 
-        StudentModel student2 = new StudentModel(0,
+        StudentModel student2 = new StudentModel(R.drawable.profile_photo,
                 "Andrea",
                 "Lapiana",
-                "andrea",
+                "lapiana",
                 getHash("password"),
                 "Ingegenria Informatica",
                 "2021/2022",
                 "0362977",
                 null);
 
+        StudentModel student3 = new StudentModel(R.drawable.profile_photo,
+                "Matteo",
+                "Fanfarillo",
+                "fanfarillo",
+                getHash("password"),
+                "Ingegenria Informatica",
+                "2021/2022",
+                "0279544",
+                null);
+
         //Add students to DB
         this.addStudent(student1);
         this.addStudent(student2);
-
+        this.addStudent(student3);
 
 
         //Add courses to DB
+        //Falessi
         CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW",
-                "ING. DEL SOFTWARE E PROG. WEB",
+                "ING. DEL SOFTWARE E PROGETTAZIONE WEB",
                 "2021",
                 "12.0",
-                "2",
+                "Winter",
                 "https://google.com");
-
         CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
@@ -226,58 +234,138 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Winter",
                 "https://binance.com");
 
-        CourseModel course2 = new CourseModel(String.valueOf(professor1.getId()),
+        //Lo presti
+        CourseModel course2 = new CourseModel(String.valueOf(professor2.getId()),
                 "CE",
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
-                "9.0",
+                "12.0",
+                "Winter",
+                "https://binance.com");
+
+        //Martinelli
+        CourseModel course3 = new CourseModel(String.valueOf(professor3.getId()),
+                "FOC",
+                "FONDAMENTI DI CONTROLLI",
+                "2021/2022",
+                "12.0",
+                "Summer",
+                "https://binance.com");
+        CourseModel course4 = new CourseModel(String.valueOf(professor3.getId()),
+                "ARL",
+                "AUTOMATICA E ROBOTICA LAB.",
+                "2021/2022",
+                "12.0",
                 "Winter",
                 "https://binance.com");
 
         this.addCourse(course);
         this.addCourse(course1);
         this.addCourse(course2);
+        this.addCourse(course3);
+        this.addCourse(course4);
 
-        //Join a new course
+        //Connecting Students to their Courses
+        //ISPW
         joinCourse(course, student1);
-        joinCourse(course1, student1);
+        joinCourse(course, student2);
+        //ISPW2
         joinCourse(course1, student2);
+        joinCourse(course1, student3);
+        //CE
         joinCourse(course2, student2);
-
+        //FOC
+        joinCourse(course3, student2);
+        //ARL
+        joinCourse(course4, student2);
 
 
         //Add homeworks
+        //Falessi
         HomeworkModel homework1 = new HomeworkModel("ISPW",
                 "ING. DEL SOFTWARE E PROG. WEB",
                 "Sequence Diagram",
-                "DUE OCT 28",
+                "02/02/2022",
                 INSTRUCTIONS,
-                "1 Points",
+                "0",
                 professor1.getId());
-
-        HomeworkModel homework2 = new HomeworkModel("CALC",
-                "CALCOLATORI ELETTRONICI",
-                "PIPELINE",
-                "DUE OCT 28",
+        HomeworkModel homework2 = new HomeworkModel("ISPW II",
+                "ING. DEL SOFTWARE E PROG. WEB II",
+                "Threads dei Java",
+                "04/02/2022",
                 INSTRUCTIONS,
-                "1 Points",
-                professor2.getId());
-
+                "0",
+                professor1.getId());
         HomeworkModel homework3 = new HomeworkModel("ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
-                "Sequence Diagram II",
-                "DUE OCT 28",
+                "Documentazione",
+                "05/02/2022",
                 INSTRUCTIONS,
-                "1 Points",
+                "0",
                 professor1.getId());
 
+        //Lo Presti
+        HomeworkModel homework4 = new HomeworkModel("CE",
+                "CALCOLATORI ELETTROCINICI",
+                "CPU",
+                "02/02/2022",
+                INSTRUCTIONS,
+                "0",
+                professor2.getId());
+        HomeworkModel homework5 = new HomeworkModel("CE",
+                "CALCOLATORI ELETTROCINICI",
+                "Registri della RAM",
+                "04/02/2022",
+                INSTRUCTIONS,
+                "0",
+                professor2.getId());
+        HomeworkModel homework6 = new HomeworkModel("CE",
+                "CALCOLATORI ELETTRONICI",
+                "Flip Flop",
+                "05/02/2022",
+                INSTRUCTIONS,
+                "0",
+                professor2.getId());
+
+        //Martinelli
+        HomeworkModel homework7 = new HomeworkModel("FOC",
+                "FONDAMENTI DI CONTROLLI",
+                "Funzioni di Trasferimento",
+                "02/02/2022",
+                INSTRUCTIONS,
+                "0",
+                professor3.getId());
+        HomeworkModel homework8 = new HomeworkModel("ARL",
+                "AUTOMATICA E ROBOTICA LAB.",
+                "Scorbot",
+                "04/02/2022",
+                INSTRUCTIONS,
+                "0",
+                professor3.getId());
+
+        //Falessi
         this.addHomework(homework1);
         this.addHomework(homework2);
         this.addHomework(homework3);
+        this.addHomework(homework3);
+        this.addHomework(homework3);
+        this.addHomework(homework3);
+        this.addHomework(homework3);
+        //Lo Presti
+        this.addHomework(homework4);
+        this.addHomework(homework5);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        //Martinelli
+        this.addHomework(homework7);
+        this.addHomework(homework8);
     }
 
     //Add Student to the Database
-    public boolean addStudent(StudentModel student){
+    public boolean addStudent(StudentModel student) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -297,7 +385,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Add Professor to the Database
-    public boolean addProfessor(ProfessorModel professor){
+    public boolean addProfessor(ProfessorModel professor) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -315,7 +403,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Set professor Id
-    public boolean setProfessorId(ProfessorModel professor){
+    public boolean setProfessorId(ProfessorModel professor) {
         //get id from the database
         Cursor cursor = null;
         boolean check = false;
@@ -335,7 +423,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Add University to the Database
-    public boolean addUniversity(UniversityModel university){
+    public boolean addUniversity(UniversityModel university) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -349,7 +437,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Add Homework: Put Homeworks into the Database
-    public boolean addHomework(HomeworkModel homework){
+    public boolean addHomework(HomeworkModel homework) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -369,7 +457,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Add course to Database
-    public boolean addCourse(CourseModel course){
+    public boolean addCourse(CourseModel course) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -390,7 +478,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
     //A student joins a new course
-    public boolean joinCourse(CourseModel course, StudentModel student){
+    public boolean joinCourse(CourseModel course, StudentModel student) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -402,6 +490,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Get a Student instance using the email
    /* public StudentModel getStudent(String email){
