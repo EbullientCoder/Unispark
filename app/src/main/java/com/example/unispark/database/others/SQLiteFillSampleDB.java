@@ -221,7 +221,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Falessi
         CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW",
-                "ING. DEL SOFTWARE E PROGETTAZIONE WEB",
+                "ING. DEL SOFTWARE E PROG. WEB",
                 "2021",
                 "12.0",
                 "Winter",
@@ -289,13 +289,13 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 INSTRUCTIONS,
                 "0",
                 professor1.getId());
-        HomeworkModel homework2 = new HomeworkModel("ISPW II",
+        /*HomeworkModel homework2 = new HomeworkModel("ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
                 "Threads dei Java",
                 "04/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor1.getId());
+                professor1.getId());*/
         HomeworkModel homework3 = new HomeworkModel("ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
                 "Documentazione",
@@ -345,7 +345,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         //Falessi
         this.addHomework(homework1);
-        this.addHomework(homework2);
+        //this.addHomework(homework2);
         this.addHomework(homework3);
         this.addHomework(homework3);
         this.addHomework(homework3);

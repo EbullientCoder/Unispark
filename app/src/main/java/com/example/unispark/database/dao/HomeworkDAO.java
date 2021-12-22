@@ -32,6 +32,7 @@ public class HomeworkDAO {
         }
         String courseName;
         Cursor cursorHomework;
+
         do{
             courseName = cursorCourse.getString(0);
             //Look for homeworks marked by courseName
@@ -80,7 +81,7 @@ public class HomeworkDAO {
         Cursor cursor = QueryHomework.selectProfessorHomework(db, professorID);
 
         if (!cursor.moveToFirst()){
-            //throe exception
+            //throw exception
         }
         //Homework attributes
         String shortName;
@@ -110,7 +111,6 @@ public class HomeworkDAO {
         cursor.close();
         db.close();
         return homeworkList;
-
     }
 
     public static boolean addHomework(HomeworkModel homework){
