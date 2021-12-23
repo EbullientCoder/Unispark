@@ -17,7 +17,7 @@ public class QueryCommunications {
     //Look for University communications marked by facultyName
     public static Cursor selectFacultyCommunications(SQLiteDatabase db, String facultyName) //throws exception
     {
-        String queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + " WHERE " + FACULTY + " = '" + facultyName + "';";
+        String queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + " WHERE " + FACULTY + " = '" + facultyName + "' OR " + FACULTY + " = 'All';";
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }
