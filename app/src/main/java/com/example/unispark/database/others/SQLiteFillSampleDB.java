@@ -74,9 +74,9 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     //COURSE_NAME
 
     //Communications table
-    public static final String COMMUNICATION = "comunicazione";
+    public static final String COMMUNICATION = "communication";
     public static final String UNI_COMMUNICATIONS = "universitycommunications";
-    public static final String DATE = "data";
+    public static final String DATE = "date";
     public static final String PROF_COMMUNICATIONS = "professorcommunications";
 
 
@@ -198,7 +198,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Sample Student
-        StudentModel student1 = new StudentModel(R.drawable.courses_martinelli,
+        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
                 "Emanuele",
                 "Valzano",
                 "valzano",
@@ -290,7 +290,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         joinCourse(course1, student2);
         joinCourse(course1, student3);
         //CE
-        joinCourse(course2, student3);
+        joinCourse(course2, student2);
         //FOC
         joinCourse(course3, student2);
         //ARL
@@ -364,34 +364,39 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addHomework(homework1);
         //this.addHomework(homework2);
         this.addHomework(homework3);
-
+        this.addHomework(homework3);
+        this.addHomework(homework3);
+        this.addHomework(homework3);
+        this.addHomework(homework3);
         //Lo Presti
         this.addHomework(homework4);
         this.addHomework(homework5);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
+        this.addHomework(homework6);
         this.addHomework(homework6);
         //Martinelli
         this.addHomework(homework7);
         this.addHomework(homework8);
 
-
         //Professors Communications
-        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "ING. DEL SOFTWARE E PROG. WEB","DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "AUTOMATICA E ROBOTICA LAB.", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_carnevale, "CA", "CONTROLLI AUTOMATICI","Daniele Carnevale", "07/04/2020", "Generic", "Communication");
-        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "CALCOLATORI ELETTRONICI","Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
+        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_carnevale, "CA","Daniele Carnevale", "07/04/2020", "Generic", "Communication");
+        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
 
         this.addProfessorCommunication(pCom1);
         this.addProfessorCommunication(pCom2);
         this.addProfessorCommunication(pCom3);
         this.addProfessorCommunication(pCom4);
 
-
         //University Communications
         UniversityCommunicationModel uCom1 = new UniversityCommunicationModel(R.drawable.rettorato, "Nuovo Edificio", DATE, COMMUNICATION, "Ingegneria Informatica");
         UniversityCommunicationModel uCom2 = new UniversityCommunicationModel(R.drawable.formula_uno, "Garage", DATE, COMMUNICATION, "Ingegneria Informatica");
         UniversityCommunicationModel uCom3 = new UniversityCommunicationModel(R.drawable.schedule, "Orari Scolastici", DATE, COMMUNICATION, "Economia");
-        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.green_pass, "Green Pass", DATE, COMMUNICATION, "Ingegneria Informatica");
-        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.drone, "Gara Droni", DATE, COMMUNICATION, "Ingegneria Informatica");
+        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.rettorato, "Green Pass", DATE, COMMUNICATION, "All");
+        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.rettorato, "Gara Droni", DATE, COMMUNICATION, "All");
         UniversityCommunicationModel uCom6 = new UniversityCommunicationModel(R.drawable.blank_img, "PROVA", DATE, COMMUNICATION, "Giurisprudenza");
 
         this.addUniversityCommunication(uCom1);
