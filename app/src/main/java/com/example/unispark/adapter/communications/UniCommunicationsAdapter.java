@@ -22,7 +22,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
     //Click ExamItem Interface
     public interface OnUniComClickListener {
-        void onUniClick(int comBackground, String title, String date, String communication);
+        void onUniClick(int position);
     }
 
 
@@ -93,7 +93,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
         @Override
         public void onClick(View view) {
-            onUniComClickListener.onUniClick(imageID, txtTitle.getText().toString(), date, communication);
+            onUniComClickListener.onUniClick(getAdapterPosition());
         }
     }
 }

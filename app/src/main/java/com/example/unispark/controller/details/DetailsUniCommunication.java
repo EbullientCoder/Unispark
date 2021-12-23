@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.R;
+import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 public class DetailsUniCommunication extends AppCompatActivity {
     //Attributes
@@ -21,10 +23,7 @@ public class DetailsUniCommunication extends AppCompatActivity {
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    int imageCommunication;
-    String title;
-    String date;
-    String communication;
+    UniversityCommunicationModel communication;
     //Display Parameters
     ImageView imgComBackground;
     TextView txtTitle;
@@ -52,22 +51,17 @@ public class DetailsUniCommunication extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        imageCommunication = extras.getInt("CommunicationImage");
-        title = extras.getString("Title");
-        date = extras.getString("Date");
-        communication = extras.getString("Communication");
+        communication = (UniversityCommunicationModel) extras.getSerializable("Communication");
         //Set Parameters
         imgComBackground = findViewById(R.id.img_uni_com_background);
-        imgComBackground.setImageResource(imageCommunication);
+        imgComBackground.setImageResource(communication.getBackground());
         txtTitle = findViewById(R.id.txt_uni_com_title);
-        txtTitle.setText(title);
+        txtTitle.setText(communication.getTitle());
         txtDate = findViewById(R.id.txt_uni_com_date);
-        txtDate.setText(date);
+        txtDate.setText(communication.getDate());
         txtCommunication = findViewById(R.id.txt_uni_com_text);
-        txtCommunication.setText(communication);
+        txtCommunication.setText(communication.getCommunication());
         //Scrolling Communication
         txtCommunication.setMovementMethod(new ScrollingMovementMethod());
-        //Home
-        home = extras.getString("Home");
     }
 }

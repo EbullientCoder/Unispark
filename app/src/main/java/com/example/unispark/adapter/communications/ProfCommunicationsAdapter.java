@@ -22,7 +22,7 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
     //Click ExamItem Interface
     public interface OnProfComClickListener {
-        void onProfClick(int profileImage, String shortName, String profName, String date, String type, String communication);
+        void onProfClick(int position);
     }
 
 
@@ -64,12 +64,8 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
     static class ProfCommunicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         private ImageView imageProfessor;
-        private int imageID;
         private TextView shortName;
-        private String profName;
-        private String date;
         private TextView type;
-        private String communication;
         private OnProfComClickListener onProfComClickListener;
 
         //Methods
@@ -86,18 +82,14 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
         void setCommunicationDate(ProfessorCommunicationModel professorCommunicationModel){
             imageProfessor.setImageResource(professorCommunicationModel.getProfilePhoto());
-            imageID = professorCommunicationModel.getProfilePhoto();
             shortName.setText(professorCommunicationModel.getShortCourseName());
-            profName = professorCommunicationModel.getProfessorName();
-            date = professorCommunicationModel.getDate();
             type.setText(professorCommunicationModel.getType());
-            communication = professorCommunicationModel.getCommunication();
         }
 
         @Override
         public void onClick(View view) {
 
-            onProfComClickListener.onProfClick(imageID, shortName.getText().toString(), profName, date, type.getText().toString(), communication);
+            onProfComClickListener.onProfClick(getAdapterPosition());
         }
     }
 }

@@ -165,9 +165,6 @@ public class ProfessorHome extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-
-
-
         rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
 
 
@@ -220,30 +217,20 @@ public class ProfessorHome extends AppCompatActivity implements
 
     //Homework Button Click
     @Override
-    public void onBtnClick(String shortName, String title, String course, String expiration, String instructions, String points, int id) {
+    public void onBtnClick(int position) {
         Intent intent = new Intent(this, DetailsHomework.class);
         //Pass Items to the new Activity
-        intent.putExtra("ShortName", shortName);
-        intent.putExtra("Course", course);
-        intent.putExtra("Title", title);
-        intent.putExtra("Expiration", expiration);
-        intent.putExtra("Instructions", instructions);
-        intent.putExtra("Points", points);
-        intent.putExtra("profID",id);
+        intent.putExtra("Homework", homeworksItem.get(position));
         intent.putExtra("Home", "ProfessorHome");
         startActivity(intent);
     }
 
     //University Communication Click
     @Override
-    public void onUniClick(int comImage, String title, String date, String communication) {
+    public void onUniClick(int position) {
         Intent intent = new Intent(this, DetailsUniCommunication.class);
         //Pass Items to the new Activity
-        intent.putExtra("CommunicationImage", comImage);
-        intent.putExtra("Title", title);
-        intent.putExtra("Date", date);
-        intent.putExtra("Communication", communication);
-        intent.putExtra("Home", "ProfessorHome");
+        intent.putExtra("Communication", uniCommunicationsItem.get(position));
         startActivity(intent);
     }
 }

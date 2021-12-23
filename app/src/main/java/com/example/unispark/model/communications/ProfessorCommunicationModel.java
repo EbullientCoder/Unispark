@@ -1,10 +1,13 @@
 package com.example.unispark.model.communications;
 
-public class ProfessorCommunicationModel {
+import java.io.Serializable;
+
+public class ProfessorCommunicationModel implements Serializable {
 
     //Attributes
     private int profilePhoto;
     private String shortCourseName;
+    private String fullCourseName;
     private String professorName;
     private String date;
     private String type;
@@ -13,9 +16,10 @@ public class ProfessorCommunicationModel {
 
     //Methods
     //Constructor
-    public ProfessorCommunicationModel(int profilePhoto, String shortCourseName, String professorName, String date, String type, String communication) {
+    public ProfessorCommunicationModel(int profilePhoto, String shortCourseName, String fullCourseName, String professorName, String date, String type, String communication) {
         this.profilePhoto = profilePhoto;
         this.shortCourseName = shortCourseName;
+        this.fullCourseName = fullCourseName;
         this.professorName = professorName;
         this.date = date;
         this.type = type;
@@ -29,6 +33,9 @@ public class ProfessorCommunicationModel {
     }
     public String getShortCourseName() {
         return shortCourseName;
+    }
+    public String getFullCourseName() {
+        return fullCourseName;
     }
     public String getProfessorName() {
         return professorName;
@@ -48,9 +55,8 @@ public class ProfessorCommunicationModel {
     public void setProfilePhoto(int profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
-    public void setShortCourseName(String shortCourseName) {
-        this.shortCourseName = shortCourseName;
-    }
+    public void setShortCourseName(String shortCourseName) { this.shortCourseName = shortCourseName; }
+    public void setFullCourseName(String fullCourseName) { this.fullCourseName = fullCourseName; }
     public void setProfessorName(String professorName) {
         this.professorName = professorName;
     }

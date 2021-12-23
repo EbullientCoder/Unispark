@@ -108,27 +108,20 @@ public class Home extends AppCompatActivity
 
         //Prof Communications
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
-
         //Create a list of strings of short name courses (Create a method in the applicative controller)
         List<String> courseShortnames = new ArrayList<>();
-        if(student.getCourses() == null){
-            profCommunicationsItem = null;
-        }
+
+        if(student.getCourses() == null) profCommunicationsItem = null;
         else{
-            for(int i = 0; i < student.getCourses().size(); i++)
-            {
-                courseShortnames.add(student.getCourses().get(i).getShortName());
-            }
+            for(int i = 0; i < student.getCourses().size(); i++) courseShortnames.add(student.getCourses().get(i).getShortName());
             profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames);
         }
-
 
         rvProfCommunications.setAdapter(new ProfCommunicationsAdapter(profCommunicationsItem, this));
 
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
-
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
 
         rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "STUDENT"));
@@ -137,42 +130,27 @@ public class Home extends AppCompatActivity
 
     //Homework Button Click
     @Override
-    public void onBtnClick(String shortName, String title, String course, String expiration, String instructions, String points, int id) {
+    public void onBtnClick(int position) {
         Intent intent = new Intent(this, DetailsHomework.class);
         //Pass Items to the new Activity
-        intent.putExtra("ShortName", shortName);
-        intent.putExtra("Course", course);
-        intent.putExtra("Title", title);
-        intent.putExtra("Expiration", expiration);
-        intent.putExtra("Instructions", instructions);
-        intent.putExtra("Points", points);
-        intent.putExtra("profID", id);
+        intent.putExtra("Homework", homeworksItem.get(position));
         intent.putExtra("Home", "StudentHome");
         startActivity(intent);
     }
     //Professor Communication Click
     @Override
-    public void onProfClick(int professorProfile, String shortName, String profName, String date, String type, String communication) {
+    public void onProfClick(int position) {
         Intent intent = new Intent(this, DetailsProfCommunication.class);
         //Pass Items to the new Activity
-        intent.putExtra("ProfessorImage", professorProfile);
-        intent.putExtra("ShortName", shortName);
-        intent.putExtra("ProfessorName", profName);
-        intent.putExtra("Date", date);
-        intent.putExtra("Type", type);
-        intent.putExtra("Communication", communication);
+        intent.putExtra("Communication", profCommunicationsItem.get(position));
         startActivity(intent);
     }
     //University Communication Click
     @Override
-    public void onUniClick(int comImage, String title, String date, String communication) {
+    public void onUniClick(int position) {
         Intent intent = new Intent(this, DetailsUniCommunication.class);
         //Pass Items to the new Activity
-        intent.putExtra("CommunicationImage", comImage);
-        intent.putExtra("Title", title);
-        intent.putExtra("Date", date);
-        intent.putExtra("Communication", communication);
-        intent.putExtra("Home", "StudentHome");
+        intent.putExtra("Communication", uniCommunicationsItem.get(position));
         startActivity(intent);
     }
 }

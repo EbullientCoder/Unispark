@@ -23,13 +23,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     //Click ExamItem Interface
     public interface OnHomeworkBtnClickListener {
-        void onBtnClick(String shortName,
-                        String title,
-                        String course,
-                        String date,
-                        String instructions,
-                        String points,
-                        int id);
+        void onBtnClick(int position);
     }
 
 
@@ -128,13 +122,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            onHomeworkBtnClickListener.onBtnClick(shortName,
-                    title,
-                    txtCourse.getText().toString(),
-                    txtExpiration.getText().toString(),
-                    instructions,
-                    points,
-                    id);
+            onHomeworkBtnClickListener.onBtnClick(getAdapterPosition());
         }
     }
 }

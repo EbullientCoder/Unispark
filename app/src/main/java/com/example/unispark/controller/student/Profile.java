@@ -87,7 +87,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         imgProfile.setImageResource(student.getImageID());
         //Name
         txtFullName = findViewById(R.id.txt_user_fullname);
-        txtFullName.setText(student.getFirstName() + student.getLastName());
+        txtFullName.setText(student.getFirstName() + " " + student.getLastName());
 
         //Courses
         rvCourses = findViewById(R.id.rv_courses);

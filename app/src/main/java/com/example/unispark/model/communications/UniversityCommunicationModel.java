@@ -1,6 +1,8 @@
 package com.example.unispark.model.communications;
 
-public class UniversityCommunicationModel {
+import java.io.Serializable;
+
+public class UniversityCommunicationModel implements Serializable {
 
     //Attributes
     private int background;

@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.R;
+import com.example.unispark.model.HomeworkModel;
+import com.example.unispark.model.StudentModel;
 
 public class DetailsHomework extends AppCompatActivity {
     //Attributes
@@ -21,11 +23,7 @@ public class DetailsHomework extends AppCompatActivity {
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    String shortName;
-    String title;
-    String expiration;
-    String instructions;
-    String points;
+    HomeworkModel homework;
     //Set Interface Text
     TextView txtShortName;
     TextView txtTitle;
@@ -66,23 +64,19 @@ public class DetailsHomework extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        shortName = extras.getString("ShortName");
-        title = extras.getString("Title");
-        expiration = extras.getString("Expiration");
-        instructions = extras.getString("Instructions");
-        points = extras.getString("Points");
+        homework = (HomeworkModel) extras.getSerializable("Homework");
         //Set Text
         txtShortName = findViewById(R.id.txt_homework_detail_subject);
-        txtShortName.setText(shortName);
+        txtShortName.setText(homework.getShortName());
         txtTitle = findViewById(R.id.txt_homework_detail_title);
-        txtTitle.setText(title);
+        txtTitle.setText(homework.getTitle());
         txtTitle.setAllCaps(true);
         txtExpiration = findViewById(R.id.txt_homework_detail_expiration);
-        txtExpiration.setText(expiration);
+        txtExpiration.setText(homework.getExpiration());
         txtInstructions = findViewById(R.id.txt_homework_detail_instructions);
-        txtInstructions.setText(instructions);
+        txtInstructions.setText(homework.getInstructions());
         txtPoints = findViewById(R.id.txt_homework_detail_points);
-        txtPoints.setText(points);
+        txtPoints.setText(homework.getPoints());
         //Get Home
         home = extras.getString("Home");
 

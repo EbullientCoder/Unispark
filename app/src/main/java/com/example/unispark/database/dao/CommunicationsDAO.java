@@ -114,6 +114,7 @@ public class CommunicationsDAO {
         //Attributes
         int profilePhoto;
         String shortName;
+        String fullName;
         String professorName;
         String date;
         String type;
@@ -125,6 +126,7 @@ public class CommunicationsDAO {
 
         while (cursor.moveToPosition(cursor.getPosition())){
             shortName = cursor.getString(1);
+            fullName = cursor.getString(1);
             date = cursor.getString(2);
             type = cursor.getString(3);
             communication = cursor.getString(4);
@@ -143,7 +145,7 @@ public class CommunicationsDAO {
                 profilePhoto = professorImage.getInt(0);
 
                 //Add CommunicationModel to List
-                communicationModel = new ProfessorCommunicationModel(profilePhoto, shortName, professorName, date, type, communication);
+                communicationModel = new ProfessorCommunicationModel(profilePhoto, shortName,fullName, professorName, date, type, communication);
                 communicationsList.add(communicationModel);
             }
             cursor.moveToNext();

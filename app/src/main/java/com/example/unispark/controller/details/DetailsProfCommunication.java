@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.R;
+import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
 public class DetailsProfCommunication extends AppCompatActivity {
     //Attributes
@@ -18,15 +20,11 @@ public class DetailsProfCommunication extends AppCompatActivity {
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    String shortName;
-    int imageProf;
-    String profName;
-    String date;
-    String type;
-    String communication;
+    ProfessorCommunicationModel communication;
     //Display Parameters
     TextView txtShortName;
     ImageView imgProfProfile;
+    TextView txtFullName;
     TextView txtProfName;
     TextView txtDate;
     TextView txtType;
@@ -51,24 +49,21 @@ public class DetailsProfCommunication extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        shortName = extras.getString("ShortName");
-        imageProf = extras.getInt("ProfessorImage");
-        profName = extras.getString("ProfessorName");
-        date = extras.getString("Date");
-        type = extras.getString("Type");
-        communication = extras.getString("Communication");
+        communication = (ProfessorCommunicationModel) extras.getSerializable("Communication");
         //Set Parameters
         txtShortName = findViewById(R.id.txt_prof_com_shortname);
-        txtShortName.setText(shortName);
+        txtShortName.setText(communication.getShortCourseName());
+        txtFullName = findViewById(R.id.txt_prof_com_fullname);
+        txtFullName.setText(communication.getFullCourseName());
         imgProfProfile = findViewById(R.id.img_prof_com_image);
-        imgProfProfile.setImageResource(imageProf);
+        imgProfProfile.setImageResource(communication.getProfilePhoto());
         txtProfName = findViewById(R.id.txt_prof_com_name);
-        txtProfName.setText(profName);
+        txtProfName.setText(communication.getProfessorName());
         txtDate = findViewById(R.id.txt_prof_com_date);
-        txtDate.setText(date);
+        txtDate.setText(communication.getDate());
         txtType = findViewById(R.id.txt_prof_com_type);
-        txtType.setText(type);
+        txtType.setText(communication.getType());
         txtCommunication = findViewById(R.id.txt_prof_com_communication);
-        txtCommunication.setText(communication);
+        txtCommunication.setText(communication.getCommunication());
     }
 }
