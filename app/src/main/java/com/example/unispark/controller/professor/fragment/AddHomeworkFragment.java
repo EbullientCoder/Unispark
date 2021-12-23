@@ -146,7 +146,7 @@ public class AddHomeworkFragment extends DialogFragment{
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
-                date = Integer.toString(day) + " / " + Integer.toString(month) + " / " + Integer.toString(year);
+                date = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
 
                 txtDisplayDate.setText(date);
             }
