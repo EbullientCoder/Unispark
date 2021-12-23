@@ -66,8 +66,8 @@ public class Links extends AppCompatActivity
 
         //Getting User Object
         extras = getIntent().getExtras();
-        //student = (StudentModel) extras.getSerializable("UserObject");
-        student = null;
+        student = (StudentModel) extras.getSerializable("UserObject");
+
 
 
         //Bottom Navigation Menu

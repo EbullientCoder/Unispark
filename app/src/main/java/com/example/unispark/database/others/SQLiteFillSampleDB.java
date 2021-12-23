@@ -198,7 +198,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Sample Student
-        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
+        StudentModel student1 = new StudentModel(R.drawable.gay_valzano,
                 "Emanuele",
                 "Valzano",
                 "valzano",

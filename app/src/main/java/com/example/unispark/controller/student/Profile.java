@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
@@ -37,6 +39,8 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
     SearchCourseFragment searchCourseFragment;
     //Get Intent Extras
     Bundle extras;
+    ImageView imgProfile;
+    TextView txtFullName;
     StudentModel student;
 
     private static final String YEAR = "2020/2021";
@@ -77,20 +81,17 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
             }
         });
 
+
+        //Profile Picture
+        imgProfile = findViewById(R.id.img_user_image);
+        imgProfile.setImageResource(student.getImageID());
+        //Name
+        txtFullName = findViewById(R.id.txt_user_fullname);
+        txtFullName.setText(student.getFirstName() + student.getLastName());
+
         //Courses
         rvCourses = findViewById(R.id.rv_courses);
         coursesItem = student.getCourses();
-
-       /* CourseModel courseModel1 = new CourseModel("0", "ARL", "Automatica e Robotica Lab", YEAR, "12.0","Winter", "https://www.google.com");
-        CourseModel courseModel2 = new CourseModel("1", "ISPW", "Ing. del Software e prog. Web", YEAR, "12.0", "Winter", "https://www.google.com");
-        CourseModel courseModel3 = new CourseModel("2", "CA","Controlli Automatici", YEAR, "9.0", "Winter", "https://www.google.com");
-        CourseModel courseModel4 = new CourseModel("3", "CE","Calcolatori Elettronici", YEAR, "9.0", "Winter", "https://www.google.com");
-
-        coursesItem.add(courseModel1);
-        coursesItem.add(courseModel2);
-        coursesItem.add(courseModel3);
-        coursesItem.add(courseModel4);*/
-
 
         coursesAdapter = new CoursesAdapter(coursesItem, this, "LEAVE");
         rvCourses.setAdapter(coursesAdapter);
