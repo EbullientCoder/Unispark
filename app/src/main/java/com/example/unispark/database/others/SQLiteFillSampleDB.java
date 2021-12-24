@@ -183,44 +183,70 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Sample Professor
-        ProfessorModel professor1 = new ProfessorModel("falessi",
+        ProfessorModel falessi = new ProfessorModel("falessi",
                 getHash("password"),
                 -1,
                 "Davide",
                 "Falessi",
-                "https://www.binance.com",
+                "https://didatticaweb.uniroma2.it/it/docenti/curriculum/T_153658-Davide-Falessi/0",
                 R.drawable.courses_falessi,
                 null, "Ingegneria Informatica");
 
-        ProfessorModel professor2 = new ProfessorModel("lopresti",
+        ProfessorModel lopresti = new ProfessorModel("lopresti",
                 getHash("password"),
                 -2,
                 "Francesco",
                 "Lo Presti",
                 "https://www.lopresti.com",
                 R.drawable.courses_lo_presti,
-                null, "Ingegneria Informatica");
+                null,
+                "Ingegneria Informatica");
 
-        ProfessorModel professor3 = new ProfessorModel("martinelli",
+        ProfessorModel martinelli = new ProfessorModel("martinelli",
                 getHash("password"),
                 -3,
                 "Francesco",
                 "Martinelli",
-                "https://www.lopresti.com",
+                "http://robot2.disp.uniroma2.it/~fmartine/",
                 R.drawable.courses_martinelli,
-                null, "Ingegneria Informatica");
+                null,
+                "Ingegneria Informatica");
+
+        ProfessorModel digennaro = new ProfessorModel("digennaro",
+                getHash("password"),
+                -4,
+                "Vincenzo",
+                "Di Gennaro",
+                "http://www.mat.uniroma2.it/~digennar/",
+                R.drawable.courses_martinelli,
+                null,
+                "Ingegneria Infromatica");
+
+        ProfessorModel carnevale = new ProfessorModel("carnevale",
+                getHash("password"),
+                -5,
+                "Daniele",
+                "Carnevale",
+                "https://sites.google.com/view/caaa1920/home",
+                R.drawable.courses_martinelli,
+                null,
+                "Ingegneria Infromatica");
 
         //Add professors to DB and set their id correctly
-        this.addProfessor(professor1);
-        this.addProfessor(professor2);
-        this.addProfessor(professor3);
-        this.setProfessorId(professor1);
-        this.setProfessorId(professor2);
-        this.setProfessorId(professor3);
+        this.addProfessor(falessi);
+        this.addProfessor(lopresti);
+        this.addProfessor(martinelli);
+        this.addProfessor(digennaro);
+        this.addProfessor(carnevale);
+        this.setProfessorId(falessi);
+        this.setProfessorId(lopresti);
+        this.setProfessorId(martinelli);
+        this.setProfessorId(digennaro);
+        this.setProfessorId(carnevale);
 
 
         //Sample Student
-        StudentModel student1 = new StudentModel(R.drawable.profile_photo,
+        StudentModel valzano = new StudentModel(R.drawable.profile_photo,
                 "Emanuele",
                 "Valzano",
                 "valzano",
@@ -230,17 +256,17 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "0268609",
                 null);
 
-        StudentModel student2 = new StudentModel(R.drawable.profile_photo,
+        StudentModel lapiana = new StudentModel(R.drawable.profile_photo,
                 "Andrea",
                 "Lapiana",
                 "lapiana",
                 getHash("password"),
                 "Ingegneria Informatica",
                 "2021/2022",
-                "0362977",
+                "0279544",
                 null);
 
-        StudentModel student3 = new StudentModel(R.drawable.profile_photo,
+        StudentModel fanfarillo = new StudentModel(R.drawable.profile_photo,
                 "Matteo",
                 "Fanfarillo",
                 "fanfarillo",
@@ -251,50 +277,51 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 null);
 
         //Add students to DB
-        this.addStudent(student1);
-        this.addStudent(student2);
-        this.addStudent(student3);
+        this.addStudent(valzano);
+        this.addStudent(lapiana);
+        this.addStudent(fanfarillo);
+
 
 
         //Add courses to DB
         //Falessi
-        CourseModel course = new CourseModel(String.valueOf(professor1.getId()),
+        CourseModel ISPW = new CourseModel(String.valueOf(falessi.getId()),
                 "ISPW",
                 "ING. DEL SOFTWARE E PROG. WEB",
                 "2021",
                 "12.0",
                 "Winter",
-                "https://google.com",
+                "https://didatticaweb.uniroma2.it/informazioni/index/insegnamento/196122-Ingegneria-Del-Software-E-Progettazione-Web/0",
                 "Ingegneria Informatica");
-        CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
+        CourseModel ISPW2 = new CourseModel(String.valueOf(falessi.getId()),
                 "ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
                 "2021/2022",
-                "12.0",
+                "6.0",
                 "Winter",
-                "https://binance.com",
+                "https://didatticaweb.uniroma2.it/informazioni/index/insegnamento/196122-Ingegneria-Del-Software-E-Progettazione-Web/0",
                 "Ingegneria Informatica");
 
-        //Lo presti
-        CourseModel course2 = new CourseModel(String.valueOf(professor2.getId()),
+        //Lo Presti
+        CourseModel CE = new CourseModel(String.valueOf(lopresti.getId()),
                 "CE",
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
-                "12.0",
+                "9.0",
                 "Winter",
                 "https://binance.com",
                 "Ingegneria Informatica");
 
         //Martinelli
-        CourseModel course3 = new CourseModel(String.valueOf(professor3.getId()),
+        CourseModel FOC = new CourseModel(String.valueOf(martinelli.getId()),
                 "FOC",
                 "FONDAMENTI DI CONTROLLI",
                 "2021/2022",
-                "12.0",
+                "9.0",
                 "Summer",
                 "https://binance.com",
                 "Ingegneria Informatica");
-        CourseModel course4 = new CourseModel(String.valueOf(professor3.getId()),
+        CourseModel ARL = new CourseModel(String.valueOf(martinelli.getId()),
                 "ARL",
                 "AUTOMATICA E ROBOTICA LAB.",
                 "2021/2022",
@@ -303,26 +330,53 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "https://binance.com",
                 "Ingegneria Informatica");
 
-        this.addCourse(course);
-        this.addCourse(course1);
-        this.addCourse(course2);
-        this.addCourse(course3);
-        this.addCourse(course4);
+        //Di Gennaro
+        CourseModel GEOM = new CourseModel(String.valueOf(digennaro.getId()),
+                "GEOM",
+                "GEOMETRIA",
+                "2021/2022",
+                "9.0",
+                "Winter",
+                "https://www.mat.uniroma2.it/~digennar/GeomIngInf.html",
+                "Ingegneria Informatica");
+
+        //Carnevale
+        CourseModel CA = new CourseModel(String.valueOf(carnevale.getId()),
+                "CA",
+                "CONTROLLI AUTOMATICI",
+                "2021/2022",
+                "6.0",
+                "Winter",
+                "https://sites.google.com/view/caaa1920/home",
+                "Ingegneria Informatica");
+
+        this.addCourse(ISPW);
+        this.addCourse(ISPW2);
+        this.addCourse(CE);
+        this.addCourse(FOC);
+        this.addCourse(ARL);
+        this.addCourse(GEOM);
+        this.addCourse(CA);
+
 
         //Connecting Students to their Courses
         //ISPW
-        joinCourse(course, student1);
-        joinCourse(course, student2);
+        joinCourse(ISPW, valzano);
+        joinCourse(ISPW, lapiana);
+        joinCourse(ISPW, fanfarillo);
         //ISPW2
-        joinCourse(course1, student2);
-        joinCourse(course1, student3);
+        joinCourse(ISPW2, valzano);
+        joinCourse(ISPW2, fanfarillo);
         //CE
-        joinCourse(course2, student2);
+        joinCourse(CE, fanfarillo);
         //FOC
-        joinCourse(course3, student2);
+        joinCourse(FOC, fanfarillo);
         //ARL
-        joinCourse(course4, student2);
-
+        joinCourse(ARL, lapiana);
+        //GEOM
+        joinCourse(GEOM, lapiana);
+        //CA
+        joinCourse(CA, lapiana);
 
         //Add homeworks
         //Falessi
@@ -332,21 +386,21 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "02/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor1.getId());
-        /*HomeworkModel homework2 = new HomeworkModel("ISPW II",
+                falessi.getId());
+        HomeworkModel homework2 = new HomeworkModel("ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
-                "Threads dei Java",
+                "Threads di Java",
                 "04/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor1.getId());*/
+                falessi.getId());
         HomeworkModel homework3 = new HomeworkModel("ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
                 "Documentazione",
                 "05/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor1.getId());
+                falessi.getId());
 
         //Lo Presti
         HomeworkModel homework4 = new HomeworkModel("CE",
@@ -355,21 +409,21 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "02/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor2.getId());
+                lopresti.getId());
         HomeworkModel homework5 = new HomeworkModel("CE",
                 "CALCOLATORI ELETTROCINICI",
                 "Registri della RAM",
                 "04/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor2.getId());
+                lopresti.getId());
         HomeworkModel homework6 = new HomeworkModel("CE",
                 "CALCOLATORI ELETTRONICI",
                 "Flip Flop",
                 "05/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor2.getId());
+                lopresti.getId());
 
         //Martinelli
         HomeworkModel homework7 = new HomeworkModel("FOC",
@@ -378,50 +432,110 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "02/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor3.getId());
+                martinelli.getId());
         HomeworkModel homework8 = new HomeworkModel("ARL",
                 "AUTOMATICA E ROBOTICA LAB.",
                 "Scorbot",
                 "04/02/2022",
                 INSTRUCTIONS,
                 "0",
-                professor3.getId());
+                martinelli.getId());
+
+        //Di Gennaro
+        HomeworkModel homework9 = new HomeworkModel("GEOM",
+                "GEOMETRIA",
+                "Matrici",
+                "04/02/2022",
+                INSTRUCTIONS,
+                "0",
+                digennaro.getId());
 
         //Falessi
         this.addHomework(homework1);
-        //this.addHomework(homework2);
-        this.addHomework(homework3);
-        this.addHomework(homework3);
-        this.addHomework(homework3);
-        this.addHomework(homework3);
+        this.addHomework(homework2);
         this.addHomework(homework3);
         //Lo Presti
         this.addHomework(homework4);
         this.addHomework(homework5);
         this.addHomework(homework6);
-        this.addHomework(homework6);
-        this.addHomework(homework6);
-        this.addHomework(homework6);
-        this.addHomework(homework6);
         //Martinelli
         this.addHomework(homework7);
         this.addHomework(homework8);
+        //Di Gennaro
+        this.addHomework(homework9);
+
 
         //Professors Communications
-        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "ING. DEL SOFTWARE E PROG. WEB", "DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "AUTOMATICA E ROBOTICA LAB.", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "CALCOLATORI ELETTROCINICI", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
+        //Falessi
+        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi,
+                "ISPW",
+                "ING. DEL SOFTWARE E PROG. WEB",
+                "DAVIDE FALESSI",
+                "10/12/2021",
+                "Exam Result",
+                "Risultati dell'esame del 3/02/2022: Tutti promossi con voti pieni :)");
+        //Martinelli
+        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli,
+                "ARL",
+                "AUTOMATICA E ROBOTICA LAB.",
+                "FRANCESCO MARTINELLI",
+                "20/03/2021",
+                "Date Esami",
+                "Pre appello: 14 Gennaio" +
+                        "\n" +
+                        "Primo Appello: 29 Gennaio" +
+                        "\n" +
+                        "Secondo Appello: 4 Febbraio");
+        //Carnevale
+        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_falessi,
+                "CA",
+                "CONTROLLI AUTOMATICI",
+                "DANIELE CARNEVALE",
+                "10/12/2021",
+                "Mathlab",
+                "Nuove funzioni Mathlab scaricabili presso il seguente link:");
+        //Lo Presti
+        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti,
+                "CE",
+                "CALCOLATORI ELETTROCINICI",
+                "Francesco Lo Presti",
+                "16/04/2020",
+                "Esame Rinviato",
+                "Esame rinviato a data da destinarsi.");
+        //Di Gennaro
+        ProfessorCommunicationModel pCom5 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti,
+                "GEOM",
+                "GEOMETRIA",
+                "Vincenzo Di Gennaro",
+                "16/04/2020",
+                "Esercizio a Tema Natalizio",
+                "https://www.youtube.com/watch?v=oyEyMjdD2uk\n" +
+                        "\n" +
+                        "Esercizio a tema natalizio (facoltativo). Considerata la canzone Twelve Days Of Christmas, dimostrare che il numero complessivo di doni d(m) ottenuti fino al giorno (12-m)-esimo incluso è (14-m)(13-m)(12-m)/6.\n" +
+                        "\n" +
+                        "Sia N una matrice nilpotente con polinomio caratteristico t^364 e polinomio minimo t^12. Il rango di N^m è proprio d(m) per tutti gli m non negativi minori o uguali a 12. Dimostrare che la forma canonica di Jordan di N consta di 13-k blocchi di ordine k per ogni k compreso fra 1 e 12. ");
+        ProfessorCommunicationModel pCom6 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti,
+                "GEOM",
+                "GEOMETRIA",
+                "Vincenzo Di Gennaro",
+                "16/04/2020",
+                "Buone Vacanze!!",
+                "Carissimi studenti, Buone vacanze a tutti!");
 
         this.addProfessorCommunication(pCom1);
         this.addProfessorCommunication(pCom2);
+        this.addProfessorCommunication(pCom3);
         this.addProfessorCommunication(pCom4);
+        this.addProfessorCommunication(pCom5);
+        this.addProfessorCommunication(pCom6);
+
 
         //University Communications
         UniversityCommunicationModel uCom1 = new UniversityCommunicationModel(R.drawable.rettorato, "Nuovo Edificio", DATE, COMMUNICATION, "Ingegneria Informatica");
         UniversityCommunicationModel uCom2 = new UniversityCommunicationModel(R.drawable.formula_uno, "Garage", DATE, COMMUNICATION, "Ingegneria Informatica");
         UniversityCommunicationModel uCom3 = new UniversityCommunicationModel(R.drawable.schedule, "Orari Scolastici", DATE, COMMUNICATION, "Economia");
-        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.rettorato, "Green Pass", DATE, COMMUNICATION, "All");
-        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.rettorato, "Gara Droni", DATE, COMMUNICATION, "All");
+        UniversityCommunicationModel uCom4 = new UniversityCommunicationModel(R.drawable.green_pass, "Green Pass", DATE, COMMUNICATION, "All");
+        UniversityCommunicationModel uCom5 = new UniversityCommunicationModel(R.drawable.drone, "Gara Droni", DATE, COMMUNICATION, "All");
         UniversityCommunicationModel uCom6 = new UniversityCommunicationModel(R.drawable.blank_img, "PROVA", DATE, COMMUNICATION, "Giurisprudenza");
 
         this.addUniversityCommunication(uCom1);
@@ -430,6 +544,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addUniversityCommunication(uCom4);
         this.addUniversityCommunication(uCom5);
         this.addUniversityCommunication(uCom6);
+
 
         //Add exams
         BookingExamModel exam1 = new BookingExamModel(0,
@@ -452,11 +567,11 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         ExamGradeModel examGrade = new ExamGradeModel(0, "CALCOLATORI ELETTRONICI", "2021/2022", "27/01/2022", "12.0", "28");
 
-        this.addExamGrade(examGrade, student2);
-
-
-
+        this.addExamGrade(examGrade, lapiana);
     }
+
+
+
 
     //Add Student to the Database
     public boolean addStudent(StudentModel student) {
@@ -478,6 +593,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
+
     //Add Professor to the Database
     public boolean addProfessor(ProfessorModel professor) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -496,6 +612,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Set professor Id
     public boolean setProfessorId(ProfessorModel professor) {
@@ -517,6 +634,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         return check;
     }
 
+
     //Add University to the Database
     public boolean addUniversity(UniversityModel university) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -530,6 +648,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Add Homework: Put Homeworks into the Database
     public boolean addHomework(HomeworkModel homework) {
@@ -550,6 +669,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Add course to Database
     public boolean addCourse(CourseModel course) {
@@ -587,6 +707,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
+
     //Add University communication
     public boolean addUniversityCommunication(UniversityCommunicationModel communication){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -604,6 +725,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
+
     //Add Professor communication
     public boolean addProfessorCommunication(ProfessorCommunicationModel communication){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -619,6 +741,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
 
     //Add booking exams
     public boolean addExam(BookingExamModel exam){
