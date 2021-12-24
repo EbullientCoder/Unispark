@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryHomework;
-import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.model.HomeworkModel;
 
 

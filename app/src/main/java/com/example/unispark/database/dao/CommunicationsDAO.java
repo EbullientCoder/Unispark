@@ -6,10 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCommunications;
-import com.example.unispark.database.query.QueryCourse;
-import com.example.unispark.database.query.QueryHomework;
 import com.example.unispark.database.query.QueryProfessor;
-import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
@@ -96,7 +93,7 @@ public class CommunicationsDAO {
     }
 
     //Get Communications marked by courseShortName
-    public static List<ProfessorCommunicationModel> getCourseCommunications(String courseShortName)
+    public static List<ProfessorCommunicationModel> getCourseCommunications(String courseShortName, String courseFullName)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
@@ -114,7 +111,6 @@ public class CommunicationsDAO {
         //Attributes
         int profilePhoto;
         String shortName;
-        String fullName;
         String professorName;
         String date;
         String type;
@@ -126,7 +122,6 @@ public class CommunicationsDAO {
 
         while (cursor.moveToPosition(cursor.getPosition())){
             shortName = cursor.getString(1);
-            fullName = cursor.getString(1);
             date = cursor.getString(2);
             type = cursor.getString(3);
             communication = cursor.getString(4);
@@ -145,7 +140,7 @@ public class CommunicationsDAO {
                 profilePhoto = professorImage.getInt(0);
 
                 //Add CommunicationModel to List
-                communicationModel = new ProfessorCommunicationModel(profilePhoto, shortName,fullName, professorName, date, type, communication);
+                communicationModel = new ProfessorCommunicationModel(profilePhoto, shortName, courseFullName, professorName, date, type, communication);
                 communicationsList.add(communicationModel);
             }
             cursor.moveToNext();
@@ -160,13 +155,13 @@ public class CommunicationsDAO {
     }
 
     //Get all communications marked by courseShortNames in the list
-    public static List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames)
+    public static List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames)
     {
         List<ProfessorCommunicationModel> communicationList = new ArrayList<>();
         List<ProfessorCommunicationModel> tempList;
         for (int i = 0; i < coursesShortNames.size(); i++)
         {
-            tempList = getCourseCommunications(coursesShortNames.get(i));
+            tempList = getCourseCommunications(coursesShortNames.get(i), coursesFullNames.get(i));
             if(tempList != null){
                 communicationList.addAll(tempList);
             }

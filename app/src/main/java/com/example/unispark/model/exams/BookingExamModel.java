@@ -1,6 +1,6 @@
 package com.example.unispark.model.exams;
 
-public class UpcomingExamModel extends ExamModel{
+public class BookingExamModel extends ExamModel{
     //Attributes
     private String classroom;
     private String building;
@@ -8,7 +8,7 @@ public class UpcomingExamModel extends ExamModel{
 
     //Methods
     //Constructor
-    public UpcomingExamModel(int id, String name, String year, String date, String CFU, String classroom, String building) {
+    public BookingExamModel(int id, String name, String year, String date, String CFU, String classroom, String building) {
         super(id, name, year, date, CFU);
         this.classroom = classroom;
         this.building = building;

@@ -2,11 +2,10 @@ package com.example.unispark.database.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
+import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
-import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
 

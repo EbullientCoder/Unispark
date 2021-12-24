@@ -1,13 +1,13 @@
 package com.example.unispark.model.exams;
 
-public class FailedExamModel extends ExamModel{
+public class ExamGradeModel extends ExamModel{
 
     //Attributes
     private String result;
 
     //Methods
     //Constructor
-    public FailedExamModel(int id, String name, String year, String date, String CFU, String result) {
+    public ExamGradeModel(int id, String name, String year, String date, String CFU, String result) {
         super(id, name, year, date, CFU);
         this.result = result;
     }

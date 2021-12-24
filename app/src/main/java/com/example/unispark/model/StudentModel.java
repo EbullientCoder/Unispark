@@ -1,10 +1,6 @@
 package com.example.unispark.model;
 
 
-import com.example.unispark.model.exams.BookExamModel;
-import com.example.unispark.model.exams.FailedExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
-
 import java.util.List;
 
 public class StudentModel extends UserModel{

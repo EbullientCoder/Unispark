@@ -37,4 +37,8 @@ public class QueryCourse {
         return cursor;
     }
 
+    //Look for course name marked by courseShortName
+
+
+
 }

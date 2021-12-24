@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.unispark.R;
-
 import com.example.unispark.database.others.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
@@ -41,8 +40,8 @@ public class SplashScreen extends AppCompatActivity {
 
 
         //Initializing Database
-        //fillDB = new SQLiteFillSampleDB(getApplicationContext());
-        //fillDB.initDatabase();
+        fillDB = new SQLiteFillSampleDB(getApplicationContext());
+        fillDB.initDatabase();
 
 
         new Handler().postDelayed(() -> {

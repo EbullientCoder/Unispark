@@ -16,9 +16,8 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.exams.FailedExamModel;
-import com.example.unispark.model.exams.BookExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
+import com.example.unispark.model.exams.BookingExamModel;
+import com.example.unispark.model.exams.ExamGradeModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -126,17 +125,17 @@ public class Exams extends AppCompatActivity {
         examsExamItem.clear();
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Accept ExamModel | 3 = Reserve ExamModel
-        VerbalizedExamModel vExam1 = new VerbalizedExamModel(1,"Analisi 1", YEAR, "11/02/2020", "12.0", 24);
-        VerbalizedExamModel vExam2 = new VerbalizedExamModel(2,"Fondamenti di Informatica", YEAR, "20/02/2020", "9.0", 30);
-        VerbalizedExamModel vExam3 = new VerbalizedExamModel(3,"Fisica 1", YEAR, "14/07/2020", "6.0", 19);
-        VerbalizedExamModel vExam4 = new VerbalizedExamModel(4,"Fondamenti di Automatica", YEAR, "25/08/2020", "6.0", 30);
-        VerbalizedExamModel vExam5 = new VerbalizedExamModel(5,"Calcolatori Elettronici", YEAR, "17/02/2021", "9.0", 27);
-        VerbalizedExamModel vExam6 = new VerbalizedExamModel(6,"Ingegneria degli Algoritmi", YEAR, "28/02/2021", "6.0", 18);
-        VerbalizedExamModel vExam7 = new VerbalizedExamModel(7,"Elettrotecnica", YEAR, "21/03/2021", "6.0", 26);
-        VerbalizedExamModel vExam8 = new VerbalizedExamModel(8,"Analisi 2", YEAR, "27/01/2021", "6.0", 21);
-        VerbalizedExamModel vExam9 = new VerbalizedExamModel(9,"Fondamenti di Telecomunicazioni", YEAR, "14/07/2021", "9.0", 25);
-        VerbalizedExamModel vExam10 = new VerbalizedExamModel(10,"Sistemi Operativi", YEAR, "20/07/2021", "9.0", 25);
-        VerbalizedExamModel vExam11 = new VerbalizedExamModel(11,"Fondamenti di Controlli", YEAR, "12/03/2021", "9.0", 22);
+        ExamGradeModel vExam1 = new ExamGradeModel(1,"Analisi 1", YEAR, "11/02/2020", "12.0", "24");
+        ExamGradeModel vExam2 = new ExamGradeModel(2,"Fondamenti di Informatica", YEAR, "20/02/2020", "9.0", "30");
+        ExamGradeModel vExam3 = new ExamGradeModel(3,"Fisica 1", YEAR, "14/07/2020", "6.0", "19");
+        ExamGradeModel vExam4 = new ExamGradeModel(4,"Fondamenti di Automatica", YEAR, "25/08/2020", "6.0", "30");
+        ExamGradeModel vExam5 = new ExamGradeModel(5,"Calcolatori Elettronici", YEAR, "17/02/2021", "9.0", "27");
+        ExamGradeModel vExam6 = new ExamGradeModel(6,"Ingegneria degli Algoritmi", YEAR, "28/02/2021", "6.0", "18");
+        ExamGradeModel vExam7 = new ExamGradeModel(7,"Elettrotecnica", YEAR, "21/03/2021", "6.0", "26");
+        ExamGradeModel vExam8 = new ExamGradeModel(8,"Analisi 2", YEAR, "27/01/2021", "6.0", "21");
+        ExamGradeModel vExam9 = new ExamGradeModel(9,"Fondamenti di Telecomunicazioni", YEAR, "14/07/2021", "9.0", "25");
+        ExamGradeModel vExam10 = new ExamGradeModel(10,"Sistemi Operativi", YEAR, "20/07/2021", "9.0", "25");
+        ExamGradeModel vExam11 = new ExamGradeModel(11,"Fondamenti di Controlli", YEAR, "12/03/2021", "9.0", "22");
 
         examsExamItem.add(new ExamItem(0, vExam1));
         examsExamItem.add(new ExamItem(0, vExam2));
@@ -159,9 +158,9 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        FailedExamModel fExam1 = new FailedExamModel(1,"Probabilita' e Statistica", YEAR, "07/03/2020", "9.0", "failed");
-        FailedExamModel fExam2 = new FailedExamModel(2,"Fondamenti di Controlli", YEAR, "11/07/2021", "9.0", "absent");
-        FailedExamModel fExam3 = new FailedExamModel(3,"Ingegneria degli Algoritmi", YEAR, "13/07/2021", "6.0", "retired");
+        ExamGradeModel fExam1 = new ExamGradeModel(1,"Probabilita' e Statistica", YEAR, "07/03/2020", "9.0", "failed");
+        ExamGradeModel fExam2 = new ExamGradeModel(2,"Fondamenti di Controlli", YEAR, "11/07/2021", "9.0", "absent");
+        ExamGradeModel fExam3 = new ExamGradeModel(3,"Ingegneria degli Algoritmi", YEAR, "13/07/2021", "6.0", "retired");
 
         examsExamItem.add(new ExamItem(1, fExam1));
         examsExamItem.add(new ExamItem(1, fExam2));
@@ -177,7 +176,7 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        BookExamModel rExam1 = new BookExamModel(5,"Esame di Prova", "2021/2022", "01/02/2022", "12.0", "L4", "Didattica");
+        BookingExamModel rExam1 = new BookingExamModel(5,"Esame di Prova", "2021/2022", "01/02/2022", "12.0", "L4", "Didattica");
 
         examsExamItem.add(new ExamItem(2, rExam1));
         examsExamItem.add(new ExamItem(2, rExam1));

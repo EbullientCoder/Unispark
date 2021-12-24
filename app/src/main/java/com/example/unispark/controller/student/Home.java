@@ -28,6 +28,7 @@ import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,11 +111,17 @@ public class Home extends AppCompatActivity
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
         //Create a list of strings of short name courses (Create a method in the applicative controller)
         List<String> courseShortnames = new ArrayList<>();
-
-        if(student.getCourses() == null) profCommunicationsItem = null;
+        List<String> courseFullNames = new ArrayList<>();
+        if(student.getCourses() == null){
+            profCommunicationsItem = null;
+        }
         else{
-            for(int i = 0; i < student.getCourses().size(); i++) courseShortnames.add(student.getCourses().get(i).getShortName());
-            profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames);
+            for(int i = 0; i < student.getCourses().size(); i++)
+            {
+                courseShortnames.add(student.getCourses().get(i).getShortName());
+                courseFullNames.add(student.getCourses().get(i).getFullName());
+            }
+            profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames, courseFullNames);
         }
 
         rvProfCommunications.setAdapter(new ProfCommunicationsAdapter(profCommunicationsItem, this));

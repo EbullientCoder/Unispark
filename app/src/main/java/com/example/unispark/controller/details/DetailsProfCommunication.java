@@ -54,7 +54,7 @@ public class DetailsProfCommunication extends AppCompatActivity {
         txtShortName = findViewById(R.id.txt_prof_com_shortname);
         txtShortName.setText(communication.getShortCourseName());
         txtFullName = findViewById(R.id.txt_prof_com_fullname);
-        txtFullName.setText(communication.getFullCourseName());
+        txtFullName.setText(communication.getFullName());
         imgProfProfile = findViewById(R.id.img_prof_com_image);
         imgProfProfile.setImageResource(communication.getProfilePhoto());
         txtProfName = findViewById(R.id.txt_prof_com_name);

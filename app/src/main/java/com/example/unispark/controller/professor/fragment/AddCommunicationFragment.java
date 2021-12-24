@@ -14,9 +14,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
 import com.example.unispark.database.dao.CommunicationsDAO;
-import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.google.android.material.textfield.TextInputLayout;

@@ -31,7 +31,6 @@ import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorHome extends AppCompatActivity implements

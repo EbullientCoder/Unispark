@@ -21,7 +21,7 @@ import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.exams.UpcomingExamModel;
+import com.example.unispark.model.exams.BookingExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -208,10 +208,10 @@ public class ProfessorExams extends AppCompatActivity {
         examsExamItem.clear();
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor UpcomingExamModel
-        UpcomingExamModel uExam1 = new UpcomingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
-        UpcomingExamModel uExam2 = new UpcomingExamModel(2,"Ing. del Software e prog. Web II", YEAR, "20/02/2020", "9.0", "L3", "Didattica");
-        UpcomingExamModel uExam3 = new UpcomingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
-        UpcomingExamModel uExam4 = new UpcomingExamModel(4,"Ing. del Software e prog. Web II", YEAR, "25/08/2020", "6.0", "L3", "Didattica");
+        BookingExamModel uExam1 = new BookingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
+        BookingExamModel uExam2 = new BookingExamModel(2,"Ing. del Software e prog. Web II", YEAR, "20/02/2020", "9.0", "L3", "Didattica");
+        BookingExamModel uExam3 = new BookingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
+        BookingExamModel uExam4 = new BookingExamModel(4,"Ing. del Software e prog. Web II", YEAR, "25/08/2020", "6.0", "L3", "Didattica");
 
         examsExamItem.add(new ExamItem(3, uExam1));
         examsExamItem.add(new ExamItem(3, uExam2));

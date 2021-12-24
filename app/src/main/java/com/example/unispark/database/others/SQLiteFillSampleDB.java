@@ -22,6 +22,8 @@ import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
+import com.example.unispark.model.exams.ExamGradeModel;
+import com.example.unispark.model.exams.BookingExamModel;
 
 public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
@@ -63,7 +65,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String CFU = "cfu";
     public static final String SESSION = "session";
     public static final String LINK = "link";
-    public static final String COURSE_FACULTY = "coursefaculty";
+
 
     //Homework and course id that tracks the professor
     public static final String TRACK_PROFESSOR = "trackprofessor";
@@ -78,6 +80,15 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String UNI_COMMUNICATIONS = "universitycommunications";
     public static final String DATE = "date";
     public static final String PROF_COMMUNICATIONS = "professorcommunications";
+
+    //Exams tables
+    public static final String EXAMS = "exams";
+    public static final String EXAM_GRADES = "examgrades";
+    public static final String EXAM_NAME = "examname";
+    public static final String BUILDING = "building";
+    public static final String CLASS = "class";
+    public static final String GRADE = "grade";
+
 
 
 
@@ -135,8 +146,19 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         db.execSQL(createTableStatement);
 
+        //Professor communications table
         createTableStatement = "CREATE TABLE " + PROF_COMMUNICATIONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SHORTNAME + " TEXT, "
                 + DATE + " TEXT, " + TITLE + " TEXT, " + COMMUNICATION + " TEXT);";
+
+        db.execSQL(createTableStatement);
+
+        //Exams table
+        createTableStatement = "CREATE TABLE " + EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EXAM_NAME + " TEXT, " + DATE + " TEXT, " + BUILDING + " TEXT, " + CLASS + " TEXT);";
+
+        db.execSQL(createTableStatement);
+
+        //Exams grades table
+        createTableStatement = "CREATE TABLE  " + EXAM_GRADES + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EXAM_NAME + " TEXT, " + STUDENT_ID + " TEXT, " + GRADE + " TEXT);";
 
         db.execSQL(createTableStatement);
     }
@@ -381,14 +403,12 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addHomework(homework8);
 
         //Professors Communications
-        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
-        ProfessorCommunicationModel pCom3 = new ProfessorCommunicationModel(R.drawable.courses_carnevale, "CA","Daniele Carnevale", "07/04/2020", "Generic", "Communication");
-        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
+        ProfessorCommunicationModel pCom1 = new ProfessorCommunicationModel(R.drawable.courses_falessi, "ISPW", "ING. DEL SOFTWARE E PROG. WEB", "DAVIDE FALESSI", "10/12/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom2 = new ProfessorCommunicationModel(R.drawable.courses_martinelli, "ARL", "AUTOMATICA E ROBOTICA LAB.", "FRANCESCO MARTINELLI", "20/03/2021", "Exam Result", "Communication");
+        ProfessorCommunicationModel pCom4 = new ProfessorCommunicationModel(R.drawable.courses_lo_presti, "CE", "CALCOLATORI ELETTROCINICI", "Francesco Lo Presti", "16/04/2020", "HomeworkModel", "Communication");
 
         this.addProfessorCommunication(pCom1);
         this.addProfessorCommunication(pCom2);
-        this.addProfessorCommunication(pCom3);
         this.addProfessorCommunication(pCom4);
 
         //University Communications
@@ -405,6 +425,32 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addUniversityCommunication(uCom4);
         this.addUniversityCommunication(uCom5);
         this.addUniversityCommunication(uCom6);
+
+        //Add exams
+        BookingExamModel exam1 = new BookingExamModel(0,
+                "ING. DEL SOFTWARE E PROG. WEB",
+                "2021/2022",
+                "20/01/2022",
+                "12.0",
+                "A4",
+                "ING.INF");
+        BookingExamModel exam2 = new BookingExamModel(0,
+                "CALCOLATORI ELETTRONICI",
+                "2021/2022",
+                "27/01/2022",
+                "12.0",
+                "A7",
+                "ING.INF");
+
+        this.addExam(exam1);
+        this.addExam(exam2);
+
+        ExamGradeModel examGrade = new ExamGradeModel(0, "CALCOLATORI ELETTRONICI", "2021/2022", "27/01/2022", "12.0", "28");
+
+        this.addExamGrade(examGrade, student2);
+
+
+
     }
 
     //Add Student to the Database
@@ -568,6 +614,35 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
+    //Add booking exams
+    public boolean addExam(BookingExamModel exam){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(EXAM_NAME, exam.getName());
+        cv.put(DATE, exam.getDate());
+        cv.put(BUILDING, exam.getBuilding());
+        cv.put(CLASS, exam.getClassroom());
+        long insert = db.insert(EXAMS, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
+
+    //Add exam grade
+    public boolean addExamGrade(ExamGradeModel examGrade, StudentModel student){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(EXAM_NAME, examGrade.getName());
+        cv.put(STUDENT_ID, student.getId());
+        cv.put(GRADE, examGrade.getResult());
+        long insert = db.insert(EXAM_GRADES, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
