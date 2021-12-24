@@ -144,7 +144,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <!-- Professors -->
+    <!-- Faculty -->
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/nunito"
-        android:text="Professors"
+        android:text="Faculty"
         android:textColor="#ADB4BC"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -164,22 +164,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito"
         android:layout_marginStart="15dp"
-        android:text="Professor 1"
+        android:text="Faculty"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <TextView
-        android:id="@+id/txt_course_prof2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/nunito"
-        android:text="Professor 2"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/txt_course_prof1"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <!-- Session -->

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.student.Profile;
 import com.example.unispark.model.CourseModel;
 
 public class DetailsCourse extends AppCompatActivity {
@@ -26,8 +25,7 @@ public class DetailsCourse extends AppCompatActivity {
     TextView txtAA;
     TextView txtCFU;
     TextView txtID;
-    TextView txtProf1;
-    TextView txtProf2;
+    TextView txtFaculty;
     TextView txtSession;
     TextView txtLink;
 
@@ -61,12 +59,8 @@ public class DetailsCourse extends AppCompatActivity {
         txtCFU.setText(course.getCfu());
         txtID = findViewById(R.id.txt_course_id);
         txtID.setText(course.getId());
-        /*
-        txtProf1 = findViewById(R.id.txt_course_prof1);
-        txtProf1.setText(prof1);
-        txtProf2 = findViewById(R.id.txt_course_prof2);
-        txtProf2.setText(prof2);
-        */
+        txtFaculty = findViewById(R.id.txt_course_prof1);
+        txtFaculty.setText(course.getFaculty());
         txtSession = findViewById(R.id.txt_course_session);
         txtSession.setText(course.getSession());
         txtLink = findViewById(R.id.txt_course_link);
