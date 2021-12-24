@@ -129,7 +129,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Courses table statement
         createTableStatement = "CREATE TABLE " + COURSE_TABLE + " (" + COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 SHORTNAME + " TEXT UNIQUE, " + COURSE_NAME + " TEXT UNIQUE, " + YEAR + " TEXT, " + CFU + " TEXT, " +
-                SESSION + " TEXT, " + LINK + " TEXT, " + TRACK_PROFESSOR + " INTEGER, "/* + FACULTY + " TEXT,*/ + "FOREIGN KEY(" + TRACK_PROFESSOR + ") REFERENCES " + PROFESSORS_TABLE + "(" + PROF_ID + "));";
+                SESSION + " TEXT, " + LINK + " TEXT, " + TRACK_PROFESSOR + " INTEGER, " + FACULTY + " TEXT, " + "FOREIGN KEY(" + TRACK_PROFESSOR + ") REFERENCES " + PROFESSORS_TABLE + "(" + PROF_ID + "));";
 
         db.execSQL(createTableStatement);
 
@@ -264,14 +264,16 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "2021",
                 "12.0",
                 "Winter",
-                "https://google.com");
+                "https://google.com",
+                "Ingegneria Informatica");
         CourseModel course1 = new CourseModel(String.valueOf(professor1.getId()),
                 "ISPW II",
                 "ING. DEL SOFTWARE E PROG. WEB II",
                 "2021/2022",
                 "12.0",
                 "Winter",
-                "https://binance.com");
+                "https://binance.com",
+                "Ingegneria Informatica");
 
         //Lo presti
         CourseModel course2 = new CourseModel(String.valueOf(professor2.getId()),
@@ -280,7 +282,8 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "2021/2022",
                 "12.0",
                 "Winter",
-                "https://binance.com");
+                "https://binance.com",
+                "Ingegneria Informatica");
 
         //Martinelli
         CourseModel course3 = new CourseModel(String.valueOf(professor3.getId()),
@@ -289,14 +292,16 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "2021/2022",
                 "12.0",
                 "Summer",
-                "https://binance.com");
+                "https://binance.com",
+                "Ingegneria Informatica");
         CourseModel course4 = new CourseModel(String.valueOf(professor3.getId()),
                 "ARL",
                 "AUTOMATICA E ROBOTICA LAB.",
                 "2021/2022",
                 "12.0",
                 "Winter",
-                "https://binance.com");
+                "https://binance.com",
+                "Ingegneria Informatica");
 
         this.addCourse(course);
         this.addCourse(course1);
@@ -558,6 +563,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         cv.put(SESSION, course.getSession());
         cv.put(LINK, course.getLink());
         cv.put(TRACK_PROFESSOR, course.getId());
+        cv.put(FACULTY, course.getFaculty());
 
         //Insert into Database: Homework Table
         long insert = db.insert(COURSE_TABLE, null, cv);
@@ -643,6 +649,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

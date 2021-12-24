@@ -9,6 +9,7 @@ public class QueryCourse {
     public static final String COURSE_NAME = "coursename";
     public static final String STUDENTS_COURSES = "studentscourses";
     public static final String STUDENT_ID = "studentID";
+    public static final String FACULTY = "faculty";
 
     private QueryCourse(){}
 
@@ -37,7 +38,13 @@ public class QueryCourse {
         return cursor;
     }
 
-    //Look for course name marked by courseShortName
+    //Look for courses marked by student faculty
+    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty) //throws exception
+    {
+        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
 
 
 

@@ -11,13 +11,14 @@ public class CourseModel implements Serializable {
     private String cfu;
     private String session;
     private String link;
+    private String faculty;
 
 
     //Methods
     //Constructor
     public CourseModel(){}
 
-    public CourseModel(String id, String shortName, String fullName, String courseYear, String cfu, String session, String link) {
+    public CourseModel(String id, String shortName, String fullName, String courseYear, String cfu, String session, String link, String faculty) {
         this.id = id;
         this.shortName = shortName;
         this.fullName = fullName;
@@ -25,6 +26,7 @@ public class CourseModel implements Serializable {
         this.cfu = cfu;
         this.session = session;
         this.link = link;
+        this.faculty = faculty;
     }
 
 
@@ -50,7 +52,9 @@ public class CourseModel implements Serializable {
     public String getLink() {
         return link;
     }
-
+    public String getFaculty() {
+        return faculty;
+    }
 
     //Setter
     public void setId(String id) {
@@ -73,5 +77,8 @@ public class CourseModel implements Serializable {
     }
     public void setLink(String link) {
         this.link = link;
+    }
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
+import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
@@ -92,6 +93,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         //Courses
         rvCourses = findViewById(R.id.rv_courses);
         coursesItem = student.getCourses();
+
 
         coursesAdapter = new CoursesAdapter(coursesItem, this, "LEAVE");
         rvCourses.setAdapter(coursesAdapter);

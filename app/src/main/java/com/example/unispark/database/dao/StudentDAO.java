@@ -70,6 +70,7 @@ public class StudentDAO {
         String cfu;
         String session;
         String link;
+        String facultyCourse;
 
         //Select all courses followed by studentId
         Cursor cursorCourse = QueryCourse.selectStudentCourses(db, id);
@@ -95,9 +96,10 @@ public class StudentDAO {
                 cfu = cursor.getString(4);
                 session = cursor.getString(5);
                 link = cursor.getString(6);
+                facultyCourse = cursor.getString(8);
 
                 //Create a new course and add it to the student's course list
-                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse);
                 coursesList.add(course);
             } while (cursorCourse.moveToNext());
         }

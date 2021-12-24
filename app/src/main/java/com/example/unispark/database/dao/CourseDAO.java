@@ -1,10 +1,15 @@
 package com.example.unispark.database.dao;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.model.CourseModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDAO {
 
@@ -42,5 +47,58 @@ public class CourseDAO {
         else return true;
     }
 
+    //Get available course names to join for a student marked by faculty
+    public static List<CourseModel> selectAvailableCourses(String faculty, List<String> courseNames)
+    {
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+
+        List<CourseModel> coursesList = new ArrayList<>();
+
+        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty);
+        if (!cursor.moveToFirst()){
+            //throw exception
+            return null;
+        }
+        //Course attributes
+        CourseModel course;
+        String courseId;
+        String shortName;
+        String fullName;
+        String courseYear;
+        String cfu;
+        String session;
+        String link;
+        String facultyCourse;
+
+        boolean equals = false;
+        do{
+            courseId = String.valueOf(cursor.getInt(7));
+            shortName = cursor.getString(1);
+            fullName = cursor.getString(2);
+            for (int i = 0; i < courseNames.size(); i++) {
+                if (fullName.equals(courseNames.get(i))) {
+                    equals = true;
+                    break;
+                }
+            }
+            if(!equals){
+                courseYear = cursor.getString(3);
+                cfu = cursor.getString(4);
+                session = cursor.getString(5);
+                link = cursor.getString(6);
+                facultyCourse = cursor.getString(8);
+
+                //Create a new course and add it to the course list
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse);
+                coursesList.add(course);
+            }
+            equals = false;
+        } while (cursor.moveToNext());
+
+        cursor.close();
+        db.close();
+
+        return coursesList;
+    }
 
 }

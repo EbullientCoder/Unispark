@@ -72,6 +72,7 @@ public class ProfessorDAO {
         String cfu;
         String session;
         String link;
+        String facultyCourse;
 
         //Select all courses marked by professor id
         cursor = QueryCourse.selectProfessorCourses(db, professorId);
@@ -89,9 +90,10 @@ public class ProfessorDAO {
                 cfu = cursor.getString(4);
                 session = cursor.getString(5);
                 link = cursor.getString(6);
+                facultyCourse = cursor.getString(8);
 
                 //Create a new course and add it to the professor's course list
-                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link);
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse);
                 coursesList.add(course);
 
             } while (cursor.moveToNext());

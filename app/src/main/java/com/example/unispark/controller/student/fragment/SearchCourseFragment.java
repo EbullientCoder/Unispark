@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
+import com.example.unispark.database.dao.CourseDAO;
+import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ public class SearchCourseFragment extends DialogFragment implements CoursesAdapt
     //Courses
     RecyclerView rvCourses;
     List<CourseModel> coursesItem;
+    StudentModel student = StudentDAO.selectStudent("valzano", "password");
 
     private static final String YEAR = "2020/2021";
 
@@ -44,15 +49,14 @@ public class SearchCourseFragment extends DialogFragment implements CoursesAdapt
 
         //Courses
         rvCourses = (RecyclerView) rootView.findViewById(R.id.rv_choose_course);
-        coursesItem = new ArrayList<>();
 
-        CourseModel courseModel1 = new CourseModel("1", "ARL","Automatica e Robotica Lab.", YEAR, "12.0", "Winter", "https://www.google.com");
+        //Get list of available courses to join for the student marked by faculty and that
+        // are not in the student course list(Implement a method)
+        List<CourseModel> courses = student.getCourses();
+        List<String> courseNames = new ArrayList<>(courses.size());
+        for (int i = 0; i < courses.size(); i++) courseNames.add(courses.get(i).getFullName());
 
-
-        coursesItem.add(courseModel1);
-
-
-
+        coursesItem = CourseDAO.selectAvailableCourses(student.getFaculty(), courseNames);
         rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, "JOIN"));
 
         return rootView;
