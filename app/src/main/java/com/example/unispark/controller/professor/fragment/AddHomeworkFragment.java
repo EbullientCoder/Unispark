@@ -76,7 +76,6 @@ public class AddHomeworkFragment extends DialogFragment{
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
