@@ -1,5 +1,7 @@
 package com.example.unispark.controller.student.fragment;
 
+import static com.example.unispark.database.dao.CourseDAO.joinCourse;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,13 +24,16 @@ import com.example.unispark.model.StudentModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCourseFragment extends DialogFragment implements CoursesAdapter.OnCourseClickListener{
+public class SearchCourseFragment extends DialogFragment
+        implements CoursesAdapter.OnCourseClickListener,
+        CoursesAdapter.OnCourseBtnClickListener {
     //Attributes
     //Dismiss Button
     ImageButton btnDismiss;
     //Courses
     RecyclerView rvCourses;
     List<CourseModel> coursesItem;
+    CoursesAdapter coursesAdapter;
     //Get Student Model
     StudentModel student;
 
@@ -65,7 +70,8 @@ public class SearchCourseFragment extends DialogFragment implements CoursesAdapt
         for (int i = 0; i < courses.size(); i++) courseNames.add(courses.get(i).getFullName());
 
         coursesItem = CourseDAO.selectAvailableCourses(student.getFaculty(), courseNames);
-        rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, "JOIN"));
+        coursesAdapter = new CoursesAdapter(coursesItem, this, this, "JOIN");
+        rvCourses.setAdapter(coursesAdapter);
 
         return rootView;
     }
@@ -75,5 +81,22 @@ public class SearchCourseFragment extends DialogFragment implements CoursesAdapt
         Intent intent = new Intent(getContext(), DetailsCourse.class);
         intent.putExtra("Course", coursesItem.get(position));
         startActivity(intent);
+    }
+
+    @Override
+    public void onButtonClick(int position) {
+        List<CourseModel> joinedCourses;
+
+        //Show Course's Homeworks
+        joinCourse(student.getId(), coursesItem.get(position).getFullName());
+
+        //Add Course to the Student's Joined Courses
+        joinedCourses = student.getCourses();
+        joinedCourses.add(coursesItem.get(position));
+        student.setCourses(joinedCourses);
+
+        Toast.makeText(getContext(), coursesItem.get(position).getFullName() + ": Joined", Toast.LENGTH_SHORT).show();
+
+        dismiss();
     }
 }

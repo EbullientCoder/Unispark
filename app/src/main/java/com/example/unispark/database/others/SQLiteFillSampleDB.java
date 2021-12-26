@@ -273,7 +273,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 getHash("password"),
                 "Ingegneria Informatica",
                 "2021/2022",
-                "0279544",
+                "0000000",
                 null);
 
         //Add students to DB
@@ -300,7 +300,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "6.0",
                 "Winter",
                 "https://didatticaweb.uniroma2.it/informazioni/index/insegnamento/196122-Ingegneria-Del-Software-E-Progettazione-Web/0",
-                "Economia");
+                "Ingegneria Informatica");
 
         //Lo Presti
         CourseModel CE = new CourseModel(String.valueOf(lopresti.getId()),

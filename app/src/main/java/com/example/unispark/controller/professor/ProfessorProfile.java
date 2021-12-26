@@ -30,7 +30,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ProfessorProfile extends AppCompatActivity implements CoursesAdapter.OnCourseClickListener {
+public class ProfessorProfile extends AppCompatActivity
+        implements CoursesAdapter.OnCourseClickListener,
+        CoursesAdapter.OnCourseBtnClickListener {
     //Attributes
     //Menu
     ImageButton menuButton;
@@ -176,7 +178,7 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
         });
         //Courses
         rvCourses = findViewById(R.id.rv_professor_courses);
-        rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, "PROFESSOR"));
+        rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, this, "PROFESSOR"));
     }
 
 
@@ -224,5 +226,10 @@ public class ProfessorProfile extends AppCompatActivity implements CoursesAdapte
         Intent intent = new Intent(this, DetailsCourse.class);
         intent.putExtra("Course", coursesItem.get(position));
         startActivity(intent);
+    }
+
+    @Override
+    public void onButtonClick(int position) {
+
     }
 }

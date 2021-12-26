@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
@@ -25,7 +26,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Profile extends AppCompatActivity implements CoursesAdapter.OnCourseClickListener {
+public class Profile extends AppCompatActivity
+        implements CoursesAdapter.OnCourseClickListener,
+        CoursesAdapter.OnCourseBtnClickListener {
 
     //Attributes
     //Bottom Menu Elements
@@ -95,7 +98,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         coursesItem = student.getCourses();
 
 
-        coursesAdapter = new CoursesAdapter(coursesItem, this, "LEAVE");
+        coursesAdapter = new CoursesAdapter(coursesItem, this, this,"LEAVE");
         rvCourses.setAdapter(coursesAdapter);
     }
 
@@ -104,5 +107,11 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         Intent intent = new Intent(this, DetailsCourse.class);
         intent.putExtra("Course", coursesItem.get(position));
         startActivity(intent);
+    }
+
+    @Override
+    public void onButtonClick(int position) {
+        //Leave Course
+        Toast.makeText(getApplicationContext(), "LEAVE COURSE", Toast.LENGTH_SHORT).show();
     }
 }

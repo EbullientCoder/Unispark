@@ -22,19 +22,27 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //Attributes
     private List<CourseModel> items;
     private OnCourseClickListener onCourseClickListener;
+    private OnCourseBtnClickListener onCourseBtnClickListener;
     private String type;
 
 
     //Interface
+    //Click on the Course
     public interface OnCourseClickListener {
         void onCourseClick(int position);
+    }
+    //Click on the Button
+    public interface  OnCourseBtnClickListener{
+        void onButtonClick(int position);
     }
 
 
     //Methods
-    public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener, String type){
+    public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener,
+                          OnCourseBtnClickListener onCourseBtnClickListener, String type){
         this.items = items;
         this.onCourseClickListener = onCourseClickListener;
+        this.onCourseBtnClickListener = onCourseBtnClickListener;
         this.type = type;
     }
 
@@ -47,7 +55,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         R.layout.item_container_courses,
                         parent,
                         false
-                ), onCourseClickListener
+                ), onCourseClickListener, onCourseBtnClickListener
         );
     }
 
@@ -79,13 +87,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     //First Row
-    static class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class CourseViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         private String shortName;
         private String id;
         private String session;
         private String link;
         private OnCourseClickListener onCourseClickListener;
+        private OnCourseBtnClickListener onCourseBtnClickListener;
 
         private TextView fullName;
         private TextView aa;
@@ -96,16 +105,29 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         //Methods
         //Constructor
-        CourseViewHolder(@NonNull View itemView, OnCourseClickListener onCourseClickListener) {
+        CourseViewHolder(@NonNull View itemView, OnCourseClickListener onCourseClickListener, OnCourseBtnClickListener onCourseBtnClickListener) {
             super(itemView);
             fullName = itemView.findViewById(R.id.txt_course_subject_name);
             aa = itemView.findViewById(R.id.txt_course_aa_date);
             cfu = itemView.findViewById(R.id.txt_course_cfu);
-            btnJoinLeave = itemView.findViewById(R.id.btn_join_leave_course);
             lyt_button = itemView.findViewById(R.id.lyt_contain_course_button);
 
             this.onCourseClickListener = onCourseClickListener;
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCourseClickListener.onCourseClick(getAdapterPosition());
+                }
+            });
+
+            this.onCourseBtnClickListener = onCourseBtnClickListener;
+            btnJoinLeave = itemView.findViewById(R.id.btn_join_leave_course);
+            btnJoinLeave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCourseBtnClickListener.onButtonClick(getAdapterPosition());
+                }
+            });
         }
 
         void setJoinCourseDate(CourseModel courseModel) {
@@ -140,11 +162,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             link = courseModel.getLink();
             btnJoinLeave.setVisibility(View.INVISIBLE);
             lyt_button.setVisibility(View.INVISIBLE);
-        }
-
-        @Override
-        public void onClick(View view) {
-            onCourseClickListener.onCourseClick(getAdapterPosition());
         }
     }
 }
