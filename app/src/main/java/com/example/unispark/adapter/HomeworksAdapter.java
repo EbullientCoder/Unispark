@@ -21,7 +21,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private OnHomeworkBtnClickListener onHomeworkBtnClickListener;
     private String type;
 
-    //Click ExamItem Interface
+    //Click HomeworkItem Interface
     public interface OnHomeworkBtnClickListener {
         void onBtnClick(int position);
     }

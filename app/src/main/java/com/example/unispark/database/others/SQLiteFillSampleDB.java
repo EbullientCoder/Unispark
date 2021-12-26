@@ -300,7 +300,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "6.0",
                 "Winter",
                 "https://didatticaweb.uniroma2.it/informazioni/index/insegnamento/196122-Ingegneria-Del-Software-E-Progettazione-Web/0",
-                "Ingegneria Informatica");
+                "Economia");
 
         //Lo Presti
         CourseModel CE = new CourseModel(String.valueOf(lopresti.getId()),
@@ -361,8 +361,8 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         //Connecting Students to their Courses
         //ISPW
+        //joinCourse(ISPW, lapiana);
         joinCourse(ISPW, valzano);
-        joinCourse(ISPW, lapiana);
         joinCourse(ISPW, fanfarillo);
         //ISPW2
         joinCourse(ISPW2, valzano);
@@ -372,7 +372,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //FOC
         joinCourse(FOC, fanfarillo);
         //ARL
-        joinCourse(ARL, lapiana);
+        //joinCourse(ARL, lapiana);
         //GEOM
         joinCourse(GEOM, lapiana);
         //CA

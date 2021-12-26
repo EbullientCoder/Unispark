@@ -77,7 +77,7 @@ public class Profile extends AppCompatActivity implements CoursesAdapter.OnCours
         addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchCourseFragment = new SearchCourseFragment();
+                searchCourseFragment = new SearchCourseFragment(student);
                 searchCourseFragment.show(getSupportFragmentManager(), "SearchCourse");
             }
         });

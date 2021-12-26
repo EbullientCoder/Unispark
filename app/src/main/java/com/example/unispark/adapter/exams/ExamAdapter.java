@@ -3,6 +3,7 @@ package com.example.unispark.adapter.exams;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,11 +19,26 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
     private List<ExamItem> examItems;
+    private OnExamBtnClickListener onExamBtnClickListener;
+
+
+
+
+    //Click ExamItem Interface
+    public interface OnExamBtnClickListener {
+        void onBtnClick(int position);
+    }
+
 
     //Methods
     //Constructor
     public ExamAdapter(List<ExamItem> examItems) {
         this.examItems = examItems;
+    }
+
+    public ExamAdapter(List<ExamItem> examItems, OnExamBtnClickListener onExamBtnClickListener) {
+        this.examItems = examItems;
+        this.onExamBtnClickListener = onExamBtnClickListener;
     }
 
     @NonNull
@@ -65,7 +81,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             R.layout.item_container_upcoming_exams,
                             parent,
                             false
-                    )
+                    ), onExamBtnClickListener
             );
         }
     }
@@ -189,7 +205,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    static class UpcomingExamViewHolder extends RecyclerView.ViewHolder{
+    static class UpcomingExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         private TextView uExamName;
         private TextView uExamYear;
@@ -197,8 +213,12 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         private TextView uExamCFU;
         private TextView uExamBuilding;
         private TextView uExamClassroom;
+        private Button btnView;
 
-        public UpcomingExamViewHolder(@NonNull View itemView) {
+        private OnExamBtnClickListener onExamBtnClickListener;
+
+
+        public UpcomingExamViewHolder(@NonNull View itemView, OnExamBtnClickListener onExamBtnClickListener) {
             super(itemView);
             uExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
             uExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
@@ -206,6 +226,10 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             uExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
             uExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
             uExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
+            btnView = itemView.findViewById(R.id.btn_upcoming_exam_view);
+
+            this.onExamBtnClickListener = onExamBtnClickListener;
+            btnView.setOnClickListener(this);
         }
 
         void setUpcomingExamDate(BookingExamModel exam){
@@ -215,6 +239,11 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             uExamCFU.setText(exam.getCFU());
             uExamClassroom.setText(exam.getClassroom());
             uExamBuilding.setText(exam.getBuilding());
+        }
+
+        @Override
+        public void onClick(View view) {
+            onExamBtnClickListener.onBtnClick(getAdapterPosition());
         }
     }
 }

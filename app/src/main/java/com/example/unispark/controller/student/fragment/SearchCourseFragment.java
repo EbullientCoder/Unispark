@@ -29,14 +29,22 @@ public class SearchCourseFragment extends DialogFragment implements CoursesAdapt
     //Courses
     RecyclerView rvCourses;
     List<CourseModel> coursesItem;
-    StudentModel student = StudentDAO.selectStudent("valzano", "password");
+    //Get Student Model
+    StudentModel student;
 
     private static final String YEAR = "2020/2021";
+
+
+    //Methods
+    //Constructor
+    public SearchCourseFragment(StudentModel student){this.student = student;}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_course, container, false);
         getDialog().setTitle("Simple Dialog");
+
 
         //Dismiss Button
         btnDismiss = rootView.findViewById(R.id.btn_goback);

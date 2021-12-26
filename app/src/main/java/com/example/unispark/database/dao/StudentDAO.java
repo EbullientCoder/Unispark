@@ -50,11 +50,11 @@ public class StudentDAO {
                     null);
             return student1;
         }
-        imageID = cursor.getInt(5);
         firstName = cursor.getString(1);
         lastName = cursor.getString(2);
         studentEmail = cursor.getString(3);
         studentPassword = cursor.getString(4);
+        imageID = cursor.getInt(5);
         faculty = cursor.getString(6);
         academicYear = cursor.getString(7);
         id = cursor.getString(8);

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfessorExams extends AppCompatActivity {
+public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnExamBtnClickListener {
     //Attributes
     //Menu
     ImageButton menuButton;
@@ -49,7 +50,7 @@ public class ProfessorExams extends AppCompatActivity {
     Bundle extras;
     //ExamModel
     RecyclerView rvExams;
-    List<ExamItem> examsExamItem;
+    List<ExamItem> examsItem;
     //Model
     ProfessorModel professor;
 
@@ -91,13 +92,13 @@ public class ProfessorExams extends AppCompatActivity {
 
         //ExamModel List
         rvExams = findViewById(R.id.rv_professor_exams);
-        examsExamItem = new ArrayList<>();
+        examsItem = new ArrayList<>();
         //ExamModel Page Title
         examsTitle = findViewById(R.id.txt_professor_exams_title);
         //ExamModel Page Menu Buttons
         upcomingExams();
 
-        rvExams.setAdapter(new ExamAdapter(examsExamItem));
+        rvExams.setAdapter(new ExamAdapter(examsItem, this));
 
 
         //Button: Add Homework - Communication
@@ -205,7 +206,7 @@ public class ProfessorExams extends AppCompatActivity {
         examsTitle.setText("UPCOMING EXAMS");
 
         //Clear the ExamModel List
-        examsExamItem.clear();
+        examsItem.clear();
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor UpcomingExamModel
         BookingExamModel uExam1 = new BookingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
@@ -213,9 +214,16 @@ public class ProfessorExams extends AppCompatActivity {
         BookingExamModel uExam3 = new BookingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
         BookingExamModel uExam4 = new BookingExamModel(4,"Ing. del Software e prog. Web II", YEAR, "25/08/2020", "6.0", "L3", "Didattica");
 
-        examsExamItem.add(new ExamItem(3, uExam1));
-        examsExamItem.add(new ExamItem(3, uExam2));
-        examsExamItem.add(new ExamItem(3, uExam3));
-        examsExamItem.add(new ExamItem(3, uExam4));
+        examsItem.add(new ExamItem(3, uExam1));
+        examsItem.add(new ExamItem(3, uExam2));
+        examsItem.add(new ExamItem(3, uExam3));
+        examsItem.add(new ExamItem(3, uExam4));
+    }
+
+    @Override
+    public void onBtnClick(int position) {
+        Intent intent = new Intent(getApplicationContext(), ProfessorVerbalizeExams.class);
+        //intent.putExtra("Exam", examsItem.get(position).getObject());
+        startActivity(intent);
     }
 }
