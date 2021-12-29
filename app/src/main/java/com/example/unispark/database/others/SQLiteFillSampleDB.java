@@ -588,8 +588,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         this.bookExam(exam1, fanfarillo);
 
-        //this.addExamGrade(examGrade1, fanfarillo);
-        //this.addExamGrade(examGrade2, fanfarillo);
     }
 
 

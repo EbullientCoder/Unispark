@@ -52,8 +52,9 @@ public class ExamsDAO {
 
         if (insert == -1) return false;
         else {
-
-            return true;
+            boolean isRemoved = removeBookedExam(examGrade.getId(), studentID);
+            if(isRemoved) return true;
+            return false;
         }
     }
 
@@ -269,14 +270,23 @@ public class ExamsDAO {
         return studentsList;
     }
 
-    /*
     //Remove studentID booked exam from DB
-    public static boolean removeBookedExams(BookingExamModel exam, String studentID)
+    public static boolean removeBookedExam(int examID, String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        int delete = db.delete("studentexams","studentID=? and coursename=?",new String[]{studentID,courseName});
-        if (delete > 0)return true;
+        int delete = db.delete("studentexams","studentID='" + studentID + "' and examID=" + examID,null);
+        if (delete > 0) return true;
         return false;
-    }*/
+    }
+
+    //Remove bookingExam from DB
+    public static boolean removeExam(int examID)
+    {
+        SQLiteDatabase db = SQLiteConnection.getWritableDB();
+        int delete = db.delete("exams","id=" + examID,null);
+        if (delete > 0) return true;
+        return false;
+    }
+
 
 }

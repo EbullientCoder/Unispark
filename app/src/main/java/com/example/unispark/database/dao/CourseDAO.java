@@ -49,8 +49,8 @@ public class CourseDAO {
 
     public static boolean leaveCourse(String studentID, String courseName){
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        int delete = db.delete("studentscourses","studentID=? and coursename=?",new String[]{studentID,courseName});
-        if (delete > 0)return true;
+        int delete = db.delete("studentscourses","studentID='" + studentID + "' and coursename='" + courseName + "'",null);
+        if (delete > 0) return true;
         return false;
     }
 

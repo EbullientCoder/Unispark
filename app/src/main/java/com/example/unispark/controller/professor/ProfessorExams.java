@@ -20,9 +20,11 @@ import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
+import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookingExamModel;
+import com.example.unispark.model.exams.ExamGradeModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -211,6 +213,7 @@ public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnE
         for (int i = 0; exams != null && i < exams.size(); i++){
             examsItem.add(new ExamItem(3, exams.get(i)));
         }
+
     }
 
     @Override

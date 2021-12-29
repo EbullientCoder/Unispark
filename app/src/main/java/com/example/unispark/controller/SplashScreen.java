@@ -15,7 +15,7 @@ import com.example.unispark.database.others.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
     //Database
-    //SQLiteFillSampleDB fillDB;
+    SQLiteFillSampleDB fillDB;
     //Timeout
     int timeout = 2000; //2000
 
@@ -40,8 +40,8 @@ public class SplashScreen extends AppCompatActivity {
 
 
         //Initializing Database
-        //fillDB = new SQLiteFillSampleDB(getApplicationContext());
-        //fillDB.initDatabase();
+        fillDB = new SQLiteFillSampleDB(getApplicationContext());
+        fillDB.initDatabase();
 
 
         new Handler().postDelayed(() -> {
