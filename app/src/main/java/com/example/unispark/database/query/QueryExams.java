@@ -60,9 +60,9 @@ public class QueryExams {
         return cursor;
     }
 
-    public static Cursor selectStudents(SQLiteDatabase db, String examName) //throws exception
+    public static Cursor selectStudents(SQLiteDatabase db, int examID) //throws exception
     {
-        String queryString = "SELECT " + STUDENT_ID + " FROM " + STUDENT_EXAMS + " WHERE " + EXAM_NAME + " = '" + examName + "';";
+        String queryString = "SELECT " + STUDENT_ID + " FROM " + STUDENT_EXAMS + " WHERE " + EXAM_ID + " = " + examID + ";";
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }

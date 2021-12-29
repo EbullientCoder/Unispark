@@ -238,11 +238,11 @@ public class ExamsDAO {
     }
 
     //Get students that booked an exam
-    public static List<StudentBean> getStudentsBookedExam(String examName)
+    public static List<StudentBean> getStudentsBookedExam(int examID)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
-        Cursor cursor = QueryExams.selectStudents(db, examName);
+        Cursor cursor = QueryExams.selectStudents(db, examID);
         if (!cursor.moveToFirst()) return null;
 
         List<StudentBean> studentsList = new ArrayList<>();
