@@ -8,6 +8,7 @@ import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.model.exams.BookingExamModel;
 
 
 import java.util.ArrayList;
@@ -48,7 +49,9 @@ public class ProfessorDAO {
                     null,
                     "",
                     0,
-                    null, null);
+                    null,
+                    null,
+                    null);
             return professorerror;
         }
         professorId = cursor.getInt(0);
@@ -74,6 +77,9 @@ public class ProfessorDAO {
         String link;
         String facultyCourse;
 
+        //List of course names for booking exams
+        List<String> courseNames = new ArrayList<>();
+
         //Select all courses marked by professor id
         cursor = QueryCourse.selectProfessorCourses(db, professorId);
 
@@ -86,6 +92,9 @@ public class ProfessorDAO {
                 courseId = String.valueOf(cursor.getInt(7));
                 shortName = cursor.getString(1);
                 fullName = cursor.getString(2);
+
+                courseNames.add(fullName);
+
                 courseYear = cursor.getString(3);
                 cfu = cursor.getString(4);
                 session = cursor.getString(5);
@@ -99,6 +108,8 @@ public class ProfessorDAO {
             } while (cursor.moveToNext());
         }
 
+        List<BookingExamModel> exams = ExamsDAO.getExams(courseNames, true);
+
 
 
         //Create the professor instance
@@ -110,7 +121,8 @@ public class ProfessorDAO {
                 website,
                 image,
                 coursesList,
-                faculty);
+                faculty,
+                exams);
 
         //close both the cursor and the db when done.
         cursor.close();

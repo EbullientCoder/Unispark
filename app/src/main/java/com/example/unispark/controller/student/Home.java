@@ -71,8 +71,6 @@ public class Home extends AppCompatActivity
         extras = getIntent().getExtras();
         student = (StudentModel) extras.getSerializable("UserObject");
 
-
-
         //Menu
         menuButton = findViewById(R.id.btn_menu);
         menuButton.setOnClickListener(new View.OnClickListener() {

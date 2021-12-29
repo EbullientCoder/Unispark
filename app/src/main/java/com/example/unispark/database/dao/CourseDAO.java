@@ -47,6 +47,13 @@ public class CourseDAO {
         else return true;
     }
 
+    public static boolean leaveCourse(String studentID, String courseName){
+        SQLiteDatabase db = SQLiteConnection.getWritableDB();
+        int delete = db.delete("studentscourses","studentID=? and coursename=?",new String[]{studentID,courseName});
+        if (delete > 0)return true;
+        return false;
+    }
+
     //Get available course names to join for a student marked by faculty
     public static List<CourseModel> selectAvailableCourses(String faculty, List<String> courseNames)
     {

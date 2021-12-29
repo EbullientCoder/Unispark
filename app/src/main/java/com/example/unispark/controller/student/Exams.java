@@ -125,29 +125,11 @@ public class Exams extends AppCompatActivity {
         examsExamItem.clear();
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Accept ExamModel | 3 = Reserve ExamModel
-        ExamGradeModel vExam1 = new ExamGradeModel(1,"Analisi 1", YEAR, "11/02/2020", "12.0", "24");
-        ExamGradeModel vExam2 = new ExamGradeModel(2,"Fondamenti di Informatica", YEAR, "20/02/2020", "9.0", "30");
-        ExamGradeModel vExam3 = new ExamGradeModel(3,"Fisica 1", YEAR, "14/07/2020", "6.0", "19");
-        ExamGradeModel vExam4 = new ExamGradeModel(4,"Fondamenti di Automatica", YEAR, "25/08/2020", "6.0", "30");
-        ExamGradeModel vExam5 = new ExamGradeModel(5,"Calcolatori Elettronici", YEAR, "17/02/2021", "9.0", "27");
-        ExamGradeModel vExam6 = new ExamGradeModel(6,"Ingegneria degli Algoritmi", YEAR, "28/02/2021", "6.0", "18");
-        ExamGradeModel vExam7 = new ExamGradeModel(7,"Elettrotecnica", YEAR, "21/03/2021", "6.0", "26");
-        ExamGradeModel vExam8 = new ExamGradeModel(8,"Analisi 2", YEAR, "27/01/2021", "6.0", "21");
-        ExamGradeModel vExam9 = new ExamGradeModel(9,"Fondamenti di Telecomunicazioni", YEAR, "14/07/2021", "9.0", "25");
-        ExamGradeModel vExam10 = new ExamGradeModel(10,"Sistemi Operativi", YEAR, "20/07/2021", "9.0", "25");
-        ExamGradeModel vExam11 = new ExamGradeModel(11,"Fondamenti di Controlli", YEAR, "12/03/2021", "9.0", "22");
 
-        examsExamItem.add(new ExamItem(0, vExam1));
-        examsExamItem.add(new ExamItem(0, vExam2));
-        examsExamItem.add(new ExamItem(0, vExam3));
-        examsExamItem.add(new ExamItem(0, vExam4));
-        examsExamItem.add(new ExamItem(0, vExam5));
-        examsExamItem.add(new ExamItem(0, vExam6));
-        examsExamItem.add(new ExamItem(0, vExam7));
-        examsExamItem.add(new ExamItem(0, vExam8));
-        examsExamItem.add(new ExamItem(0, vExam9));
-        examsExamItem.add(new ExamItem(0, vExam10));
-        examsExamItem.add(new ExamItem(0, vExam11));
+        List<ExamGradeModel> verbalizedExams = student.getvExams();
+        for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
+            examsExamItem.add(new ExamItem(1, verbalizedExams.get(i)));
+        }
     }
 
     //Page: Failed ExamModel
@@ -158,15 +140,13 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        ExamGradeModel fExam1 = new ExamGradeModel(1,"Probabilita' e Statistica", YEAR, "07/03/2020", "9.0", "failed");
-        ExamGradeModel fExam2 = new ExamGradeModel(2,"Fondamenti di Controlli", YEAR, "11/07/2021", "9.0", "absent");
-        ExamGradeModel fExam3 = new ExamGradeModel(3,"Ingegneria degli Algoritmi", YEAR, "13/07/2021", "6.0", "retired");
+        List<ExamGradeModel> failedExams = student.getfExams();
+        for (int i = 0; failedExams != null && i < failedExams.size(); i++){
+            examsExamItem.add(new ExamItem(1, failedExams.get(i)));
+        }
 
-        examsExamItem.add(new ExamItem(1, fExam1));
-        examsExamItem.add(new ExamItem(1, fExam2));
-        examsExamItem.add(new ExamItem(1, fExam3));
+
     }
-
 
     //Page: Reserve ExamModel
     private void reserveExams(){
@@ -176,21 +156,9 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        BookingExamModel rExam1 = new BookingExamModel(5,"Esame di Prova", "2021/2022", "01/02/2022", "12.0", "L4", "Didattica");
-
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
-        examsExamItem.add(new ExamItem(2, rExam1));
+        List<BookingExamModel> bookingExams = student.getbExams();
+        for (int i = 0; bookingExams != null && i < bookingExams.size(); i++){
+            examsExamItem.add(new ExamItem(2, bookingExams.get(i)));
+        }
     }
 }

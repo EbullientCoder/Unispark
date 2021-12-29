@@ -1,5 +1,7 @@
 package com.example.unispark.model;
 
+import com.example.unispark.model.exams.BookingExamModel;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class ProfessorModel extends UserModel{
     private int image;
     private List<CourseModel> courses;
     private String faculty;
+    private List<BookingExamModel> exams;
 
 
     //Methods
@@ -20,7 +23,7 @@ public class ProfessorModel extends UserModel{
         super(email, password);
     }
 
-    public ProfessorModel(String email, String password, int id, String firstName, String lastName, String website, int image, List<CourseModel> courses, String faculty) {
+    public ProfessorModel(String email, String password, int id, String firstName, String lastName, String website, int image, List<CourseModel> courses, String faculty, List<BookingExamModel> exams) {
         super(email, password);
         this.id = id;
         this.firstName = firstName;
@@ -29,6 +32,7 @@ public class ProfessorModel extends UserModel{
         this.image = image;
         this.courses = courses;
         this.faculty = faculty;
+        this.exams = exams;
     }
 
     //Getter
@@ -51,7 +55,9 @@ public class ProfessorModel extends UserModel{
         return courses;
     }
     public String getFaculty(){ return faculty; }
-
+    public List<BookingExamModel> getExams() {
+        return exams;
+    }
 
     //Setter
     public void setId(int id) {
@@ -73,6 +79,9 @@ public class ProfessorModel extends UserModel{
         this.courses = courses;
     }
     public void setFaculty(String faculty) { this.faculty = faculty; }
+    public void setExams(List<BookingExamModel> exams) {
+        this.exams = exams;
+    }
 }
 
 

@@ -198,8 +198,6 @@ public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnE
         }
     }
 
-
-
     //Page: Upcoming ExamModel
     private void upcomingExams(){
         //Set Title
@@ -209,15 +207,10 @@ public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnE
         examsItem.clear();
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor UpcomingExamModel
-        BookingExamModel uExam1 = new BookingExamModel(1,"Ing. del Software e prog. Web", YEAR, "11/02/2020", "12.0", "L3", "Didattica");
-        BookingExamModel uExam2 = new BookingExamModel(2,"Ing. del Software e prog. Web II", YEAR, "20/02/2020", "9.0", "L3", "Didattica");
-        BookingExamModel uExam3 = new BookingExamModel(3,"Ing. del Software e prog. Web", YEAR, "14/07/2020", "6.0", "L3", "Didattica");
-        BookingExamModel uExam4 = new BookingExamModel(4,"Ing. del Software e prog. Web II", YEAR, "25/08/2020", "6.0", "L3", "Didattica");
-
-        examsItem.add(new ExamItem(3, uExam1));
-        examsItem.add(new ExamItem(3, uExam2));
-        examsItem.add(new ExamItem(3, uExam3));
-        examsItem.add(new ExamItem(3, uExam4));
+        List<BookingExamModel> exams = professor.getExams();
+        for (int i = 0; exams != null && i < exams.size(); i++){
+            examsItem.add(new ExamItem(3, exams.get(i)));
+        }
     }
 
     @Override

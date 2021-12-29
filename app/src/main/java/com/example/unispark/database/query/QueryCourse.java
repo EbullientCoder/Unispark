@@ -10,6 +10,8 @@ public class QueryCourse {
     public static final String STUDENTS_COURSES = "studentscourses";
     public static final String STUDENT_ID = "studentID";
     public static final String FACULTY = "faculty";
+    public static final String YEAR = "year";
+    public static final String CFU = "cfu";
 
     private QueryCourse(){}
 
@@ -46,6 +48,20 @@ public class QueryCourse {
         return cursor;
     }
 
+    //Look for course's academic year marked by courseName
+    public static Cursor selectYear(SQLiteDatabase db, String courseName) //throws exception
+    {
+        String queryString = "SELECT " + YEAR + " FROM " + COURSE_TABLE + " WHERE "
+                + COURSE_NAME + " = '" + courseName + "';";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
 
-
+    //Look for course's CFU marked by courseName
+    public static Cursor selectCFU(SQLiteDatabase db, String courseName) //throws exception
+    {
+        String queryString = "SELECT " + CFU + " FROM " + COURSE_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
 }

@@ -8,6 +8,8 @@ import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.exams.BookingExamModel;
+import com.example.unispark.model.exams.ExamGradeModel;
 
 
 import java.util.ArrayList;
@@ -47,6 +49,10 @@ public class StudentDAO {
                     null,
                     null,
                     null,
+                    null,
+                    null,
+                    null,
+                    null,
                     null);
             return student1;
         }
@@ -72,6 +78,8 @@ public class StudentDAO {
         String link;
         String facultyCourse;
 
+        List<String> courseNames = new ArrayList<>();
+
         //Select all courses followed by studentId
         Cursor cursorCourse = QueryCourse.selectStudentCourses(db, id);
 
@@ -80,10 +88,11 @@ public class StudentDAO {
             coursesList = null;
         }
         else{
-            String courseName;
 
+            String courseName;
             do{
                 courseName = cursorCourse.getString(0);
+                courseNames.add(courseName);
                 cursor = QueryCourse.selectCourseName(db, courseName);
 
                 if (!cursor.moveToFirst()){
@@ -103,6 +112,34 @@ public class StudentDAO {
                 coursesList.add(course);
             } while (cursorCourse.moveToNext());
         }
+
+        //Get booking exams List
+        List<BookingExamModel> bookingExams = ExamsDAO.getExams(courseNames, false);
+
+        //Get booked exams List
+        List<BookingExamModel> bookedExams = ExamsDAO.getBookedExams(id);
+
+        List<BookingExamModel> removeList = new ArrayList<>();
+
+        BookingExamModel bookingExam;
+        BookingExamModel bookedExam;
+        for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
+            bookedExam = bookedExams.get(i);
+            for(int j = 0; bookingExams != null && j < bookingExams.size(); j++){
+                bookingExam = bookingExams.get(j);
+                if (bookingExam.getId() == bookedExam.getId()) removeList.add(bookingExams.get(j));
+            }
+        }
+        if(bookingExams != null){
+            bookingExams.removeAll(removeList);
+        }
+
+        //Get Verbalized exams
+        List<ExamGradeModel> verbalizedExams = ExamsDAO.getVerbalizedExams(id);
+
+        //Get Failed Exams
+        List<ExamGradeModel> failedExams = ExamsDAO.getFailedExams(id);
+
         //Create the student instance
         student = new StudentModel(imageID,
                 firstName,
@@ -112,7 +149,11 @@ public class StudentDAO {
                 faculty,
                 academicYear,
                 id,
-                coursesList);
+                coursesList,
+                bookingExams,
+                bookedExams,
+                verbalizedExams,
+                failedExams);
 
         //close both the cursor and the db when done.
         cursor.close();

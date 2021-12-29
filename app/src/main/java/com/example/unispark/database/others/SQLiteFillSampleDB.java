@@ -88,8 +88,8 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String BUILDING = "building";
     public static final String CLASS = "class";
     public static final String GRADE = "grade";
-
-
+    public static final String STUDENT_EXAMS = "studentexams";
+    public static final String EXAM_ID = "examID";
 
 
     public SQLiteFillSampleDB(@Nullable Context context) {
@@ -101,7 +101,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Students table statement
         String createTableStatement = "CREATE TABLE " + STUDENTS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + FIRSTNAME + " TEXT, " + LASTNAME + " TEXT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT, " + IMAGE + " INTEGER, " + FACULTY + " TEXT, " + ACADEMIC_YEAR + " TEXT, " + STUDENT_ID + " TEXT);";
+                + FIRSTNAME + " TEXT, " + LASTNAME + " TEXT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT, " + IMAGE + " INTEGER, " + FACULTY + " TEXT, " + ACADEMIC_YEAR + " TEXT, " + STUDENT_ID + " TEXT UNIQUE);";
 
         db.execSQL(createTableStatement);
 
@@ -161,6 +161,11 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         createTableStatement = "CREATE TABLE  " + EXAM_GRADES + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EXAM_NAME + " TEXT, " + STUDENT_ID + " TEXT, " + GRADE + " TEXT);";
 
         db.execSQL(createTableStatement);
+
+        //Relation Student-Booked exams table
+        createTableStatement = "CREATE TABLE  " + STUDENT_EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + EXAM_ID + " INTEGER UNIQUE);";
+
+        db.execSQL(createTableStatement);
     }
 
     //Initialize Database
@@ -190,7 +195,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Falessi",
                 "https://didatticaweb.uniroma2.it/it/docenti/curriculum/T_153658-Davide-Falessi/0",
                 R.drawable.courses_falessi,
-                null, "Ingegneria Informatica");
+                null, "Ingegneria Informatica", null);
 
         ProfessorModel lopresti = new ProfessorModel("lopresti",
                 getHash("password"),
@@ -200,7 +205,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "https://www.lopresti.com",
                 R.drawable.courses_lo_presti,
                 null,
-                "Ingegneria Informatica");
+                "Ingegneria Informatica", null);
 
         ProfessorModel martinelli = new ProfessorModel("martinelli",
                 getHash("password"),
@@ -210,7 +215,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "http://robot2.disp.uniroma2.it/~fmartine/",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Informatica");
+                "Ingegneria Informatica", null);
 
         ProfessorModel digennaro = new ProfessorModel("digennaro",
                 getHash("password"),
@@ -220,7 +225,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "http://www.mat.uniroma2.it/~digennar/",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica");
+                "Ingegneria Infromatica", null);
 
         ProfessorModel carnevale = new ProfessorModel("carnevale",
                 getHash("password"),
@@ -230,7 +235,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "https://sites.google.com/view/caaa1920/home",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica");
+                "Ingegneria Infromatica", null);
 
         //Add professors to DB and set their id correctly
         this.addProfessor(falessi);
@@ -254,6 +259,10 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Ingegneria Informatica",
                 "2021/2022",
                 "0268609",
+                null,
+                null,
+                null,
+                null,
                 null);
 
         StudentModel lapiana = new StudentModel(R.drawable.profile_photo,
@@ -264,6 +273,10 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Ingegneria Informatica",
                 "2021/2022",
                 "0279544",
+                null,
+                null,
+                null,
+                null,
                 null);
 
         StudentModel fanfarillo = new StudentModel(R.drawable.profile_photo,
@@ -274,6 +287,10 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "Ingegneria Informatica",
                 "2021/2022",
                 "0000000",
+                null,
+                null,
+                null,
+                null,
                 null);
 
         //Add students to DB
@@ -547,17 +564,17 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Add exams
-        BookingExamModel exam1 = new BookingExamModel(0,
-                "ING. DEL SOFTWARE E PROG. WEB",
+        BookingExamModel exam1 = new BookingExamModel(1,
+                "CALCOLATORI ELETTRONICI",
                 "2021/2022",
-                "20/01/2022",
+                "2022-01-21 10:00",
                 "12.0",
                 "A4",
                 "ING.INF");
-        BookingExamModel exam2 = new BookingExamModel(0,
+        BookingExamModel exam2 = new BookingExamModel(2,
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
-                "27/01/2022",
+                "2022-02-18 09:00",
                 "12.0",
                 "A7",
                 "ING.INF");
@@ -565,9 +582,14 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addExam(exam1);
         this.addExam(exam2);
 
-        ExamGradeModel examGrade = new ExamGradeModel(0, "CALCOLATORI ELETTRONICI", "2021/2022", "27/01/2022", "12.0", "28");
+        ExamGradeModel examGrade1 = new ExamGradeModel(0, exam1.getName(), exam2.getYear(), exam2.getDate(), exam2.getCFU(), "15");
 
-        this.addExamGrade(examGrade, lapiana);
+        ExamGradeModel examGrade2 = new ExamGradeModel(0, exam2.getName(), exam1.getYear(), exam1.getDate(), exam1.getCFU(), "28");
+
+        this.bookExam(exam1, fanfarillo);
+
+        //this.addExamGrade(examGrade1, fanfarillo);
+        //this.addExamGrade(examGrade2, fanfarillo);
     }
 
 
@@ -761,6 +783,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
     //Add exam grade
     public boolean addExamGrade(ExamGradeModel examGrade, StudentModel student){
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -772,6 +795,21 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
+    //Book Exam
+    public boolean bookExam(BookingExamModel exam, StudentModel student){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(STUDENT_ID, student.getId());
+        cv.put(EXAM_ID, exam.getId());
+        long insert = db.insert(STUDENT_EXAMS, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    //
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

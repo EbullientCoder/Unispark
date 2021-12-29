@@ -92,7 +92,7 @@ public class CommunicationsDAO {
         return communicationsList;
     }
 
-    //Get Communications marked by courseShortName
+    //Get Communications marked by courseShortName(Togliere il marametro course full name e ottenerlo tramite query)
     public static List<ProfessorCommunicationModel> getCourseCommunications(String courseShortName, String courseFullName)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
@@ -154,7 +154,7 @@ public class CommunicationsDAO {
         return communicationsList;
     }
 
-    //Get all communications marked by courseShortNames in the list
+    //Get all communications marked by courseShortNames in the list(Not a DAO responsibility --> put it into controller)
     public static List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames)
     {
         List<ProfessorCommunicationModel> communicationList = new ArrayList<>();
