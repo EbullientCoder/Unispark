@@ -7,7 +7,7 @@
     android:background="#212529"
     android:paddingHorizontal="15dp"
     android:paddingVertical="20dp"
-    tools:context=".controller.Login">
+    tools:context=".controller.guicontroller.LoginGUIController">
 
     <!-- Logo - Welcome -->
     <LinearLayout
@@ -137,7 +137,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- Login Button -->
+    <!-- LoginGUIController Button -->
     <LinearLayout
         android:id="@+id/submit_layout"
         android:layout_width="match_parent"

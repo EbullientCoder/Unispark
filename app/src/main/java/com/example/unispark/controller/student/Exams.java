@@ -16,8 +16,8 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.exams.BookingExamModel;
-import com.example.unispark.model.exams.ExamGradeModel;
+import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public class Exams extends AppCompatActivity {
 
         //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Accept ExamModel | 3 = Reserve ExamModel
 
-        List<ExamGradeModel> verbalizedExams = student.getvExams();
+        List<VerbalizedExamModel> verbalizedExams = student.getvExams();
         for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
             examsExamItem.add(new ExamItem(1, verbalizedExams.get(i)));
         }
@@ -140,7 +140,7 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        List<ExamGradeModel> failedExams = student.getfExams();
+        List<VerbalizedExamModel> failedExams = student.getfExams();
         for (int i = 0; failedExams != null && i < failedExams.size(); i++){
             examsExamItem.add(new ExamItem(1, failedExams.get(i)));
         }
@@ -156,7 +156,7 @@ public class Exams extends AppCompatActivity {
         //Clear the ExamModel List
         examsExamItem.clear();
 
-        List<BookingExamModel> bookingExams = student.getbExams();
+        List<BookExamModel> bookingExams = student.getbExams();
         for (int i = 0; bookingExams != null && i < bookingExams.size(); i++){
             examsExamItem.add(new ExamItem(2, bookingExams.get(i)));
         }

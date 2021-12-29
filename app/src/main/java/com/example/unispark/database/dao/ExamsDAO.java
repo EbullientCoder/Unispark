@@ -10,13 +10,9 @@ import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.database.query.QueryStudent;
-import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
-import com.example.unispark.model.exams.BookingExamModel;
-import com.example.unispark.model.exams.ExamGradeModel;
+import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +20,7 @@ public class ExamsDAO {
 
     private ExamsDAO(){}
 
-    public static boolean addExam(BookingExamModel exam)
+    public static boolean addExam(BookExamModel exam)
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         ContentValues cv = new ContentValues();
@@ -40,7 +36,7 @@ public class ExamsDAO {
     }
 
 
-    public static boolean addExamGrade(ExamGradeModel examGrade, String studentID)
+    public static boolean addExamGrade(VerbalizedExamModel examGrade, String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         ContentValues cv = new ContentValues();
@@ -59,7 +55,7 @@ public class ExamsDAO {
     }
 
     //Create a new Booking Exam model(not sure if in DAO)
-    public static BookingExamModel bookingExam(Cursor cursor, String courseName)
+    public static BookExamModel bookingExam(Cursor cursor, String courseName)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
@@ -76,17 +72,17 @@ public class ExamsDAO {
         String classroom = cursor.getString(4);
 
         //Create new bookingExam model
-        BookingExamModel exam = new BookingExamModel(id, name, year, dateTime, cfu, classroom, building);
+        BookExamModel exam = new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
 
         return exam;
     }
 
     //Select student exams marked my courseName
-    public static List<BookingExamModel> getExams(String courseName, boolean isProfessor)
+    public static List<BookExamModel> getExams(String courseName, boolean isProfessor)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
-        List<BookingExamModel> examsList = new ArrayList<>();
+        List<BookExamModel> examsList = new ArrayList<>();
 
         Cursor cursor = QueryExams.selectExams(db, courseName, isProfessor);
 
@@ -107,10 +103,10 @@ public class ExamsDAO {
     }
 
     //Select exams marked by List of courseNames(Implement into another class, not the DAO)
-    public static List<BookingExamModel> getExams(List<String> courseNames, boolean isProfessor)
+    public static List<BookExamModel> getExams(List<String> courseNames, boolean isProfessor)
     {
-        List<BookingExamModel> examsList = new ArrayList<>();
-        List<BookingExamModel> tempList;
+        List<BookExamModel> examsList = new ArrayList<>();
+        List<BookExamModel> tempList;
         for (int i = 0; i < courseNames.size(); i++)
         {
             tempList = getExams(courseNames.get(i), isProfessor);
@@ -122,7 +118,7 @@ public class ExamsDAO {
     }
 
 
-    public static boolean bookExam(BookingExamModel exam, String studentID){
+    public static boolean bookExam(BookExamModel exam, String studentID){
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         ContentValues cv = new ContentValues();
 
@@ -135,13 +131,13 @@ public class ExamsDAO {
     }
 
     //Get booked exams marked by studentID
-    public static List<BookingExamModel> getBookedExams(String studentID)
+    public static List<BookExamModel> getBookedExams(String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectBookedExams(db, studentID);
         if (!cursor.moveToFirst()) return null;
 
-        List<BookingExamModel> bookedExamsList = new ArrayList<>();
+        List<BookExamModel> bookedExamsList = new ArrayList<>();
 
         int examID;
         Cursor cursorExam;
@@ -165,11 +161,11 @@ public class ExamsDAO {
 
 
     //Create a new examGrade (not sure if in the DAO)
-    public static ExamGradeModel examGrade(Cursor cursorGrade, String result)
+    public static VerbalizedExamModel examGrade(Cursor cursorGrade, String result)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
-        List<ExamGradeModel> examGrades = new ArrayList<>();
+        List<VerbalizedExamModel> examGrades = new ArrayList<>();
 
         int id = cursorGrade.getInt(0);
         String name = cursorGrade.getString(1);
@@ -184,7 +180,7 @@ public class ExamsDAO {
         String cfu = cursorCFU.getString(0);
 
         //Create new ExamGrade
-        ExamGradeModel examGrade = new ExamGradeModel(id, name, year, date, cfu, result);
+        VerbalizedExamModel examGrade = new VerbalizedExamModel(id, name, year, date, cfu, result);
 
         cursorYear.close();
         cursorDate.close();
@@ -195,12 +191,12 @@ public class ExamsDAO {
     }
 
     //Get verbalized exams
-    public static List<ExamGradeModel> getVerbalizedExams(String studentID)
+    public static List<VerbalizedExamModel> getVerbalizedExams(String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectExamGrades(db, studentID);
         if (!cursor.moveToFirst()) return null;
-        List<ExamGradeModel> gradesList = new ArrayList<>();
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
 
         do {
             String result = cursor.getString(2);
@@ -217,12 +213,12 @@ public class ExamsDAO {
     }
 
     //Get failed exams List
-    public static List<ExamGradeModel> getFailedExams(String studentID)
+    public static List<VerbalizedExamModel> getFailedExams(String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectExamGrades(db, studentID);
         if (!cursor.moveToFirst()) return null;
-        List<ExamGradeModel> gradesList = new ArrayList<>();
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
 
         do {
             String result = cursor.getString(2);

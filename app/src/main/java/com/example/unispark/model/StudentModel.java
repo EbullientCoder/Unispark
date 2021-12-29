@@ -1,8 +1,8 @@
 package com.example.unispark.model;
 
 
-import com.example.unispark.model.exams.BookingExamModel;
-import com.example.unispark.model.exams.ExamGradeModel;
+import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ public class StudentModel extends UserModel{
     private String academicYear;
     private String id;
     private List<CourseModel> courses;
-    private List<BookingExamModel> bExams;
-    private List<BookingExamModel> upcomingExams;
-    private List<ExamGradeModel> vExams;
-    private List<ExamGradeModel> fExams;
+    private List<BookExamModel> bExams;
+    private List<BookExamModel> upcomingExams;
+    private List<VerbalizedExamModel> vExams;
+    private List<VerbalizedExamModel> fExams;
 
 
     //Methods
@@ -33,10 +33,10 @@ public class StudentModel extends UserModel{
                         String academicYear,
                         String id,
                         List<CourseModel> courses,
-                        List<BookingExamModel> bExams,
-                        List<BookingExamModel> upcomingExams,
-                        List<ExamGradeModel> vExams,
-                        List<ExamGradeModel> fExams
+                        List<BookExamModel> bExams,
+                        List<BookExamModel> upcomingExams,
+                        List<VerbalizedExamModel> vExams,
+                        List<VerbalizedExamModel> fExams
     ) {
         super(email, password);
         this.imageID = imageID;
@@ -82,19 +82,19 @@ public class StudentModel extends UserModel{
         return courses;
     }
 
-    public List<BookingExamModel> getbExams() {
+    public List<BookExamModel> getbExams() {
         return bExams;
     }
 
-    public List<BookingExamModel> getUpcomingExams() {
+    public List<BookExamModel> getUpcomingExams() {
         return upcomingExams;
     }
 
-    public List<ExamGradeModel> getvExams() {
+    public List<VerbalizedExamModel> getvExams() {
         return vExams;
     }
 
-    public List<ExamGradeModel> getfExams() {
+    public List<VerbalizedExamModel> getfExams() {
         return fExams;
     }
 
@@ -127,19 +127,19 @@ public class StudentModel extends UserModel{
         this.courses = courses;
     }
 
-    public void setbExams(List<BookingExamModel> bExams) {
+    public void setbExams(List<BookExamModel> bExams) {
         this.bExams = bExams;
     }
 
-    public void setUpcomingExams(List<BookingExamModel> upcomingExams) {
+    public void setUpcomingExams(List<BookExamModel> upcomingExams) {
         this.upcomingExams = upcomingExams;
     }
 
-    public void setvExams(List<ExamGradeModel> vExams) {
+    public void setvExams(List<VerbalizedExamModel> vExams) {
         this.vExams = vExams;
     }
 
-    public void setfExams(List<ExamGradeModel> fExams) {
+    public void setfExams(List<VerbalizedExamModel> fExams) {
         this.fExams = fExams;
     }
 }

@@ -8,8 +8,8 @@ import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.exams.BookingExamModel;
-import com.example.unispark.model.exams.ExamGradeModel;
+import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
 
 import java.util.ArrayList;
@@ -114,15 +114,15 @@ public class StudentDAO {
         }
 
         //Get booking exams List
-        List<BookingExamModel> bookingExams = ExamsDAO.getExams(courseNames, false);
+        List<BookExamModel> bookingExams = ExamsDAO.getExams(courseNames, false);
 
         //Get booked exams List
-        List<BookingExamModel> bookedExams = ExamsDAO.getBookedExams(id);
+        List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
 
-        List<BookingExamModel> removeList = new ArrayList<>();
+        List<BookExamModel> removeList = new ArrayList<>();
 
-        BookingExamModel bookingExam;
-        BookingExamModel bookedExam;
+        BookExamModel bookingExam;
+        BookExamModel bookedExam;
         for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
             bookedExam = bookedExams.get(i);
             for(int j = 0; bookingExams != null && j < bookingExams.size(); j++){
@@ -135,10 +135,10 @@ public class StudentDAO {
         }
 
         //Get Verbalized exams
-        List<ExamGradeModel> verbalizedExams = ExamsDAO.getVerbalizedExams(id);
+        List<VerbalizedExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(id);
 
         //Get Failed Exams
-        List<ExamGradeModel> failedExams = ExamsDAO.getFailedExams(id);
+        List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(id);
 
         //Create the student instance
         student = new StudentModel(imageID,

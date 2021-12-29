@@ -179,7 +179,7 @@ public class AddExamFragment extends DialogFragment{
                 instructions = txtInstructions.getEditText().getText().toString();
 
                 //Exam Object
-                //exam = new ExamModel();
+                //exam = new ExamModel(2, "");
 
                 Toast.makeText(getContext(),
                         "Exam:\n" +

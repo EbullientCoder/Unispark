@@ -8,7 +8,7 @@ import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.exams.BookingExamModel;
+import com.example.unispark.model.exams.BookExamModel;
 
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public class ProfessorDAO {
             } while (cursor.moveToNext());
         }
 
-        List<BookingExamModel> exams = ExamsDAO.getExams(courseNames, true);
+        List<BookExamModel> exams = ExamsDAO.getExams(courseNames, true);
 
 
 

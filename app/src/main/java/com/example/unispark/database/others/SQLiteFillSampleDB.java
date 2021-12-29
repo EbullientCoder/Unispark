@@ -22,8 +22,8 @@ import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
-import com.example.unispark.model.exams.ExamGradeModel;
-import com.example.unispark.model.exams.BookingExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
+import com.example.unispark.model.exams.BookExamModel;
 
 public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
@@ -564,14 +564,14 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Add exams
-        BookingExamModel exam1 = new BookingExamModel(1,
+        BookExamModel exam1 = new BookExamModel(1,
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
                 "2022-01-21 10:00",
                 "12.0",
                 "A4",
                 "ING.INF");
-        BookingExamModel exam2 = new BookingExamModel(2,
+        BookExamModel exam2 = new BookExamModel(2,
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
                 "2022-02-18 09:00",
@@ -582,9 +582,9 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addExam(exam1);
         this.addExam(exam2);
 
-        ExamGradeModel examGrade1 = new ExamGradeModel(0, exam1.getName(), exam2.getYear(), exam2.getDate(), exam2.getCFU(), "15");
+        VerbalizedExamModel examGrade1 = new VerbalizedExamModel(0, exam1.getName(), exam2.getYear(), exam2.getDate(), exam2.getCFU(), "15");
 
-        ExamGradeModel examGrade2 = new ExamGradeModel(0, exam2.getName(), exam1.getYear(), exam1.getDate(), exam1.getCFU(), "28");
+        VerbalizedExamModel examGrade2 = new VerbalizedExamModel(0, exam2.getName(), exam1.getYear(), exam1.getDate(), exam1.getCFU(), "28");
 
         this.bookExam(exam1, fanfarillo);
 
@@ -764,7 +764,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
     //Add booking exams
-    public boolean addExam(BookingExamModel exam){
+    public boolean addExam(BookExamModel exam){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -780,7 +780,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
     //Add exam grade
-    public boolean addExamGrade(ExamGradeModel examGrade, StudentModel student){
+    public boolean addExamGrade(VerbalizedExamModel examGrade, StudentModel student){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -795,7 +795,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     }
 
     //Book Exam
-    public boolean bookExam(BookingExamModel exam, StudentModel student){
+    public boolean bookExam(BookExamModel exam, StudentModel student){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 

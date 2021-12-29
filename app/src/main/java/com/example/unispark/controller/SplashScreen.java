@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.unispark.R;
+import com.example.unispark.controller.guicontroller.LoginGUIController;
 import com.example.unispark.database.others.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
         new Handler().postDelayed(() -> {
-            Intent i = new Intent(SplashScreen.this, Login.class);
+            Intent i = new Intent(SplashScreen.this, LoginGUIController.class);
             startActivity(i);
             finish();
         }, timeout);
