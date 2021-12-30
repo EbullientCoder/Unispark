@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.adapter.SignedStudentsAdapter;
 import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.bean.StudentBean;
 import com.example.unispark.database.dao.ExamsDAO;
@@ -71,5 +73,8 @@ public class ProfessorVerbalizeExams extends AppCompatActivity {
         //Students Recycler View
         rvStudents = findViewById(R.id.rv_signedStudents);
         studentsItem = ExamsDAO.getStudentsBookedExam(exam.getId());
+
+        if(studentsItem == null) Toast.makeText(getApplicationContext(), "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
+        else rvStudents.setAdapter(new SignedStudentsAdapter(studentsItem));
     }
 }

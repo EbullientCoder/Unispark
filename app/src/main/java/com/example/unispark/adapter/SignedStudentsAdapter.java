@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.StudentBean;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 
@@ -17,11 +18,11 @@ import java.util.List;
 public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    List<StudentModel> items;
+    List<StudentBean> items;
 
 
     //Methods
-    public SignedStudentsAdapter(List<StudentModel> items){
+    public SignedStudentsAdapter(List<StudentBean> items){
         this.items = items;
     }
 
@@ -39,7 +40,7 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        StudentModel student = (StudentModel) items.get(position);
+        StudentBean student = (StudentBean) items.get(position);
         ((SignedStudentsAdapter.StudentViewHolder) holder).setStudentDate(student);
     }
 
@@ -64,8 +65,8 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             id = itemView.findViewById(R.id.txt_signed_student_id);
         }
 
-        void setStudentDate(StudentModel student){
-            fullname.setText(student.getFirstName() + " " + student.getLastName());
+        void setStudentDate(StudentBean student){
+            fullname.setText(student.getFullName());
             id.setText(student.getId());
         }
     }
