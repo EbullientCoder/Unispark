@@ -190,7 +190,9 @@ implements ExamAdapter.OnBookExamClickListener,
 
     @Override
     public void onBookBtnClick(int position) {
-        List<BookExamModel> exams = student.getBookedExams();
+        List<BookExamModel> exams;
+        if(student.getBookedExams() == null) exams = new ArrayList<>();
+        else exams = student.getBookedExams();
 
         //Make the Connection inside the DB
         ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());
