@@ -99,11 +99,11 @@
 
             <!-- AA -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txt_add_exam_AA"
-                android:layout_width="150dp"
+                android:id="@+id/txt_add_exam_hour"
+                android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_marginTop="20dp"
-                android:hint="AA"
+                android:hint="Hour"
                 android:textColorHint="#FFFFFF"
                 app:boxBackgroundColor="#272b2f"
                 app:boxCornerRadiusBottomEnd="5dp"
@@ -125,33 +125,6 @@
             </com.google.android.material.textfield.TextInputLayout>
             <!-- android:layout_marginTop="20dp" -->
 
-            <!-- CFU -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txt_add_exam_cfu"
-                android:layout_width="150dp"
-                android:layout_height="75dp"
-                android:layout_marginTop="20dp"
-                android:hint="CFU"
-                android:textColorHint="#FFFFFF"
-                app:boxBackgroundColor="#272b2f"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_input_course">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/nunito"
-                    android:inputType="text"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- android:layout_marginTop="20dp" -->
 
             <!-- Expiration -->
             <ImageButton
@@ -195,7 +168,7 @@
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_cfu">
+                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_hour">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -223,7 +196,7 @@
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_cfu">
+                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_hour">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -234,35 +207,6 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!-- Instructions -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txt_add_exam_instructions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Instructions"
-                android:textColorHint="#FFFFFF"
-                app:boxBackgroundColor="#272b2f"
-                app:boxCornerRadiusBottomEnd="5dp"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_add_exam_building">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito"
-                    android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:lines="6"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

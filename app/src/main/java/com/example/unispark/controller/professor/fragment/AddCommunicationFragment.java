@@ -19,6 +19,7 @@ import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,10 @@ public class AddCommunicationFragment extends DialogFragment{
 
 
 
+        //Calendar
+        OffsetDateTime offset = OffsetDateTime.now();
+        String date = offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth();
+
         //DropDown Selector
         coursesList = professor.getCourses();
         courses = new ArrayList<>(coursesList.size());
@@ -108,13 +113,13 @@ public class AddCommunicationFragment extends DialogFragment{
                 type = txtType.getEditText().getText().toString();
                 text = txtCommunication.getEditText().getText().toString();
 
-                //Homework Object
+                //Communication Object
                 communication = new ProfessorCommunicationModel(
                         professor.getImage(),
                         coursesList.get(i).getShortName(),
                         coursesList.get(i).getFullName(),
                         professor.getFirstName() + " " + professor.getLastName(),
-                        "10/02/2021",
+                        date,
                         type,
                         text);
 

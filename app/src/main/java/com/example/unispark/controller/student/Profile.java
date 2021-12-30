@@ -97,9 +97,11 @@ public class Profile extends AppCompatActivity
         rvCourses = findViewById(R.id.rv_courses);
         coursesItem = student.getCourses();
 
-
-        coursesAdapter = new CoursesAdapter(coursesItem, this, this,"LEAVE");
-        rvCourses.setAdapter(coursesAdapter);
+        if(coursesItem == null) Toast.makeText(getApplicationContext(), "EMPTY COURSES LIST", Toast.LENGTH_SHORT).show();
+        else{
+            coursesAdapter = new CoursesAdapter(coursesItem, this, this,"LEAVE");
+            rvCourses.setAdapter(coursesAdapter);
+        }
     }
 
     @Override
@@ -111,7 +113,19 @@ public class Profile extends AppCompatActivity
 
     @Override
     public void onButtonClick(int position) {
+        List<CourseModel> joinedCourses = student.getCourses();
+
         //Leave Course
-        Toast.makeText(getApplicationContext(), "LEAVE COURSE", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), coursesItem.get(position).getFullName() + ": Leaved", Toast.LENGTH_SHORT).show();
+
+        //Remove Course Joined from DB
+        CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
+
+        //Remove Course from Student's joined Courses
+        joinedCourses.remove(position);
+        student.setCourses(joinedCourses);
+
+        //Notify changed dimension to the Adapter
+        coursesAdapter.notifyItemRemoved(position);
     }
 }

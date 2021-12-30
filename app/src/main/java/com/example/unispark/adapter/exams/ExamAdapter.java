@@ -19,32 +19,48 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
     private List<ExamItem> examItems;
-    private OnExamBtnClickListener onExamBtnClickListener;
+    private OnViewExamClickListener onViewExamClickListener;
+    private OnBookExamClickListener onBookExamClickListener;
+    private OnLeaveExamClickListener onLeaveExamClickListener;
 
 
-
-
-    //Click ExamItem Interface
-    public interface OnExamBtnClickListener {
-        void onBtnClick(int position);
+    //Student: Click on "Book Exam" Button
+    public interface OnBookExamClickListener{
+        void onBookBtnClick(int position);
     }
+
+    //Student: Click on "Leave Exam" Button
+    public interface OnLeaveExamClickListener{
+        void onLeaveBtnClick(int position);
+    }
+
+    //Professor: Click on "View Assigned Exam" Button
+    public interface OnViewExamClickListener {
+        void onViewBtnClick(int position);
+    }
+
 
 
     //Methods
     //Constructor
-    public ExamAdapter(List<ExamItem> examItems) {
+    public ExamAdapter(List<ExamItem> examItems,
+                       OnBookExamClickListener onBookExamClickListener,
+                       OnLeaveExamClickListener onLeaveExamClickListener) {
         this.examItems = examItems;
+        this.onBookExamClickListener = onBookExamClickListener;
+        this.onLeaveExamClickListener = onLeaveExamClickListener;
     }
 
-    public ExamAdapter(List<ExamItem> examItems, OnExamBtnClickListener onExamBtnClickListener) {
+    public ExamAdapter(List<ExamItem> examItems,
+                       OnViewExamClickListener onViewExamClickListener) {
         this.examItems = examItems;
-        this.onExamBtnClickListener = onExamBtnClickListener;
+        this.onViewExamClickListener = onViewExamClickListener;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Verbalized ExamModel
+        //Verbalized - Failed ExamModel
         if(viewType == 0){
             return new VerbalizedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -54,59 +70,59 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     )
             );
         }
-        //Failed ExamModel
+        //Professor: View Assigned Exams
         else if(viewType == 1){
-            return new FailedExamViewHolder(
+            return new UpcomingExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
-                            R.layout.item_container_failed_exams,
+                            R.layout.item_container_professor_assigned_exams,
                             parent,
                             false
-                    )
+                    ), onViewExamClickListener
             );
         }
-        //Reserve Exam
+        //Student: Book Exams
         else if(viewType == 2){
             return new BookExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                             R.layout.item_container_book_exams,
                             parent,
                             false
-                    )
+                    ), onBookExamClickListener
             );
         }
-        //Professor Upcoming Exam
+        //Student: Booked Exams
         else{
-            return new UpcomingExamViewHolder(
+            return new BookedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
-                            R.layout.item_container_upcoming_exams,
+                            R.layout.item_container_book_exams,
                             parent,
                             false
-                    ), onExamBtnClickListener
+                    ), onLeaveExamClickListener
             );
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //verbalized Exams
+        //Verbalized - Failed Exams
         if(getItemViewType(position) == 0){
             VerbalizedExamModel vExam = (VerbalizedExamModel) examItems.get(position).getObject();
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
         }
-        //Failed Exams
+        //Professor: Assigned Exams
         else if(getItemViewType(position) == 1){
-            VerbalizedExamModel fExam = (VerbalizedExamModel) examItems.get(position).getObject();
-            ((FailedExamViewHolder) holder).setFailedExamDate(fExam);
+            BookExamModel assignedExam = (BookExamModel) examItems.get(position).getObject();
+            ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
         }
-        //Reserve Exams
+        //Student: Book Exams
         else if(getItemViewType(position) == 2){
-            BookExamModel rExam = (BookExamModel) examItems.get(position).getObject();
-            ((BookExamViewHolder) holder).setBookExamDate(rExam);
+            BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
+            ((BookExamViewHolder) holder).setBookExamDate(bookExam);
         }
-        //Professor Upcoming Exams
+        //Student: Booked Exams
         else {
-            BookExamModel uExam = (BookExamModel) examItems.get(position).getObject();
-            ((UpcomingExamViewHolder) holder).setUpcomingExamDate(uExam);
+            BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
+            ((BookedExamViewHolder) holder).setBookedExamDate(bookExam);
         }
     }
 
@@ -121,129 +137,162 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
 
-    //ExamModel ViewHolder
+
+    //0: Verbalized - Failed Exams
     static class VerbalizedExamViewHolder extends RecyclerView.ViewHolder{
         //Attributes
-        private TextView vExamName;
-        private TextView vExamYear;
-        private TextView vExamDate;
-        private TextView vExamCFU;
-        private TextView vExamResult;
+        private TextView ExamName;
+        private TextView ExamYear;
+        private TextView ExamDate;
+        private TextView ExamCFU;
+        private TextView ExamResult;
 
         //Methods
         //Constructor
         public VerbalizedExamViewHolder(@NonNull View itemView) {
             super(itemView);
-            vExamName = itemView.findViewById(R.id.txt_verbalized_exam_subject_name);
-            vExamYear = itemView.findViewById(R.id.txt_verbalized_exam_aa);
-            vExamDate = itemView.findViewById(R.id.txt_verbalized_exam_date);
-            vExamCFU = itemView.findViewById(R.id.txt_verbalized_exam_cfu);
-            vExamResult = itemView.findViewById(R.id.txt_verbalized_exam_result);
+            ExamName = itemView.findViewById(R.id.txt_verbalized_exam_subject_name);
+            ExamYear = itemView.findViewById(R.id.txt_verbalized_exam_aa);
+            ExamDate = itemView.findViewById(R.id.txt_verbalized_exam_date);
+            ExamCFU = itemView.findViewById(R.id.txt_verbalized_exam_cfu);
+            ExamResult = itemView.findViewById(R.id.txt_verbalized_exam_result);
         }
 
         void setVerbalizedExamDate(VerbalizedExamModel exam){
-            vExamName.setText(exam.getName());
-            vExamYear.setText(exam.getYear());
-            vExamDate.setText(exam.getDate());
-            vExamCFU.setText(exam.getCFU());
-            vExamResult.setText(exam.getResult());
+            ExamName.setText(exam.getName());
+            ExamYear.setText(exam.getYear());
+            ExamDate.setText(exam.getDate());
+            ExamCFU.setText(exam.getCFU());
+            ExamResult.setText(exam.getResult());
         }
     }
 
-    static class FailedExamViewHolder extends RecyclerView.ViewHolder{
-        //Attributes
-        private TextView fExamName;
-        private TextView fExamYear;
-        private TextView fExamDate;
-        private TextView fExamCFU;
-        private TextView fExamResult;
-
-        public FailedExamViewHolder(@NonNull View itemView) {
-            super(itemView);
-            fExamName = itemView.findViewById(R.id.txt_failed_exam_subject_name);
-            fExamYear = itemView.findViewById(R.id.txt_failed_exam_aa);
-            fExamDate = itemView.findViewById(R.id.txt_failed_exam_date);
-            fExamCFU = itemView.findViewById(R.id.txt_failed_exam_cfu);
-            fExamResult = itemView.findViewById(R.id.txt_failed_exam_result);
-        }
-
-        void setFailedExamDate(VerbalizedExamModel exam){
-            fExamName.setText(exam.getName());
-            fExamYear.setText(exam.getYear());
-            fExamDate.setText(exam.getDate());
-            fExamCFU.setText(exam.getCFU());
-            fExamResult.setText(exam.getResult());
-        }
-    }
-
-    static class BookExamViewHolder extends RecyclerView.ViewHolder{
-        //Attributes
-        private TextView rExamName;
-        private TextView rExamYear;
-        private TextView rExamDate;
-        private TextView rExamCFU;
-        private TextView rExamClassroom;
-        private TextView rExamBuilding;
-
-        public BookExamViewHolder(@NonNull View itemView) {
-            super(itemView);
-            rExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
-            rExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
-            rExamDate = itemView.findViewById(R.id.txt_book_exam_date);
-            rExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
-            rExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
-            rExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
-        }
-
-        void setBookExamDate(BookExamModel exam){
-            rExamName.setText(exam.getName());
-            rExamYear.setText(exam.getYear());
-            rExamDate.setText(exam.getDate());
-            rExamCFU.setText(exam.getCFU());
-            rExamClassroom.setText(exam.getClassroom());
-            rExamBuilding.setText(exam.getBuilding());
-        }
-    }
-
+    //1: Professor Assigned Exams
     static class UpcomingExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private TextView uExamName;
-        private TextView uExamYear;
-        private TextView uExamDate;
-        private TextView uExamCFU;
-        private TextView uExamBuilding;
-        private TextView uExamClassroom;
+        private TextView ExamName;
+        private TextView ExamYear;
+        private TextView ExamDate;
+        private TextView ExamCFU;
+        private TextView ExamBuilding;
+        private TextView ExamClassroom;
         private Button btnView;
 
-        private OnExamBtnClickListener onExamBtnClickListener;
+        private OnViewExamClickListener onViewExamClickListener;
 
 
-        public UpcomingExamViewHolder(@NonNull View itemView, OnExamBtnClickListener onExamBtnClickListener) {
+        public UpcomingExamViewHolder(@NonNull View itemView, OnViewExamClickListener onViewExamClickListener) {
             super(itemView);
-            uExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
-            uExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
-            uExamDate = itemView.findViewById(R.id.txt_upcoming_exam_date);
-            uExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
-            uExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
-            uExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
+            ExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
+            ExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
+            ExamDate = itemView.findViewById(R.id.txt_upcoming_exam_date);
+            ExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
+            ExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
+            ExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
             btnView = itemView.findViewById(R.id.btn_upcoming_exam_view);
 
-            this.onExamBtnClickListener = onExamBtnClickListener;
+            this.onViewExamClickListener = onViewExamClickListener;
             btnView.setOnClickListener(this);
         }
 
         void setUpcomingExamDate(BookExamModel exam){
-            uExamName.setText(exam.getName());
-            uExamYear.setText(exam.getYear());
-            uExamDate.setText(exam.getDate());
-            uExamCFU.setText(exam.getCFU());
-            uExamClassroom.setText(exam.getClassroom());
-            uExamBuilding.setText(exam.getBuilding());
+            ExamName.setText(exam.getName());
+            ExamYear.setText(exam.getYear());
+            ExamDate.setText(exam.getDate());
+            ExamCFU.setText(exam.getCFU());
+            ExamClassroom.setText(exam.getClassroom());
+            ExamBuilding.setText(exam.getBuilding());
         }
 
         @Override
         public void onClick(View view) {
-            onExamBtnClickListener.onBtnClick(getAdapterPosition());
+            onViewExamClickListener.onViewBtnClick(getAdapterPosition());
+        }
+    }
+
+    //2: Student Book Exam
+    static class BookExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        //Attributes
+        private TextView ExamName;
+        private TextView ExamYear;
+        private TextView ExamDate;
+        private TextView ExamCFU;
+        private TextView ExamClassroom;
+        private TextView ExamBuilding;
+        private Button btnBook;
+
+        private OnBookExamClickListener onBookExamClickListener;
+
+
+        public BookExamViewHolder(@NonNull View itemView, OnBookExamClickListener onBookExamClickListener) {
+            super(itemView);
+            ExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
+            ExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
+            ExamDate = itemView.findViewById(R.id.txt_book_exam_date);
+            ExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
+            ExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
+            ExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
+            btnBook = itemView.findViewById(R.id.btn_book_exam_book);
+
+            this.onBookExamClickListener = onBookExamClickListener;
+            btnBook.setOnClickListener(this);
+        }
+
+        void setBookExamDate(BookExamModel exam){
+            ExamName.setText(exam.getName());
+            ExamYear.setText(exam.getYear());
+            ExamDate.setText(exam.getDate());
+            ExamCFU.setText(exam.getCFU());
+            ExamClassroom.setText(exam.getClassroom());
+            ExamBuilding.setText(exam.getBuilding());
+        }
+
+        @Override
+        public void onClick(View view) {
+            onBookExamClickListener.onBookBtnClick(getAdapterPosition());
+        }
+    }
+
+    //3: Student Booked Exam
+    static class BookedExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //Attributes
+        private TextView ExamName;
+        private TextView ExamYear;
+        private TextView ExamDate;
+        private TextView ExamCFU;
+        private TextView ExamClassroom;
+        private TextView ExamBuilding;
+        private Button btnLeave;
+
+        private OnLeaveExamClickListener onLeaveExamClickListener;
+
+        public BookedExamViewHolder(@NonNull View itemView, OnLeaveExamClickListener onLeaveExamClickListener) {
+            super(itemView);
+            ExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
+            ExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
+            ExamDate = itemView.findViewById(R.id.txt_book_exam_date);
+            ExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
+            ExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
+            ExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
+            btnLeave = itemView.findViewById(R.id.btn_book_exam_book);
+
+            this.onLeaveExamClickListener = onLeaveExamClickListener;
+            btnLeave.setOnClickListener(this);
+        }
+
+        void setBookedExamDate(BookExamModel exam){
+            ExamName.setText(exam.getName());
+            ExamYear.setText(exam.getYear());
+            ExamDate.setText(exam.getDate());
+            ExamCFU.setText(exam.getCFU());
+            ExamClassroom.setText(exam.getClassroom());
+            ExamBuilding.setText(exam.getBuilding());
+            btnLeave.setText("LEAVE");
+        }
+
+        @Override
+        public void onClick(View view) {
+            onLeaveExamClickListener.onLeaveBtnClick(getAdapterPosition());
         }
     }
 }

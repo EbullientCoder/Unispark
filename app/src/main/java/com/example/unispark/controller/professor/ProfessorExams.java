@@ -29,7 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnExamBtnClickListener {
+public class ProfessorExams extends AppCompatActivity
+        implements ExamAdapter.OnViewExamClickListener{
     //Attributes
     //Menu
     ImageButton menuButton;
@@ -201,23 +202,23 @@ public class ProfessorExams extends AppCompatActivity implements ExamAdapter.OnE
     //Page: Upcoming ExamModel
     private void upcomingExams(){
         //Set Title
-        examsTitle.setText("UPCOMING EXAMS");
+        examsTitle.setText("ASSIGNED EXAMS");
 
         //Clear the ExamModel List
         examsItem.clear();
 
-        //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Reserve ExamModel | 3 = Professor UpcomingExamModel
+        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         List<BookExamModel> exams = professor.getExams();
         for (int i = 0; exams != null && i < exams.size(); i++){
-            examsItem.add(new ExamItem(3, exams.get(i)));
+            examsItem.add(new ExamItem(1, exams.get(i)));
         }
 
     }
 
     @Override
-    public void onBtnClick(int position) {
+    public void onViewBtnClick(int position) {
         Intent intent = new Intent(getApplicationContext(), ProfessorVerbalizeExams.class);
-        //intent.putExtra("Exam", examsItem.get(position).getObject());
+        intent.putExtra("Exam", (BookExamModel) examsItem.get(position).getObject());
         startActivity(intent);
     }
 }

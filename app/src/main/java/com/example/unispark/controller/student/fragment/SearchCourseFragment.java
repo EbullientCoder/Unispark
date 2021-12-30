@@ -17,7 +17,6 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
 import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
 
@@ -66,12 +65,15 @@ public class SearchCourseFragment extends DialogFragment
         //Get list of available courses to join for the student marked by faculty and that
         // are not in the student course list(Implement a method)
         List<CourseModel> courses = student.getCourses();
-        List<String> courseNames = new ArrayList<>(courses.size());
-        for (int i = 0; i < courses.size(); i++) courseNames.add(courses.get(i).getFullName());
+        if(courses == null) Toast.makeText(getContext(), "NON è ISCRITTO A NESSUN CORSO - GESTIRE TRAMITE ECCEZIONI", Toast.LENGTH_SHORT).show();
+        else{
+            List<String> courseNames = new ArrayList<>(courses.size());
+            for (int i = 0; i < courses.size(); i++) courseNames.add(courses.get(i).getFullName());
 
-        coursesItem = CourseDAO.selectAvailableCourses(student.getFaculty(), courseNames);
-        coursesAdapter = new CoursesAdapter(coursesItem, this, this, "JOIN");
-        rvCourses.setAdapter(coursesAdapter);
+            coursesItem = CourseDAO.selectAvailableCourses(student.getFaculty(), courseNames);
+            coursesAdapter = new CoursesAdapter(coursesItem, this, this, "JOIN");
+            rvCourses.setAdapter(coursesAdapter);
+        }
 
         return rootView;
     }
@@ -88,7 +90,7 @@ public class SearchCourseFragment extends DialogFragment
         List<CourseModel> joinedCourses;
 
         //Show Course's Homeworks
-        joinCourse(student.getId(), coursesItem.get(position).getFullName());
+        CourseDAO.joinCourse(student.getId(), coursesItem.get(position).getFullName());
 
         //Add Course to the Student's Joined Courses
         joinedCourses = student.getCourses();

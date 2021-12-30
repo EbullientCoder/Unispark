@@ -66,7 +66,7 @@ public class Schedule extends AppCompatActivity{
         txtDay = findViewById(R.id.txt_calendar_day);
         txtDay.setText(String.valueOf(offset.getDayOfWeek()));
         txtDate = findViewById(R.id.txt_calendar_date);
-        txtDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
+        txtDate.setText(offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth());
 
 
         //Bottom Navigation Menu

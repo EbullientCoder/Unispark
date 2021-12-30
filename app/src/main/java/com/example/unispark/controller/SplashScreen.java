@@ -41,8 +41,8 @@ public class SplashScreen extends AppCompatActivity {
 
 
         //Initializing Database
-        fillDB = new SQLiteFillSampleDB(getApplicationContext());
-        fillDB.initDatabase();
+        //fillDB = new SQLiteFillSampleDB(getApplicationContext());
+        //fillDB.initDatabase();
 
 
         new Handler().postDelayed(() -> {

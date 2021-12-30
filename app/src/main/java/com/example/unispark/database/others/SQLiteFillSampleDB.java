@@ -225,7 +225,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "http://www.mat.uniroma2.it/~digennar/",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica", null);
+                "Ingegneria Informatica", null);
 
         ProfessorModel carnevale = new ProfessorModel("carnevale",
                 getHash("password"),
@@ -235,7 +235,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "https://sites.google.com/view/caaa1920/home",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica", null);
+                "Ingegneria Informatica", null);
 
         //Add professors to DB and set their id correctly
         this.addProfessor(falessi);
@@ -574,7 +574,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         BookExamModel exam2 = new BookExamModel(2,
                 "CALCOLATORI ELETTRONICI",
                 "2021/2022",
-                "2022-02-18 09:00",
+                "2020-02-18 09:00",
                 "12.0",
                 "A7",
                 "ING.INF");
@@ -583,11 +583,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addExam(exam2);
 
         VerbalizedExamModel examGrade1 = new VerbalizedExamModel(0, exam1.getName(), exam2.getYear(), exam2.getDate(), exam2.getCFU(), "15");
-
         VerbalizedExamModel examGrade2 = new VerbalizedExamModel(0, exam2.getName(), exam1.getYear(), exam1.getDate(), exam1.getCFU(), "28");
-
-        this.bookExam(exam1, fanfarillo);
-
     }
 
 

@@ -61,7 +61,7 @@ public class ExamsDAO {
 
         int id = cursor.getInt(0);
         String name = cursor.getString(1);
-        Cursor cursorYear = QueryCourse.selectCourseName(db, courseName);
+        Cursor cursorYear = QueryCourse.selectYear(db, courseName);
         if (!cursorYear.moveToFirst()){} //throws exception
         String year = cursorYear.getString(0);
         String dateTime = cursor.getString(2);
@@ -78,7 +78,7 @@ public class ExamsDAO {
     }
 
     //Select student exams marked my courseName
-    public static List<BookExamModel> getExams(String courseName, boolean isProfessor)
+    private static List<BookExamModel> getExams(String courseName, boolean isProfessor)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 

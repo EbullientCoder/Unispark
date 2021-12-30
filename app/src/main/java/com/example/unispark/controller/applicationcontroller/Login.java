@@ -25,7 +25,7 @@ public class Login {
     }
 
     //Login Methods
-    public Intent studendLogin(UserModel user){
+    public Intent studentLogin(UserModel user){
         StudentModel student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
 
         if(student.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -38,7 +38,7 @@ public class Login {
     }
 
     public Intent professorLogin(UserModel user){
-        ProfessorModel professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getEmail());
+        ProfessorModel professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
 
         if(professor.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
         else{

@@ -72,8 +72,6 @@ public class ProfessorHome extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_home);
 
-        //Avvertenza Eccezioni
-        Toast.makeText(getApplicationContext(), "SE LA LISTA DEI COMPITI E' NULLA CRASHA", Toast.LENGTH_LONG).show();
         //Getting User Object
         extras = getIntent().getExtras();
         professor = (ProfessorModel) extras.getSerializable("UserObject");
@@ -164,15 +162,19 @@ public class ProfessorHome extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-        rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
+        if(uniCommunicationsItem == null) Toast.makeText(getApplicationContext(), "EMPTY COMMUNICATIONS LIST", Toast.LENGTH_SHORT).show();
+        else rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
 
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
         homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
 
-        homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
-        rvHomeworks.setAdapter(homeworkAdapter);
+        if(homeworksItem == null) Toast.makeText(getApplicationContext(), "EMPTY HOMEWORKS LIST", Toast.LENGTH_SHORT).show();
+        else{
+            homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
+            rvHomeworks.setAdapter(homeworkAdapter);
+        }
     }
 
 

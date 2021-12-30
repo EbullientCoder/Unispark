@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,7 +15,9 @@ import android.widget.TextView;
 import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
+import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
@@ -23,14 +26,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Exams extends AppCompatActivity {
+public class Exams extends AppCompatActivity
+implements ExamAdapter.OnBookExamClickListener,
+        ExamAdapter.OnLeaveExamClickListener {
 
     //Attributes
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //ExamModel
     RecyclerView rvExams;
-    List<ExamItem> examsExamItem;
+    ExamAdapter examAdapter;
+    List<ExamItem> examsItem;
     //Menu ExamModel Page
     ImageButton btnPageRight;
     ImageButton btnPageLeft;
@@ -71,7 +77,7 @@ public class Exams extends AppCompatActivity {
 
         //ExamModel List
         rvExams = findViewById(R.id.rv_exams);
-        examsExamItem = new ArrayList<>();
+        examsItem = new ArrayList<>();
         //ExamModel Page Title
         examsTitle = findViewById(R.id.txt_exams_title);
         //ExamModel Page Menu Buttons
@@ -104,14 +110,16 @@ public class Exams extends AppCompatActivity {
     //Page Menu
     private void pageMenu(){
         //Edit the page index
-        if(page > 2 || page < -2) page = 0;
+        if(page > 3 || page < -3) page = 0;
 
         //Select the Page
         if(page == 0) verbalizedExams();
-        if(page == 1 || page == -1) failedExams();
-        if(page == 2 || page == -2) reserveExams();
+        if(page == 1 || page == -3) failedExams();
+        if(page == 2 || page == -2) bookExams();
+        if(page == 3 || page == -1) bookedExams();
 
-        rvExams.setAdapter(new ExamAdapter(examsExamItem));
+        examAdapter = new ExamAdapter(examsItem, this, this);
+        rvExams.setAdapter(examAdapter);
     }
 
 
@@ -122,13 +130,12 @@ public class Exams extends AppCompatActivity {
         examsTitle.setText("VERBALIZED EXAMS");
 
         //Clear the ExamModel List
-        examsExamItem.clear();
+        examsItem.clear();
 
-        //Types: 0 = Verbalized ExamModel | 1 = Failed ExamModel | 2 = Accept ExamModel | 3 = Reserve ExamModel
-
+        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         List<VerbalizedExamModel> verbalizedExams = student.getvExams();
         for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
-            examsExamItem.add(new ExamItem(1, verbalizedExams.get(i)));
+            examsItem.add(new ExamItem(0, verbalizedExams.get(i)));
         }
     }
 
@@ -138,27 +145,78 @@ public class Exams extends AppCompatActivity {
         examsTitle.setText("FAILED EXAMS");
 
         //Clear the ExamModel List
-        examsExamItem.clear();
+        examsItem.clear();
 
+        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         List<VerbalizedExamModel> failedExams = student.getfExams();
         for (int i = 0; failedExams != null && i < failedExams.size(); i++){
-            examsExamItem.add(new ExamItem(1, failedExams.get(i)));
+            examsItem.add(new ExamItem(0, failedExams.get(i)));
         }
-
-
     }
 
-    //Page: Reserve ExamModel
-    private void reserveExams(){
+    //Page: Upcoming Exams
+    private void bookExams(){
         //Set Title
-        examsTitle.setText("BOOK EXAMS");
+        examsTitle.setText("BOOK UPCOMING EXAMS");
 
         //Clear the ExamModel List
-        examsExamItem.clear();
+        examsItem.clear();
 
-        List<BookExamModel> bookingExams = student.getbExams();
-        for (int i = 0; bookingExams != null && i < bookingExams.size(); i++){
-            examsExamItem.add(new ExamItem(2, bookingExams.get(i)));
+        List<String> courseName = new ArrayList<>();
+        List<CourseModel> courses = student.getCourses();
+        for(int i = 0; i < courses.size(); i++) courseName.add(courses.get(i).getFullName());
+
+        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
+        List<BookExamModel> bookExams = ExamsDAO.getExams(courseName, false);
+        for (int i = 0; bookExams != null && i < bookExams.size(); i++){
+            examsItem.add(new ExamItem(2, bookExams.get(i)));
         }
+    }
+
+    //Page: Booked Exams
+    private void bookedExams(){
+        //Set Title
+        examsTitle.setText("BOOKED EXAMS");
+
+        //Clear the ExamModel List
+        examsItem.clear();
+
+        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
+        List<BookExamModel> leaveExams = student.getBookedExams();
+        for (int i = 0; leaveExams != null && i < leaveExams.size(); i++){
+            examsItem.add(new ExamItem(3, leaveExams.get(i)));
+        }
+    }
+
+    @Override
+    public void onBookBtnClick(int position) {
+        List<BookExamModel> exams = student.getBookedExams();
+
+        //Make the Connection inside the DB
+        ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());
+
+        //Adding the Booked Exam into the Student's Exams List
+        exams.add((BookExamModel) examsItem.get(position).getObject());
+        student.setBookedExams(exams);
+
+        //Removing the Booked Exam from the List
+        examsItem.remove(position);
+        examAdapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onLeaveBtnClick(int position) {
+        List<BookExamModel> exams = student.getBookedExams();
+
+        //Remove the Connection inside the DB
+        ExamsDAO.removeBookedExam(exams.get(position).getId(), student.getId());
+
+        //Remove the Booked Exam from Student's Attributes
+        exams.remove(position);
+        student.setBookedExams(exams);
+
+        //Removing the Booked Exam from the List
+        examsItem.remove(position);
+        examAdapter.notifyItemRemoved(position);
     }
 }

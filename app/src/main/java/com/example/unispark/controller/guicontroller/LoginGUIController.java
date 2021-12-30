@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.applicationcontroller.Login;
-import com.example.unispark.controller.professor.ProfessorHome;
-import com.example.unispark.controller.student.Home;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.ProfessorModel;
@@ -87,7 +85,7 @@ public class LoginGUIController extends AppCompatActivity {
 
             switch (userSelection) {
                 case "STUDENT":
-                    intent = loginAppController.studendLogin(user);
+                    intent = loginAppController.studentLogin(user);
                     if(intent != null) startActivity(intent);
 
                     break;
@@ -104,7 +102,6 @@ public class LoginGUIController extends AppCompatActivity {
 
                     break;
             }
-
         }
         else Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
     }

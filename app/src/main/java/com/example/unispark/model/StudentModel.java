@@ -16,8 +16,8 @@ public class StudentModel extends UserModel{
     private String academicYear;
     private String id;
     private List<CourseModel> courses;
-    private List<BookExamModel> bExams;
     private List<BookExamModel> upcomingExams;
+    private List<BookExamModel> bookedExams;
     private List<VerbalizedExamModel> vExams;
     private List<VerbalizedExamModel> fExams;
 
@@ -33,8 +33,8 @@ public class StudentModel extends UserModel{
                         String academicYear,
                         String id,
                         List<CourseModel> courses,
-                        List<BookExamModel> bExams,
                         List<BookExamModel> upcomingExams,
+                        List<BookExamModel> bookedExams,
                         List<VerbalizedExamModel> vExams,
                         List<VerbalizedExamModel> fExams
     ) {
@@ -46,8 +46,8 @@ public class StudentModel extends UserModel{
         this.academicYear = academicYear;
         this.id = id;
         this.courses = courses;
-        this.bExams = bExams;
         this.upcomingExams = upcomingExams;
+        this.bookedExams = bookedExams;
         this.vExams = vExams;
         this.fExams = fExams;
 
@@ -82,12 +82,12 @@ public class StudentModel extends UserModel{
         return courses;
     }
 
-    public List<BookExamModel> getbExams() {
-        return bExams;
-    }
-
     public List<BookExamModel> getUpcomingExams() {
         return upcomingExams;
+    }
+
+    public List<BookExamModel> getBookedExams() {
+        return bookedExams;
     }
 
     public List<VerbalizedExamModel> getvExams() {
@@ -127,12 +127,12 @@ public class StudentModel extends UserModel{
         this.courses = courses;
     }
 
-    public void setbExams(List<BookExamModel> bExams) {
-        this.bExams = bExams;
-    }
-
     public void setUpcomingExams(List<BookExamModel> upcomingExams) {
         this.upcomingExams = upcomingExams;
+    }
+
+    public void setBookedExams(List<BookExamModel> bookedExams) {
+        this.bookedExams = bookedExams;
     }
 
     public void setvExams(List<VerbalizedExamModel> vExams) {

@@ -15,17 +15,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.exams.ExamModel;
+import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.OffsetDateTime;
@@ -50,26 +48,20 @@ public class AddExamFragment extends DialogFragment{
     DatePickerDialog.OnDateSetListener dateListener;
     Calendar calendar;
     String date;
-    //AA
-    TextInputLayout txtAA;
-    String aa;
-    //CFU
-    TextInputLayout txtCFU;
-    String cfu;
+    //Hour
+    TextInputLayout txtHour;
+    String hour;
     //Building
     TextInputLayout txtBuilding;
     String building;
     //Classroom
     TextInputLayout txtClassroom;
     String classroom;
-    //Instructions
-    TextInputLayout txtInstructions;
-    String instructions;
     //Model
     ProfessorModel professor;
     List<CourseModel> coursesList;
     //Exam Model
-    ExamModel exam;
+    BookExamModel exam;
 
     int i;
 
@@ -147,7 +139,7 @@ public class AddExamFragment extends DialogFragment{
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
-                date = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
+                date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day) + " ";
 
                 txtDisplayDate.setText(date);
             }
@@ -157,40 +149,38 @@ public class AddExamFragment extends DialogFragment{
 
         //Creating the Exam & Adding it into the Database
         //AA
-        txtAA = rootView.findViewById(R.id.txt_add_exam_AA);
-        //CFU
-        txtCFU = rootView.findViewById(R.id.txt_add_exam_cfu);
+        txtHour = rootView.findViewById(R.id.txt_add_exam_hour);
         //Building
         txtBuilding = rootView.findViewById(R.id.txt_add_exam_building);
         //Classroom
         txtClassroom = rootView.findViewById(R.id.txt_add_exam_classroom);
-        //Instructions
-        txtInstructions = rootView.findViewById(R.id.txt_add_exam_instructions);
 
         //Add Exam
         btnAddExam = rootView.findViewById(R.id.btn_add_exam_add);
         btnAddExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                aa = txtAA.getEditText().getText().toString();
-                cfu = txtCFU.getEditText().getText().toString();
+                List<BookExamModel> exams = professor.getExams();
+
+                hour = txtHour.getEditText().getText().toString();
                 building = txtBuilding.getEditText().getText().toString();
                 classroom = txtClassroom.getEditText().getText().toString();
-                instructions = txtInstructions.getEditText().getText().toString();
 
                 //Exam Object
-                //exam = new ExamModel(2, "");
+                exam = new BookExamModel(10,
+                        coursesList.get(i).getFullName(),
+                        coursesList.get(i).getCourseYear(),
+                        date + hour,
+                        coursesList.get(i).getCfu(),
+                        classroom,
+                        building);
 
-                Toast.makeText(getContext(),
-                        "Exam:\n" +
-                        "AA: " + aa + "\n" +
-                        "CFU: " + cfu + "\n" +
-                        "Building: " + building + "\n" +
-                        "Classroom: " + classroom + "\n" +
-                        "Instructions: " + instructions, Toast.LENGTH_LONG).show();
 
                 //Adding it into the DB
-                //ExamsDAO.addExam(exam);
+                ExamsDAO.addExam(exam);
+
+                exams.add(exam);
+                professor.setExams(exams);
 
                 dismiss();
             }
