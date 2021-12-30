@@ -275,10 +275,12 @@ public class ExamsDAO {
     //Remove bookingExam from DB
     public static boolean removeExam(int examID)
     {
+        int a;
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         int delete = db.delete("exams","id=" + examID,null);
         if (delete > 0) return true;
         return false;
+
     }
 
 
