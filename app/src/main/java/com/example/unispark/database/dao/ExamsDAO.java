@@ -89,7 +89,7 @@ public class ExamsDAO {
         else{
             exams = ExamsFacade.getInstance().getStudentExams(id);
         }
-
+        int a;
         return exams;
     }
 
