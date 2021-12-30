@@ -129,6 +129,7 @@ public class Profile extends AppCompatActivity
             //Notify changed dimension to the Adapter
             coursesAdapter.notifyItemRemoved(position);
         }
+        else Toast.makeText(getApplicationContext(), "Cannot leave course: EXAM BOOKED", Toast.LENGTH_SHORT).show();
 
     }
 }
