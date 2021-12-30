@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#272b2f"
-    android:paddingEnd="15dp"
+    android:background="#212529"
     tools:context=".controller.professor.ProfessorVerbalizeExams">
 
     <!-- Header -->
@@ -13,8 +12,6 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:paddingHorizontal="15dp"
-        android:background="#272b2f"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,7 +44,7 @@
             android:fontFamily="@font/nunito_bold"
             android:text="SHORT NAME"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +55,6 @@
             android:id="@+id/txt_verbalize_exam_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/nunito"
             android:text="31-12-2021"
             android:textColor="#FFFFFF"
@@ -74,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingHorizontal="15dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
