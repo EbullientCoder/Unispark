@@ -557,20 +557,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addUniversityCommunication(uCom4);
         this.addUniversityCommunication(uCom5);
         this.addUniversityCommunication(uCom6);
-
-
-        //Add exams
-        BookExamModel exam1 = new BookExamModel(1,
-                "CALCOLATORI ELETTRONICI",
-                "2021/2022",
-                "2022-01-21 10:00",
-                "12.0",
-                "A4",
-                "ING.INF");
-
-        this.addExam(exam1);
-        this.bookExam(exam1, fanfarillo);
-        this.bookExam(exam1, lapiana);
     }
 
 
