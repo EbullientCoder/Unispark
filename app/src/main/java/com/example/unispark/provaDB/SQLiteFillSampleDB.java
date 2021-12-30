@@ -159,7 +159,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         db.execSQL(createTableStatement);
 
         //Relation Student-Booked exams table
-        createTableStatement = "CREATE TABLE  " + STUDENT_EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + EXAM_ID + " INTEGER UNIQUE);";
+        createTableStatement = "CREATE TABLE  " + STUDENT_EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + EXAM_ID + " INTEGER);";
 
         db.execSQL(createTableStatement);
     }
@@ -567,23 +567,10 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "12.0",
                 "A4",
                 "ING.INF");
-        BookExamModel exam2 = new BookExamModel(2,
-                "CALCOLATORI ELETTRONICI",
-                "2021/2022",
-                "2022-02-18 09:00",
-                "12.0",
-                "A7",
-                "ING.INF");
 
         this.addExam(exam1);
-        this.addExam(exam2);
-
-        VerbalizedExamModel examGrade1 = new VerbalizedExamModel(0, exam1.getName(), exam2.getYear(), exam2.getDate(), exam2.getCFU(), "15");
-
-        VerbalizedExamModel examGrade2 = new VerbalizedExamModel(0, exam2.getName(), exam1.getYear(), exam1.getDate(), exam1.getCFU(), "28");
-
         this.bookExam(exam1, fanfarillo);
-
+        this.bookExam(exam1, lapiana);
     }
 
 
