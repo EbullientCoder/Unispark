@@ -115,17 +115,20 @@ public class Profile extends AppCompatActivity
     public void onButtonClick(int position) {
         List<CourseModel> joinedCourses = student.getCourses();
 
-        //Leave Course
-        Toast.makeText(getApplicationContext(), coursesItem.get(position).getFullName() + ": Leaved", Toast.LENGTH_SHORT).show();
-
         //Remove Course Joined from DB
-        CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
+        boolean leaveCourse = CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
 
-        //Remove Course from Student's joined Courses
-        joinedCourses.remove(position);
-        student.setCourses(joinedCourses);
+        if(leaveCourse){
+            //Leave Course
+            Toast.makeText(getApplicationContext(), coursesItem.get(position).getFullName() + ": Leaved", Toast.LENGTH_SHORT).show();
 
-        //Notify changed dimension to the Adapter
-        coursesAdapter.notifyItemRemoved(position);
+            //Remove Course from Student's joined Courses
+            joinedCourses.remove(position);
+            student.setCourses(joinedCourses);
+
+            //Notify changed dimension to the Adapter
+            coursesAdapter.notifyItemRemoved(position);
+        }
+
     }
 }
