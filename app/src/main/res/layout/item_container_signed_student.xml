@@ -44,10 +44,9 @@
         <!-- Grade Field -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_signed_student_grade"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:hint="Grade"
             android:textColorHint="#FFFFFF"
             app:boxBackgroundColor="#1A1C1E"
@@ -57,6 +56,7 @@
             app:boxStrokeWidthFocused="0dp"
             app:endIconMode="clear_text"
             app:endIconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_signed_student_fullname"
             app:startIconTint="@color/white">
