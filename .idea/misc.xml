@@ -6,12 +6,14 @@
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_details_prof_communication.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_generic_login.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_professor_exams.xml" value="0.1598731884057971" />
-        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_professor_verbalize_exams.xml" value="0.1598731884057971" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_professor_home.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_professor_verbalize_exams.xml" value="0.46647230320699706" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/fragment_add_communication.xml" value="0.4" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/fragment_add_exam.xml" value="0.4" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/fragment_add_homework.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_book_exams.xml" value="0.4" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_course.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_signed_studentk.xml" value="0.536" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_upcoming_exams.xml" value="0.22554347826086957" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/item_container_user.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/layout/activity_details_homework.xml" value="0.24682971014492755" />
