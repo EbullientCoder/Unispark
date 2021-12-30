@@ -49,7 +49,7 @@ public class CourseDAO {
     }
 
     public static boolean leaveCourse(String studentID, String courseName){
-        SQLiteDatabase db = SQLiteConnection.getWritableDB();
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursorExam = QueryExams.selectBookedExams(db, studentID);
         if (cursorExam.moveToFirst()){
             int examId;
@@ -60,12 +60,13 @@ public class CourseDAO {
                 cursorExamName = QueryExams.selectExamId(db, examId);
                 if (!cursorExamName.moveToFirst()){}//throws exception
                 examName = cursorExamName.getString(1);
-                if(examName == courseName){
+                if(examName.equals(courseName)){
                     return false;
                 }
             } while (cursorExam.moveToNext());
         }
-
+        db.close();
+        db = SQLiteConnection.getWritableDB();
         int delete = db.delete("studentscourses","studentID='" + studentID + "' and coursename='" + courseName + "'",null);
         if (delete > 0) return true;
         return false;
