@@ -1,11 +1,11 @@
 package com.example.unispark.bean;
 
-public class StudentBean {
+public class BeanStudentSignedToExam {
 
     String id;
     String fullName;
 
-    public StudentBean(String id, String fullName) {
+    public BeanStudentSignedToExam(String id, String fullName) {
         this.id = id;
         this.fullName = fullName;
     }

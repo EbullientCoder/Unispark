@@ -11,12 +11,8 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.SignedStudentsAdapter;
-import com.example.unispark.adapter.exams.ExamItem;
-import com.example.unispark.bean.StudentBean;
+import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.BookExamModel;
 
 import java.util.List;
@@ -36,7 +32,7 @@ public class ProfessorVerbalizeExams extends AppCompatActivity {
 
     //ExamModel
     RecyclerView rvStudents;
-    List<StudentBean> studentsItem;
+    List<BeanStudentSignedToExam> studentsItem;
     //Model
     BookExamModel exam;
 

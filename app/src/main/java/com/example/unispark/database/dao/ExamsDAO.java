@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.example.unispark.bean.StudentBean;
+import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
@@ -232,16 +232,16 @@ public class ExamsDAO {
     }
 
     //Get students that booked an exam
-    public static List<StudentBean> getStudentsBookedExam(int examID)
+    public static List<BeanStudentSignedToExam> getStudentsBookedExam(int examID)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
         Cursor cursor = QueryExams.selectStudents(db, examID);
         if (!cursor.moveToFirst()) return null;
 
-        List<StudentBean> studentsList = new ArrayList<>();
-        //StudentBean
-        StudentBean student;
+        List<BeanStudentSignedToExam> studentsList = new ArrayList<>();
+        //BeanStudentSignedToExam
+        BeanStudentSignedToExam student;
         String id;
         String fullName;
         Cursor cursorName;
@@ -252,7 +252,7 @@ public class ExamsDAO {
             fullName = cursorName.getString(0) + " " + cursorName.getString(1);
 
             //Create Student and add it to the list
-            student = new StudentBean(id, fullName);
+            student = new BeanStudentSignedToExam(id, fullName);
             studentsList.add(student);
             cursorName.close();
         } while(cursor.moveToNext());
