@@ -32,12 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/nunito"
             android:text="MATRICOLA"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txt_signed_student_fullname"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,8 +45,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_signed_student_grade"
             android:layout_width="200dp"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:hint="Grade"
             android:textColorHint="#FFFFFF"
             app:boxBackgroundColor="#1A1C1E"
@@ -57,7 +57,6 @@
             app:boxStrokeWidthFocused="0dp"
             app:endIconMode="clear_text"
             app:endIconTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_signed_student_fullname"
             app:startIconTint="@color/white">
