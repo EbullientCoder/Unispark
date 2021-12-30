@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.UserModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -71,7 +71,7 @@ public class LoginGUIController extends AppCompatActivity {
 
     //LoginGUIController Method
     void loginMethod(){
-        UserModel user = new UserModel();
+        BeanUser user;
         Login loginAppController = new Login(getApplicationContext());
         Intent intent;
 
@@ -80,8 +80,7 @@ public class LoginGUIController extends AppCompatActivity {
 
 
         if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
-            user.setEmail(email);
-            user.setPassword(password);
+            user = new BeanUser(email, password);
 
             switch (userSelection) {
                 case "STUDENT":

@@ -90,11 +90,11 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         void setProfessorDate(ProfessorModel professor){
-            imgProfessor.setImageResource(professor.getImage());
+            imgProfessor.setImageResource(professor.getProfilePicture());
             txtProfFirstname.setText(professor.getFirstName());
             txtProfLastname.setText(professor.getLastName());
 
-            imgProfessorID = professor.getImage();
+            imgProfessorID = professor.getProfilePicture();
             firstName = professor.getFirstName();
             lastName = professor.getLastName();
             website = professor.getWebsite();

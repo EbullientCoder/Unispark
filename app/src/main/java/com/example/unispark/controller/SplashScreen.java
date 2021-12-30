@@ -12,11 +12,11 @@ import android.view.WindowManager;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.LoginGUIController;
-import com.example.unispark.database.others.SQLiteFillSampleDB;
+import com.example.unispark.provaDB.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
     //Database
-    SQLiteFillSampleDB fillDB;
+    //SQLiteFillSampleDB fillDB;
     //Timeout
     int timeout = 2000; //2000
 

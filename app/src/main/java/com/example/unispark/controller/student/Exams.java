@@ -133,7 +133,7 @@ implements ExamAdapter.OnBookExamClickListener,
         examsItem.clear();
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<VerbalizedExamModel> verbalizedExams = student.getvExams();
+        List<VerbalizedExamModel> verbalizedExams = student.getVerbalizedExams();
         for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
             examsItem.add(new ExamItem(0, verbalizedExams.get(i)));
         }
@@ -148,7 +148,7 @@ implements ExamAdapter.OnBookExamClickListener,
         examsItem.clear();
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<VerbalizedExamModel> failedExams = student.getfExams();
+        List<VerbalizedExamModel> failedExams = student.getFailedExams();
         for (int i = 0; failedExams != null && i < failedExams.size(); i++){
             examsItem.add(new ExamItem(0, failedExams.get(i)));
         }
@@ -162,12 +162,10 @@ implements ExamAdapter.OnBookExamClickListener,
         //Clear the ExamModel List
         examsItem.clear();
 
-        List<String> courseName = new ArrayList<>();
-        List<CourseModel> courses = student.getCourses();
-        for(int i = 0; i < courses.size(); i++) courseName.add(courses.get(i).getFullName());
+
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<BookExamModel> bookExams = ExamsDAO.getExams(courseName, false);
+        List<BookExamModel> bookExams = ExamsDAO.getExams(student.getId(), false);
         for (int i = 0; bookExams != null && i < bookExams.size(); i++){
             examsItem.add(new ExamItem(2, bookExams.get(i)));
         }
@@ -191,6 +189,7 @@ implements ExamAdapter.OnBookExamClickListener,
     @Override
     public void onBookBtnClick(int position) {
         List<BookExamModel> exams = student.getBookedExams();
+        if (exams == null) exams = new ArrayList<>();
 
         //Make the Connection inside the DB
         ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());

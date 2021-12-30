@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.database.dao.ProfessorDAO;
@@ -25,7 +26,7 @@ public class Login {
     }
 
     //Login Methods
-    public Intent studentLogin(UserModel user){
+    public Intent studentLogin(BeanUser user){
         StudentModel student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
 
         if(student.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -37,7 +38,7 @@ public class Login {
         return intent;
     }
 
-    public Intent professorLogin(UserModel user){
+    public Intent professorLogin(BeanUser user){
         ProfessorModel professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
 
         if(professor.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -49,7 +50,7 @@ public class Login {
         return intent;
     }
 
-    public Intent universityLogin(UserModel user){
+    public Intent universityLogin(BeanUser user){
         /*UniversityModel university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
 
         if(university.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();

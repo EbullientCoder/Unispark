@@ -115,7 +115,7 @@ public class AddCommunicationFragment extends DialogFragment{
 
                 //Communication Object
                 communication = new ProfessorCommunicationModel(
-                        professor.getImage(),
+                        professor.getProfilePicture(),
                         coursesList.get(i).getShortName(),
                         coursesList.get(i).getFullName(),
                         professor.getFirstName() + " " + professor.getLastName(),

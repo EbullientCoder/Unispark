@@ -12,9 +12,6 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".controller.professor.ProfessorVerbalizeExams"
-            android:exported="true" />
-        <activity
             android:name=".controller.professor.ProfessorExams"
             android:exported="true" />
         <activity
@@ -22,6 +19,9 @@
             android:exported="true" />
         <activity
             android:name=".controller.professor.ProfessorProfile"
+            android:exported="true" />
+        <activity
+            android:name=".controller.professor.ProfessorVerbalizeExams"
             android:exported="true" />
         <activity
             android:name=".controller.details.DetailsProfessor"

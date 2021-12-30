@@ -88,7 +88,7 @@ public class Profile extends AppCompatActivity
 
         //Profile Picture
         imgProfile = findViewById(R.id.img_user_image);
-        imgProfile.setImageResource(student.getImageID());
+        imgProfile.setImageResource(student.getProfilePicture());
         //Name
         txtFullName = findViewById(R.id.txt_user_fullname);
         txtFullName.setText(student.getFirstName() + " " + student.getLastName());

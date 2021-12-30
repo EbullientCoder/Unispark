@@ -155,7 +155,7 @@ public class ProfessorProfile extends AppCompatActivity
 
 
         //Get Parameters
-        imageID = professor.getImage();
+        imageID = professor.getProfilePicture();
         firstname = professor.getFirstName();
         lastname = professor.getLastName();
         website = professor.getWebsite();

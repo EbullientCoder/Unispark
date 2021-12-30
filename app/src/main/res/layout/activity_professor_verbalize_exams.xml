@@ -4,6 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212529"
     tools:context=".controller.professor.ProfessorVerbalizeExams">
+
+    <!-- Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Go Back -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/body_homeworks_button"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageButton
+                android:id="@+id/btn_verbalize_exam_goback"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#0000"
+                android:src="@drawable/icon_goback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <!-- Exam Subject ShortName -->
+        <TextView
+            android:id="@+id/txt_verbalize_exam_shortname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="SHORT NAME"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Exam Date -->
+        <TextView
+            android:id="@+id/txt_verbalize_exam_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:text="31-12-2021"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_verbalize_exam_shortname" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Students -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="15dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/txt_verbalize_exam_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="SIGNED STUDENTS"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Signed Students List -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_signedStudents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:fadeScrollbars="true"
+            android:orientation="vertical"
+            android:scrollbarSize="4dp"
+            android:scrollbarThumbVertical="@drawable/icon_scrollbar"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <!-- android:fadeScrollbars="false" -->
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
