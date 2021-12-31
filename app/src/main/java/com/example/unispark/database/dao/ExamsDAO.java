@@ -117,6 +117,18 @@ public class ExamsDAO {
 
     public static boolean bookExam(BookExamModel exam, String studentID){
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
+
+        Cursor cursor = QueryExams.selectExamGrades(db, studentID);
+        if(cursor.moveToFirst()){
+            String takenExam;
+            String result;
+            do {
+                takenExam = cursor.getString(1);
+                result = cursor.getString(2);
+                if (exam.getName().equals(takenExam) && Double.valueOf(result) >= 18) return false;
+
+            } while (cursor.moveToNext());
+        }
         ContentValues cv = new ContentValues();
 
         cv.put("studentID", studentID);

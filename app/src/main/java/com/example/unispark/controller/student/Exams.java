@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.unispark.adapter.exams.ExamItem;
@@ -192,15 +193,17 @@ implements ExamAdapter.OnBookExamClickListener,
         if (exams == null) exams = new ArrayList<>();
 
         //Make the Connection inside the DB
-        ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());
+        boolean isBooked = ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());
+        if (isBooked){
+            //Adding the Booked Exam into the Student's Exams List
+            exams.add((BookExamModel) examsItem.get(position).getObject());
+            student.setBookedExams(exams);
 
-        //Adding the Booked Exam into the Student's Exams List
-        exams.add((BookExamModel) examsItem.get(position).getObject());
-        student.setBookedExams(exams);
-
-        //Removing the Booked Exam from the List
-        examsItem.remove(position);
-        examAdapter.notifyItemRemoved(position);
+            //Removing the Booked Exam from the List
+            examsItem.remove(position);
+            examAdapter.notifyItemRemoved(position);
+        }
+        else Toast.makeText(getApplicationContext(), "Cannot Book: Exam already verbalized", Toast.LENGTH_SHORT).show();
     }
 
     @Override

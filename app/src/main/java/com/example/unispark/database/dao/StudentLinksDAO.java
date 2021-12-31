@@ -20,7 +20,6 @@ public class StudentLinksDAO {
     public static boolean addStudentLink(LinkModel studentLink, String studentId){
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
 
-
         Cursor cursor = QueryStudentLinks.selectStudentLinks(db, studentId);
         if (cursor.moveToFirst()) {
             String linkAddress;
