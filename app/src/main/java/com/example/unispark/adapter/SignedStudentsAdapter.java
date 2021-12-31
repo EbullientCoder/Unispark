@@ -3,13 +3,17 @@ package com.example.unispark.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.BeanStudentSignedToExam;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -17,11 +21,19 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Attributes
     List<BeanStudentSignedToExam> items;
+    OnAddBtnClickListener onAddBtnClickListener;
+
+
+    //Click SignedStudent Add Button Interface
+    public interface OnAddBtnClickListener {
+        void onAddBtnClick(int position, String grade);
+    }
 
 
     //Methods
-    public SignedStudentsAdapter(List<BeanStudentSignedToExam> items){
+    public SignedStudentsAdapter(List<BeanStudentSignedToExam> items, OnAddBtnClickListener onAddBtnClickListener){
         this.items = items;
+        this.onAddBtnClickListener = onAddBtnClickListener;
     }
 
     @NonNull
@@ -32,7 +44,7 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         R.layout.item_container_signed_student,
                         parent,
                         false
-                )
+                ), onAddBtnClickListener
         );
     }
 
@@ -49,23 +61,39 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
 
-    static class StudentViewHolder extends RecyclerView.ViewHolder{
+    static class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         private TextView fullname;
         private TextView id;
+        private EditText txtGrade;
+        private String result;
+        private Button btnAddGrade;
+
+        private OnAddBtnClickListener onAddBtnClickListener;
 
         //Methods
         //Constructor
-        StudentViewHolder(@NonNull View itemView){
+        StudentViewHolder(@NonNull View itemView, OnAddBtnClickListener onAddBtnClickListener){
             super(itemView);
 
             fullname = itemView.findViewById(R.id.txt_signed_student_fullname);
             id = itemView.findViewById(R.id.txt_signed_student_id);
+            txtGrade = itemView.findViewById(R.id.txt_verbalize_exam_grade);
+            btnAddGrade = itemView.findViewById(R.id.btn_signed_student_add);
+
+            this.onAddBtnClickListener = onAddBtnClickListener;
+            btnAddGrade.setOnClickListener(this);
         }
 
         void setStudentDate(BeanStudentSignedToExam student){
             fullname.setText(student.getFullName());
-            id.setText(student.getId());
+            id.setText(student.getId() + ": ");
+        }
+
+        @Override
+        public void onClick(View view) {
+            result = String.valueOf(txtGrade.getText());
+            onAddBtnClickListener.onAddBtnClick(getAdapterPosition(), result);
         }
     }
 }

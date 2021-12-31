@@ -221,7 +221,7 @@ public class ExamsDAO {
             String result = cursor.getString(2);
             double numberResult = Double.valueOf(result);
             if (numberResult < 18){
-                gradesList.add(examGrade(cursor, "Retired"));
+                gradesList.add(examGrade(cursor, result));
             }
         } while(cursor.moveToNext());
 

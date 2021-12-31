@@ -2,8 +2,9 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="75dp"
     android:backgroundTint="#272b2f"
     app:cardCornerRadius="5dp"
     android:layout_marginBottom="10dp">
@@ -14,62 +15,60 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txt_signed_student_fullname"
+            android:id="@+id/txt_signed_student_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="FULLNAME"
+            android:text="MATRICOLA: "
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_signed_student_id"
+            android:id="@+id/txt_signed_student_fullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"
             android:fontFamily="@font/nunito"
-            android:text="MATRICOLA"
+            android:text="FULLNAME"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/txt_signed_student_fullname"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_signed_student_id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_signed_student_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/nunito"
+            android:text="Grade: "
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <!-- Grade Field -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_signed_student_grade"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:hint="Grade"
-            android:textColorHint="#FFFFFF"
-            app:boxBackgroundColor="#1A1C1E"
-            app:boxCornerRadiusBottomEnd="5dp"
-            app:boxCornerRadiusBottomStart="5dp"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/white"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_verbalize_exam_grade"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/nunito"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_signed_student_fullname"
-            app:startIconTint="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/nunito"
-                android:inputType="text"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+            app:layout_constraintStart_toEndOf="@+id/txt_signed_student_grade"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <LinearLayout

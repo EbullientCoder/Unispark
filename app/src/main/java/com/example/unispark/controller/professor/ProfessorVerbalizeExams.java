@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +16,12 @@ import com.example.unispark.adapter.SignedStudentsAdapter;
 import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-public class ProfessorVerbalizeExams extends AppCompatActivity {
+public class ProfessorVerbalizeExams extends AppCompatActivity implements SignedStudentsAdapter.OnAddBtnClickListener {
 
     //Attributes
     //Button: GoBack
@@ -28,10 +32,9 @@ public class ProfessorVerbalizeExams extends AppCompatActivity {
     TextView txtCourseName;
     //Exam Date
     TextView txtCourseDate;
-    //Exam Grade
-
     //ExamModel
     RecyclerView rvStudents;
+    SignedStudentsAdapter studentsAdapter;
     List<BeanStudentSignedToExam> studentsItem;
     //Model
     BookExamModel exam;
@@ -71,6 +74,24 @@ public class ProfessorVerbalizeExams extends AppCompatActivity {
         studentsItem = ExamsDAO.getStudentsBookedExam(exam.getId());
 
         if(studentsItem == null) Toast.makeText(getApplicationContext(), "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
-        else rvStudents.setAdapter(new SignedStudentsAdapter(studentsItem));
+        else{
+            studentsAdapter = new SignedStudentsAdapter(studentsItem, this);
+            rvStudents.setAdapter(studentsAdapter);
+        }
+    }
+
+    @Override
+    public void onAddBtnClick(int position, String result) {
+        //Create new Verbalized Exam
+        VerbalizedExamModel vExam = new VerbalizedExamModel(exam.getId(), exam.getName(), exam.getDate(), exam.getDate(), exam.getCFU(), result);
+
+        //Add Verbalized Exam to the DB
+        ExamsDAO.addExamGrade(vExam, studentsItem.get(position).getId());
+
+        //Remove Verbalized Exam
+        studentsItem.remove(position);
+        studentsAdapter.notifyItemRemoved(position);
+
+        if(result != null) Toast.makeText(getApplicationContext(), "Exam Verbalized", Toast.LENGTH_SHORT).show();
     }
 }

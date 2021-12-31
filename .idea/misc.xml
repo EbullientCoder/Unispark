@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_book_exams.xml" value="0.25" />
-        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_signed_student.xml" value="0.25" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_homework.xml" value="0.72" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_signed_student.xml" value="0.536" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_details_prof_communication.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_generic_login.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/AndroidStudio/app/src/main/res/layout/activity_professor_exams.xml" value="0.1598731884057971" />
@@ -38,7 +39,6 @@
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/menu/professor_bottom_menu.xml" value="0.25" />
         <entry key="..\:/Users/andre/Desktop/uniSpark/app/src/main/res/menu/student_bottom_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_professor_verbalize_exams.xml" value="0.12082066869300911" />
-        <entry key="app/src/main/res/layout/item_container_signed_student.xml" value="0.24365942028985507" />
       </map>
     </option>
   </component>
