@@ -14,6 +14,7 @@ public class QueryProfessor {
     public static final String SHORTNAME = "shortname";
     public static final String FIRSTNAME = "firstname";
     public static final String LASTNAME = "lastname";
+    public static final String FACULTY = "faculty";
 
 
     private QueryProfessor(){}
@@ -38,6 +39,14 @@ public class QueryProfessor {
     public static Cursor getProfessorName(SQLiteDatabase db, int professorId) //throws exception
     {
         String queryString = "SELECT " + FIRSTNAME + ", " + LASTNAME + " FROM " + PROFESSORS_TABLE + " WHERE " + PROF_ID + " = " + professorId + ";";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
+
+    //Look for professor marked by faculty
+    public static Cursor selectProfessorFaculty(SQLiteDatabase db, String faculty) //throws exception
+    {
+        String queryString = "SELECT * FROM " + PROFESSORS_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }

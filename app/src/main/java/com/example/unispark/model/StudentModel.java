@@ -21,7 +21,9 @@ public class StudentModel extends UserModel{
 
     //Methods
     //Constructor
-    public StudentModel(String firstName, String lastName, String email, int profilePicture, String id, String faculty, String academicYear, List<CourseModel> courses, List<BookExamModel> bookedExams, List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams) {
+    public StudentModel(String firstName, String lastName, String email, int profilePicture, String id, String faculty,
+                        String academicYear, List<CourseModel> courses, List<BookExamModel> bookedExams,
+                        List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,6 +74,8 @@ public class StudentModel extends UserModel{
     }
 
 
+
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -108,6 +112,7 @@ public class StudentModel extends UserModel{
     public void setFailedExams(List<VerbalizedExamModel> failedExams) {
         this.failedExams = failedExams;
     }
+
 }
 
 

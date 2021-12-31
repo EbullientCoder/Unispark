@@ -2,7 +2,9 @@ package com.example.unispark.facade;
 
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.database.dao.StudentLinksDAO;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.LinkModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;

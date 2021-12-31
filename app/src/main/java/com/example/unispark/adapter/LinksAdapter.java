@@ -18,7 +18,7 @@ import java.util.List;
 
 public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //Attributes
-    private List<ExamItem> examItems;
+    private List<LinkModel> examItems;
     private OnLinkClickListener onLinkClickListener;
     private OnDelBtnClickListener onDelBtnClickListener;
 
@@ -33,7 +33,7 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     //Methods
-    public LinksAdapter(List<ExamItem> examItems, OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
+    public LinksAdapter(List<LinkModel> examItems, OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
         this.examItems = examItems;
         this.onLinkClickListener = onLinkClickListener;
         this.onDelBtnClickListener = onDelBtnClickListener;
@@ -54,18 +54,13 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        LinkModel link = (LinkModel) examItems.get(position).getObject();
+        LinkModel link = (LinkModel) examItems.get(position);
         ((LinkViewHolder) holder).setLinkDate(link);
     }
 
     @Override
     public int getItemCount() {
         return examItems.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return examItems.get(position).getType();
     }
 
 

@@ -6,19 +6,16 @@ import java.util.List;
 public class UniversityModel extends UserModel {
     //Attributes
     private String name;
+    private int image;
     private String address;
-    private List<ProfessorModel> professors;
-    private List<StudentModel> students;
-
 
     //Methods
     //Constructor
-    public UniversityModel(String email, String password, String name, String address, List<ProfessorModel> professors, List<StudentModel> students) {
+    public UniversityModel(String email, String password, int image, String name, String address) {
         super(email, password);
+        this.image = image;
         this.name = name;
         this.address = address;
-        this.professors = professors;
-        this.students = students;
     }
 
 
@@ -31,14 +28,9 @@ public class UniversityModel extends UserModel {
         return address;
     }
 
-    public List<ProfessorModel> getProfessors() {
-        return professors;
+    public int getImage() {
+        return image;
     }
-
-    public List<StudentModel> getStudents() {
-        return students;
-    }
-
 
     //Setter
     public void setName(String name) {
@@ -49,11 +41,7 @@ public class UniversityModel extends UserModel {
         this.address = address;
     }
 
-    public void setProfessors(List<ProfessorModel> professors) {
-        this.professors = professors;
-    }
-
-    public void setStudents(List<StudentModel> students) {
-        this.students = students;
+    public void setImage(int image) {
+        this.image = image;
     }
 }

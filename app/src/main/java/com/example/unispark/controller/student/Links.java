@@ -18,12 +18,16 @@ import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
 import com.example.unispark.controller.details.DetailsProfessor;
+import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.database.dao.ProfessorDAO;
+import com.example.unispark.database.dao.StudentLinksDAO;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.adapter.ProfessorsAdapter;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LinkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
@@ -48,7 +52,7 @@ public class Links extends AppCompatActivity
     ImageButton addButton;
     //Links
     RecyclerView rvLinks;
-    List<ExamItem> linksExamItem;
+    List<LinkModel> linksExamItem;
     LinksAdapter linkAdapter;
     EditText txtAddLinkName;
     EditText txtAddLink;
@@ -85,9 +89,11 @@ public class Links extends AppCompatActivity
 
         //Professors
         rvProfessors = findViewById(R.id.rv_professors);
-        professorsItem = new ArrayList<>();
+        professorsItem = ProfessorDAO.getFacultyProfessors(student.getFaculty());
 
-
+        if (professorsItem == null){
+            professorsItem = new ArrayList<>();
+        }
 
         rvProfessors.setAdapter(new ProfessorsAdapter(professorsItem, this));
 
@@ -97,7 +103,12 @@ public class Links extends AppCompatActivity
 
         //Links
         rvLinks = findViewById(R.id.rv_links);
-        linksExamItem = new ArrayList<>();
+        linksExamItem = StudentLinksDAO.getStudentLinks(student.getId());
+
+        if (linksExamItem == null){
+            linksExamItem = new ArrayList<>();
+        }
+
         linkAdapter = new LinksAdapter(linksExamItem, this, this);
         rvLinks.setAdapter(linkAdapter);
 
@@ -112,9 +123,14 @@ public class Links extends AppCompatActivity
                 String link = txtAddLink.getText().toString();
                 if(linkName.length() != 0 && link.length() != 0){
                     LinkModel link0 = new LinkModel(linkName, link);
-                    linksExamItem.add(new ExamItem(0, link0));
 
-                    linkAdapter.notifyItemInserted(linksExamItem.size());
+                    //Adding the link into the DB
+                    boolean isAdded = StudentLinksDAO.addStudentLink(link0, student.getId());
+                    if(isAdded){
+                        linksExamItem.add(link0);
+                        linkAdapter.notifyItemInserted(linksExamItem.size());
+                    }
+                    else Toast.makeText(getApplicationContext(), "Link already exists", Toast.LENGTH_SHORT).show();
                 }
                 else Toast.makeText(getApplicationContext(), "EMPTY LINK", Toast.LENGTH_SHORT).show();
             }
@@ -143,30 +159,16 @@ public class Links extends AppCompatActivity
 
     @Override
     public void onDelBtnClick(int position) {
+        List<LinkModel> studentLinks = StudentLinksDAO.getStudentLinks(student.getId());
+
+        //Remove the Connection inside the DB
+        assert studentLinks != null;
+        StudentLinksDAO.removeLink(studentLinks.get(position).getLinkName());
+
+        //Removing link from the List
         linksExamItem.remove(position);
         linkAdapter.notifyItemRemoved(position);
     }
 
 
-    //Create Course Models Method
-    public static List<CourseModel> createCourses(){
-        List<CourseModel> list = new ArrayList<>();
-
-        CourseModel course = new CourseModel();
-        CourseModel course1 = new CourseModel();
-        CourseModel course2 = new CourseModel();
-
-        course.setFullName("CONTROLLI AUTOMATICI");
-        course.setLink("Link CA");
-        course1.setFullName("GEOMETRIA");
-        course1.setLink("Link GEO");
-        course2.setFullName("//");
-        course2.setLink("//");
-
-        list.add(course);
-        list.add(course1);
-        list.add(course2);
-
-        return list;
-    }
 }

@@ -9,6 +9,7 @@ import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
+import com.example.unispark.database.dao.UniversityDAO;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
@@ -51,13 +52,14 @@ public class Login {
     }
 
     public Intent universityLogin(BeanUser user){
-        /*UniversityModel university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
+        UniversityModel university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
 
         if(university.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
         else{
-            intent = new Intent(context, UniversityHome.class);
-            intent.putExtra("UserObject", university);
-        }*/
+            //intent = new Intent(context, UniversityHome.class);
+            //intent.putExtra("UserObject", university);
+
+        }
 
         return intent;
     }

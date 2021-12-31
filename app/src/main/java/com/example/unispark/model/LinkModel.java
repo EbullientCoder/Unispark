@@ -1,6 +1,8 @@
 package com.example.unispark.model;
 
-public class LinkModel{
+
+
+public class LinkModel {
 
     //Attributes
     private String linkName;

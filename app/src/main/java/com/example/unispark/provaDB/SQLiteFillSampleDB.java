@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 
 import com.example.unispark.R;
+import com.example.unispark.model.LinkModel;
 import com.example.unispark.provaDB.communications.ProfessorCommunicationModel;
 import com.example.unispark.provaDB.communications.UniversityCommunicationModel;
 import com.example.unispark.provaDB.exams.BookExamModel;
@@ -35,12 +36,16 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String IMAGE = "image";
     public static final String FIRSTNAME = "firstname";
     public static final String LASTNAME = "lastname";
+    public static final String NAME = "name";
+    public static final String ADDRESS = "streetaddress";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String FACULTY = "faculty";
     public static final String ACADEMIC_YEAR = "academicyear";
     public static final String WEBSITE = "website";
 
+    //Faculties table
+    public static final String FACULTIES = "faculties";
 
     //Homework table
     public static final String HOMEWORK_TABLE = "homework";
@@ -87,6 +92,9 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String STUDENT_EXAMS = "studentexams";
     public static final String EXAM_ID = "examID";
 
+    //Student Links table
+    public static final String STUDENTS_LINKS = "studentslinks";
+
 
     public SQLiteFillSampleDB(@Nullable Context context) {
         super(context, "unispark.db", null, 1);
@@ -110,7 +118,12 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //University table statement
-        createTableStatement = "CREATE TABLE " + UNI_TABLE + " (" + UNIVERSITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT);";
+        createTableStatement = "CREATE TABLE " + UNI_TABLE + " (" + UNIVERSITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT UNIQUE, " + ADDRESS + " TEXT UNIQUE, " + IMAGE + " INTEGER, " + EMAIL + " TEXT UNIQUE, " + PASSWORD + " TEXT);";
+
+        db.execSQL(createTableStatement);
+
+        //Faculty table
+        createTableStatement = "CREATE TABLE  " + FACULTIES + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + FACULTY + " TEXT UNIQUE);";
 
         db.execSQL(createTableStatement);
 
@@ -162,6 +175,11 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         createTableStatement = "CREATE TABLE  " + STUDENT_EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + EXAM_ID + " INTEGER);";
 
         db.execSQL(createTableStatement);
+
+        //Student links table
+        createTableStatement = "CREATE TABLE  " + STUDENTS_LINKS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + NAME + " TEXT, " + LINK + " TEXT);";
+
+        db.execSQL(createTableStatement);
     }
 
     //Initialize Database
@@ -174,13 +192,13 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //Sample University
         UniversityModel university = new UniversityModel("universita",
                 getHash("password"),
+                0,
                 "Tor Vergata",
-                "Via le Mani dal Naso",
-                null,
-                null);
+                "Via le Mani dal Naso");
 
-        //Add University to DB
+        //Add University to DB and its faculties
         this.addUniversity(university);
+        this.addFaculty("Ingegneria Informatica");
 
 
         //Sample Professor
@@ -221,7 +239,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "http://www.mat.uniroma2.it/~digennar/",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica", null);
+                "Ingegneria Informatica", null);
 
         ProfessorModel carnevale = new ProfessorModel("carnevale",
                 getHash("password"),
@@ -231,7 +249,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 "https://sites.google.com/view/caaa1920/home",
                 R.drawable.courses_martinelli,
                 null,
-                "Ingegneria Infromatica", null);
+                "Ingegneria Informatica", null);
 
         //Add professors to DB and set their id correctly
         this.addProfessor(falessi);
@@ -288,6 +306,11 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
+
+        //Add students links
+        this.addStudentLink(valzano, new LinkModel("Linguaggio C", "https://www.linguaggioc.com"));
+        this.addStudentLink(lapiana, new LinkModel("Linguaggio Java", "https://www.linguaggiojava.com"));
+        this.addStudentLink(fanfarillo, new LinkModel("Linguaggio Python", "https://www.linguaggiopython.com"));
 
         //Add students to DB
         this.addStudent(valzano);
@@ -557,9 +580,31 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addUniversityCommunication(uCom4);
         this.addUniversityCommunication(uCom5);
         this.addUniversityCommunication(uCom6);
+
+        //Add On Exam for Each Professor
+        //ISPW
+        BookExamModel exam = new BookExamModel(0, "ING. DEL SOFTWARE E PROG. WEB", "2021/2022", "2022-02-03", "12.0", "A1", "Didattica");
+        //ISPW 2
+        BookExamModel exam1 = new BookExamModel(0, "ING. DEL SOFTWARE E PROG. WEB II", "2021/2022", "2022-02-10", "12.0", "A1", "Didattica");
+        //CE
+        BookExamModel exam2 = new BookExamModel(0, "CALCOLATORI ELETTRONICI", "2021/2022", "2022-02-10", "9.0", "A1", "Didattica");
+        //FOC
+        BookExamModel exam3 = new BookExamModel(0, "FONDAMENTI DI CONTROLLI", "2021/2022", "2022-02-10", "9.0", "A1", "Didattica");
+        //ARL
+        BookExamModel exam4 = new BookExamModel(0, "AUTOMATICA E ROBOTICA LAB.", "2021/2022", "2022-02-10", "9.0", "A1", "Didattica");
+        //GEOM
+        BookExamModel exam5 = new BookExamModel(0, "GEOMETRIA", "2021/2022", "2022-02-10", "9.0", "A1", "Didattica");
+        //CA
+        BookExamModel exam6 = new BookExamModel(0, "CONTROLLI AUTOMATICI", "2021/2022", "2022-02-10", "6.0", "A1", "Didattica");
+
+        this.addExam(exam);
+        this.addExam(exam1);
+        this.addExam(exam2);
+        this.addExam(exam3);
+        this.addExam(exam4);
+        this.addExam(exam5);
+        this.addExam(exam6);
     }
-
-
 
 
     //Add Student to the Database
@@ -629,15 +674,18 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(NAME, university.getName());
+        cv.put(ADDRESS, university.getAddress());
+        cv.put(IMAGE, university.getImage());
         cv.put(EMAIL, university.getEmail());
         cv.put(PASSWORD, university.getPassword());
+
 
         long insert = db.insert(UNI_TABLE, null, cv);
 
         if (insert == -1) return false;
         else return true;
     }
-
 
     //Add Homework: Put Homeworks into the Database
     public boolean addHomework(HomeworkModel homework) {
@@ -776,7 +824,33 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         else return true;
     }
 
-    //
+    //Add faculty
+    public boolean addFaculty(String faculty){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(FACULTY, faculty);
+        long insert = db.insert(FACULTIES, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    //Add student link
+    public boolean addStudentLink(StudentModel student, LinkModel studentLink){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(STUDENT_ID, student.getId());
+        cv.put(NAME, studentLink.getLinkName());
+        cv.put(LINK, studentLink.getLinkAddress());
+        long insert = db.insert(STUDENTS_LINKS, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

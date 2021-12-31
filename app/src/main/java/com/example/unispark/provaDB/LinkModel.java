@@ -1,6 +1,8 @@
 package com.example.unispark.provaDB;
 
-public class LinkModel{
+import java.io.Serializable;
+
+public class LinkModel {
 
     //Attributes
     private String linkName;
