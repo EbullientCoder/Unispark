@@ -122,16 +122,14 @@ public class Home extends AppCompatActivity
             profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames, courseFullNames);
         }
 
-        if(profCommunicationsItem == null) Toast.makeText(getApplicationContext(), "EMPTY COMMUNICATIONS LIST", Toast.LENGTH_SHORT).show();
-        else rvProfCommunications.setAdapter(new ProfCommunicationsAdapter(profCommunicationsItem, this));
+        if(profCommunicationsItem != null) rvProfCommunications.setAdapter(new ProfCommunicationsAdapter(profCommunicationsItem, this));
 
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
+        if (homeworksItem != null) rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "STUDENT"));
 
-        if(homeworksItem == null) Toast.makeText(getApplicationContext(), "EMPTY HOMEWORKS LIST", Toast.LENGTH_SHORT).show();
-        else rvHomeworks.setAdapter(new HomeworksAdapter(homeworksItem, this, "STUDENT"));
     }
 
 

@@ -162,16 +162,13 @@ public class ProfessorHome extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-        if(uniCommunicationsItem == null) Toast.makeText(getApplicationContext(), "EMPTY COMMUNICATIONS LIST", Toast.LENGTH_SHORT).show();
-        else rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
-
+        if(uniCommunicationsItem != null) rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
         homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
 
-        if(homeworksItem == null) Toast.makeText(getApplicationContext(), "EMPTY HOMEWORKS LIST", Toast.LENGTH_SHORT).show();
-        else{
+        if(homeworksItem != null) {
             homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
             rvHomeworks.setAdapter(homeworkAdapter);
         }

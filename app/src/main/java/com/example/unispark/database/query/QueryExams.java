@@ -67,6 +67,12 @@ public class QueryExams {
         return cursor;
     }
 
+    public static Cursor selectExamDate(SQLiteDatabase db, int examID) //throws exception
+    {
+        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE " + ID + " = " + examID + " AND " + DATE + " >= date('now') ;";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
 
 
 

@@ -82,8 +82,9 @@ public class CourseDAO {
         String session = cursor.getString(5);
         String link = cursor.getString(6);
         String facultyCourse = cursor.getString(8);
+        int uniYear = cursor.getInt(9);
 
-        return new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse);
+        return new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse, uniYear);
     }
 
     public static List<CourseModel> selectStudentCourses(String studentId){
@@ -133,13 +134,13 @@ public class CourseDAO {
     }
 
     //Get available course names to join for a student marked by faculty
-    public static List<CourseModel> selectAvailableCourses(String faculty, List<String> courseNames)
+    public static List<CourseModel> selectAvailableCourses(String faculty, int uniYear, List<String> courseNames)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
         List<CourseModel> coursesList = new ArrayList<>();
 
-        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty);
+        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty, uniYear);
         if (!cursor.moveToFirst()){
             //throw exception
             return null;
@@ -154,17 +155,22 @@ public class CourseDAO {
         String session;
         String link;
         String facultyCourse;
+        int year;
 
         boolean equals = false;
         do{
             courseId = String.valueOf(cursor.getInt(7));
             shortName = cursor.getString(1);
             fullName = cursor.getString(2);
-            for (int i = 0; i < courseNames.size(); i++) {
-                if (fullName.equals(courseNames.get(i))) {
-                    equals = true;
-                    break;
-                }
+
+            if (courseNames != null){
+                for (int i = 0; i < courseNames.size(); i++) {
+                    if (fullName.equals(courseNames.get(i))) {
+                        equals = true;
+                        break;
+                    }
+            }
+
             }
             if(!equals){
                 courseYear = cursor.getString(3);
@@ -172,9 +178,10 @@ public class CourseDAO {
                 session = cursor.getString(5);
                 link = cursor.getString(6);
                 facultyCourse = cursor.getString(8);
+                year = cursor.getInt(9);
 
                 //Create a new course and add it to the course list
-                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse);
+                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse, year);
                 coursesList.add(course);
             }
             equals = false;

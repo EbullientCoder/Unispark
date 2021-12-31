@@ -97,11 +97,13 @@ public class Profile extends AppCompatActivity
         rvCourses = findViewById(R.id.rv_courses);
         coursesItem = student.getCourses();
 
-        if(coursesItem == null) Toast.makeText(getApplicationContext(), "EMPTY COURSES LIST", Toast.LENGTH_SHORT).show();
-        else{
+
+        if (coursesItem  != null){
             coursesAdapter = new CoursesAdapter(coursesItem, this, this,"LEAVE");
             rvCourses.setAdapter(coursesAdapter);
         }
+
+
     }
 
     @Override

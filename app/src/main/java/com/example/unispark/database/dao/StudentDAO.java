@@ -22,7 +22,7 @@ public class StudentDAO {
             // throw exception
 
             //Momentaneo
-            StudentModel student1 = new StudentModel(null, null, null, 0, null, null, null, null, null, null, null);
+            StudentModel student1 = new StudentModel(null, null, null, 0, null, null, null, null, null, null, null, 0);
             return student1;
         }
 
@@ -33,8 +33,9 @@ public class StudentDAO {
         String faculty = cursor.getString(6);
         String academicYear = cursor.getString(7);
         String studentId = cursor.getString(8);
+        int uniYear = cursor.getInt(9);
         //Compose the student entity
-        StudentModel student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear);
+        StudentModel student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear, uniYear);
 
         cursor.close();
         db.close();

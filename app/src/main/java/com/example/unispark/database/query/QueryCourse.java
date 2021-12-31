@@ -12,6 +12,7 @@ public class QueryCourse {
     public static final String FACULTY = "faculty";
     public static final String YEAR = "year";
     public static final String CFU = "cfu";
+    public static final String UNIVERSITY_YEAR = "uniyear";
 
     private QueryCourse(){}
 
@@ -41,9 +42,21 @@ public class QueryCourse {
     }
 
     //Look for courses marked by student faculty
-    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty) //throws exception
+    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty, int uniYear) //throws exception
     {
-        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+        String queryString = null;
+        if (uniYear == 1){
+            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + UNIVERSITY_YEAR + " = " + uniYear
+                     + " AND " + FACULTY + " = '" + faculty + "';";
+        }
+        else if (uniYear == 2){
+            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE (" + UNIVERSITY_YEAR + " = 1 OR "
+                    + UNIVERSITY_YEAR + " = 2)" + " AND " + FACULTY + " = '" + faculty + "';";
+        }
+        else if (uniYear == 3){
+            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+        }
+
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }

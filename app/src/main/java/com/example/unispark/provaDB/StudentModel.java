@@ -12,6 +12,7 @@ import java.util.List;
 public class StudentModel extends UserModel{
     //Attributes
 
+    private int uniYear;
     private int imageID;
     private String firstName;
     private String lastName;
@@ -27,7 +28,8 @@ public class StudentModel extends UserModel{
 
     //Methods
     //Constructor
-    public StudentModel(int imageID,
+    public StudentModel(int uniYear,
+                        int imageID,
                         String firstName,
                         String lastName,
                         String email,
@@ -42,6 +44,7 @@ public class StudentModel extends UserModel{
                         List<VerbalizedExamModel> fExams
     ) {
         super(email, password);
+        this.uniYear = uniYear;
         this.imageID = imageID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -57,6 +60,12 @@ public class StudentModel extends UserModel{
     }
 
     //Getter
+
+
+    public int getUniYear() {
+        return uniYear;
+    }
+
     public int getImageID() {
         return imageID;
     }
@@ -102,6 +111,12 @@ public class StudentModel extends UserModel{
     }
 
     //Setter
+
+
+    public void setUniversityYear(int uniYear) {
+        this.uniYear = uniYear;
+    }
+
     public void setImageID(int imageID) {
         this.imageID = imageID;
     }

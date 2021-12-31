@@ -86,12 +86,15 @@ public class ProfessorVerbalizeExams extends AppCompatActivity implements Signed
         VerbalizedExamModel vExam = new VerbalizedExamModel(exam.getId(), exam.getName(), exam.getDate(), exam.getDate(), exam.getCFU(), result);
 
         //Add Verbalized Exam to the DB
-        ExamsDAO.addExamGrade(vExam, studentsItem.get(position).getId());
+        boolean isValid = ExamsDAO.addExamGrade(vExam, studentsItem.get(position).getId());
+        if (!isValid) Toast.makeText(getApplicationContext(), "Cannot verbalize: Exam has not taken place yet", Toast.LENGTH_SHORT).show();
+        else{
+            //Remove Verbalized Exam
+            studentsItem.remove(position);
+            studentsAdapter.notifyItemRemoved(position);
 
-        //Remove Verbalized Exam
-        studentsItem.remove(position);
-        studentsAdapter.notifyItemRemoved(position);
+            if(result != null) Toast.makeText(getApplicationContext(), "Exam Verbalized", Toast.LENGTH_SHORT).show();
+        }
 
-        if(result != null) Toast.makeText(getApplicationContext(), "Exam Verbalized", Toast.LENGTH_SHORT).show();
     }
 }

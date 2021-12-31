@@ -41,8 +41,14 @@ public class ExamsDAO {
     public static boolean addExamGrade(VerbalizedExamModel examGrade, String studentID)
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
+        Cursor cursor = QueryExams.selectExamDate(db, examGrade.getId());
 
+        if (!cursor.moveToFirst()){}//throws exception
+        Cursor isValid = QueryExams.selectExamDate(db, examGrade.getId());
+        if (isValid.moveToFirst()) return false;
+
+        ContentValues cv = new ContentValues();
+        cv.put("id", examGrade.getId());
         cv.put("examname", examGrade.getName());
         cv.put("studentID", studentID);
         cv.put("grade", examGrade.getResult());

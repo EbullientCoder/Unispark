@@ -17,13 +17,14 @@ public class StudentModel extends UserModel{
     private List<BookExamModel> bookedExams;
     private List<VerbalizedExamModel> verbalizedExams;
     private List<VerbalizedExamModel> failedExams;
+    private int uniYear;
 
 
     //Methods
     //Constructor
     public StudentModel(String firstName, String lastName, String email, int profilePicture, String id, String faculty,
                         String academicYear, List<CourseModel> courses, List<BookExamModel> bookedExams,
-                        List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams) {
+                        List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams, int uniYear) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +35,7 @@ public class StudentModel extends UserModel{
         this.bookedExams = bookedExams;
         this.verbalizedExams = verbalizedExams;
         this.failedExams = failedExams;
+        this.uniYear = uniYear;
     }
 
     public String getFirstName() {
@@ -71,6 +73,10 @@ public class StudentModel extends UserModel{
 
     public List<VerbalizedExamModel> getFailedExams() {
         return failedExams;
+    }
+
+    public int getUniYear() {
+        return uniYear;
     }
 
 
@@ -113,6 +119,9 @@ public class StudentModel extends UserModel{
         this.failedExams = failedExams;
     }
 
+    public void setUniYear(int uniYear) {
+        this.uniYear = uniYear;
+    }
 }
 
 

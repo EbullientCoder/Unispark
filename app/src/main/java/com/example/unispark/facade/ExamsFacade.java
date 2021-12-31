@@ -43,6 +43,9 @@ public class ExamsFacade {
     public List<BookExamModel> getStudentExams(String id)
     {
         List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
+        if (courses == null){
+            return null;
+        }
         List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
 
         List<BookExamModel> examsList = new ArrayList<>();
