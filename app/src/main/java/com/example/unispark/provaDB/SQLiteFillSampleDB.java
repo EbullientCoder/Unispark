@@ -592,7 +592,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         //GEOM
         BookExamModel exam5 = new BookExamModel(0, "GEOMETRIA", "2021/2022", "2022-02-10", "9.0", "A1", "Didattica");
         //CA
-        BookExamModel exam6 = new BookExamModel(0, "CONTROLLI AUTOMATICI", "2021/2022", "2021-12-23", "6.0", "A1", "Didattica");
+        BookExamModel exam6 = new BookExamModel(0, "CONTROLLI AUTOMATICI", "2021/2022", "2022-12-23", "6.0", "A1", "Didattica");
 
         this.addExam(exam);
         this.addExam(exam1);
@@ -601,7 +601,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addExam(exam4);
         this.addExam(exam5);
         this.addExam(exam6);
-
     }
 
 

@@ -45,7 +45,7 @@ public class ExamsDAO {
 
         if (!cursor.moveToFirst()){}//throws exception
         Cursor isValid = QueryExams.selectExamDate(db, examGrade.getId());
-        if (isValid.moveToFirst()) return false;
+        //if (isValid.moveToFirst()) return false;
 
         ContentValues cv = new ContentValues();
         cv.put("id", examGrade.getId());

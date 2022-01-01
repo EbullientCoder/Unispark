@@ -16,12 +16,15 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
 import com.example.unispark.database.dao.CourseDAO;
+import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
 import com.example.unispark.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,11 @@ public class Profile extends AppCompatActivity
     //Attributes
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
+    //Averages
+    TextView aAverage;
+    CircularProgressIndicator aCircleAverage;
+    TextView wAverage;
+    CircularProgressIndicator wCircleAverage;
     //Courses
     RecyclerView rvCourses;
     List<CourseModel> coursesItem;
@@ -61,6 +69,36 @@ public class Profile extends AppCompatActivity
         extras = getIntent().getExtras();
         student = (StudentModel) extras.getSerializable("UserObject");
 
+
+
+        //Average
+        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
+        float average = 0;
+        float CFU = 0;
+        //Arithmetic Average
+        if(exams != null){
+            for(int i = 0; i < exams.size(); i++) average += Double.parseDouble(exams.get(i).getResult());
+            average = average/exams.size();
+        }
+        aAverage = findViewById(R.id.txt_arithmetic_average_number);
+        aAverage.setText(String.format("%.02f", average));
+        average = (average * 100 / 35);
+        aCircleAverage = findViewById(R.id.avg_arithmetic_average);
+        aCircleAverage.setProgress((int) average, false);
+        //Weighted Average
+        average = 0;
+        if(exams != null){
+            for(int i = 0; i < exams.size(); i++){
+                average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCFU()));
+                CFU += Double.parseDouble(exams.get(i).getCFU());
+            }
+            average = average/CFU;
+        }
+        wAverage = findViewById(R.id.txt_weighted_average_number);
+        wAverage.setText(String.format("%.02f", average));
+        average = (average * 100 / 36);
+        wCircleAverage = findViewById(R.id.avg_weighted_average);
+        wCircleAverage.setProgress((int) average, false);
 
 
         //Bottom Navigation Menu
