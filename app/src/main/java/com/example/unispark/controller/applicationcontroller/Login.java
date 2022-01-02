@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.unispark.controller.university.UniversityHome;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.student.Home;
@@ -13,7 +14,6 @@ import com.example.unispark.database.dao.UniversityDAO;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
-import com.example.unispark.model.UserModel;
 
 public class Login {
     private Context context;
@@ -56,9 +56,8 @@ public class Login {
 
         if(university.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
         else{
-            //intent = new Intent(context, UniversityHome.class);
-            //intent.putExtra("UserObject", university);
-
+            intent = new Intent(context, UniversityHome.class);
+            intent.putExtra("UserObject", university);
         }
 
         return intent;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.unispark">
+    package="com.example.unispark" >
 
     <application
         android:allowBackup="false"
@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Try"
-        tools:replace="android:allowBackup">
+        tools:replace="android:allowBackup" >
+        <activity
+            android:name=".controller.university.UniversityHome"
+            android:exported="true" />
         <activity
             android:name=".controller.professor.ProfessorExams"
             android:exported="true" />
@@ -40,10 +43,10 @@
             android:exported="true" />
         <activity
             android:name=".controller.guicontroller.LoginGUIController"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".controller.SplashScreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +55,7 @@
         </activity>
         <activity
             android:name=".controller.student.Home"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
