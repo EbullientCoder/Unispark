@@ -81,6 +81,6 @@ public class ProfessorDAO {
         db.close();
 
         return professors;
-
     }
+
 }

@@ -2,30 +2,46 @@ package com.example.unispark.model;
 
 public class LessonModel {
     //Attributes
-    private String time;
-    private String lesson;
-
+    private String lessonName;
+    private String day;
+    private String hour;
 
     //Methods
     //Constructor
-    public LessonModel(String time, String lesson) {
-        this.time = time;
-        this.lesson = lesson;
+
+
+    public LessonModel(String lessonName, String day, String hour) {
+        this.lessonName = lessonName;
+        this.day = day;
+        this.hour = hour;
     }
 
-    //Getter
-    public String getTime() {
-        return time;
-    }
-    public String getLesson() {
-        return lesson;
+
+    public String getLessonName() {
+        return lessonName;
     }
 
-    //Setter
-    public void setTime(String time) {
-        this.time = time;
+    public String getDay() {
+        return day;
     }
-    public void setLesson(String lesson) {
-        this.lesson = lesson;
+
+    public String getHour() {
+        return hour;
     }
+
+
+
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
 }
+

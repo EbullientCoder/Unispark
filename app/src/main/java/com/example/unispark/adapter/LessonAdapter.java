@@ -17,11 +17,11 @@ import java.util.List;
 public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    private List<ExamItem> examItems;
+    private List<LessonModel> examItems;
 
     //Methods
     //Constructor
-    public LessonAdapter(List<ExamItem> examItems) {
+    public LessonAdapter(List<LessonModel> examItems) {
         this.examItems = examItems;
     }
 
@@ -40,7 +40,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position) == 0){
-            LessonModel lesson = (LessonModel) examItems.get(position).getObject();
+            LessonModel lesson = (LessonModel) examItems.get(position);
             ((LessonViewHolder) holder).setLessonDate(lesson);
         }
     }
@@ -49,12 +49,6 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return examItems.size();
     }
-
-    @Override
-    public int getItemViewType(int position){
-        return examItems.get(position).getType();
-    }
-
 
     //ExamModel ViewHolder
     static class LessonViewHolder extends RecyclerView.ViewHolder{
@@ -71,8 +65,8 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         void setLessonDate(LessonModel lesson){
-            lessonName.setText(lesson.getLesson());
-            lessonTime.setText(lesson.getTime());
+            lessonName.setText(lesson.getLessonName());
+            lessonTime.setText(lesson.getHour());
         }
     }
 }

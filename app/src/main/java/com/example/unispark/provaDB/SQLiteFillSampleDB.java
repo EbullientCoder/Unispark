@@ -96,6 +96,13 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
     //Student Links table
     public static final String STUDENTS_LINKS = "studentslinks";
+    public static final String LESSON = "lesson";
+    public static final String LESSONS = "lessons";
+    public static final String DAY = "day";
+    public static final String HOUR = "hour";
+
+    //Schedule lessons table
+
 
 
     public SQLiteFillSampleDB(@Nullable Context context) {
@@ -182,6 +189,10 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         createTableStatement = "CREATE TABLE  " + STUDENTS_LINKS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STUDENT_ID + " TEXT, " + NAME + " TEXT, " + LINK + " TEXT);";
 
         db.execSQL(createTableStatement);
+
+        //Schedule lessons table
+        createTableStatement = "CREATE TABLE " + LESSONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LESSON + " TEXT, " + DAY + " TEXT, " + HOUR + " TEXT);";
+        db.execSQL(createTableStatement);
     }
 
     //Initialize Database
@@ -209,7 +220,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 -1,
                 "Davide",
                 "Falessi",
-                "https://didatticaweb.uniroma2.it/it/docenti/curriculum/T_153658-Davide-Falessi/0",
+                "https://diatticaweb.uniroma2.it/it/docenti/curriculum/T_153658-Davide-Falessi/0",
                 R.drawable.courses_falessi,
                 null, "Ingegneria Informatica", null);
 
@@ -399,8 +410,13 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addCourse(GEOM);
         this.addCourse(CA);
 
-        //Connecting Students to their Courses
+        //Add lesson Course
+        LessonModel lesson1 = new LessonModel("GEOMETRIA", "MONDAY", "09:30 - 10:15");
+        this.addLesson(lesson1);
+        LessonModel lesson2 = new LessonModel("GEOMETRIA", "TUESDAY", "15:00 - 15:45");
+        this.addLesson(lesson2);
 
+        //Connecting Students to their Courses
         joinCourse(GEOM, valzano);
         joinCourse(ISPW, fanfarillo);
         joinCourse(ISPW2, fanfarillo);
@@ -849,6 +865,21 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
+
+    //Add lesson
+    public boolean addLesson(LessonModel lesson){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(LESSON, lesson.getLessonName());
+        cv.put(DAY, lesson.getDay());
+        cv.put(HOUR, lesson.getHour());
+        long insert = db.insert(LESSONS, null, cv);
+
+        if (insert == -1) return false;
+        else return true;
+    }
+
 
 
 

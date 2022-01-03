@@ -16,7 +16,7 @@ import com.example.unispark.provaDB.SQLiteFillSampleDB;
 
 public class SplashScreen extends AppCompatActivity {
     //Database
-    SQLiteFillSampleDB fillDB;
+    //SQLiteFillSampleDB fillDB;
     //Timeout
     int timeout = 2000; //2000
 

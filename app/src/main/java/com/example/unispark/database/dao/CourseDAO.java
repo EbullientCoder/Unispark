@@ -27,6 +27,8 @@ public class CourseDAO {
         cv.put("session", course.getSession());
         cv.put("link", course.getLink());
         cv.put("trackprofessor", course.getId());
+        cv.put("faculty", course.getFaculty());
+        cv.put("uniyear", course.getUniYear());
 
         //Insert into Database: Homework Table
         long insert = db.insert("courses", null, cv);
@@ -192,5 +194,4 @@ public class CourseDAO {
 
         return coursesList;
     }
-
 }
