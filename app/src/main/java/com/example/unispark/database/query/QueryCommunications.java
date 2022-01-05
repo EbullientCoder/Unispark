@@ -18,7 +18,7 @@ public class QueryCommunications {
     public static Cursor selectFacultyCommunications(SQLiteDatabase db, String facultyName) //throws exception
     {
         String queryString;
-        if(facultyName == null) queryString = queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + ";";
+        if(facultyName.equals("all")) queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + ";";
         else queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + " WHERE " + FACULTY + " = '" + facultyName + "' OR " + FACULTY + " = 'All';";
 
         Cursor cursor = db.rawQuery(queryString, null);
