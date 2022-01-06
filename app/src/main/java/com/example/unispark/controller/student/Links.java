@@ -87,6 +87,7 @@ public class Links extends AppCompatActivity
         });
 
 
+
         //Professors
         rvProfessors = findViewById(R.id.rv_professors);
         professorsItem = ProfessorDAO.getFacultyProfessors(student.getFaculty());
@@ -111,6 +112,8 @@ public class Links extends AppCompatActivity
 
         linkAdapter = new LinksAdapter(linksExamItem, this, this);
         rvLinks.setAdapter(linkAdapter);
+
+
 
         //Add Button
         txtAddLinkName = findViewById(R.id.txt_input_link_name);

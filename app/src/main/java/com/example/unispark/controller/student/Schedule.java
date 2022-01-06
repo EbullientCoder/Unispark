@@ -99,8 +99,7 @@ public class Schedule extends AppCompatActivity{
                 lessonsExamItem = LessonsDAO.getLessons("MONDAY", student.getCourses());
         }
 
-        if(lessonsExamItem != null) rvLessons.setAdapter(new LessonAdapter(lessonsExamItem));
-
+        if(lessonsExamItem != null) rvLessons.setAdapter(new LessonAdapter(lessonsExamItem, "STUDENT"));
     }
 
 }

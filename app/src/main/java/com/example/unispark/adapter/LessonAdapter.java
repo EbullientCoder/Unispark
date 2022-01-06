@@ -3,13 +3,13 @@ package com.example.unispark.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.model.LessonModel;
 
 import java.util.List;
@@ -17,37 +17,67 @@ import java.util.List;
 public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    private List<LessonModel> examItems;
+    private List<LessonModel> lessonItem;
+    private OnDelBtnClickListener onDelBtnClickListener;
+    private String type;
+
+
+    //Click Delete Link Interface
+    public interface OnDelBtnClickListener{
+        void onDelBtnClick(int position);
+    }
 
     //Methods
     //Constructor
-    public LessonAdapter(List<LessonModel> examItems) {
-        this.examItems = examItems;
+    public LessonAdapter(List<LessonModel> lessonItem, String type){
+        this.lessonItem = lessonItem;
+        this.type = type;
+    }
+
+    public LessonAdapter(List<LessonModel> lessonItem, OnDelBtnClickListener onDelBtnClickListener, String type) {
+        this.lessonItem = lessonItem;
+        this.onDelBtnClickListener = onDelBtnClickListener;
+        this.type = type;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new LessonViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.item_container_lesson,
-                        parent,
-                        false
-                )
-        );
+        if(type.equals("STUDENT")){
+            return new LessonViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.item_container_lesson,
+                            parent,
+                            false
+                    )
+            );
+        }
+        else{
+            return new LessonUniViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.item_container_lesson,
+                            parent,
+                            false
+                    ), onDelBtnClickListener
+            );
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(getItemViewType(position) == 0){
-            LessonModel lesson = (LessonModel) examItems.get(position);
+        if(type.equals("STUDENT")){
+            LessonModel lesson = (LessonModel) lessonItem.get(position);
             ((LessonViewHolder) holder).setLessonDate(lesson);
+        }
+        else if(type.equals("UNIVERSITY")){
+            LessonModel lesson = (LessonModel) lessonItem.get(position);
+            ((LessonUniViewHolder) holder).setLessonDate(lesson);
         }
     }
 
     @Override
     public int getItemCount() {
-        return examItems.size();
+        return lessonItem.size();
     }
 
     //ExamModel ViewHolder
@@ -55,6 +85,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         //Attributes
         private TextView lessonName;
         private TextView lessonTime;
+        private ImageButton btnDelete;
 
         //Methods
         //Constructor
@@ -62,6 +93,37 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView);
             lessonName = itemView.findViewById(R.id.txt_lesson_name);
             lessonTime = itemView.findViewById(R.id.txt_lesson_time);
+            btnDelete = itemView.findViewById(R.id.btn_delete_lesson);
+            btnDelete.setVisibility(View.GONE);
+        }
+
+        void setLessonDate(LessonModel lesson){
+            lessonName.setText(lesson.getLessonName());
+            lessonTime.setText(lesson.getHour());
+        }
+    }
+
+    //ExamModel ViewHolder
+    static class LessonUniViewHolder extends RecyclerView.ViewHolder{
+        //Attributes
+        private TextView lessonName;
+        private TextView lessonTime;
+        private ImageButton btnDelete;
+
+        //Methods
+        //Constructor
+        public LessonUniViewHolder(@NonNull View itemView, OnDelBtnClickListener onDelBtnClickListener) {
+            super(itemView);
+            lessonName = itemView.findViewById(R.id.txt_lesson_name);
+            lessonTime = itemView.findViewById(R.id.txt_lesson_time);
+            btnDelete = itemView.findViewById(R.id.btn_delete_lesson);
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onDelBtnClickListener.onDelBtnClick(getAdapterPosition());
+                }
+            });
         }
 
         void setLessonDate(LessonModel lesson){

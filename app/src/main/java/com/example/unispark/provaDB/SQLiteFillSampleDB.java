@@ -203,7 +203,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     //Sample Database
     public void fillDB() {
         //Sample University
-        UniversityModel university = new UniversityModel("universita",
+        UniversityModel university = new UniversityModel("torvergata",
                 getHash("password"),
                 0,
                 "Tor Vergata",
@@ -278,7 +278,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
 
         //Sample Student
-        StudentModel valzano = new StudentModel(1,
+        StudentModel valzano = new StudentModel(3,
                 R.drawable.profile_photo,
                 "Emanuele",
                 "Valzano",
@@ -293,7 +293,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
                 null,
                 null);
 
-        StudentModel lapiana = new StudentModel(2,
+        StudentModel lapiana = new StudentModel(3,
                 R.drawable.profile_photo,
                 "Andrea",
                 "Lapiana",
@@ -410,12 +410,6 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addCourse(GEOM);
         this.addCourse(CA);
 
-        //Add lesson Course
-        LessonModel lesson1 = new LessonModel("GEOMETRIA", "MONDAY", "09:30 - 10:15");
-        this.addLesson(lesson1);
-        LessonModel lesson2 = new LessonModel("GEOMETRIA", "TUESDAY", "15:00 - 15:45");
-        this.addLesson(lesson2);
-
         //Connecting Students to their Courses
         joinCourse(GEOM, valzano);
         joinCourse(ISPW, fanfarillo);
@@ -426,6 +420,60 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         joinCourse(FOC, fanfarillo);
         //GEOM
         joinCourse(GEOM, lapiana);
+
+
+        //Add lesson Course
+        //ISPW - Monday
+        LessonModel lesson1 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "MONDAY", "11:30 - 12:15");
+        LessonModel lesson2 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "MONDAY", "12:30 - 13:15");
+        LessonModel lesson3 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "MONDAY", "14:00 - 14:45");
+        LessonModel lesson4 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "MONDAY", "15:00 - 15:45");
+        //ISPW - Tuesday
+        LessonModel lesson5 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "TUESDAY", "09:30 - 10:15");
+        LessonModel lesson6 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "TUESDAY", "10:30 - 11:15");
+        //ISPW -Thursday
+        LessonModel lesson7 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "THURSDAY", "16:00 - 16:45");
+        LessonModel lesson8 = new LessonModel("ING. DEL SOFTWARE E PROG. WEB", "THURSDAY", "17:00 - 17:45");
+        //ARL - Monday
+        LessonModel lesson9 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "MONDAY", "16:00 - 16:45");
+        LessonModel lesson10 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "MONDAY", "17:00 - 17:45");
+        //ARL - Tuesday
+        LessonModel lesson11 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "MONDAY", "14:00 - 14:45");
+        LessonModel lesson12 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "MONDAY", "15:00 - 15:45");
+        //ARL - Wednesday
+        LessonModel lesson13 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "WEDNESDAY", "09:30 - 10:15");
+        LessonModel lesson14 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "WEDNESDAY", "10:30 - 11:15");
+        //ARL - Friday
+        LessonModel lesson15 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "FRIDAY", "14:00 - 14:45");
+        LessonModel lesson16 = new LessonModel("AUTOMATICA E ROBOTICA LAB.", "FRIDAY", "15:00 - 15:45");
+        //CA - Wednesday
+        LessonModel lesson17 = new LessonModel("CONTROLLI AUTOMATICI", "WEDNESDAY", "11:30 - 12:15");
+        LessonModel lesson18 = new LessonModel("CONTROLLI AUTOMATICI", "WEDNESDAY", "12:30 - 13:15");
+        //CA - Friday
+        LessonModel lesson19 = new LessonModel("CONTROLLI AUTOMATICI", "FRIDAY", "11:30 - 12:15");
+        LessonModel lesson20 = new LessonModel("CONTROLLI AUTOMATICI", "FRIDAY", "12:30 - 13:15");
+
+        this.addLesson(lesson1);
+        this.addLesson(lesson2);
+        this.addLesson(lesson3);
+        this.addLesson(lesson4);
+        this.addLesson(lesson5);
+        this.addLesson(lesson6);
+        this.addLesson(lesson7);
+        this.addLesson(lesson8);
+        this.addLesson(lesson9);
+        this.addLesson(lesson10);
+        this.addLesson(lesson11);
+        this.addLesson(lesson12);
+        this.addLesson(lesson13);
+        this.addLesson(lesson14);
+        this.addLesson(lesson15);
+        this.addLesson(lesson16);
+        this.addLesson(lesson17);
+        this.addLesson(lesson18);
+        this.addLesson(lesson19);
+        this.addLesson(lesson20);
+
 
         //Add homeworks
         //Falessi
@@ -592,7 +640,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addUniversityCommunication(uCom3);
         this.addUniversityCommunication(uCom4);
         this.addUniversityCommunication(uCom5);
-        this.addUniversityCommunication(uCom6);
+        //this.addUniversityCommunication(uCom6);
 
         //Add On Exam for Each Professor
         //ISPW

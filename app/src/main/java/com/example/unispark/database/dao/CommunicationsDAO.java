@@ -92,7 +92,7 @@ public class CommunicationsDAO {
         return communicationsList;
     }
 
-    //Get Communications marked by courseShortName(Togliere il marametro course full name e ottenerlo tramite query)
+    //Get Communications marked by courseShortName(Togliere il parametro course full name e ottenerlo tramite query)
     public static List<ProfessorCommunicationModel> getCourseCommunications(String courseShortName, String courseFullName)
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();

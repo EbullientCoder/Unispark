@@ -35,13 +35,17 @@ public class SearchCourseFragment extends DialogFragment
     CoursesAdapter coursesAdapter;
     //Get Student Model
     StudentModel student;
+    CoursesAdapter joinedCoursesAdapter;
 
     private static final String YEAR = "2020/2021";
 
 
     //Methods
     //Constructor
-    public SearchCourseFragment(StudentModel student){this.student = student;}
+    public SearchCourseFragment(StudentModel student, CoursesAdapter joinedCoursesAdapter){
+        this.student = student;
+        this.joinedCoursesAdapter = joinedCoursesAdapter;
+    }
 
 
     @Override
@@ -97,7 +101,8 @@ public class SearchCourseFragment extends DialogFragment
         joinedCourses.add(coursesItem.get(position));
         student.setCourses(joinedCourses);
 
-        Toast.makeText(getContext(), coursesItem.get(position).getFullName() + ": Joined", Toast.LENGTH_SHORT).show();
+        //Notify the Joined Courses Adapter
+        joinedCoursesAdapter.notifyDataSetChanged();
 
         dismiss();
     }

@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.HomeworkModel;
@@ -63,6 +64,8 @@ public class AddHomeworkFragment extends DialogFragment{
     List<CourseModel> coursesList;
     //Homework Model
     HomeworkModel homework;
+    List<HomeworkModel> homeworksItem = null;
+    HomeworksAdapter homeworksAdapter = null;
 
     int i;
 
@@ -70,9 +73,15 @@ public class AddHomeworkFragment extends DialogFragment{
 
     //Methods
     //Constructor
-    public AddHomeworkFragment(ProfessorModel professor) {
+    public AddHomeworkFragment(ProfessorModel professor){
+        this.professor = professor;
+    }
+
+    public AddHomeworkFragment(ProfessorModel professor, List<HomeworkModel> homeworksItem, HomeworksAdapter homeworksAdapter) {
         //Getting Professor Object
         this.professor = professor;
+        this.homeworksItem = homeworksItem;
+        this.homeworksAdapter = homeworksAdapter;
     }
 
 
@@ -179,6 +188,12 @@ public class AddHomeworkFragment extends DialogFragment{
 
                 //Adding it into the DB
                 HomeworkDAO.addHomework(homework);
+
+                //Notify the Homework Adapter
+                if(homeworksItem != null && homeworksAdapter != null){
+                    homeworksItem.add(homework);
+                    homeworksAdapter.notifyDataSetChanged();
+                }
 
                 dismiss();
             }

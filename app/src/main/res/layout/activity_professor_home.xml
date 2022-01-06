@@ -205,6 +205,7 @@
         android:backgroundTint="#34D2A1"/>
 
 
+    <!-- Bottom Menu -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/professor_bottomMenuBar"
         android:layout_width="match_parent"

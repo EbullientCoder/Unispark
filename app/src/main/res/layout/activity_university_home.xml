@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -81,7 +82,7 @@
             android:fontFamily="@font/nunito_bold"
             android:text="UNIVERSITA' DI ROMA TOR VERGATA"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_university_image" />
@@ -129,24 +130,43 @@
             android:id="@+id/rv_assigned_communications"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
             android:fadeScrollbars="true"
             android:orientation="horizontal"
             android:scrollbarSize="4dp"
             android:scrollbarThumbHorizontal="@drawable/icon_scrollbar"
             android:scrollbars="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
-        <!-- SCHEDULES -->
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Schedules -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:text="SCHEDULES"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="5dp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_schedule_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="SCHEDULES: COURSE"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!-- Right Arrow -->
+            <ImageButton
+                android:id="@+id/btn_course_next"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#0000"
+                android:src="@drawable/icon_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_schedules"
@@ -154,12 +174,72 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:fadeScrollbars="true"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:scrollbarSize="4dp"
             android:scrollbarThumbHorizontal="@drawable/icon_scrollbar"
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <!-- Bottom Navigation Menu - Floating Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_uni_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="25dp"
+        android:src="@drawable/icon_plus"
+        android:backgroundTint="#34D2A1"/>
+
+    <!-- Floating Button: Communications-->
+    <TextView
+        android:id="@+id/txt_add_uni_communication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COMMUNICATION"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nunito_bold"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="55dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_uni_communication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_fab"
+        app:layout_constraintEnd_toEndOf="@+id/add_fab"
+        android:src="@drawable/icon_communication"
+        android:backgroundTint="#34D2A1"/>
+
+    <!-- floating Button: Schedules -->
+    <TextView
+        android:id="@+id/txt_add_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SCHEDULE"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nunito_bold"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="100dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="115dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_fab"
+        app:layout_constraintEnd_toEndOf="@+id/add_fab"
+        android:src="@drawable/icon_schedule"
+        android:backgroundTint="#34D2A1"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

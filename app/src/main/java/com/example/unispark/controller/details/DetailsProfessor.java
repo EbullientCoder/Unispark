@@ -105,7 +105,7 @@ public class DetailsProfessor extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
-        txtCourse3 = findViewById(R.id.txt_professor_detail_course3);
+        /*txtCourse3 = findViewById(R.id.txt_professor_detail_course3);
         txtCourse3.setText(courses.get(2).getFullName());
         txtLink3 = findViewById(R.id.txt_professor_detail_link3);
         txtLink3.setText(courses.get(2).getLink());
@@ -116,6 +116,6 @@ public class DetailsProfessor extends AppCompatActivity {
                 Uri uri = Uri.parse(courses.get(2).getLink());
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
-        });
+        });*/
     }
 }

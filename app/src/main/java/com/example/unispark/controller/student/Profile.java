@@ -118,7 +118,7 @@ public class Profile extends AppCompatActivity
         addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchCourseFragment = new SearchCourseFragment(student);
+                searchCourseFragment = new SearchCourseFragment(student, coursesAdapter);
                 searchCourseFragment.show(getSupportFragmentManager(), "SearchCourse");
             }
         });
@@ -159,9 +159,6 @@ public class Profile extends AppCompatActivity
         boolean leaveCourse = CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
 
         if(leaveCourse){
-            //Leave Course
-            Toast.makeText(getApplicationContext(), coursesItem.get(position).getFullName() + ": Leaved", Toast.LENGTH_SHORT).show();
-
             //Remove Course from Student's joined Courses
             joinedCourses.remove(position);
             student.setCourses(joinedCourses);
@@ -170,6 +167,5 @@ public class Profile extends AppCompatActivity
             coursesAdapter.notifyItemRemoved(position);
         }
         else Toast.makeText(getApplicationContext(), "Cannot leave course: EXAM BOOKED", Toast.LENGTH_SHORT).show();
-
     }
 }
