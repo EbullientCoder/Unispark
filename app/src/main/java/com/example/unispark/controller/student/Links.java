@@ -14,20 +14,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
+import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.details.DetailsProfessor;
-import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentLinksDAO;
-import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.adapter.ProfessorsAdapter;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LinkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
@@ -40,6 +38,8 @@ public class Links extends AppCompatActivity
         LinksAdapter.OnDelBtnClickListener {
 
     //Attributes
+    //Menu
+    ImageButton menuButton;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //Professors
@@ -74,14 +74,40 @@ public class Links extends AppCompatActivity
 
 
 
+        //Menu
+        menuButton = findViewById(R.id.btn_menu);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+
+                //Serve un modo per determinare il giorno e la notte.
+                rightMenuAppController.dayColor();
+                rightMenuAppController.nightColor();
+            }
+        });
+
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
-        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.links);
+        //Remove Menu View's background
+        bottomNavigationView.setBackground(null);
+        //Remove Menu View's icons tint
+        bottomNavigationView.setItemIconTintList(null);
+        //Set StudentHomeGUIController button
+        bottomNavigationView.setSelectedItemId(R.id.links);
+        //Click Listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
-                overridePendingTransition(0, 0);
+                //Menu Applicative Controller
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(student, getApplicationContext(), item.getItemId());
+
+                //Start Activity
+                Intent intent = bottomMenuAppController.nextActivity();
+                startActivity(intent);
+                overridePendingTransition(0,0);
+
                 return true;
             }
         });

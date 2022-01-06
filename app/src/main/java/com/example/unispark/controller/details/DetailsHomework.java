@@ -2,7 +2,6 @@ package com.example.unispark.controller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.unispark.controller.professor.ProfessorHome;
-import com.example.unispark.controller.student.Home;
 import com.example.unispark.R;
 import com.example.unispark.model.HomeworkModel;
-import com.example.unispark.model.StudentModel;
 
 public class DetailsHomework extends AppCompatActivity {
     //Attributes
@@ -30,7 +26,7 @@ public class DetailsHomework extends AppCompatActivity {
     TextView txtExpiration;
     TextView txtInstructions;
     TextView txtPoints;
-    //Get Home
+    //Get StudentHomeGUIController
     String home;
     //Submit Button
     LinearLayout submitLayout;
@@ -77,8 +73,8 @@ public class DetailsHomework extends AppCompatActivity {
         txtInstructions.setText(homework.getInstructions());
         txtPoints = findViewById(R.id.txt_homework_detail_points);
         txtPoints.setText(homework.getPoints());
-        //Get Home
-        home = extras.getString("Home");
+        //Get StudentHomeGUIController
+        home = extras.getString("StudentHomeGUIController");
 
         //ProfessorHomework
         if(home.equals("ProfessorHome")){

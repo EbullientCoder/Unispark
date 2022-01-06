@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
+import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.menu.BottomNavigationMenu;
-import com.example.unispark.model.CourseModel;
+import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
@@ -32,6 +32,8 @@ implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
     //Attributes
+    //Menu
+    ImageButton menuButton;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //ExamModel
@@ -63,14 +65,40 @@ implements ExamAdapter.OnBookExamClickListener,
 
 
 
+        //Menu
+        menuButton = findViewById(R.id.btn_menu);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+
+                //Serve un modo per determinare il giorno e la notte.
+                rightMenuAppController.dayColor();
+                rightMenuAppController.nightColor();
+            }
+        });
+
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
-        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.exams);
+        //Remove Menu View's background
+        bottomNavigationView.setBackground(null);
+        //Remove Menu View's icons tint
+        bottomNavigationView.setItemIconTintList(null);
+        //Set StudentHomeGUIController button
+        bottomNavigationView.setSelectedItemId(R.id.exams);
+        //Click Listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
-                overridePendingTransition(0, 0);
+                //Menu Applicative Controller
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(student, getApplicationContext(), item.getItemId());
+
+                //Start Activity
+                Intent intent = bottomMenuAppController.nextActivity();
+                startActivity(intent);
+                overridePendingTransition(0,0);
+
                 return true;
             }
         });

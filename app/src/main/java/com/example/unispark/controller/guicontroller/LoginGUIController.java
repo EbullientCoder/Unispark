@@ -78,7 +78,7 @@ public class LoginGUIController extends AppCompatActivity {
         email = txtEmail.getEditText().getText().toString();
         password = txtPassword.getEditText().getText().toString();
 
-
+        //Checking User Credentials
         if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
             user = new BeanUser(email, password);
 

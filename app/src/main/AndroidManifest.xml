@@ -45,7 +45,7 @@
             android:name=".controller.guicontroller.LoginGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.SplashScreen"
+            android:name=".controller.guicontroller.SplashScreenGUIController"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.student.Home"
+            android:name=".controller.guicontroller.student.StudentHomeGUIController"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

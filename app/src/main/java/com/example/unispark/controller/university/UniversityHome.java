@@ -86,6 +86,8 @@ public class UniversityHome extends AppCompatActivity implements
             }
         });
 
+
+
         //Floating Button
         isOpen = false;
 

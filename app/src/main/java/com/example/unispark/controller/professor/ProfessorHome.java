@@ -12,11 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.details.DetailsHomework;
 import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
@@ -24,7 +24,7 @@ import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.database.dao.HomeworkDAO;
-import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
@@ -79,21 +79,39 @@ public class ProfessorHome extends AppCompatActivity implements
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Work in Progress", Toast.LENGTH_SHORT).show();
+                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+
+                //Serve un modo per determinare il giorno e la notte.
+                rightMenuAppController.dayColor();
+                rightMenuAppController.nightColor();
             }
         });
 
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
-        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.professor_home);
+        //Remove Menu View's background
+        bottomNavigationView.setBackground(null);
+        //Remove Menu View's icons tint
+        bottomNavigationView.setItemIconTintList(null);
+        //Set StudentHomeGUIController button
+        bottomNavigationView.setSelectedItemId(R.id.professor_home);
+        //Click Listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), professor));
-                overridePendingTransition(0, 0);
+                //Menu Applicative Controller
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(professor, getApplicationContext(), item.getItemId());
+
+                //Start Activity
+                Intent intent = bottomMenuAppController.nextActivity();
+                startActivity(intent);
+                overridePendingTransition(0,0);
+
                 return true;
             }
         });
+
 
         //Button: Add Homework - Communication
         isOpen = false;
@@ -214,7 +232,7 @@ public class ProfessorHome extends AppCompatActivity implements
         Intent intent = new Intent(this, DetailsHomework.class);
         //Pass Items to the new Activity
         intent.putExtra("Homework", homeworksItem.get(position));
-        intent.putExtra("Home", "ProfessorHome");
+        intent.putExtra("StudentHomeGUIController", "ProfessorHome");
         startActivity(intent);
     }
 

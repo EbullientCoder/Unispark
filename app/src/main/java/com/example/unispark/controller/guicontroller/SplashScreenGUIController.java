@@ -1,4 +1,4 @@
-package com.example.unispark.controller;
+package com.example.unispark.controller.guicontroller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,14 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.guicontroller.LoginGUIController;
+import com.example.unispark.controller.applicationcontroller.SplashScreen;
 import com.example.unispark.provaDB.SQLiteFillSampleDB;
 
-public class SplashScreen extends AppCompatActivity {
-    //Database
-    SQLiteFillSampleDB fillDB;
-    //Timeout
-    int timeout = 2000; //2000
+public class SplashScreenGUIController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +36,16 @@ public class SplashScreen extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
-        //Initializing Database
-        //fillDB = new SQLiteFillSampleDB(getApplicationContext());
-        //fillDB.initDatabase();
+        //Initializing Sample DB
+        SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
+        //splashScreenAppController.databaseConnection();
 
 
+        //Delayed Launch of Login (2 seconds)
         new Handler().postDelayed(() -> {
-            Intent i = new Intent(SplashScreen.this, LoginGUIController.class);
+            Intent i = new Intent(SplashScreenGUIController.this, LoginGUIController.class);
             startActivity(i);
             finish();
-        }, timeout);
+        }, 2000);
     }
 }

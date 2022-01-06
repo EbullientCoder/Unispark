@@ -2,16 +2,13 @@ package com.example.unispark.controller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.unispark.controller.student.Home;
 import com.example.unispark.R;
-import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
 public class DetailsProfCommunication extends AppCompatActivity {

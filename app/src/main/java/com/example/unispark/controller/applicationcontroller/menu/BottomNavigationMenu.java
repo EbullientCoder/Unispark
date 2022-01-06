@@ -1,4 +1,4 @@
-package com.example.unispark.menu;
+package com.example.unispark.controller.applicationcontroller.menu;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.professor.ProfessorProfile;
 import com.example.unispark.controller.student.Links;
 import com.example.unispark.controller.student.Exams;
-import com.example.unispark.controller.student.Home;
+import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
 import com.example.unispark.controller.student.Profile;
 import com.example.unispark.controller.student.Schedule;
 import com.example.unispark.model.UserModel;
@@ -20,21 +20,32 @@ import com.example.unispark.R;
 
 
 public class BottomNavigationMenu extends AppCompatActivity {
-    public static void visualSetting(BottomNavigationView bottomNavigationView, int id){
-        //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
-        //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
-        //Set Home button
-        bottomNavigationView.setSelectedItemId(id);
+    //Attributes
+    private UserModel user;
+    private Intent intent;
+    private Context context;
+    private int selectedID;
+
+
+    //Constructor
+    public BottomNavigationMenu(UserModel user, Context context, int selectedID){
+        //Model
+        this.user = user;
+
+        //New Activity
+        intent = null;
+        this.context = context;
+
+        //Menu
+        this.selectedID = selectedID;
     }
 
-    public static Intent functionalSetting(Context context, int id, UserModel user){
-        Intent intent = null;
 
-        switch (id){
+
+    public Intent nextActivity(){
+        switch (selectedID){
             //Student
-            case R.id.home: intent = new Intent(context, Home.class);
+            case R.id.home: intent = new Intent(context, StudentHomeGUIController.class);
                 break;
             case R.id.profile: intent = new Intent(context, Profile.class);
             break;
@@ -52,9 +63,6 @@ public class BottomNavigationMenu extends AppCompatActivity {
             break;
             case R.id.professor_exams: intent = new Intent(context, ProfessorExams.class);
             break;
-
-            //University
-            //case
         }
         intent.putExtra("UserObject", user);
 

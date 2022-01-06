@@ -14,19 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
 import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
-import com.example.unispark.menu.BottomNavigationMenu;
+import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Profile extends AppCompatActivity
@@ -34,6 +33,8 @@ public class Profile extends AppCompatActivity
         CoursesAdapter.OnCourseBtnClickListener {
 
     //Attributes
+    //Menu
+    ImageButton menuButton;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //Averages
@@ -71,6 +72,45 @@ public class Profile extends AppCompatActivity
 
 
 
+        //Menu
+        menuButton = findViewById(R.id.btn_menu);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+
+                //Serve un modo per determinare il giorno e la notte.
+                rightMenuAppController.dayColor();
+                rightMenuAppController.nightColor();
+            }
+        });
+
+
+        //Bottom Navigation Menu
+        bottomNavigationView = findViewById(R.id.bottomMenuView);
+        //Remove Menu View's background
+        bottomNavigationView.setBackground(null);
+        //Remove Menu View's icons tint
+        bottomNavigationView.setItemIconTintList(null);
+        //Set StudentHomeGUIController button
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+        //Click Listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //Menu Applicative Controller
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(student, getApplicationContext(), item.getItemId());
+
+                //Start Activity
+                Intent intent = bottomMenuAppController.nextActivity();
+                startActivity(intent);
+                overridePendingTransition(0,0);
+
+                return true;
+            }
+        });
+
+
         //Average
         List<VerbalizedExamModel> exams = student.getVerbalizedExams();
         float average = 0;
@@ -101,17 +141,6 @@ public class Profile extends AppCompatActivity
         wCircleAverage.setProgress((int) average, false);
 
 
-        //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
-        BottomNavigationMenu.visualSetting(bottomNavigationView, R.id.profile);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                startActivity(BottomNavigationMenu.functionalSetting(getApplicationContext(), item.getItemId(), student));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-        });
 
         //Open Fragment: Search Course
         addCourse = findViewById(R.id.btn_add_course);
