@@ -54,7 +54,7 @@ public class LessonsDAO {
     public static boolean removeLesson(LessonModel lesson)
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        int delete = db.delete("lessons","lesson='" + lesson.getLessonName() + "' and day=" + lesson.getDay() + "' and hour=" + lesson.getHour(),null);
+        int delete = db.delete("lessons","lesson='" + lesson.getLessonName() + "' and day='" + lesson.getDay() + "' and hour='" + lesson.getHour() + "'",null);
         if (delete > 0) return true;
         return false;
     }
