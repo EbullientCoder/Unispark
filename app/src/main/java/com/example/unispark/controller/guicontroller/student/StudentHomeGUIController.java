@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 
 import com.example.unispark.R;
 
+import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
+import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
@@ -35,11 +37,13 @@ public class StudentHomeGUIController extends AppCompatActivity{
     BottomNavigationView bottomNavigationView;
     //University Communications
     RecyclerView rvUniCommunications;
+    UniCommunicationsAdapter uniCommunicationsAdapter;
     //Professor Communications
     RecyclerView rvProfCommunications;
+    ProfCommunicationsAdapter profCommunicationsAdapter;
     //Homeworks
     RecyclerView rvHomeworks;
-    List<HomeworkModel> homeworksItem;
+    HomeworksAdapter homeworksAdapter;
     //Get Intent Extras
     Bundle extras;
     StudentModel student;
@@ -103,23 +107,26 @@ public class StudentHomeGUIController extends AppCompatActivity{
         //Uni Communications
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Application Controller
-        ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications(student, getApplicationContext(), rvUniCommunications);
-        uniCommunicationsAppController.setCommunicationsAdapter();
+        ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications(student, getApplicationContext());
+        uniCommunicationsAdapter = uniCommunicationsAppController.setCommunicationsAdapter();
+        rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
 
 
         //Prof Communications
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
         //Application Controller
-        ShowProfCommunications profCommunicationsAppController = new ShowProfCommunications(student, getApplicationContext(), rvProfCommunications);
-        profCommunicationsAppController.setCommunicationsAdapter();
+        ShowProfCommunications profCommunicationsAppController = new ShowProfCommunications(student, getApplicationContext());
+        profCommunicationsAdapter = profCommunicationsAppController.setCommunicationsAdapter();
+        rvProfCommunications.setAdapter(profCommunicationsAdapter);
 
 
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
         //Application Controller
-        ShowHomeworks homeworksAppController = new ShowHomeworks(student, getApplicationContext(), rvHomeworks);
-        homeworksAppController.setStudentHomeworksAdapter();
+        ShowHomeworks homeworksAppController = new ShowHomeworks(student, getApplicationContext());
+        homeworksAdapter = homeworksAppController.setStudentHomeworksAdapter();
+        rvHomeworks.setAdapter(homeworksAdapter);
     }
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unispark.R;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -28,7 +29,8 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
     //Methods
     public UniCommunicationsAdapter(List<UniversityCommunicationModel> items, OnUniComClickListener onUniComClickListener){
-        this.items = items;
+        if(items == null) this.items = new ArrayList<>();
+        else this.items = items;
         this.onUniComClickListener = onUniComClickListener;
     }
 

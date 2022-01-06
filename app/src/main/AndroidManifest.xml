@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.student.Exams"
+            android:name=".controller.guicontroller.student.StudentExamsGUIController"
             android:exported="true" />
         <activity
             android:name=".controller.student.Schedule"
@@ -72,7 +72,7 @@
             android:name=".controller.student.Links"
             android:exported="true" />
         <activity
-            android:name=".controller.student.Profile"
+            android:name=".controller.guicontroller.student.StudentProfileGUIController"
             android:exported="true" />
 
         <meta-data

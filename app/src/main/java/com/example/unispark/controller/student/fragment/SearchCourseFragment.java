@@ -97,8 +97,8 @@ public class SearchCourseFragment extends DialogFragment
 
         //Add Course to the Student's Joined Courses
         joinedCourses = student.getCourses();
-        if (joinedCourses ==  null) joinedCourses = new ArrayList<>();
-        joinedCourses.add(coursesItem.get(position));
+        if (joinedCourses == null) joinedCourses = new ArrayList<>();
+        joinedCourses.add(0, coursesItem.get(position));
         student.setCourses(joinedCourses);
 
         //Notify the Joined Courses Adapter

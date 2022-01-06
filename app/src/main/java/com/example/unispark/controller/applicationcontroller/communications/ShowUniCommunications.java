@@ -20,7 +20,6 @@ public class ShowUniCommunications implements UniCommunicationsAdapter.OnUniComC
     //Attributes
     Context context;
     //Communications
-    RecyclerView rvUniCommunications;
     UniCommunicationsAdapter communicationsAdapter;
     List<UniversityCommunicationModel> uniCommunicationsItem;
     //User Model
@@ -31,45 +30,41 @@ public class ShowUniCommunications implements UniCommunicationsAdapter.OnUniComC
 
     //Constructor
     //Student
-    public ShowUniCommunications(StudentModel student, Context context, RecyclerView rvUniCommunications){
+    public ShowUniCommunications(StudentModel student, Context context){
         this.student = student;
         this.context = context;
 
         //Communications
-        this.rvUniCommunications = rvUniCommunications;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
         communicationsAdapter = null;
     }
 
     //Professor
-    public ShowUniCommunications(ProfessorModel professor, Context context, RecyclerView rvUniCommunications){
+    public ShowUniCommunications(ProfessorModel professor, Context context){
         this.professor = professor;
         this.context = context;
 
         //Communications
-        this.rvUniCommunications = rvUniCommunications;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
         communicationsAdapter = null;
     }
 
     //University
-    public ShowUniCommunications(UniversityModel university, Context context, RecyclerView rvUniCommunications){
+    public ShowUniCommunications(UniversityModel university, Context context){
         this.university = university;
         this.context = context;
 
         //Communications
-        this.rvUniCommunications = rvUniCommunications;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
         communicationsAdapter = null;
     }
 
 
     //Communications Adapter
-    public void setCommunicationsAdapter(){
-        if(uniCommunicationsItem != null){
-            communicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
-            rvUniCommunications.setAdapter(communicationsAdapter);
-        }
+    public UniCommunicationsAdapter setCommunicationsAdapter(){
+        communicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+
+        return communicationsAdapter;
     }
 
 

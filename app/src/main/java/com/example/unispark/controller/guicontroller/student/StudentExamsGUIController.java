@@ -1,4 +1,4 @@
-package com.example.unispark.controller.student;
+package com.example.unispark.controller.guicontroller.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Exams extends AppCompatActivity
+public class StudentExamsGUIController extends AppCompatActivity
 implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
@@ -79,6 +79,7 @@ implements ExamAdapter.OnBookExamClickListener,
         });
 
 
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
@@ -102,6 +103,7 @@ implements ExamAdapter.OnBookExamClickListener,
                 return true;
             }
         });
+
 
 
         //ExamModel List
@@ -183,7 +185,7 @@ implements ExamAdapter.OnBookExamClickListener,
         }
     }
 
-    //Page: Upcoming Exams
+    //Page: Upcoming StudentExamsGUIController
     private void bookExams(){
         //Set Title
         examsTitle.setText("BOOK UPCOMING EXAMS");
@@ -200,7 +202,7 @@ implements ExamAdapter.OnBookExamClickListener,
         }
     }
 
-    //Page: Booked Exams
+    //Page: Booked StudentExamsGUIController
     private void bookedExams(){
         //Set Title
         examsTitle.setText("BOOKED EXAMS");
@@ -223,7 +225,7 @@ implements ExamAdapter.OnBookExamClickListener,
         //Make the Connection inside the DB
         boolean isBooked = ExamsDAO.bookExam((BookExamModel) examsItem.get(position).getObject(), student.getId());
         if (isBooked){
-            //Adding the Booked Exam into the Student's Exams List
+            //Adding the Booked Exam into the Student's StudentExamsGUIController List
             exams.add((BookExamModel) examsItem.get(position).getObject());
             student.setBookedExams(exams);
 

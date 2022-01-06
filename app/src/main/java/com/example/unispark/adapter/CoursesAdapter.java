@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unispark.R;
 import com.example.unispark.model.CourseModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -40,7 +41,10 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //Methods
     public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener,
                           OnCourseBtnClickListener onCourseBtnClickListener, String type){
-        this.items = items;
+        //If the Course List is empty:
+        if(items == null) this.items = new ArrayList<>();
+        else this.items = items;
+
         this.onCourseClickListener = onCourseClickListener;
         this.onCourseBtnClickListener = onCourseBtnClickListener;
         this.type = type;

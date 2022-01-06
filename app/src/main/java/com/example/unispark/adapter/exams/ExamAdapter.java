@@ -71,7 +71,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     )
             );
         }
-        //Professor: View Assigned Exams
+        //Professor: View Assigned StudentExamsGUIController
         else if(viewType == 1){
             return new UpcomingExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -81,7 +81,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     ), onViewExamClickListener
             );
         }
-        //Student: Book Exams
+        //Student: Book StudentExamsGUIController
         else if(viewType == 2){
             return new BookExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -91,7 +91,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     ), onBookExamClickListener
             );
         }
-        //Student: Booked Exams
+        //Student: Booked StudentExamsGUIController
         else{
             return new BookedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -105,22 +105,22 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //Verbalized - Failed Exams
+        //Verbalized - Failed StudentExamsGUIController
         if(getItemViewType(position) == 0){
             VerbalizedExamModel vExam = (VerbalizedExamModel) examItems.get(position).getObject();
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
         }
-        //Professor: Assigned Exams
+        //Professor: Assigned StudentExamsGUIController
         else if(getItemViewType(position) == 1){
             BookExamModel assignedExam = (BookExamModel) examItems.get(position).getObject();
             ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
         }
-        //Student: Book Exams
+        //Student: Book StudentExamsGUIController
         else if(getItemViewType(position) == 2){
             BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
             ((BookExamViewHolder) holder).setBookExamDate(bookExam);
         }
-        //Student: Booked Exams
+        //Student: Booked StudentExamsGUIController
         else {
             BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
             ((BookedExamViewHolder) holder).setBookedExamDate(bookExam);
@@ -139,7 +139,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
 
-    //0: Verbalized - Failed Exams
+    //0: Verbalized - Failed StudentExamsGUIController
     static class VerbalizedExamViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         private TextView ExamName;
@@ -168,7 +168,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    //1: Professor Assigned Exams
+    //1: Professor Assigned StudentExamsGUIController
     static class UpcomingExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         private TextView ExamName;

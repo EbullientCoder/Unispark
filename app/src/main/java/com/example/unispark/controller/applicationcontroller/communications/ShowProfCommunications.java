@@ -18,7 +18,6 @@ public class ShowProfCommunications implements ProfCommunicationsAdapter.OnProfC
     //Attributes
     Context context;
     //Communications
-    RecyclerView rvProfCommunications;
     ProfCommunicationsAdapter communicationsAdapter;
     List<ProfessorCommunicationModel> profCommunicationsItem;
     //User Model
@@ -27,19 +26,18 @@ public class ShowProfCommunications implements ProfCommunicationsAdapter.OnProfC
 
     //Constructor
     //Student
-    public ShowProfCommunications(StudentModel student, Context context, RecyclerView rvProfCommunications){
+    public ShowProfCommunications(StudentModel student, Context context){
         this.student = student;
         this.context = context;
 
         //Communications
-        this.rvProfCommunications = rvProfCommunications;
         profCommunicationsItem = null;
         communicationsAdapter = null;
     }
 
 
     //Communications Adapter
-    public void setCommunicationsAdapter(){
+    public ProfCommunicationsAdapter setCommunicationsAdapter(){
         List<String> courseShortnames = new ArrayList<>();
         List<String> courseFullNames = new ArrayList<>();
 
@@ -51,10 +49,10 @@ public class ShowProfCommunications implements ProfCommunicationsAdapter.OnProfC
             }
 
             profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames, courseFullNames);
-
-            communicationsAdapter = new ProfCommunicationsAdapter(profCommunicationsItem, this);
-            rvProfCommunications.setAdapter(communicationsAdapter);
         }
+        communicationsAdapter = new ProfCommunicationsAdapter(profCommunicationsItem, this);
+
+        return communicationsAdapter;
     }
 
 

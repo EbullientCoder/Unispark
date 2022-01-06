@@ -18,7 +18,6 @@ public class ShowHomeworks implements HomeworksAdapter.OnHomeworkBtnClickListene
     //Attributes
     Context context;
     //Homeworks
-    RecyclerView rvHomeworks;
     HomeworksAdapter homeworksAdapter;
     List<HomeworkModel> homeworksItem;
     //User Model
@@ -28,42 +27,38 @@ public class ShowHomeworks implements HomeworksAdapter.OnHomeworkBtnClickListene
 
     //Constructor
     //Student
-    public ShowHomeworks(StudentModel student, Context context, RecyclerView rvHomeworks){
+    public ShowHomeworks(StudentModel student, Context context){
         this.student = student;
         this.context = context;
 
         //Communications
-        this.rvHomeworks = rvHomeworks;
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
         homeworksAdapter = null;
     }
 
     //Professor
-    public ShowHomeworks(ProfessorModel professor, Context context, RecyclerView rvHomeworks){
+    public ShowHomeworks(ProfessorModel professor, Context context){
         this.professor = professor;
         this.context = context;
 
         //Communications
-        this.rvHomeworks = rvHomeworks;
         homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
         homeworksAdapter = null;
     }
 
 
     //Student Homeworks Adapter
-    public void setStudentHomeworksAdapter() {
-        if(homeworksItem != null){
-            homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "STUDENT");
-            rvHomeworks.setAdapter(homeworksAdapter);
-        }
+    public HomeworksAdapter setStudentHomeworksAdapter() {
+        homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "STUDENT");
+
+        return homeworksAdapter;
     }
 
     //Professor Homeworks Adapter
-    public void setProfessorHomeworksAdapter() {
-        if(homeworksItem != null){
-            homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
-            rvHomeworks.setAdapter(homeworksAdapter);
-        }
+    public HomeworksAdapter setProfessorHomeworksAdapter() {
+        homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
+
+        return homeworksAdapter;
     }
 
 

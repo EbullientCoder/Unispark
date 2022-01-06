@@ -1,4 +1,4 @@
-package com.example.unispark.controller.student;
+package com.example.unispark.controller.guicontroller.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
+import com.example.unispark.controller.applicationcontroller.courses.ShowJoinedCourses;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
 import com.example.unispark.database.dao.CourseDAO;
@@ -28,9 +30,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.List;
 
-public class Profile extends AppCompatActivity
-        implements CoursesAdapter.OnCourseClickListener,
-        CoursesAdapter.OnCourseBtnClickListener {
+public class StudentProfileGUIController extends AppCompatActivity{
 
     //Attributes
     //Menu
@@ -44,7 +44,6 @@ public class Profile extends AppCompatActivity
     CircularProgressIndicator wCircleAverage;
     //Courses
     RecyclerView rvCourses;
-    List<CourseModel> coursesItem;
     CoursesAdapter coursesAdapter;
     //Search Course
     ImageButton addCourse;
@@ -56,11 +55,8 @@ public class Profile extends AppCompatActivity
     TextView txtFullName;
     StudentModel student;
 
-    private static final String YEAR = "2020/2021";
-
 
     //Methods
-    //Constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +80,7 @@ public class Profile extends AppCompatActivity
                 rightMenuAppController.nightColor();
             }
         });
+
 
 
         //Bottom Navigation Menu
@@ -111,38 +108,31 @@ public class Profile extends AppCompatActivity
         });
 
 
-        //Average
-        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
-        float average = 0;
-        float CFU = 0;
+
+        //Use Case: Calculate Averages
         //Arithmetic Average
-        if(exams != null){
-            for(int i = 0; i < exams.size(); i++) average += Double.parseDouble(exams.get(i).getResult());
-            average = average/exams.size();
-        }
         aAverage = findViewById(R.id.txt_arithmetic_average_number);
-        aAverage.setText(String.format("%.02f", average));
-        average = (average * 100 / 35);
         aCircleAverage = findViewById(R.id.avg_arithmetic_average);
-        aCircleAverage.setProgress((int) average, false);
+        //Application Controller
+        CalculateAverage averageAppController = new CalculateAverage(student, getApplicationContext());
+        float average = averageAppController.arithmeticAverage();
+        int cAverage = averageAppController.graphicArithmeticAverage(average);
+        aAverage.setText(String.format("%.02f", average));
+        aCircleAverage.setProgress(cAverage, false);
+
         //Weighted Average
-        average = 0;
-        if(exams != null){
-            for(int i = 0; i < exams.size(); i++){
-                average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCFU()));
-                CFU += Double.parseDouble(exams.get(i).getCFU());
-            }
-            average = average/CFU;
-        }
         wAverage = findViewById(R.id.txt_weighted_average_number);
-        wAverage.setText(String.format("%.02f", average));
-        average = (average * 100 / 36);
         wCircleAverage = findViewById(R.id.avg_weighted_average);
-        wCircleAverage.setProgress((int) average, false);
+        //Application Controller
+        average = averageAppController.weightedAverage();
+        cAverage = averageAppController.graphicWeightedAverage(average);
+        wAverage.setText(String.format("%.02f", average));
+        wCircleAverage.setProgress(cAverage, false);
 
 
 
-        //Open Fragment: Search Course
+        //Use Case: Search Course
+        //Open SearchCourse Fragment
         addCourse = findViewById(R.id.btn_add_course);
         addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,48 +143,20 @@ public class Profile extends AppCompatActivity
         });
 
 
-        //Profile Picture
+
+        //Student Picture
         imgProfile = findViewById(R.id.img_user_image);
         imgProfile.setImageResource(student.getProfilePicture());
-        //Name
+
+        //Student Name
         txtFullName = findViewById(R.id.txt_user_fullname);
         txtFullName.setText(student.getFirstName() + " " + student.getLastName());
 
-        //Courses
+        //Student Courses
         rvCourses = findViewById(R.id.rv_courses);
-        coursesItem = student.getCourses();
-
-
-        if (coursesItem  != null){
-            coursesAdapter = new CoursesAdapter(coursesItem, this, this,"LEAVE");
-            rvCourses.setAdapter(coursesAdapter);
-        }
-
-
-    }
-
-    @Override
-    public void onCourseClick(int position) {
-        Intent intent = new Intent(this, DetailsCourse.class);
-        intent.putExtra("Course", coursesItem.get(position));
-        startActivity(intent);
-    }
-
-    @Override
-    public void onButtonClick(int position) {
-        List<CourseModel> joinedCourses = student.getCourses();
-
-        //Remove Course Joined from DB
-        boolean leaveCourse = CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
-
-        if(leaveCourse){
-            //Remove Course from Student's joined Courses
-            joinedCourses.remove(position);
-            student.setCourses(joinedCourses);
-
-            //Notify changed dimension to the Adapter
-            coursesAdapter.notifyItemRemoved(position);
-        }
-        else Toast.makeText(getApplicationContext(), "Cannot leave course: EXAM BOOKED", Toast.LENGTH_SHORT).show();
+        //Application Controller
+        ShowJoinedCourses joinedCoursesAppController = new ShowJoinedCourses(student, getApplicationContext());
+        coursesAdapter = joinedCoursesAppController.setCoursesAdapter();
+        rvCourses.setAdapter(coursesAdapter);
     }
 }

@@ -42,7 +42,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!-- Profile Image -->
+    <!-- StudentProfileGUIController Image -->
     <ImageView
         android:id="@+id/img_professor_detail_image"
         android:layout_width="100dp"

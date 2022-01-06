@@ -84,7 +84,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String DATE = "date";
     public static final String PROF_COMMUNICATIONS = "professorcommunications";
 
-    //Exams tables
+    //StudentExamsGUIController tables
     public static final String EXAMS = "exams";
     public static final String EXAM_GRADES = "examgrades";
     public static final String EXAM_NAME = "examname";
@@ -170,12 +170,12 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         db.execSQL(createTableStatement);
 
-        //Exams table
+        //StudentExamsGUIController table
         createTableStatement = "CREATE TABLE " + EXAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EXAM_NAME + " TEXT, " + DATE + " TEXT, " + BUILDING + " TEXT, " + CLASS + " TEXT);";
 
         db.execSQL(createTableStatement);
 
-        //Exams grades table
+        //StudentExamsGUIController grades table
         createTableStatement = "CREATE TABLE  " + EXAM_GRADES + " (" + ID + " INTEGER, " + EXAM_NAME + " TEXT, " + STUDENT_ID + " TEXT, " + GRADE + " TEXT);";
 
         db.execSQL(createTableStatement);
