@@ -37,8 +37,8 @@ public class SplashScreenGUIController extends AppCompatActivity {
 
 
         //Initializing Sample DB
-        SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
-        //splashScreenAppController.databaseConnection();
+        SplashScreen splashScreenAppController = new SplashScreen();
+        //splashScreenAppController.databaseConnection(getApplicationContext());
 
 
         //Delayed Launch of Login (2 seconds)

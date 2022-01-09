@@ -14,10 +14,13 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
+import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
+import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
+import com.example.unispark.model.UniversityModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -25,16 +28,14 @@ public class LoginGUIController extends AppCompatActivity {
 
     //User Selector
     String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
-    private AutoCompleteTextView autoCompleteTxt;
+    AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     String userSelection;
     //Database: Email & Password
-    private TextInputLayout txtEmail;
-    String email;
-    private TextInputLayout txtPassword;
-    String password;
+    TextInputLayout txtEmail;
+    TextInputLayout txtPassword;
     //LoginGUIController Button
-    private Button loginButton;
+    Button loginButton;
 
 
     //Methods
@@ -72,11 +73,11 @@ public class LoginGUIController extends AppCompatActivity {
     //LoginGUIController Method
     void loginMethod(){
         BeanUser user;
-        Login loginAppController = new Login(getApplicationContext());
+        Login loginAppController = new Login();
         Intent intent;
 
-        email = txtEmail.getEditText().getText().toString();
-        password = txtPassword.getEditText().getText().toString();
+        String email = txtEmail.getEditText().getText().toString();
+        String password = txtPassword.getEditText().getText().toString();
 
         //Checking User Credentials
         if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
@@ -84,20 +85,44 @@ public class LoginGUIController extends AppCompatActivity {
 
             switch (userSelection) {
                 case "STUDENT":
-                    intent = loginAppController.studentLogin(user);
-                    if(intent != null) startActivity(intent);
+                    //Get Student Model
+                    StudentModel student = loginAppController.studentLogin(user);
+
+                    if(student.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                    else{
+                        intent = new Intent(getApplicationContext(), StudentHomeGUIController.class);
+                        intent.putExtra("UserObject", student);
+
+                        startActivity(intent);
+                    }
 
                     break;
 
                 case "PROFESSOR":
-                    intent = loginAppController.professorLogin(user);
-                    if(intent != null) startActivity(intent);
+                    //Get Professor Model
+                    ProfessorModel professor = loginAppController.professorLogin(user);
+
+                    if(professor.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                    else{
+                        intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                        intent.putExtra("UserObject", professor);
+
+                        startActivity(intent);
+                    }
 
                     break;
 
                 case "UNIVERSITY":
-                    intent = loginAppController.universityLogin(user);
-                    if(intent != null) startActivity(intent);
+                    //Get University Model
+                    UniversityModel university = loginAppController.universityLogin(user);
+
+                    if(university.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                    else{
+                        intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                        intent.putExtra("UserObject", university);
+
+                        startActivity(intent);
+                    }
 
                     break;
             }

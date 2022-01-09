@@ -16,50 +16,23 @@ import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 
 public class Login {
-    private Context context;
-    private Intent intent;
-
-
-    //Constructor
-    public Login(Context context){
-        this.context = context;
-        intent = null;
-    }
 
     //Login Methods
-    public Intent studentLogin(BeanUser user){
+    public StudentModel studentLogin(BeanUser user){
         StudentModel student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
 
-        if(student.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
-        else{
-            intent = new Intent(context, StudentHomeGUIController.class);
-            intent.putExtra("UserObject", student);
-        }
-
-        return intent;
+        return student;
     }
 
-    public Intent professorLogin(BeanUser user){
+    public ProfessorModel professorLogin(BeanUser user){
         ProfessorModel professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
 
-        if(professor.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
-        else{
-            intent = new Intent(context, ProfessorHome.class);
-            intent.putExtra("UserObject", professor);
-        }
-
-        return intent;
+        return professor;
     }
 
-    public Intent universityLogin(BeanUser user){
+    public UniversityModel universityLogin(BeanUser user){
         UniversityModel university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
 
-        if(university.getEmail() == null) Toast.makeText(context, "Wrong Credentials", Toast.LENGTH_SHORT).show();
-        else{
-            intent = new Intent(context, UniversityHome.class);
-            intent.putExtra("UserObject", university);
-        }
-
-        return intent;
+        return university;
     }
 }
