@@ -12,6 +12,7 @@ import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowHomeworks{
@@ -20,7 +21,8 @@ public class ShowHomeworks{
         List<HomeworkModel> homeworksItem;
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
 
-        return homeworksItem;
+        if(homeworksItem != null) return homeworksItem;
+        else return new ArrayList<>();
     }
 
     //Professor
@@ -28,6 +30,7 @@ public class ShowHomeworks{
         List<HomeworkModel> homeworksItem;
         homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
 
-        return homeworksItem;
+        if(homeworksItem != null) return homeworksItem;
+        else return new ArrayList<>();
     }
 }

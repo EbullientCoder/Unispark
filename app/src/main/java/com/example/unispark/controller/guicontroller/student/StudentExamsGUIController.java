@@ -106,14 +106,14 @@ implements ExamAdapter.OnBookExamClickListener,
 
 
 
+        //ExamModel Page Title
+        examsTitle = findViewById(R.id.txt_exams_title);
         //ExamModel List
         rvExams = findViewById(R.id.rv_exams);
         examsItem = new ArrayList<>();
-        //ExamModel Page Title
-        examsTitle = findViewById(R.id.txt_exams_title);
         //ExamModel Page Menu Buttons
-        btnPageRight = (ImageButton) findViewById(R.id.btn_exams_next);
-        btnPageLeft = (ImageButton) findViewById(R.id.btn_exams_previusly);
+        btnPageRight = findViewById(R.id.btn_exams_next);
+        btnPageLeft = findViewById(R.id.btn_exams_previusly);
         page = 0;
         //Right Click
         btnPageRight.setOnClickListener(new View.OnClickListener() {

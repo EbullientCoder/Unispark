@@ -30,6 +30,7 @@ import com.example.unispark.controller.applicationcontroller.menu.BottomNavigati
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentHomeGUIController extends AppCompatActivity

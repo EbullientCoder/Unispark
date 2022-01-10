@@ -32,6 +32,7 @@ public class ShowProfCommunications{
             profCommunicationsItem = CommunicationsDAO.getAllCoursesCommunications(courseShortnames, courseFullNames);
         }
 
-        return profCommunicationsItem;
+        if(profCommunicationsItem != null) return profCommunicationsItem;
+        else return new ArrayList<>();
     }
 }

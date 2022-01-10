@@ -10,26 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowExams {
-    //Attributes
-    Context context;
-    //Exams
-    ExamAdapter examAdapter;
-    List<ExamItem> examsItem;
-    //User Model
-    StudentModel student;
 
-
-    //Constructor
-    public ShowExams(StudentModel student, Context context){
-        this.student = student;
-        this.context = context;
-
-        //Exams
-        examAdapter = null;
-        examsItem = new ArrayList<>();
-    }
-
-
-    //Exams Adapter
+    //Student
+    //Verbalized Exams
 
 }

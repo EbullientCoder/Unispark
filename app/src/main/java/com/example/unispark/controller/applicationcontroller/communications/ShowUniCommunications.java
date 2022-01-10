@@ -14,6 +14,7 @@ import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowUniCommunications{
@@ -22,7 +23,8 @@ public class ShowUniCommunications{
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
 
-        return uniCommunicationsItem;
+        if(uniCommunicationsItem != null) return uniCommunicationsItem;
+        else return new ArrayList<>();
     }
 
     //Professor
@@ -30,7 +32,8 @@ public class ShowUniCommunications{
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-        return uniCommunicationsItem;
+        if(uniCommunicationsItem != null) return uniCommunicationsItem;
+        else return new ArrayList<>();
     }
 
     //University
@@ -38,6 +41,7 @@ public class ShowUniCommunications{
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
 
-        return uniCommunicationsItem;
+        if(uniCommunicationsItem != null) return uniCommunicationsItem;
+        else return new ArrayList<>();
     }
 }
