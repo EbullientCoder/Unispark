@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.university.fragment.AddScheduleFragment;
@@ -130,16 +131,14 @@ public class UniversityHome extends AppCompatActivity implements
 
 
 
-        //------------------------------------------------------------------------------------------
-
         //Assigned Communications
         rvUniCommunications = findViewById(R.id.rv_assigned_communications);
-        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
+        //Application Controller
+        ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
+        uniCommunicationsItem = uniCommunicationsAppController.setUniversityCommunications();
+        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+        rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
-        if(uniCommunicationsItem != null){
-            uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
-            rvUniCommunications.setAdapter(uniCommunicationsAdapter);
-        }
 
 
         //Schedules
@@ -219,11 +218,14 @@ public class UniversityHome extends AppCompatActivity implements
     }
 
 
+
+    //On UniversityCommunications Click
     @Override
     public void onUniClick(int position) {
         Intent intent = new Intent(this, DetailsUniCommunication.class);
         //Pass Items to the new Activity
         intent.putExtra("Communication", uniCommunicationsItem.get(position));
+
         startActivity(intent);
     }
 

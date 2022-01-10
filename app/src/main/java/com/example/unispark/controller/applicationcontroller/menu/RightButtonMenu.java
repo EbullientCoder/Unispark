@@ -4,21 +4,14 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class RightButtonMenu {
-    //Attributes
-    private Context context;
-
-    //Constructor
-    public RightButtonMenu(Context context){
-        this.context = context;
-    }
 
     //Change into DAY COLOR
-    public void dayColor(){
+    public void dayColor(Context context){
         Toast.makeText(context, "DAY COLOR", Toast.LENGTH_SHORT).show();
     }
 
     //Change into NIGHT COLOR
-    public void nightColor(){
+    public void nightColor(Context context){
         Toast.makeText(context, "NIGHT COLOR", Toast.LENGTH_SHORT).show();
     }
 }

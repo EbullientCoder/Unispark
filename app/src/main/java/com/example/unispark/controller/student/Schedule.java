@@ -61,11 +61,11 @@ public class Schedule extends AppCompatActivity{
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+                RightButtonMenu rightMenuAppController = new RightButtonMenu();
 
                 //Serve un modo per determinare il giorno e la notte.
-                rightMenuAppController.dayColor();
-                rightMenuAppController.nightColor();
+                rightMenuAppController.dayColor(getApplicationContext());
+                rightMenuAppController.nightColor(getApplicationContext());
             }
         });
 
@@ -83,10 +83,10 @@ public class Schedule extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(student, getApplicationContext(), item.getItemId());
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity();
+                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 

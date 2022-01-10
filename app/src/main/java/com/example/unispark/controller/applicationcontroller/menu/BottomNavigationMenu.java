@@ -19,33 +19,14 @@ import com.example.unispark.R;
 
 
 public class BottomNavigationMenu extends AppCompatActivity {
-    //Attributes
-    private UserModel user;
-    private Intent intent;
-    private Context context;
-    private int selectedID;
 
+    public Intent nextActivity(UserModel user, Context context, int selectedID){
+        Intent intent = null;
 
-    //Constructor
-    public BottomNavigationMenu(UserModel user, Context context, int selectedID){
-        //Model
-        this.user = user;
-
-        //New Activity
-        intent = null;
-        this.context = context;
-
-        //Menu
-        this.selectedID = selectedID;
-    }
-
-
-
-    public Intent nextActivity(){
         switch (selectedID){
             //Student
             case R.id.home: intent = new Intent(context, StudentHomeGUIController.class);
-                break;
+            break;
             case R.id.profile: intent = new Intent(context, StudentProfileGUIController.class);
             break;
             case R.id.exams: intent = new Intent(context, StudentExamsGUIController.class);

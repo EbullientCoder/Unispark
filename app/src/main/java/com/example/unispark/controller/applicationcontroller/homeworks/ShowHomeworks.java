@@ -14,65 +14,20 @@ import com.example.unispark.model.StudentModel;
 
 import java.util.List;
 
-public class ShowHomeworks implements HomeworksAdapter.OnHomeworkBtnClickListener{
-    //Attributes
-    Context context;
-    //Homeworks
-    HomeworksAdapter homeworksAdapter;
-    List<HomeworkModel> homeworksItem;
-    //User Model
-    StudentModel student;
-    ProfessorModel professor;
-
-
-    //Constructor
+public class ShowHomeworks{
     //Student
-    public ShowHomeworks(StudentModel student, Context context){
-        this.student = student;
-        this.context = context;
-
-        //Communications
+    public List<HomeworkModel> setStudentHomeworks(StudentModel student){
+        List<HomeworkModel> homeworksItem;
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
-        homeworksAdapter = null;
+
+        return homeworksItem;
     }
 
     //Professor
-    public ShowHomeworks(ProfessorModel professor, Context context){
-        this.professor = professor;
-        this.context = context;
-
-        //Communications
+    public List<HomeworkModel> setProfessorHomeworks(ProfessorModel professor){
+        List<HomeworkModel> homeworksItem;
         homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
-        homeworksAdapter = null;
-    }
 
-
-    //Student Homeworks Adapter
-    public HomeworksAdapter setStudentHomeworksAdapter() {
-        homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "STUDENT");
-
-        return homeworksAdapter;
-    }
-
-    //Professor Homeworks Adapter
-    public HomeworksAdapter setProfessorHomeworksAdapter() {
-        homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
-
-        return homeworksAdapter;
-    }
-
-
-
-    //On HomeworksClick
-    @Override
-    public void onBtnClick(int position) {
-        Intent intent = new Intent(context, DetailsHomework.class);
-        //Pass Items to the new Activity
-        intent.putExtra("Homework", homeworksItem.get(position));
-        intent.putExtra("StudentHomeGUIController", "StudentHome");
-        //Start New Activity from Outside an Activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        context.startActivity(intent);
+        return homeworksItem;
     }
 }

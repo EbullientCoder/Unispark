@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
+import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
+import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.details.DetailsHomework;
 import com.example.unispark.controller.details.DetailsUniCommunication;
@@ -52,6 +55,7 @@ public class ProfessorHome extends AppCompatActivity implements
     BottomNavigationView bottomNavigationView;
     //Communications
     RecyclerView rvUniCommunications;
+    UniCommunicationsAdapter uniCommunicationsAdapter;
     List<UniversityCommunicationModel> uniCommunicationsItem;
     //Homeworks
     RecyclerView rvHomeworks;
@@ -79,13 +83,14 @@ public class ProfessorHome extends AppCompatActivity implements
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+                RightButtonMenu rightMenuAppController = new RightButtonMenu();
 
                 //Serve un modo per determinare il giorno e la notte.
-                rightMenuAppController.dayColor();
-                rightMenuAppController.nightColor();
+                rightMenuAppController.dayColor(getApplicationContext());
+                rightMenuAppController.nightColor(getApplicationContext());
             }
         });
+
 
 
         //Bottom Navigation Menu
@@ -101,16 +106,17 @@ public class ProfessorHome extends AppCompatActivity implements
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(professor, getApplicationContext(), item.getItemId());
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity();
+                Intent intent = bottomMenuAppController.nextActivity(professor, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
                 return true;
             }
         });
+
 
 
         //Button: Add Homework - Communication
@@ -169,22 +175,23 @@ public class ProfessorHome extends AppCompatActivity implements
 
 
 
-        //------------------------------------------------------------------------------------------
-
         //Uni Communications
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
-        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
+        //Application Controller
+        ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
+        uniCommunicationsItem = uniCommunicationsAppController.setProfessorCommunications(professor);
+        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+        rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
-        if(uniCommunicationsItem != null) rvUniCommunications.setAdapter(new UniCommunicationsAdapter(uniCommunicationsItem, this));
+
 
         //Homeworks
         rvHomeworks = findViewById(R.id.rv_homeworks);
-        homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
-
-        if(homeworksItem != null) {
-            homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
-            rvHomeworks.setAdapter(homeworkAdapter);
-        }
+        //Application Controller
+        ShowHomeworks homeworksAppController = new ShowHomeworks();
+        homeworksItem = homeworksAppController.setProfessorHomeworks(professor);
+        homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
+        rvHomeworks.setAdapter(homeworkAdapter);
     }
 
 
@@ -226,6 +233,17 @@ public class ProfessorHome extends AppCompatActivity implements
     }
 
 
+
+    //University Communication Click
+    @Override
+    public void onUniClick(int position) {
+        Intent intent = new Intent(this, DetailsUniCommunication.class);
+        //Pass Items to the new Activity
+        intent.putExtra("Communication", uniCommunicationsItem.get(position));
+
+        startActivity(intent);
+    }
+
     //Homework Button Click
     @Override
     public void onBtnClick(int position) {
@@ -236,12 +254,4 @@ public class ProfessorHome extends AppCompatActivity implements
         startActivity(intent);
     }
 
-    //University Communication Click
-    @Override
-    public void onUniClick(int position) {
-        Intent intent = new Intent(this, DetailsUniCommunication.class);
-        //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
-        startActivity(intent);
-    }
 }

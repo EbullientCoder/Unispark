@@ -70,11 +70,11 @@ implements ExamAdapter.OnBookExamClickListener,
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RightButtonMenu rightMenuAppController = new RightButtonMenu(getApplicationContext());
+                RightButtonMenu rightMenuAppController = new RightButtonMenu();
 
                 //Serve un modo per determinare il giorno e la notte.
-                rightMenuAppController.dayColor();
-                rightMenuAppController.nightColor();
+                rightMenuAppController.dayColor(getApplicationContext());
+                rightMenuAppController.nightColor(getApplicationContext());
             }
         });
 
@@ -93,10 +93,10 @@ implements ExamAdapter.OnBookExamClickListener,
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu(student, getApplicationContext(), item.getItemId());
+                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity();
+                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -154,7 +154,6 @@ implements ExamAdapter.OnBookExamClickListener,
     }
 
 
-
     //Page: Verbalized ExamModel
     private void verbalizedExams(){
         //Set Title
@@ -170,6 +169,7 @@ implements ExamAdapter.OnBookExamClickListener,
         }
     }
 
+
     //Page: Failed ExamModel
     private void failedExams(){
         //Set Title
@@ -184,6 +184,7 @@ implements ExamAdapter.OnBookExamClickListener,
             examsItem.add(new ExamItem(0, failedExams.get(i)));
         }
     }
+
 
     //Page: Upcoming StudentExamsGUIController
     private void bookExams(){
@@ -202,6 +203,7 @@ implements ExamAdapter.OnBookExamClickListener,
         }
     }
 
+
     //Page: Booked StudentExamsGUIController
     private void bookedExams(){
         //Set Title
@@ -216,6 +218,9 @@ implements ExamAdapter.OnBookExamClickListener,
             examsItem.add(new ExamItem(3, leaveExams.get(i)));
         }
     }
+
+
+
 
     @Override
     public void onBookBtnClick(int position) {
@@ -235,6 +240,7 @@ implements ExamAdapter.OnBookExamClickListener,
         }
         else Toast.makeText(getApplicationContext(), "Cannot Book: Exam already verbalized", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onLeaveBtnClick(int position) {

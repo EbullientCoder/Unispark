@@ -16,68 +16,28 @@ import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 import java.util.List;
 
-public class ShowUniCommunications implements UniCommunicationsAdapter.OnUniComClickListener{
-    //Attributes
-    Context context;
-    //Communications
-    UniCommunicationsAdapter communicationsAdapter;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
-    //User Model
-    StudentModel student;
-    ProfessorModel professor;
-    UniversityModel university;
-
-
-    //Constructor
+public class ShowUniCommunications{
     //Student
-    public ShowUniCommunications(StudentModel student, Context context){
-        this.student = student;
-        this.context = context;
-
-        //Communications
+    public List<UniversityCommunicationModel> setStudentCommunications(StudentModel student){
+        List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
-        communicationsAdapter = null;
+
+        return uniCommunicationsItem;
     }
 
     //Professor
-    public ShowUniCommunications(ProfessorModel professor, Context context){
-        this.professor = professor;
-        this.context = context;
-
-        //Communications
+    public List<UniversityCommunicationModel> setProfessorCommunications(ProfessorModel professor){
+        List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
-        communicationsAdapter = null;
+
+        return uniCommunicationsItem;
     }
 
     //University
-    public ShowUniCommunications(UniversityModel university, Context context){
-        this.university = university;
-        this.context = context;
-
-        //Communications
+    public List<UniversityCommunicationModel> setUniversityCommunications(){
+        List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
-        communicationsAdapter = null;
-    }
 
-
-    //Communications Adapter
-    public UniCommunicationsAdapter setCommunicationsAdapter(){
-        communicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
-
-        return communicationsAdapter;
-    }
-
-
-
-    //On UniversityCommunicationsClick
-    @Override
-    public void onUniClick(int position) {
-        Intent intent = new Intent(context, DetailsUniCommunication.class);
-        //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
-        //Start New Activity from Outside an Activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        context.startActivity(intent);
+        return uniCommunicationsItem;
     }
 }
