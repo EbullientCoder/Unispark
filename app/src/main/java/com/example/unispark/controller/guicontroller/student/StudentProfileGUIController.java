@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
-import com.example.unispark.controller.applicationcontroller.courses.ShowJoinedCourses;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
 import com.example.unispark.database.dao.CourseDAO;
@@ -24,13 +23,14 @@ import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.details.DetailsCourse;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.util.List;
 
-public class StudentProfileGUIController extends AppCompatActivity{
+public class StudentProfileGUIController extends AppCompatActivity
+        implements CoursesAdapter.OnCourseClickListener,
+        CoursesAdapter.OnCourseBtnClickListener{
 
     //Attributes
     //Menu
@@ -45,6 +45,7 @@ public class StudentProfileGUIController extends AppCompatActivity{
     //Courses
     RecyclerView rvCourses;
     CoursesAdapter coursesAdapter;
+    List<CourseModel> coursesItem;
     //Search Course
     ImageButton addCourse;
     //Fragment Course
@@ -109,13 +110,23 @@ public class StudentProfileGUIController extends AppCompatActivity{
 
 
 
+        //Student Picture
+        imgProfile = findViewById(R.id.img_user_image);
+        imgProfile.setImageResource(student.getProfilePicture());
+
+        //Student Name
+        txtFullName = findViewById(R.id.txt_user_fullname);
+        txtFullName.setText(student.getFirstName() + " " + student.getLastName());
+
+
+
         //Use Case: Calculate Averages
         //Arithmetic Average
         aAverage = findViewById(R.id.txt_arithmetic_average_number);
         aCircleAverage = findViewById(R.id.avg_arithmetic_average);
         //Application Controller
-        CalculateAverage averageAppController = new CalculateAverage(student, getApplicationContext());
-        float average = averageAppController.arithmeticAverage();
+        CalculateAverage averageAppController = new CalculateAverage();
+        float average = averageAppController.arithmeticAverage(student.getVerbalizedExams());
         int cAverage = averageAppController.graphicArithmeticAverage(average);
         aAverage.setText(String.format("%.02f", average));
         aCircleAverage.setProgress(cAverage, false);
@@ -124,7 +135,7 @@ public class StudentProfileGUIController extends AppCompatActivity{
         wAverage = findViewById(R.id.txt_weighted_average_number);
         wCircleAverage = findViewById(R.id.avg_weighted_average);
         //Application Controller
-        average = averageAppController.weightedAverage();
+        average = averageAppController.weightedAverage(student.getVerbalizedExams());
         cAverage = averageAppController.graphicWeightedAverage(average);
         wAverage.setText(String.format("%.02f", average));
         wCircleAverage.setProgress(cAverage, false);
@@ -144,19 +155,39 @@ public class StudentProfileGUIController extends AppCompatActivity{
 
 
 
-        //Student Picture
-        imgProfile = findViewById(R.id.img_user_image);
-        imgProfile.setImageResource(student.getProfilePicture());
-
-        //Student Name
-        txtFullName = findViewById(R.id.txt_user_fullname);
-        txtFullName.setText(student.getFirstName() + " " + student.getLastName());
-
         //Student Courses
         rvCourses = findViewById(R.id.rv_courses);
-        //Application Controller
-        ShowJoinedCourses joinedCoursesAppController = new ShowJoinedCourses(student, getApplicationContext());
-        coursesAdapter = joinedCoursesAppController.setCoursesAdapter();
+        coursesItem = student.getCourses();
+        coursesAdapter = new CoursesAdapter(coursesItem, this, this, "LEAVE");
         rvCourses.setAdapter(coursesAdapter);
+    }
+
+
+
+    //On Course Click
+    @Override
+    public void onCourseClick(int position) {
+        Intent intent = new Intent(getApplicationContext(), DetailsCourse.class);
+        //Pass Items to the new Activity
+        intent.putExtra("Course", coursesItem.get(position));
+
+        startActivity(intent);
+    }
+
+    //On LeaveCourse Click
+    @Override
+    public void onButtonClick(int position) {
+        //Remove Course Joined from DB
+        boolean leaveCourse = CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
+
+        if(leaveCourse){
+            //Remove Course from Student's joined Courses
+            coursesItem.remove(position);
+            student.setCourses(coursesItem);
+
+            //Notify changed dimension to the Adapter
+            coursesAdapter.notifyItemRemoved(position);
+        }
+        else Toast.makeText(getApplicationContext(), "Cannot leave course: EXAM BOOKED", Toast.LENGTH_SHORT).show();
     }
 }

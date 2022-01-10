@@ -8,26 +8,9 @@ import com.example.unispark.model.exams.VerbalizedExamModel;
 import java.util.List;
 
 public class CalculateAverage {
-    //Attributes
-    Context context;
-    //StudentExamsGUIController
-    List<VerbalizedExamModel> exams;
-    //User Model
-    StudentModel student;
-
-
-    //Constructor
-    public CalculateAverage(StudentModel student, Context context){
-        this.student = student;
-        this.context = context;
-
-        //Verbalized StudentExamsGUIController
-        exams = student.getVerbalizedExams();
-    }
-
 
     //Arithmetic Average
-    public float arithmeticAverage(){
+    public float arithmeticAverage(List<VerbalizedExamModel> exams){
         float average = 0;
 
         //Calculating the Average if the Student has Verbalized StudentExamsGUIController
@@ -51,8 +34,9 @@ public class CalculateAverage {
     }
 
 
+
     //Weighted Average
-    public float weightedAverage(){
+    public float weightedAverage(List<VerbalizedExamModel> exams){
         float average = 0;
         float CFU = 0;
 
