@@ -16,6 +16,9 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
+import com.example.unispark.controller.applicationcontroller.schedule.GetLessons;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleFragment;
 import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationFragment;
@@ -29,7 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class UniversityHome extends AppCompatActivity implements
+public class UniversityHomeGUIController extends AppCompatActivity implements
         UniCommunicationsAdapter.OnUniComClickListener,
         LessonAdapter.OnDelBtnClickListener {
 
@@ -203,13 +206,18 @@ public class UniversityHome extends AppCompatActivity implements
         txtScheduleTitle.setText("SCHEDULE: " + day);
 
         //Lessons
-        List<CourseModel> courses = CourseDAO.selectAvailableCourses("Ingegneria Informatica", 3, null);
-        schedulesItem = LessonsDAO.getLessons(day, courses);
+        //Application Controller: Get Courses
+        GetCourses getCoursesAppController = new GetCourses();
+        List<CourseModel> courses = getCoursesAppController.getCourses("Ingegneria Informatica");
+        //Application Controller: Get Lessons
+        GetLessons getLessonsAppController = new GetLessons();
+        schedulesItem = getLessonsAppController.getLessons(day, courses);
         lessonAdapter = new LessonAdapter(schedulesItem, this, "UNIVERSITY");
 
         //Set adapter
         if(schedulesItem != null) rvSchedules.setAdapter(lessonAdapter);
     }
+
 
 
 
@@ -223,10 +231,12 @@ public class UniversityHome extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    //On DeleteLesson Button Click
     @Override
     public void onDelBtnClick(int position) {
-        //Remove StudentScheduleGUIController from DB
-        LessonsDAO.removeLesson(schedulesItem.get(position));
+        //Application Controller
+        DeleteLesson deleteLessonAppController = new DeleteLesson();
+        deleteLessonAppController.deleteLesson(schedulesItem.get(position));
 
         //Show Removed StudentScheduleGUIController
         schedulesItem.remove(position);

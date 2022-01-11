@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup" >
         <activity
-            android:name=".controller.guicontroller.university.UniversityHome"
+            android:name=".controller.guicontroller.university.UniversityHomeGUIController"
             android:exported="true" />
         <activity
             android:name=".controller.guicontroller.professor.ProfessorExamsGUIController"
