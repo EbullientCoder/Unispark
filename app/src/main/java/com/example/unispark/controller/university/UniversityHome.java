@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,21 +17,16 @@ import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.details.DetailsUniCommunication;
-import com.example.unispark.controller.professor.fragment.AddExamFragment;
 import com.example.unispark.controller.university.fragment.AddScheduleFragment;
 import com.example.unispark.controller.university.fragment.AddUniCommunicationFragment;
-import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.FacultyDAO;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LessonModel;
-import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UniversityHome extends AppCompatActivity implements
@@ -135,7 +129,7 @@ public class UniversityHome extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_assigned_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.setUniversityCommunications();
+        uniCommunicationsItem = uniCommunicationsAppController.showUniversityCommunications();
         uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 

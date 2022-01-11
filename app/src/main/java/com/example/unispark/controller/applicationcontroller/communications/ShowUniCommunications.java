@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ShowUniCommunications{
     //Student
-    public List<UniversityCommunicationModel> setStudentCommunications(StudentModel student){
+    public List<UniversityCommunicationModel> showStudentCommunications(StudentModel student){
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
 
@@ -28,7 +28,7 @@ public class ShowUniCommunications{
     }
 
     //Professor
-    public List<UniversityCommunicationModel> setProfessorCommunications(ProfessorModel professor){
+    public List<UniversityCommunicationModel> showProfessorCommunications(ProfessorModel professor){
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
@@ -37,7 +37,7 @@ public class ShowUniCommunications{
     }
 
     //University
-    public List<UniversityCommunicationModel> setUniversityCommunications(){
+    public List<UniversityCommunicationModel> showUniversityCommunications(){
         List<UniversityCommunicationModel> uniCommunicationsItem;
         uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
 

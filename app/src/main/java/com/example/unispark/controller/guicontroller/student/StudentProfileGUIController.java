@@ -15,8 +15,9 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.controller.applicationcontroller.CalculateAverage;
+import com.example.unispark.controller.applicationcontroller.course.LeaveCourse;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.student.fragment.SearchCourseFragment;
+import com.example.unispark.controller.guicontroller.student.fragment.SearchCourseGUIController;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
@@ -49,7 +50,7 @@ public class StudentProfileGUIController extends AppCompatActivity
     //Search Course
     ImageButton addCourse;
     //Fragment Course
-    SearchCourseFragment searchCourseFragment;
+    SearchCourseGUIController searchCourseFragment;
     //Get Intent Extras
     Bundle extras;
     ImageView imgProfile;
@@ -148,7 +149,7 @@ public class StudentProfileGUIController extends AppCompatActivity
         addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchCourseFragment = new SearchCourseFragment(student, coursesAdapter);
+                searchCourseFragment = new SearchCourseGUIController(student, coursesAdapter);
                 searchCourseFragment.show(getSupportFragmentManager(), "SearchCourse");
             }
         });
@@ -177,8 +178,9 @@ public class StudentProfileGUIController extends AppCompatActivity
     //On LeaveCourse Click
     @Override
     public void onButtonClick(int position) {
-        //Remove Course Joined from DB
-        boolean leaveCourse = CourseDAO.leaveCourse(student.getId(), coursesItem.get(position).getFullName());
+        //Application Controller
+        LeaveCourse leaveCourseAppController = new LeaveCourse();
+        boolean leaveCourse = leaveCourseAppController.leaveCourse(student, coursesItem.get(position));
 
         if(leaveCourse){
             //Remove Course from Student's joined Courses

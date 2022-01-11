@@ -11,13 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
 import com.example.unispark.controller.applicationcontroller.ShowFacultyProfessors;
-import com.example.unispark.controller.applicationcontroller.links.AddLinks;
+import com.example.unispark.controller.applicationcontroller.links.AddLink;
+import com.example.unispark.controller.applicationcontroller.links.DeleteLink;
 import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.details.DetailsProfessor;
@@ -129,7 +129,7 @@ public class StudentLinksGUIController extends AppCompatActivity
         rvLinks = findViewById(R.id.rv_links);
         //Application Controller
         ShowLinks linksAppController = new ShowLinks();
-        linksItem = linksAppController.setLinks(student);
+        linksItem = linksAppController.showLinks(student);
         linkAdapter = new LinksAdapter(linksItem, this, this);
         rvLinks.setAdapter(linkAdapter);
 
@@ -148,7 +148,7 @@ public class StudentLinksGUIController extends AppCompatActivity
                     LinkModel link0 = new LinkModel(linkName, link);
 
                     //Application Controller
-                    AddLinks addLinksAppController = new AddLinks();
+                    AddLink addLinksAppController = new AddLink();
                     boolean isAdded = addLinksAppController.addLink(student, link0);
                     if(isAdded){
                         linksItem.add(link0);
@@ -177,19 +177,23 @@ public class StudentLinksGUIController extends AppCompatActivity
         startActivity(intent);
     }
 
+    //On Link Click
     @Override
     public void onLinkClick(String url) {
         Uri uri = Uri.parse(url);
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
+    //On DeleteLink Click
     @Override
     public void onDelBtnClick(int position) {
-        List<LinkModel> studentLinks = StudentLinksDAO.getStudentLinks(student.getId());
+        //Application Controller: Show Links
+        ShowLinks linksAppController = new ShowLinks();
+        List<LinkModel> studentLinks = linksAppController.showLinks(student);
 
-        //Remove the Connection inside the DB
-        assert studentLinks != null;
-        StudentLinksDAO.removeLink(studentLinks.get(position).getLinkName());
+        //Application Controller: Delete Link
+        DeleteLink deleteLinkAppController = new DeleteLink();
+        deleteLinkAppController.deleteLink(studentLinks.get(position));
 
         //Removing link from the List
         linksItem.remove(position);

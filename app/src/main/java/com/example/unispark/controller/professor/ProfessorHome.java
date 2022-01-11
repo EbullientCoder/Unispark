@@ -176,7 +176,7 @@ public class ProfessorHome extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.setProfessorCommunications(professor);
+        uniCommunicationsItem = uniCommunicationsAppController.showProfessorCommunications(professor);
         uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 

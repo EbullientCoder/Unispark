@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ShowProfCommunications{
 
-    public List<ProfessorCommunicationModel> setProfessorCommunications(StudentModel student){
+    public List<ProfessorCommunicationModel> showProfessorCommunications(StudentModel student){
         List<ProfessorCommunicationModel> profCommunicationsItem = null;
         List<String> courseShortnames = new ArrayList<>();
         List<String> courseFullNames = new ArrayList<>();

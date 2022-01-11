@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ShowLinks {
     //Students Links
-    public List<LinkModel> setLinks(StudentModel student){
+    public List<LinkModel> showLinks(StudentModel student){
         List<LinkModel> linksItem;
         linksItem = StudentLinksDAO.getStudentLinks(student.getId());
 

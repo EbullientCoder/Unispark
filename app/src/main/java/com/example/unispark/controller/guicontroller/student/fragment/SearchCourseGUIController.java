@@ -1,4 +1,4 @@
-package com.example.unispark.controller.student.fragment;
+package com.example.unispark.controller.guicontroller.student.fragment;
 
 import static com.example.unispark.database.dao.CourseDAO.joinCourse;
 
@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
+import com.example.unispark.controller.applicationcontroller.SearchCourse;
+import com.example.unispark.controller.applicationcontroller.course.JoinCourse;
 import com.example.unispark.controller.details.DetailsCourse;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.model.CourseModel;
@@ -23,7 +25,7 @@ import com.example.unispark.model.StudentModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCourseFragment extends DialogFragment
+public class SearchCourseGUIController extends DialogFragment
         implements CoursesAdapter.OnCourseClickListener,
         CoursesAdapter.OnCourseBtnClickListener {
     //Attributes
@@ -42,7 +44,7 @@ public class SearchCourseFragment extends DialogFragment
 
     //Methods
     //Constructor
-    public SearchCourseFragment(StudentModel student, CoursesAdapter joinedCoursesAdapter){
+    public SearchCourseGUIController(StudentModel student, CoursesAdapter joinedCoursesAdapter){
         this.student = student;
         this.joinedCoursesAdapter = joinedCoursesAdapter;
     }
@@ -63,18 +65,13 @@ public class SearchCourseFragment extends DialogFragment
             }
         });
 
+
+
         //Courses
         rvCourses = (RecyclerView) rootView.findViewById(R.id.rv_choose_course);
-
-        //Get list of available courses to join for the student marked by faculty and that
-        // are not in the student course list(Implement a method)
-        List<CourseModel> courses = student.getCourses();
-        List<String> courseNames = null;
-        if(courses != null){
-            courseNames = new ArrayList<>(courses.size());
-            for (int i = 0; i < courses.size(); i++) courseNames.add(courses.get(i).getFullName());
-        }
-        coursesItem = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), courseNames);
+        //Application Controller
+        SearchCourse searchCourseAppController = new SearchCourse();
+        coursesItem = searchCourseAppController.setCourses(student);
         coursesAdapter = new CoursesAdapter(coursesItem, this, this, "JOIN");
         rvCourses.setAdapter(coursesAdapter);
 
@@ -84,6 +81,7 @@ public class SearchCourseFragment extends DialogFragment
 
 
 
+    //On Course Click
     @Override
     public void onCourseClick(int position) {
         Intent intent = new Intent(getContext(), DetailsCourse.class);
@@ -91,12 +89,14 @@ public class SearchCourseFragment extends DialogFragment
         startActivity(intent);
     }
 
+    //On JoinCourse Click
     @Override
     public void onButtonClick(int position) {
         List<CourseModel> joinedCourses;
 
-        //Show Course's Homeworks
-        CourseDAO.joinCourse(student.getId(), coursesItem.get(position).getFullName());
+        //Application Controller
+        JoinCourse joinCourseAppController = new JoinCourse();
+        joinCourseAppController.joinCourse(student, coursesItem.get(position));
 
         //Add Course to the Student's Joined Courses
         joinedCourses = student.getCourses();

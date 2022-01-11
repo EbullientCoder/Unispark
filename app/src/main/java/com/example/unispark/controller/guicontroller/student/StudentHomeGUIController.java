@@ -116,7 +116,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.setStudentCommunications(student);
+        uniCommunicationsItem = uniCommunicationsAppController.showStudentCommunications(student);
         uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
@@ -126,7 +126,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
         //Application Controller
         ShowProfCommunications profCommunicationsAppController = new ShowProfCommunications();
-        profCommunicationsItem = profCommunicationsAppController.setProfessorCommunications(student);
+        profCommunicationsItem = profCommunicationsAppController.showProfessorCommunications(student);
         profCommunicationsAdapter = new ProfCommunicationsAdapter(profCommunicationsItem, this);
         rvProfCommunications.setAdapter(profCommunicationsAdapter);
 
@@ -152,6 +152,9 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
 
         startActivity(intent);
     }
+
+
+
 
     //On ProfessorCommunications Click
     @Override
