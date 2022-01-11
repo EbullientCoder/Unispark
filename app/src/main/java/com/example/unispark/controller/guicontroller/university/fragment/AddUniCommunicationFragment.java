@@ -1,4 +1,4 @@
-package com.example.unispark.controller.university.fragment;
+package com.example.unispark.controller.guicontroller.university.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.model.UniversityModel;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.textfield.TextInputLayout;
 

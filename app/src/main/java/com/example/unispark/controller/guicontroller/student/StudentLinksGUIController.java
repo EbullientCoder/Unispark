@@ -15,13 +15,12 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
-import com.example.unispark.controller.applicationcontroller.ShowFacultyProfessors;
+import com.example.unispark.controller.applicationcontroller.professor.ShowFacultyProfessors;
 import com.example.unispark.controller.applicationcontroller.links.AddLink;
 import com.example.unispark.controller.applicationcontroller.links.DeleteLink;
 import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.details.DetailsProfessor;
-import com.example.unispark.database.dao.StudentLinksDAO;
+import com.example.unispark.controller.guicontroller.details.DetailsProfessorGUIController;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.adapter.ProfessorsAdapter;
 import com.example.unispark.model.CourseModel;
@@ -38,7 +37,7 @@ public class StudentLinksGUIController extends AppCompatActivity
         LinksAdapter.OnLinkClickListener,
         LinksAdapter.OnDelBtnClickListener {
 
-    //Attributes
+
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
@@ -47,21 +46,20 @@ public class StudentLinksGUIController extends AppCompatActivity
     RecyclerView rvProfessors;
     ProfessorsAdapter professorsAdapter;
     List<ProfessorModel> professorsItem;
+    //Link
+    EditText txtAddLinkName;
+    EditText txtAddLink;
+    //Button Add Link
+    ImageButton addButton;
     //Links
     RecyclerView rvLinks;
     LinksAdapter linkAdapter;
     List<LinkModel> linksItem;
-    //Button Add
-    ImageButton addButton;
-    //Link
-    EditText txtAddLinkName;
-    EditText txtAddLink;
     //Get Intent Extras
     Bundle extras;
     StudentModel student;
 
 
-    //Methods
     //Constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +165,7 @@ public class StudentLinksGUIController extends AppCompatActivity
     //Clickable Items Methods
     @Override
     public void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<CourseModel> courses) {
-        Intent intent = new Intent(this, DetailsProfessor.class);
+        Intent intent = new Intent(this, DetailsProfessorGUIController.class);
         intent.putExtra("ProfessorImage", profImageID);
         intent.putExtra("Firstname", firstname);
         intent.putExtra("Lastname", lastname);

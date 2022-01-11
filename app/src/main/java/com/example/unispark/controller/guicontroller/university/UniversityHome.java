@@ -1,4 +1,4 @@
-package com.example.unispark.controller.university;
+package com.example.unispark.controller.guicontroller.university;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +16,9 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
-import com.example.unispark.controller.details.DetailsUniCommunication;
-import com.example.unispark.controller.university.fragment.AddScheduleFragment;
-import com.example.unispark.controller.university.fragment.AddUniCommunicationFragment;
+import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
+import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleFragment;
+import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationFragment;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.CourseModel;
@@ -216,7 +216,7 @@ public class UniversityHome extends AppCompatActivity implements
     //On UniversityCommunications Click
     @Override
     public void onUniClick(int position) {
-        Intent intent = new Intent(this, DetailsUniCommunication.class);
+        Intent intent = new Intent(this, DetailsUniCommunicationGUIController.class);
         //Pass Items to the new Activity
         intent.putExtra("Communication", uniCommunicationsItem.get(position));
 

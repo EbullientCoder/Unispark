@@ -15,9 +15,7 @@ import com.example.unispark.R;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
 import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
-import com.example.unispark.controller.professor.ProfessorHome;
-import com.example.unispark.database.dao.ProfessorDAO;
-import com.example.unispark.database.dao.StudentDAO;
+import com.example.unispark.controller.guicontroller.professor.ProfessorHomeGUIController;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
@@ -104,7 +102,7 @@ public class LoginGUIController extends AppCompatActivity {
 
                     if(professor.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
                     else{
-                        intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                        intent = new Intent(getApplicationContext(), ProfessorHomeGUIController.class);
                         intent.putExtra("UserObject", professor);
 
                         startActivity(intent);
@@ -118,7 +116,7 @@ public class LoginGUIController extends AppCompatActivity {
 
                     if(university.getEmail() == null) Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
                     else{
-                        intent = new Intent(getApplicationContext(), ProfessorHome.class);
+                        intent = new Intent(getApplicationContext(), ProfessorHomeGUIController.class);
                         intent.putExtra("UserObject", university);
 
                         startActivity(intent);

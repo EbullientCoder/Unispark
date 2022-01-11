@@ -1,4 +1,4 @@
-package com.example.unispark.controller.applicationcontroller;
+package com.example.unispark.controller.applicationcontroller.average;
 
 import android.content.Context;
 

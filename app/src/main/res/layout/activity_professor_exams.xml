@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.professor.ProfessorExams"
+    tools:context=".controller.guicontroller.professor.ProfessorExamsGUIController"
     android:background="#212529">
 
     <!-- Main -->
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:text="EXAMS TITLE"
+                android:text="ASSIGNED EXAMS"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
                 android:textStyle="bold"

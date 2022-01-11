@@ -1,10 +1,8 @@
-package com.example.unispark.controller.university.fragment;
+package com.example.unispark.controller.guicontroller.university.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +15,12 @@ import android.widget.ImageButton;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
-import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LessonModel;
 import com.example.unispark.model.UniversityModel;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
-import com.google.android.material.textfield.TextInputLayout;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -14,15 +14,15 @@ import com.example.unispark.R;
 
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
-import com.example.unispark.controller.applicationcontroller.ShowHomeworks;
+import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
-import com.example.unispark.controller.details.DetailsProfCommunication;
-import com.example.unispark.controller.details.DetailsUniCommunication;
+import com.example.unispark.controller.guicontroller.details.DetailsProfCommunicationGUIController;
+import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
-import com.example.unispark.controller.details.DetailsHomework;
+import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
@@ -35,7 +35,8 @@ public class StudentHomeGUIController extends AppCompatActivity
 implements UniCommunicationsAdapter.OnUniComClickListener,
 ProfCommunicationsAdapter.OnProfComClickListener,
 HomeworksAdapter.OnHomeworkBtnClickListener{
-    //Attributes
+
+
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
@@ -57,8 +58,6 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     StudentModel student;
 
 
-
-    //Methods
     //Constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +145,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     //On UniversityCommunications Click
     @Override
     public void onUniClick(int position) {
-        Intent intent = new Intent(getApplicationContext(), DetailsUniCommunication.class);
+        Intent intent = new Intent(getApplicationContext(), DetailsUniCommunicationGUIController.class);
         //Pass Items to the new Activity
         intent.putExtra("Communication", uniCommunicationsItem.get(position));
 
@@ -159,7 +158,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     //On ProfessorCommunications Click
     @Override
     public void onProfClick(int position) {
-        Intent intent = new Intent(getApplicationContext(), DetailsProfCommunication.class);
+        Intent intent = new Intent(getApplicationContext(), DetailsProfCommunicationGUIController.class);
         //Pass Items to the new Activity
         intent.putExtra("Communication", profCommunicationsItem.get(position));
 
@@ -169,7 +168,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     //On Homework Click
     @Override
     public void onBtnClick(int position) {
-        Intent intent = new Intent(getApplicationContext(), DetailsHomework.class);
+        Intent intent = new Intent(getApplicationContext(), DetailsHomeworkGUIController.class);
         //Pass Items to the new Activity
         intent.putExtra("Homework", homeworksItem.get(position));
         intent.putExtra("StudentHomeGUIController", "StudentHome");

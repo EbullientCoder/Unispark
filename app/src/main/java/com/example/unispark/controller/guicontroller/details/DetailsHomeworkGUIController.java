@@ -1,4 +1,4 @@
-package com.example.unispark.controller.details;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,21 +13,18 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.model.HomeworkModel;
 
-public class DetailsHomework extends AppCompatActivity {
+public class DetailsHomeworkGUIController extends AppCompatActivity {
     //Attributes
     //Button: GoBack
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    HomeworkModel homework;
     //Set Interface Text
     TextView txtShortName;
     TextView txtTitle;
     TextView txtExpiration;
     TextView txtInstructions;
     TextView txtPoints;
-    //Get StudentHomeGUIController
-    String home;
     //Submit Button
     LinearLayout submitLayout;
     Button btnSubmit;
@@ -60,7 +57,7 @@ public class DetailsHomework extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        homework = (HomeworkModel) extras.getSerializable("Homework");
+        HomeworkModel homework = (HomeworkModel) extras.getSerializable("Homework");
         //Set Text
         txtShortName = findViewById(R.id.txt_homework_detail_subject);
         txtShortName.setText(homework.getShortName());
@@ -74,10 +71,10 @@ public class DetailsHomework extends AppCompatActivity {
         txtPoints = findViewById(R.id.txt_homework_detail_points);
         txtPoints.setText(homework.getPoints());
         //Get StudentHomeGUIController
-        home = extras.getString("StudentHomeGUIController");
+        String home = extras.getString("StudentHomeGUIController");
 
         //ProfessorHomework
-        if(home.equals("ProfessorHome")){
+        if(home.equals("ProfessorHomeGUIController")){
             submitLayout = findViewById(R.id.submit_layout);
             submitLayout.setVisibility(View.INVISIBLE);
         }

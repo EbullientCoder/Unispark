@@ -5,9 +5,9 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.unispark.controller.professor.ProfessorExams;
-import com.example.unispark.controller.professor.ProfessorHome;
-import com.example.unispark.controller.professor.ProfessorProfile;
+import com.example.unispark.controller.guicontroller.professor.ProfessorExamsGUIController;
+import com.example.unispark.controller.guicontroller.professor.ProfessorHomeGUIController;
+import com.example.unispark.controller.guicontroller.professor.ProfessorProfileGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentLinksGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentExamsGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
@@ -37,11 +37,11 @@ public class BottomNavigationMenu extends AppCompatActivity {
             break;
 
             //Professor
-            case R.id.professor_home: intent = new Intent(context, ProfessorHome.class);
+            case R.id.professor_home: intent = new Intent(context, ProfessorHomeGUIController.class);
             break;
-            case R.id.professor_profile: intent = new Intent(context, ProfessorProfile.class);
+            case R.id.professor_profile: intent = new Intent(context, ProfessorProfileGUIController.class);
             break;
-            case R.id.professor_exams: intent = new Intent(context, ProfessorExams.class);
+            case R.id.professor_exams: intent = new Intent(context, ProfessorExamsGUIController.class);
             break;
         }
         intent.putExtra("UserObject", user);

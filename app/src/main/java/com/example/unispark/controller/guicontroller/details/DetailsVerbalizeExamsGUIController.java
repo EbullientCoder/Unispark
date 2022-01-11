@@ -1,12 +1,10 @@
-package com.example.unispark.controller.professor;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,29 +12,27 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.adapter.SignedStudentsAdapter;
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.controller.applicationcontroller.exams.ShowSignedToExamStudents;
+import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
 import com.example.unispark.model.exams.BookExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-public class ProfessorVerbalizeExams extends AppCompatActivity implements SignedStudentsAdapter.OnAddBtnClickListener {
+public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
+        implements SignedStudentsAdapter.OnAddBtnClickListener {
 
-    //Attributes
     //Button: GoBack
     ImageView btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    //Exam Name
+    //Exam Data
     TextView txtCourseName;
-    //Exam Date
     TextView txtCourseDate;
     //ExamModel
     RecyclerView rvStudents;
     SignedStudentsAdapter studentsAdapter;
     List<BeanStudentSignedToExam> studentsItem;
-    //Model
+    //Exam Model
     BookExamModel exam;
 
 
@@ -56,10 +52,12 @@ public class ProfessorVerbalizeExams extends AppCompatActivity implements Signed
         });
 
 
+
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
         exam = (BookExamModel) extras.getSerializable("Exam");
+
 
 
         //Exam Name - Date
@@ -69,11 +67,13 @@ public class ProfessorVerbalizeExams extends AppCompatActivity implements Signed
         txtCourseDate.setText(exam.getDate());
 
 
+
         //Students Recycler View
         rvStudents = findViewById(R.id.rv_signedStudents);
-        studentsItem = ExamsDAO.getStudentsBookedExam(exam.getId());
-
-        if(studentsItem == null) Toast.makeText(getApplicationContext(), "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
+        //Application Controller
+        ShowSignedToExamStudents bookedStudentAppController = new ShowSignedToExamStudents();
+        studentsItem = bookedStudentAppController.showBookedStudents(exam);
+        if(studentsItem.isEmpty()) Toast.makeText(getApplicationContext(), "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
         else{
             studentsAdapter = new SignedStudentsAdapter(studentsItem, this);
             rvStudents.setAdapter(studentsAdapter);
@@ -82,11 +82,10 @@ public class ProfessorVerbalizeExams extends AppCompatActivity implements Signed
 
     @Override
     public void onAddBtnClick(int position, String result) {
-        //Create new Verbalized Exam
-        VerbalizedExamModel vExam = new VerbalizedExamModel(exam.getId(), exam.getName(), exam.getDate(), exam.getDate(), exam.getCFU(), result);
+        //Application Controller
+        VerbalizeExam verbalizeExamAppController = new VerbalizeExam();
+        boolean isValid = verbalizeExamAppController.verbalizeExam(exam, studentsItem.get(position), result);
 
-        //Add Verbalized Exam to the DB
-        boolean isValid = ExamsDAO.addExamGrade(vExam, studentsItem.get(position).getId());
         if (!isValid) Toast.makeText(getApplicationContext(), "Cannot verbalize: Exam has not taken place yet", Toast.LENGTH_SHORT).show();
         else{
             //Remove Verbalized Exam

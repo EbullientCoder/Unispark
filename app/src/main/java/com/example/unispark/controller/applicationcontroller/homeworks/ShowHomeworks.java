@@ -1,12 +1,5 @@
-package com.example.unispark.controller.applicationcontroller;
+package com.example.unispark.controller.applicationcontroller.homeworks;
 
-import android.content.Context;
-import android.content.Intent;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.unispark.adapter.HomeworksAdapter;
-import com.example.unispark.controller.details.DetailsHomework;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;

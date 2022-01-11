@@ -14,14 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.applicationcontroller.CalculateAverage;
+import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
 import com.example.unispark.controller.applicationcontroller.course.LeaveCourse;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.student.fragment.SearchCourseGUIController;
-import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
-import com.example.unispark.controller.details.DetailsCourse;
+import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,11 +32,14 @@ public class StudentProfileGUIController extends AppCompatActivity
         implements CoursesAdapter.OnCourseClickListener,
         CoursesAdapter.OnCourseBtnClickListener{
 
-    //Attributes
+
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
+    //Student
+    ImageView imgProfile;
+    TextView txtFullName;
     //Averages
     TextView aAverage;
     CircularProgressIndicator aCircleAverage;
@@ -53,8 +55,6 @@ public class StudentProfileGUIController extends AppCompatActivity
     SearchCourseGUIController searchCourseFragment;
     //Get Intent Extras
     Bundle extras;
-    ImageView imgProfile;
-    TextView txtFullName;
     StudentModel student;
 
 
@@ -168,7 +168,7 @@ public class StudentProfileGUIController extends AppCompatActivity
     //On Course Click
     @Override
     public void onCourseClick(int position) {
-        Intent intent = new Intent(getApplicationContext(), DetailsCourse.class);
+        Intent intent = new Intent(getApplicationContext(), DetailsCourseGUIController.class);
         //Pass Items to the new Activity
         intent.putExtra("Course", coursesItem.get(position));
 

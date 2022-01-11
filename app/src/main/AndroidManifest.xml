@@ -12,34 +12,34 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup" >
         <activity
-            android:name=".controller.university.UniversityHome"
+            android:name=".controller.guicontroller.university.UniversityHome"
             android:exported="true" />
         <activity
-            android:name=".controller.professor.ProfessorExams"
+            android:name=".controller.guicontroller.professor.ProfessorExamsGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.professor.ProfessorHome"
+            android:name=".controller.guicontroller.professor.ProfessorHomeGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.professor.ProfessorProfile"
+            android:name=".controller.guicontroller.professor.ProfessorProfileGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.professor.ProfessorVerbalizeExams"
+            android:name=".controller.guicontroller.details.DetailsVerbalizeExamsGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.details.DetailsProfessor"
+            android:name=".controller.guicontroller.details.DetailsProfessorGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.details.DetailsCourse"
+            android:name=".controller.guicontroller.details.DetailsCourseGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.details.DetailsUniCommunication"
+            android:name=".controller.guicontroller.details.DetailsUniCommunicationGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.details.DetailsProfCommunication"
+            android:name=".controller.guicontroller.details.DetailsProfCommunicationGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.details.DetailsHomework"
+            android:name=".controller.guicontroller.details.DetailsHomeworkGUIController"
             android:exported="true" />
         <activity
             android:name=".controller.guicontroller.LoginGUIController"

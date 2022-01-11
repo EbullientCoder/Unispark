@@ -1,13 +1,6 @@
 package com.example.unispark.controller.applicationcontroller;
 
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
-import com.example.unispark.controller.university.UniversityHome;
 import com.example.unispark.bean.login.BeanUser;
-import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.database.dao.UniversityDAO;

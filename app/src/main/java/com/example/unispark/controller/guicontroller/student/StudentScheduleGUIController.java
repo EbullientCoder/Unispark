@@ -15,9 +15,8 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
-import com.example.unispark.controller.applicationcontroller.ShowSchedule;
+import com.example.unispark.controller.applicationcontroller.schedule.ShowSchedule;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.LessonModel;
 import com.example.unispark.model.StudentModel;
@@ -27,7 +26,7 @@ import java.util.List;
 
 public class StudentScheduleGUIController extends AppCompatActivity{
 
-    //Attributes
+
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
@@ -44,7 +43,6 @@ public class StudentScheduleGUIController extends AppCompatActivity{
     StudentModel student;
 
 
-    //Methods
     //Constructor
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#272b2f"
     android:paddingEnd="15dp"
-    tools:context=".controller.details.DetailsProfCommunication">
+    tools:context=".controller.guicontroller.details.DetailsProfCommunicationGUIController">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout

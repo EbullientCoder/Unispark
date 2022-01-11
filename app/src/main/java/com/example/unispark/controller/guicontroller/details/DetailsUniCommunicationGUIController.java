@@ -1,4 +1,4 @@
-package com.example.unispark.controller.details;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,26 +12,23 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
-public class DetailsUniCommunication extends AppCompatActivity {
+public class DetailsUniCommunicationGUIController extends AppCompatActivity {
     //Attributes
     //Button: GoBack
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    UniversityCommunicationModel communication;
     //Display Parameters
     ImageView imgComBackground;
     TextView txtTitle;
     TextView txtDate;
     TextView txtCommunication;
-    //Get Context
-    String home;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_uni_communication);
-
 
         //GoBack Button
         btnGoBack = findViewById(R.id.btn_detail_uni_goback);
@@ -43,10 +40,11 @@ public class DetailsUniCommunication extends AppCompatActivity {
         });
 
 
+
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        communication = (UniversityCommunicationModel) extras.getSerializable("Communication");
+        UniversityCommunicationModel communication = (UniversityCommunicationModel) extras.getSerializable("Communication");
         //Set Parameters
         imgComBackground = findViewById(R.id.img_uni_com_background);
         imgComBackground.setImageResource(communication.getBackground());

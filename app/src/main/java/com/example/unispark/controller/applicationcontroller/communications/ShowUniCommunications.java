@@ -1,17 +1,8 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
-import com.example.unispark.controller.details.DetailsUniCommunication;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
-import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 import java.util.ArrayList;

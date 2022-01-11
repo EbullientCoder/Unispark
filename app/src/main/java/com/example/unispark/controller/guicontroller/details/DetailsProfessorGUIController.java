@@ -1,4 +1,4 @@
-package com.example.unispark.controller.details;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,17 +14,12 @@ import com.example.unispark.model.CourseModel;
 
 import java.util.List;
 
-public class DetailsProfessor extends AppCompatActivity {
+public class DetailsProfessorGUIController extends AppCompatActivity {
     //Attributes
     //Button: GoBack
     ImageView btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    int imageID;
-    String firstname;
-    String lastname;
-    String website;
-    List<CourseModel> courses;
     //Set Interface Text
     ImageView imgProfImage;
     TextView txtProfName;
@@ -53,14 +48,16 @@ public class DetailsProfessor extends AppCompatActivity {
         });
 
 
+
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        imageID = extras.getInt("ProfessorImage");
-        firstname = extras.getString("Firstname");
-        lastname = extras.getString("Lastname");
-        website = extras.getString("Website");
-        courses = (List<CourseModel>) extras.getSerializable("Courses");
+        int imageID = extras.getInt("ProfessorImage");
+        String firstname = extras.getString("Firstname");
+        String lastname = extras.getString("Lastname");
+        String website = extras.getString("Website");
+        List<CourseModel> courses = (List<CourseModel>) extras.getSerializable("Courses");
+
 
 
         //Display Parameters

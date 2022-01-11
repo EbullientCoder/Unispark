@@ -1,4 +1,4 @@
-package com.example.unispark.controller.professor.fragment;
+package com.example.unispark.controller.guicontroller.professor.fragment;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -16,68 +16,75 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.time.OffsetDateTime;
+
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
-import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.adapter.HomeworksAdapter;
+import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
+import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddExamFragment extends DialogFragment{
-    //Attributes
+public class AddHomeworkGUIController extends DialogFragment{
+
+
     //Dismiss Button
     ImageButton btnDismiss;
-    //Btn Add Exam
-    Button btnAddExam;
-    //Course Selector
-    List<String> courses;
-    AutoCompleteTextView autoCompleteTxt;
-    ArrayAdapter<String> adapterItems;
-    String courseSelection;
+    //Add Homework Button
+    Button btnAddHomework;
+    //Title
+    TextInputLayout txtTitle;
+    //Instructions
+    TextInputLayout txtInstructions;
     //Date Picker
     TextView txtDisplayDate;
     ImageButton btnSelectDate;
     DatePickerDialog.OnDateSetListener dateListener;
     Calendar calendar;
     String date;
-    //Hour
-    TextInputLayout txtHour;
-    String hour;
-    //Building
-    TextInputLayout txtBuilding;
-    String building;
-    //Classroom
-    TextInputLayout txtClassroom;
-    String classroom;
-    //Model
+    //Points
+    TextInputLayout txtPoints;
+    //Course Selector
+    List<String> courses;
+    String courseSelection;
+    AutoCompleteTextView autoCompleteTxt;
+    ArrayAdapter<String> adapterItems;
+    //Professor Model
     ProfessorModel professor;
     List<CourseModel> coursesList;
-    //Exam Model
-    BookExamModel exam;
-
+    //Homework Model
+    HomeworkModel homework;
+    List<HomeworkModel> homeworksItem = null;
+    HomeworksAdapter homeworksAdapter = null;
     int i;
 
 
-
-    //Methods
     //Constructor
-    public AddExamFragment(ProfessorModel professor) {
+    public AddHomeworkGUIController(ProfessorModel professor){
         this.professor = professor;
+    }
+
+    public AddHomeworkGUIController(ProfessorModel professor, List<HomeworkModel> homeworksItem, HomeworksAdapter homeworksAdapter) {
+        //Getting Professor Object
+        this.professor = professor;
+        this.homeworksItem = homeworksItem;
+        this.homeworksAdapter = homeworksAdapter;
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_exam, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_homework, container, false);
         getDialog().setTitle("Simple Dialog");
 
         //Dismiss Button
@@ -96,7 +103,7 @@ public class AddExamFragment extends DialogFragment{
         courses = new ArrayList<>(coursesList.size());
         for(i = 0; i < coursesList.size(); i++) courses.add(coursesList.get(i).getShortName());
 
-        autoCompleteTxt = rootView.findViewById(R.id.add_exam_select_course);
+        autoCompleteTxt = rootView.findViewById(R.id.select_course);
         adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
         autoCompleteTxt.setAdapter(adapterItems);
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,17 +116,19 @@ public class AddExamFragment extends DialogFragment{
             }
         });
 
+
+
         //Date Picker
         calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        txtDisplayDate = rootView.findViewById(R.id.txt_add_exam_selected_date);
+        txtDisplayDate = rootView.findViewById(R.id.txt_selected_date);
         OffsetDateTime offset = OffsetDateTime.now();
-        txtDisplayDate.setText(offset.getDayOfMonth() + "/" + offset.getMonthValue() + "/" + offset.getYear());
+        txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
 
-        btnSelectDate = rootView.findViewById(R.id.btn_add_exam_select_date);
+        btnSelectDate = rootView.findViewById(R.id.btn_select_date);
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,7 +148,7 @@ public class AddExamFragment extends DialogFragment{
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
-                date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day) + " ";
+                date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day);
 
                 txtDisplayDate.setText(date);
             }
@@ -147,40 +156,43 @@ public class AddExamFragment extends DialogFragment{
 
 
 
-        //Creating the Exam & Adding it into the Database
-        //AA
-        txtHour = rootView.findViewById(R.id.txt_add_exam_hour);
-        //Building
-        txtBuilding = rootView.findViewById(R.id.txt_add_exam_building);
-        //Classroom
-        txtClassroom = rootView.findViewById(R.id.txt_add_exam_classroom);
+        //Creating the Homework & Adding it into the Database
+        //Title
+        txtTitle = rootView.findViewById(R.id.txt_add_homework_title);
+        //Instructions
+        txtInstructions = rootView.findViewById(R.id.txt_add_homework_instructions);
+        //Points
+        txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
 
-        //Add Exam
-        btnAddExam = rootView.findViewById(R.id.btn_add_exam_add);
-        btnAddExam.setOnClickListener(new View.OnClickListener() {
+        //Add Homework
+        btnAddHomework = rootView.findViewById(R.id.btn_add_homework_add);
+        btnAddHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<BookExamModel> exams = professor.getExams();
+                String title = txtTitle.getEditText().getText().toString();
+                String instructions = txtInstructions.getEditText().getText().toString();
+                String points = txtPoints.getEditText().getText().toString();
 
-                hour = txtHour.getEditText().getText().toString();
-                building = txtBuilding.getEditText().getText().toString();
-                classroom = txtClassroom.getEditText().getText().toString();
-
-                //Exam Object
-                exam = new BookExamModel(10,
+                //Homework Object
+                homework = new HomeworkModel(
+                        coursesList.get(i).getShortName(),
                         coursesList.get(i).getFullName(),
-                        coursesList.get(i).getCourseYear(),
-                        date + hour,
-                        coursesList.get(i).getCfu(),
-                        classroom,
-                        building);
+                        title,
+                        date,
+                        instructions,
+                        points,
+                        professor.getId());
 
 
-                //Adding it into the DB
-                ExamsDAO.addExam(exam);
+                //Application Controller
+                AddHomework addHomeworkAppController = new AddHomework();
+                addHomeworkAppController.addHomework(homework);
 
-                exams.add(exam);
-                professor.setExams(exams);
+                //Notify the Homework Adapter
+                if(homeworksItem != null && homeworksAdapter != null){
+                    homeworksItem.add(homework);
+                    homeworksAdapter.notifyDataSetChanged();
+                }
 
                 dismiss();
             }

@@ -5,7 +5,7 @@
     android:background="#272b2f"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.details.DetailsUniCommunication">
+    tools:context=".controller.guicontroller.details.DetailsUniCommunicationGUIController">
 
     <!-- Image -->
     <androidx.cardview.widget.CardView

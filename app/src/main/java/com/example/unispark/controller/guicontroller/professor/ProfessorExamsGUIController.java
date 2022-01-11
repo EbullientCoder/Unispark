@@ -1,4 +1,4 @@
-package com.example.unispark.controller.professor;
+package com.example.unispark.controller.guicontroller.professor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,28 +14,25 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.adapter.HomeworksAdapter;
-import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
-import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
-import com.example.unispark.controller.applicationcontroller.ShowHomeworks;
+import com.example.unispark.adapter.exams.ExamAdapter;
+import com.example.unispark.adapter.exams.ExamItem;
+import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.details.DetailsHomework;
-import com.example.unispark.controller.details.DetailsUniCommunication;
-import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
-import com.example.unispark.controller.professor.fragment.AddExamFragment;
-import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
+import com.example.unispark.controller.guicontroller.details.DetailsVerbalizeExamsGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddExamGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddHomeworkGUIController;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
-import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
+import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ProfessorHome extends AppCompatActivity implements
-        HomeworksAdapter.OnHomeworkBtnClickListener,
-        UniCommunicationsAdapter.OnUniComClickListener{
+public class ProfessorExamsGUIController extends AppCompatActivity
+        implements ExamAdapter.OnViewExamClickListener{
+
 
     //Menu
     ImageButton menuButton;
@@ -50,16 +47,14 @@ public class ProfessorHome extends AppCompatActivity implements
     Boolean isOpen;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
-    //Communications
-    RecyclerView rvUniCommunications;
-    UniCommunicationsAdapter uniCommunicationsAdapter;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
-    //Homeworks
-    RecyclerView rvHomeworks;
-    HomeworksAdapter homeworkAdapter;
-    List<HomeworkModel> homeworksItem;
+    //Menu ExamModel Page
+    TextView examsTitle;
     //Get Intent Extras
     Bundle extras;
+    //ExamModel
+    RecyclerView rvExams;
+    ExamAdapter examAdapter;
+    List<ExamItem> examsItem;
     //Model
     ProfessorModel professor;
 
@@ -67,7 +62,7 @@ public class ProfessorHome extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_professor_home);
+        setContentView(R.layout.activity_professor_exams);
 
         //Getting User Object
         extras = getIntent().getExtras();
@@ -97,7 +92,7 @@ public class ProfessorHome extends AppCompatActivity implements
         //Remove Menu View's icons tint
         bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.professor_home);
+        bottomNavigationView.setSelectedItemId(R.id.professor_exams);
         //Click Listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -113,6 +108,18 @@ public class ProfessorHome extends AppCompatActivity implements
                 return true;
             }
         });
+
+
+        //ExamModel Page Title
+        examsTitle = findViewById(R.id.txt_professor_exams_title);
+
+        //ExamModel List
+        rvExams = findViewById(R.id.rv_professor_exams);
+        //Application Controller
+        ShowExams showExamsAppController = new ShowExams();
+        examsItem = showExamsAppController.assignedExams(professor);
+        examAdapter = new ExamAdapter(examsItem, this);
+        rvExams.setAdapter(examAdapter);
 
 
 
@@ -137,7 +144,7 @@ public class ProfessorHome extends AppCompatActivity implements
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamFragment fragment = new AddExamFragment(professor);
+                AddExamGUIController fragment= new AddExamGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -151,7 +158,7 @@ public class ProfessorHome extends AppCompatActivity implements
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkFragment fragment= new AddHomeworkFragment(professor, homeworksItem, homeworkAdapter);
+                AddHomeworkGUIController fragment= new AddHomeworkGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -165,30 +172,10 @@ public class ProfessorHome extends AppCompatActivity implements
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddCommunicationFragment fragment= new AddCommunicationFragment(professor);
+                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });
-
-
-
-        //Uni Communications
-        rvUniCommunications = findViewById(R.id.rv_uni_communications);
-        //Application Controller
-        ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.showProfessorCommunications(professor);
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
-        rvUniCommunications.setAdapter(uniCommunicationsAdapter);
-
-
-
-        //Homeworks
-        rvHomeworks = findViewById(R.id.rv_homeworks);
-        //Application Controller
-        ShowHomeworks homeworksAppController = new ShowHomeworks();
-        homeworksItem = homeworksAppController.setProfessorHomeworks(professor);
-        homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
-        rvHomeworks.setAdapter(homeworkAdapter);
     }
 
 
@@ -231,24 +218,12 @@ public class ProfessorHome extends AppCompatActivity implements
 
 
 
-    //University Communication Click
-    @Override
-    public void onUniClick(int position) {
-        Intent intent = new Intent(this, DetailsUniCommunication.class);
-        //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
 
+    //On ViewExam Button Click
+    @Override
+    public void onViewBtnClick(int position) {
+        Intent intent = new Intent(getApplicationContext(), DetailsVerbalizeExamsGUIController.class);
+        intent.putExtra("Exam", (BookExamModel) examsItem.get(position).getObject());
         startActivity(intent);
     }
-
-    //Homework Button Click
-    @Override
-    public void onBtnClick(int position) {
-        Intent intent = new Intent(this, DetailsHomework.class);
-        //Pass Items to the new Activity
-        intent.putExtra("Homework", homeworksItem.get(position));
-        intent.putExtra("StudentHomeGUIController", "ProfessorHome");
-        startActivity(intent);
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.example.unispark.controller.applicationcontroller;
+package com.example.unispark.controller.applicationcontroller.professor;
 
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.model.ProfessorModel;

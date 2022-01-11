@@ -39,6 +39,17 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     //Methods
+    //Professor
+    public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener, String type){
+        //If the Course List is empty:
+        if(items == null) this.items = new ArrayList<>();
+        else this.items = items;
+
+        this.onCourseClickListener = onCourseClickListener;
+        this.type = type;
+    }
+
+    //Student
     public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener,
                           OnCourseBtnClickListener onCourseBtnClickListener, String type){
         //If the Course List is empty:
@@ -83,10 +94,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return items.size();
     }
 
-    /*@Override
-    public int getItemViewType(int position) {
-        return items.get(position).getType();
-    }*/
 
 
     //First Row
@@ -106,8 +113,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private LinearLayout lyt_button;
 
 
-        //Methods
         //Constructor
+        //Student
         CourseViewHolder(@NonNull View itemView, OnCourseClickListener onCourseClickListener, OnCourseBtnClickListener onCourseBtnClickListener) {
             super(itemView);
             fullName = itemView.findViewById(R.id.txt_course_subject_name);
@@ -132,6 +139,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         }
+
 
         void setJoinCourseDate(CourseModel courseModel) {
             fullName.setText(courseModel.getFullName());

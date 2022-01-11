@@ -1,4 +1,4 @@
-package com.example.unispark.controller.details;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.model.CourseModel;
 
-public class DetailsCourse extends AppCompatActivity {
+public class DetailsCourseGUIController extends AppCompatActivity {
     //Attributes
     //Button: GoBack
     ImageView btnGoBack;
@@ -42,6 +42,7 @@ public class DetailsCourse extends AppCompatActivity {
                 finish();
             }
         });
+
 
 
         //Get Intent Extras Data

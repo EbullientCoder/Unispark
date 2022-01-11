@@ -18,7 +18,7 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
-import com.example.unispark.controller.applicationcontroller.exams.StudentShowExams;
+import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.StudentModel;
@@ -32,28 +32,24 @@ public class StudentExamsGUIController extends AppCompatActivity
 implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
-    //Attributes
     //Menu
     ImageButton menuButton;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
-    //ExamModel
-    RecyclerView rvExams;
-    ExamAdapter examAdapter;
-    List<ExamItem> examsItem;
     //Menu ExamModel Page
     ImageButton btnPageRight;
     ImageButton btnPageLeft;
+    //Exams List
     TextView examsTitle;
+    RecyclerView rvExams;
+    ExamAdapter examAdapter;
+    List<ExamItem> examsItem;
     int page;
     //Get Intent Extras
     Bundle extras;
     StudentModel student;
 
-    private static final String YEAR = "2020/2021";
 
-
-    //Methods
     //Constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +137,7 @@ implements ExamAdapter.OnBookExamClickListener,
     //Page Menu
     private void pageMenu(){
         //Application Controller
-        StudentShowExams studentExamsAppController = new StudentShowExams();
+        ShowExams studentExamsAppController = new ShowExams();
 
         //Edit the page index
         if(page > 3 || page < -3) page = 0;

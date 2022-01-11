@@ -1,4 +1,4 @@
-package com.example.unispark.controller.details;
+package com.example.unispark.controller.guicontroller.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,13 +11,12 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
-public class DetailsProfCommunication extends AppCompatActivity {
+public class DetailsProfCommunicationGUIController extends AppCompatActivity {
     //Attributes
     //Button: GoBack
     ImageButton btnGoBack;
     //Get Intent Extras
     Bundle extras;
-    ProfessorCommunicationModel communication;
     //Display Parameters
     TextView txtShortName;
     ImageView imgProfProfile;
@@ -43,10 +42,11 @@ public class DetailsProfCommunication extends AppCompatActivity {
         });
 
 
+
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        communication = (ProfessorCommunicationModel) extras.getSerializable("Communication");
+        ProfessorCommunicationModel communication = (ProfessorCommunicationModel) extras.getSerializable("Communication");
         //Set Parameters
         txtShortName = findViewById(R.id.txt_prof_com_shortname);
         txtShortName.setText(communication.getShortCourseName());

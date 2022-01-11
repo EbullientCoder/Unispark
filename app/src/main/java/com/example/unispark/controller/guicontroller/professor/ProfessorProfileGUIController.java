@@ -1,4 +1,4 @@
-package com.example.unispark.controller.professor;
+package com.example.unispark.controller.guicontroller.professor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +18,10 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.details.DetailsCourse;
-import com.example.unispark.controller.professor.fragment.AddCommunicationFragment;
-import com.example.unispark.controller.professor.fragment.AddExamFragment;
-import com.example.unispark.controller.professor.fragment.AddHomeworkFragment;
+import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddExamGUIController;
+import com.example.unispark.controller.guicontroller.professor.fragment.AddHomeworkGUIController;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
@@ -30,9 +30,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ProfessorProfile extends AppCompatActivity
-        implements CoursesAdapter.OnCourseClickListener,
-        CoursesAdapter.OnCourseBtnClickListener {
+public class ProfessorProfileGUIController extends AppCompatActivity
+        implements CoursesAdapter.OnCourseClickListener{
     //Attributes
     //Menu
     ImageButton menuButton;
@@ -49,16 +48,13 @@ public class ProfessorProfile extends AppCompatActivity
     BottomNavigationView bottomNavigationView;
     //Get Intent Extras
     Bundle extras;
-    int imageID;
-    String firstname;
-    String lastname;
-    String website;
     //Set Intent Extras
     ImageView imgProfImage;
     TextView txtProfName;
     TextView txtWebsite;
     //Courses
     RecyclerView rvCourses;
+    CoursesAdapter coursesAdapter;
     List<CourseModel> coursesItem;
     //Model
     ProfessorModel professor;
@@ -90,6 +86,7 @@ public class ProfessorProfile extends AppCompatActivity
         });
 
 
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
@@ -115,6 +112,7 @@ public class ProfessorProfile extends AppCompatActivity
         });
 
 
+
         //Button: Add Homework - Communication
         isOpen = false;
 
@@ -136,7 +134,7 @@ public class ProfessorProfile extends AppCompatActivity
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamFragment fragment= new AddExamFragment(professor);
+                AddExamGUIController fragment= new AddExamGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -150,7 +148,7 @@ public class ProfessorProfile extends AppCompatActivity
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkFragment fragment= new AddHomeworkFragment(professor);
+                AddHomeworkGUIController fragment= new AddHomeworkGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -164,7 +162,7 @@ public class ProfessorProfile extends AppCompatActivity
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddCommunicationFragment fragment= new AddCommunicationFragment(professor);
+                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(professor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });
@@ -172,11 +170,10 @@ public class ProfessorProfile extends AppCompatActivity
 
 
         //Get Parameters
-        imageID = professor.getProfilePicture();
-        firstname = professor.getFirstName();
-        lastname = professor.getLastName();
-        website = professor.getWebsite();
-        coursesItem = professor.getCourses();
+        int imageID = professor.getProfilePicture();
+        String firstname = professor.getFirstName();
+        String lastname = professor.getLastName();
+        String website = professor.getWebsite();
 
         //Display Parameters
         imgProfImage = findViewById(R.id.img_professor_profile_image);
@@ -193,9 +190,12 @@ public class ProfessorProfile extends AppCompatActivity
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
+
         //Courses
         rvCourses = findViewById(R.id.rv_professor_courses);
-        rvCourses.setAdapter(new CoursesAdapter(coursesItem, this, this, "PROFESSOR"));
+        coursesItem = professor.getCourses();
+        coursesAdapter = new CoursesAdapter(coursesItem, this, "PROFESSOR");
+        rvCourses.setAdapter(coursesAdapter);
     }
 
 
@@ -237,16 +237,13 @@ public class ProfessorProfile extends AppCompatActivity
     }
 
 
+
+
     //Course Click
     @Override
     public void onCourseClick(int position) {
-        Intent intent = new Intent(this, DetailsCourse.class);
+        Intent intent = new Intent(this, DetailsCourseGUIController.class);
         intent.putExtra("Course", coursesItem.get(position));
         startActivity(intent);
-    }
-
-    @Override
-    public void onButtonClick(int position) {
-
     }
 }
