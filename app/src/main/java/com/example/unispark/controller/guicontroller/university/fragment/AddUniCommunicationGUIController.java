@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.controller.applicationcontroller.communications.AddUniCommunication;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
@@ -24,8 +25,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class AddUniCommunicationFragment extends DialogFragment {
-    //Attributes
+public class AddUniCommunicationGUIController extends DialogFragment {
+
+
     //Dismiss Button
     ImageButton btnDismiss;
     //Add Communication Button
@@ -49,23 +51,18 @@ public class AddUniCommunicationFragment extends DialogFragment {
     UniversityCommunicationModel communication;
     List<UniversityCommunicationModel> uniCommunicationsItem;
     UniCommunicationsAdapter communicationsAdapter;
-
     int i;
 
 
-
-
-    //Methods
     //Constructor
-    public AddUniCommunicationFragment(UniversityModel university,
-                                       List<UniversityCommunicationModel> uniCommunicationsItem,
-                                       UniCommunicationsAdapter communicationsAdapter) {
+    public AddUniCommunicationGUIController(UniversityModel university,
+                                            List<UniversityCommunicationModel> uniCommunicationsItem,
+                                            UniCommunicationsAdapter communicationsAdapter) {
         //Getting Professor Object
         this.university = university;
         this.uniCommunicationsItem = uniCommunicationsItem;
         this.communicationsAdapter = communicationsAdapter;
     }
-
 
 
     @Override
@@ -83,6 +80,7 @@ public class AddUniCommunicationFragment extends DialogFragment {
         });
 
 
+
         //Button: Add Photo
         btnPhoto = rootView.findViewById(R.id.btn_add_uni_communication_photo);
         btnPhoto.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +92,8 @@ public class AddUniCommunicationFragment extends DialogFragment {
                 startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
             }
         });
+
+
 
         //Calendar
         OffsetDateTime offset = OffsetDateTime.now();
@@ -116,7 +116,8 @@ public class AddUniCommunicationFragment extends DialogFragment {
         });
 
 
-        //Creating the Homework & Adding it into the Database
+
+        //Creating the Communication & Adding it into the Database
         //Type
         txtTitle = rootView.findViewById(R.id.txt_add_uni_communication_title);
         //Communication
@@ -137,8 +138,9 @@ public class AddUniCommunicationFragment extends DialogFragment {
                         text,
                         facultySelection);
 
-                //Add Lesson into the DB
-                CommunicationsDAO.addUniversityCommunication(communication);
+                //Application Controller
+                AddUniCommunication addCommunicationAppController = new AddUniCommunication();
+                addCommunicationAppController.addCommunication(communication);
 
                 //Notify the Communications Adapter
                 uniCommunicationsItem.add(0, communication);

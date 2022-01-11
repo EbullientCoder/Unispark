@@ -20,10 +20,8 @@ import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetLessons;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
-import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleFragment;
-import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationFragment;
-import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.LessonsDAO;
+import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleGUIController;
+import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationGUIController;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LessonModel;
 import com.example.unispark.model.UniversityModel;
@@ -107,7 +105,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddUniCommunicationFragment fragment = new AddUniCommunicationFragment(university, uniCommunicationsItem, uniCommunicationsAdapter);
+                AddUniCommunicationGUIController fragment = new AddUniCommunicationGUIController(university, uniCommunicationsItem, uniCommunicationsAdapter);
                 fragment.show(getSupportFragmentManager(), "AddUniCommunication");
             }
         });
@@ -121,7 +119,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddScheduleFragment fragment = new AddScheduleFragment(university, lessonAdapter, schedulesItem);
+                AddScheduleGUIController fragment = new AddScheduleGUIController(university, lessonAdapter, schedulesItem);
                 fragment.show(getSupportFragmentManager(), "AddSchedule");
             }
         });

@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.CourseModel;
@@ -25,8 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddScheduleFragment extends DialogFragment {
-    //Attributes
+public class AddScheduleGUIController extends DialogFragment {
+
+
     //Dismiss Button
     ImageButton btnDismiss;
     //Add StudentScheduleGUIController Button
@@ -50,7 +53,6 @@ public class AddScheduleFragment extends DialogFragment {
     UniversityModel university;
     List<LessonModel> schedulesItem;
     LessonAdapter lessonAdapter;
-
     int i;
 
     String DAYS[] = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
@@ -59,7 +61,7 @@ public class AddScheduleFragment extends DialogFragment {
 
     //Methods
     //Constructor
-    public AddScheduleFragment(UniversityModel university, LessonAdapter lessonAdapter, List<LessonModel> schedulesItem) {
+    public AddScheduleGUIController(UniversityModel university, LessonAdapter lessonAdapter, List<LessonModel> schedulesItem) {
         //Getting Professor Object
         this.university = university;
         this.schedulesItem = schedulesItem;
@@ -85,9 +87,10 @@ public class AddScheduleFragment extends DialogFragment {
 
 
 
-
         //Courses
-        List<CourseModel> coursesModel = CourseDAO.selectAvailableCourses("Ingegneria Informatica", 3, null);
+        //Application Controller: Get Courses
+        GetCourses getCoursesAppController = new GetCourses();
+        List<CourseModel> coursesModel = getCoursesAppController.getCourses("Ingegneria Informatica");
         if(coursesModel != null) for(int j = 0; j < coursesModel.size(); j++) courses.add(coursesModel.get(j).getFullName());
 
         autoCompleteTxtCourse = rootView.findViewById(R.id.add_schedule_course);
@@ -132,8 +135,9 @@ public class AddScheduleFragment extends DialogFragment {
                 //Creating new Lesson
                 LessonModel lesson = new LessonModel(courseSelection, daySelection, hourSelection);
 
-                //Adding Lesson to the DB
-                LessonsDAO.addLesson(lesson);
+                //Application Controller: Add Lesson
+                AddLesson addLessonAppController = new AddLesson();
+                addLessonAppController.addLesson(lesson);
 
                 //Notifying the Lessons Adapter
                 schedulesItem.add(0, lesson);
