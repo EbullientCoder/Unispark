@@ -14,13 +14,12 @@ import com.example.unispark.R;
 
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
-import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
+import com.example.unispark.controller.applicationcontroller.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.details.DetailsProfCommunication;
 import com.example.unispark.controller.details.DetailsUniCommunication;
-import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.controller.details.DetailsHomework;
@@ -30,7 +29,6 @@ import com.example.unispark.controller.applicationcontroller.menu.BottomNavigati
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentHomeGUIController extends AppCompatActivity

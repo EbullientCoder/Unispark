@@ -35,7 +35,7 @@ public class AddScheduleFragment extends DialogFragment {
     //Attributes
     //Dismiss Button
     ImageButton btnDismiss;
-    //Add Schedule Button
+    //Add StudentScheduleGUIController Button
     Button btnAddSchedule;
     //Course Selector
     List<String> courses;
@@ -130,7 +130,7 @@ public class AddScheduleFragment extends DialogFragment {
 
 
 
-        //Add Schedule
+        //Add StudentScheduleGUIController
         btnAddSchedule = rootView.findViewById(R.id.btn_add_schedule_add);
         btnAddSchedule.setOnClickListener(new View.OnClickListener() {
             @Override

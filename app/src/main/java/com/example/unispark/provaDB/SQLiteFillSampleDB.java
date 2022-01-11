@@ -94,14 +94,14 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
     public static final String STUDENT_EXAMS = "studentexams";
     public static final String EXAM_ID = "examID";
 
-    //Student Links table
+    //Student StudentLinksGUIController table
     public static final String STUDENTS_LINKS = "studentslinks";
     public static final String LESSON = "lesson";
     public static final String LESSONS = "lessons";
     public static final String DAY = "day";
     public static final String HOUR = "hour";
 
-    //Schedule lessons table
+    //StudentScheduleGUIController lessons table
 
 
 
@@ -190,7 +190,7 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
 
         db.execSQL(createTableStatement);
 
-        //Schedule lessons table
+        //StudentScheduleGUIController lessons table
         createTableStatement = "CREATE TABLE " + LESSONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LESSON + " TEXT, " + DAY + " TEXT, " + HOUR + " TEXT);";
         db.execSQL(createTableStatement);
     }

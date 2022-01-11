@@ -66,10 +66,10 @@
             android:name=".controller.guicontroller.student.StudentExamsGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.student.Schedule"
+            android:name=".controller.guicontroller.student.StudentScheduleGUIController"
             android:exported="true" />
         <activity
-            android:name=".controller.student.Links"
+            android:name=".controller.guicontroller.student.StudentLinksGUIController"
             android:exported="true" />
         <activity
             android:name=".controller.guicontroller.student.StudentProfileGUIController"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:windowSoftInputMode="adjustPan"
-    tools:context=".controller.student.Links"
+    tools:context=".controller.guicontroller.student.StudentLinksGUIController"
     android:background="#212529">
 
     <!-- Main -->
@@ -106,19 +106,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <!-- Links -->
+        <!-- StudentLinksGUIController -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp">
-
-            <!-- zero links -->
-            <ImageView
-                android:id="@+id/img_zero_items"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:cropToPadding="true"
-                android:src="@drawable/icon_zero_links"/>
 
             <!-- Title -->
             <TextView
@@ -201,7 +193,7 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Links List -->
+            <!-- StudentLinksGUIController List -->
             <!-- android:layout_marginTop="5dp" -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_links"

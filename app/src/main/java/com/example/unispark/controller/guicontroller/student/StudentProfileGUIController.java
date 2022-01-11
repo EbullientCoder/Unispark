@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
+import com.example.unispark.controller.applicationcontroller.CalculateAverage;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.student.fragment.SearchCourseFragment;
 import com.example.unispark.database.dao.CourseDAO;

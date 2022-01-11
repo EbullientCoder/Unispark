@@ -10,10 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.professor.ProfessorHome;
-import com.example.unispark.controller.student.Links;
 import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.ProfessorModel;
 
 import java.util.List;
 

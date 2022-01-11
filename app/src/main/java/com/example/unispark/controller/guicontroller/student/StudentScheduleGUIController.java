@@ -1,4 +1,4 @@
-package com.example.unispark.controller.student;
+package com.example.unispark.controller.guicontroller.student;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
+import com.example.unispark.controller.applicationcontroller.ShowSchedule;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
@@ -24,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class Schedule extends AppCompatActivity{
+public class StudentScheduleGUIController extends AppCompatActivity{
 
     //Attributes
     //Menu
@@ -35,8 +36,9 @@ public class Schedule extends AppCompatActivity{
     TextView txtDay;
     TextView txtDate;
     //Lessons
-    private RecyclerView rvLessons;
-    private List<LessonModel> lessonsExamItem;
+    RecyclerView rvLessons;
+    LessonAdapter lessonAdapter;
+    List<LessonModel> lessonsItem;
     //Get Intent Extras
     Bundle extras;
     StudentModel student;
@@ -70,6 +72,7 @@ public class Schedule extends AppCompatActivity{
         });
 
 
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
@@ -95,6 +98,7 @@ public class Schedule extends AppCompatActivity{
         });
 
 
+
         //Calendar
         OffsetDateTime offset = OffsetDateTime.now();
         txtDay = findViewById(R.id.txt_calendar_day);
@@ -103,33 +107,13 @@ public class Schedule extends AppCompatActivity{
         txtDate.setText(offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth());
 
 
+
         //Lessons
         rvLessons = findViewById(R.id.rv_lessons);
-        lessonsExamItem = null;
-
-        lessonsList(String.valueOf(offset.getDayOfWeek()));
+        //Application Controller
+        ShowSchedule showScheduleAppController = new ShowSchedule();
+        lessonsItem = showScheduleAppController.setLessons(student,String.valueOf(offset.getDayOfWeek()));
+        lessonAdapter = new LessonAdapter(lessonsItem, "STUDENT");
+        rvLessons.setAdapter(lessonAdapter);
     }
-
-    //Select Lessons
-    private void lessonsList(String day){
-        switch(day){
-            case "TUESDAY": lessonsExamItem = LessonsDAO.getLessons("TUESDAY", student.getCourses());
-                break;
-            case "WEDNESDAY": lessonsExamItem = LessonsDAO.getLessons("WEDNESDAY", student.getCourses());
-                break;
-            case "THURSDAY": lessonsExamItem = LessonsDAO.getLessons("THURSDAY", student.getCourses());
-                break;
-            case "FRIDAY": lessonsExamItem = LessonsDAO.getLessons("FRIDAY", student.getCourses());
-                break;
-            case "SATURDAY": lessonsExamItem = LessonsDAO.getLessons("SATURDAY", student.getCourses());
-                break;
-            case "SUNDAY": lessonsExamItem = LessonsDAO.getLessons("SUNDAY", student.getCourses());
-                break;
-            default:
-                lessonsExamItem = LessonsDAO.getLessons("MONDAY", student.getCourses());
-        }
-
-        if(lessonsExamItem != null) rvLessons.setAdapter(new LessonAdapter(lessonsExamItem, "STUDENT"));
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.example.unispark.controller.student;
+package com.example.unispark.controller.guicontroller.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +16,11 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
+import com.example.unispark.controller.applicationcontroller.ShowFacultyProfessors;
+import com.example.unispark.controller.applicationcontroller.links.AddLinks;
+import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
 import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.details.DetailsProfessor;
-import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentLinksDAO;
 import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.adapter.ProfessorsAdapter;
@@ -29,10 +31,9 @@ import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Links extends AppCompatActivity
+public class StudentLinksGUIController extends AppCompatActivity
         implements ProfessorsAdapter.OnProfessorClickListener,
         LinksAdapter.OnLinkClickListener,
         LinksAdapter.OnDelBtnClickListener {
@@ -44,16 +45,15 @@ public class Links extends AppCompatActivity
     BottomNavigationView bottomNavigationView;
     //Professors
     RecyclerView rvProfessors;
+    ProfessorsAdapter professorsAdapter;
     List<ProfessorModel> professorsItem;
     //Links
-    //Image
-    ImageView zeroLinks;
+    RecyclerView rvLinks;
+    LinksAdapter linkAdapter;
+    List<LinkModel> linksItem;
     //Button Add
     ImageButton addButton;
-    //Links
-    RecyclerView rvLinks;
-    List<LinkModel> linksExamItem;
-    LinksAdapter linkAdapter;
+    //Link
     EditText txtAddLinkName;
     EditText txtAddLink;
     //Get Intent Extras
@@ -88,6 +88,7 @@ public class Links extends AppCompatActivity
         });
 
 
+
         //Bottom Navigation Menu
         bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
@@ -116,32 +117,25 @@ public class Links extends AppCompatActivity
 
         //Professors
         rvProfessors = findViewById(R.id.rv_professors);
-        professorsItem = ProfessorDAO.getFacultyProfessors(student.getFaculty());
-
-        if (professorsItem == null){
-            professorsItem = new ArrayList<>();
-        }
-
-        rvProfessors.setAdapter(new ProfessorsAdapter(professorsItem, this));
+        //Application Controller
+        ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
+        professorsItem = facultyProfessorsAppController.setFacultyProfessors(student);
+        professorsAdapter = new ProfessorsAdapter(professorsItem, this);
+        rvProfessors.setAdapter(professorsAdapter);
 
 
-        //Image Links
-        zeroLinks = findViewById(R.id.img_zero_items);
 
-        //Links
+        //StudentLinksGUIController
         rvLinks = findViewById(R.id.rv_links);
-        linksExamItem = StudentLinksDAO.getStudentLinks(student.getId());
-
-        if (linksExamItem == null){
-            linksExamItem = new ArrayList<>();
-        }
-
-        linkAdapter = new LinksAdapter(linksExamItem, this, this);
+        //Application Controller
+        ShowLinks linksAppController = new ShowLinks();
+        linksItem = linksAppController.setLinks(student);
+        linkAdapter = new LinksAdapter(linksItem, this, this);
         rvLinks.setAdapter(linkAdapter);
 
 
 
-        //Add Button
+        //Add Link Button
         txtAddLinkName = findViewById(R.id.txt_input_link_name);
         txtAddLink = findViewById(R.id.txt_input_link);
         addButton = findViewById(R.id.btn_link_add);
@@ -153,11 +147,12 @@ public class Links extends AppCompatActivity
                 if(linkName.length() != 0 && link.length() != 0){
                     LinkModel link0 = new LinkModel(linkName, link);
 
-                    //Adding the link into the DB
-                    boolean isAdded = StudentLinksDAO.addStudentLink(link0, student.getId());
+                    //Application Controller
+                    AddLinks addLinksAppController = new AddLinks();
+                    boolean isAdded = addLinksAppController.addLink(student, link0);
                     if(isAdded){
-                        linksExamItem.add(link0);
-                        linkAdapter.notifyItemInserted(linksExamItem.size());
+                        linksItem.add(link0);
+                        linkAdapter.notifyItemInserted(linksItem.size());
                     }
                     else Toast.makeText(getApplicationContext(), "Link already exists", Toast.LENGTH_SHORT).show();
                 }
@@ -165,6 +160,8 @@ public class Links extends AppCompatActivity
             }
         });
     }
+
+
 
 
     //Clickable Items Methods
@@ -195,7 +192,7 @@ public class Links extends AppCompatActivity
         StudentLinksDAO.removeLink(studentLinks.get(position).getLinkName());
 
         //Removing link from the List
-        linksExamItem.remove(position);
+        linksItem.remove(position);
         linkAdapter.notifyItemRemoved(position);
     }
 

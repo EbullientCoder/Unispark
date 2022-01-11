@@ -81,6 +81,9 @@ public class SearchCourseFragment extends DialogFragment
         return rootView;
     }
 
+
+
+
     @Override
     public void onCourseClick(int position) {
         Intent intent = new Intent(getContext(), DetailsCourse.class);

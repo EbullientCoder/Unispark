@@ -1,4 +1,4 @@
-package com.example.unispark.controller.applicationcontroller.homeworks;
+package com.example.unispark.controller.applicationcontroller;
 
 import android.content.Context;
 import android.content.Intent;

@@ -114,7 +114,7 @@ public class UniversityHome extends AppCompatActivity implements
                 fragment.show(getSupportFragmentManager(), "AddUniCommunication");
             }
         });
-        //Button: Add Schedule
+        //Button: Add StudentScheduleGUIController
         txtSchedule = findViewById(R.id.txt_add_schedule);
         txtSchedule.setVisibility(View.GONE);
 
@@ -203,9 +203,9 @@ public class UniversityHome extends AppCompatActivity implements
     }
 
 
-    //Show Schedule
+    //Show StudentScheduleGUIController
     private void showSchedule(String day){
-        //Set Course's Schedule
+        //Set Course's StudentScheduleGUIController
         txtScheduleTitle.setText("SCHEDULE: " + day);
 
         //Lessons
@@ -231,10 +231,10 @@ public class UniversityHome extends AppCompatActivity implements
 
     @Override
     public void onDelBtnClick(int position) {
-        //Remove Schedule from DB
+        //Remove StudentScheduleGUIController from DB
         LessonsDAO.removeLesson(schedulesItem.get(position));
 
-        //Show Removed Schedule
+        //Show Removed StudentScheduleGUIController
         schedulesItem.remove(position);
         lessonAdapter.notifyItemRemoved(position);
         rvSchedules.setAdapter(lessonAdapter);

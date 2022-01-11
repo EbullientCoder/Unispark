@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.unispark.controller.professor.ProfessorExams;
 import com.example.unispark.controller.professor.ProfessorHome;
 import com.example.unispark.controller.professor.ProfessorProfile;
-import com.example.unispark.controller.student.Links;
+import com.example.unispark.controller.guicontroller.student.StudentLinksGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentExamsGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentProfileGUIController;
-import com.example.unispark.controller.student.Schedule;
+import com.example.unispark.controller.guicontroller.student.StudentScheduleGUIController;
 import com.example.unispark.model.UserModel;
 import com.example.unispark.R;
 
@@ -31,9 +31,9 @@ public class BottomNavigationMenu extends AppCompatActivity {
             break;
             case R.id.exams: intent = new Intent(context, StudentExamsGUIController.class);
             break;
-            case R.id.links: intent =  new Intent(context, Links.class);
+            case R.id.links: intent =  new Intent(context, StudentLinksGUIController.class);
             break;
-            case R.id.schedule: intent = new Intent(context, Schedule.class);
+            case R.id.schedule: intent = new Intent(context, StudentScheduleGUIController.class);
             break;
 
             //Professor
