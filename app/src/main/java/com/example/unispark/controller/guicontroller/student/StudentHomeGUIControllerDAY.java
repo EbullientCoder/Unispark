@@ -1,37 +1,35 @@
 package com.example.unispark.controller.guicontroller.student;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.unispark.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.unispark.R;
+import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
-import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
+import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
+import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
+import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
 import com.example.unispark.controller.guicontroller.details.DetailsProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
+import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
-import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
-import com.example.unispark.model.HomeworkModel;
-import com.example.unispark.adapter.HomeworksAdapter;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
-public class StudentHomeGUIController extends AppCompatActivity
+public class StudentHomeGUIControllerDAY extends AppCompatActivity
 implements UniCommunicationsAdapter.OnUniComClickListener,
 ProfCommunicationsAdapter.OnProfComClickListener,
 HomeworksAdapter.OnHomeworkBtnClickListener{
@@ -62,7 +60,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_home);
+        setContentView(R.layout.activity_student_home_day);
 
         //Getting User Object
         extras = getIntent().getExtras();
@@ -75,7 +73,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), StudentHomeGUIControllerDAY.class);
+                Intent intent = new Intent(getApplicationContext(), StudentHomeGUIController.class);
 
                 startActivity(intent);
             }

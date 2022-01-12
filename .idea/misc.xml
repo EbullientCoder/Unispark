@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout-night/activity_student_exams.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout-white/activity_student_home_day.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/activity_professor_exams.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/activity_student_home.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/activity_student_home_day.xml" value="0.264" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/activity_student_links.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_book_exams.xml" value="0.25" />
         <entry key="..\:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android/app/src/main/res/layout/item_container_homework.xml" value="0.72" />
