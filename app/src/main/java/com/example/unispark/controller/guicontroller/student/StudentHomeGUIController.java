@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.unispark.R;
 
@@ -70,14 +71,12 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
 
 
 
-        //Menu: Day - Night
+        //Menu
         menuButton = findViewById(R.id.btn_menu);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), StudentHomeGUIControllerDAY.class);
-
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
             }
         });
 
