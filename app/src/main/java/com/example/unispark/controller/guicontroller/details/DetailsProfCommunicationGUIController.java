@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
+import com.example.unispark.bean.BeanProfCommunication;
+
 
 public class DetailsProfCommunicationGUIController extends AppCompatActivity {
     //Attributes
@@ -46,7 +47,7 @@ public class DetailsProfCommunicationGUIController extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        ProfessorCommunicationModel communication = (ProfessorCommunicationModel) extras.getSerializable("Communication");
+        BeanProfCommunication communication = (BeanProfCommunication) extras.getSerializable("Communication");
         //Set Parameters
         txtShortName = findViewById(R.id.txt_prof_com_shortname);
         txtShortName.setText(communication.getShortCourseName());

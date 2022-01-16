@@ -24,12 +24,9 @@ import com.example.unispark.controller.applicationcontroller.communications.Show
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.guicontroller.details.DetailsProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
-import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;

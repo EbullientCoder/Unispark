@@ -1,7 +1,7 @@
 package com.example.unispark.facade;
 
 import com.example.unispark.database.dao.CommunicationsDAO;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
+import com.example.unispark.model.communications.BeanProfCommunication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,10 @@ public class CommunicationsFacade {
         return instance;
     }
 
-    public List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames)
+    public List<BeanProfCommunication> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames)
     {
-        List<ProfessorCommunicationModel> communicationList = new ArrayList<>();
-        List<ProfessorCommunicationModel> tempList;
+        List<BeanProfCommunication> communicationList = new ArrayList<>();
+        List<BeanProfCommunication> tempList;
         for (int i = 0; i < coursesShortNames.size(); i++)
         {
             tempList = CommunicationsDAO.getCourseCommunications(coursesShortNames.get(i), coursesFullNames.get(i));

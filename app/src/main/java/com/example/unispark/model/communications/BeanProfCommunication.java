@@ -2,7 +2,7 @@ package com.example.unispark.model.communications;
 
 import java.io.Serializable;
 
-public class ProfessorCommunicationModel implements Serializable {
+public class BeanProfCommunication implements Serializable {
 
     //Attributes
     private int profilePhoto;
@@ -16,7 +16,7 @@ public class ProfessorCommunicationModel implements Serializable {
 
     //Methods
     //Constructor
-    public ProfessorCommunicationModel(int profilePhoto, String shortCourseName, String fullName, String professorName, String date, String type, String communication) {
+    public BeanProfCommunication(int profilePhoto, String shortCourseName, String fullName, String professorName, String date, String type, String communication) {
         this.profilePhoto = profilePhoto;
         this.shortCourseName = shortCourseName;
         this.fullName = fullName;

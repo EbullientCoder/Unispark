@@ -8,8 +8,6 @@
     tools:context=".controller.guicontroller.student.StudentProfileGUIController"
     android:background="#212529">
 
-
-
     <!-- Main -->
     <LinearLayout
         android:layout_width="match_parent"

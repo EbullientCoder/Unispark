@@ -1,20 +1,18 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
-import com.example.unispark.bean.BeanProfCommunication;
 import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.facade.CommunicationsFacade;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
+import com.example.unispark.model.communications.BeanProfCommunication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowProfCommunications{
 
-    public List<BeanProfCommunication> showProfessorCommunications(BeanLoggedStudent student){
-       List<BeanProfCommunication> beanProfCommunicationList = new ArrayList<>();
+    public List<com.example.unispark.bean.BeanProfCommunication> showProfessorCommunications(BeanLoggedStudent student){
+       List<com.example.unispark.bean.BeanProfCommunication> beanProfCommunicationList = new ArrayList<>();
 
-        List<ProfessorCommunicationModel> profCommunicationsItem;
+        List<BeanProfCommunication> profCommunicationsItem;
         List<String> courseShortnames = new ArrayList<>();
         List<String> courseFullNames = new ArrayList<>();
 
@@ -28,7 +26,7 @@ public class ShowProfCommunications{
             profCommunicationsItem = CommunicationsFacade.getInstance().getAllCoursesCommunications(courseShortnames, courseFullNames);
 
             for (int j = 0; j < profCommunicationsItem.size(); j++){
-                beanProfCommunicationList.add(new BeanProfCommunication(
+                beanProfCommunicationList.add(new com.example.unispark.bean.BeanProfCommunication(
                         profCommunicationsItem.get(j).getProfilePhoto(),
                         profCommunicationsItem.get(j).getShortCourseName(),
                         profCommunicationsItem.get(j).getFullName(),
