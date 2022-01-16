@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.model.CourseModel;
 
 public class DetailsCourseGUIController extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class DetailsCourseGUIController extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        course = (CourseModel) extras.getSerializable("Course");
+        BeanCourse course = (BeanCourse) extras.getSerializable("Course");
         //Set Text
         txtShortName = findViewById(R.id.txt_course_short_name);
         txtShortName.setText(course.getShortName());

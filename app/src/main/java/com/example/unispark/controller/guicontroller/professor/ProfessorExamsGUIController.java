@@ -15,14 +15,16 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
-import com.example.unispark.adapter.exams.ExamItem;
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.details.DetailsVerbalizeExamsGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddExamGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddHomeworkGUIController;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,9 +56,9 @@ public class ProfessorExamsGUIController extends AppCompatActivity
     //ExamModel
     RecyclerView rvExams;
     ExamAdapter examAdapter;
-    List<ExamItem> examsItem;
+    List<BeanExamType> examsItem;
     //Model
-    ProfessorModel professor;
+    BeanLoggedProfessor bProfessor;
 
 
     @Override
@@ -66,7 +68,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
 
         //Getting User Object
         extras = getIntent().getExtras();
-        professor = (ProfessorModel) extras.getSerializable("UserObject");
+        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
 
 
 
@@ -98,10 +100,10 @@ public class ProfessorExamsGUIController extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(professor, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bProfessor, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -117,7 +119,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
         rvExams = findViewById(R.id.rv_professor_exams);
         //Application Controller
         ShowExams showExamsAppController = new ShowExams();
-        examsItem = showExamsAppController.assignedExams(professor);
+        examsItem = showExamsAppController.assignedExams(bProfessor);
         examAdapter = new ExamAdapter(examsItem, this);
         rvExams.setAdapter(examAdapter);
 
@@ -144,7 +146,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamGUIController fragment= new AddExamGUIController(professor);
+                AddExamGUIController fragment= new AddExamGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -158,7 +160,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkGUIController fragment= new AddHomeworkGUIController(professor);
+                AddHomeworkGUIController fragment= new AddHomeworkGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -172,7 +174,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(professor);
+                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });
@@ -223,7 +225,7 @@ public class ProfessorExamsGUIController extends AppCompatActivity
     @Override
     public void onViewBtnClick(int position) {
         Intent intent = new Intent(getApplicationContext(), DetailsVerbalizeExamsGUIController.class);
-        intent.putExtra("Exam", (BookExamModel) examsItem.get(position).getObject());
+        intent.putExtra("Exam", (BeanBookExam) examsItem.get(position).getBeanExamType());
         startActivity(intent);
     }
 }

@@ -15,14 +15,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
 import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.exceptions.ExamAlreadyExists;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
@@ -41,7 +48,7 @@ public class AddExamGUIController extends DialogFragment{
     //Btn Add Exam
     Button btnAddExam;
     //Course Selector
-    List<String> courses;
+    List<String> coursesNames;
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     String courseSelection;
@@ -60,17 +67,17 @@ public class AddExamGUIController extends DialogFragment{
     //Classroom
     TextInputLayout txtClassroom;
     String classroom;
-    //Model
-    ProfessorModel professor;
-    List<CourseModel> coursesList;
+
+    BeanLoggedProfessor bProfessor;
+    List<BeanCourse> bCourses;
     //Exam Model
-    BookExamModel exam;
+    BeanBookExam bExam;
     int i;
 
 
     //Constructor
-    public AddExamGUIController(ProfessorModel professor) {
-        this.professor = professor;
+    public AddExamGUIController(BeanLoggedProfessor bProfessor) {
+        this.bProfessor = bProfessor;
     }
 
 
@@ -92,12 +99,13 @@ public class AddExamGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        coursesList = professor.getCourses();
-        courses = new ArrayList<>(coursesList.size());
-        for(i = 0; i < coursesList.size(); i++) courses.add(coursesList.get(i).getShortName());
+        GetCourses getCoursesController = new GetCourses();
+        bCourses = getCoursesController.getCourses(bProfessor);
+        coursesNames = getCoursesController.getCoursesNames(bProfessor);
+
 
         autoCompleteTxt = rootView.findViewById(R.id.add_exam_select_course);
-        adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
+        adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, coursesNames);
         autoCompleteTxt.setAdapter(adapterItems);
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -162,30 +170,32 @@ public class AddExamGUIController extends DialogFragment{
         btnAddExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<BookExamModel> exams = professor.getExams();
+
 
                 hour = txtHour.getEditText().getText().toString();
                 building = txtBuilding.getEditText().getText().toString();
                 classroom = txtClassroom.getEditText().getText().toString();
 
                 //Exam Object
-                exam = new BookExamModel(10,
-                        coursesList.get(i).getFullName(),
-                        coursesList.get(i).getCourseYear(),
+                bExam = new BeanBookExam(10,
+                        bCourses.get(i).getFullName(),
+                        bCourses.get(i).getCourseYear(),
                         date + hour,
-                        coursesList.get(i).getCfu(),
+                        bCourses.get(i).getCfu(),
                         classroom,
                         building);
 
 
                 //Application Controller
                 AddExam addExamAppController = new AddExam();
-                addExamAppController.addExam(exam);
+                try {
+                    addExamAppController.addExam(bExam, bProfessor);
+                    dismiss();
+                } catch (ExamAlreadyExists | GenericException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
-                exams.add(exam);
-                professor.setExams(exams);
-
-                dismiss();
             }
         });
 

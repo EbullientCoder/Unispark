@@ -13,15 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.unispark.adapter.exams.ExamItem;
 import com.example.unispark.R;
 import com.example.unispark.adapter.exams.ExamAdapter;
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
-import com.example.unispark.model.StudentModel;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
+import com.example.unispark.exceptions.ExamAlreadyVerbalized;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.exams.BookExamModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,11 +46,11 @@ implements ExamAdapter.OnBookExamClickListener,
     TextView examsTitle;
     RecyclerView rvExams;
     ExamAdapter examAdapter;
-    List<ExamItem> examsItem;
+    List<BeanExamType> bExams;
     int page;
     //Get Intent Extras
     Bundle extras;
-    StudentModel student;
+    BeanLoggedStudent bStudent;
 
 
     //Constructor
@@ -58,7 +61,7 @@ implements ExamAdapter.OnBookExamClickListener,
 
         //Getting User Object
         extras = getIntent().getExtras();
-        student = (StudentModel) extras.getSerializable("UserObject");
+        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
 
@@ -90,10 +93,10 @@ implements ExamAdapter.OnBookExamClickListener,
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bStudent, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -147,29 +150,29 @@ implements ExamAdapter.OnBookExamClickListener,
             //Set Title
             examsTitle.setText("VERBALIZED EXAMS");
             //Exams Item
-            examsItem = studentExamsAppController.verbalizedExams(student);
+            bExams = studentExamsAppController.verbalizedExams(bStudent);
         }
         if(page == 1 || page == -3) {
             //Set Title
             examsTitle.setText("FAILED EXAMS");
             //Exams Item
-            examsItem = studentExamsAppController.failedExams(student);
+            bExams = studentExamsAppController.failedExams(bStudent);
         }
         if(page == 2 || page == -2) {
             //Set Title
             examsTitle.setText("BOOK UPCOMING EXAMS");
             //Exams Item
-            examsItem = studentExamsAppController.bookExams(student);
+            bExams = studentExamsAppController.bookExams(bStudent);
 
         }
         if(page == 3 || page == -1) {
             //Set Title
             examsTitle.setText("BOOKED EXAMS");
             //Exams Item
-            examsItem = studentExamsAppController.bookedExams(student);
+            bExams = studentExamsAppController.bookedExams(bStudent);
         }
 
-        examAdapter = new ExamAdapter(examsItem, this, this);
+        examAdapter = new ExamAdapter(bExams, this, this);
         rvExams.setAdapter(examAdapter);
     }
 
@@ -179,39 +182,37 @@ implements ExamAdapter.OnBookExamClickListener,
     //On BookExam Click
     @Override
     public void onBookBtnClick(int position) {
-        List<BookExamModel> exams = student.getBookedExams();
-        if (exams == null) exams = new ArrayList<>();
 
         //Application Controller
         BookExam bookExamAppController = new BookExam();
-        boolean isBooked = bookExamAppController.bookExam(student, (BookExamModel) examsItem.get(position).getObject());
-        if (isBooked){
-            //Adding the Booked Exam into the Student's StudentExamsGUIController List
-            exams.add((BookExamModel) examsItem.get(position).getObject());
-            student.setBookedExams(exams);
+
+        try {
+            bookExamAppController.bookExam(bStudent, (BeanBookExam) bExams.get(position).getBeanExamType());
 
             //Removing the Booked Exam from the List
-            examsItem.remove(position);
+            bExams.remove(position);
             examAdapter.notifyItemRemoved(position);
+        } catch (ExamAlreadyVerbalized | GenericException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        else Toast.makeText(getApplicationContext(), "Cannot Book: Exam already verbalized", Toast.LENGTH_SHORT).show();
     }
 
     //On LeaveExam Click
     @Override
     public void onLeaveBtnClick(int position) {
-        List<BookExamModel> exams = student.getBookedExams();
 
         //Application Controller
         LeaveExam leaveExamAppController = new LeaveExam();
-        leaveExamAppController.removeExam(student, exams.get(position));
-
-        //Remove the Booked Exam from Student's Attributes
-        exams.remove(position);
-        student.setBookedExams(exams);
+        try {
+            leaveExamAppController.removeExam(bStudent, position);
+        } catch (GenericException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         //Removing the Booked Exam from the List
-        examsItem.remove(position);
+        bExams.remove(position);
         examAdapter.notifyItemRemoved(position);
     }
 }

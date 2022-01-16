@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanUniCommunication;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 public class DetailsUniCommunicationGUIController extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class DetailsUniCommunicationGUIController extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        UniversityCommunicationModel communication = (UniversityCommunicationModel) extras.getSerializable("Communication");
+        BeanUniCommunication communication = (BeanUniCommunication) extras.getSerializable("Communication");
         //Set Parameters
         imgComBackground = findViewById(R.id.img_uni_com_background);
         imgComBackground.setImageResource(communication.getBackground());

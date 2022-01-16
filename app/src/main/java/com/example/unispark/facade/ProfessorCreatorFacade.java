@@ -27,7 +27,7 @@ public class ProfessorCreatorFacade {
     public ProfessorModel getProfessor(String firstName, String lastName, String email, int profilePicture, int professorId, String faculty, String website) //throws exception
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(professorId);
-        List<BookExamModel> exams = ExamsDAO.getExams(String.valueOf(professorId), true);
+        List<BookExamModel> exams = ExamsFacade.getExams(String.valueOf(professorId), true);
 
         return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams);
 

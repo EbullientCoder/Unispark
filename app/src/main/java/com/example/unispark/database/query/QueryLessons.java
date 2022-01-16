@@ -19,5 +19,12 @@ public class QueryLessons {
         return cursor;
     }
 
+    public static Cursor selectLessons(SQLiteDatabase db, String day, String courseName, String hour) // throws exception
+    {
+        String queryString = "SELECT " + LESSON + ", " + DAY + ", " + HOUR + " FROM " + LESSONS + " WHERE " + DAY + " = '" + day + "' AND " + LESSON + " = '" + courseName + "' AND " + HOUR + " = '" + hour + "';";
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
+
 
 }

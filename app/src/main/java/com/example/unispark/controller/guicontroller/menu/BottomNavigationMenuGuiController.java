@@ -1,10 +1,12 @@
-package com.example.unispark.controller.applicationcontroller.menu;
+package com.example.unispark.controller.guicontroller.menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.controller.guicontroller.professor.ProfessorExamsGUIController;
 import com.example.unispark.controller.guicontroller.professor.ProfessorHomeGUIController;
 import com.example.unispark.controller.guicontroller.professor.ProfessorProfileGUIController;
@@ -15,12 +17,12 @@ import com.example.unispark.controller.guicontroller.student.StudentProfileGUICo
 import com.example.unispark.controller.guicontroller.student.StudentScheduleGUIController;
 import com.example.unispark.model.UserModel;
 import com.example.unispark.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+public class BottomNavigationMenuGuiController extends AppCompatActivity {
 
-public class BottomNavigationMenu extends AppCompatActivity {
-
-    public Intent nextActivity(UserModel user, Context context, int selectedID){
+    public Intent nextActivity(BeanLoggedUser user, Context context, int selectedID){
         Intent intent = null;
 
         switch (selectedID){
@@ -48,4 +50,7 @@ public class BottomNavigationMenu extends AppCompatActivity {
 
         return intent;
     }
+
+
+
 }

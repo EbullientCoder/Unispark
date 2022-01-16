@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.model.LessonModel;
 
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
 public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    private List<LessonModel> lessonItem;
+    private List<BeanLesson> lessonItem;
     private OnDelBtnClickListener onDelBtnClickListener;
     private String type;
 
@@ -29,12 +31,12 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     //Methods
     //Constructor
-    public LessonAdapter(List<LessonModel> lessonItem, String type){
+    public LessonAdapter(List<BeanLesson> lessonItem, String type){
         this.lessonItem = lessonItem;
         this.type = type;
     }
 
-    public LessonAdapter(List<LessonModel> lessonItem, OnDelBtnClickListener onDelBtnClickListener, String type) {
+    public LessonAdapter(List<BeanLesson> lessonItem, OnDelBtnClickListener onDelBtnClickListener, String type) {
         this.lessonItem = lessonItem;
         this.onDelBtnClickListener = onDelBtnClickListener;
         this.type = type;
@@ -66,11 +68,11 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(type.equals("STUDENT")){
-            LessonModel lesson = (LessonModel) lessonItem.get(position);
+            BeanLesson lesson = (BeanLesson) lessonItem.get(position);
             ((LessonViewHolder) holder).setLessonDate(lesson);
         }
         else if(type.equals("UNIVERSITY")){
-            LessonModel lesson = (LessonModel) lessonItem.get(position);
+            BeanLesson lesson = (BeanLesson) lessonItem.get(position);
             ((LessonUniViewHolder) holder).setLessonDate(lesson);
         }
     }
@@ -97,7 +99,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             btnDelete.setVisibility(View.GONE);
         }
 
-        void setLessonDate(LessonModel lesson){
+        void setLessonDate(BeanLesson lesson){
             lessonName.setText(lesson.getLessonName());
             lessonTime.setText(lesson.getHour());
         }
@@ -126,7 +128,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
         }
 
-        void setLessonDate(LessonModel lesson){
+        void setLessonDate(BeanLesson lesson){
             lessonName.setText(lesson.getLessonName());
             lessonTime.setText(lesson.getHour());
         }

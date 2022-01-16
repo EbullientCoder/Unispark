@@ -2,7 +2,6 @@ package com.example.unispark.controller.guicontroller.student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -16,17 +15,20 @@ import com.example.unispark.R;
 
 import com.example.unispark.adapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.BeanProfCommunication;
+import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.controller.applicationcontroller.communications.ShowProfCommunications;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.guicontroller.details.DetailsProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
-import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.adapter.HomeworksAdapter;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,18 +47,18 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     //University Communications
     RecyclerView rvUniCommunications;
     UniCommunicationsAdapter uniCommunicationsAdapter;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
+    List<BeanUniCommunication> beanUniCommunicationList;
     //Professor Communications
     RecyclerView rvProfCommunications;
     ProfCommunicationsAdapter profCommunicationsAdapter;
-    List<ProfessorCommunicationModel> profCommunicationsItem;
+    List<BeanProfCommunication> beanProfCommunicationList;
     //Homeworks
     RecyclerView rvHomeworks;
     HomeworksAdapter homeworksAdapter;
-    List<HomeworkModel> homeworksItem;
+    List<BeanHomework> beanHomeworkList;
     //Get Intent Extras
     Bundle extras;
-    StudentModel student;
+    BeanLoggedStudent bStudent;
 
 
     //Constructor
@@ -67,7 +69,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
 
         //Getting User Object
         extras = getIntent().getExtras();
-        student = (StudentModel) extras.getSerializable("UserObject");
+        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
 
@@ -95,10 +97,10 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenu = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenu.nextActivity(bStudent, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -112,8 +114,8 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.showStudentCommunications(student);
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+        beanUniCommunicationList = uniCommunicationsAppController.showStudentCommunications(bStudent);
+        uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
 
@@ -122,8 +124,8 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         rvProfCommunications =  findViewById(R.id.rv_prof_communications);
         //Application Controller
         ShowProfCommunications profCommunicationsAppController = new ShowProfCommunications();
-        profCommunicationsItem = profCommunicationsAppController.showProfessorCommunications(student);
-        profCommunicationsAdapter = new ProfCommunicationsAdapter(profCommunicationsItem, this);
+        beanProfCommunicationList = profCommunicationsAppController.showProfessorCommunications(bStudent);
+        profCommunicationsAdapter = new ProfCommunicationsAdapter(beanProfCommunicationList, this);
         rvProfCommunications.setAdapter(profCommunicationsAdapter);
 
 
@@ -132,8 +134,8 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
         rvHomeworks = findViewById(R.id.rv_homeworks);
         //Application Controller
         ShowHomeworks homeworksAppController = new ShowHomeworks();
-        homeworksItem = homeworksAppController.setStudentHomeworks(student);
-        homeworksAdapter = new HomeworksAdapter(homeworksItem, this, "STUDENT");
+        beanHomeworkList = homeworksAppController.getHomework(bStudent);
+        homeworksAdapter = new HomeworksAdapter(beanHomeworkList, this, "STUDENT");
         rvHomeworks.setAdapter(homeworksAdapter);
     }
 
@@ -144,7 +146,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     public void onUniClick(int position) {
         Intent intent = new Intent(getApplicationContext(), DetailsUniCommunicationGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
+        intent.putExtra("Communication", beanUniCommunicationList.get(position));
 
         startActivity(intent);
     }
@@ -157,7 +159,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     public void onProfClick(int position) {
         Intent intent = new Intent(getApplicationContext(), DetailsProfCommunicationGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Communication", profCommunicationsItem.get(position));
+        intent.putExtra("Communication", beanProfCommunicationList.get(position));
 
         startActivity(intent);
     }
@@ -167,7 +169,7 @@ HomeworksAdapter.OnHomeworkBtnClickListener{
     public void onBtnClick(int position) {
         Intent intent = new Intent(getApplicationContext(), DetailsHomeworkGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Homework", homeworksItem.get(position));
+        intent.putExtra("Homework", beanHomeworkList.get(position));
         intent.putExtra("StudentHomeGUIController", "StudentHome");
 
         startActivity(intent);

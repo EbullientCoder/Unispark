@@ -13,11 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.AddUniCommunication;
-import com.example.unispark.database.dao.CommunicationsDAO;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -46,21 +49,21 @@ public class AddUniCommunicationGUIController extends DialogFragment {
     ArrayAdapter<String> adapterItems;
     String facultySelection;
     //University Model
-    UniversityModel university;
+    BeanLoggedUniversity bUniversity;
     //Homework Model
-    UniversityCommunicationModel communication;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
+    BeanUniCommunication beanUniCommunication;
+    List<BeanUniCommunication> beanUniCommunicationList;
     UniCommunicationsAdapter communicationsAdapter;
     int i;
 
 
     //Constructor
-    public AddUniCommunicationGUIController(UniversityModel university,
-                                            List<UniversityCommunicationModel> uniCommunicationsItem,
+    public AddUniCommunicationGUIController(BeanLoggedUniversity bUniversity,
+                                            List<BeanUniCommunication> beanUniCommunicationList,
                                             UniCommunicationsAdapter communicationsAdapter) {
         //Getting Professor Object
-        this.university = university;
-        this.uniCommunicationsItem = uniCommunicationsItem;
+        this.bUniversity = bUniversity;
+        this.beanUniCommunicationList = beanUniCommunicationList;
         this.communicationsAdapter = communicationsAdapter;
     }
 
@@ -100,8 +103,8 @@ public class AddUniCommunicationGUIController extends DialogFragment {
         String date = offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth();
 
         //DropDown Selector
-        faculties = university.getFaculties();
-        faculties.add("All");
+        faculties = bUniversity.getFaculties();
+        //faculties.add("All");
         autoCompleteTxt = rootView.findViewById(R.id.add_uni_communication_select_faculty);
         adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, faculties);
         autoCompleteTxt.setAdapter(adapterItems);
@@ -132,7 +135,7 @@ public class AddUniCommunicationGUIController extends DialogFragment {
                 text = txtCommunication.getEditText().getText().toString();
 
                 //Communication Object
-                communication = new UniversityCommunicationModel(R.drawable.blank_img,
+                beanUniCommunication = new BeanUniCommunication(R.drawable.blank_img,
                         title,
                         date,
                         text,
@@ -140,13 +143,17 @@ public class AddUniCommunicationGUIController extends DialogFragment {
 
                 //Application Controller
                 AddUniCommunication addCommunicationAppController = new AddUniCommunication();
-                addCommunicationAppController.addCommunication(communication);
+                try {
+                    addCommunicationAppController.addCommunication(beanUniCommunication);
+                    //Notify the Communications Adapter
+                    beanUniCommunicationList.add(0, beanUniCommunication);
+                    communicationsAdapter.notifyDataSetChanged();
 
-                //Notify the Communications Adapter
-                uniCommunicationsItem.add(0, communication);
-                communicationsAdapter.notifyDataSetChanged();
-
-                dismiss();
+                    dismiss();
+                } catch (GenericException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

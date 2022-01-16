@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.adapter.exams.ExamItem;
+import com.example.unispark.bean.BeanLink;
 import com.example.unispark.model.LinkModel;
 
 import java.util.List;
 
 public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //Attributes
-    private List<LinkModel> examItems;
+    private List<BeanLink> beanLinkList;
     private OnLinkClickListener onLinkClickListener;
     private OnDelBtnClickListener onDelBtnClickListener;
 
@@ -33,8 +33,8 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     //Methods
-    public LinksAdapter(List<LinkModel> examItems, OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
-        this.examItems = examItems;
+    public LinksAdapter(List<BeanLink> beanLinkList, OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
+        this.beanLinkList = beanLinkList;
         this.onLinkClickListener = onLinkClickListener;
         this.onDelBtnClickListener = onDelBtnClickListener;
     }
@@ -54,13 +54,13 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        LinkModel link = (LinkModel) examItems.get(position);
-        ((LinkViewHolder) holder).setLinkDate(link);
+        BeanLink beanLink = (BeanLink) beanLinkList.get(position);
+        ((LinkViewHolder) holder).setLinkDate(beanLink);
     }
 
     @Override
     public int getItemCount() {
-        return examItems.size();
+        return beanLinkList.size();
     }
 
 
@@ -94,7 +94,7 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             });
         }
 
-        void setLinkDate(LinkModel link){
+        void setLinkDate(BeanLink link){
             linkName.setText(link.getLinkName());
             linkAddress.setText(link.getLinkAddress());
         }

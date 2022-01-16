@@ -15,11 +15,11 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.schedule.ShowSchedule;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
-import com.example.unispark.model.LessonModel;
-import com.example.unispark.model.StudentModel;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -37,10 +37,10 @@ public class StudentScheduleGUIController extends AppCompatActivity{
     //Lessons
     RecyclerView rvLessons;
     LessonAdapter lessonAdapter;
-    List<LessonModel> lessonsItem;
+    List<BeanLesson> lessonsItem;
     //Get Intent Extras
     Bundle extras;
-    StudentModel student;
+    BeanLoggedStudent bStudent;
 
 
     //Constructor
@@ -52,7 +52,7 @@ public class StudentScheduleGUIController extends AppCompatActivity{
 
         //Getting User Object
         extras = getIntent().getExtras();
-        student = (StudentModel) extras.getSerializable("UserObject");
+        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
 
@@ -84,10 +84,10 @@ public class StudentScheduleGUIController extends AppCompatActivity{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bStudent, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -110,7 +110,7 @@ public class StudentScheduleGUIController extends AppCompatActivity{
         rvLessons = findViewById(R.id.rv_lessons);
         //Application Controller
         ShowSchedule showScheduleAppController = new ShowSchedule();
-        lessonsItem = showScheduleAppController.setLessons(student,String.valueOf(offset.getDayOfWeek()));
+        lessonsItem = showScheduleAppController.getLessons(bStudent,String.valueOf(offset.getDayOfWeek()));
         lessonAdapter = new LessonAdapter(lessonsItem, "STUDENT");
         rvLessons.setAdapter(lessonAdapter);
     }

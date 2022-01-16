@@ -6,17 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
-import com.example.unispark.controller.applicationcontroller.course.SearchCourse;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.course.JoinCourse;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
+import com.example.unispark.exceptions.CourseAlreadyJoined;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +34,15 @@ public class SearchCourseGUIController extends DialogFragment
     ImageButton btnDismiss;
     //Courses
     RecyclerView rvCourses;
-    List<CourseModel> coursesItem;
+    List<BeanCourse> beanAvaliableCourses;
     CoursesAdapter coursesAdapter;
     //Get Student Model
-    StudentModel student;
+    BeanLoggedStudent student;
     CoursesAdapter joinedCoursesAdapter;
 
 
     //Constructor
-    public SearchCourseGUIController(StudentModel student, CoursesAdapter joinedCoursesAdapter){
+    public SearchCourseGUIController(BeanLoggedStudent student, CoursesAdapter joinedCoursesAdapter){
         this.student = student;
         this.joinedCoursesAdapter = joinedCoursesAdapter;
     }
@@ -64,9 +68,9 @@ public class SearchCourseGUIController extends DialogFragment
         //Courses
         rvCourses = (RecyclerView) rootView.findViewById(R.id.rv_choose_course);
         //Application Controller
-        SearchCourse searchCourseAppController = new SearchCourse();
-        coursesItem = searchCourseAppController.setCourses(student);
-        coursesAdapter = new CoursesAdapter(coursesItem, this, this, "JOIN");
+        GetCourses getCoursesCoontroller = new GetCourses();
+        beanAvaliableCourses = getCoursesCoontroller.getAvaliableCourses(student);
+        coursesAdapter = new CoursesAdapter(beanAvaliableCourses, this, this, "JOIN");
         rvCourses.setAdapter(coursesAdapter);
 
         return rootView;
@@ -79,28 +83,25 @@ public class SearchCourseGUIController extends DialogFragment
     @Override
     public void onCourseClick(int position) {
         Intent intent = new Intent(getContext(), DetailsCourseGUIController.class);
-        intent.putExtra("Course", coursesItem.get(position));
+        intent.putExtra("Course", beanAvaliableCourses.get(position));
         startActivity(intent);
     }
 
     //On JoinCourse Click
     @Override
     public void onButtonClick(int position) {
-        List<CourseModel> joinedCourses;
+        List<BeanCourse> joinedCourses;
 
         //Application Controller
         JoinCourse joinCourseAppController = new JoinCourse();
-        joinCourseAppController.joinCourse(student, coursesItem.get(position));
-
-        //Add Course to the Student's Joined Courses
-        joinedCourses = student.getCourses();
-        if (joinedCourses == null) joinedCourses = new ArrayList<>();
-        joinedCourses.add(0, coursesItem.get(position));
-        student.setCourses(joinedCourses);
-
-        //Notify the Joined Courses Adapter
-        joinedCoursesAdapter.notifyDataSetChanged();
-
-        dismiss();
+        try {
+            joinCourseAppController.joinCourse(student, beanAvaliableCourses.get(position), position);
+            //Notify the Joined Courses Adapter
+            joinedCoursesAdapter.notifyDataSetChanged();
+            dismiss();
+        } catch (CourseAlreadyJoined | GenericException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

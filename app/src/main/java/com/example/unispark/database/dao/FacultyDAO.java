@@ -3,9 +3,11 @@ package com.example.unispark.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryFaculties;
+import com.example.unispark.exceptions.DatabaseOperationError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,27 +19,29 @@ public class FacultyDAO {
 
     private FacultyDAO(){}
 
-    public static boolean addFaculty(String faculty){
+    public static void addFaculty(String faculty) throws SQLiteException, DatabaseOperationError
+    {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
 
+        ContentValues cv = new ContentValues();
         cv.put(FACULTY, faculty);
         long insert = db.insert(FACULTIES, null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
     }
 
-    public static List<String> getUniversityFaculties(){
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryFaculties.selectFaculties(db);
-        if (!cursor.moveToFirst()) return null; //throw exception
+    public static List<String> getUniversityFaculties() throws SQLiteException
+    {
 
         List<String> faculties = new ArrayList<>();
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+        Cursor cursor = QueryFaculties.selectFaculties(db);
 
-        do{
-            faculties.add(cursor.getString(0));
-        } while(cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            do{
+                faculties.add(cursor.getString(0));
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();

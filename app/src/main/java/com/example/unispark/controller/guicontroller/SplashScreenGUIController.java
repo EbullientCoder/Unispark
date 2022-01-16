@@ -35,10 +35,10 @@ public class SplashScreenGUIController extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-
         //Initializing Sample DB
-        SplashScreen splashScreenAppController = new SplashScreen();
-        //splashScreenAppController.databaseConnection(getApplicationContext());
+        //SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
+       // splashScreenAppController.databaseConnection();
+
 
 
         //Delayed Launch of Login (2 seconds)

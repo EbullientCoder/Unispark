@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
+import com.example.unispark.bean.BeanUniCommunication;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //Attributes
-    private List<UniversityCommunicationModel> items;
+    private List<BeanUniCommunication> beanUniCommunicationList;
     private OnUniComClickListener onUniComClickListener;
 
     //Click ExamItem Interface
@@ -28,9 +28,9 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     //Methods
-    public UniCommunicationsAdapter(List<UniversityCommunicationModel> items, OnUniComClickListener onUniComClickListener){
-        if(items == null) this.items = new ArrayList<>();
-        else this.items = items;
+    public UniCommunicationsAdapter(List<BeanUniCommunication> beanUniCommunicationList, OnUniComClickListener onUniComClickListener){
+
+        this.beanUniCommunicationList = beanUniCommunicationList;
         this.onUniComClickListener = onUniComClickListener;
     }
 
@@ -48,13 +48,13 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        UniversityCommunicationModel universityCommunicationModel = (UniversityCommunicationModel) items.get(position);
-        ((UniCommunicationViewHolder) holder).setCommunicationDate(universityCommunicationModel);
+        BeanUniCommunication universityCommunication = (BeanUniCommunication) beanUniCommunicationList.get(position);
+        ((UniCommunicationViewHolder) holder).setCommunicationDate(universityCommunication);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return beanUniCommunicationList.size();
     }
 
     /*@Override
@@ -84,7 +84,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
             itemView.setOnClickListener(this);
         }
 
-        void setCommunicationDate(UniversityCommunicationModel universityCommunicationModel){
+        void setCommunicationDate(BeanUniCommunication universityCommunicationModel){
             imgCommunication.setImageResource(universityCommunicationModel.getBackground());
             imageID = universityCommunicationModel.getBackground();
             txtTitle.setText(universityCommunicationModel.getTitle());

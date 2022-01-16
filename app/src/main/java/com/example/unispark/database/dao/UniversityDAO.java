@@ -9,20 +9,24 @@ import com.example.unispark.model.UniversityModel;
 
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
+
 public class UniversityDAO {
 
     private UniversityDAO(){}
 
-    public static UniversityModel selectUniversity(String email, String password){
+    public static UniversityModel selectUniversity(String email, String password) throws LoginException
+    {
 
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryLogin.loginUniversity(db, email, password);
-        if(!cursor.moveToFirst()){
-            //throws exception
+        UniversityModel university;
 
-            //Momentaneo
-            UniversityModel universityError = new UniversityModel(null, null, 0, null, null);
-            return universityError;
+        Cursor cursor = QueryLogin.loginUniversity(db, email, password);
+
+        if (!cursor.moveToFirst()) {
+
+            throw new LoginException();
+
         }
 
         String name = cursor.getString(1);
@@ -31,7 +35,11 @@ public class UniversityDAO {
         String universityEmail = cursor.getString(4);
         List<String> faculties = FacultyDAO.getUniversityFaculties();
 
-        return new UniversityModel(name, universityEmail, profilePicture, streetAddress, faculties);
+        university = new UniversityModel(name, universityEmail, profilePicture, streetAddress, faculties);
 
+        cursor.close();
+        db.close();
+
+        return university;
     }
 }

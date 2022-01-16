@@ -3,11 +3,13 @@ package com.example.unispark.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryStudentLinks;
+import com.example.unispark.exceptions.DatabaseOperationError;
+import com.example.unispark.exceptions.LinkAlreadyExists;
 import com.example.unispark.model.LinkModel;
-import com.example.unispark.provaDB.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,8 @@ public class StudentLinksDAO {
     private StudentLinksDAO(){}
 
 
-    public static boolean addStudentLink(LinkModel studentLink, String studentId){
+    public static void addStudentLink(LinkModel studentLink, String studentId) throws LinkAlreadyExists, SQLiteException, DatabaseOperationError
+    {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
 
         Cursor cursor = QueryStudentLinks.selectStudentLinks(db, studentId);
@@ -25,7 +28,7 @@ public class StudentLinksDAO {
             String linkAddress;
             do {
                 linkAddress = cursor.getString(3);
-                if (studentLink.getLinkAddress().equals(linkAddress)) return false;
+                if (studentLink.getLinkAddress().equals(linkAddress)) throw new LinkAlreadyExists();
             } while(cursor.moveToNext());
         }
 
@@ -36,25 +39,25 @@ public class StudentLinksDAO {
         cv.put("link", studentLink.getLinkAddress());
         long insert = db.insert("studentslinks", null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
     }
 
-    public static List<LinkModel> getStudentLinks(String studentID){
+    public static List<LinkModel> getStudentLinks(String studentID) throws SQLiteException
+    {
+        List<LinkModel> studentLinks = new ArrayList<>();
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryStudentLinks.selectStudentLinks(db, studentID);
-        if (!cursor.moveToFirst()) return null; //throws exception
 
-        List<LinkModel> studentLinks = new ArrayList<>();
-        LinkModel link;
-        String linkName;
-        String linkAddress;
-
-        do {
-            linkName = cursor.getString(2);
-            linkAddress = cursor.getString(3);
-            studentLinks.add(new LinkModel(linkName, linkAddress));
-        } while(cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            LinkModel link;
+            String linkName;
+            String linkAddress;
+            do {
+                linkName = cursor.getString(2);
+                linkAddress = cursor.getString(3);
+                studentLinks.add(new LinkModel(linkName, linkAddress));
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
@@ -62,12 +65,10 @@ public class StudentLinksDAO {
         return studentLinks;
     }
 
-    public static boolean removeLink(String name)
+    public static void removeLink(String name) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         int delete = db.delete("studentslinks","name='" + name + "'",null);
-        if (delete > 0) return true;
-        return false;
-
+        if (!(delete > 0)) throw new DatabaseOperationError(1);
     }
 }

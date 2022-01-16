@@ -3,10 +3,14 @@ package com.example.unispark.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
+import com.example.unispark.exceptions.CourseException;
+import com.example.unispark.exceptions.DatabaseOperationError;
+import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
 
 import java.util.ArrayList;
@@ -16,10 +20,15 @@ public class CourseDAO {
 
     private CourseDAO(){}
 
-    public static boolean addCourse(CourseModel course){
+    public static void addCourse(CourseModel course) throws CourseException, DatabaseOperationError, SQLiteException
+    {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
+        Cursor cursor = QueryCourse.selectCourseName(db, course.getFullName());
 
+        if (cursor.moveToFirst()) throw new CourseException(0);
+
+
+        ContentValues cv = new ContentValues();
         cv.put("shortname", course.getShortName());
         cv.put("coursename", course.getFullName());
         cv.put("year", course.getCourseYear());
@@ -33,24 +42,29 @@ public class CourseDAO {
         //Insert into Database: Homework Table
         long insert = db.insert("courses", null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
+
     }
 
-    public static boolean joinCourse(String studentID, String courseName){
+    public static void joinCourse(String studentID, String courseName) throws CourseException, SQLiteException, DatabaseOperationError
+    {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
+        Cursor cursor = QueryCourse.selectCourseName(db, courseName);
 
+        if (cursor.moveToFirst()) throw new CourseException(1);
+
+        ContentValues cv = new ContentValues();
         cv.put("studentID", studentID);
         cv.put("coursename", courseName);
 
         long insert = db.insert("studentscourses", null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
+
     }
 
-    public static boolean leaveCourse(String studentID, String courseName){
+    public static void leaveCourse(String studentID, String courseName) throws CourseException, SQLiteException, DatabaseOperationError
+    {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursorExam = QueryExams.selectBookedExams(db, studentID);
         if (cursorExam.moveToFirst()){
@@ -60,138 +74,96 @@ public class CourseDAO {
             do{
                 examId = cursorExam.getInt(0);
                 cursorExamName = QueryExams.selectExamId(db, examId);
-                if (!cursorExamName.moveToFirst()){}//throws exception
+                cursorExamName.moveToFirst();
                 examName = cursorExamName.getString(1);
                 if(examName.equals(courseName)){
-                    return false;
+                    throw new CourseException(2);
                 }
             } while (cursorExam.moveToNext());
         }
         db.close();
         db = SQLiteConnection.getWritableDB();
         int delete = db.delete("studentscourses","studentID='" + studentID + "' and coursename='" + courseName + "'",null);
-        if (delete > 0) return true;
-        return false;
+        if (!(delete > 0)) throw new DatabaseOperationError(1);
+
     }
 
 
-    public static CourseModel createCourse(Cursor cursor){
-        String courseId = String.valueOf(cursor.getInt(7));
-        String shortName = cursor.getString(1);
-        String fullName = cursor.getString(2);
-        String courseYear = cursor.getString(3);
-        String cfu = cursor.getString(4);
-        String session = cursor.getString(5);
-        String link = cursor.getString(6);
-        String facultyCourse = cursor.getString(8);
-        int uniYear = cursor.getInt(9);
-
-        return new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse, uniYear);
-    }
-
-    public static List<CourseModel> selectStudentCourses(String studentId){
+    public static List<CourseModel> selectStudentCourses(String studentId) throws SQLiteException
+    {
+        List<CourseModel> coursesList = new ArrayList<>();
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursorCourse = QueryCourse.selectStudentCourses(db, studentId);
 
-        if (!cursorCourse.moveToFirst()) return null; //throw exception
+        if (cursorCourse.moveToFirst()){
+            String courseName;
+            Cursor cursor;
+            do{
+                courseName = cursorCourse.getString(0);
+                cursor = QueryCourse.selectCourseName(db, courseName);
+                cursor.moveToFirst();
 
-        List<CourseModel> coursesList = new ArrayList<>();
+                coursesList.add(CourseCreatorFacade.getInstance().createCourse(cursor));
+                cursor.close();
+            } while (cursorCourse.moveToNext());
+        }
 
-        String courseName;
-        Cursor cursor;
-        do{
-            courseName = cursorCourse.getString(0);
-            cursor = QueryCourse.selectCourseName(db, courseName);
-            if (!cursor.moveToFirst()){} //throw exception
-            //Create a new course and add it to the student's course list
-            coursesList.add(createCourse(cursor));
-            cursor.close();
-        } while (cursorCourse.moveToNext());
-
-        //close both db and cursorCourse when done
         cursorCourse.close();
         db.close();
 
         return coursesList;
     }
 
-    public static List<CourseModel> selectProfessorCourses(int professorId){
-
+    public static List<CourseModel> selectProfessorCourses(int professorId) throws SQLiteException
+    {
+        List<CourseModel> coursesList = new ArrayList<>();
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryCourse.selectProfessorCourses(db, professorId);
 
-        if (!cursor.moveToFirst()) return null; //throw exception
-
-        List<CourseModel> coursesList = new ArrayList<>();
-
-        do {
-            coursesList.add(createCourse(cursor));
-
-        } while (cursor.moveToNext());
-
-        cursor.close();
-        db.close();
-
-        return coursesList;
-    }
-
-    //Get available course names to join for a student marked by faculty
-    public static List<CourseModel> selectAvailableCourses(String faculty, int uniYear, List<String> courseNames)
-    {
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-
-        List<CourseModel> coursesList = new ArrayList<>();
-
-        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty, uniYear);
-        if (!cursor.moveToFirst()){
-            //throw exception
-            return null;
+        if (cursor.moveToFirst()){
+            do {
+                coursesList.add(CourseCreatorFacade.getInstance().createCourse(cursor));
+            } while (cursor.moveToNext());
         }
-        //Course attributes
-        CourseModel course;
-        String courseId;
-        String shortName;
-        String fullName;
-        String courseYear;
-        String cfu;
-        String session;
-        String link;
-        String facultyCourse;
-        int year;
-
-        boolean equals = false;
-        do{
-            courseId = String.valueOf(cursor.getInt(7));
-            shortName = cursor.getString(1);
-            fullName = cursor.getString(2);
-
-            if (courseNames != null){
-                for (int i = 0; i < courseNames.size(); i++) {
-                    if (fullName.equals(courseNames.get(i))) {
-                        equals = true;
-                        break;
-                    }
-            }
-
-            }
-            if(!equals){
-                courseYear = cursor.getString(3);
-                cfu = cursor.getString(4);
-                session = cursor.getString(5);
-                link = cursor.getString(6);
-                facultyCourse = cursor.getString(8);
-                year = cursor.getInt(9);
-
-                //Create a new course and add it to the course list
-                course = new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse, year);
-                coursesList.add(course);
-            }
-            equals = false;
-        } while (cursor.moveToNext());
 
         cursor.close();
         db.close();
 
         return coursesList;
     }
+
+    //Get available course names to join for a student marked by faculty and that are not already in the student's courses list
+    public static List<CourseModel> selectAvailableCourses(String faculty, int uniYear, List<CourseModel> courses) throws SQLiteException
+    {
+        List<CourseModel> coursesList = new ArrayList<>();
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty, uniYear);
+
+        if (cursor.moveToFirst()){
+            coursesList = CourseCreatorFacade.getInstance().getAvaliableCourses(cursor, courses);
+        }
+        cursor.close();
+        db.close();
+
+        return coursesList;
+    }
+
+    public static List<CourseModel> selectCourses(String faculty) throws SQLiteException
+    {
+        List<CourseModel> coursesList = new ArrayList<>();
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+        Cursor cursor = QueryCourse.selectFacultyCourses(db, faculty);
+
+        if (cursor.moveToFirst()){
+            do{
+                coursesList.add(CourseCreatorFacade.getInstance().createCourse(cursor));
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return coursesList;
+    }
+
+
 }

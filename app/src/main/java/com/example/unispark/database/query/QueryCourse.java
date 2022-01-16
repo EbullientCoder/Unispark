@@ -77,4 +77,12 @@ public class QueryCourse {
         Cursor cursor = db.rawQuery(queryString, null);
         return cursor;
     }
+
+    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty) //throws exception
+    {
+        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        return cursor;
+    }
 }

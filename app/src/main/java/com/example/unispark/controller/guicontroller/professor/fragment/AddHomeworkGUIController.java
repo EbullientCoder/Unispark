@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.OffsetDateTime;
 
@@ -23,14 +24,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.HomeworksAdapter;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
-import com.example.unispark.database.dao.HomeworkDAO;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.HomeworkModel;
-import com.example.unispark.model.ProfessorModel;
+import com.example.unispark.exceptions.GenericException;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -59,24 +60,24 @@ public class AddHomeworkGUIController extends DialogFragment{
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     //Professor Model
-    ProfessorModel professor;
-    List<CourseModel> coursesList;
+    BeanLoggedProfessor bProfessor;
+    List<BeanCourse> bCourses;
     //Homework Model
-    HomeworkModel homework;
-    List<HomeworkModel> homeworksItem = null;
+    BeanHomework bHomework;
+    List<BeanHomework> bHomeworkList = null;
     HomeworksAdapter homeworksAdapter = null;
     int i;
 
 
     //Constructor
-    public AddHomeworkGUIController(ProfessorModel professor){
-        this.professor = professor;
+    public AddHomeworkGUIController(BeanLoggedProfessor bProfessor){
+        this.bProfessor = bProfessor;
     }
 
-    public AddHomeworkGUIController(ProfessorModel professor, List<HomeworkModel> homeworksItem, HomeworksAdapter homeworksAdapter) {
+    public AddHomeworkGUIController(BeanLoggedProfessor bProfessor, List<BeanHomework> bHomeworkList, HomeworksAdapter homeworksAdapter) {
         //Getting Professor Object
-        this.professor = professor;
-        this.homeworksItem = homeworksItem;
+        this.bProfessor = bProfessor;
+        this.bHomeworkList = bHomeworkList;
         this.homeworksAdapter = homeworksAdapter;
     }
 
@@ -99,9 +100,9 @@ public class AddHomeworkGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        coursesList = professor.getCourses();
-        courses = new ArrayList<>(coursesList.size());
-        for(i = 0; i < coursesList.size(); i++) courses.add(coursesList.get(i).getShortName());
+        GetCourses getCoursesController = new GetCourses();
+        bCourses = getCoursesController.getCourses(bProfessor);
+        courses = getCoursesController.getCoursesNames(bProfessor);
 
         autoCompleteTxt = rootView.findViewById(R.id.select_course);
         adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
@@ -174,27 +175,31 @@ public class AddHomeworkGUIController extends DialogFragment{
                 String points = txtPoints.getEditText().getText().toString();
 
                 //Homework Object
-                homework = new HomeworkModel(
-                        coursesList.get(i).getShortName(),
-                        coursesList.get(i).getFullName(),
+                bHomework = new BeanHomework(
+                        bCourses.get(i).getShortName(),
+                        bCourses.get(i).getFullName(),
                         title,
                         date,
                         instructions,
                         points,
-                        professor.getId());
+                        bProfessor.getId());
 
 
                 //Application Controller
                 AddHomework addHomeworkAppController = new AddHomework();
-                addHomeworkAppController.addHomework(homework);
+                try {
+                    addHomeworkAppController.addHomework(bHomework);
 
-                //Notify the Homework Adapter
-                if(homeworksItem != null && homeworksAdapter != null){
-                    homeworksItem.add(homework);
-                    homeworksAdapter.notifyDataSetChanged();
+                    //Notify the Homework Adapter
+                    if(bHomeworkList != null && homeworksAdapter != null){
+                        bHomeworkList.add(bHomework);
+                        homeworksAdapter.notifyDataSetChanged();
+                    }
+                    dismiss();
+                } catch (GenericException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
-                dismiss();
             }
         });
 

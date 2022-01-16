@@ -16,18 +16,18 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGUIController;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddExamGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddHomeworkGUIController;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
-import com.example.unispark.model.HomeworkModel;
-import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -53,15 +53,15 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
     //Communications
     RecyclerView rvUniCommunications;
     UniCommunicationsAdapter uniCommunicationsAdapter;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
+    List<BeanUniCommunication> beanUniCommunicationList;
     //Homeworks
     RecyclerView rvHomeworks;
     HomeworksAdapter homeworkAdapter;
-    List<HomeworkModel> homeworksItem;
+    List<BeanHomework> beanHomeworkList;
     //Get Intent Extras
     Bundle extras;
     //Model
-    ProfessorModel professor;
+    BeanLoggedProfessor bProfessor;
 
 
     @Override
@@ -71,7 +71,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
 
         //Getting User Object
         extras = getIntent().getExtras();
-        professor = (ProfessorModel) extras.getSerializable("UserObject");
+        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
 
 
 
@@ -103,10 +103,10 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(professor, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bProfessor, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -137,7 +137,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamGUIController fragment = new AddExamGUIController(professor);
+                AddExamGUIController fragment = new AddExamGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -151,7 +151,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkGUIController fragment= new AddHomeworkGUIController(professor, homeworksItem, homeworkAdapter);
+                AddHomeworkGUIController fragment= new AddHomeworkGUIController(bProfessor, beanHomeworkList, homeworkAdapter);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -165,7 +165,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(professor);
+                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });
@@ -176,8 +176,8 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.showProfessorCommunications(professor);
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+        beanUniCommunicationList = uniCommunicationsAppController.showProfessorCommunications(bProfessor);
+        uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
 
@@ -186,11 +186,10 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
         rvHomeworks = findViewById(R.id.rv_homeworks);
         //Application Controller
         ShowHomeworks homeworksAppController = new ShowHomeworks();
-        homeworksItem = homeworksAppController.setProfessorHomeworks(professor);
-        homeworkAdapter = new HomeworksAdapter(homeworksItem, this, "PROFESSOR");
+        beanHomeworkList = homeworksAppController.getHomework(bProfessor);
+        homeworkAdapter = new HomeworksAdapter(beanHomeworkList, this, "PROFESSOR");
         rvHomeworks.setAdapter(homeworkAdapter);
     }
-
 
 
     //Open Button
@@ -237,7 +236,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
     public void onUniClick(int position) {
         Intent intent = new Intent(this, DetailsUniCommunicationGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
+        intent.putExtra("Communication", beanUniCommunicationList.get(position));
 
         startActivity(intent);
     }
@@ -247,7 +246,7 @@ public class ProfessorHomeGUIController extends AppCompatActivity implements
     public void onBtnClick(int position) {
         Intent intent = new Intent(this, DetailsHomeworkGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Homework", homeworksItem.get(position));
+        intent.putExtra("Homework", beanHomeworkList.get(position));
         intent.putExtra("StudentHomeGUIController", "ProfessorHomeGUIController");
         startActivity(intent);
     }

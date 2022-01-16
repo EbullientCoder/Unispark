@@ -14,15 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.course.LeaveCourse;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.student.fragment.SearchCourseGUIController;
+import com.example.unispark.exceptions.ExamBookedException;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
-import com.example.unispark.model.StudentModel;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
@@ -48,14 +52,14 @@ public class StudentProfileGUIController extends AppCompatActivity
     //Courses
     RecyclerView rvCourses;
     CoursesAdapter coursesAdapter;
-    List<CourseModel> coursesItem;
+    List<BeanCourse> bCourses;
     //Search Course
     ImageButton addCourse;
     //Fragment Course
     SearchCourseGUIController searchCourseFragment;
     //Get Intent Extras
     Bundle extras;
-    StudentModel student;
+    BeanLoggedStudent student;
 
 
     //Methods
@@ -66,7 +70,7 @@ public class StudentProfileGUIController extends AppCompatActivity
 
         //Getting User Object
         extras = getIntent().getExtras();
-        student = (StudentModel) extras.getSerializable("UserObject");
+        student = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
 
@@ -98,7 +102,7 @@ public class StudentProfileGUIController extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
                 Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
@@ -158,8 +162,10 @@ public class StudentProfileGUIController extends AppCompatActivity
 
         //Student Courses
         rvCourses = findViewById(R.id.rv_courses);
-        coursesItem = student.getCourses();
-        coursesAdapter = new CoursesAdapter(coursesItem, this, this, "LEAVE");
+        GetCourses getCoursesController = new GetCourses();
+        bCourses = getCoursesController.getCourses(student);
+
+        coursesAdapter = new CoursesAdapter(bCourses, this, this, "LEAVE");
         rvCourses.setAdapter(coursesAdapter);
     }
 
@@ -170,7 +176,7 @@ public class StudentProfileGUIController extends AppCompatActivity
     public void onCourseClick(int position) {
         Intent intent = new Intent(getApplicationContext(), DetailsCourseGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Course", coursesItem.get(position));
+        intent.putExtra("Course", bCourses.get(position));
 
         startActivity(intent);
     }
@@ -180,16 +186,15 @@ public class StudentProfileGUIController extends AppCompatActivity
     public void onButtonClick(int position) {
         //Application Controller
         LeaveCourse leaveCourseAppController = new LeaveCourse();
-        boolean leaveCourse = leaveCourseAppController.leaveCourse(student, coursesItem.get(position));
-
-        if(leaveCourse){
-            //Remove Course from Student's joined Courses
-            coursesItem.remove(position);
-            student.setCourses(coursesItem);
+        try {
+            leaveCourseAppController.leaveCourse(student, bCourses.get(position), position);
 
             //Notify changed dimension to the Adapter
             coursesAdapter.notifyItemRemoved(position);
+        } catch (GenericException | ExamBookedException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        else Toast.makeText(getApplicationContext(), "Cannot leave course: EXAM BOOKED", Toast.LENGTH_SHORT).show();
+
     }
 }

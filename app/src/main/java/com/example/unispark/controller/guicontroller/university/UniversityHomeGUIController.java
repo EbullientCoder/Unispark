@@ -15,6 +15,10 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.adapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
 import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
@@ -22,8 +26,6 @@ import com.example.unispark.controller.applicationcontroller.schedule.GetLessons
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleGUIController;
 import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationGUIController;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.LessonModel;
 import com.example.unispark.model.UniversityModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,16 +50,16 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
     //Communications
     RecyclerView rvUniCommunications;
     UniCommunicationsAdapter uniCommunicationsAdapter;
-    List<UniversityCommunicationModel> uniCommunicationsItem;
+    List<BeanUniCommunication> beanUniCommunicationList;
     //Schedules
     TextView txtScheduleTitle;
     RecyclerView rvSchedules;
     LessonAdapter lessonAdapter;
-    List<LessonModel> schedulesItem;
+    List<BeanLesson> bLessons;
     //Get Intent Extras
     Bundle extras;
     //Model
-    UniversityModel university;
+    BeanLoggedUniversity bUniversity;
 
     int index = 0;
 
@@ -69,7 +71,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
 
         //Getting User Object
         extras = getIntent().getExtras();
-        university = (UniversityModel) extras.getSerializable("UserObject");
+        bUniversity = (BeanLoggedUniversity) extras.getSerializable("UserObject");
 
 
 
@@ -105,7 +107,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddUniCommunicationGUIController fragment = new AddUniCommunicationGUIController(university, uniCommunicationsItem, uniCommunicationsAdapter);
+                AddUniCommunicationGUIController fragment = new AddUniCommunicationGUIController(bUniversity, beanUniCommunicationList, uniCommunicationsAdapter);
                 fragment.show(getSupportFragmentManager(), "AddUniCommunication");
             }
         });
@@ -119,7 +121,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddScheduleGUIController fragment = new AddScheduleGUIController(university, lessonAdapter, schedulesItem);
+                AddScheduleGUIController fragment = new AddScheduleGUIController(bUniversity, lessonAdapter, bLessons);
                 fragment.show(getSupportFragmentManager(), "AddSchedule");
             }
         });
@@ -130,8 +132,8 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_assigned_communications);
         //Application Controller
         ShowUniCommunications uniCommunicationsAppController = new ShowUniCommunications();
-        uniCommunicationsItem = uniCommunicationsAppController.showUniversityCommunications();
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(uniCommunicationsItem, this);
+        beanUniCommunicationList = uniCommunicationsAppController.showUniversityCommunications();
+        uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
 
@@ -206,14 +208,14 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         //Lessons
         //Application Controller: Get Courses
         GetCourses getCoursesAppController = new GetCourses();
-        List<CourseModel> courses = getCoursesAppController.getCourses("Ingegneria Informatica");
+        List<BeanCourse> courses = getCoursesAppController.getFacultyCourses(bUniversity.getFaculties());
         //Application Controller: Get Lessons
         GetLessons getLessonsAppController = new GetLessons();
-        schedulesItem = getLessonsAppController.getLessons(day, courses);
-        lessonAdapter = new LessonAdapter(schedulesItem, this, "UNIVERSITY");
+        bLessons = getLessonsAppController.getLessons(day, courses);
+        lessonAdapter = new LessonAdapter(bLessons, this, "UNIVERSITY");
 
         //Set adapter
-        if(schedulesItem != null) rvSchedules.setAdapter(lessonAdapter);
+        rvSchedules.setAdapter(lessonAdapter);
     }
 
 
@@ -224,7 +226,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
     public void onUniClick(int position) {
         Intent intent = new Intent(this, DetailsUniCommunicationGUIController.class);
         //Pass Items to the new Activity
-        intent.putExtra("Communication", uniCommunicationsItem.get(position));
+        intent.putExtra("Communication", beanUniCommunicationList.get(position));
 
         startActivity(intent);
     }
@@ -234,10 +236,15 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
     public void onDelBtnClick(int position) {
         //Application Controller
         DeleteLesson deleteLessonAppController = new DeleteLesson();
-        deleteLessonAppController.deleteLesson(schedulesItem.get(position));
+        try {
+            deleteLessonAppController.deleteLesson(bLessons.get(position));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         //Show Removed StudentScheduleGUIController
-        schedulesItem.remove(position);
+        bLessons.remove(position);
         lessonAdapter.notifyItemRemoved(position);
         rvSchedules.setAdapter(lessonAdapter);
     }

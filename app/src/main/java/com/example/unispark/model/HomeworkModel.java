@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class HomeworkModel implements Serializable {
     //Attributes
     private String shortName;
-    private String fullname;
+    private String fullName;
     private String title;
     private String expiration;
     private String instructions;
@@ -15,9 +15,9 @@ public class HomeworkModel implements Serializable {
 
     //Methods
     //Constructor
-    public HomeworkModel(String shortName, String fullname, String title, String expiration, String instructions, String points, int trackProfessor) {
+    public HomeworkModel(String shortName, String fullName, String title, String expiration, String instructions, String points, int trackProfessor) {
         this.shortName = shortName;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.title = title;
         this.expiration = expiration;
         this.instructions = instructions;
@@ -29,8 +29,8 @@ public class HomeworkModel implements Serializable {
     public String getShortName() {
         return shortName;
     }
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
     public String getTitle(){
         return title;
@@ -50,8 +50,8 @@ public class HomeworkModel implements Serializable {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
     public void setTitle(String title) {
         this.title = title;

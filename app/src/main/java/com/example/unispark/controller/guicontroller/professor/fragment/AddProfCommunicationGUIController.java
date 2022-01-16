@@ -9,18 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanProfCommunication;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.AddProfCommunication;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.communications.ProfessorCommunicationModel;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+import com.example.unispark.exceptions.GenericException;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddProfCommunicationGUIController extends DialogFragment{
@@ -40,16 +41,16 @@ public class AddProfCommunicationGUIController extends DialogFragment{
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     //Professor Model
-    ProfessorModel professor;
+    BeanLoggedProfessor bProfessor;
     //ProfCommunication Model
-    ProfessorCommunicationModel communication;
+    BeanProfCommunication bCommunication;
     int i;
 
 
     //Constructor
-    public AddProfCommunicationGUIController(ProfessorModel professor) {
+    public AddProfCommunicationGUIController(BeanLoggedProfessor bProfessor) {
         //Getting Professor Object
-        this.professor = professor;
+        this.bProfessor = bProfessor;
     }
 
 
@@ -76,9 +77,9 @@ public class AddProfCommunicationGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        List<CourseModel> coursesList = professor.getCourses();
-        courses = new ArrayList<>(coursesList.size());
-        for(i = 0; i < coursesList.size(); i++) courses.add(coursesList.get(i).getShortName());
+        GetCourses getCoursesController = new GetCourses();
+        courses = getCoursesController.getCoursesNames(bProfessor);
+
 
         autoCompleteTxt = rootView.findViewById(R.id.add_communication_select_course);
         adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
@@ -112,20 +113,24 @@ public class AddProfCommunicationGUIController extends DialogFragment{
                 String text = txtCommunication.getEditText().getText().toString();
 
                 //Communication Object
-                communication = new ProfessorCommunicationModel(
-                        professor.getProfilePicture(),
-                        coursesList.get(i).getShortName(),
-                        coursesList.get(i).getFullName(),
-                        professor.getFirstName() + " " + professor.getLastName(),
+                bCommunication = new BeanProfCommunication(
+                        bProfessor.getProfilePicture(),
+                        bProfessor.getCourses().get(i).getShortName(),
+                        bProfessor.getCourses().get(i).getFullName(),
+                        bProfessor.getFirstName() + " " + bProfessor.getLastName(),
                         date,
                         type,
                         text);
 
                 //Application Controller
                 AddProfCommunication addCommunicationAppController = new AddProfCommunication();
-                addCommunicationAppController.addProfCommunication(communication);
-
-                dismiss();
+                try {
+                    addCommunicationAppController.addProfCommunication(bCommunication);
+                    dismiss();
+                } catch (GenericException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -1,15 +1,33 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.model.StudentModel;
+import com.example.unispark.exceptions.DatabaseOperationError;
+import com.example.unispark.exceptions.ExamAlreadyVerbalized;
+import com.example.unispark.exceptions.ExamException;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.exams.BookExamModel;
 
-public class BookExam {
-    //Book Exam
-    //Make DB Connection
-    public boolean bookExam(StudentModel student, BookExamModel exam){
-        boolean isBooked = ExamsDAO.bookExam(exam, student.getId());
+import java.util.List;
 
-        return isBooked;
+public class BookExam {
+
+
+    public void bookExam(BeanLoggedStudent student, BeanBookExam exam) throws ExamAlreadyVerbalized, GenericException
+    {
+        List<BookExamModel> exams = student.getBookedExams();
+        BookExamModel bookExam = new BookExamModel(exam.getId(), exam.getName(), exam.getYear(), exam.getDate(), exam.getCFU(), exam.getClassroom(), exam.getBuilding());
+        try {
+            ExamsDAO.bookExam(bookExam, student.getId());
+            exams.add(bookExam);
+            student.setBookedExams(exams);
+        } catch (ExamException e) {
+            e.printStackTrace();
+            throw new ExamAlreadyVerbalized("Exam verbalized, cannot book");
+        } catch (DatabaseOperationError databaseOperationError) {
+            databaseOperationError.printStackTrace();
+            throw new GenericException("Cannot book exam, try again");
+        }
     }
 }

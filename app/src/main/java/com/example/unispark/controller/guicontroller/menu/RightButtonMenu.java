@@ -1,4 +1,4 @@
-package com.example.unispark.controller.applicationcontroller.menu;
+package com.example.unispark.controller.guicontroller.menu;
 
 import android.content.Context;
 import android.widget.Toast;

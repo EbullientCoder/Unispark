@@ -1,8 +1,5 @@
 package com.example.unispark.controller.applicationcontroller.average;
 
-import android.content.Context;
-
-import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
@@ -30,7 +27,7 @@ public class CalculateAverage {
         //Calculating the Average if the Student has Verbalized StudentExamsGUIController
         if(average != 0) circularAverage = (average * 100 / 35);
 
-        return (int)circularAverage;
+        return (int) circularAverage;
     }
 
 

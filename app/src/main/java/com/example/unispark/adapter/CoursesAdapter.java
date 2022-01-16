@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.unispark.R;
-import com.example.unispark.model.CourseModel;
+import com.example.unispark.bean.BeanCourse;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     //Attributes
-    private List<CourseModel> items;
+    private List<BeanCourse> bCourses;
     private OnCourseClickListener onCourseClickListener;
     private OnCourseBtnClickListener onCourseBtnClickListener;
     private String type;
@@ -40,21 +41,19 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     //Methods
     //Professor
-    public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener, String type){
+    public CoursesAdapter(List<BeanCourse> bCourses, OnCourseClickListener onCourseClickListener, String type){
         //If the Course List is empty:
-        if(items == null) this.items = new ArrayList<>();
-        else this.items = items;
+        this.bCourses = bCourses;
 
         this.onCourseClickListener = onCourseClickListener;
         this.type = type;
     }
 
     //Student
-    public CoursesAdapter(List<CourseModel> items, OnCourseClickListener onCourseClickListener,
+    public CoursesAdapter(List<BeanCourse> bCourses, OnCourseClickListener onCourseClickListener,
                           OnCourseBtnClickListener onCourseBtnClickListener, String type){
-        //If the Course List is empty:
-        if(items == null) this.items = new ArrayList<>();
-        else this.items = items;
+
+        this.bCourses = bCourses;
 
         this.onCourseClickListener = onCourseClickListener;
         this.onCourseBtnClickListener = onCourseBtnClickListener;
@@ -76,22 +75,22 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(type.equals("JOIN")){
-            CourseModel courseModel = (CourseModel) items.get(position);
+            BeanCourse courseModel = (BeanCourse) bCourses.get(position);
             ((CourseViewHolder) holder).setJoinCourseDate(courseModel);
         }
         else if(type.equals("LEAVE")){
-            CourseModel courseModel = (CourseModel) items.get(position);
+            BeanCourse courseModel = (BeanCourse) bCourses.get(position);
             ((CourseViewHolder) holder).setLeaveCourseDate(courseModel);
         }
         else if(type.equals("PROFESSOR")){
-            CourseModel courseModel = (CourseModel) items.get(position);
+            BeanCourse courseModel = (BeanCourse) bCourses.get(position);
             ((CourseViewHolder) holder).setProfessorCourseDate(courseModel);
         }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return bCourses.size();
     }
 
 
@@ -141,7 +140,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
 
-        void setJoinCourseDate(CourseModel courseModel) {
+        void setJoinCourseDate(BeanCourse courseModel) {
             fullName.setText(courseModel.getFullName());
             shortName = courseModel.getShortName();
             aa.setText(courseModel.getCourseYear());
@@ -152,7 +151,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             btnJoinLeave.setText("JOIN");
         }
 
-        void setLeaveCourseDate(CourseModel courseModel) {
+        void setLeaveCourseDate(BeanCourse courseModel) {
             fullName.setText(courseModel.getFullName());
             shortName = courseModel.getShortName();
             aa.setText(courseModel.getCourseYear());
@@ -163,7 +162,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             btnJoinLeave.setText("LEAVE");
         }
 
-        void setProfessorCourseDate(CourseModel courseModel) {
+        void setProfessorCourseDate(BeanCourse courseModel) {
             fullName.setText(courseModel.getFullName());
             shortName = courseModel.getShortName();
             aa.setText(courseModel.getCourseYear());

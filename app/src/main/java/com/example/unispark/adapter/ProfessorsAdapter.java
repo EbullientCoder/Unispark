@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    List<ProfessorModel> items;
+    List<BeanLoggedProfessor> beanLoggedProfessorList;
     OnProfessorClickListener onProfessorClickListener;
 
     //Interface
@@ -29,8 +30,8 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     //Methods
-    public ProfessorsAdapter(List<ProfessorModel> items, OnProfessorClickListener onProfessorClickListener){
-        this.items = items;
+    public ProfessorsAdapter(List<BeanLoggedProfessor> beanLoggedProfessorList, OnProfessorClickListener onProfessorClickListener){
+        this.beanLoggedProfessorList = beanLoggedProfessorList;
         this.onProfessorClickListener = onProfessorClickListener;
     }
 
@@ -48,19 +49,14 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ProfessorModel professor = (ProfessorModel) items.get(position);
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) beanLoggedProfessorList.get(position);
         ((ProfessorViewHolder) holder).setProfessorDate(professor);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return beanLoggedProfessorList.size();
     }
-
-    /*@Override
-    public int getItemViewType(int position) {
-        return items.get(position);
-    }*/
 
 
     //First Row
@@ -89,7 +85,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemView.setOnClickListener(this);
         }
 
-        void setProfessorDate(ProfessorModel professor){
+        void setProfessorDate(BeanLoggedProfessor professor){
             imgProfessor.setImageResource(professor.getProfilePicture());
             txtProfFirstname.setText(professor.getFirstName());
             txtProfLastname.setText(professor.getLastName());

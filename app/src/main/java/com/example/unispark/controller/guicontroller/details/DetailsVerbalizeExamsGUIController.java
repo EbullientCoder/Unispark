@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.SignedStudentsAdapter;
+import com.example.unispark.bean.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowSignedToExamStudents;
 import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
+import com.example.unispark.exceptions.ExamNotYetOccured;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.exams.BookExamModel;
 
 import java.util.List;
@@ -33,7 +36,7 @@ public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
     SignedStudentsAdapter studentsAdapter;
     List<BeanStudentSignedToExam> studentsItem;
     //Exam Model
-    BookExamModel exam;
+    BeanBookExam beanBookExam;
 
 
     //Methods
@@ -56,15 +59,15 @@ public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        exam = (BookExamModel) extras.getSerializable("Exam");
+        beanBookExam = (BeanBookExam) extras.getSerializable("Exam");
 
 
 
         //Exam Name - Date
         txtCourseName = findViewById(R.id.txt_verbalize_exam_shortname);
-        txtCourseName.setText(exam.getName());
+        txtCourseName.setText(beanBookExam.getName());
         txtCourseDate = findViewById(R.id.txt_verbalize_exam_date);
-        txtCourseDate.setText(exam.getDate());
+        txtCourseDate.setText(beanBookExam.getDate());
 
 
 
@@ -72,7 +75,7 @@ public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
         rvStudents = findViewById(R.id.rv_signedStudents);
         //Application Controller
         ShowSignedToExamStudents bookedStudentAppController = new ShowSignedToExamStudents();
-        studentsItem = bookedStudentAppController.showBookedStudents(exam);
+        studentsItem = bookedStudentAppController.showBookedStudents(beanBookExam);
         if(studentsItem.isEmpty()) Toast.makeText(getApplicationContext(), "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
         else{
             studentsAdapter = new SignedStudentsAdapter(studentsItem, this);
@@ -84,16 +87,18 @@ public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
     public void onAddBtnClick(int position, String result) {
         //Application Controller
         VerbalizeExam verbalizeExamAppController = new VerbalizeExam();
-        boolean isValid = verbalizeExamAppController.verbalizeExam(exam, studentsItem.get(position), result);
+        try {
 
-        if (!isValid) Toast.makeText(getApplicationContext(), "Cannot verbalize: Exam has not taken place yet", Toast.LENGTH_SHORT).show();
-        else{
+            verbalizeExamAppController.verbalizeExam(beanBookExam, studentsItem.get(position), result);
             //Remove Verbalized Exam
             studentsItem.remove(position);
             studentsAdapter.notifyItemRemoved(position);
 
             if(result != null) Toast.makeText(getApplicationContext(), "Exam Verbalized", Toast.LENGTH_SHORT).show();
-        }
 
+        } catch (ExamNotYetOccured | GenericException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

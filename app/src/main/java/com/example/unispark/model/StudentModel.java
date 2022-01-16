@@ -1,13 +1,12 @@
 package com.example.unispark.model;
 
-
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
 
 public class StudentModel extends UserModel{
-    //Attributes
+
     private String firstName;
     private String lastName;
     private String id;
@@ -20,11 +19,19 @@ public class StudentModel extends UserModel{
     private int uniYear;
 
 
-    //Methods
-    //Constructor
-    public StudentModel(String firstName, String lastName, String email, int profilePicture, String id, String faculty,
-                        String academicYear, List<CourseModel> courses, List<BookExamModel> bookedExams,
-                        List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams, int uniYear) {
+    public StudentModel(String email,
+                        String firstName,
+                        String lastName,
+                        int profilePicture,
+                        String id,
+                        String faculty,
+                        String academicYear,
+                        List<CourseModel> courses,
+                        List<BookExamModel> bookedExams,
+                        List<VerbalizedExamModel> verbalizedExams,
+                        List<VerbalizedExamModel> failedExams,
+                        int uniYear) {
+
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,6 +44,7 @@ public class StudentModel extends UserModel{
         this.failedExams = failedExams;
         this.uniYear = uniYear;
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -80,8 +88,6 @@ public class StudentModel extends UserModel{
     }
 
 
-
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -93,6 +99,7 @@ public class StudentModel extends UserModel{
     public void setId(String id) {
         this.id = id;
     }
+
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
@@ -123,9 +130,3 @@ public class StudentModel extends UserModel{
         this.uniYear = uniYear;
     }
 }
-
-
-
-
-
-

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanProfCommunication;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //Attributes
-    private List<ProfessorCommunicationModel> items;
+    private List<BeanProfCommunication> beanProfCommunicationList;
     private OnProfComClickListener onProfComClickListener;
 
     //Click ExamItem Interface
@@ -28,9 +29,9 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
 
     //Methods
-    public ProfCommunicationsAdapter(List<ProfessorCommunicationModel> items, OnProfComClickListener onProfComClickListener){
-        if(items == null) this.items = new ArrayList<>();
-        else this.items = items;
+    public ProfCommunicationsAdapter(List<BeanProfCommunication> beanProfCommunicationList, OnProfComClickListener onProfComClickListener){
+
+        this.beanProfCommunicationList = beanProfCommunicationList;
         this.onProfComClickListener = onProfComClickListener;
     }
 
@@ -48,19 +49,15 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ProfessorCommunicationModel professorCommunicationModel = (ProfessorCommunicationModel) items.get(position);
-        ((ProfCommunicationViewHolder) holder).setCommunicationDate(professorCommunicationModel);
+        BeanProfCommunication professorCommunication = (BeanProfCommunication) beanProfCommunicationList.get(position);
+        ((ProfCommunicationViewHolder) holder).setCommunicationDate(professorCommunication);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return beanProfCommunicationList.size();
     }
 
-    /*@Override
-    public int getItemViewType(int position) {
-        return items.get(position).getType();
-    }*/
 
 
     static class ProfCommunicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -82,7 +79,7 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
             itemView.setOnClickListener(this);
         }
 
-        void setCommunicationDate(ProfessorCommunicationModel professorCommunicationModel){
+        void setCommunicationDate(BeanProfCommunication professorCommunicationModel){
             imageProfessor.setImageResource(professorCommunicationModel.getProfilePhoto());
             shortName.setText(professorCommunicationModel.getShortCourseName());
             type.setText(professorCommunicationModel.getType());

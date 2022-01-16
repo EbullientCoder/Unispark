@@ -1,16 +1,18 @@
 package com.example.unispark.controller.applicationcontroller.schedule;
 
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.LessonModel;
-import com.example.unispark.model.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowSchedule {
     //Show Schedule
-    public List<LessonModel> setLessons(StudentModel student, String day){
-        List<LessonModel> lessonsItem = new ArrayList<>();
+    public List<BeanLesson> getLessons(BeanLoggedStudent student, String day){
+        List<LessonModel> lessonsItem;
+        List<BeanLesson> bLessons = new ArrayList<>();
         switch(day){
             case "TUESDAY": lessonsItem = LessonsDAO.getLessons("TUESDAY", student.getCourses());
                 break;
@@ -28,6 +30,12 @@ public class ShowSchedule {
                 lessonsItem = LessonsDAO.getLessons("MONDAY", student.getCourses());
         }
 
-        return lessonsItem;
+        for (int i = 0; i < lessonsItem.size(); i++){
+            LessonModel lesson = lessonsItem.get(i);
+            bLessons.add(new BeanLesson(lesson.getLessonName(), lesson.getDay(), lesson.getHour()));
+        }
+
+
+        return bLessons;
     }
 }

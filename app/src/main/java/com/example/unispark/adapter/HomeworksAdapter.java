@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.model.HomeworkModel;
 
 import java.util.List;
 
 public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //Attributes
-    private List<HomeworkModel> items;
+    private List<BeanHomework> beanHomeworkList;
     private OnHomeworkBtnClickListener onHomeworkBtnClickListener;
     private String type;
 
@@ -28,8 +29,8 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     //Methods
-    public HomeworksAdapter(List<HomeworkModel> items, OnHomeworkBtnClickListener onHomeworkBtnClickListener, String type){
-        this.items = items;
+    public HomeworksAdapter(List<BeanHomework> beanHomeworkList, OnHomeworkBtnClickListener onHomeworkBtnClickListener, String type){
+        this.beanHomeworkList = beanHomeworkList;
         this.onHomeworkBtnClickListener = onHomeworkBtnClickListener;
         this.type = type;
     }
@@ -50,25 +51,21 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //Student Homework
         if(type.equals("STUDENT")){
-            HomeworkModel homework = (HomeworkModel) items.get(position);
+            BeanHomework homework = (BeanHomework) beanHomeworkList.get(position);
             ((HomeworkViewHolder) holder).setHomeworkDate(homework);
         }
         //Professor Homework
         else if(type.equals("PROFESSOR")){
-            HomeworkModel homework = (HomeworkModel) items.get(position);
+            BeanHomework homework = (BeanHomework) beanHomeworkList.get(position);
             ((HomeworkViewHolder) holder).setProfessorHomeworkDate(homework);
         }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return beanHomeworkList.size();
     }
 
-    /*@Override
-    public int getItemViewType(int position) {
-        return items.get(position).getType();
-    }*/
 
 
     //Homeworks ViewHolder
@@ -98,8 +95,8 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         //Student
-        void setHomeworkDate(HomeworkModel homework){
-            txtCourse.setText(homework.getFullname());
+        void setHomeworkDate(BeanHomework homework){
+            txtCourse.setText(homework.getFullName());
             txtExpiration.setText(homework.getExpiration());
 
             shortName = homework.getShortName();
@@ -109,7 +106,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         //Professor
-        void setProfessorHomeworkDate(HomeworkModel homework){
+        void setProfessorHomeworkDate(BeanHomework homework){
             txtCourse.setText(homework.getTitle().toUpperCase());
             txtExpiration.setText(homework.getExpiration());
 

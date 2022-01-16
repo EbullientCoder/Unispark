@@ -3,14 +3,15 @@ package com.example.unispark.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
+import android.database.sqlite.SQLiteException;
 
 import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.database.query.QueryStudent;
-import com.example.unispark.facade.ExamsFacade;
+import com.example.unispark.exceptions.DatabaseOperationError;
+import com.example.unispark.exceptions.ExamException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
@@ -22,30 +23,30 @@ public class ExamsDAO {
 
     private ExamsDAO(){}
 
-    public static boolean addExam(BookExamModel exam)
+    public static void addExam(BookExamModel exam) throws ExamException, DatabaseOperationError, SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
+        Cursor cursor = QueryExams.selectExam(db, exam.getName(), exam.getDate());
 
+        if (cursor.moveToFirst()) throw new ExamException(0);
+
+        ContentValues cv = new ContentValues();
         cv.put("examname", exam.getName());
         cv.put("date", exam.getDate());
         cv.put("building", exam.getBuilding());
         cv.put("class", exam.getClassroom());
         long insert = db.insert("exams", null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
+
     }
 
 
-    public static boolean addExamGrade(VerbalizedExamModel examGrade, String studentID)
+    public static void addExamGrade(VerbalizedExamModel examGrade, String studentID) throws ExamException, DatabaseOperationError, SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        Cursor cursor = QueryExams.selectExamDate(db, examGrade.getId());
-
-        if (!cursor.moveToFirst()){}//throws exception
-        Cursor isValid = QueryExams.selectExamDate(db, examGrade.getId());
-        //if (isValid.moveToFirst()) return false;
+        Cursor cursorDate = QueryExams.selectExamDate(db, examGrade.getId());
+        if (cursorDate.moveToFirst()) throw new ExamException(1);
 
         ContentValues cv = new ContentValues();
         cv.put("id", examGrade.getId());
@@ -54,16 +55,13 @@ public class ExamsDAO {
         cv.put("grade", examGrade.getResult());
         long insert = db.insert("examgrades", null, cv);
 
-        if (insert == -1) return false;
-        else {
-            boolean isRemoved = removeBookedExam(examGrade.getId(), studentID);
-            if(isRemoved) return true;
-            return false;
-        }
+        if (insert == -1) throw new DatabaseOperationError(0);
+        else removeBookedExam(examGrade.getId(), studentID);
+
     }
 
     //Create a new Booking Exam model
-    private static BookExamModel bookingExam(Cursor cursor, String courseName)
+    private static BookExamModel bookingExam(Cursor cursor, String courseName) throws SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
@@ -79,41 +77,25 @@ public class ExamsDAO {
         String building = cursor.getString(3);
         String classroom = cursor.getString(4);
 
-        //Create new bookingExam model
+        //Create new bookExam model
         BookExamModel exam = new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
 
         return exam;
     }
 
-    //Select exams marked by studentID/professorId depending on boolean isProfessor
-    public static List<BookExamModel> getExams(String id, boolean isProfessor)
-    {
-        List<BookExamModel> exams;
-        if (isProfessor) {
-            exams = ExamsFacade.getInstance().getProfessorExams(id);
-        }
-        else{
-            exams = ExamsFacade.getInstance().getStudentExams(id);
-        }
-        return exams;
-    }
-
     //Select exams marked my courseName
-    public static List<BookExamModel> getCourseExams(CourseModel course, boolean isProfessor)
+    public static List<BookExamModel> getCourseExams(CourseModel course, boolean isProfessor) throws SQLiteException
     {
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
         List<BookExamModel> examsList = new ArrayList<>();
-
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectExams(db, course.getFullName(), isProfessor);
-        if (!cursor.moveToFirst()){
-            //throw exception
-            return null;
+
+        if (cursor.moveToFirst()){
+            do {
+                examsList.add(bookingExam(cursor, course.getFullName()));
+            } while(cursor.moveToNext());
         }
 
-        do {
-            examsList.add(bookingExam(cursor, course.getFullName()));
-        } while(cursor.moveToNext());
-        //Close both db and cursor
         cursor.close();
         db.close();
 
@@ -121,52 +103,53 @@ public class ExamsDAO {
     }
 
 
-    public static boolean bookExam(BookExamModel exam, String studentID){
+    public static void bookExam(BookExamModel exam, String studentID) throws ExamException, SQLiteException, DatabaseOperationError
+    {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
 
         Cursor cursor = QueryExams.selectExamGrades(db, studentID);
+
         if(cursor.moveToFirst()){
             String takenExam;
             String result;
             do {
                 takenExam = cursor.getString(1);
                 result = cursor.getString(2);
-                if (exam.getName().equals(takenExam) && Double.valueOf(result) >= 18) return false;
-
+                if (exam.getName().equals(takenExam) && Double.valueOf(result) >= 18) throw new ExamException(2);
             } while (cursor.moveToNext());
         }
-        ContentValues cv = new ContentValues();
 
+        ContentValues cv = new ContentValues();
         cv.put("studentID", studentID);
         cv.put("examID", exam.getId());
         long insert = db.insert("studentexams", null, cv);
 
-        if (insert == -1) return false;
-        else return true;
+        if (insert == -1) throw new DatabaseOperationError(0);
+
     }
 
     //Get booked exams marked by studentID
-    public static List<BookExamModel> getBookedExams(String studentID)
+    public static List<BookExamModel> getBookedExams(String studentID) throws SQLiteException
     {
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryExams.selectBookedExams(db, studentID);
-        if (!cursor.moveToFirst()) return null;
-
         List<BookExamModel> bookedExamsList = new ArrayList<>();
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
-        int examID;
-        Cursor cursorExam;
-        String examName;
+        Cursor cursor = QueryExams.selectBookedExams(db, studentID);
+        if (cursor.moveToFirst()) {
+            int examID;
+            Cursor cursorExam;
+            String examName;
 
-        do {
-            examID = cursor.getInt(0);
-            cursorExam = QueryExams.selectExamId(db, examID);
-            if (!cursorExam.moveToFirst()){} //throw exception
-            examName = cursorExam.getString(1);
+            do {
+                examID = cursor.getInt(0);
+                cursorExam = QueryExams.selectExamId(db, examID);
+                if (!cursorExam.moveToFirst()){} //throw exception
+                examName = cursorExam.getString(1);
 
-            bookedExamsList.add(bookingExam(cursorExam, examName));
-            cursorExam.close();
-        } while(cursor.moveToNext());
+                bookedExamsList.add(bookingExam(cursorExam, examName));
+                cursorExam.close();
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
@@ -175,8 +158,8 @@ public class ExamsDAO {
     }
 
 
-    //Create a new examGrade (not sure if in the DAO)
-    public static VerbalizedExamModel examGrade(Cursor cursorGrade, String result)
+    //Create a new examGrade
+    public static VerbalizedExamModel examGrade(Cursor cursorGrade, String result) throws SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
 
@@ -206,20 +189,20 @@ public class ExamsDAO {
     }
 
     //Get verbalized exams
-    public static List<VerbalizedExamModel> getVerbalizedExams(String studentID)
+    public static List<VerbalizedExamModel> getVerbalizedExams(String studentID) throws SQLiteException
     {
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectExamGrades(db, studentID);
-        if (!cursor.moveToFirst()) return null;
-        List<VerbalizedExamModel> gradesList = new ArrayList<>();
-
-        do {
-            String result = cursor.getString(2);
-            double numberResult = Double.valueOf(result);
-            if (numberResult >= 18){
-                gradesList.add(examGrade(cursor, result));
-            }
-        } while(cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            do {
+                String result = cursor.getString(2);
+                double numberResult = Double.valueOf(result);
+                if (numberResult >= 18){
+                    gradesList.add(examGrade(cursor, result));
+                }
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
@@ -228,20 +211,20 @@ public class ExamsDAO {
     }
 
     //Get failed exams List
-    public static List<VerbalizedExamModel> getFailedExams(String studentID)
+    public static List<VerbalizedExamModel> getFailedExams(String studentID) throws SQLiteException
     {
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
         Cursor cursor = QueryExams.selectExamGrades(db, studentID);
-        if (!cursor.moveToFirst()) return null;
-        List<VerbalizedExamModel> gradesList = new ArrayList<>();
-
-        do {
-            String result = cursor.getString(2);
-            double numberResult = Double.valueOf(result);
-            if (numberResult < 18){
-                gradesList.add(examGrade(cursor, result));
-            }
-        } while(cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            do {
+                String result = cursor.getString(2);
+                double numberResult = Double.valueOf(result);
+                if (numberResult < 18){
+                    gradesList.add(examGrade(cursor, result));
+                }
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
@@ -250,30 +233,30 @@ public class ExamsDAO {
     }
 
     //Get students that booked an exam
-    public static List<BeanStudentSignedToExam> getStudentsBookedExam(int examID)
+    public static List<BeanStudentSignedToExam> getStudentsBookedExam(int examID) throws SQLiteException
     {
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-
-        Cursor cursor = QueryExams.selectStudents(db, examID);
-        if (!cursor.moveToFirst()) return null;
-
         List<BeanStudentSignedToExam> studentsList = new ArrayList<>();
-        //BeanStudentSignedToExam
-        BeanStudentSignedToExam student;
-        String id;
-        String fullName;
-        Cursor cursorName;
-        do{
-            id = cursor.getString(0);
-            cursorName = QueryStudent.getStudentName(db, id);
-            if (!cursorName.moveToFirst()){}//throws exception
-            fullName = cursorName.getString(0) + " " + cursorName.getString(1);
+        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+        Cursor cursor = QueryExams.selectStudents(db, examID);
+        if (cursor.moveToFirst()) {
 
-            //Create Student and add it to the list
-            student = new BeanStudentSignedToExam(id, fullName);
-            studentsList.add(student);
-            cursorName.close();
-        } while(cursor.moveToNext());
+            //BeanStudentSignedToExam
+            BeanStudentSignedToExam student;
+            String id;
+            String fullName;
+            Cursor cursorName;
+            do{
+                id = cursor.getString(0);
+                cursorName = QueryStudent.getStudentName(db, id);
+                cursorName.moveToFirst();
+                fullName = cursorName.getString(0) + " " + cursorName.getString(1);
+
+                //Create Student and add it to the list
+                student = new BeanStudentSignedToExam(id, fullName);
+                studentsList.add(student);
+                cursorName.close();
+            } while(cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
@@ -282,21 +265,21 @@ public class ExamsDAO {
     }
 
     //Remove studentID booked exam from DB
-    public static boolean removeBookedExam(int examID, String studentID)
+    public static void removeBookedExam(int examID, String studentID) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
+
         int delete = db.delete("studentexams","studentID='" + studentID + "' and examID=" + examID,null);
-        if (delete > 0) return true;
-        return false;
+        if (!(delete > 0)) throw new DatabaseOperationError(1);
+
     }
 
     //Remove bookingExam from DB
-    public static boolean removeExam(int examID)
+    public static void removeExam(int examID) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
         int delete = db.delete("exams","id=" + examID,null);
-        if (delete > 0) return true;
-        return false;
+        if (!(delete > 0)) throw new DatabaseOperationError(1);
 
     }
 

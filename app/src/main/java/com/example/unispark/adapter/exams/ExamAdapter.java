@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.BeanVerbalizeExam;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
@@ -19,7 +22,7 @@ import java.util.List;
 public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    private List<ExamItem> examItems;
+    private List<BeanExamType> bExams;
     private OnViewExamClickListener onViewExamClickListener;
     private OnBookExamClickListener onBookExamClickListener;
     private OnLeaveExamClickListener onLeaveExamClickListener;
@@ -44,17 +47,17 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Methods
     //Constructor
-    public ExamAdapter(List<ExamItem> examItems,
+    public ExamAdapter(List<BeanExamType> bExams,
                        OnBookExamClickListener onBookExamClickListener,
                        OnLeaveExamClickListener onLeaveExamClickListener) {
-        this.examItems = examItems;
+        this.bExams = bExams;
         this.onBookExamClickListener = onBookExamClickListener;
         this.onLeaveExamClickListener = onLeaveExamClickListener;
     }
 
-    public ExamAdapter(List<ExamItem> examItems,
+    public ExamAdapter(List<BeanExamType> bExams,
                        OnViewExamClickListener onViewExamClickListener) {
-        this.examItems = examItems;
+        this.bExams = bExams;
         this.onViewExamClickListener = onViewExamClickListener;
     }
 
@@ -107,34 +110,34 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //Verbalized - Failed StudentExamsGUIController
         if(getItemViewType(position) == 0){
-            VerbalizedExamModel vExam = (VerbalizedExamModel) examItems.get(position).getObject();
+            BeanVerbalizeExam vExam = (BeanVerbalizeExam) bExams.get(position).getBeanExamType();
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
         }
         //Professor: Assigned StudentExamsGUIController
         else if(getItemViewType(position) == 1){
-            BookExamModel assignedExam = (BookExamModel) examItems.get(position).getObject();
+            BeanBookExam assignedExam = (BeanBookExam) bExams.get(position).getBeanExamType();
             ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
         }
         //Student: Book StudentExamsGUIController
         else if(getItemViewType(position) == 2){
-            BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getBeanExamType();
             ((BookExamViewHolder) holder).setBookExamDate(bookExam);
         }
         //Student: Booked StudentExamsGUIController
         else {
-            BookExamModel bookExam = (BookExamModel) examItems.get(position).getObject();
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getBeanExamType();
             ((BookedExamViewHolder) holder).setBookedExamDate(bookExam);
         }
     }
 
     @Override
     public int getItemCount() {
-        return examItems.size();
+        return bExams.size();
     }
 
     @Override
     public int getItemViewType(int position){
-        return examItems.get(position).getType();
+        return bExams.get(position).getType();
     }
 
 
@@ -159,7 +162,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ExamResult = itemView.findViewById(R.id.txt_verbalized_exam_result);
         }
 
-        void setVerbalizedExamDate(VerbalizedExamModel exam){
+        void setVerbalizedExamDate(BeanVerbalizeExam exam){
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
@@ -196,7 +199,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             btnView.setOnClickListener(this);
         }
 
-        void setUpcomingExamDate(BookExamModel exam){
+        void setUpcomingExamDate(BeanBookExam exam){
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
@@ -239,7 +242,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             btnBook.setOnClickListener(this);
         }
 
-        void setBookExamDate(BookExamModel exam){
+        void setBookExamDate(BeanBookExam exam){
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
@@ -281,7 +284,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             btnLeave.setOnClickListener(this);
         }
 
-        void setBookedExamDate(BookExamModel exam){
+        void setBookedExamDate(BeanBookExam exam){
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());

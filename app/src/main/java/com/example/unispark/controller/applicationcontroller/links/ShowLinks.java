@@ -1,19 +1,25 @@
 package com.example.unispark.controller.applicationcontroller.links;
 
+import com.example.unispark.bean.BeanLink;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.StudentLinksDAO;
 import com.example.unispark.model.LinkModel;
-import com.example.unispark.model.StudentModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowLinks {
     //Students Links
-    public List<LinkModel> showLinks(StudentModel student){
+    public List<BeanLink> showLinks(BeanLoggedStudent student){
+        List<BeanLink> beanLinkList = new ArrayList<>();
+
         List<LinkModel> linksItem;
         linksItem = StudentLinksDAO.getStudentLinks(student.getId());
+        for (int i = 0; i < linksItem.size(); i++){
+            beanLinkList.add(new BeanLink(linksItem.get(i).getLinkName(), linksItem.get(i).getLinkAddress()));
+        }
 
-        if(linksItem != null) return linksItem;
-        else return new ArrayList<>();
+        return beanLinkList;
+
     }
 }

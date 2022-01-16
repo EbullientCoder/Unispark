@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.model.HomeworkModel;
 
 public class DetailsHomeworkGUIController extends AppCompatActivity {
@@ -57,7 +58,7 @@ public class DetailsHomeworkGUIController extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        HomeworkModel homework = (HomeworkModel) extras.getSerializable("Homework");
+        BeanHomework homework = (BeanHomework) extras.getSerializable("Homework");
         //Set Text
         txtShortName = findViewById(R.id.txt_homework_detail_subject);
         txtShortName.setText(homework.getShortName());

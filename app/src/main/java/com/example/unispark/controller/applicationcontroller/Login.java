@@ -1,31 +1,93 @@
 package com.example.unispark.controller.applicationcontroller;
 
+import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
 import com.example.unispark.database.dao.UniversityDAO;
+import com.example.unispark.exceptions.WrongUsernameOrPasswordException;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 
+import javax.security.auth.login.LoginException;
+
+
+
 public class Login {
 
     //Login Methods
-    public StudentModel studentLogin(BeanUser user){
-        StudentModel student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
+    public BeanLoggedStudent studentLogin(BeanUser user) throws WrongUsernameOrPasswordException
+    {
+        BeanLoggedStudent beanLoggedStudent = null;
+        StudentModel student = null;
+        try {
+            student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
+            beanLoggedStudent = new BeanLoggedStudent(student.getFirstName(),
+                    student.getLastName(),
+                    student.getProfilePicture(),
+                    student.getId(),
+                    student.getFaculty(),
+                    student.getAcademicYear(),
+                    student.getCourses(),
+                    student.getBookedExams(),
+                    student.getVerbalizedExams(),
+                    student.getFailedExams(),
+                    student.getUniYear());
+        } catch (LoginException e) {
+            e.printStackTrace();
+            throw new WrongUsernameOrPasswordException("Wrong username or password");
+        }
 
-        return student;
+        return beanLoggedStudent;
     }
 
-    public ProfessorModel professorLogin(BeanUser user){
-        ProfessorModel professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
+    public BeanLoggedProfessor professorLogin(BeanUser user) throws WrongUsernameOrPasswordException
+    {
 
-        return professor;
+        BeanLoggedProfessor beanLoggedProfessor = null;
+        ProfessorModel professor = null;
+
+        try {
+            professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
+            beanLoggedProfessor = new BeanLoggedProfessor(
+                    professor.getFirstName(),
+                    professor.getLastName(),
+                    professor.getProfilePicture(),
+                    professor.getId(),
+                    professor.getFaculty(),
+                    professor.getWebsite(),
+                    professor.getCourses(),
+                    professor.getExams()
+            );
+        } catch (LoginException e) {
+            e.printStackTrace();
+            throw new WrongUsernameOrPasswordException("Wrong username or password");
+        }
+
+        return beanLoggedProfessor;
     }
 
-    public UniversityModel universityLogin(BeanUser user){
-        UniversityModel university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
+    public BeanLoggedUniversity universityLogin(BeanUser user) throws WrongUsernameOrPasswordException {
+        BeanLoggedUniversity beanLoggedUniversity = null;
+        UniversityModel university = null;
 
-        return university;
+        try {
+            university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
+            beanLoggedUniversity = new BeanLoggedUniversity(
+                    university.getName(),
+                    university.getProfilePicture(),
+                    university.getStreetAddress(),
+                    university.getFaculties()
+            );
+
+        } catch (LoginException e) {
+            e.printStackTrace();
+            throw new WrongUsernameOrPasswordException("Wrong username or password");
+        }
+
+        return beanLoggedUniversity;
     }
 }

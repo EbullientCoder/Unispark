@@ -12,18 +12,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
+import com.example.unispark.bean.BeanCoursesNames;
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.course.GetCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
-import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.LessonsDAO;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.LessonModel;
+import com.example.unispark.exceptions.GenericException;
+import com.example.unispark.exceptions.LessonAlreadyExists;
 import com.example.unispark.model.UniversityModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class AddScheduleGUIController extends DialogFragment {
     //Add StudentScheduleGUIController Button
     Button btnAddSchedule;
     //Course Selector
-    List<String> courses;
+    BeanCoursesNames bCoursesNames;
     AutoCompleteTextView autoCompleteTxtCourse;
     ArrayAdapter<String> adapterItemsCourse;
     String courseSelection;
@@ -50,8 +51,8 @@ public class AddScheduleGUIController extends DialogFragment {
     ArrayAdapter<String> adapterItemsHour;
     String hourSelection;
     //University Model
-    UniversityModel university;
-    List<LessonModel> schedulesItem;
+    BeanLoggedUniversity bUniversity;
+    List<BeanLesson> schedulesItem;
     LessonAdapter lessonAdapter;
     int i;
 
@@ -61,13 +62,12 @@ public class AddScheduleGUIController extends DialogFragment {
 
     //Methods
     //Constructor
-    public AddScheduleGUIController(UniversityModel university, LessonAdapter lessonAdapter, List<LessonModel> schedulesItem) {
+    public AddScheduleGUIController(BeanLoggedUniversity bUniversity, LessonAdapter lessonAdapter, List<BeanLesson> schedulesItem) {
         //Getting Professor Object
-        this.university = university;
+        this.bUniversity = bUniversity;
         this.schedulesItem = schedulesItem;
         this.lessonAdapter = lessonAdapter;
 
-        courses = new ArrayList<>();
     }
 
 
@@ -89,12 +89,13 @@ public class AddScheduleGUIController extends DialogFragment {
 
         //Courses
         //Application Controller: Get Courses
+
+
         GetCourses getCoursesAppController = new GetCourses();
-        List<CourseModel> coursesModel = getCoursesAppController.getCourses("Ingegneria Informatica");
-        if(coursesModel != null) for(int j = 0; j < coursesModel.size(); j++) courses.add(coursesModel.get(j).getFullName());
+        bCoursesNames = getCoursesAppController.getCoursesNamesByFaculty(bUniversity.getFaculties());
 
         autoCompleteTxtCourse = rootView.findViewById(R.id.add_schedule_course);
-        adapterItemsCourse = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
+        adapterItemsCourse = new ArrayAdapter<>(getContext(), R.layout.item_container_item, bCoursesNames.getCourses());
         autoCompleteTxtCourse.setAdapter(adapterItemsCourse);
         autoCompleteTxtCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -133,17 +134,22 @@ public class AddScheduleGUIController extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //Creating new Lesson
-                LessonModel lesson = new LessonModel(courseSelection, daySelection, hourSelection);
+                BeanLesson bLesson = new BeanLesson(courseSelection, daySelection, hourSelection);
 
                 //Application Controller: Add Lesson
                 AddLesson addLessonAppController = new AddLesson();
-                addLessonAppController.addLesson(lesson);
 
-                //Notifying the Lessons Adapter
-                schedulesItem.add(0, lesson);
-                lessonAdapter.notifyDataSetChanged();
+                try {
+                    addLessonAppController.addLesson(bLesson);
 
-                dismiss();
+                    //Notifying the Lessons Adapter
+                    schedulesItem.add(0, bLesson);
+                    lessonAdapter.notifyDataSetChanged();
+                    dismiss();
+                } catch (GenericException | LessonAlreadyExists e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

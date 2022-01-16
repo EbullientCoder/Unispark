@@ -17,12 +17,15 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddExamGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddHomeworkGUIController;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,9 +58,9 @@ public class ProfessorProfileGUIController extends AppCompatActivity
     //Courses
     RecyclerView rvCourses;
     CoursesAdapter coursesAdapter;
-    List<CourseModel> coursesItem;
+    List<BeanCourse> beanCourseList;
     //Model
-    ProfessorModel professor;
+    BeanLoggedProfessor bProfessor;
 
 
     //Methods
@@ -68,7 +71,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
 
         //Getting User Object
         extras = getIntent().getExtras();
-        professor = (ProfessorModel) extras.getSerializable("UserObject");
+        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
 
 
 
@@ -100,10 +103,10 @@ public class ProfessorProfileGUIController extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(professor, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bProfessor, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -134,7 +137,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
         btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddExamGUIController fragment= new AddExamGUIController(professor);
+                AddExamGUIController fragment= new AddExamGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddExam");
             }
         });
@@ -148,7 +151,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
         btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddHomeworkGUIController fragment= new AddHomeworkGUIController(professor);
+                AddHomeworkGUIController fragment= new AddHomeworkGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddHomework");
             }
         });
@@ -162,7 +165,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
         btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(professor);
+                AddProfCommunicationGUIController fragment= new AddProfCommunicationGUIController(bProfessor);
                 fragment.show(getSupportFragmentManager(), "AddCommunication");
             }
         });
@@ -170,10 +173,10 @@ public class ProfessorProfileGUIController extends AppCompatActivity
 
 
         //Get Parameters
-        int imageID = professor.getProfilePicture();
-        String firstname = professor.getFirstName();
-        String lastname = professor.getLastName();
-        String website = professor.getWebsite();
+        int imageID = bProfessor.getProfilePicture();
+        String firstname = bProfessor.getFirstName();
+        String lastname = bProfessor.getLastName();
+        String website = bProfessor.getWebsite();
 
         //Display Parameters
         imgProfImage = findViewById(R.id.img_professor_profile_image);
@@ -193,8 +196,10 @@ public class ProfessorProfileGUIController extends AppCompatActivity
 
         //Courses
         rvCourses = findViewById(R.id.rv_professor_courses);
-        coursesItem = professor.getCourses();
-        coursesAdapter = new CoursesAdapter(coursesItem, this, "PROFESSOR");
+        GetCourses getCoursesController = new GetCourses();
+        beanCourseList = getCoursesController.getCourses(bProfessor);
+
+        coursesAdapter = new CoursesAdapter(beanCourseList, this, "PROFESSOR");
         rvCourses.setAdapter(coursesAdapter);
     }
 
@@ -243,7 +248,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
     @Override
     public void onCourseClick(int position) {
         Intent intent = new Intent(this, DetailsCourseGUIController.class);
-        intent.putExtra("Course", coursesItem.get(position));
+        intent.putExtra("Course", beanCourseList.get(position));
         startActivity(intent);
     }
 }

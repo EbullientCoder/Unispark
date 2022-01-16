@@ -2,8 +2,8 @@ package com.example.unispark.facade;
 
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.exams.BookExamModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,30 +40,31 @@ public class ExamsFacade {
     }
 
 
-    public List<BookExamModel> getStudentExams(String id)
+    private static List<BookExamModel> getStudentExams(String id)
     {
-        List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
-        if (courses == null){
-            return null;
-        }
-        List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
-
         List<BookExamModel> examsList = new ArrayList<>();
-        List<BookExamModel> tempList;
-        for (int i = 0; i < courses.size(); i++)
-        {
-            tempList = ExamsDAO.getCourseExams(courses.get(i), false);
-            if(tempList != null){
-                if (bookedExams != null) {
-                    removeBookedExams(bookedExams, tempList);
+
+        List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
+
+        if (!courses.isEmpty()){
+
+            List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
+            List<BookExamModel> tempList;
+            for (int i = 0; i < courses.size(); i++)
+            {
+                tempList = ExamsDAO.getCourseExams(courses.get(i), false);
+                if(!tempList.isEmpty()){
+                    if (!bookedExams.isEmpty()) {
+                        removeBookedExams(bookedExams, tempList);
+                    }
+                    examsList.addAll(tempList);
                 }
-                examsList.addAll(tempList);
             }
         }
         return examsList;
     }
 
-    public List<BookExamModel> getProfessorExams(String id)
+    private static List<BookExamModel> getProfessorExams(String id)
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(Integer.valueOf(id));
 
@@ -77,5 +78,18 @@ public class ExamsFacade {
             }
         }
         return examsList;
+    }
+
+    //Select exams marked by studentID/professorId depending on boolean isProfessor
+    public static List<BookExamModel> getExams(String id, boolean isProfessor)
+    {
+        List<BookExamModel> exams;
+        if (isProfessor) {
+            exams = getProfessorExams(id);
+        }
+        else{
+            exams = getStudentExams(id);
+        }
+        return exams;
     }
 }

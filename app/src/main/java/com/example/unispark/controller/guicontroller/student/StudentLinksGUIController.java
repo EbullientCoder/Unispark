@@ -15,18 +15,22 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
+import com.example.unispark.bean.BeanLink;
+import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.professor.ShowFacultyProfessors;
 import com.example.unispark.controller.applicationcontroller.links.AddLink;
 import com.example.unispark.controller.applicationcontroller.links.DeleteLink;
 import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
-import com.example.unispark.controller.applicationcontroller.menu.RightButtonMenu;
+import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.details.DetailsProfessorGUIController;
-import com.example.unispark.controller.applicationcontroller.menu.BottomNavigationMenu;
+import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.example.unispark.adapter.ProfessorsAdapter;
+import com.example.unispark.exceptions.GenericException;
+import com.example.unispark.exceptions.LinkAlreadyExists;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LinkModel;
 import com.example.unispark.model.ProfessorModel;
-import com.example.unispark.model.StudentModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
@@ -45,7 +49,7 @@ public class StudentLinksGUIController extends AppCompatActivity
     //Professors
     RecyclerView rvProfessors;
     ProfessorsAdapter professorsAdapter;
-    List<ProfessorModel> professorsItem;
+    List<BeanLoggedProfessor> beanLoggedProfessorList;
     //Link
     EditText txtAddLinkName;
     EditText txtAddLink;
@@ -54,10 +58,10 @@ public class StudentLinksGUIController extends AppCompatActivity
     //Links
     RecyclerView rvLinks;
     LinksAdapter linkAdapter;
-    List<LinkModel> linksItem;
+    List<BeanLink> beanLinkList;
     //Get Intent Extras
     Bundle extras;
-    StudentModel student;
+    BeanLoggedStudent bStudent;
 
 
     //Constructor
@@ -68,7 +72,7 @@ public class StudentLinksGUIController extends AppCompatActivity
 
         //Getting User Object
         extras = getIntent().getExtras();
-        student = (StudentModel) extras.getSerializable("UserObject");
+        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
 
@@ -100,10 +104,10 @@ public class StudentLinksGUIController extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Menu Applicative Controller
-                BottomNavigationMenu bottomMenuAppController = new BottomNavigationMenu();
+                BottomNavigationMenuGuiController bottomMenuAppController = new BottomNavigationMenuGuiController();
 
                 //Start Activity
-                Intent intent = bottomMenuAppController.nextActivity(student, getApplicationContext(), item.getItemId());
+                Intent intent = bottomMenuAppController.nextActivity(bStudent, getApplicationContext(), item.getItemId());
                 startActivity(intent);
                 overridePendingTransition(0,0);
 
@@ -117,8 +121,8 @@ public class StudentLinksGUIController extends AppCompatActivity
         rvProfessors = findViewById(R.id.rv_professors);
         //Application Controller
         ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
-        professorsItem = facultyProfessorsAppController.setFacultyProfessors(student);
-        professorsAdapter = new ProfessorsAdapter(professorsItem, this);
+        beanLoggedProfessorList = facultyProfessorsAppController.setFacultyProfessors(bStudent);
+        professorsAdapter = new ProfessorsAdapter(beanLoggedProfessorList, this);
         rvProfessors.setAdapter(professorsAdapter);
 
 
@@ -127,8 +131,8 @@ public class StudentLinksGUIController extends AppCompatActivity
         rvLinks = findViewById(R.id.rv_links);
         //Application Controller
         ShowLinks linksAppController = new ShowLinks();
-        linksItem = linksAppController.showLinks(student);
-        linkAdapter = new LinksAdapter(linksItem, this, this);
+        beanLinkList = linksAppController.showLinks(bStudent);
+        linkAdapter = new LinksAdapter(beanLinkList, this, this);
         rvLinks.setAdapter(linkAdapter);
 
 
@@ -143,16 +147,20 @@ public class StudentLinksGUIController extends AppCompatActivity
                 String linkName = txtAddLinkName.getText().toString();
                 String link = txtAddLink.getText().toString();
                 if(linkName.length() != 0 && link.length() != 0){
-                    LinkModel link0 = new LinkModel(linkName, link);
+
+                    BeanLink newLink = new BeanLink(linkName, link);
 
                     //Application Controller
                     AddLink addLinksAppController = new AddLink();
-                    boolean isAdded = addLinksAppController.addLink(student, link0);
-                    if(isAdded){
-                        linksItem.add(link0);
-                        linkAdapter.notifyItemInserted(linksItem.size());
+                    try {
+                        addLinksAppController.addLink(bStudent, newLink);
+                        beanLinkList.add(newLink);
+                        linkAdapter.notifyItemInserted(beanLinkList.size());
+                    } catch (LinkAlreadyExists | GenericException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(getApplicationContext(), "Link already exists", Toast.LENGTH_SHORT).show();
+
                 }
                 else Toast.makeText(getApplicationContext(), "EMPTY LINK", Toast.LENGTH_SHORT).show();
             }
@@ -187,14 +195,19 @@ public class StudentLinksGUIController extends AppCompatActivity
     public void onDelBtnClick(int position) {
         //Application Controller: Show Links
         ShowLinks linksAppController = new ShowLinks();
-        List<LinkModel> studentLinks = linksAppController.showLinks(student);
+        List<BeanLink> studentLinks = linksAppController.showLinks(bStudent);
 
         //Application Controller: Delete Link
         DeleteLink deleteLinkAppController = new DeleteLink();
-        deleteLinkAppController.deleteLink(studentLinks.get(position));
+        try {
+            deleteLinkAppController.deleteLink(studentLinks.get(position));
+        } catch (GenericException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         //Removing link from the List
-        linksItem.remove(position);
+        beanLinkList.remove(position);
         linkAdapter.notifyItemRemoved(position);
     }
 
