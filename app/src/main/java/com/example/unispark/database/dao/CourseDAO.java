@@ -46,12 +46,9 @@ public class CourseDAO {
 
     }
 
-    public static void joinCourse(String studentID, String courseName) throws CourseException, SQLiteException, DatabaseOperationError
+    public static void joinCourse(String studentID, String courseName) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        Cursor cursor = QueryCourse.selectCourseName(db, courseName);
-
-        if (cursor.moveToFirst()) throw new CourseException(1);
 
         ContentValues cv = new ContentValues();
         cv.put("studentID", studentID);
@@ -77,7 +74,7 @@ public class CourseDAO {
                 cursorExamName.moveToFirst();
                 examName = cursorExamName.getString(1);
                 if(examName.equals(courseName)){
-                    throw new CourseException(2);
+                    throw new CourseException(1);
                 }
             } while (cursorExam.moveToNext());
         }

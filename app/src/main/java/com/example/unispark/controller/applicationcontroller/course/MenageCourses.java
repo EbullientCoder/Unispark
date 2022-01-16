@@ -5,35 +5,82 @@ import com.example.unispark.bean.BeanCoursesNames;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CourseDAO;
+import com.example.unispark.exceptions.CourseException;
+import com.example.unispark.exceptions.DatabaseOperationError;
+import com.example.unispark.exceptions.ExamBookedException;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCourses {
+public class MenageCourses {
+
+    //Remove Course Joined from DB
+    public void leaveCourse(BeanLoggedStudent student, BeanCourse bCourse, int position) throws ExamBookedException, GenericException
+    {
+        List<CourseModel> courses = student.getCourses();
+        try {
+            CourseDAO.leaveCourse(student.getId(), bCourse.getFullName());
+            courses.remove(position);
+            student.setCourses(courses);
+
+        } catch (CourseException e) {
+            e.printStackTrace();
+            throw new ExamBookedException("Cannot leave course, exam booked");
+
+        } catch (DatabaseOperationError databaseOperationError) {
+            databaseOperationError.printStackTrace();
+            throw new GenericException("Cannot leave course, try again..");
+        }
+
+
+    }
+
+
+    //Join Course
+    public void joinCourse(BeanLoggedStudent student, BeanCourse bCourse) throws GenericException {
+        try {
+            CourseDAO.joinCourse(student.getId(), bCourse.getFullName());
+            //Add Course to the Student's Joined Courses
+            List<CourseModel> joinedCourses = student.getCourses();
+            joinedCourses.add(0, new CourseModel(bCourse.getId(),
+                    bCourse.getShortName(),
+                    bCourse.getFullName(),
+                    bCourse.getCourseYear(),
+                    bCourse.getCfu(),
+                    bCourse.getSession(),
+                    bCourse.getLink(),
+                    bCourse.getFaculty(),
+                    bCourse.getUniYear()));
+
+            student.setCourses(joinedCourses);
+
+        }  catch (DatabaseOperationError databaseOperationError) {
+            databaseOperationError.printStackTrace();
+            throw new GenericException("Cannot join course, try again");
+        }
+    }
 
 
     public List<BeanCourse> getAvaliableCourses(BeanLoggedStudent student){
 
         List<BeanCourse> bCourses = new ArrayList<>();
 
-        if (!student.getCourses().isEmpty()){
-            List<CourseModel> avaliableCourses;
-            avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), student.getCourses());
-            CourseModel course;
-            for (int i = 0; i < avaliableCourses.size(); i++){
-                course = avaliableCourses.get(i);
-                bCourses.add(new BeanCourse(course.getId(),
-                        course.getShortName(),
-                        course.getFullName(),
-                        course.getCourseYear(),
-                        course.getCfu(),
-                        course.getSession(),
-                        course.getLink(),
-                        course.getFaculty(),
-                        course.getUniYear()));
-            }
+        List<CourseModel> avaliableCourses;
+        avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), student.getCourses());
+        CourseModel course;
+        for (int i = 0; i < avaliableCourses.size(); i++){
+            course = avaliableCourses.get(i);
+            bCourses.add(new BeanCourse(course.getId(),
+                    course.getShortName(),
+                    course.getFullName(),
+                    course.getCourseYear(),
+                    course.getCfu(),
+                    course.getSession(),
+                    course.getLink(),
+                    course.getFaculty(),
+                    course.getUniYear()));
         }
 
         return bCourses;
@@ -140,8 +187,4 @@ public class GetCourses {
 
         return coursesNames;
     }
-
-
-
-
 }

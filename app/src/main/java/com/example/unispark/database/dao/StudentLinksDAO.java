@@ -28,7 +28,7 @@ public class StudentLinksDAO {
             String linkAddress;
             do {
                 linkAddress = cursor.getString(3);
-                if (studentLink.getLinkAddress().equals(linkAddress)) throw new LinkAlreadyExists();
+                if (studentLink.getLinkAddress().equals(linkAddress)) throw new LinkAlreadyExists("Link already exists");
             } while(cursor.moveToNext());
         }
 
@@ -65,10 +65,10 @@ public class StudentLinksDAO {
         return studentLinks;
     }
 
-    public static void removeLink(String name) throws SQLiteException, DatabaseOperationError
+    public static void removeLink(String linkName) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        int delete = db.delete("studentslinks","name='" + name + "'",null);
+        int delete = db.delete("studentslinks","link='" + linkName + "'",null);
         if (!(delete > 0)) throw new DatabaseOperationError(1);
     }
 }

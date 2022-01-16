@@ -17,7 +17,8 @@ import com.example.unispark.R;
 import com.example.unispark.bean.BeanProfCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.AddProfCommunication;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.exceptions.GenericException;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -77,7 +78,7 @@ public class AddProfCommunicationGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        GetCourses getCoursesController = new GetCourses();
+        MenageCourses getCoursesController = new MenageCourses();
         courses = getCoursesController.getCoursesNames(bProfessor);
 
 
@@ -112,25 +113,35 @@ public class AddProfCommunicationGUIController extends DialogFragment{
                 String type = txtType.getEditText().getText().toString();
                 String text = txtCommunication.getEditText().getText().toString();
 
-                //Communication Object
-                bCommunication = new BeanProfCommunication(
-                        bProfessor.getProfilePicture(),
-                        bProfessor.getCourses().get(i).getShortName(),
-                        bProfessor.getCourses().get(i).getFullName(),
-                        bProfessor.getFirstName() + " " + bProfessor.getLastName(),
-                        date,
-                        type,
-                        text);
+                if(type.equals("") || text.equals("")) Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
 
-                //Application Controller
-                AddProfCommunication addCommunicationAppController = new AddProfCommunication();
-                try {
-                    addCommunicationAppController.addProfCommunication(bCommunication);
-                    dismiss();
-                } catch (GenericException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                else{
+
+                    //Communication Object
+                    bCommunication = new BeanProfCommunication(
+                            bProfessor.getProfilePicture(),
+                            bProfessor.getCourses().get(i).getShortName(),
+                            bProfessor.getCourses().get(i).getFullName(),
+                            bProfessor.getFirstName() + " " + bProfessor.getLastName(),
+                            date,
+                            type,
+                            text);
+
+                    //Application Controller
+                    AddProfCommunication addCommunicationAppController = new AddProfCommunication();
+                    try {
+                        addCommunicationAppController.addProfCommunication(bCommunication);
+                        Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    } catch (GenericException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+
+
+
             }
         });
 

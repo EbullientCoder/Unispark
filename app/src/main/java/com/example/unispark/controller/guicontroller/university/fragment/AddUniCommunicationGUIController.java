@@ -145,6 +145,7 @@ public class AddUniCommunicationGUIController extends DialogFragment {
                 AddUniCommunication addCommunicationAppController = new AddUniCommunication();
                 try {
                     addCommunicationAppController.addCommunication(beanUniCommunication);
+                    Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
                     //Notify the Communications Adapter
                     beanUniCommunicationList.add(0, beanUniCommunication);
                     communicationsAdapter.notifyDataSetChanged();

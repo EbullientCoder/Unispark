@@ -15,7 +15,6 @@ import com.example.unispark.controller.guicontroller.student.StudentExamsGUICont
 import com.example.unispark.controller.guicontroller.student.StudentHomeGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentProfileGUIController;
 import com.example.unispark.controller.guicontroller.student.StudentScheduleGUIController;
-import com.example.unispark.model.UserModel;
 import com.example.unispark.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

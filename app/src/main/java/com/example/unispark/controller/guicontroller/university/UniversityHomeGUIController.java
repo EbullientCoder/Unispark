@@ -20,7 +20,8 @@ import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.ShowUniCommunications;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetLessons;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
@@ -207,7 +208,7 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
 
         //Lessons
         //Application Controller: Get Courses
-        GetCourses getCoursesAppController = new GetCourses();
+        MenageCourses getCoursesAppController = new MenageCourses();
         List<BeanCourse> courses = getCoursesAppController.getFacultyCourses(bUniversity.getFaculties());
         //Application Controller: Get Lessons
         GetLessons getLessonsAppController = new GetLessons();

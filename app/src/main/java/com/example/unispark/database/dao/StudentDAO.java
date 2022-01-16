@@ -3,7 +3,7 @@ package com.example.unispark.database.dao;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.unispark.bean.login.BeanLoggedStudent;
+
 import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.facade.StudentCreatorFacade;

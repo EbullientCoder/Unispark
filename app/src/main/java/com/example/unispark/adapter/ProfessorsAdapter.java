@@ -11,27 +11,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.BeanProfessorDetails;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
+
 
 import java.util.List;
 
 public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    List<BeanLoggedProfessor> beanLoggedProfessorList;
+    List<BeanProfessorDetails> beanLoggedProfessorList;
     OnProfessorClickListener onProfessorClickListener;
 
     //Interface
     public interface OnProfessorClickListener{
-        void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<CourseModel> courses);
+        void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<BeanCourse> courses);
     }
 
 
     //Methods
-    public ProfessorsAdapter(List<BeanLoggedProfessor> beanLoggedProfessorList, OnProfessorClickListener onProfessorClickListener){
-        this.beanLoggedProfessorList = beanLoggedProfessorList;
+    public ProfessorsAdapter(List<BeanProfessorDetails> beanProfessorDetails, OnProfessorClickListener onProfessorClickListener){
+        this.beanLoggedProfessorList = beanProfessorDetails;
         this.onProfessorClickListener = onProfessorClickListener;
     }
 
@@ -49,7 +51,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        BeanLoggedProfessor professor = (BeanLoggedProfessor) beanLoggedProfessorList.get(position);
+        BeanProfessorDetails professor = (BeanProfessorDetails) beanLoggedProfessorList.get(position);
         ((ProfessorViewHolder) holder).setProfessorDate(professor);
     }
 
@@ -66,7 +68,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private String firstName;
         private String lastName;
         private String website;
-        private List<CourseModel> courses;
+        private List<BeanCourse> courses;
 
         private ImageView imgProfessor;
         private TextView txtProfFirstname;
@@ -85,7 +87,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemView.setOnClickListener(this);
         }
 
-        void setProfessorDate(BeanLoggedProfessor professor){
+        void setProfessorDate(BeanProfessorDetails professor){
             imgProfessor.setImageResource(professor.getProfilePicture());
             txtProfFirstname.setText(professor.getFirstName());
             txtProfLastname.setText(professor.getLastName());

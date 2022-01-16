@@ -15,12 +15,12 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
-import com.example.unispark.controller.applicationcontroller.course.JoinCourse;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
 import com.example.unispark.exceptions.CourseAlreadyJoined;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.model.CourseModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +68,8 @@ public class SearchCourseGUIController extends DialogFragment
         //Courses
         rvCourses = (RecyclerView) rootView.findViewById(R.id.rv_choose_course);
         //Application Controller
-        GetCourses getCoursesCoontroller = new GetCourses();
-        beanAvaliableCourses = getCoursesCoontroller.getAvaliableCourses(student);
+        MenageCourses getCoursesController = new MenageCourses();
+        beanAvaliableCourses = getCoursesController.getAvaliableCourses(student);
         coursesAdapter = new CoursesAdapter(beanAvaliableCourses, this, this, "JOIN");
         rvCourses.setAdapter(coursesAdapter);
 
@@ -90,16 +90,16 @@ public class SearchCourseGUIController extends DialogFragment
     //On JoinCourse Click
     @Override
     public void onButtonClick(int position) {
-        List<BeanCourse> joinedCourses;
 
         //Application Controller
-        JoinCourse joinCourseAppController = new JoinCourse();
+        MenageCourses joinCourseAppController = new MenageCourses();
         try {
-            joinCourseAppController.joinCourse(student, beanAvaliableCourses.get(position), position);
+            joinCourseAppController.joinCourse(student, beanAvaliableCourses.get(position));
             //Notify the Joined Courses Adapter
+            beanAvaliableCourses.remove(position);
             joinedCoursesAdapter.notifyDataSetChanged();
             dismiss();
-        } catch (CourseAlreadyJoined | GenericException e) {
+        } catch ( GenericException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }

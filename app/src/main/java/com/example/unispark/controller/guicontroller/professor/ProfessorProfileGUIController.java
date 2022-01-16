@@ -19,7 +19,7 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
 import com.example.unispark.controller.guicontroller.professor.fragment.AddProfCommunicationGUIController;
@@ -196,7 +196,7 @@ public class ProfessorProfileGUIController extends AppCompatActivity
 
         //Courses
         rvCourses = findViewById(R.id.rv_professor_courses);
-        GetCourses getCoursesController = new GetCourses();
+        MenageCourses getCoursesController = new MenageCourses();
         beanCourseList = getCoursesController.getCourses(bProfessor);
 
         coursesAdapter = new CoursesAdapter(beanCourseList, this, "PROFESSOR");

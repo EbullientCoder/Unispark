@@ -24,7 +24,8 @@ import com.example.unispark.R;
 import com.example.unispark.bean.BeanBookExam;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
 import com.example.unispark.database.dao.ExamsDAO;
@@ -99,7 +100,7 @@ public class AddExamGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        GetCourses getCoursesController = new GetCourses();
+        MenageCourses getCoursesController = new MenageCourses();
         bCourses = getCoursesController.getCourses(bProfessor);
         coursesNames = getCoursesController.getCoursesNames(bProfessor);
 
@@ -176,26 +177,34 @@ public class AddExamGUIController extends DialogFragment{
                 building = txtBuilding.getEditText().getText().toString();
                 classroom = txtClassroom.getEditText().getText().toString();
 
-                //Exam Object
-                bExam = new BeanBookExam(10,
-                        bCourses.get(i).getFullName(),
-                        bCourses.get(i).getCourseYear(),
-                        date + hour,
-                        bCourses.get(i).getCfu(),
-                        classroom,
-                        building);
-
-
-                //Application Controller
-                AddExam addExamAppController = new AddExam();
-                try {
-                    addExamAppController.addExam(bExam, bProfessor);
-                    dismiss();
-                } catch (ExamAlreadyExists | GenericException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                if (hour.equals("") || building.equals("") || classroom.equals("")){
+                    Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                 }
 
+                else{
+
+                    //Exam Object
+                    bExam = new BeanBookExam(10,
+                            bCourses.get(i).getFullName(),
+                            bCourses.get(i).getCourseYear(),
+                            date + hour,
+                            bCourses.get(i).getCfu(),
+                            classroom,
+                            building);
+
+
+                    //Application Controller
+                    AddExam addExamAppController = new AddExam();
+                    try {
+                        addExamAppController.addExam(bExam, bProfessor);
+                        Toast.makeText(getContext(), "Exam added", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    } catch (ExamAlreadyExists | GenericException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
             }
         });
 

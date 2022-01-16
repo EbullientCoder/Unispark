@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.adapter.LinksAdapter;
+import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.BeanLink;
+import com.example.unispark.bean.BeanProfessorDetails;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.professor.ShowFacultyProfessors;
@@ -29,8 +31,6 @@ import com.example.unispark.adapter.ProfessorsAdapter;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LinkAlreadyExists;
 import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.LinkModel;
-import com.example.unispark.model.ProfessorModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
@@ -49,7 +49,7 @@ public class StudentLinksGUIController extends AppCompatActivity
     //Professors
     RecyclerView rvProfessors;
     ProfessorsAdapter professorsAdapter;
-    List<BeanLoggedProfessor> beanLoggedProfessorList;
+    List<BeanProfessorDetails> beanProfessorDetailsList;
     //Link
     EditText txtAddLinkName;
     EditText txtAddLink;
@@ -121,8 +121,8 @@ public class StudentLinksGUIController extends AppCompatActivity
         rvProfessors = findViewById(R.id.rv_professors);
         //Application Controller
         ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
-        beanLoggedProfessorList = facultyProfessorsAppController.setFacultyProfessors(bStudent);
-        professorsAdapter = new ProfessorsAdapter(beanLoggedProfessorList, this);
+        beanProfessorDetailsList = facultyProfessorsAppController.setFacultyProfessors(bStudent);
+        professorsAdapter = new ProfessorsAdapter(beanProfessorDetailsList, this);
         rvProfessors.setAdapter(professorsAdapter);
 
 
@@ -172,7 +172,7 @@ public class StudentLinksGUIController extends AppCompatActivity
 
     //Clickable Items Methods
     @Override
-    public void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<CourseModel> courses) {
+    public void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<BeanCourse> courses) {
         Intent intent = new Intent(this, DetailsProfessorGUIController.class);
         intent.putExtra("ProfessorImage", profImageID);
         intent.putExtra("Firstname", firstname);
@@ -184,6 +184,7 @@ public class StudentLinksGUIController extends AppCompatActivity
     }
 
     //On Link Click
+
     @Override
     public void onLinkClick(String url) {
         Uri uri = Uri.parse(url);
@@ -193,22 +194,21 @@ public class StudentLinksGUIController extends AppCompatActivity
     //On DeleteLink Click
     @Override
     public void onDelBtnClick(int position) {
-        //Application Controller: Show Links
-        ShowLinks linksAppController = new ShowLinks();
-        List<BeanLink> studentLinks = linksAppController.showLinks(bStudent);
 
         //Application Controller: Delete Link
         DeleteLink deleteLinkAppController = new DeleteLink();
+
         try {
-            deleteLinkAppController.deleteLink(studentLinks.get(position));
+            deleteLinkAppController.deleteLink(beanLinkList.get(position));
+            //Removing link from the List
+            beanLinkList.remove(position);
+            linkAdapter.notifyItemRemoved(position);
         } catch (GenericException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        //Removing link from the List
-        beanLinkList.remove(position);
-        linkAdapter.notifyItemRemoved(position);
+
     }
 
 

@@ -19,7 +19,8 @@ import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.bean.BeanCoursesNames;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.login.BeanLoggedUniversity;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LessonAlreadyExists;
@@ -91,7 +92,7 @@ public class AddScheduleGUIController extends DialogFragment {
         //Application Controller: Get Courses
 
 
-        GetCourses getCoursesAppController = new GetCourses();
+        MenageCourses getCoursesAppController = new MenageCourses();
         bCoursesNames = getCoursesAppController.getCoursesNamesByFaculty(bUniversity.getFaculties());
 
         autoCompleteTxtCourse = rootView.findViewById(R.id.add_schedule_course);
@@ -141,6 +142,7 @@ public class AddScheduleGUIController extends DialogFragment {
 
                 try {
                     addLessonAppController.addLesson(bLesson);
+                    Toast.makeText(getContext(), "Schedule updated", Toast.LENGTH_SHORT).show();
 
                     //Notifying the Lessons Adapter
                     schedulesItem.add(0, bLesson);

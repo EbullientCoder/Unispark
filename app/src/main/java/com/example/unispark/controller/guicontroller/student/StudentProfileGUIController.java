@@ -17,13 +17,12 @@ import com.example.unispark.R;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
-import com.example.unispark.controller.applicationcontroller.course.LeaveCourse;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.student.fragment.SearchCourseGUIController;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.model.CourseModel;
 import com.example.unispark.adapter.CoursesAdapter;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
 import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
@@ -162,7 +161,7 @@ public class StudentProfileGUIController extends AppCompatActivity
 
         //Student Courses
         rvCourses = findViewById(R.id.rv_courses);
-        GetCourses getCoursesController = new GetCourses();
+        MenageCourses getCoursesController = new MenageCourses();
         bCourses = getCoursesController.getCourses(student);
 
         coursesAdapter = new CoursesAdapter(bCourses, this, this, "LEAVE");
@@ -185,13 +184,13 @@ public class StudentProfileGUIController extends AppCompatActivity
     @Override
     public void onButtonClick(int position) {
         //Application Controller
-        LeaveCourse leaveCourseAppController = new LeaveCourse();
+        MenageCourses leaveCourseAppController = new MenageCourses();
         try {
             leaveCourseAppController.leaveCourse(student, bCourses.get(position), position);
-
+            bCourses.remove(position);
             //Notify changed dimension to the Adapter
             coursesAdapter.notifyItemRemoved(position);
-        } catch (GenericException | ExamBookedException e) {
+       } catch (GenericException | ExamBookedException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }

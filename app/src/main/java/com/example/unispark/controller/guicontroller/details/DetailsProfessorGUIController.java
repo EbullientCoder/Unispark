@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.unispark.R;
-import com.example.unispark.model.CourseModel;
+import com.example.unispark.bean.BeanCourse;
+
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class DetailsProfessorGUIController extends AppCompatActivity {
         String firstname = extras.getString("Firstname");
         String lastname = extras.getString("Lastname");
         String website = extras.getString("Website");
-        List<CourseModel> courses = (List<CourseModel>) extras.getSerializable("Courses");
+        List<BeanCourse> courses = (List<BeanCourse>) extras.getSerializable("Courses");
 
 
 

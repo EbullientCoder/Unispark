@@ -13,7 +13,7 @@ public class DeleteLink {
         //Remove the Connection inside the DB
         LinkModel removeLink = new LinkModel(link.getLinkName(), link.getLinkAddress());
         try {
-            StudentLinksDAO.removeLink(removeLink.getLinkName());
+            StudentLinksDAO.removeLink(removeLink.getLinkAddress());
         } catch (DatabaseOperationError databaseOperationError) {
             databaseOperationError.printStackTrace();
             throw new GenericException("Cannot delete link, try again");

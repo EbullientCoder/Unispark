@@ -27,7 +27,8 @@ import com.example.unispark.adapter.HomeworksAdapter;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.GetCourses;
+
+import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
 import com.example.unispark.exceptions.GenericException;
 import com.google.android.material.textfield.TextInputLayout;
@@ -100,7 +101,7 @@ public class AddHomeworkGUIController extends DialogFragment{
 
 
         //DropDown Selector
-        GetCourses getCoursesController = new GetCourses();
+        MenageCourses getCoursesController = new MenageCourses();
         bCourses = getCoursesController.getCourses(bProfessor);
         courses = getCoursesController.getCoursesNames(bProfessor);
 
@@ -174,31 +175,39 @@ public class AddHomeworkGUIController extends DialogFragment{
                 String instructions = txtInstructions.getEditText().getText().toString();
                 String points = txtPoints.getEditText().getText().toString();
 
-                //Homework Object
-                bHomework = new BeanHomework(
-                        bCourses.get(i).getShortName(),
-                        bCourses.get(i).getFullName(),
-                        title,
-                        date,
-                        instructions,
-                        points,
-                        bProfessor.getId());
+                if (title.equals("") || instructions.equals("") || points.equals("")){
+
+                    Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                }
+
+                else{
+                    //Homework Object
+                    bHomework = new BeanHomework(
+                            bCourses.get(i).getShortName(),
+                            bCourses.get(i).getFullName(),
+                            title,
+                            date,
+                            instructions,
+                            points,
+                            bProfessor.getId());
 
 
-                //Application Controller
-                AddHomework addHomeworkAppController = new AddHomework();
-                try {
-                    addHomeworkAppController.addHomework(bHomework);
+                    //Application Controller
+                    AddHomework addHomeworkAppController = new AddHomework();
+                    try {
+                        addHomeworkAppController.addHomework(bHomework);
+                        Toast.makeText(getContext(), "Homework added", Toast.LENGTH_SHORT).show();
 
-                    //Notify the Homework Adapter
-                    if(bHomeworkList != null && homeworksAdapter != null){
-                        bHomeworkList.add(bHomework);
-                        homeworksAdapter.notifyDataSetChanged();
+                        //Notify the Homework Adapter
+                        if(bHomeworkList != null && homeworksAdapter != null){
+                            bHomeworkList.add(bHomework);
+                            homeworksAdapter.notifyDataSetChanged();
+                        }
+                        dismiss();
+                    } catch (GenericException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    dismiss();
-                } catch (GenericException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

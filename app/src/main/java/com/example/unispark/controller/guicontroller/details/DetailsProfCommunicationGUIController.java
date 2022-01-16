@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.BeanProfCommunication;
-
+import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
 public class DetailsProfCommunicationGUIController extends AppCompatActivity {
     //Attributes

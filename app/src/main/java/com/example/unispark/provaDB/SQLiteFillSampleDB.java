@@ -665,6 +665,9 @@ public class SQLiteFillSampleDB extends SQLiteOpenHelper {
         this.addExam(exam4);
         this.addExam(exam5);
         this.addExam(exam6);
+
+        //Add grade
+        this.addExamGrade(new VerbalizedExamModel(1, "ING. DEL SOFTWARE E PROG. WEB", "2021/2022", "12/01/2021","12", "21"), valzano);
     }
 
 

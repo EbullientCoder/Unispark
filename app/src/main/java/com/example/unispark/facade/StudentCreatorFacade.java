@@ -27,7 +27,7 @@ public class StudentCreatorFacade {
         return instance;
     }
 
-    public StudentModel getStudent(String email, String firstName, String lastName, int profilePicture, String studentId, String faculty, String academicYear, int uniYear) //throws exception
+    public StudentModel getStudent(String firstName, String lastName, String email, int profilePicture, String studentId, String faculty, String academicYear, int uniYear) //throws exception
     {
 
         List<CourseModel> coursesList = CourseDAO.selectStudentCourses(studentId);
@@ -35,6 +35,6 @@ public class StudentCreatorFacade {
         List<VerbalizedExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(studentId);
         List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(studentId);
 
-        return new StudentModel(email, firstName, lastName, profilePicture, studentId, faculty, academicYear, coursesList, bookedExams, verbalizedExams, failedExams, uniYear);
+        return new StudentModel(firstName, lastName, email, profilePicture, studentId, faculty, academicYear, coursesList, bookedExams, verbalizedExams, failedExams, uniYear);
     }
 }

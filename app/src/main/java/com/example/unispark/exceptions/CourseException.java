@@ -13,8 +13,7 @@ public class CourseException extends Exception{
     /*
      * The code represents the operation that caused the error managing courses
      * add course -> 0
-     * join course -> 1
-     * leave course -> 2
+     * leave course -> 1
      */
 
     private final int code;

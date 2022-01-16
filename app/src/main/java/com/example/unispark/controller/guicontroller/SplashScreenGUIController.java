@@ -37,7 +37,7 @@ public class SplashScreenGUIController extends AppCompatActivity {
 
         //Initializing Sample DB
         SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
-        //splashScreenAppController.databaseConnection();
+        splashScreenAppController.databaseConnection();
 
 
 
