@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.BeanProfessorDetails;
 
 
 import java.util.List;
@@ -52,11 +53,13 @@ public class DetailsProfessorGUIController extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Parameters
-        int imageID = extras.getInt("ProfessorImage");
-        String firstname = extras.getString("Firstname");
-        String lastname = extras.getString("Lastname");
-        String website = extras.getString("Website");
-        List<BeanCourse> courses = (List<BeanCourse>) extras.getSerializable("Courses");
+        BeanProfessorDetails professor = (BeanProfessorDetails) extras.getSerializable("Professor");
+
+        int imageID = professor.getProfilePicture();
+        String firstname = professor.getFirstName();
+        String lastname = professor.getLastName();
+        String website = professor.getWebsite();
+        List<BeanCourse> courses = professor.getCourses();
 
 
 

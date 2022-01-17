@@ -172,19 +172,14 @@ public class StudentLinksGUIController extends AppCompatActivity
 
     //Clickable Items Methods
     @Override
-    public void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<BeanCourse> courses) {
+    public void onProfessorClick(int position) {
         Intent intent = new Intent(this, DetailsProfessorGUIController.class);
-        intent.putExtra("ProfessorImage", profImageID);
-        intent.putExtra("Firstname", firstname);
-        intent.putExtra("Lastname", lastname);
-        intent.putExtra("Website", website);
-        intent.putExtra("Courses", (Serializable) courses);
+        intent.putExtra("Professor", beanProfessorDetailsList.get(position));
 
         startActivity(intent);
     }
 
     //On Link Click
-
     @Override
     public void onLinkClick(String url) {
         Uri uri = Uri.parse(url);

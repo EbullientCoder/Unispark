@@ -2,9 +2,10 @@ package com.example.unispark.bean;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BeanProfessorDetails {
+public class BeanProfessorDetails implements Serializable {
 
     //Attributes
     private String firstName;

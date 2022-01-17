@@ -27,7 +27,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     //Interface
     public interface OnProfessorClickListener{
-        void onProfessorClick(int profImageID, String firstname, String lastname, String website, List<BeanCourse> courses);
+        void onProfessorClick(int position);
     }
 
 
@@ -64,12 +64,6 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     //First Row
     static class ProfessorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private int imgProfessorID;
-        private String firstName;
-        private String lastName;
-        private String website;
-        private List<BeanCourse> courses;
-
         private ImageView imgProfessor;
         private TextView txtProfFirstname;
         private TextView txtProfLastname;
@@ -91,17 +85,11 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             imgProfessor.setImageResource(professor.getProfilePicture());
             txtProfFirstname.setText(professor.getFirstName());
             txtProfLastname.setText(professor.getLastName());
-
-            imgProfessorID = professor.getProfilePicture();
-            firstName = professor.getFirstName();
-            lastName = professor.getLastName();
-            website = professor.getWebsite();
-            courses = professor.getCourses();
         }
 
         @Override
         public void onClick(View view) {
-            onProfessorClickListener.onProfessorClick(imgProfessorID, firstName, lastName, website, courses);
+            onProfessorClickListener.onProfessorClick(getAdapterPosition());
         }
     }
 
