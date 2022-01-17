@@ -18,11 +18,10 @@ import com.example.unispark.bean.login.BeanLoggedStudent;
 
 import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.guicontroller.details.DetailsCourseGUIController;
-import com.example.unispark.exceptions.CourseAlreadyJoined;
 import com.example.unispark.exceptions.GenericException;
+import com.example.unispark.model.CourseModel;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCourseGUIController extends DialogFragment
@@ -34,17 +33,21 @@ public class SearchCourseGUIController extends DialogFragment
     ImageButton btnDismiss;
     //Courses
     RecyclerView rvCourses;
-    List<BeanCourse> beanAvaliableCourses;
+    List<BeanCourse> beanAvailableCourses;
     CoursesAdapter coursesAdapter;
     //Get Student Model
     BeanLoggedStudent student;
     CoursesAdapter joinedCoursesAdapter;
+    List<BeanCourse> joinedCourses;
 
 
     //Constructor
-    public SearchCourseGUIController(BeanLoggedStudent student, CoursesAdapter joinedCoursesAdapter){
+    public SearchCourseGUIController(BeanLoggedStudent student,
+                                     CoursesAdapter joinedCoursesAdapter,
+                                     List<BeanCourse> joinedCourses){
         this.student = student;
         this.joinedCoursesAdapter = joinedCoursesAdapter;
+        this.joinedCourses = joinedCourses;
     }
 
 
@@ -69,8 +72,8 @@ public class SearchCourseGUIController extends DialogFragment
         rvCourses = (RecyclerView) rootView.findViewById(R.id.rv_choose_course);
         //Application Controller
         MenageCourses getCoursesController = new MenageCourses();
-        beanAvaliableCourses = getCoursesController.getAvaliableCourses(student);
-        coursesAdapter = new CoursesAdapter(beanAvaliableCourses, this, this, "JOIN");
+        beanAvailableCourses = getCoursesController.getAvaliableCourses(student);
+        coursesAdapter = new CoursesAdapter(beanAvailableCourses, this, this, "JOIN");
         rvCourses.setAdapter(coursesAdapter);
 
         return rootView;
@@ -83,7 +86,7 @@ public class SearchCourseGUIController extends DialogFragment
     @Override
     public void onCourseClick(int position) {
         Intent intent = new Intent(getContext(), DetailsCourseGUIController.class);
-        intent.putExtra("Course", beanAvaliableCourses.get(position));
+        intent.putExtra("Course", beanAvailableCourses.get(position));
         startActivity(intent);
     }
 
@@ -94,10 +97,15 @@ public class SearchCourseGUIController extends DialogFragment
         //Application Controller
         MenageCourses joinCourseAppController = new MenageCourses();
         try {
-            joinCourseAppController.joinCourse(student, beanAvaliableCourses.get(position));
+            joinCourseAppController.joinCourse(student, beanAvailableCourses.get(position));
+
             //Notify the Joined Courses Adapter
-            beanAvaliableCourses.remove(position);
+            joinedCourses.add(0, beanAvailableCourses.get(position));
             joinedCoursesAdapter.notifyDataSetChanged();
+
+            //Remove Course from the Available Courses
+            beanAvailableCourses.remove(position);
+
             dismiss();
         } catch ( GenericException e) {
             e.printStackTrace();

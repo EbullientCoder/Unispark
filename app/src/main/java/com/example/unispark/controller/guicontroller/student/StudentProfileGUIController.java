@@ -146,13 +146,12 @@ public class StudentProfileGUIController extends AppCompatActivity
 
 
 
-        //Use Case: Search Course
         //Open SearchCourse Fragment
         addCourse = findViewById(R.id.btn_add_course);
         addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchCourseFragment = new SearchCourseGUIController(student, coursesAdapter);
+                searchCourseFragment = new SearchCourseGUIController(student, coursesAdapter, bCourses);
                 searchCourseFragment.show(getSupportFragmentManager(), "SearchCourse");
             }
         });
@@ -161,6 +160,7 @@ public class StudentProfileGUIController extends AppCompatActivity
 
         //Student Courses
         rvCourses = findViewById(R.id.rv_courses);
+        //Application Controller
         MenageCourses getCoursesController = new MenageCourses();
         bCourses = getCoursesController.getCourses(student);
 

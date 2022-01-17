@@ -143,6 +143,7 @@ public class MenageCourses {
 
 
 
+    //Get Student Courses
     public List<BeanCourse> getCourses(BeanLoggedStudent student){
         List<CourseModel> courses = student.getCourses();
         List<BeanCourse> bCourses = new ArrayList<>();
@@ -163,6 +164,7 @@ public class MenageCourses {
         return bCourses;
     }
 
+    //Get Professor Courses
     public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
         List<CourseModel> courses = professor.getCourses();
         List<BeanCourse> bCourses = new ArrayList<>();
