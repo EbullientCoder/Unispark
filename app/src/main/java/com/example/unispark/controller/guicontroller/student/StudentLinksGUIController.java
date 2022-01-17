@@ -145,7 +145,7 @@ public class StudentLinksGUIController extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 String linkName = txtAddLinkName.getText().toString();
-                String link = txtAddLink.getText().toString();
+                String link = "https://" + txtAddLink.getText().toString();
                 if(linkName.length() != 0 && link.length() != 0){
 
                     BeanLink newLink = new BeanLink(linkName, link);
