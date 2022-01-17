@@ -1,18 +1,21 @@
 package com.example.unispark.controller.applicationcontroller.schedule;
 
+import android.widget.Toast;
+
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.LessonModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ShowSchedule {
+public class GetScheduleStudent {
     //Show Schedule
     public List<BeanLesson> getLessons(BeanLoggedStudent student, String day){
         List<LessonModel> lessonsItem;
-        List<BeanLesson> bLessons = new ArrayList<>();
+        List<BeanLesson> lessons = new ArrayList<>();
         switch(day){
             case "TUESDAY": lessonsItem = LessonsDAO.getLessons("TUESDAY", student.getCourses());
                 break;
@@ -32,10 +35,34 @@ public class ShowSchedule {
 
         for (int i = 0; i < lessonsItem.size(); i++){
             LessonModel lesson = lessonsItem.get(i);
-            bLessons.add(new BeanLesson(lesson.getLessonName(), lesson.getDay(), lesson.getHour()));
+            lessons.add(new BeanLesson(lesson.getLessonName(), lesson.getDay(), lesson.getHour()));
         }
 
+        //Sort the Lessons by their Start Hour
+        LessonsSort(lessons);
 
-        return bLessons;
+
+        return lessons;
+    }
+
+
+
+    //Sort Lessons
+    private void LessonsSort(List<BeanLesson> lessons){
+
+        if(lessons !=  null){
+            int hour1, hour2;
+
+            for(int i = 0; i < lessons.size(); i++){
+                //Gets the first two elements of the string and cast them into Integers
+
+                for(int j = 1; j < (lessons.size() - i); j++){
+                    hour1 = Integer.parseInt(lessons.get(j - 1).getHour().substring(0, 2));
+                    hour2 = Integer.parseInt(lessons.get(j).getHour().substring(0, 2));
+
+                    if(hour2 < hour1) Collections.swap(lessons, j - 1, j);
+                }
+            }
+        }
     }
 }

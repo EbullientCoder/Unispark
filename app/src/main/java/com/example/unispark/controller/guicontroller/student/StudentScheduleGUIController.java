@@ -17,7 +17,7 @@ import com.example.unispark.R;
 import com.example.unispark.adapter.LessonAdapter;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.controller.applicationcontroller.schedule.ShowSchedule;
+import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleStudent;
 import com.example.unispark.controller.guicontroller.menu.RightButtonMenu;
 import com.example.unispark.controller.guicontroller.menu.BottomNavigationMenuGuiController;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -109,8 +109,8 @@ public class StudentScheduleGUIController extends AppCompatActivity{
         //Lessons
         rvLessons = findViewById(R.id.rv_lessons);
         //Application Controller
-        ShowSchedule showScheduleAppController = new ShowSchedule();
-        lessonsItem = showScheduleAppController.getLessons(bStudent,String.valueOf(offset.getDayOfWeek()));
+        GetScheduleStudent getScheduleStudentAppController = new GetScheduleStudent();
+        lessonsItem = getScheduleStudentAppController.getLessons(bStudent,String.valueOf(offset.getDayOfWeek()));
         lessonAdapter = new LessonAdapter(lessonsItem, "STUDENT");
         rvLessons.setAdapter(lessonAdapter);
     }

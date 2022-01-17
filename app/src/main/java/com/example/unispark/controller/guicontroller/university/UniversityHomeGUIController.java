@@ -23,12 +23,10 @@ import com.example.unispark.controller.applicationcontroller.communications.Show
 
 import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
-import com.example.unispark.controller.applicationcontroller.schedule.GetLessons;
+import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
 import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGUIController;
 import com.example.unispark.controller.guicontroller.university.fragment.AddScheduleGUIController;
 import com.example.unispark.controller.guicontroller.university.fragment.AddUniCommunicationGUIController;
-import com.example.unispark.model.UniversityModel;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -211,8 +209,8 @@ public class UniversityHomeGUIController extends AppCompatActivity implements
         MenageCourses getCoursesAppController = new MenageCourses();
         List<BeanCourse> courses = getCoursesAppController.getFacultyCourses(bUniversity.getFaculties());
         //Application Controller: Get Lessons
-        GetLessons getLessonsAppController = new GetLessons();
-        bLessons = getLessonsAppController.getLessons(day, courses);
+        GetScheduleUniversity getScheduleUniversityAppController = new GetScheduleUniversity();
+        bLessons = getScheduleUniversityAppController.getLessons(day, courses);
         lessonAdapter = new LessonAdapter(bLessons, this, "UNIVERSITY");
 
         //Set adapter

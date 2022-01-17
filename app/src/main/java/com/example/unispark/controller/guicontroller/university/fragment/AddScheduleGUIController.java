@@ -22,6 +22,7 @@ import com.example.unispark.bean.login.BeanLoggedUniversity;
 
 import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
+import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LessonAlreadyExists;
 import com.example.unispark.model.UniversityModel;
@@ -152,6 +153,12 @@ public class AddScheduleGUIController extends DialogFragment {
                         //Notifying the Lessons Adapter
                         schedulesItem.add(0, bLesson);
                         lessonAdapter.notifyDataSetChanged();
+
+                        //App Controller: GetScheduleUniversity
+                        //Sorting the Lessons
+                        GetScheduleUniversity getScheduleUniversity =  new GetScheduleUniversity();
+                        getScheduleUniversity.LessonsSort(schedulesItem);
+
                         dismiss();
                     } catch (GenericException | LessonAlreadyExists e) {
                         e.printStackTrace();

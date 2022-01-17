@@ -87,27 +87,31 @@ public class MenageCourses {
     }
 
 
+
+    //University: Get Courses of its faculty
     public BeanCoursesNames getCoursesNamesByFaculty(List<String> faculties){
         BeanCoursesNames bCourses = new BeanCoursesNames();
         List<CourseModel> courses = new ArrayList<>();
+        List<CourseModel> allCourses = new ArrayList<>();
         List<String> coursesNames = new ArrayList<>();
 
         for (int i = 0; i < faculties.size(); i++){
             courses = CourseDAO.selectCourses(faculties.get(i));
             if (!courses.isEmpty()){
-                courses.addAll(courses);
+                allCourses.addAll(courses);
             }
         }
 
-        for (int j = 0; j < courses.size(); j++){
-            coursesNames.add(courses.get(j).getFullName());
+        for (int j = 0; j < allCourses.size(); j++){
+            coursesNames.add(allCourses.get(j).getFullName());
         }
 
         bCourses.setCourses(coursesNames);
 
-
         return bCourses;
     }
+
+
 
     //Get Courses
     public List<BeanCourse> getFacultyCourses(List<String> faculties){
