@@ -40,7 +40,6 @@ public class SplashScreenGUIController extends AppCompatActivity {
         //splashScreenAppController.databaseConnection(getApplicationContext());
 
 
-
         //Delayed Launch of Login (2 seconds)
         new Handler().postDelayed(() -> {
             Intent i = new Intent(SplashScreenGUIController.this, LoginGUIController.class);
