@@ -52,12 +52,12 @@ public class AddHomeworkGUIController extends DialogFragment{
     ImageButton btnSelectDate;
     DatePickerDialog.OnDateSetListener dateListener;
     Calendar calendar;
-    String date;
+    String date = "";
     //Points
     TextInputLayout txtPoints;
     //Course Selector
     List<String> courses;
-    String courseSelection;
+    String courseSelection = "";
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     //Professor Model
@@ -175,9 +175,9 @@ public class AddHomeworkGUIController extends DialogFragment{
                 String instructions = txtInstructions.getEditText().getText().toString();
                 String points = txtPoints.getEditText().getText().toString();
 
-                if (title.equals("") || instructions.equals("") || points.equals("")){
+                if (courseSelection.equals("") || title.equals("") || instructions.equals("") || points.equals("")){
 
-                    Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                    getInvalidMessage();
                 }
 
                 else{
@@ -196,7 +196,7 @@ public class AddHomeworkGUIController extends DialogFragment{
                     AddHomework addHomeworkAppController = new AddHomework();
                     try {
                         addHomeworkAppController.addHomework(bHomework);
-                        Toast.makeText(getContext(), "Homework added", Toast.LENGTH_SHORT).show();
+                        HomeworkAddedMessage();
 
                         //Notify the Homework Adapter
                         if(bHomeworkList != null && homeworksAdapter != null){
@@ -214,5 +214,14 @@ public class AddHomeworkGUIController extends DialogFragment{
 
 
         return rootView;
+    }
+
+
+    private void getInvalidMessage(){
+        Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+    }
+
+    private void HomeworkAddedMessage(){
+        Toast.makeText(getContext(), "Homework added", Toast.LENGTH_SHORT).show();
     }
 }

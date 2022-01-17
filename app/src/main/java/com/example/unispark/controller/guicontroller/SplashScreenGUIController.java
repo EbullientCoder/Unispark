@@ -36,8 +36,8 @@ public class SplashScreenGUIController extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         //Initializing Sample DB
-        SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
-        splashScreenAppController.databaseConnection();
+        //SplashScreen splashScreenAppController = new SplashScreen(getApplicationContext());
+        //splashScreenAppController.databaseConnection();
 
 
 

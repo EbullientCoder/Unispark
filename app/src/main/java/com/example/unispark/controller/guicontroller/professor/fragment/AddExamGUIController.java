@@ -52,13 +52,13 @@ public class AddExamGUIController extends DialogFragment{
     List<String> coursesNames;
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
-    String courseSelection;
+    String courseSelection = "";
     //Date Picker
     TextView txtDisplayDate;
     ImageButton btnSelectDate;
     DatePickerDialog.OnDateSetListener dateListener;
     Calendar calendar;
-    String date;
+    String date = "";
     //Hour
     TextInputLayout txtHour;
     String hour;
@@ -177,8 +177,8 @@ public class AddExamGUIController extends DialogFragment{
                 building = txtBuilding.getEditText().getText().toString();
                 classroom = txtClassroom.getEditText().getText().toString();
 
-                if (hour.equals("") || building.equals("") || classroom.equals("")){
-                    Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                if (courseSelection.equals("") || hour.equals("") || building.equals("") || classroom.equals("")){
+                    getInvalidMessagge();
                 }
 
                 else{
@@ -197,7 +197,7 @@ public class AddExamGUIController extends DialogFragment{
                     AddExam addExamAppController = new AddExam();
                     try {
                         addExamAppController.addExam(bExam, bProfessor);
-                        Toast.makeText(getContext(), "Exam added", Toast.LENGTH_SHORT).show();
+                        examAddedMessage();
                         dismiss();
                     } catch (ExamAlreadyExists | GenericException e) {
                         e.printStackTrace();
@@ -210,4 +210,15 @@ public class AddExamGUIController extends DialogFragment{
 
         return rootView;
     }
+
+
+    private void getInvalidMessagge(){
+        Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void examAddedMessage(){
+        Toast.makeText(getContext(), "Exam added", Toast.LENGTH_SHORT).show();
+    }
+
 }

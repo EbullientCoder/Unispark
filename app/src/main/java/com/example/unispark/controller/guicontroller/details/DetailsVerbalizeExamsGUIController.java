@@ -88,17 +88,31 @@ public class DetailsVerbalizeExamsGUIController extends AppCompatActivity
         //Application Controller
         VerbalizeExam verbalizeExamAppController = new VerbalizeExam();
         try {
+            double doubleResult = Double.parseDouble(result);
+            if (doubleResult < 0 || doubleResult > 30){
+                getResultInvalidMessage();
+            }
+            else{
+                verbalizeExamAppController.verbalizeExam(beanBookExam, studentsItem.get(position), result);
+                //Remove Verbalized Exam
+                studentsItem.remove(position);
+                studentsAdapter.notifyItemRemoved(position);
+            }
 
-            verbalizeExamAppController.verbalizeExam(beanBookExam, studentsItem.get(position), result);
-            //Remove Verbalized Exam
-            studentsItem.remove(position);
-            studentsAdapter.notifyItemRemoved(position);
 
-            if(result != null) Toast.makeText(getApplicationContext(), "Exam Verbalized", Toast.LENGTH_SHORT).show();
+
 
         } catch (ExamNotYetOccured | GenericException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (NumberFormatException numberFormatException){
+            getResultInvalidMessage();
         }
+    }
+
+
+    private void getResultInvalidMessage(){
+
+        Toast.makeText(getApplicationContext(), "Result format not valid, insert a number between 0 and 30", Toast.LENGTH_SHORT).show();
     }
 }

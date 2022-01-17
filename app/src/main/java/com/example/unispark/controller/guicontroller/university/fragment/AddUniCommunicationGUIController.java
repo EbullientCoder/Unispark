@@ -43,11 +43,12 @@ public class AddUniCommunicationGUIController extends DialogFragment {
     //Instructions
     TextInputLayout txtCommunication;
     String text;
+    String date = "";
     //Faculty Selector
     List<String> faculties;
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
-    String facultySelection;
+    String facultySelection = "";
     //University Model
     BeanLoggedUniversity bUniversity;
     //Homework Model
@@ -100,7 +101,7 @@ public class AddUniCommunicationGUIController extends DialogFragment {
 
         //Calendar
         OffsetDateTime offset = OffsetDateTime.now();
-        String date = offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth();
+        date = offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth();
 
         //DropDown Selector
         faculties = bUniversity.getFaculties();
@@ -134,30 +135,44 @@ public class AddUniCommunicationGUIController extends DialogFragment {
                 title = txtTitle.getEditText().getText().toString();
                 text = txtCommunication.getEditText().getText().toString();
 
-                //Communication Object
-                beanUniCommunication = new BeanUniCommunication(R.drawable.blank_img,
-                        title,
-                        date,
-                        text,
-                        facultySelection);
+                if (title.equals("") || text.equals("") || facultySelection.equals("")){
+                    getInvalidMessagge();
+                }
 
-                //Application Controller
-                AddUniCommunication addCommunicationAppController = new AddUniCommunication();
-                try {
-                    addCommunicationAppController.addCommunication(beanUniCommunication);
-                    Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
-                    //Notify the Communications Adapter
-                    beanUniCommunicationList.add(0, beanUniCommunication);
-                    communicationsAdapter.notifyDataSetChanged();
+                else{
+                    //Communication Object
+                    beanUniCommunication = new BeanUniCommunication(R.drawable.blank_img,
+                            title,
+                            date,
+                            text,
+                            facultySelection);
 
-                    dismiss();
-                } catch (GenericException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Application Controller
+                    AddUniCommunication addCommunicationAppController = new AddUniCommunication();
+                    try {
+                        addCommunicationAppController.addCommunication(beanUniCommunication);
+                        CommunicationAddedMessage();
+                        //Notify the Communications Adapter
+                        beanUniCommunicationList.add(0, beanUniCommunication);
+                        communicationsAdapter.notifyDataSetChanged();
+
+                        dismiss();
+                    } catch (GenericException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
         return rootView;
+    }
+
+    private void getInvalidMessagge(){
+        Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+    }
+
+    private void CommunicationAddedMessage(){
+        Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
     }
 }

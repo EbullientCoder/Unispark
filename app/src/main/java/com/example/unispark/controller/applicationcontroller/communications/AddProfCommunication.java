@@ -25,4 +25,5 @@ public class AddProfCommunication {
             throw new GenericException("Cannot add communication, try again");
         }
     }
+
 }

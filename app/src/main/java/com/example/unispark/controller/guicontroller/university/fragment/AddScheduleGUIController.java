@@ -40,17 +40,17 @@ public class AddScheduleGUIController extends DialogFragment {
     BeanCoursesNames bCoursesNames;
     AutoCompleteTextView autoCompleteTxtCourse;
     ArrayAdapter<String> adapterItemsCourse;
-    String courseSelection;
+    String courseSelection = "";
     //Day Selector
     List<String> days;
     AutoCompleteTextView autoCompleteTxtDay;
     ArrayAdapter<String> adapterItemsDay;
-    String daySelection;
+    String daySelection = "";
     //Hour Selector
     List<String> hours;
     AutoCompleteTextView autoCompleteTxtHour;
     ArrayAdapter<String> adapterItemsHour;
-    String hourSelection;
+    String hourSelection = "";
     //University Model
     BeanLoggedUniversity bUniversity;
     List<BeanLesson> schedulesItem;
@@ -134,27 +134,42 @@ public class AddScheduleGUIController extends DialogFragment {
         btnAddSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Creating new Lesson
-                BeanLesson bLesson = new BeanLesson(courseSelection, daySelection, hourSelection);
+                if (courseSelection.equals("") || daySelection.equals("") || hourSelection.equals("")){
+                    getInvalidMessagge();
+                }
 
-                //Application Controller: Add Lesson
-                AddLesson addLessonAppController = new AddLesson();
+                else{
+                    //Creating new Lesson
+                    BeanLesson bLesson = new BeanLesson(courseSelection, daySelection, hourSelection);
 
-                try {
-                    addLessonAppController.addLesson(bLesson);
-                    Toast.makeText(getContext(), "Schedule updated", Toast.LENGTH_SHORT).show();
+                    //Application Controller: Add Lesson
+                    AddLesson addLessonAppController = new AddLesson();
 
-                    //Notifying the Lessons Adapter
-                    schedulesItem.add(0, bLesson);
-                    lessonAdapter.notifyDataSetChanged();
-                    dismiss();
-                } catch (GenericException | LessonAlreadyExists e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    try {
+                        addLessonAppController.addLesson(bLesson);
+                        ScheduleUpdatedMessage();
+
+                        //Notifying the Lessons Adapter
+                        schedulesItem.add(0, bLesson);
+                        lessonAdapter.notifyDataSetChanged();
+                        dismiss();
+                    } catch (GenericException | LessonAlreadyExists e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
         return rootView;
+    }
+
+
+    private void getInvalidMessagge(){
+        Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+    }
+
+    private void ScheduleUpdatedMessage(){
+        Toast.makeText(getContext(), "Schedule updated", Toast.LENGTH_SHORT).show();
     }
 }

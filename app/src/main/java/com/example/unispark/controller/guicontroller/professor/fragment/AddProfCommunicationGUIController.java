@@ -38,7 +38,7 @@ public class AddProfCommunicationGUIController extends DialogFragment{
     TextInputLayout txtCommunication;
     //Course Selector
     List<String> courses;
-    String courseSelection;
+    String courseSelection = "";
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
     //Professor Model
@@ -113,7 +113,9 @@ public class AddProfCommunicationGUIController extends DialogFragment{
                 String type = txtType.getEditText().getText().toString();
                 String text = txtCommunication.getEditText().getText().toString();
 
-                if(type.equals("") || text.equals("")) Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                if(courseSelection.equals("") || type.equals("") || text.equals("")) {
+                    getInvalidMessagge();
+                }
 
                 else{
 
@@ -131,7 +133,7 @@ public class AddProfCommunicationGUIController extends DialogFragment{
                     AddProfCommunication addCommunicationAppController = new AddProfCommunication();
                     try {
                         addCommunicationAppController.addProfCommunication(bCommunication);
-                        Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
+                        CommunicationAddedMessage();
                         dismiss();
                     } catch (GenericException e) {
                         e.printStackTrace();
@@ -146,5 +148,15 @@ public class AddProfCommunicationGUIController extends DialogFragment{
         });
 
         return rootView;
+    }
+
+
+    private void getInvalidMessagge(){
+        Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+    }
+
+    private void CommunicationAddedMessage(){
+
+        Toast.makeText(getContext(), "Communication added", Toast.LENGTH_SHORT).show();
     }
 }

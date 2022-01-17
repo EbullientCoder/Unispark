@@ -45,8 +45,8 @@ public class ExamsDAO {
     public static void addExamGrade(VerbalizedExamModel examGrade, String studentID) throws ExamException, DatabaseOperationError, SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        Cursor cursorDate = QueryExams.selectExamDate(db, examGrade.getId());
-        if (cursorDate.moveToFirst()) throw new ExamException(1);
+        //Cursor cursorDate = QueryExams.selectExamDate(db, examGrade.getId());
+        //if (cursorDate.moveToFirst()) throw new ExamException(1);
 
         ContentValues cv = new ContentValues();
         cv.put("id", examGrade.getId());
