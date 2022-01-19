@@ -1,15 +1,22 @@
 package com.example.unispark.controller.applicationcontroller.average;
 
 import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CalculateAverage {
 
     //Arithmetic Average
     public float arithmeticAverage(BeanLoggedStudent student){
-        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
+        List<VerbalizedExamModel> exams = null;
+        try {
+            exams = ExamsDAO.getVerbalizedExams(student.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         float average = 0;
 
         //Calculating the Average if the Student has Verbalized StudentExamsGUIController
@@ -37,7 +44,13 @@ public class CalculateAverage {
 
     //Weighted Average
     public float weightedAverage(BeanLoggedStudent student){
-        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
+
+        List<VerbalizedExamModel> exams = null;
+        try {
+            exams = ExamsDAO.getVerbalizedExams(student.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         float average = 0;
         float CFU = 0;
 
