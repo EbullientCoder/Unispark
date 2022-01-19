@@ -22,11 +22,19 @@ public class ShowExams {
         List<BeanExamType> bExams = new ArrayList<>();
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<VerbalizedExamModel> verbalizedExams = student.getVerbalizedExams();
-        for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
-            VerbalizedExamModel vExam = verbalizedExams.get(i);
-            bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+        try{
+
+            List<VerbalizedExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(student.getId());
+
+            for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
+                VerbalizedExamModel vExam = verbalizedExams.get(i);
+                bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
 
         return bExams;
     }
@@ -37,10 +45,14 @@ public class ShowExams {
         List<BeanExamType> bExams = new ArrayList<>();
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<VerbalizedExamModel> failedExams = student.getFailedExams();
-        for (int i = 0; failedExams != null && i < failedExams.size(); i++){
-            VerbalizedExamModel vExam = failedExams.get(i);
-            bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+        try{
+            List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(student.getId());
+            for (int i = 0; failedExams != null && i < failedExams.size(); i++){
+                VerbalizedExamModel vExam = failedExams.get(i);
+                bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return bExams;
