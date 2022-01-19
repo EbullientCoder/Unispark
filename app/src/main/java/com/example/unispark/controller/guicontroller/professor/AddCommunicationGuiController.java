@@ -38,7 +38,7 @@ public class AddCommunicationGuiController extends AddExamGuiController{
                 addCommunicationAppController.addProfCommunication(bCommunication);
                 CommunicationAddedMessage(context);
                 dialog.dismiss();
-            } catch (GenericException e) {
+            } catch ( GenericException e) {
                 e.printStackTrace();
                 errorMessage(context, e.getMessage());
             }

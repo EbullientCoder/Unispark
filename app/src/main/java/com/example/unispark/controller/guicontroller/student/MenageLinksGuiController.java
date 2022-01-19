@@ -18,17 +18,19 @@ import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiCont
 import com.example.unispark.view.details.DetailsProfessorView;
 import com.example.unispark.viewadapter.LinksAdapter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class MenageLinksGuiController extends BottomNavigationMenuGuiController {
 
 
     public List<BeanProfessorDetails> showProfessorDetails(BeanLoggedStudent student){
-        List<BeanProfessorDetails> professorDetails;
+        List<BeanProfessorDetails> professorDetails = null;
 
         //Application Controller
         ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
         professorDetails = facultyProfessorsAppController.setFacultyProfessors(student);
+
 
         return professorDetails;
     }

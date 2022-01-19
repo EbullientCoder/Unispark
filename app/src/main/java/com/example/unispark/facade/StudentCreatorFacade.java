@@ -9,6 +9,8 @@ import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentCreatorFacade {
@@ -27,7 +29,7 @@ public class StudentCreatorFacade {
         return instance;
     }
 
-    public StudentModel getStudent(String firstName, String lastName, String email, int profilePicture, String studentId, String faculty, String academicYear, int uniYear) //throws exception
+    public StudentModel getStudent(String firstName, String lastName, String email, int profilePicture, String studentId, String faculty, String academicYear, int uniYear) throws SQLException
     {
 
         List<CourseModel> coursesList = CourseDAO.selectStudentCourses(studentId);

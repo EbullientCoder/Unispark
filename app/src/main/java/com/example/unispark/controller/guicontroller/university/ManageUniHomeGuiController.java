@@ -21,6 +21,7 @@ import com.example.unispark.view.university.fragment.AddUniCommunicationView;
 import com.example.unispark.viewadapter.LessonAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ManageUniHomeGuiController extends BaseUniGuiController{
@@ -38,10 +39,11 @@ public class ManageUniHomeGuiController extends BaseUniGuiController{
 
 
     public List<BeanUniCommunication> showCommunications(){
-        List<BeanUniCommunication> communications;
+        List<BeanUniCommunication> communications = null;
 
         ShowCommunications uniCommunicationsAppController = new ShowCommunications();
         communications = uniCommunicationsAppController.showUniversityCommunications();
+
 
         return communications;
     }
@@ -67,6 +69,7 @@ public class ManageUniHomeGuiController extends BaseUniGuiController{
 
         MenageCourses getCoursesAppController = new MenageCourses();
         courses = getCoursesAppController.getFacultyCourses(faculties);
+
 
         return courses;
     }

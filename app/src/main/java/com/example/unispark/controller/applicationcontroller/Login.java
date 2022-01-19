@@ -12,6 +12,8 @@ import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.UniversityModel;
 
+import java.sql.SQLException;
+
 import javax.security.auth.login.LoginException;
 
 
@@ -19,8 +21,7 @@ import javax.security.auth.login.LoginException;
 public class Login {
 
     //Login Methods
-    public BeanLoggedStudent studentLogin(BeanUser user) throws WrongUsernameOrPasswordException
-    {
+    public BeanLoggedStudent studentLogin(BeanUser user) throws WrongUsernameOrPasswordException, SQLException {
         BeanLoggedStudent beanLoggedStudent = null;
         StudentModel student = null;
         try {
@@ -44,8 +45,7 @@ public class Login {
         return beanLoggedStudent;
     }
 
-    public BeanLoggedProfessor professorLogin(BeanUser user) throws WrongUsernameOrPasswordException
-    {
+    public BeanLoggedProfessor professorLogin(BeanUser user) throws WrongUsernameOrPasswordException, SQLException {
 
         BeanLoggedProfessor beanLoggedProfessor = null;
         ProfessorModel professor = null;
@@ -70,7 +70,7 @@ public class Login {
         return beanLoggedProfessor;
     }
 
-    public BeanLoggedUniversity universityLogin(BeanUser user) throws WrongUsernameOrPasswordException {
+    public BeanLoggedUniversity universityLogin(BeanUser user) throws WrongUsernameOrPasswordException, SQLException {
         BeanLoggedUniversity beanLoggedUniversity = null;
         UniversityModel university = null;
 

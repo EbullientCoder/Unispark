@@ -4,7 +4,10 @@ import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +43,7 @@ public class ExamsFacade {
     }
 
 
-    private static List<BookExamModel> getStudentExams(String id)
-    {
+    private static List<BookExamModel> getStudentExams(String id) throws SQLException {
         List<BookExamModel> examsList = new ArrayList<>();
 
         List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
@@ -64,8 +66,7 @@ public class ExamsFacade {
         return examsList;
     }
 
-    private static List<BookExamModel> getProfessorExams(String id)
-    {
+    private static List<BookExamModel> getProfessorExams(String id) throws SQLException {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(Integer.valueOf(id));
 
         List<BookExamModel> examsList = new ArrayList<>();
@@ -81,8 +82,7 @@ public class ExamsFacade {
     }
 
     //Select exams marked by studentID/professorId depending on boolean isProfessor
-    public static List<BookExamModel> getExams(String id, boolean isProfessor)
-    {
+    public static List<BookExamModel> getExams(String id, boolean isProfessor) throws SQLException {
         List<BookExamModel> exams;
         if (isProfessor) {
             exams = getProfessorExams(id);
@@ -91,5 +91,44 @@ public class ExamsFacade {
             exams = getStudentExams(id);
         }
         return exams;
+    }
+
+
+
+    //Create a new Booking Exam model
+    public BookExamModel bookingExam(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("examID");
+        String name = rs.getString("examname");
+        String year = rs.getString( "year");
+        String dateTime = rs.getString("date");
+        String cfu = rs.getString("cfu");
+        String building = rs.getString("building");
+        String classroom = rs.getString("class");
+
+        //Create new bookExam model
+        BookExamModel exam = new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
+
+        return exam;
+    }
+
+
+    //Create a new examGrade
+    public VerbalizedExamModel examGrade(ResultSet rs, String result) throws SQLException {
+
+        List<VerbalizedExamModel> examGrades = new ArrayList<>();
+
+        int id = rs.getInt("examID");
+        String name = rs.getString("examname");
+
+        String year = rs.getString("year");
+        String date = rs.getString("date");
+        String cfu = rs.getString("cfu");
+
+        //Create new ExamGrade
+        VerbalizedExamModel examGrade = new VerbalizedExamModel(id, name, year, date, cfu, result);
+
+
+        return examGrade;
     }
 }

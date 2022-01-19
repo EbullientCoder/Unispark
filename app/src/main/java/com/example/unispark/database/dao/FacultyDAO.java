@@ -1,14 +1,12 @@
 package com.example.unispark.database.dao;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-
-import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryFaculties;
-import com.example.unispark.exceptions.DatabaseOperationError;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,32 +17,35 @@ public class FacultyDAO {
 
     private FacultyDAO(){}
 
-    public static void addFaculty(String faculty) throws SQLiteException, DatabaseOperationError
-    {
-        SQLiteDatabase db = SQLiteConnection.getWritableDB();
 
-        ContentValues cv = new ContentValues();
-        cv.put(FACULTY, faculty);
-        long insert = db.insert(FACULTIES, null, cv);
 
-        if (insert == -1) throw new DatabaseOperationError(0);
-    }
-
-    public static List<String> getUniversityFaculties() throws SQLiteException
-    {
+    public static List<String> getUniversityFaculties() throws SQLException {
 
         List<String> faculties = new ArrayList<>();
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryFaculties.selectFaculties(db);
 
-        if (cursor.moveToFirst()) {
-            do{
-                faculties.add(cursor.getString(0));
-            } while(cursor.moveToNext());
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryFaculties.selectFaculties(statement);
+
+            if (rs.first()) {
+                do{
+                    faculties.add(rs.getString("faculty"));
+                } while(rs.next());
+            }
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
-
-        cursor.close();
-        db.close();
 
         return faculties;
     }

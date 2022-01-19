@@ -1,16 +1,13 @@
 package com.example.unispark.database.dao;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-
-import com.example.unispark.database.others.SQLiteConnection;
-import com.example.unispark.database.query.QueryCourse;
+import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryHomework;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.model.HomeworkModel;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,109 +17,127 @@ public class HomeworkDAO {
     private HomeworkDAO(){}
 
     //Get homeworks of courses marked by studentID
-    public static List<HomeworkModel> getStudentHomework(String studentID) throws SQLiteException
-    {
+    public static List<HomeworkModel> getStudentHomework(String studentID) throws SQLException {
         List<HomeworkModel> homeworkList = new ArrayList<>();
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursorCourse = QueryCourse.selectStudentCourses(db, studentID);
 
-        if (cursorCourse.moveToFirst()){
-            String courseName;
-            Cursor cursorHomework;
+        Statement statement = null;
+        Connection connection = null;
 
-            do{
-                courseName = cursorCourse.getString(0);
-                //Look for homeworks marked by courseName
-                cursorHomework = QueryHomework.selectHomework(db, courseName);
-                if (cursorHomework.moveToFirst()){
-                    //Course attributes
-                    String shortName;
-                    String fullName;
-                    String title;
-                    String expiration;
-                    String instructions;
-                    String points;
-                    int trackProfessor;
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-                    do {
-                        shortName = cursorHomework.getString(1);
-                        fullName = cursorHomework.getString(2);
-                        title = cursorHomework.getString(3);
-                        expiration = cursorHomework.getString(4);
-                        instructions = cursorHomework.getString(5);
-                        points = cursorHomework.getString(6);
-                        trackProfessor = cursorHomework.getInt(7);
-                        //Create a new homework and add it to the homework list
-                        HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                        homeworkList.add(newHomework);
-                    } while (cursorHomework.moveToNext());
-                }
+            ResultSet rs = QueryHomework.selectHomeworks(statement, studentID);
 
-                cursorHomework.close();
+            if (rs.first()){
+                String shortName;
+                String fullName;
+                String title;
+                String expiration;
+                String instructions;
+                String points;
+                int trackProfessor;
 
-            } while (cursorCourse.moveToNext());
+                do{
+
+                    shortName = rs.getString("shortname");
+                    fullName = rs.getString("coursename");
+                    title = rs.getString("title");
+                    expiration = rs.getString("expiration");
+                    instructions = rs.getString("instructions");
+                    points = rs.getString("points");
+                    trackProfessor = rs.getInt("trackprofessor");
+                    //Create a new homework and add it to the homework list
+                    HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
+                    homeworkList.add(newHomework);
+
+                } while (rs.next());
+
+            }
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
-
-        cursorCourse.close();
-        db.close();
 
         return homeworkList;
     }
+
+
 
     //Get homeworks marked by professorID
-    public static List<HomeworkModel> getAssignedHomework(int professorID) throws SQLiteException
-    {
+    public static List<HomeworkModel> getAssignedHomework(int professorID) throws SQLException {
         List<HomeworkModel> homeworkList = new ArrayList<>();
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryHomework.selectProfessorHomework(db, professorID);
 
-        if (cursor.moveToFirst()){
-            //Homework attributes
-            String shortName;
-            String fullName;
-            String title;
-            String expiration;
-            String instructions;
-            String points;
-            int trackProfessor;
-            do{
-                shortName = cursor.getString(1);
-                fullName = cursor.getString(2);
-                title = cursor.getString(3);
-                expiration = cursor.getString(4);
-                instructions = cursor.getString(5);
-                points = cursor.getString(6);
-                trackProfessor = cursor.getInt(7);
-                //Create a new homework and add it to the homework list
-                HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                homeworkList.add(newHomework);
-            } while (cursor.moveToNext());
-            //Reverse Homeworks List
-            Collections.reverse(homeworkList);
+
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryHomework.selectProfessorHomework(statement, professorID);
+
+            if (rs.first()){
+                //Homework attributes
+                String shortName;
+                String fullName;
+                String title;
+                String expiration;
+                String instructions;
+                String points;
+                int trackProfessor;
+                do{
+                    shortName = rs.getString("shortname");
+                    fullName = rs.getString("coursename");
+                    title = rs.getString("title");
+                    expiration = rs.getString("expiration");
+                    instructions = rs.getString("instructions");
+                    points = rs.getString("points");
+                    trackProfessor = rs.getInt("trackprofessor");
+                    //Create a new homework and add it to the homework list
+                    HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
+                    homeworkList.add(newHomework);
+                } while (rs.next());
+                //Reverse Homeworks List
+                Collections.reverse(homeworkList);
+            }
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
 
-        cursor.close();
-        db.close();
         return homeworkList;
     }
 
-    public static void addHomework(HomeworkModel homework) throws SQLiteException, DatabaseOperationError
-    {
-        SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        ContentValues cv = new ContentValues();
 
-        cv.put("shortname", homework.getShortName());
-        cv.put("coursename", homework.getFullName());
-        cv.put("title", homework.getTitle());
-        cv.put("expiration", homework.getExpiration());
-        cv.put("instructions", homework.getInstructions());
-        cv.put("points", homework.getPoints());
-        cv.put("trackprofessor", homework.getTrackProfessor());
+    public static void addHomework(HomeworkModel homework) throws SQLException {
+        Statement statement = null;
+        Connection connection = null;
 
-        //Insert into Database: Homework Table
-        long insert = db.insert("homework", null, cv);
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-        if (insert == -1) throw new DatabaseOperationError(0);
+            QueryHomework.insertHomework(statement, homework.getShortName(), homework.getFullName(),
+                    homework.getTitle(), homework.getExpiration(), homework.getInstructions(), homework.getPoints(), homework.getTrackProfessor());
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
+        }
     }
 
 

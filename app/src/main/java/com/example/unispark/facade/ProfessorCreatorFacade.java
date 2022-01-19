@@ -6,6 +6,7 @@ import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProfessorCreatorFacade {
@@ -24,10 +25,10 @@ public class ProfessorCreatorFacade {
         return instance;
     }
 
-    public ProfessorModel getProfessor(String firstName, String lastName, String email, int profilePicture, int professorId, String faculty, String website) //throws exception
+    public ProfessorModel getProfessor(String firstName, String lastName, String email, int profilePicture, int professorId, String faculty, String website) throws SQLException
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(professorId);
-        List<BookExamModel> exams = ExamsFacade.getExams(String.valueOf(professorId), true);
+        List<BookExamModel> exams = ExamsFacade.getInstance().getExams(String.valueOf(professorId), true);
 
         return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams);
 

@@ -12,7 +12,7 @@ public class BeanErrorLessonAlreadyExists {
         this.hour = hour;
     }
 
-    public String getMess() {
+    public String getMessage() {
         return "Lesson ** " + lesson + " ** already exists on " + day + " at hour " + hour;
     }
 }

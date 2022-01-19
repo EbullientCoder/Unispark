@@ -3,6 +3,7 @@ package com.example.unispark.facade;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,7 @@ public class CommunicationsFacade {
         return instance;
     }
 
-    public List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames)
-    {
+    public List<ProfessorCommunicationModel> getAllCoursesCommunications(List<String> coursesShortNames, List<String> coursesFullNames) throws SQLException {
         List<ProfessorCommunicationModel> communicationList = new ArrayList<>();
         List<ProfessorCommunicationModel> tempList;
         for (int i = 0; i < coursesShortNames.size(); i++)

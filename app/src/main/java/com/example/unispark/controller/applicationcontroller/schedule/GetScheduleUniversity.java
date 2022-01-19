@@ -3,9 +3,11 @@ package com.example.unispark.controller.applicationcontroller.schedule;
 import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.database.dao.LessonsDAO;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LessonModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +32,12 @@ public class GetScheduleUniversity {
                         bCourses.get(i).getUniYear()));
             }
 
-            List<LessonModel> lessons = LessonsDAO.getLessons(day, courses);
+            List<LessonModel> lessons = null;
+            try {
+                lessons = LessonsDAO.getLessons(day, courses);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
             for (int j = 0; j < lessons.size(); j++){
                 bLessons.add(new BeanLesson(lessons.get(j).getLessonName(), lessons.get(j).getDay(), lessons.get(j).getHour()));

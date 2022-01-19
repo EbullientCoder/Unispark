@@ -1,13 +1,15 @@
 package com.example.unispark.database.dao;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-
-import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.facade.StudentCreatorFacade;
 import com.example.unispark.model.StudentModel;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.security.auth.login.LoginException;
 
@@ -16,32 +18,43 @@ public class StudentDAO {
     private StudentDAO(){}
 
     //Get a Student using the email and password
-    public static StudentModel selectStudent(String email, String password) throws LoginException
-    {
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+    public static StudentModel selectStudent(String email, String password) throws LoginException, SQLException {
+        Statement statement = null;
+        Connection connection = null;
         StudentModel student;
 
-        Cursor cursor = QueryLogin.loginStudent(db, email, password);
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-        if (!cursor.moveToFirst()) {
+            ResultSet rs = QueryLogin.loginStudent(statement, email, password);
 
-            throw new LoginException();
+            if (!rs.first()) {
 
+                throw new LoginException();
+
+            }
+
+            rs.first();
+            String firstName = rs.getString("firstname");
+            String lastName = rs.getString("lastname");
+            String studentEmail = rs.getString("email");
+            int profilePicture = rs.getInt("image");
+            String faculty = rs.getString("faculty");
+            String academicYear = rs.getString("academicyear");
+            String studentId = rs.getString("studentID");
+            int uniYear = rs.getInt("uniyear");
+            //Compose the student entity
+            student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear, uniYear);
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
-
-        String firstName = cursor.getString(1);
-        String lastName = cursor.getString(2);
-        String studentEmail = cursor.getString(3);
-        int profilePicture = cursor.getInt(5);
-        String faculty = cursor.getString(6);
-        String academicYear = cursor.getString(7);
-        String studentId = cursor.getString(8);
-        int uniYear = cursor.getInt(9);
-        //Compose the student entity
-        student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear, uniYear);
-
-        cursor.close();
-        db.close();
 
         return student;
     }

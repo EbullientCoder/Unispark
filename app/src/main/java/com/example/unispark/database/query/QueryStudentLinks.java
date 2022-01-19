@@ -3,6 +3,10 @@ package com.example.unispark.database.query;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class QueryStudentLinks {
 
     public static final String STUDENTS_LINKS = "studentslinks";
@@ -10,15 +14,23 @@ public class QueryStudentLinks {
 
     private QueryStudentLinks(){}
 
-    public static Cursor selectStudentLinks(SQLiteDatabase db, String studentId) //throws exception
+
+
+    public static ResultSet selectStudentLinks(Statement statement, String studentId) throws SQLException
     {
         String queryString = "SELECT * FROM " + STUDENTS_LINKS + " WHERE " + STUDENT_ID + " = '" + studentId + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
 
 
+    public static void insertLink(Statement stmt, String studentId, String name, String link) throws SQLException {
+        stmt.executeUpdate("INSERT INTO studentslinks(studentID, name, link) VALUES('" +studentId+ "', '" +name+ "', '" +link+ "')");
+    }
+
+
+    public static void deleteLink(Statement stmt, String link) throws SQLException {
+        stmt.executeUpdate("DELETE FROM studentslinks WHERE link = '" +link+ "'");
+    }
+
 }
-
-

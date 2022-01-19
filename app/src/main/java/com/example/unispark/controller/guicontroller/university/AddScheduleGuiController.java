@@ -13,6 +13,7 @@ import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LessonAlreadyExists;
 import com.example.unispark.viewadapter.LessonAdapter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AddScheduleGuiController extends BaseUniGuiController{
@@ -24,6 +25,7 @@ public class AddScheduleGuiController extends BaseUniGuiController{
         BeanCoursesNames bCoursesNames;
         MenageCourses getCoursesAppController = new MenageCourses();
         bCoursesNames = getCoursesAppController.getCoursesNamesByFaculty(faculties);
+
 
         return bCoursesNames;
 
@@ -62,9 +64,15 @@ public class AddScheduleGuiController extends BaseUniGuiController{
                 getScheduleUniversity.LessonsSort(lessons);
 
                 dialog.dismiss();
-            } catch (GenericException | LessonAlreadyExists e) {
-                e.printStackTrace();
-                getErrorMessage(context, e.getMessage());
+            } catch (GenericException genericException) {
+
+                genericException.printStackTrace();
+                getErrorMessage(context, genericException.getMessage());
+
+            } catch (LessonAlreadyExists lessonAlreadyExists) {
+                lessonAlreadyExists.printStackTrace();
+                getErrorMessage(context, lessonAlreadyExists.getMess().getMessage());
+
             }
         }
     }

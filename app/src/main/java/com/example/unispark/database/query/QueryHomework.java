@@ -3,6 +3,10 @@ package com.example.unispark.database.query;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class QueryHomework {
     //Homework table
     public static final String HOMEWORK_TABLE = "homework";
@@ -12,20 +16,25 @@ public class QueryHomework {
     private QueryHomework(){}
 
     //Look for homeworks marked by courseName
-    public static Cursor selectHomework(SQLiteDatabase db, String courseName) //throws exception
+    public static ResultSet selectHomeworks(Statement statement, String studentId) throws SQLException
     {
-        String queryString = "SELECT * FROM " + HOMEWORK_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT * FROM studentscourses INNER JOIN homework ON studentscourses.coursename = homework.coursename " +
+                "WHERE studentscourses.studentID = '" + studentId + "';";
+        return statement.executeQuery(queryString);
     }
 
     //Look for homeworks tracked by professorID
-    public static Cursor selectProfessorHomework(SQLiteDatabase db, int professorID) //throws exception
+    public static ResultSet selectProfessorHomework(Statement statement, int professorID) throws SQLException
     {
         String queryString = "SELECT * FROM " + HOMEWORK_TABLE + " WHERE " + TRACK_PROFESSOR + " = " + professorID + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
+
+    public static void insertHomework(Statement stmt, String shortName, String courseName, String title, String expiration, String instructions,
+                                      String points, int trackProfessor) throws SQLException {
+        stmt.executeUpdate("INSERT INTO homework(shortname, coursename, title, expiration, instructions, points, trackprofessor) " +
+                "VALUES('" +shortName+ "', '" +courseName+ "', '" +title+ "', '" +expiration+ "', '" +instructions+ "', '" +points+ "', " +trackProfessor+ ")");
+    }
 
 }

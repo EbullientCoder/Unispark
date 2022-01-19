@@ -1,7 +1,14 @@
 package com.example.unispark.database.query;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.unispark.exceptions.GenericException;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class QueryCourse {
     //Courses table
@@ -17,33 +24,29 @@ public class QueryCourse {
     private QueryCourse(){}
 
     //Look for course marked by course name
-    public static Cursor selectCourseName(SQLiteDatabase db, String courseName) //throws exception
-    {
+    public static ResultSet selectCourseName(Statement statement, String courseName) throws SQLException {
         String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
     //Look for courses marked by studentID
-    public static Cursor selectStudentCourses(SQLiteDatabase db, String studentID) //throws exception
+    public static ResultSet selectStudentCourses(Statement statement, String studentID) throws SQLException
     {
-        String queryString = "SELECT " + COURSE_NAME + " FROM " + STUDENTS_COURSES + " WHERE "
-                + STUDENT_ID + " = '" + studentID + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT * FROM courses INNER JOIN studentscourses ON courses.coursename = studentscourses.coursename WHERE " +
+                "studentscourses.studentID = '" + studentID + "';";
+
+        return statement.executeQuery(queryString);
     }
 
     //Look for courses marked by professorID
-    public static Cursor selectProfessorCourses(SQLiteDatabase db, int professorID) //throws exception
+    public static ResultSet selectProfessorCourses(Statement statement, int professorID) throws SQLException
     {
         String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE trackprofessor = " + professorID + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
     //Look for courses marked by student faculty
-    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty, int uniYear) //throws exception
-    {
+    public static ResultSet selectFacultyCourses(Statement statement, String faculty, int uniYear) throws SQLException {
         String queryString = null;
         if (uniYear == 1){
             queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + UNIVERSITY_YEAR + " = " + uniYear
@@ -57,32 +60,30 @@ public class QueryCourse {
             queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
         }
 
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
-    //Look for course's academic year marked by courseName
-    public static Cursor selectYear(SQLiteDatabase db, String courseName) //throws exception
-    {
-        String queryString = "SELECT " + YEAR + " FROM " + COURSE_TABLE + " WHERE "
-                + COURSE_NAME + " = '" + courseName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
-    }
 
-    //Look for course's CFU marked by courseName
-    public static Cursor selectCFU(SQLiteDatabase db, String courseName) //throws exception
-    {
-        String queryString = "SELECT " + CFU + " FROM " + COURSE_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
-    }
 
-    public static Cursor selectFacultyCourses(SQLiteDatabase db, String faculty) //throws exception
+
+    public static ResultSet selectFacultyCourses(Statement statement, String faculty) throws SQLException
     {
         String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
 
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
+    }
+
+
+    public static void addStudentCourse(Statement stmt, String studentId, String courseName) throws SQLException {
+        stmt.executeUpdate("INSERT INTO studentscourses(studentID, coursename) VALUES('" +studentId+ "', '" +courseName+ "')");
+    }
+
+
+
+    public static void removeStudentCourse(Statement stmt, String studentId, String courseName) throws SQLException {
+        stmt.executeUpdate("DELETE FROM studentscourses WHERE studentID = '" +studentId+ "' AND coursename = '" + courseName + "'");
     }
 }
+
+
+

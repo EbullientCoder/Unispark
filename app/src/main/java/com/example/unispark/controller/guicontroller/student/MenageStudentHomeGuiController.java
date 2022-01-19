@@ -14,6 +14,8 @@ import com.example.unispark.view.details.DetailsHomeworkView;
 import com.example.unispark.view.details.DetailsProfCommunicationView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenageStudentHomeGuiController extends BottomNavigationMenuGuiController {
@@ -24,6 +26,7 @@ public class MenageStudentHomeGuiController extends BottomNavigationMenuGuiContr
         //Applicative Controller
         ShowCommunications communicationsController = new ShowCommunications();
         communications = communicationsController.showUniversityCommunications(student);
+
 
         return communications;
     }
@@ -37,16 +40,21 @@ public class MenageStudentHomeGuiController extends BottomNavigationMenuGuiContr
         ShowCommunications communicationsController = new ShowCommunications();
         communications = communicationsController.showProfessorCommunications(student);
 
+
         return communications;
     }
 
 
     public List<BeanHomework> getHomeworks(BeanLoggedStudent student){
 
-        List<BeanHomework> homeworks;
+        List<BeanHomework> homeworks = null;
         //Applicative Controller
         ShowHomeworks showHomeworksController = new ShowHomeworks();
-        homeworks = showHomeworksController.getHomework(student);
+        try {
+            homeworks = showHomeworksController.getHomework(student);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return homeworks;
 

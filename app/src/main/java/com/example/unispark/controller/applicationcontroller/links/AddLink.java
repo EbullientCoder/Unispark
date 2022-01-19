@@ -3,10 +3,11 @@ package com.example.unispark.controller.applicationcontroller.links;
 import com.example.unispark.bean.BeanLink;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.StudentLinksDAO;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LinkAlreadyExists;
 import com.example.unispark.model.LinkModel;
+
+import java.sql.SQLException;
 
 public class AddLink {
     //Add Link
@@ -16,9 +17,9 @@ public class AddLink {
 
         try {
             StudentLinksDAO.addStudentLink(newLink, student.getId());
-        } catch (DatabaseOperationError databaseOperationError) {
-            databaseOperationError.printStackTrace();
-            throw new GenericException("Cannot add link, try again");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
         }
     }
 }

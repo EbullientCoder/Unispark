@@ -1,12 +1,13 @@
 package com.example.unispark.database.dao;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.model.UniversityModel;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
@@ -15,30 +16,40 @@ public class UniversityDAO {
 
     private UniversityDAO(){}
 
-    public static UniversityModel selectUniversity(String email, String password) throws LoginException
-    {
-
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
+    public static UniversityModel selectUniversity(String email, String password) throws LoginException, SQLException {
         UniversityModel university;
 
-        Cursor cursor = QueryLogin.loginUniversity(db, email, password);
+        Statement statement = null;
+        Connection connection = null;
 
-        if (!cursor.moveToFirst()) {
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-            throw new LoginException();
+            ResultSet rs = QueryLogin.loginUniversity(statement, email, password);
 
+            if (!rs.first()) {
+
+                throw new LoginException();
+
+            }
+
+            String name = rs.getString("name");
+            String streetAddress = rs.getString("streetaddress");
+            int profilePicture = rs.getInt("image");
+            String universityEmail = rs.getString("email");
+            List<String> faculties = FacultyDAO.getUniversityFaculties();
+
+            university = new UniversityModel(name, universityEmail, profilePicture, streetAddress, faculties);
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
-
-        String name = cursor.getString(1);
-        String streetAddress = cursor.getString(2);
-        int profilePicture = cursor.getInt(3);
-        String universityEmail = cursor.getString(4);
-        List<String> faculties = FacultyDAO.getUniversityFaculties();
-
-        university = new UniversityModel(name, universityEmail, profilePicture, streetAddress, faculties);
-
-        cursor.close();
-        db.close();
 
         return university;
     }

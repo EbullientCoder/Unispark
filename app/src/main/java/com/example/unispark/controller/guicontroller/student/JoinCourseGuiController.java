@@ -12,6 +12,7 @@ import com.example.unispark.controller.applicationcontroller.course.MenageCourse
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.CoursesAdapter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class JoinCourseGuiController extends MenageStudentProfileGuiController {
@@ -20,6 +21,7 @@ public class JoinCourseGuiController extends MenageStudentProfileGuiController {
         List<BeanCourse> courseList;
         MenageCourses getCoursesController = new MenageCourses();
         courseList = getCoursesController.getAvaliableCourses(student);
+
 
         return courseList;
 

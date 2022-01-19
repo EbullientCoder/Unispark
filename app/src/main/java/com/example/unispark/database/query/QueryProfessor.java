@@ -3,6 +3,10 @@ package com.example.unispark.database.query;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class QueryProfessor {
 
     //Professor table
@@ -20,35 +24,31 @@ public class QueryProfessor {
     private QueryProfessor(){}
 
     //Look for professor's id tracked by courseShortName
-    public static Cursor getProfessorId(SQLiteDatabase db, String courseShortName) //throws exception
+    public static ResultSet getProfessorId(Statement statement, String courseShortName) throws SQLException
     {
         String queryString = "SELECT " + TRACK_PROFESSOR + " FROM " + COURSE_TABLE + " WHERE " + SHORTNAME + " = '" + courseShortName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
     //Look for professor's profile imageID marked by professorId
-    public static Cursor getProfessorProfileImage(SQLiteDatabase db, int professorId) //throws exception
+    public static ResultSet getProfessorProfileImage(Statement statement, int professorId) throws SQLException
     {
         String queryString = "SELECT " + IMAGE + " FROM " + PROFESSORS_TABLE + " WHERE " + PROF_ID + " = " + professorId + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
     //Look for professor's Name marked by professorId
-    public static Cursor getProfessorName(SQLiteDatabase db, int professorId) //throws exception
+    public static ResultSet getProfessorName(Statement statement, int professorId) throws SQLException
     {
         String queryString = "SELECT " + FIRSTNAME + ", " + LASTNAME + " FROM " + PROFESSORS_TABLE + " WHERE " + PROF_ID + " = " + professorId + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
     //Look for professor marked by faculty
-    public static Cursor selectProfessorFaculty(SQLiteDatabase db, String faculty) //throws exception
+    public static ResultSet selectProfessorFaculty(Statement statement, String faculty) throws SQLException
     {
         String queryString = "SELECT * FROM " + PROFESSORS_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
 

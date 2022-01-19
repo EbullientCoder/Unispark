@@ -1,16 +1,14 @@
 package com.example.unispark.database.dao;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-
-import com.example.unispark.database.others.SQLiteConnection;
+import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryStudentLinks;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.exceptions.LinkAlreadyExists;
 import com.example.unispark.model.LinkModel;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,56 +17,94 @@ public class StudentLinksDAO {
     private StudentLinksDAO(){}
 
 
-    public static void addStudentLink(LinkModel studentLink, String studentId) throws LinkAlreadyExists, SQLiteException, DatabaseOperationError
-    {
-        SQLiteDatabase db = SQLiteConnection.getWritableDB();
+    public static void addStudentLink(LinkModel studentLink, String studentId) throws LinkAlreadyExists, SQLException {
 
-        Cursor cursor = QueryStudentLinks.selectStudentLinks(db, studentId);
-        if (cursor.moveToFirst()) {
-            String linkAddress;
-            do {
-                linkAddress = cursor.getString(3);
-                if (studentLink.getLinkAddress().equals(linkAddress)) throw new LinkAlreadyExists("Link already exists");
-            } while(cursor.moveToNext());
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryStudentLinks.selectStudentLinks(statement, studentId);
+            if (rs.first()) {
+                String linkAddress;
+                do {
+                    linkAddress = rs.getString("link");
+                    if (studentLink.getLinkAddress().equals(linkAddress)) throw new LinkAlreadyExists("Link already exists");
+                } while(rs.next());
+            }
+
+            QueryStudentLinks.insertLink(statement, studentId, studentLink.getLinkName(), studentLink.getLinkAddress());
+
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
 
-        ContentValues cv = new ContentValues();
 
-        cv.put("studentID", studentId);
-        cv.put("name", studentLink.getLinkName());
-        cv.put("link", studentLink.getLinkAddress());
-        long insert = db.insert("studentslinks", null, cv);
 
-        if (insert == -1) throw new DatabaseOperationError(0);
+
     }
 
-    public static List<LinkModel> getStudentLinks(String studentID) throws SQLiteException
-    {
+    public static List<LinkModel> getStudentLinks(String studentID) throws SQLException {
         List<LinkModel> studentLinks = new ArrayList<>();
-        SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        Cursor cursor = QueryStudentLinks.selectStudentLinks(db, studentID);
 
-        if (cursor.moveToFirst()) {
-            LinkModel link;
-            String linkName;
-            String linkAddress;
-            do {
-                linkName = cursor.getString(2);
-                linkAddress = cursor.getString(3);
-                studentLinks.add(new LinkModel(linkName, linkAddress));
-            } while(cursor.moveToNext());
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryStudentLinks.selectStudentLinks(statement, studentID);
+
+            if (rs.first()) {
+                LinkModel link;
+                String linkName;
+                String linkAddress;
+                do {
+                    linkName = rs.getString("name");
+                    linkAddress = rs.getString("link");
+                    studentLinks.add(new LinkModel(linkName, linkAddress));
+                } while(rs.next());
+            }
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
         }
-
-        cursor.close();
-        db.close();
 
         return studentLinks;
     }
 
-    public static void removeLink(String linkName) throws SQLiteException, DatabaseOperationError
-    {
-        SQLiteDatabase db = SQLiteConnection.getWritableDB();
-        int delete = db.delete("studentslinks","link='" + linkName + "'",null);
-        if (!(delete > 0)) throw new DatabaseOperationError(1);
+
+
+    public static void removeLink(String link) throws SQLException {
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            QueryStudentLinks.deleteLink(statement, link);
+
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
+        }
+
+
     }
 }

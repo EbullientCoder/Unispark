@@ -11,10 +11,11 @@ import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
-import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiController {
@@ -72,6 +73,7 @@ public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiCont
             //Exams Item
             exams = studentExamsAppController.bookExams(student);
 
+
         }
         if(page == 3 || page == -1) {
             //Set Title
@@ -91,6 +93,7 @@ public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiCont
 
         try {
             bookExamAppController.bookExam(student, (BeanBookExam) exams.get(position).getBeanExamType());
+            getBookedExamMessage(context);
 
             //Removing the Booked Exam from the List
             exams.remove(position);
@@ -105,17 +108,19 @@ public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiCont
     public void leaveExam(Context context, BeanLoggedStudent student, List<BeanExamType> exams, int position, ExamAdapter examAdapter){
 
         //Application Controller
-        LeaveExam leaveExamAppController = new LeaveExam();
-        try {
-            leaveExamAppController.removeExam(student, position);
+        try{
 
+            LeaveExam leaveExamAppController = new LeaveExam();
+            leaveExamAppController.removeExam(student, position);
             //Removing the Booked Exam from the List
             exams.remove(position);
             examAdapter.notifyItemRemoved(position);
+
         } catch (GenericException e) {
             e.printStackTrace();
             getErrorMessage(context, e.getMessage());
         }
+
 
     }
 
@@ -123,6 +128,11 @@ public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiCont
     private void getErrorMessage(Context context, String message){
 
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getBookedExamMessage(Context context){
+
+        Toast.makeText(context, "Exam booked", Toast.LENGTH_SHORT).show();
     }
 
 

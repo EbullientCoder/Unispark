@@ -2,14 +2,14 @@ package com.example.unispark.controller.applicationcontroller.communications;
 
 import com.example.unispark.bean.BeanProfessorCommunication;
 import com.example.unispark.database.dao.CommunicationsDAO;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 
+import java.sql.SQLException;
+
 public class AddProfCommunication {
     //Add professor Communication
-    public void addProfCommunication(BeanProfessorCommunication communication) throws GenericException
-    {
+    public void addProfCommunication(BeanProfessorCommunication communication) throws GenericException {
         ProfessorCommunicationModel communicationModel = new ProfessorCommunicationModel(
                 communication.getProfilePhoto(),
                 communication.getShortCourseName(),
@@ -19,12 +19,14 @@ public class AddProfCommunication {
                 communication.getType(),
                 communication.getCommunication()
         );
+
         try {
             CommunicationsDAO.addProfessorCommunication(communicationModel);
-        } catch (DatabaseOperationError databaseOperationError) {
-            databaseOperationError.printStackTrace();
-            throw new GenericException("Cannot add communication, try again");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
         }
+
     }
 
 }

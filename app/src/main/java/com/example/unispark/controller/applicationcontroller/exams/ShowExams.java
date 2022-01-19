@@ -11,6 +11,7 @@ import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,12 +51,18 @@ public class ShowExams {
     public List<BeanExamType> bookExams(BeanLoggedStudent student){
         List<BeanExamType> bExams = new ArrayList<>();
 
-        //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<BookExamModel> bookExams = ExamsFacade.getExams(student.getId(), false);
-        for (int i = 0; bookExams != null && i < bookExams.size(); i++){
-            BookExamModel bExam = bookExams.get(i);
-            bExams.add(new BeanExamType(2, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+
+        try{
+            //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
+            List<BookExamModel> bookExams = ExamsFacade.getExams(student.getId(), false);
+            for (int i = 0; bookExams != null && i < bookExams.size(); i++){
+                BookExamModel bExam = bookExams.get(i);
+                bExams.add(new BeanExamType(2, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
 
         return bExams;
     }

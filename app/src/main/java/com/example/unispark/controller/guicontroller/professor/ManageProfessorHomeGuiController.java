@@ -11,6 +11,7 @@ import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomew
 import com.example.unispark.view.details.DetailsHomeworkView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ManageProfessorHomeGuiController extends BaseProfessorGuiController {
@@ -24,6 +25,7 @@ public class ManageProfessorHomeGuiController extends BaseProfessorGuiController
         //Application Controller
         ShowCommunications uniCommunicationsAppController = new ShowCommunications();
         uniCommunications = uniCommunicationsAppController.showUniversityCommunications(professor);
+
 
         return uniCommunications;
     }

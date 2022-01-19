@@ -2,17 +2,16 @@ package com.example.unispark.controller.applicationcontroller.exams;
 
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.exams.BookExamModel;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class LeaveExam {
 
     //Remove the Connection inside the DB
-    public void removeExam(BeanLoggedStudent student, int position) throws GenericException
-    {
+    public void removeExam(BeanLoggedStudent student, int position) throws GenericException {
         List<BookExamModel> bookedExams = student.getBookedExams();
         BookExamModel leaveExam = bookedExams.get(position);
         try {
@@ -20,9 +19,9 @@ public class LeaveExam {
             //Remove the Booked Exam from Student's Attributes
             bookedExams.remove(position);
             student.setBookedExams(bookedExams);
-        } catch (DatabaseOperationError databaseOperationError) {
-            databaseOperationError.printStackTrace();
-            throw new GenericException("Cannot leave Exam, try again");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
         }
     }
 }

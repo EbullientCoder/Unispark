@@ -9,13 +9,14 @@ import com.example.unispark.facade.CommunicationsFacade;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCommunications {
 
 
-    public List<BeanProfessorCommunication> showProfessorCommunications(BeanLoggedStudent student){
+    public List<BeanProfessorCommunication> showProfessorCommunications(BeanLoggedStudent student)  {
        List<BeanProfessorCommunication> beanProfCommunicationList = new ArrayList<>();
 
         List<ProfessorCommunicationModel> profCommunicationsItem;
@@ -29,18 +30,22 @@ public class ShowCommunications {
                 courseFullNames.add(student.getCourses().get(i).getFullName());
             }
 
-            profCommunicationsItem = CommunicationsFacade.getInstance().getAllCoursesCommunications(courseShortnames, courseFullNames);
+            try{
+                profCommunicationsItem = CommunicationsFacade.getInstance().getAllCoursesCommunications(courseShortnames, courseFullNames);
 
-            for (int j = 0; j < profCommunicationsItem.size(); j++){
-                beanProfCommunicationList.add(new BeanProfessorCommunication(
-                        profCommunicationsItem.get(j).getProfilePhoto(),
-                        profCommunicationsItem.get(j).getShortCourseName(),
-                        profCommunicationsItem.get(j).getFullName(),
-                        profCommunicationsItem.get(j).getProfessorName(),
-                        profCommunicationsItem.get(j).getDate(),
-                        profCommunicationsItem.get(j).getType(),
-                        profCommunicationsItem.get(j).getCommunication()
-                ));
+                for (int j = 0; j < profCommunicationsItem.size(); j++){
+                    beanProfCommunicationList.add(new BeanProfessorCommunication(
+                            profCommunicationsItem.get(j).getProfilePhoto(),
+                            profCommunicationsItem.get(j).getShortCourseName(),
+                            profCommunicationsItem.get(j).getFullName(),
+                            profCommunicationsItem.get(j).getProfessorName(),
+                            profCommunicationsItem.get(j).getDate(),
+                            profCommunicationsItem.get(j).getType(),
+                            profCommunicationsItem.get(j).getCommunication()
+                    ));
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         }
 
@@ -50,40 +55,49 @@ public class ShowCommunications {
 
 
     //Student
-    public List<BeanUniCommunication> showUniversityCommunications(BeanLoggedStudent student){
+    public List<BeanUniCommunication> showUniversityCommunications(BeanLoggedStudent student) {
         List<com.example.unispark.bean.BeanUniCommunication> beanUniCommunicationList = new ArrayList<>();
 
         List<UniversityCommunicationModel> uniCommunicationsItem;
-        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
-        for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-            beanUniCommunicationList.add(new BeanUniCommunication(
-                    uniCommunicationsItem.get(i).getBackground(),
-                    uniCommunicationsItem.get(i).getTitle(),
-                    uniCommunicationsItem.get(i).getDate(),
-                    uniCommunicationsItem.get(i).getCommunication(),
-                    uniCommunicationsItem.get(i).getFaculty()
-            ));
+        try {
+            uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
+            for (int i = 0; i < uniCommunicationsItem.size(); i ++){
+                beanUniCommunicationList.add(new BeanUniCommunication(
+                        uniCommunicationsItem.get(i).getBackground(),
+                        uniCommunicationsItem.get(i).getTitle(),
+                        uniCommunicationsItem.get(i).getDate(),
+                        uniCommunicationsItem.get(i).getCommunication(),
+                        uniCommunicationsItem.get(i).getFaculty()
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
 
         return beanUniCommunicationList;
 
     }
 
     //Professor
-    public List<BeanUniCommunication> showUniversityCommunications(BeanLoggedProfessor professor){
+    public List<BeanUniCommunication> showUniversityCommunications(BeanLoggedProfessor professor) {
         List<BeanUniCommunication> beanUniCommunicationList = new ArrayList<>();
 
         List<UniversityCommunicationModel> uniCommunicationsItem;
-        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
+        try {
+            uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
-        for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-            beanUniCommunicationList.add(new BeanUniCommunication(
-                    uniCommunicationsItem.get(i).getBackground(),
-                    uniCommunicationsItem.get(i).getTitle(),
-                    uniCommunicationsItem.get(i).getDate(),
-                    uniCommunicationsItem.get(i).getCommunication(),
-                    uniCommunicationsItem.get(i).getFaculty()
-            ));
+            for (int i = 0; i < uniCommunicationsItem.size(); i ++){
+                beanUniCommunicationList.add(new BeanUniCommunication(
+                        uniCommunicationsItem.get(i).getBackground(),
+                        uniCommunicationsItem.get(i).getTitle(),
+                        uniCommunicationsItem.get(i).getDate(),
+                        uniCommunicationsItem.get(i).getCommunication(),
+                        uniCommunicationsItem.get(i).getFaculty()
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return beanUniCommunicationList;
@@ -91,20 +105,24 @@ public class ShowCommunications {
     }
 
     //University
-    public List<BeanUniCommunication> showUniversityCommunications(){
+    public List<BeanUniCommunication> showUniversityCommunications() {
         List<BeanUniCommunication> beanUniCommunicationList = new ArrayList<>();
 
         List<UniversityCommunicationModel> uniCommunicationsItem;
-        uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
+        try {
+            uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
 
-        for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-            beanUniCommunicationList.add(new com.example.unispark.bean.BeanUniCommunication(
-                    uniCommunicationsItem.get(i).getBackground(),
-                    uniCommunicationsItem.get(i).getTitle(),
-                    uniCommunicationsItem.get(i).getDate(),
-                    uniCommunicationsItem.get(i).getCommunication(),
-                    uniCommunicationsItem.get(i).getFaculty()
-            ));
+            for (int i = 0; i < uniCommunicationsItem.size(); i ++){
+                beanUniCommunicationList.add(new com.example.unispark.bean.BeanUniCommunication(
+                        uniCommunicationsItem.get(i).getBackground(),
+                        uniCommunicationsItem.get(i).getTitle(),
+                        uniCommunicationsItem.get(i).getDate(),
+                        uniCommunicationsItem.get(i).getCommunication(),
+                        uniCommunicationsItem.get(i).getFaculty()
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return beanUniCommunicationList;

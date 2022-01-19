@@ -1,0 +1,30 @@
+Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
+        }
+
+
+
+
+
+      public static void insertCommunication(Statement stmt, int image, String title, String date, String communication, String faculty) throws SQLException {
+              stmt.executeUpdate("INSERT INTO universitycommunications(image, title, date, communication, faculty) VALUES(" +image+ ", '" +title+ "', '" +date+ "', '" +communication+ "', '" +faculty+ "')");
+          }
+
+
+
+
+
+       public static void deleteScheduling(Statement stmt, String username, String a, String b, String c) throws SQLException {
+       		stmt.executeUpdate("DELETE FROM Scheduling WHERE Username = '" +username+ "'");
+       	}

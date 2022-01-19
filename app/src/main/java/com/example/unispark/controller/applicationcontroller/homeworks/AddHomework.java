@@ -2,9 +2,10 @@ package com.example.unispark.controller.applicationcontroller.homeworks;
 
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.database.dao.HomeworkDAO;
-import com.example.unispark.exceptions.DatabaseOperationError;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.HomeworkModel;
+
+import java.sql.SQLException;
 
 public class AddHomework {
     //Add Homework
@@ -21,9 +22,9 @@ public class AddHomework {
         try {
             HomeworkDAO.addHomework(homeworkModel);
 
-        } catch (DatabaseOperationError databaseOperationError) {
-            databaseOperationError.printStackTrace();
-            throw new GenericException("Cannot add homework, try agian");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
         }
     }
 }

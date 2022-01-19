@@ -7,12 +7,13 @@ import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowHomeworks{
     //Student
-    public List<BeanHomework> getHomework(BeanLoggedStudent student){
+    public List<BeanHomework> getHomework(BeanLoggedStudent student) throws SQLException {
         List<BeanHomework> beanHomeworkList = new ArrayList<>();
 
         List<HomeworkModel> homeworksItem;
@@ -37,8 +38,12 @@ public class ShowHomeworks{
     public List<BeanHomework> getHomework(BeanLoggedProfessor professor){
         List<BeanHomework> beanHomeworkList = new ArrayList<>();
 
-        List<HomeworkModel> homeworksItem;
-        homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
+        List<HomeworkModel> homeworksItem = null;
+        try {
+            homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         for (int i = 0; i < homeworksItem.size(); i++){
             beanHomeworkList.add(new BeanHomework(

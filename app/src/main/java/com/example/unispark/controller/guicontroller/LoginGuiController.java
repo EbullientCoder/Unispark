@@ -14,6 +14,8 @@ import com.example.unispark.view.professor.ProfessorHomeView;
 import com.example.unispark.view.student.StudentHomeView;
 import com.example.unispark.view.university.UniversityHomeView;
 
+import java.sql.SQLException;
+
 public class LoginGuiController {
 
     public void login(Context context, String userSelection, String email, String password){
@@ -36,7 +38,7 @@ public class LoginGuiController {
                         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("UserObject", student);
                         context.startActivity(intent);
-                    } catch (WrongUsernameOrPasswordException e) {
+                    } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
                         getErrorMessage(context, e.getMessage());
                     }
@@ -51,7 +53,7 @@ public class LoginGuiController {
                         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("UserObject", professor);
                         context.startActivity(intent);
-                    } catch (WrongUsernameOrPasswordException e) {
+                    } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
                         getErrorMessage(context, e.getMessage());
                     }
@@ -66,7 +68,7 @@ public class LoginGuiController {
                         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("UserObject", university);
                         context.startActivity(intent);
-                    } catch (WrongUsernameOrPasswordException e) {
+                    } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
                         getErrorMessage(context, e.getMessage());
                     }

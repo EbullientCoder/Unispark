@@ -1,7 +1,12 @@
 package com.example.unispark.database.query;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class QueryExams {
 
@@ -18,69 +23,86 @@ public class QueryExams {
     private QueryExams(){}
 
     //Look for exams marked by courseName
-    public static Cursor selectExams(SQLiteDatabase db, String courseName, boolean isProfessor) //throws exception
+    public static ResultSet selectExams(Statement statement, String courseName, boolean isProfessor) throws SQLException
     {
         String queryString;
-        if (isProfessor) queryString = "SELECT * FROM " + EXAMS + " WHERE " + EXAM_NAME + " = '" + courseName + "';";
-        else queryString = "SELECT * FROM " + EXAMS + " WHERE " + EXAM_NAME + " = '" + courseName + "' AND " + DATE + " >= date('now') ;";
+        if (isProfessor) queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.coursename = '" + courseName + "';";
 
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        else queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.coursename = '" + courseName + "' AND " + DATE + " >= NOW();";
+
+        return statement.executeQuery(queryString);
     }
 
     //Look for exams marked by studentID
-    public static Cursor selectBookedExams(SQLiteDatabase db, String studentID) //throws exception
+    public static ResultSet selectBookedExams(Statement statement, String studentID) throws SQLException
     {
-        String queryString = "SELECT " + EXAM_ID + " FROM " + STUDENT_EXAMS + " WHERE " + STUDENT_ID + " = '" + studentID + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT * FROM studentexams INNER JOIN exams ON studentexams.examID = exams.examID " +
+                "INNER JOIN courses ON exams.examname = courses.coursename WHERE studentexams.studentID = '" + studentID + "';";
+        return statement.executeQuery(queryString);
+
     }
 
-    //Look for exam marked by examID
-    public static Cursor selectExamId(SQLiteDatabase db, int examID) //throws exception
-    {
-        String queryString = "SELECT * FROM " + EXAMS + " WHERE " + ID + " = " + examID + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
-    }
+
 
     //Look for exam grades marked by studentID
-    public static Cursor selectExamGrades(SQLiteDatabase db, String studentID) //throws exception
+    public static ResultSet selectExamGrades(Statement statement, String studentID) throws SQLException
     {
-        String queryString = "SELECT " + ID + ", " + EXAM_NAME + ", " + GRADE + " FROM " + EXAM_GRADES + " WHERE " + STUDENT_ID + " = '" + studentID + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT * FROM examgrades INNER JOIN exams ON examgrades.examID = exams.examID " +
+                "INNER JOIN courses ON exams.examname = courses.coursename WHERE examgrades.studentID = '" + studentID + "';";
+        return statement.executeQuery(queryString);
     }
 
-    //Look for exam's date marked by examName
-    public static Cursor selectDate(SQLiteDatabase db, String examName) //throws exception
+
+
+    public static ResultSet selectStudents(Statement statement, int examID) throws SQLException
     {
-        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE " + EXAM_NAME + " = '" + examName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT * FROM studentexams INNER JOIN students ON studentexams.studentID = students.studentID WHERE studentexams.examID = " + examID + ";";
+        return statement.executeQuery(queryString);
+
     }
 
-    public static Cursor selectStudents(SQLiteDatabase db, int examID) //throws exception
-    {
-        String queryString = "SELECT " + STUDENT_ID + " FROM " + STUDENT_EXAMS + " WHERE " + EXAM_ID + " = " + examID + ";";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+    public static ResultSet selectExamDate(Statement statement, int examID) throws SQLException{
+        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE examID = " + examID + " AND " + DATE + " >= NOW() ;";
+        return statement.executeQuery(queryString);
+
+
     }
 
-    public static Cursor selectExamDate(SQLiteDatabase db, int examID) //throws exception
-    {
-        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE " + ID + " = " + examID + " AND " + DATE + " >= date('now') ;";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
-    }
-
-    public static Cursor selectExam(SQLiteDatabase db, String name, String date) //throws exception
+    public static ResultSet selectExam(Statement statement, String name, String date) throws SQLException
     {
         String queryString = "SELECT * FROM " + EXAMS + " WHERE " + EXAM_NAME + " = '" + name + "' AND " + DATE + " = '" + date + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
+
+    public static ResultSet selectCourseExam(Statement statement, String studentId, String courseName) throws SQLException
+    {
+        String queryString = "SELECT * FROM studentexams INNER JOIN exams ON studentexams.examID = exams.examID WHERE exams.examname = '" + courseName +
+                "' AND studentexams.studentID = '" + studentId + "';";
+
+        return statement.executeQuery(queryString);
+    }
+
+
+    public static void insertExam(Statement stmt, String examName, String date, String building, String classRoom) throws SQLException {
+        stmt.executeUpdate("INSERT INTO exams(examname, date, building, class) VALUES('" +examName+ "', '" +date+ "', '" +building+ "', '" +classRoom+ "')");
+    }
+
+
+
+    public static void insertGrade(Statement stmt, int examId, String examName, String studentId, String grade) throws SQLException {
+        stmt.executeUpdate("INSERT INTO examgrades(examID, examname, studentID, grade) VALUES(" +examId+ ", '" +examName+ "', '" +studentId+ "', '" +grade+ "')");
+    }
+
+
+    public static void bookStudentExam(Statement stmt, String studentId, int examId) throws SQLException {
+        stmt.executeUpdate("INSERT INTO studentexams(studentID, examID) VALUES('" +studentId+ "', " +examId+ ")");
+    }
+
+
+    public static void deleteBookedExam(Statement stmt, String studentId, int examId) throws SQLException {
+        stmt.executeUpdate("DELETE FROM studentexams WHERE studentID = '" +studentId+ "' AND examID = " + examId);
+    }
 
 
 }

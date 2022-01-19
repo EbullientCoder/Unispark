@@ -3,6 +3,10 @@ package com.example.unispark.database.query;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class QueryCommunications {
 
     //Communications tables (University and Professors)
@@ -14,22 +18,33 @@ public class QueryCommunications {
 
     private QueryCommunications(){}
 
+
+    public static void insertCommunication(Statement stmt, int image, String title, String date, String communication, String faculty) throws SQLException {
+        stmt.executeUpdate("INSERT INTO universitycommunications(image, title, date, communication, faculty) VALUES(" +image+ ", '" +title+ "', '" +date+ "', '" +communication+ "', '" +faculty+ "')");
+    }
+
+
+
+    public static void insertCommunication(Statement stmt, String shortName, String date, String title, String communication) throws SQLException {
+        stmt.executeUpdate("INSERT INTO professorcommunications(shortname, date, title, communication) VALUES('" +shortName+ "', '" +date+ "', '" +title+ "', '" +communication+ "')");
+    }
+
     //Look for University communications marked by facultyName
-    public static Cursor selectFacultyCommunications(SQLiteDatabase db, String facultyName) //throws exception
+    public static ResultSet selectFacultyCommunications(Statement statement, String facultyName) throws SQLException
     {
         String queryString;
         if(facultyName.equals("all")) queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + ";";
         else queryString = "SELECT * FROM " + UNI_COMMUNICATIONS + " WHERE " + FACULTY + " = '" + facultyName + "' OR " + FACULTY + " = 'All';";
 
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        return statement.executeQuery(queryString);
     }
 
+
     //Look for Professor communications marked by courseShortName
-    public static Cursor selectCourseCommunications(SQLiteDatabase db, String courseShortName) //throws exception
+    public static ResultSet selectCourseCommunications(Statement statement, String courseShortName) throws SQLException
     {
-        String queryString = "SELECT * FROM " + PROF_COMMUNICATIONS + " WHERE " + SHORTNAME + " = '" + courseShortName + "';";
-        Cursor cursor = db.rawQuery(queryString, null);
-        return cursor;
+        String queryString = "SELECT *  FROM professorcommunications INNER JOIN courses ON professorcommunications.shortname = courses.shortname " +
+                "INNER JOIN professors ON courses.trackprofessor = professors.professorID WHERE professorcommunications.shortname = '"+courseShortName+"';";
+        return statement.executeQuery(queryString);
     }
 }
