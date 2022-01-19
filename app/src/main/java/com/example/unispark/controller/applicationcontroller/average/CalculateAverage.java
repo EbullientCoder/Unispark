@@ -1,5 +1,6 @@
 package com.example.unispark.controller.applicationcontroller.average;
 
+import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
@@ -7,7 +8,8 @@ import java.util.List;
 public class CalculateAverage {
 
     //Arithmetic Average
-    public float arithmeticAverage(List<VerbalizedExamModel> exams){
+    public float arithmeticAverage(BeanLoggedStudent student){
+        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
         float average = 0;
 
         //Calculating the Average if the Student has Verbalized StudentExamsGUIController
@@ -22,6 +24,7 @@ public class CalculateAverage {
 
     //Circular Arithmetic Average
     public int graphicArithmeticAverage(float average){
+
         float circularAverage = 0;
 
         //Calculating the Average if the Student has Verbalized StudentExamsGUIController
@@ -33,7 +36,8 @@ public class CalculateAverage {
 
 
     //Weighted Average
-    public float weightedAverage(List<VerbalizedExamModel> exams){
+    public float weightedAverage(BeanLoggedStudent student){
+        List<VerbalizedExamModel> exams = student.getVerbalizedExams();
         float average = 0;
         float CFU = 0;
 

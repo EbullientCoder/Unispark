@@ -38,7 +38,7 @@ public class StudentDAO {
         String studentId = cursor.getString(8);
         int uniYear = cursor.getInt(9);
         //Compose the student entity
-        student = StudentCreatorFacade.getInstance().getStudent(studentEmail, firstName, lastName, profilePicture, studentId, faculty, academicYear, uniYear);
+        student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear, uniYear);
 
         cursor.close();
         db.close();

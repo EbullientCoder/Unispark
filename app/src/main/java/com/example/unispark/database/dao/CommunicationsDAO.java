@@ -9,7 +9,7 @@ import com.example.unispark.database.others.SQLiteConnection;
 import com.example.unispark.database.query.QueryCommunications;
 import com.example.unispark.database.query.QueryProfessor;
 import com.example.unispark.exceptions.DatabaseOperationError;
-import com.example.unispark.model.communications.BeanProfCommunication;
+import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class CommunicationsDAO {
 
     }
 
-    public static void addProfessorCommunication(BeanProfCommunication communication) throws SQLiteException, DatabaseOperationError
+    public static void addProfessorCommunication(ProfessorCommunicationModel communication) throws SQLiteException, DatabaseOperationError
     {
         SQLiteDatabase db = SQLiteConnection.getWritableDB();
 
@@ -90,16 +90,16 @@ public class CommunicationsDAO {
     }
 
 
-    public static List<BeanProfCommunication> getCourseCommunications(String courseShortName, String courseFullName) throws SQLiteException
+    public static List<ProfessorCommunicationModel> getCourseCommunications(String courseShortName, String courseFullName) throws SQLiteException
     {
         SQLiteDatabase db = SQLiteConnection.getReadableDB();
-        List<BeanProfCommunication> communicationsList = new ArrayList<>();
+        List<ProfessorCommunicationModel> communicationsList = new ArrayList<>();
 
         Cursor cursor = QueryCommunications.selectCourseCommunications(db, courseShortName);
 
         if (cursor.moveToFirst()){
             //Communication Model
-            BeanProfCommunication communicationModel;
+            ProfessorCommunicationModel communicationModel;
             //Attributes
             int profilePhoto;
             String shortName;
@@ -129,7 +129,7 @@ public class CommunicationsDAO {
                 profilePhoto = professorImage.getInt(0);
 
                 //Add CommunicationModel to List
-                communicationModel = new BeanProfCommunication(profilePhoto, shortName, courseFullName, professorName, date, type, communication);
+                communicationModel = new ProfessorCommunicationModel(profilePhoto, shortName, courseFullName, professorName, date, type, communication);
                 communicationsList.add(communicationModel);
 
             } while(cursor.moveToNext());

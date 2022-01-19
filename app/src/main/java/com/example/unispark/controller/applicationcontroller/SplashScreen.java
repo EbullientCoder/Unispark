@@ -1,12 +1,8 @@
 package com.example.unispark.controller.applicationcontroller;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 
-import com.example.unispark.controller.guicontroller.LoginGUIController;
-import com.example.unispark.controller.guicontroller.SplashScreenGUIController;
-import com.example.unispark.provaDB.SQLiteFillSampleDB;
+import com.example.unispark.database.others.provaDB.SQLiteFillSampleDB;
 
 public class SplashScreen {
 

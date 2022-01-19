@@ -39,7 +39,7 @@ public class ShowExams {
         List<VerbalizedExamModel> failedExams = student.getFailedExams();
         for (int i = 0; failedExams != null && i < failedExams.size(); i++){
             VerbalizedExamModel vExam = failedExams.get(i);
-            bExams.add(new BeanExamType(1, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+            bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
         }
 
         return bExams;

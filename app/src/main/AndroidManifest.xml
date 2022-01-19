@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.unispark" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -12,63 +14,72 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup" >
         <activity
-            android:name=".controller.guicontroller.university.UniversityHomeGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.professor.ProfessorExamsGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.professor.ProfessorHomeGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.professor.ProfessorProfileGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsVerbalizeExamsGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsProfessorGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsCourseGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsUniCommunicationGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsProfCommunicationGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.details.DetailsHomeworkGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.LoginGUIController"
-            android:exported="true" />
-        <activity
-            android:name=".controller.guicontroller.SplashScreenGUIController"
+            android:name=".view.SplashScreenView"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
-            android:name=".controller.guicontroller.student.StudentHomeGUIController"
-            android:exported="true" >
-        </activity>
+            android:name=".view.LoginView"
+            android:exported="true" />
+
+
         <activity
-            android:name=".controller.guicontroller.student.StudentExamsGUIController"
+            android:name=".view.student.StudentHomeView"
             android:exported="true" />
         <activity
-            android:name=".controller.guicontroller.student.StudentScheduleGUIController"
+            android:name=".view.student.StudentExamsView"
             android:exported="true" />
         <activity
-            android:name=".controller.guicontroller.student.StudentLinksGUIController"
+            android:name=".view.student.StudentLinksView"
             android:exported="true" />
         <activity
-            android:name=".controller.guicontroller.student.StudentProfileGUIController"
+            android:name=".view.student.StudentProfileView"
             android:exported="true" />
+        <activity
+            android:name=".view.student.StudentScheduleView"
+            android:exported="true" />
+
+
+        <activity
+            android:name=".view.professor.ProfessorHomeView"
+            android:exported="true" />
+        <activity
+            android:name=".view.professor.ProfessorExamsView"
+            android:exported="true" />
+        <activity
+            android:name=".view.professor.ProfessorProfileView"
+            android:exported="true" />
+        <activity
+            android:name=".view.details.DetailsVerbalizeExamsView"
+            android:exported="true" />
+
+
+        <activity
+            android:name=".view.university.UniversityHomeView"
+            android:exported="true" />
+
+
+        <activity
+            android:name=".view.details.DetailsCourseView"
+            android:exported="true" />
+        <activity
+            android:name=".view.details.DetailsHomeworkView"
+            android:exported="true" />
+        <activity
+            android:name=".view.details.DetailsProfCommunicationView"
+            android:exported="true" />
+        <activity
+            android:name=".view.details.DetailsProfessorView"
+            android:exported="true" />
+        <activity
+            android:name=".view.details.DetailsUniCommunicationView"
+            android:exported="true" />
+
 
         <meta-data
             android:name="preloaded_fonts"
