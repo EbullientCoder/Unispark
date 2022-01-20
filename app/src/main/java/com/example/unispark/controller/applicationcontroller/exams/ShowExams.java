@@ -35,7 +35,6 @@ public class ShowExams {
             throwables.printStackTrace();
         }
 
-
         return bExams;
     }
 
@@ -99,12 +98,17 @@ public class ShowExams {
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
         List<BeanExamType> bExams = new ArrayList<>();
 
-        List<BookExamModel> exams = professor.getExams();
-        for (int i = 0; exams != null && i < exams.size(); i++){
-            BookExamModel bExam = exams.get(i);
-            bExams.add(new BeanExamType(1, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
-        }
 
+        try {
+            List<BookExamModel> exams;
+            exams = ExamsFacade.getExams(String.valueOf(professor.getId()), true);
+            for (int i = 0; exams != null && i < exams.size(); i++){
+                BookExamModel bExam = exams.get(i);
+                bExams.add(new BeanExamType(1, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return bExams;
     }
 }
