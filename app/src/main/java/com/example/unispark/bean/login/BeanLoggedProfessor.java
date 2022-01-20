@@ -14,13 +14,13 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
     private String faculty;
     private String website;
     private List<CourseModel> courses;
-    private List<BookExamModel> exams;
+
 
     //Methods
     //Constructor
 
 
-    public BeanLoggedProfessor(String firstName, String lastName, int profilePicture, int id, String faculty, String website, List<CourseModel> courses, List<BookExamModel> exams) {
+    public BeanLoggedProfessor(String firstName, String lastName, int profilePicture, int id, String faculty, String website, List<CourseModel> courses) {
         super(profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +28,7 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         this.faculty = faculty;
         this.website = website;
         this.courses = courses;
-        this.exams = exams;
+
     }
 
 
@@ -57,9 +57,7 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         return courses;
     }
 
-    public List<BookExamModel> getExams() {
-        return exams;
-    }
+
 
 
 
@@ -87,7 +85,5 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         this.courses = courses;
     }
 
-    public void setExams(List<BookExamModel> exams) {
-        this.exams = exams;
-    }
+
 }

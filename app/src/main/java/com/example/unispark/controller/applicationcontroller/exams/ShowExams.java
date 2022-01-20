@@ -65,7 +65,7 @@ public class ShowExams {
 
         try{
             //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-            List<BookExamModel> bookExams = ExamsFacade.getExams(student.getId(), false);
+            List<BookExamModel> bookExams = ExamsFacade.getInstance().getExams(student.getId(), false);
             for (int i = 0; bookExams != null && i < bookExams.size(); i++){
                 BookExamModel bExam = bookExams.get(i);
                 bExams.add(new BeanExamType(2, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
@@ -73,7 +73,6 @@ public class ShowExams {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
 
         return bExams;
     }
@@ -84,10 +83,15 @@ public class ShowExams {
         List<BeanExamType> bExams = new ArrayList<>();
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        List<BookExamModel> bookedExams = student.getBookedExams();
-        for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
-            BookExamModel bExam = bookedExams.get(i);
-            bExams.add(new BeanExamType(3, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+        try{
+            List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(student.getId());
+            for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
+                BookExamModel bExam = bookedExams.get(i);
+                bExams.add(new BeanExamType(3, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return bExams;
@@ -101,7 +105,7 @@ public class ShowExams {
 
         try {
             List<BookExamModel> exams;
-            exams = ExamsFacade.getExams(String.valueOf(professor.getId()), true);
+            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
             for (int i = 0; exams != null && i < exams.size(); i++){
                 BookExamModel bExam = exams.get(i);
                 bExams.add(new BeanExamType(1, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));

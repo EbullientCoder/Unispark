@@ -34,8 +34,6 @@ public class Login {
                     student.getAcademicYear(),
                     student.getCourses(),
                     student.getBookedExams(),
-                    student.getVerbalizedExams(),
-                    student.getFailedExams(),
                     student.getUniYear());
         } catch (LoginException e) {
             e.printStackTrace();
@@ -59,8 +57,7 @@ public class Login {
                     professor.getId(),
                     professor.getFaculty(),
                     professor.getWebsite(),
-                    professor.getCourses(),
-                    professor.getExams()
+                    professor.getCourses()
             );
         } catch (LoginException e) {
             e.printStackTrace();

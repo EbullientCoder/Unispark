@@ -20,9 +20,7 @@ public class AddExam {
         try {
 
             ExamsDAO.addExam(exam);
-            List<BookExamModel> exams = professor.getExams();
-            exams.add(exam);
-            professor.setExams(exams);
+
 
         } catch (ExamException e) {
             e.printStackTrace();

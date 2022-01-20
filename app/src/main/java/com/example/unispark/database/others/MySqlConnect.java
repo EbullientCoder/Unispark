@@ -2,6 +2,7 @@ package com.example.unispark.database.others;
 
 
 import android.database.sqlite.SQLiteException;
+import android.os.StrictMode;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +27,8 @@ public class MySqlConnect {
 
     //Get a readable SQLiteDatabase ("unispark.db")
     public synchronized Connection getDBConnection() throws SQLiteException {
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         if (this.conn == null){
 
             try{

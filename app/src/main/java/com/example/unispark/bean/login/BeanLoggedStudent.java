@@ -16,8 +16,6 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     private String academicYear;
     private List<CourseModel> courses;
     private List<BookExamModel> bookedExams;
-    private List<VerbalizedExamModel> verbalizedExams;
-    private List<VerbalizedExamModel> failedExams;
     private int uniYear;
 
 
@@ -29,8 +27,6 @@ public class BeanLoggedStudent extends BeanLoggedUser {
                              String academicYear,
                              List<CourseModel> courses,
                              List<BookExamModel> bookedExams,
-                             List<VerbalizedExamModel> verbalizedExams,
-                             List<VerbalizedExamModel> failedExams,
                              int uniYear) {
 
         super(profilePicture);
@@ -41,8 +37,6 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         this.academicYear = academicYear;
         this.courses = courses;
         this.bookedExams = bookedExams;
-        this.verbalizedExams = verbalizedExams;
-        this.failedExams = failedExams;
         this.uniYear = uniYear;
     }
 
@@ -76,13 +70,6 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         return bookedExams;
     }
 
-    public List<VerbalizedExamModel> getVerbalizedExams() {
-        return verbalizedExams;
-    }
-
-    public List<VerbalizedExamModel> getFailedExams() {
-        return failedExams;
-    }
 
     public int getUniYear() {
         return uniYear;
@@ -119,13 +106,6 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         this.bookedExams = bookedExams;
     }
 
-    public void setVerbalizedExams(List<VerbalizedExamModel> verbalizedExams) {
-        this.verbalizedExams = verbalizedExams;
-    }
-
-    public void setFailedExams(List<VerbalizedExamModel> failedExams) {
-        this.failedExams = failedExams;
-    }
 
     public void setUniYear(int uniYear) {
         this.uniYear = uniYear;

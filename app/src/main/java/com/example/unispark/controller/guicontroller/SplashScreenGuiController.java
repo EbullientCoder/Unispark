@@ -14,7 +14,6 @@ public class SplashScreenGuiController {
 
 
     public void showLoginView(Context context){
-        setPolicy();
 
         new Handler().postDelayed(() -> {
             Intent i = new Intent(context, LoginView.class);
@@ -26,8 +25,5 @@ public class SplashScreenGuiController {
 
     }
 
-    private void setPolicy(){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-    }
+
 }
