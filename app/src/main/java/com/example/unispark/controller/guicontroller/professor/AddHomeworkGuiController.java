@@ -11,7 +11,7 @@ import com.example.unispark.viewadapter.HomeworksAdapter;
 
 import java.util.List;
 
-public class AddHomeworkGuiController extends AddExamGuiController{
+public class AddHomeworkGuiController extends AddItemGuiController{
 
 
 

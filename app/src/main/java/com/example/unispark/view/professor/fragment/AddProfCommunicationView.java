@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.BeanProfessorCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 
@@ -42,7 +43,7 @@ public class AddProfCommunicationView extends DialogFragment{
 
     //Bean
     BeanLoggedProfessor bProfessor;
-    BeanProfessorCommunication bCommunication;
+    List<BeanCourse> bCourses;
     int i;
 
 
@@ -80,6 +81,7 @@ public class AddProfCommunicationView extends DialogFragment{
 
         //DropDown Selector
         //Gui Controller
+        bCourses = communicationGuiController.showCourses(bProfessor);
         courses = communicationGuiController.getCoursesNames(bProfessor);
 
 
@@ -115,8 +117,8 @@ public class AddProfCommunicationView extends DialogFragment{
 
 
                 communicationGuiController.addCommunication(getContext(), getDialog(), courseSelection,
-                        type, text, bProfessor.getProfilePicture(), bProfessor.getCourses().get(i).getShortName(),
-                        bProfessor.getCourses().get(i).getFullName(), bProfessor.getFirstName(),
+                        type, text, bProfessor.getProfilePicture(), bCourses.get(i).getShortName(),
+                        bCourses.get(i).getFullName(), bProfessor.getFirstName(),
                         bProfessor.getLastName(), date);
             }
         });

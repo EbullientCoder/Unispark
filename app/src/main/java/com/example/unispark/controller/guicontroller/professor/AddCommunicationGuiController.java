@@ -9,7 +9,7 @@ import com.example.unispark.controller.applicationcontroller.communications.AddP
 import com.example.unispark.exceptions.GenericException;
 
 
-public class AddCommunicationGuiController extends AddExamGuiController{
+public class AddCommunicationGuiController extends AddItemGuiController{
 
     public void addCommunication(Context context, Dialog dialog, String courseSelection, String type, String text,
                                  int profilePicture, String courseShortName, String courseName,

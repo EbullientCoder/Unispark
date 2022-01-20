@@ -17,39 +17,8 @@ import com.example.unispark.exceptions.GenericException;
 
 import java.util.List;
 
-public class AddExamGuiController {
+public class AddExamGuiController extends AddItemGuiController{
 
-    public List<BeanCourse> showCourses(BeanLoggedProfessor professor){
-        List<BeanCourse> courses;
-
-        MenageCourses getCoursesController = new MenageCourses();
-        courses = getCoursesController.getCourses(professor);
-
-        return courses;
-    }
-
-    public List<String> getCoursesNames(BeanLoggedProfessor professor){
-        List<String> coursesNames;
-
-        MenageCourses coursesGuiController = new MenageCourses();
-        coursesNames = coursesGuiController.getCoursesNames(professor);
-
-        return coursesNames;
-    }
-
-    public void showDateDialog(Context context, DatePickerDialog.OnDateSetListener dateListener, int year, int month, int day){
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                context,
-                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                dateListener,
-                year,
-                month,
-                day);
-
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.show();
-    }
 
     public void addExam(Context context, Dialog dialog, BeanLoggedProfessor professor,
                         String courseName, String courseYear, String date, String courseSelection,
@@ -87,19 +56,10 @@ public class AddExamGuiController {
         }
     }
 
-    public void getInvalidMessagge(Context context){
-        Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show();
-    }
-
 
     private void examAddedMessage(Context context){
         Toast.makeText(context, "Exam added", Toast.LENGTH_SHORT).show();
     }
-
-    public void errorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
 
 
 

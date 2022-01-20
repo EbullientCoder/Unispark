@@ -60,7 +60,6 @@ public class AddHomeworkView extends DialogFragment{
     //Bean
     BeanLoggedProfessor bProfessor;
     List<BeanCourse> bCourses;
-    BeanHomework bHomework;
     List<BeanHomework> bHomeworkList = null;
     HomeworksAdapter homeworksAdapter = null;
 
