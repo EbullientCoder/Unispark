@@ -15,7 +15,7 @@ import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.student.ShowScheduleGuiController;
 import com.example.unispark.viewadapter.LessonAdapter;
 import com.example.unispark.bean.BeanLesson;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.time.OffsetDateTime;
 import java.util.List;

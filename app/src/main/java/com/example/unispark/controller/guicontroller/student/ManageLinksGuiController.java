@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.example.unispark.bean.BeanLink;
-import com.example.unispark.bean.BeanProfessorDetails;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.professor.BeanProfessorDetails;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.links.AddLink;
 import com.example.unispark.controller.applicationcontroller.links.DeleteLink;
 import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
@@ -18,7 +18,6 @@ import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiCont
 import com.example.unispark.view.details.DetailsProfessorView;
 import com.example.unispark.viewadapter.LinksAdapter;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ManageLinksGuiController extends BottomNavigationMenuGuiController {

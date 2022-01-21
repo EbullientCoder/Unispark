@@ -1,8 +1,10 @@
-package com.example.unispark.bean.login;
+package com.example.unispark.bean.university;
+
+import com.example.unispark.bean.login.BeanLoggedUser;
 
 import java.util.List;
 
-public class BeanLoggedUniversity extends BeanLoggedUser{
+public class BeanLoggedUniversity extends BeanLoggedUser {
 
     //Attributes
     private String name;

@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.bean.exams.BeanExamType;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.view.details.DetailsVerbalizeExamsView;
 

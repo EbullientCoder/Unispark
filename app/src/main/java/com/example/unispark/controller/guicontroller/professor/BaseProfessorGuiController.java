@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.view.professor.fragment.AddExamView;
 import com.example.unispark.view.professor.fragment.AddHomeworkView;

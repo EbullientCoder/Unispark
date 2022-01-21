@@ -14,8 +14,8 @@ import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.student.ManageLinksGuiController;
 import com.example.unispark.viewadapter.LinksAdapter;
 import com.example.unispark.bean.BeanLink;
-import com.example.unispark.bean.BeanProfessorDetails;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.professor.BeanProfessorDetails;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 
 import com.example.unispark.viewadapter.ProfessorsAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExamType;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;

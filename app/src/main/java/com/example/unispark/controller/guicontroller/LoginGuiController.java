@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.bean.login.BeanLoggedUniversity;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
+import com.example.unispark.bean.student.BeanLoggedStudent;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
 import com.example.unispark.exceptions.WrongUsernameOrPasswordException;

@@ -1,9 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.schedule;
 
-import android.widget.Toast;
-
 import com.example.unispark.bean.BeanLesson;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.LessonsDAO;
 import com.example.unispark.model.LessonModel;
 

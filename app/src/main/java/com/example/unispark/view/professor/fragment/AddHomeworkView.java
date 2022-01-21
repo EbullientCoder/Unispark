@@ -24,7 +24,7 @@ import com.example.unispark.controller.guicontroller.professor.AddHomeworkGuiCon
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 
 import com.google.android.material.textfield.TextInputLayout;
 

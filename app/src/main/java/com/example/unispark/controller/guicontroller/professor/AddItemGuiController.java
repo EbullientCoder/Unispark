@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.widget.Toast;
 
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 
 import java.util.List;

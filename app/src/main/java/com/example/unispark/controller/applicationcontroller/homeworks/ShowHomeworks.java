@@ -1,11 +1,10 @@
 package com.example.unispark.controller.applicationcontroller.homeworks;
 
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.HomeworkModel;
-import com.example.unispark.model.ProfessorModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 
 import com.example.unispark.controller.guicontroller.student.ManageStudentProfileGuiController;
 import com.example.unispark.viewadapter.CoursesAdapter;

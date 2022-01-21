@@ -1,7 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.links;
 
 import com.example.unispark.bean.BeanLink;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.StudentLinksDAO;
 import com.example.unispark.model.LinkModel;
 

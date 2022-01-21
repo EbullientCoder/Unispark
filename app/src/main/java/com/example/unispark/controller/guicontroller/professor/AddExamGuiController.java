@@ -5,7 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.unispark.bean.exams.BeanBookExam;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.GenericException;

@@ -27,11 +27,16 @@ public class TestAddCommunication {
 
         AddCommunication communicationController;
         communicationController = new AddCommunication();
+        BeanUniCommunication communication;
+        communication = new BeanUniCommunication();
+        communication.setTitle("Pubblicazione lezioni");
+        communication.setCommunication("Sono state aggiunte le lezioni per il secondo semestre");
+        communication.setFaculty("Economia");
+        communication.setDate("2022-01-20");
+        communication.setBackground(R.id.img_uni_com_background);
 
         try {
-            communicationController.addUniCommunication(new BeanUniCommunication(R.id.img_uni_com_background,
-                    "Pubblicazione lezioni", "2022-01-20",
-                    "Sono state aggiunte le lezioni per il secondo semestre", "Economia"));
+            communicationController.addUniCommunication(communication);
             code = 1;
         } catch (GenericException genericException) {
             genericException.printStackTrace();
@@ -50,11 +55,18 @@ public class TestAddCommunication {
 
         AddCommunication communicationController;
         communicationController = new AddCommunication();
+        BeanProfessorCommunication communication;
+        communication= new BeanProfessorCommunication();
+        communication.setType("Lezioni");
+        communication.setCommunication("Le lezioni sono rinviate alla prossima settimana");
+        communication.setProfessorName("Francesco Manzini");
+        communication.setDate("2022-01-20");
+        communication.setProfilePhoto(R.id.img_professor_profile_image);
+        communication.setFullName("TEST COURSE");
+        communication.setShortCourseName("TES");
 
         try {
-            communicationController.addProfCommunication(new BeanProfessorCommunication(R.id.img_professor_profile_image,
-                    "TES", "TEST COURSE",
-                    "Francesco Manzini", "2022-01-20", "Lezioni", "Le lezioni sono rinviate alla prossima settimana"));
+            communicationController.addProfCommunication(communication);
             code = 2;
         } catch (GenericException genericException) {
             genericException.printStackTrace();
@@ -77,11 +89,18 @@ public class TestAddCommunication {
 
         AddCommunication communicationController;
         communicationController = new AddCommunication();
+        BeanProfessorCommunication communication;
+        communication= new BeanProfessorCommunication();
+        communication.setType("Esami");
+        communication.setCommunication("Gli esami verranno verbalizzati a breve");
+        communication.setProfessorName("Francesco Manzini");
+        communication.setDate("2022-01-20");
+        communication.setProfilePhoto(R.id.img_professor_profile_image);
+        communication.setFullName("MATEMATICA GENERALE");
+        communication.setShortCourseName("MAT");
 
         try {
-            communicationController.addProfCommunication(new BeanProfessorCommunication(R.id.img_professor_profile_image,
-                    "MAT", "MATEMATICA GENERALE",
-                    "Francesco Manzini", "2022-01-20", "Esami", "Gli esami verranno verbalizzati a breve"));
+            communicationController.addProfCommunication(communication);
             code = 1;
         } catch (GenericException | CourseDoesNotExist genericException) {
             genericException.printStackTrace();

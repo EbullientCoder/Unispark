@@ -1,26 +1,19 @@
-package com.example.unispark.bean;
+package com.example.unispark.bean.professor;
 
+import com.example.unispark.bean.login.BeanLoggedUser;
+import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.exams.BookExamModel;
 
-
-import com.example.unispark.bean.courses.BeanCourse;
-
-import java.io.Serializable;
 import java.util.List;
 
-public class BeanProfessorDetails implements Serializable {
+public class BeanLoggedProfessor extends BeanLoggedUser{
 
     //Attributes
     private String firstName;
     private String lastName;
-    private int profilePicture;
     private int id;
     private String faculty;
     private String website;
-    private List<BeanCourse> courses;
-
-
-
-
 
     public String getFirstName() {
         return firstName;
@@ -41,17 +34,6 @@ public class BeanProfessorDetails implements Serializable {
     public String getWebsite() {
         return website;
     }
-
-    public int getProfilePicture() {
-        return profilePicture;
-    }
-
-    public List<BeanCourse> getCourses() {
-        return courses;
-    }
-
-
-
 
 
     public void setFirstName(String firstName) {
@@ -75,11 +57,4 @@ public class BeanProfessorDetails implements Serializable {
     }
 
 
-    public void setProfilePicture(int profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public void setCourses(List<BeanCourse> courses) {
-        this.courses = courses;
-    }
 }

@@ -5,7 +5,7 @@ plugins {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "emanuvalza99_test4"
+        property "sonar.projectKey", "emanuvalza99_uniSpark3"
         property "sonar.organization", "emanuvalza99"
         property "sonar.host.url", "https://sonarcloud.io"
     }

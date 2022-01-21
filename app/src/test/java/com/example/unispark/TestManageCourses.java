@@ -4,7 +4,7 @@ package com.example.unispark;
 import static org.junit.Assert.assertEquals;
 
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
@@ -40,13 +40,24 @@ public class TestManageCourses {
         Login loginController;
         loginController = new Login();
         BeanLoggedStudent beanStudent;
-        beanStudent = loginController.studentLogin(new BeanUser("andrea.lapiana", "password"));
+        BeanUser beanUser;
+        beanUser = new BeanUser();
+        beanUser.setEmail("andrea.lapiana");
+        beanUser.setPassword("password");
+        beanStudent = loginController.studentLogin(beanUser);
 
         // Create a course that does not exist
         BeanCourse beanCourse;
-        beanCourse = new BeanCourse("1", "TEST", "TEST COURSE",
-                "2021/2022", "12.0", "Winter", "https://testcourse.com",
-                "Ingegneria Informatica", 1);
+        beanCourse = new BeanCourse();
+        beanCourse.setUniYear(1);
+        beanCourse.setCourseYear("2021/2022");
+        beanCourse.setSession("Winter");
+        beanCourse.setLink("https://testcourse.com");
+        beanCourse.setId("1");
+        beanCourse.setCfu("12.0");
+        beanCourse.setFullName("TEST COURSE");
+        beanCourse.setShortName("TEST");
+        beanCourse.setFaculty("Ingegneria Informatica");
 
 
         ManageCourses controller;
@@ -78,13 +89,25 @@ public class TestManageCourses {
         Login loginController;
         loginController = new Login();
         BeanLoggedStudent beanStudent;
-        beanStudent = loginController.studentLogin(new BeanUser("mario.rossi", "password"));
+        BeanUser beanUser;
+        beanUser = new BeanUser();
+        beanUser.setEmail("mario.rossi");
+        beanUser.setPassword("password");
+        beanStudent = loginController.studentLogin(beanUser);
 
         //Create a course already joined by the student
         BeanCourse beanCourse;
-        beanCourse = new BeanCourse("4", "MAT", "MATEMATICA GENERALE",
-                "2021/2022", "12.0", "Winter", "https://economia.uniroma2.it/cdl/triennio/clem/corso/206/",
-                "Economia", 1);
+        beanCourse = new BeanCourse();
+        beanCourse.setUniYear(1);
+        beanCourse.setCourseYear("2021/2022");
+        beanCourse.setSession("Winter");
+        beanCourse.setLink("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/");
+        beanCourse.setId("4");
+        beanCourse.setCfu("12.0");
+        beanCourse.setFullName("MATEMATICA GENERALE");
+        beanCourse.setShortName("MAT");
+        beanCourse.setFaculty("Economia");
+
 
         ManageCourses controller;
         controller = new ManageCourses();
@@ -116,13 +139,24 @@ public class TestManageCourses {
         Login loginController;
         loginController = new Login();
         BeanLoggedStudent beanStudent;
-        beanStudent = loginController.studentLogin(new BeanUser("mario.rossi", "password"));
+        BeanUser beanUser;
+        beanUser = new BeanUser();
+        beanUser.setEmail("mario.rossi");
+        beanUser.setPassword("password");
+        beanStudent = loginController.studentLogin(beanUser);
 
         //Create a course that is associated to the exam the student has booked
         BeanCourse beanCourse;
-        beanCourse = new BeanCourse("4", "MAT", "MATEMATICA GENERALE",
-                "2021/2022", "12.0", "Winter", "https://economia.uniroma2.it/cdl/triennio/clem/corso/206/",
-                "Economia", 1);
+        beanCourse = new BeanCourse();
+        beanCourse.setUniYear(1);
+        beanCourse.setCourseYear("2021/2022");
+        beanCourse.setSession("Winter");
+        beanCourse.setLink("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/");
+        beanCourse.setId("4");
+        beanCourse.setCfu("12.0");
+        beanCourse.setFullName("MATEMATICA GENERALE");
+        beanCourse.setShortName("MAT");
+        beanCourse.setFaculty("Economia");
 
 
         int position = 0;

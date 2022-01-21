@@ -2,8 +2,8 @@ package com.example.unispark.controller.applicationcontroller.course;
 
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.courses.BeanCoursesNames;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.exceptions.CourseAlreadyJoined;
 import com.example.unispark.exceptions.CourseDoesNotExist;
@@ -185,7 +185,12 @@ public class ManageCourses {
 
     //Get Professor Courses
     public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
-        List<CourseModel> courses = professor.getCourses();
+        List<CourseModel> courses = null;
+        try {
+            courses = CourseDAO.selectProfessorCourses(professor.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         List<BeanCourse> bCourses = new ArrayList<>();
         CourseModel course;
         for (int i = 0; i < courses.size(); i++){
@@ -209,7 +214,12 @@ public class ManageCourses {
 
     public List<String> getCoursesNames(BeanLoggedProfessor bProfessor){
         List<String> coursesNames = new ArrayList<>();
-        List<CourseModel> courses = bProfessor.getCourses();
+        List<CourseModel> courses = null;
+        try {
+            courses = CourseDAO.selectProfessorCourses(bProfessor.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         for(int i = 0; i < courses.size(); i++) coursesNames.add(courses.get(i).getShortName());
 

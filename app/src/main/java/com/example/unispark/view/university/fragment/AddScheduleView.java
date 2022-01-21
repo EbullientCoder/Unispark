@@ -18,7 +18,7 @@ import com.example.unispark.controller.guicontroller.university.AddScheduleGuiCo
 import com.example.unispark.viewadapter.LessonAdapter;
 import com.example.unispark.bean.courses.BeanCoursesNames;
 import com.example.unispark.bean.BeanLesson;
-import com.example.unispark.bean.login.BeanLoggedUniversity;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 
 import java.util.List;
 

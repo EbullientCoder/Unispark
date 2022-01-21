@@ -19,7 +19,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 
 import com.example.unispark.controller.guicontroller.professor.AddExamGuiController;
 import com.google.android.material.textfield.TextInputLayout;

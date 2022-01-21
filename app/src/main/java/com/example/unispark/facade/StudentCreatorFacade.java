@@ -1,6 +1,5 @@
 package com.example.unispark.facade;
 
-import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CourseDAO;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
@@ -10,7 +9,6 @@ import com.example.unispark.model.exams.VerbalizedExamModel;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentCreatorFacade {

@@ -1,7 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
 import com.example.unispark.bean.exams.BeanBookExam;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.ExamException;

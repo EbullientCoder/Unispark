@@ -1,8 +1,8 @@
 package com.example.unispark.controller.applicationcontroller;
 
-import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.bean.login.BeanLoggedUniversity;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
+import com.example.unispark.bean.student.BeanLoggedStudent;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.database.dao.ProfessorDAO;
 import com.example.unispark.database.dao.StudentDAO;
@@ -62,7 +62,6 @@ public class Login {
             beanLoggedProfessor.setProfilePicture(professor.getProfilePicture());
             beanLoggedProfessor.setId(professor.getId());
             beanLoggedProfessor.setFaculty(professor.getFaculty());
-            beanLoggedProfessor.setCourses(professor.getCourses());
             beanLoggedProfessor.setWebsite(professor.getWebsite());
         } catch (LoginException e) {
             e.printStackTrace();

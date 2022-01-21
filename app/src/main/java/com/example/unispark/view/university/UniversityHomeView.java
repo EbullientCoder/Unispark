@@ -17,7 +17,7 @@ import com.example.unispark.viewadapter.LessonAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.communications.BeanUniCommunication;
-import com.example.unispark.bean.login.BeanLoggedUniversity;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

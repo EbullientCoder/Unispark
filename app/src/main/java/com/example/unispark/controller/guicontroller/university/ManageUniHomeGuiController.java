@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.communications.BeanUniCommunication;
-import com.example.unispark.bean.login.BeanLoggedUniversity;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;

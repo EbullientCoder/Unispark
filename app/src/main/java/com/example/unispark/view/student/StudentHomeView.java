@@ -20,7 +20,7 @@ import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.communications.BeanProfessorCommunication;
 import com.example.unispark.bean.communications.BeanUniCommunication;
-import com.example.unispark.bean.login.BeanLoggedStudent;
+import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

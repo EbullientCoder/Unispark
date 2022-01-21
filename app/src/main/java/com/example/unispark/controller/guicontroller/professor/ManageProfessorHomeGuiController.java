@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.communications.BeanUniCommunication;
-import com.example.unispark.bean.login.BeanLoggedProfessor;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.view.details.DetailsHomeworkView;

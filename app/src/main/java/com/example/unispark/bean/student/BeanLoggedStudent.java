@@ -1,19 +1,24 @@
-package com.example.unispark.bean.login;
+package com.example.unispark.bean.student;
 
+import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BeanLoggedProfessor extends BeanLoggedUser{
+public class BeanLoggedStudent extends BeanLoggedUser {
 
-    //Attributes
     private String firstName;
     private String lastName;
-    private int id;
+    private String id;
     private String faculty;
-    private String website;
+    private String academicYear;
     private List<CourseModel> courses;
+    private List<BookExamModel> bookedExams;
+    private int uniYear;
+
 
 
 
@@ -26,7 +31,7 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         return lastName;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -34,12 +39,22 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         return faculty;
     }
 
-    public String getWebsite() {
-        return website;
+    public String getAcademicYear() {
+        return academicYear;
     }
 
     public List<CourseModel> getCourses() {
         return courses;
+    }
+
+
+    public List<BookExamModel> getBookedExams() {
+        return bookedExams;
+    }
+
+
+    public int getUniYear() {
+        return uniYear;
     }
 
 
@@ -54,16 +69,17 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
         this.lastName = lastName;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
+
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
     }
 
     public void setCourses(List<CourseModel> courses) {
@@ -71,4 +87,13 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
     }
 
 
+    public void setBookedExams(List<BookExamModel> bookedExams) {
+        this.bookedExams = bookedExams;
+    }
+
+
+    public void setUniYear(int uniYear) {
+        this.uniYear = uniYear;
+    }
 }
+
