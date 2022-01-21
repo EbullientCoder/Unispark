@@ -21,7 +21,7 @@ import com.example.unispark.viewadapter.CoursesAdapter;
 import java.util.List;
 
 
-public class MenageStudentProfileGuiController extends BottomNavigationMenuGuiController {
+public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiController {
 
 
 

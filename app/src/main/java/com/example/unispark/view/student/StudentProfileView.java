@@ -15,7 +15,7 @@ import com.example.unispark.R;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 
-import com.example.unispark.controller.guicontroller.student.MenageStudentProfileGuiController;
+import com.example.unispark.controller.guicontroller.student.ManageStudentProfileGuiController;
 import com.example.unispark.viewadapter.CoursesAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -52,7 +52,7 @@ public class StudentProfileView extends AppCompatActivity
     List<BeanCourse> bCourses;
 
     //Gui Controller
-    private MenageStudentProfileGuiController profileGuiController;
+    private ManageStudentProfileGuiController profileGuiController;
 
 
     //Methods
@@ -61,7 +61,7 @@ public class StudentProfileView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
 
-        this.profileGuiController = new MenageStudentProfileGuiController();
+        this.profileGuiController = new ManageStudentProfileGuiController();
 
         //Getting User Object
         extras = getIntent().getExtras();

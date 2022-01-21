@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 
-import com.example.unispark.controller.guicontroller.student.MenageStudentHomeGuiController;
+import com.example.unispark.controller.guicontroller.student.ManageStudentHomeGuiController;
 import com.example.unispark.viewadapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanHomework;
@@ -56,7 +56,7 @@ public class StudentHomeView extends AppCompatActivity
         List<BeanHomework> beanHomeworks;
 
         //Gui controller
-        private MenageStudentHomeGuiController homeGuiController;
+        private ManageStudentHomeGuiController homeGuiController;
 
 
         //Constructor
@@ -65,7 +65,7 @@ public class StudentHomeView extends AppCompatActivity
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_student_home);
 
-                this.homeGuiController = new MenageStudentHomeGuiController();
+                this.homeGuiController = new ManageStudentHomeGuiController();
 
                 //Getting User Bean
                 extras = getIntent().getExtras();

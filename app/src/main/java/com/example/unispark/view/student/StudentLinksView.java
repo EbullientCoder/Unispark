@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.unispark.R;
-import com.example.unispark.controller.guicontroller.student.MenageLinksGuiController;
+import com.example.unispark.controller.guicontroller.student.ManageLinksGuiController;
 import com.example.unispark.viewadapter.LinksAdapter;
 import com.example.unispark.bean.BeanLink;
 import com.example.unispark.bean.BeanProfessorDetails;
@@ -52,7 +52,7 @@ public class StudentLinksView extends AppCompatActivity
     List<BeanProfessorDetails> beanProfessorDetailsList;
 
     //Gui controller
-    private MenageLinksGuiController linksGuiController;
+    private ManageLinksGuiController linksGuiController;
 
 
 
@@ -63,7 +63,7 @@ public class StudentLinksView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_links);
 
-        this.linksGuiController = new MenageLinksGuiController();
+        this.linksGuiController = new ManageLinksGuiController();
 
 
 

@@ -17,7 +17,7 @@ import com.example.unispark.view.details.DetailsUniCommunicationView;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MenageStudentHomeGuiController extends BottomNavigationMenuGuiController {
+public class ManageStudentHomeGuiController extends BottomNavigationMenuGuiController {
 
     public List<BeanUniCommunication> getUniCommunications(BeanLoggedStudent student){
 

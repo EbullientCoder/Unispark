@@ -21,7 +21,7 @@ import com.example.unispark.viewadapter.LinksAdapter;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MenageLinksGuiController extends BottomNavigationMenuGuiController {
+public class ManageLinksGuiController extends BottomNavigationMenuGuiController {
 
 
     public List<BeanProfessorDetails> showProfessorDetails(BeanLoggedStudent student){

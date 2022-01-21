@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 
 import com.example.unispark.R;
-import com.example.unispark.controller.guicontroller.student.MenageStudentExamsGuiController;
+import com.example.unispark.controller.guicontroller.student.ManageStudentExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.login.BeanLoggedStudent;
@@ -43,7 +43,7 @@ implements ExamAdapter.OnBookExamClickListener,
     List<BeanExamType> bExams;
     int page;
 
-    private MenageStudentExamsGuiController examsGuiController;
+    private ManageStudentExamsGuiController examsGuiController;
 
 
     //Constructor
@@ -52,7 +52,7 @@ implements ExamAdapter.OnBookExamClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_exams);
 
-        this.examsGuiController  = new MenageStudentExamsGuiController();
+        this.examsGuiController  = new ManageStudentExamsGuiController();
 
 
         //Getting User Object

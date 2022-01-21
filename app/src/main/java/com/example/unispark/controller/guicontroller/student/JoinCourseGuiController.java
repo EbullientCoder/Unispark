@@ -16,7 +16,7 @@ import com.example.unispark.viewadapter.CoursesAdapter;
 
 import java.util.List;
 
-public class JoinCourseGuiController extends MenageStudentProfileGuiController {
+public class JoinCourseGuiController extends ManageStudentProfileGuiController {
 
     public List<BeanCourse> showAvaliableCourses(BeanLoggedStudent student){
         List<BeanCourse> courseList;
