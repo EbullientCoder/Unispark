@@ -65,6 +65,9 @@ public class Login {
             beanLoggedProfessor.setId(professor.getId());
             beanLoggedProfessor.setFaculty(professor.getFaculty());
             beanLoggedProfessor.setWebsite(professor.getWebsite());
+            beanLoggedProfessor.setCourses(professor.getCourses());
+            beanLoggedProfessor.setBookExams(professor.getExams());
+            beanLoggedProfessor.setHomeworks(professor.getHomeworks());
         } catch (LoginException e) {
             e.printStackTrace();
             throw new WrongUsernameOrPasswordException(errorMessage);

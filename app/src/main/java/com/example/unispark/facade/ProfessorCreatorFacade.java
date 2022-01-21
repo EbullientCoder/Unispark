@@ -1,7 +1,9 @@
 package com.example.unispark.facade;
 
 import com.example.unispark.database.dao.CourseDAO;
+import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
 
@@ -28,8 +30,9 @@ public class ProfessorCreatorFacade {
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(professorId);
         List<BookExamModel> exams = ExamsFacade.getInstance().getExams(String.valueOf(professorId), true);
+        List<HomeworkModel> homeworks = HomeworkDAO.getAssignedHomework(professorId);
 
-        return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams);
+        return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams, homeworks);
 
     }
 }

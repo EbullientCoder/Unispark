@@ -1,57 +1,44 @@
 package com.example.unispark.bean.professor;
 
 import com.example.unispark.bean.login.BeanLoggedUser;
+import com.example.unispark.model.CourseModel;
+import com.example.unispark.model.HomeworkModel;
+import com.example.unispark.model.exams.BookExamModel;
 
-public class BeanLoggedProfessor extends BeanLoggedUser{
+import java.util.List;
+
+public class BeanLoggedProfessor extends BeanProfessor{
 
     //Attributes
-    private String firstName;
-    private String lastName;
-    private int id;
-    private String faculty;
-    private String website;
 
-    public String getFirstName() {
-        return firstName;
+    private List<CourseModel> courses;
+    private List<BookExamModel> bookExams;
+    private List<HomeworkModel> homeworks;
+
+
+    public List<CourseModel> getCourses() {
+        return courses;
     }
 
-    public String getLastName() {
-        return lastName;
+    public List<BookExamModel> getBookExams() {
+        return bookExams;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public String getWebsite() {
-        return website;
+    public List<HomeworkModel> getHomeworks() {
+        return homeworks;
     }
 
 
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCourses(List<CourseModel> courses) {
+        this.courses = courses;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setBookExams(List<BookExamModel> bookExams) {
+        this.bookExams = bookExams;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHomeworks(List<HomeworkModel> homeworks) {
+        this.homeworks = homeworks;
     }
-
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-
 }

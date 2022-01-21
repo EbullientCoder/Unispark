@@ -30,12 +30,8 @@ public class ShowHomeworks{
     public List<BeanHomework> getHomework(BeanLoggedProfessor professor){
         List<BeanHomework> beanHomeworkList = new ArrayList<>();
 
-        List<HomeworkModel> homeworksItem = null;
-        try {
-            homeworksItem = HomeworkDAO.getAssignedHomework(professor.getId());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        List<HomeworkModel> homeworksItem;
+        homeworksItem = professor.getHomeworks();
 
         return this.listBeanHomeworks(homeworksItem);
 

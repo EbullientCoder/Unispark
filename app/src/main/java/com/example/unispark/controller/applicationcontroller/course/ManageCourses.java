@@ -140,24 +140,17 @@ public class ManageCourses {
 
     //Get Professor Courses
     public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
-        List<CourseModel> courses = null;
-        try {
-            courses = CourseDAO.selectProfessorCourses(professor.getId());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        List<CourseModel> courses;
+        courses = professor.getCourses();
 
         return CourseCreatorFacade.getInstance().listBeanCourses(courses);
     }
 
     public List<String> getCoursesNames(BeanLoggedProfessor bProfessor){
         List<String> coursesNames = new ArrayList<>();
-        List<CourseModel> courses = null;
-        try {
-            courses = CourseDAO.selectProfessorCourses(bProfessor.getId());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        List<CourseModel> courses;
+        courses = bProfessor.getCourses();
+
 
         for(int i = 0; i < courses.size(); i++) coursesNames.add(courses.get(i).getShortName());
 

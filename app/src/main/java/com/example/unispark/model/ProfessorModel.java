@@ -13,12 +13,15 @@ public class ProfessorModel extends UserModel{
     private String website;
     private List<CourseModel> courses;
     private List<BookExamModel> exams;
+    private List<HomeworkModel> homeworks;
 
     //Methods
     //Constructor
 
 
-    public ProfessorModel(String firstName, String lastName, String email, int profilePicture, int id, String faculty, String website, List<CourseModel> courses, List<BookExamModel> exams) {
+    public ProfessorModel(String firstName, String lastName, String email, int profilePicture, int id,
+                          String faculty, String website, List<CourseModel> courses,
+                          List<BookExamModel> exams, List<HomeworkModel> homeworks) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,6 +30,7 @@ public class ProfessorModel extends UserModel{
         this.website = website;
         this.courses = courses;
         this.exams = exams;
+        this.homeworks = homeworks;
     }
 
     public String getFirstName() {
@@ -83,6 +87,14 @@ public class ProfessorModel extends UserModel{
 
     public void setExams(List<BookExamModel> exams) {
         this.exams = exams;
+    }
+
+    public List<HomeworkModel> getHomeworks() {
+        return homeworks;
+    }
+
+    public void setHomeworks(List<HomeworkModel> homeworks) {
+        this.homeworks = homeworks;
     }
 }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.HomeworksAdapter;
@@ -17,7 +18,7 @@ public class AddHomeworkGuiController extends AddItemGuiController{
 
     public void addHomework(Context context, Dialog dialog, String courseSelection, String title,
                             String instructions, String points, String courseShortName, String courseName,
-                            String date, int profId, HomeworksAdapter homeworksAdapter, List<BeanHomework> homeworkList){
+                            String date, BeanLoggedProfessor professor, HomeworksAdapter homeworksAdapter, List<BeanHomework> homeworkList){
         if (courseSelection.equals("") || title.equals("") || instructions.equals("") || points.equals("")){
 
             getInvalidMessagge(context);
@@ -27,7 +28,7 @@ public class AddHomeworkGuiController extends AddItemGuiController{
             //Homework Object
             BeanHomework bHomework;
             bHomework = new BeanHomework();
-            bHomework.setTrackProfessor(profId);
+            bHomework.setTrackProfessor(professor.getId());
             bHomework.setPoints(points);
             bHomework.setInstructions(instructions);
             bHomework.setFullName(courseName);
@@ -39,7 +40,7 @@ public class AddHomeworkGuiController extends AddItemGuiController{
             //Application Controller
             AddHomework addHomeworkAppController = new AddHomework();
             try {
-                addHomeworkAppController.addHomework(bHomework);
+                addHomeworkAppController.addHomework(bHomework, professor);
                 HomeworkAddedMessage(context);
 
                 //Notify the Homework Adapter

@@ -60,8 +60,8 @@ public class AddHomeworkView extends DialogFragment{
     //Bean
     BeanLoggedProfessor bProfessor;
     List<BeanCourse> bCourses;
-    List<BeanHomework> bHomeworkList = null;
-    HomeworksAdapter homeworksAdapter = null;
+    List<BeanHomework> bHomeworkList;
+    HomeworksAdapter homeworksAdapter;
 
 
     int i;
@@ -169,7 +169,7 @@ public class AddHomeworkView extends DialogFragment{
                 String points = txtPoints.getEditText().getText().toString();
 
                 homeworkGuiController.addHomework(getContext(), getDialog(), courseSelection, title, instructions,
-                        points, bCourses.get(i).getShortName(), bCourses.get(i).getFullName(), date, bProfessor.getId(),
+                        points, bCourses.get(i).getShortName(), bCourses.get(i).getFullName(), date, bProfessor,
                         homeworksAdapter, bHomeworkList);
             }
         });
