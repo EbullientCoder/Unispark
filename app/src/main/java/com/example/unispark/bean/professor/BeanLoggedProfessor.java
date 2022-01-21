@@ -36,6 +36,7 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
     }
 
 
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
