@@ -1,4 +1,4 @@
-package com.example.unispark.bean;
+package com.example.unispark.bean.lesson;
 
 public class BeanErrorLessonAlreadyExists {
 

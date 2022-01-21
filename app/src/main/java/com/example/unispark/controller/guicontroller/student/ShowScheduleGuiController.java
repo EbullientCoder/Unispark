@@ -1,6 +1,6 @@
 package com.example.unispark.controller.guicontroller.student;
 
-import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.lesson.BeanLesson;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleStudent;
 import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;

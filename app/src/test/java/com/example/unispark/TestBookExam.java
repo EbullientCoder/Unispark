@@ -4,18 +4,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import android.os.StrictMode;
-
-import com.example.unispark.bean.BeanBookExam;
-import com.example.unispark.bean.BeanStudentSignedToExam;
+import com.example.unispark.bean.exam.BeanBookExam;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
-import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
-import com.example.unispark.exceptions.ExamNotYetOccured;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;

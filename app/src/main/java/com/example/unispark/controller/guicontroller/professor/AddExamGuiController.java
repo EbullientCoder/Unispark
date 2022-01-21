@@ -1,21 +1,14 @@
 package com.example.unispark.controller.guicontroller.professor;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanBookExam;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.exam.BeanBookExam;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.GenericException;
-
-import java.util.List;
 
 public class AddExamGuiController extends AddItemGuiController{
 

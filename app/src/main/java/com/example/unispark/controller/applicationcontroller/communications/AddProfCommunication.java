@@ -1,6 +1,6 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
-import com.example.unispark.bean.BeanProfessorCommunication;
+import com.example.unispark.bean.communication.BeanProfessorCommunication;
 import com.example.unispark.database.dao.CommunicationsDAO;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;

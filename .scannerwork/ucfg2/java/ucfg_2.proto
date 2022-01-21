@@ -1,9 +1,56 @@
 
-Ecom.example.unispark.communications.Communication#getComBackground()Iú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java ("1*Ã
-1ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java ("ß
-ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java (
-""B53
-1com.example.unispark.communications.Communication
+Xcom.example.unispark.database.others.MySqlConnect#getDBConnection()Ljava/sql/Connection;Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java# (2"8*¸
+2É
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java" "(™Î
+Ë
+É
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java" "(™=3
+1com.example.unispark.database.others.MySqlConnect"
+conn"__id*
+
+%2java.sql.Connection*
+1*º
+5Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java" "()¨
+©
+É
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java" "(™
+%2java.sql.Connection"qjava.sql.DriverManager#getConnection(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;*"
+java.sql.DriverManager*VT
+Rjdbc:mysql://unispark-db.cmh7hqdc7yex.us-east-1.rds.amazonaws.com:3306/Unispark-DB*	
+admin*
+passwordUnispark*
+2*ù
+6Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java! !(ç
+ä
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java! !(6
+%1java.lang.Class"<java.lang.Class#forName(Ljava/lang/String;)Ljava/lang/Class;*"
+java.lang.Class*
+com.mysql.jdbc.Driver*
+5*˝
+8Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java (Í
+Á
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java (
+%0java.sql.Connection"__id*?*=3
+1com.example.unispark.database.others.MySqlConnect"
+conn*
+6
+1*ö
+1Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java) )(Í
+Á
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java) )(
+%5java.sql.Connection"__id*?*=3
+1com.example.unispark.database.others.MySqlConnect"
+conn"¢
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/others/MySqlConnect.java) )(
+
+%5java.sql.ConnectionB53
+1com.example.unispark.database.others.MySqlConnect

@@ -4,8 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanCoursesNames;
-import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.course.BeanCoursesNames;
+import com.example.unispark.bean.lesson.BeanLesson;
 import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
@@ -13,7 +13,6 @@ import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LessonAlreadyExists;
 import com.example.unispark.viewadapter.LessonAdapter;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class AddScheduleGuiController extends BaseUniGuiController{

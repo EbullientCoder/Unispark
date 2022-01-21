@@ -1,6 +1,6 @@
 package com.example.unispark.controller.applicationcontroller.homeworks;
 
-import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.homework.BeanHomework;
 import com.example.unispark.database.dao.HomeworkDAO;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.HomeworkModel;

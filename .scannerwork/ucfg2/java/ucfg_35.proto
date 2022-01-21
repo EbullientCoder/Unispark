@@ -1,16 +1,17 @@
 
-Scom.example.unispark.communications.ItemCommunication#getObject()Ljava/lang/Object; 
-•C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/ItemCommunication.java ("1*ô
-1 
-•C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/ItemCommunication.java (‹
-ˆ
- 
-•C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/ItemCommunication.java (
-%0java.lang.Object"__id*E*C7
-5com.example.unispark.communications.ItemCommunication"
-object"½
- 
-•C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/ItemCommunication.java (
+Fcom.example.unispark.bean.BeanLesson#getLessonName()Ljava/lang/String;u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java ("1*ã
+1u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (Ò
+Ï
+u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (
+%0java.lang.String"__id*8*6&
+$com.example.unispark.bean.BeanLesson"
+
+lessonName"‘
+u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (
 
-%0java.lang.ObjectB97
-5com.example.unispark.communications.ItemCommunication
+%0java.lang.StringB(&
+$com.example.unispark.bean.BeanLesson

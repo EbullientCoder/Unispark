@@ -6,13 +6,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.CoursesAdapter;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class JoinCourseGuiController extends MenageStudentProfileGuiController {

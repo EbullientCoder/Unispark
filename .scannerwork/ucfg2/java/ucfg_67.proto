@@ -1,9 +1,16 @@
 
-7com.example.unispark.links.LinksAdapter#getItemCount()Ií
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/links/LinksAdapter.java2 2("1*∏
-1í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/links/LinksAdapter.java3 3("ù
-í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/links/LinksAdapter.java3 3( 
-""B+)
-'com.example.unispark.links.LinksAdapter
+Ecom.example.unispark.bean.BeanLink#getLinkAddress()Ljava/lang/String;s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java ( "1*‹
+1s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (œ
+Ã
+s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (
+%0java.lang.String"__id*7*5$
+"com.example.unispark.bean.BeanLink"
+linkAddress"è
+s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (
+
+%0java.lang.StringB&$
+"com.example.unispark.bean.BeanLink

@@ -16,8 +16,8 @@ import android.widget.ImageButton;
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.university.AddScheduleGuiController;
 import com.example.unispark.viewadapter.LessonAdapter;
-import com.example.unispark.bean.BeanCoursesNames;
-import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.course.BeanCoursesNames;
+import com.example.unispark.bean.lesson.BeanLesson;
 import com.example.unispark.bean.login.BeanLoggedUniversity;
 
 import java.util.List;

@@ -1,16 +1,9 @@
 
-Rcom.example.unispark.communications.Communication#getComTitle1()Ljava/lang/String;ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java   ("1*Á
-1ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java! !(Ü
-É
-ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java! !(
-%0java.lang.String"__id*D*B3
-1com.example.unispark.communications.Communication"
-	comTitle1"π
-ú
-ëC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/Communication.java! !(
-
-%0java.lang.StringB53
-1com.example.unispark.communications.Communication
+?com.example.unispark.bean.BeanUniCommunication#getBackground()I
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanUniCommunication.java ("1*ê
+1
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanUniCommunication.java ("â
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanUniCommunication.java (
+""B20
+.com.example.unispark.bean.BeanUniCommunication

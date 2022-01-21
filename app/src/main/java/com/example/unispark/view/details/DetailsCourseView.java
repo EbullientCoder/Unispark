@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.controller.guicontroller.DetailsGuiController;
 import com.example.unispark.model.CourseModel;
 

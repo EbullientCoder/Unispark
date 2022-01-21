@@ -4,8 +4,8 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanBookExam;
-import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.exam.BeanBookExam;
+import com.example.unispark.bean.exam.BeanExamType;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
@@ -15,7 +15,6 @@ import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiCont
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MenageStudentExamsGuiController extends BottomNavigationMenuGuiController {

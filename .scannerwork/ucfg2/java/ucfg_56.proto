@@ -1,9 +1,46 @@
 
-9com.example.unispark.professors.Professor#getProfImage()Iî
-âC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/professors/Professor.java ("1*º
-1î
-âC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/professors/Professor.java ("ü
-î
-âC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/professors/Professor.java (
-""B-+
-)com.example.unispark.professors.Professor
+{com.example.unispark.database.query.QueryExams#selectExamGrades(Ljava/sql/Statement;Ljava/lang/String;)Ljava/sql/ResultSet;
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java0 0(,"1*»
+1
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java2 2(mÿ
+’
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java2 3(j
+%0java.lang.String"__concat*RP
+NSELECT * FROM examgrades INNER JOIN exams ON examgrades.examID = exams.examID *\Z
+XINNER JOIN courses ON exams.examname = courses.coursename WHERE examgrades.studentID = '·
+ﬁ
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java2 3(v
+%1java.lang.String"__concat*
+
+%0java.lang.String*
+
+	studentIDjava.lang.String»
+≈
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java2 3(}
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+';≈
+¬
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java2 3(~
+queryStringjava.lang.String"__id*
+
+%2java.lang.StringœÃ
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java4 4(2
+%3java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
+
+	statementjava.sql.Statement*!
+
+queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"ù
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java4 4(3
+
+%3java.sql.ResultSet:
+	statementjava.sql.Statement:
+	studentIDjava.lang.StringB2"0
+.com.example.unispark.database.query.QueryExams

@@ -1,16 +1,9 @@
 
-Gcom.example.unispark.exams.ReserveExam#getrExamName()Ljava/lang/String;ë
-ÜC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ReserveExam.java ("1*ª
-1ë
-ÜC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ReserveExam.java (
-Ì
-ë
-ÜC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ReserveExam.java (
-%0java.lang.String"__id*9*7(
-&com.example.unispark.exams.ReserveExam"
-	rExamName"Æ
-ë
-ÜC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ReserveExam.java (
-
-%0java.lang.StringB*(
-&com.example.unispark.exams.ReserveExam
+>com.example.unispark.viewadapter.LessonAdapter#getItemCount()I
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/viewadapter/LessonAdapter.javaO O("1*ê
+1
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/viewadapter/LessonAdapter.javaP P("â
+
+uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/viewadapter/LessonAdapter.javaP P(!
+""B20
+.com.example.unispark.viewadapter.LessonAdapter

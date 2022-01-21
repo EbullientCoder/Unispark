@@ -1,9 +1,16 @@
 
-Icom.example.unispark.communications.CommunicationsAdapter#getItemCount()I¤
-™C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/CommunicationsAdapter.java3 3("1*Ü
-1¤
-™C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/CommunicationsAdapter.java4 4(!"¯
-¤
-™C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/communications/CommunicationsAdapter.java4 4()
-""B=;
-9com.example.unispark.communications.CommunicationsAdapter
+Ycom.example.unispark.bean.BeanProfessorCommunication#getCommunication()Ljava/lang/String;…
+{C:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanProfessorCommunication.java1 1(""1*©
+1…
+{C:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanProfessorCommunication.java2 2(ö
+ó
+…
+{C:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanProfessorCommunication.java2 2(
+%0java.lang.String"__id*K*I6
+4com.example.unispark.bean.BeanProfessorCommunication"
+communication"¢
+…
+{C:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanProfessorCommunication.java2 2(
+
+%0java.lang.StringB86
+4com.example.unispark.bean.BeanProfessorCommunication

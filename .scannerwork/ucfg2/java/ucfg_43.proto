@@ -1,16 +1,16 @@
 
-Acom.example.unispark.exams.ItemExam#getObject()Ljava/lang/Object;Ž
-ƒC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ItemExam.java ("1*¬
-1Ž
-ƒC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ItemExam.java (ç
-ä
-Ž
-ƒC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ItemExam.java (
-%0java.lang.Object"__id*3*1%
-#com.example.unispark.exams.ItemExam"
-object"«
-Ž
-ƒC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/ItemExam.java (
+Acom.example.unispark.model.LessonModel#getDay()Ljava/lang/String;w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java ("1*ä
+1w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (Ï
+Ì
+w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (
+%0java.lang.String"__id*3*1(
+&com.example.unispark.model.LessonModel"
+day"“
+w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (
 
-%0java.lang.ObjectB'%
-#com.example.unispark.exams.ItemExam
+%0java.lang.StringB*(
+&com.example.unispark.model.LessonModel

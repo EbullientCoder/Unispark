@@ -1,12 +1,10 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
-import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.exam.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.database.dao.ExamsDAO;
-import com.example.unispark.model.exams.BookExamModel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowSignedToExamStudents {

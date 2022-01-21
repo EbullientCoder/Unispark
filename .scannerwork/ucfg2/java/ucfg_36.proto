@@ -1,9 +1,16 @@
 
-;com.example.unispark.courses.CoursesAdapter#getItemCount()I–
-‹C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/CoursesAdapter.java4 4("1*À
-1–
-‹C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/CoursesAdapter.java5 5("¡
-–
-‹C:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/CoursesAdapter.java5 5("
-""B/-
-+com.example.unispark.courses.CoursesAdapter
+?com.example.unispark.bean.BeanLesson#getDay()Ljava/lang/String;u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java ("1*Ü
+1u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (Ë
+È
+u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (
+%0java.lang.String"__id*1*/&
+$com.example.unispark.bean.BeanLesson"
+day"‘
+u
+kC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLesson.java (
+
+%0java.lang.StringB(&
+$com.example.unispark.bean.BeanLesson

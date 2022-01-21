@@ -1,7 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
-import com.example.unispark.bean.BeanProfessorCommunication;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communication.BeanProfessorCommunication;
+import com.example.unispark.bean.communication.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CommunicationsDAO;
@@ -56,7 +56,7 @@ public class ShowCommunications {
 
     //Student
     public List<BeanUniCommunication> showUniversityCommunications(BeanLoggedStudent student) {
-        List<com.example.unispark.bean.BeanUniCommunication> beanUniCommunicationList = new ArrayList<>();
+        List<BeanUniCommunication> beanUniCommunicationList = new ArrayList<>();
 
         List<UniversityCommunicationModel> uniCommunicationsItem;
         try {
@@ -113,7 +113,7 @@ public class ShowCommunications {
             uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
 
             for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-                beanUniCommunicationList.add(new com.example.unispark.bean.BeanUniCommunication(
+                beanUniCommunicationList.add(new BeanUniCommunication(
                         uniCommunicationsItem.get(i).getBackground(),
                         uniCommunicationsItem.get(i).getTitle(),
                         uniCommunicationsItem.get(i).getDate(),

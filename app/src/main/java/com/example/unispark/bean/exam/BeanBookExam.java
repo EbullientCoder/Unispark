@@ -1,6 +1,6 @@
-package com.example.unispark.bean;
+package com.example.unispark.bean.exam;
 
-public class BeanBookExam extends BeanExam{
+public class BeanBookExam extends BeanExam {
 
     private String classroom;
     private String building;

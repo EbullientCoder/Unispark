@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.bean.lesson.BeanLesson;
 
 import java.util.List;
 

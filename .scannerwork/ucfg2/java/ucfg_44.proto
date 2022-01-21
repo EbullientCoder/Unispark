@@ -1,9 +1,16 @@
 
-?com.example.unispark.homeworks.HomeworksAdapter#getItemCount()Iö
-èC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/homeworks/HomeworksAdapter.java2 2("1*»
-1ö
-èC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/homeworks/HomeworksAdapter.java3 3("•
-ö
-èC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/homeworks/HomeworksAdapter.java3 3($
-""B31
-/com.example.unispark.homeworks.HomeworksAdapter
+Bcom.example.unispark.model.LessonModel#getHour()Ljava/lang/String;w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java ("1*Â
+1w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (–
+Õ
+w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (
+%0java.lang.String"__id*4*2(
+&com.example.unispark.model.LessonModel"
+hour"ì
+w
+mC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/model/LessonModel.java (
+
+%0java.lang.StringB*(
+&com.example.unispark.model.LessonModel

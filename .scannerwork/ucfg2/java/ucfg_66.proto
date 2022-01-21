@@ -1,16 +1,17 @@
 
-Ecom.example.unispark.courses.ItemCourse#getObject()Ljava/lang/Object;í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/ItemCourse.java ("1*º
-1í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/ItemCourse.java (Ô
-Ï
-í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/ItemCourse.java (
-%0java.lang.Object"__id*7*5)
-'com.example.unispark.courses.ItemCourse"
-object"Ø
-í
-áC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/courses/ItemCourse.java (
+Bcom.example.unispark.bean.BeanLink#getLinkName()Ljava/lang/String;s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java ("1*Ÿ
+1s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (Ã
+…
+s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (
+%0java.lang.String"__id*4*2$
+"com.example.unispark.bean.BeanLink"
+
+linkName"è
+s
+iC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanLink.java (
 
-%0java.lang.ObjectB+)
-'com.example.unispark.courses.ItemCourse
+%0java.lang.StringB&$
+"com.example.unispark.bean.BeanLink

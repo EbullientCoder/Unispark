@@ -1,16 +1,17 @@
 
-Fcom.example.unispark.exams.AcceptExam#getaExamDate()Ljava/lang/String;ê
-ÖC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/AcceptExam.java ("1*∑
-1ê
-ÖC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/AcceptExam.java (Ó
-Î
-ê
-ÖC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/AcceptExam.java (
-%0java.lang.String"__id*8*6'
-%com.example.unispark.exams.AcceptExam"
-	aExamDate"≠
-ê
-ÖC:/Users/andre/Desktop/Uni/Materie/ISPW/Progetto/Unispark/Android_Studio/app/src/main/java/com/example/unispark/exams/AcceptExam.java (
+Qcom.example.unispark.bean.BeanStudentSignedToExam#getFullName()Ljava/lang/String;Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanStudentSignedToExam.java ("1*ò
+1Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanStudentSignedToExam.java (Î
+Ë
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanStudentSignedToExam.java (
+%0java.lang.String"__id*C*A3
+1com.example.unispark.bean.BeanStudentSignedToExam"
+
+fullName"ü
+Ç
+xC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/bean/BeanStudentSignedToExam.java (
 
-%0java.lang.StringB)'
-%com.example.unispark.exams.AcceptExam
+%0java.lang.StringB53
+1com.example.unispark.bean.BeanStudentSignedToExam

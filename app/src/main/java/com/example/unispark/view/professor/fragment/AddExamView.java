@@ -18,7 +18,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 
 import com.example.unispark.controller.guicontroller.professor.AddExamGuiController;
