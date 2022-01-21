@@ -12,15 +12,12 @@ import java.sql.SQLException;
 
 public class AddExam {
     //Add Exam
-    public void addExam(BeanBookExam bExam, BeanLoggedProfessor professor) throws ExamAlreadyExists, GenericException
+    public void addExam(BeanBookExam bExam) throws ExamAlreadyExists, GenericException
     {
         //Adding it into the DB
         BookExamModel exam = new BookExamModel(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCfu(), bExam.getClassroom(), bExam.getBuilding());
         try {
-
             ExamsDAO.addExam(exam);
-
-
         } catch (ExamException e) {
             e.printStackTrace();
             throw new ExamAlreadyExists("Exam already exists");

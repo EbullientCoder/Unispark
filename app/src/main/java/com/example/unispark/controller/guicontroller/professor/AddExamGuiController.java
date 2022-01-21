@@ -39,7 +39,7 @@ public class AddExamGuiController extends AddItemGuiController{
             AddExam addExamAppController = new AddExam();
             try {
 
-                addExamAppController.addExam(bExam, professor);
+                addExamAppController.addExam(bExam);
                 examAddedMessage(context);
                 dialog.dismiss();
 

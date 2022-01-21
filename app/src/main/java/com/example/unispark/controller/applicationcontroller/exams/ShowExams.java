@@ -18,167 +18,129 @@ public class ShowExams {
     //Student
     //Page: Verbalized ExamModel
     public List<BeanExamType> verbalizedExams(BeanLoggedStudent student){
-        List<BeanExamType> bExams = new ArrayList<>();
-
+        List<VerbalizedExamModel> verbalizedExams = null;
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
-
-            List<VerbalizedExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(student.getId());
-
-            for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
-                VerbalizedExamModel vExam = verbalizedExams.get(i);
-                BeanVerbalizeExam beanVerbalizeExam;
-                beanVerbalizeExam = new BeanVerbalizeExam();
-                beanVerbalizeExam.setName(vExam.getName());
-                beanVerbalizeExam.setResult(vExam.getResult());
-                beanVerbalizeExam.setCfu(vExam.getCFU());
-                beanVerbalizeExam.setDate(vExam.getDate());
-                beanVerbalizeExam.setId(vExam.getId());
-                beanVerbalizeExam.setYear(vExam.getYear());
-                BeanExamType beanExamType;
-                beanExamType = new BeanExamType();
-                beanExamType.setType(0);
-                beanExamType.setExamType(beanVerbalizeExam);
-                bExams.add(beanExamType);
-            }
+            verbalizedExams = ExamsDAO.getVerbalizedExams(student.getId());
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return bExams;
+        return this.listBeanVerbalizedExams(verbalizedExams, 0);
     }
 
 
     //Page: Failed ExamModel
     public List<BeanExamType> failedExams(BeanLoggedStudent student){
-        List<BeanExamType> bExams = new ArrayList<>();
+        List<VerbalizedExamModel> failedExams = null;
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
-            List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(student.getId());
-            for (int i = 0; failedExams != null && i < failedExams.size(); i++){
-                VerbalizedExamModel vExam = failedExams.get(i);
-                BeanVerbalizeExam beanVerbalizeExam;
-                beanVerbalizeExam = new BeanVerbalizeExam();
-                beanVerbalizeExam.setName(vExam.getName());
-                beanVerbalizeExam.setResult(vExam.getResult());
-                beanVerbalizeExam.setCfu(vExam.getCFU());
-                beanVerbalizeExam.setDate(vExam.getDate());
-                beanVerbalizeExam.setId(vExam.getId());
-                beanVerbalizeExam.setYear(vExam.getYear());
-                BeanExamType beanExamType;
-                beanExamType = new BeanExamType();
-                beanExamType.setType(0);
-                beanExamType.setExamType(beanVerbalizeExam);
-                bExams.add(beanExamType);
-                bExams.add(beanExamType);
-            }
+            failedExams = ExamsDAO.getFailedExams(student.getId());
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return bExams;
+        return this.listBeanVerbalizedExams(failedExams, 0);
     }
 
 
     //Page: Upcoming StudentExamsGUIController
     public List<BeanExamType> bookExams(BeanLoggedStudent student){
-        List<BeanExamType> bExams = new ArrayList<>();
-
+        List<BookExamModel> bookExams = null;
 
         try{
             //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-            List<BookExamModel> bookExams = ExamsFacade.getInstance().getExams(student.getId(), false);
-            for (int i = 0; bookExams != null && i < bookExams.size(); i++){
-                BookExamModel bExam = bookExams.get(i);
-                BeanBookExam beanBookExam;
-                beanBookExam = new BeanBookExam();
-                beanBookExam.setDate(bExam.getDate());
-                beanBookExam.setYear(bExam.getYear());
-                beanBookExam.setName(bExam.getName());
-                beanBookExam.setCfu(bExam.getCFU());
-                beanBookExam.setId(bExam.getId());
-                beanBookExam.setBuilding(bExam.getBuilding());
-                beanBookExam.setClassroom(beanBookExam.getClassroom());
-                BeanExamType beanExamType;
-                beanExamType = new BeanExamType();
-                beanExamType.setType(2);
-                beanExamType.setExamType(beanBookExam);
+            bookExams = ExamsFacade.getInstance().getExams(student.getId(), false);
 
-                bExams.add(beanExamType);
-            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return bExams;
+        return this.listBeanBookExams(bookExams, 2);
     }
 
 
     //Page: Booked StudentExamsGUIController
     public List<BeanExamType> bookedExams(BeanLoggedStudent student){
-        List<BeanExamType> bExams = new ArrayList<>();
+        List<BookExamModel> bookedExams = null;
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
-            List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(student.getId());
-            for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
-                BookExamModel bExam = bookedExams.get(i);
-                BeanBookExam beanBookExam;
-                beanBookExam = new BeanBookExam();
-                beanBookExam.setDate(bExam.getDate());
-                beanBookExam.setYear(bExam.getYear());
-                beanBookExam.setName(bExam.getName());
-                beanBookExam.setCfu(bExam.getCFU());
-                beanBookExam.setId(bExam.getId());
-                beanBookExam.setBuilding(bExam.getBuilding());
-                beanBookExam.setClassroom(beanBookExam.getClassroom());
-                BeanExamType beanExamType;
-                beanExamType = new BeanExamType();
-                beanExamType.setType(3);
-                beanExamType.setExamType(beanBookExam);
-
-                bExams.add(beanExamType);
-            }
+            bookedExams = ExamsDAO.getBookedExams(student.getId());
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return bExams;
+        return this.listBeanBookExams(bookedExams, 3);
     }
 
 
     //Professor
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        List<BeanExamType> bExams = new ArrayList<>();
+        List<BookExamModel> exams = null;
 
 
         try {
-            List<BookExamModel> exams;
-            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
-            for (int i = 0; exams != null && i < exams.size(); i++){
-                BookExamModel bExam = exams.get(i);
-                BeanBookExam beanBookExam;
-                beanBookExam = new BeanBookExam();
-                beanBookExam.setDate(bExam.getDate());
-                beanBookExam.setYear(bExam.getYear());
-                beanBookExam.setName(bExam.getName());
-                beanBookExam.setCfu(bExam.getCFU());
-                beanBookExam.setId(bExam.getId());
-                beanBookExam.setBuilding(bExam.getBuilding());
-                beanBookExam.setClassroom(beanBookExam.getClassroom());
-                BeanExamType beanExamType;
-                beanExamType = new BeanExamType();
-                beanExamType.setType(1);
-                beanExamType.setExamType(beanBookExam);
 
-                bExams.add(beanExamType);
-            }
+            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return this.listBeanBookExams(exams, 1);
+    }
+
+
+
+    private List<BeanExamType> listBeanVerbalizedExams(List<VerbalizedExamModel> verbalizedExams, int type){
+        List<BeanExamType> bExams = new ArrayList<>();
+
+        for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
+            VerbalizedExamModel vExam = verbalizedExams.get(i);
+            BeanVerbalizeExam beanVerbalizeExam;
+            beanVerbalizeExam = new BeanVerbalizeExam();
+            beanVerbalizeExam.setName(vExam.getName());
+            beanVerbalizeExam.setResult(vExam.getResult());
+            beanVerbalizeExam.setCfu(vExam.getCFU());
+            beanVerbalizeExam.setDate(vExam.getDate());
+            beanVerbalizeExam.setId(vExam.getId());
+            beanVerbalizeExam.setYear(vExam.getYear());
+            BeanExamType beanExamType;
+            beanExamType = new BeanExamType();
+            beanExamType.setType(type);
+            beanExamType.setExamType(beanVerbalizeExam);
+            bExams.add(beanExamType);
+        }
+
+        return bExams;
+    }
+
+    private List<BeanExamType> listBeanBookExams(List<BookExamModel> bookExams, int type){
+        List<BeanExamType> bExams = new ArrayList<>();
+
+        for (int i = 0; bookExams != null && i < bookExams.size(); i++){
+            BookExamModel bExam = bookExams.get(i);
+            BeanBookExam beanBookExam;
+            beanBookExam = new BeanBookExam();
+            beanBookExam.setDate(bExam.getDate());
+            beanBookExam.setYear(bExam.getYear());
+            beanBookExam.setName(bExam.getName());
+            beanBookExam.setCfu(bExam.getCFU());
+            beanBookExam.setId(bExam.getId());
+            beanBookExam.setBuilding(bExam.getBuilding());
+            beanBookExam.setClassroom(beanBookExam.getClassroom());
+            BeanExamType beanExamType;
+            beanExamType = new BeanExamType();
+            beanExamType.setType(type);
+            beanExamType.setExamType(beanBookExam);
+
+            bExams.add(beanExamType);
+        }
+
         return bExams;
     }
 }

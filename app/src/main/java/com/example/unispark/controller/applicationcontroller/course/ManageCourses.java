@@ -64,31 +64,14 @@ public class ManageCourses {
 
         List<BeanCourse> bCourses = new ArrayList<>();
 
-        List<CourseModel> avaliableCourses;
+        List<CourseModel> avaliableCourses = null;
         try {
             avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), student.getCourses());
-            CourseModel course;
-            for (int i = 0; i < avaliableCourses.size(); i++){
-                course = avaliableCourses.get(i);
-                BeanCourse beanCourse;
-                beanCourse  = new BeanCourse();
-                beanCourse.setShortName(course.getShortName());
-                beanCourse.setFullName(course.getFullName());
-                beanCourse.setCourseYear(course.getCourseYear());
-                beanCourse.setCfu(course.getCfu());
-                beanCourse.setFaculty(course.getFaculty());
-                beanCourse.setId(course.getId());
-                beanCourse.setLink(course.getLink());
-                beanCourse.setSession(course.getSession());
-                beanCourse.setUniYear(course.getUniYear());
-                bCourses.add(beanCourse);
-            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-
-        return bCourses;
+        return listBeanCourses(avaliableCourses);
     }
 
 
@@ -133,18 +116,7 @@ public class ManageCourses {
                 courses = CourseDAO.selectCourses(faculties.get(i));
                 if (!courses.isEmpty()){
                     for (int j = 0; j < courses.size(); j++){
-                        BeanCourse beanCourse;
-                        beanCourse  = new BeanCourse();
-                        beanCourse.setShortName(courses.get(j).getShortName());
-                        beanCourse.setFullName(courses.get(j).getFullName());
-                        beanCourse.setCourseYear(courses.get(j).getCourseYear());
-                        beanCourse.setCfu(courses.get(j).getCfu());
-                        beanCourse.setFaculty(courses.get(j).getFaculty());
-                        beanCourse.setId(courses.get(j).getId());
-                        beanCourse.setLink(courses.get(j).getLink());
-                        beanCourse.setSession(courses.get(j).getSession());
-                        beanCourse.setUniYear(courses.get(j).getUniYear());
-                        bCourses.add(beanCourse);
+                        bCourses.add(this.createBeanCourse(courses.get(j)));
                     }
                 }
             }
@@ -162,26 +134,10 @@ public class ManageCourses {
     //Get Student Courses
     public List<BeanCourse> getCourses(BeanLoggedStudent student){
         List<CourseModel> courses = student.getCourses();
-        List<BeanCourse> bCourses = new ArrayList<>();
-        CourseModel course;
-        for (int i = 0; i < courses.size(); i++){
-            course = courses.get(i);
-            BeanCourse beanCourse;
-            beanCourse  = new BeanCourse();
-            beanCourse.setShortName(course.getShortName());
-            beanCourse.setFullName(course.getFullName());
-            beanCourse.setCourseYear(course.getCourseYear());
-            beanCourse.setCfu(course.getCfu());
-            beanCourse.setFaculty(course.getFaculty());
-            beanCourse.setId(course.getId());
-            beanCourse.setLink(course.getLink());
-            beanCourse.setSession(course.getSession());
-            beanCourse.setUniYear(course.getUniYear());
-            bCourses.add(beanCourse);
-        }
 
-        return bCourses;
+        return this.listBeanCourses(courses);
     }
+
 
     //Get Professor Courses
     public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
@@ -191,25 +147,8 @@ public class ManageCourses {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        List<BeanCourse> bCourses = new ArrayList<>();
-        CourseModel course;
-        for (int i = 0; i < courses.size(); i++){
-            course = courses.get(i);
-            BeanCourse beanCourse;
-            beanCourse  = new BeanCourse();
-            beanCourse.setShortName(course.getShortName());
-            beanCourse.setFullName(course.getFullName());
-            beanCourse.setCourseYear(course.getCourseYear());
-            beanCourse.setCfu(course.getCfu());
-            beanCourse.setFaculty(course.getFaculty());
-            beanCourse.setId(course.getId());
-            beanCourse.setLink(course.getLink());
-            beanCourse.setSession(course.getSession());
-            beanCourse.setUniYear(course.getUniYear());
-            bCourses.add(beanCourse);
-        }
 
-        return bCourses;
+        return this.listBeanCourses(courses);
     }
 
     public List<String> getCoursesNames(BeanLoggedProfessor bProfessor){
@@ -224,5 +163,32 @@ public class ManageCourses {
         for(int i = 0; i < courses.size(); i++) coursesNames.add(courses.get(i).getShortName());
 
         return coursesNames;
+    }
+
+    private BeanCourse createBeanCourse(CourseModel course){
+        BeanCourse beanCourse;
+        beanCourse  = new BeanCourse();
+        beanCourse.setShortName(course.getShortName());
+        beanCourse.setFullName(course.getFullName());
+        beanCourse.setCourseYear(course.getCourseYear());
+        beanCourse.setCfu(course.getCfu());
+        beanCourse.setFaculty(course.getFaculty());
+        beanCourse.setId(course.getId());
+        beanCourse.setLink(course.getLink());
+        beanCourse.setSession(course.getSession());
+        beanCourse.setUniYear(course.getUniYear());
+
+        return beanCourse;
+    }
+
+    private List<BeanCourse> listBeanCourses(List<CourseModel> courses){
+        List<BeanCourse> bCourses = new ArrayList<>();
+        CourseModel course;
+        for (int i = 0; i < courses.size(); i++){
+            course = courses.get(i);
+            bCourses.add(this.createBeanCourse(course));
+        }
+
+        return bCourses;
     }
 }

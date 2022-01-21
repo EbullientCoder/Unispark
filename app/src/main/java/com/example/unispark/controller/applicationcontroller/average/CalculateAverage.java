@@ -46,7 +46,7 @@ public class CalculateAverage {
     //Weighted Average
     public float weightedAverage(BeanLoggedStudent student){
         float average = 0;
-        float CFU = 0;
+        float cfu = 0;
 
         try {
             List<VerbalizedExamModel> exams;
@@ -55,10 +55,10 @@ public class CalculateAverage {
             if(exams != null){
                 for(int i = 0; i < exams.size(); i++){
                     average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCFU()));
-                    CFU += Double.parseDouble(exams.get(i).getCFU());
+                    cfu += Double.parseDouble(exams.get(i).getCFU());
                 }
 
-                average = average / CFU;
+                average = average / cfu;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

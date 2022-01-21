@@ -20,6 +20,8 @@ import javax.security.auth.login.LoginException;
 
 public class Login {
 
+    private static String errorMessage = "Wrong username and/or password";
+
     //Login Methods
     public BeanLoggedStudent studentLogin(BeanUser user) throws WrongUsernameOrPasswordException, SQLException {
         BeanLoggedStudent beanLoggedStudent = null;
@@ -41,7 +43,7 @@ public class Login {
 
         } catch (LoginException e) {
             e.printStackTrace();
-            throw new WrongUsernameOrPasswordException("Wrong username or password");
+            throw new WrongUsernameOrPasswordException(errorMessage);
         }
 
         return beanLoggedStudent;
@@ -65,7 +67,7 @@ public class Login {
             beanLoggedProfessor.setWebsite(professor.getWebsite());
         } catch (LoginException e) {
             e.printStackTrace();
-            throw new WrongUsernameOrPasswordException("Wrong username or password");
+            throw new WrongUsernameOrPasswordException(errorMessage);
         }
 
         return beanLoggedProfessor;
@@ -85,7 +87,7 @@ public class Login {
 
         } catch (LoginException e) {
             e.printStackTrace();
-            throw new WrongUsernameOrPasswordException("Wrong username or password");
+            throw new WrongUsernameOrPasswordException(errorMessage);
         }
 
         return beanLoggedUniversity;
