@@ -1,46 +1,0 @@
-
-|com.example.unispark.database.query.QueryExams#selectBookedExams(Ljava/sql/Statement;Ljava/lang/String;)Ljava/sql/ResultSet;
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java% %(-"1*–
-1
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java' '(qﬁ
-€
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java' ((l
-%0java.lang.String"__concat*VT
-RSELECT * FROM studentexams INNER JOIN exams ON studentexams.examID = exams.examID *^\
-ZINNER JOIN courses ON exams.examname = courses.coursename WHERE studentexams.studentID = '·
-ﬁ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java' ((x
-%1java.lang.String"__concat*
-
-%0java.lang.String*
-
-	studentIDjava.lang.String»
-≈
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java' ((
-%2java.lang.String"__concat*
-
-%1java.lang.String*
-';«
-ƒ
-Ä
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java' ((Ä
-queryStringjava.lang.String"__id*
-
-%2java.lang.StringœÃ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java) )(2
-%3java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
-
-	statementjava.sql.Statement*!
-
-queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"ù
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java) )(3
-
-%3java.sql.ResultSet:
-	statementjava.sql.Statement:
-	studentIDjava.lang.StringB2"0
-.com.example.unispark.database.query.QueryExams

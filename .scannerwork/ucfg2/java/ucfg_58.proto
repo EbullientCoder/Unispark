@@ -1,99 +1,0 @@
-
-hcom.example.unispark.database.query.QueryExams#selectExamDate(Ljava/sql/Statement;I)Ljava/sql/ResultSet;
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java@ @(*"1*ê
-1
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(&ª
-§
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA) A(-
-%0java.lang.String"__id*
-""Í
-Ê
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(-
-%1java.lang.String"__concat*	
-SELECT *
-
-%0java.lang.StringÌ
-É
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(8
-%2java.lang.String"__concat*
-
-%1java.lang.String*
-
- FROM ª
-§
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA; A(@
-%3java.lang.String"__id*
-""Ú
-×
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(@
-%4java.lang.String"__concat*
-
-%2java.lang.String*
-
-%3java.lang.StringÖ
-Ó
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(U
-%5java.lang.String"__concat*
-
-%4java.lang.String*
- WHERE examID = È
-Å
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(^
-%6java.lang.String"__concat*
-
-%5java.lang.String*
-""Ë
-È
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(h
-%7java.lang.String"__concat*
-
-%6java.lang.String*	
- AND ª
-§
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaAk A(o
-%8java.lang.String"__id*
-""Ú
-×
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(o
-%9java.lang.String"__concat*
-
-%7java.lang.String*
-
-%8java.lang.StringÒ
-Ï
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(
-%10java.lang.String"__concat*
-
-%9java.lang.String*
- >= NOW() ;È
-Å
-€
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaA A(€
-queryStringjava.lang.String"__id*
-
-%10java.lang.StringÐÍ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaB B(2
-%11java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
-
-	statementjava.sql.Statement*!
-
-queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"ž
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaB B(3
-
-%11java.sql.ResultSet:
-	statementjava.sql.Statement:
-""B2"0
-.com.example.unispark.database.query.QueryExams

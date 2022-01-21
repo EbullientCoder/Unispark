@@ -1,39 +1,0 @@
-
-hcom.example.unispark.database.query.QueryExams#selectStudents(Ljava/sql/Statement;I)Ljava/sql/ResultSet;
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java9 9(*"1*Á
-
-1€
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java; ;(™°
-­
-€
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java; ;(¢
-%0java.lang.String"__concat*~|
-zSELECT * FROM studentexams INNER JOIN students ON studentexams.studentID = students.studentID WHERE studentexams.examID = *
-""É
-Æ
-€
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java; ;(¨
-%1java.lang.String"__concat*
-
-%0java.lang.String*
-;Ç
-Ä
-€
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java; ;(©
-queryStringjava.lang.String"__id*
-
-%1java.lang.StringÏÌ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java< <(2
-%2java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
-
-	statementjava.sql.Statement*!
-
-queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.java< <(3
-
-%2java.sql.ResultSet:
-	statementjava.sql.Statement:
-""B2"0
-.com.example.unispark.database.query.QueryExams

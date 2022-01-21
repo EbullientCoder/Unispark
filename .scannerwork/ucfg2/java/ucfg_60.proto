@@ -1,57 +1,0 @@
-
-çcom.example.unispark.database.query.QueryExams#selectCourseExam(Ljava/sql/Statement;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/ResultSet;
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaN N(,"1*ï
-1Ä
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP P(â∫
-∑
-Ä
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP P(ñ
-%0java.lang.String"__concat*nl
-jSELECT * FROM studentexams INNER JOIN exams ON studentexams.examID = exams.examID WHERE exams.examname = '* 
-
-
-courseNamejava.lang.StringÊ
-„
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP Q(2
-%1java.lang.String"__concat*
-
-%0java.lang.String*$"
- ' AND studentexams.studentID = '·
-ﬁ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP Q(>
-%2java.lang.String"__concat*
-
-%1java.lang.String*
-
-	studentIdjava.lang.String»
-≈
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP Q(E
-%3java.lang.String"__concat*
-
-%2java.lang.String*
-';≈
-¬
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaP Q(F
-queryStringjava.lang.String"__id*
-
-%3java.lang.StringœÃ
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaS S(2
-%4java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
-
-	statementjava.sql.Statement*!
-
-queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"ù
-
-uC:/Users/andre/Desktop/uniSpark/uniSpark_Mobile/app/src/main/java/com/example/unispark/database/query/QueryExams.javaS S(3
-
-%4java.sql.ResultSet:
-	statementjava.sql.Statement:
-	studentIdjava.lang.String:
-
-courseNamejava.lang.StringB2"0
-.com.example.unispark.database.query.QueryExams
