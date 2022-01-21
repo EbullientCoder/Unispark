@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 
 
 import java.util.List;

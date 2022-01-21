@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.BeanProfessorCommunication;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communications.BeanProfessorCommunication;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
@@ -15,7 +15,6 @@ import com.example.unispark.view.details.DetailsProfCommunicationView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenageStudentHomeGuiController extends BottomNavigationMenuGuiController {

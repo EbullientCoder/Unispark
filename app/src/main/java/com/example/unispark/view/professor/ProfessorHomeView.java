@@ -17,7 +17,7 @@ import com.example.unispark.controller.guicontroller.professor.ManageProfessorHo
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

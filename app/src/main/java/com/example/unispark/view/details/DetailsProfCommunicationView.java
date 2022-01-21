@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanProfessorCommunication;
+import com.example.unispark.bean.communications.BeanProfessorCommunication;
 
 
 public class DetailsProfCommunicationView extends AppCompatActivity {

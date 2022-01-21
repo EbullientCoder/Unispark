@@ -18,8 +18,8 @@ import com.example.unispark.controller.guicontroller.student.MenageStudentHomeGu
 import com.example.unispark.viewadapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanHomework;
-import com.example.unispark.bean.BeanProfessorCommunication;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communications.BeanProfessorCommunication;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.student.MenageStudentExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
-import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

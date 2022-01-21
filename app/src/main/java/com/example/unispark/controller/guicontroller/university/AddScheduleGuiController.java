@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanCoursesNames;
+import com.example.unispark.bean.courses.BeanCoursesNames;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;

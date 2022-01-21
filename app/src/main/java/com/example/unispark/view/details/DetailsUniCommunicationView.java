@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanUniCommunication;
-import com.example.unispark.model.communications.UniversityCommunicationModel;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 
 public class DetailsUniCommunicationView extends AppCompatActivity {
     //Attributes

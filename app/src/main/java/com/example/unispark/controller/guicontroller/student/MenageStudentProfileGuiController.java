@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;

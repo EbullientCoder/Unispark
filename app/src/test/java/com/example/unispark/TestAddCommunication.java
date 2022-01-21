@@ -2,8 +2,8 @@ package com.example.unispark;
 
 import static org.junit.Assert.assertEquals;
 
-import com.example.unispark.bean.BeanProfessorCommunication;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communications.BeanProfessorCommunication;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
 import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;
@@ -29,7 +29,7 @@ public class TestAddCommunication {
         communicationController = new AddCommunication();
 
         try {
-            communicationController.addUniCommunication(new BeanUniCommunication(R.id.img_communication_background,
+            communicationController.addUniCommunication(new BeanUniCommunication(R.id.img_uni_com_background,
                     "Pubblicazione lezioni", "2022-01-20",
                     "Sono state aggiunte le lezioni per il secondo semestre", "Economia"));
             code = 1;

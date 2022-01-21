@@ -1,13 +1,12 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
-import com.example.unispark.bean.BeanBookExam;
-import com.example.unispark.bean.BeanExamType;
-import com.example.unispark.bean.BeanVerbalizeExam;
+import com.example.unispark.bean.exams.BeanBookExam;
+import com.example.unispark.bean.exams.BeanExamType;
+import com.example.unispark.bean.exams.BeanVerbalizeExam;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.facade.ExamsFacade;
-import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 

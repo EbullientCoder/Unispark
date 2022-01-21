@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.student.JoinCourseGuiController;
 import com.example.unispark.viewadapter.CoursesAdapter;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 
 

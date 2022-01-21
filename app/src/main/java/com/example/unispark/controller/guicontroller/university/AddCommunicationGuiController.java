@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;

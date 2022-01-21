@@ -1,9 +1,8 @@
 package com.example.unispark.controller.applicationcontroller.schedule;
 
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.database.dao.LessonsDAO;
-import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.LessonModel;
 

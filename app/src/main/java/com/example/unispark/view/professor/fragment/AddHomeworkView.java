@@ -22,7 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.professor.AddHomeworkGuiController;
 import com.example.unispark.viewadapter.HomeworksAdapter;
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 

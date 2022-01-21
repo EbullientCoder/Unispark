@@ -3,7 +3,7 @@ package com.example.unispark.controller.guicontroller.professor;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowSignedToExamStudents;
 import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;

@@ -1,4 +1,4 @@
-package com.example.unispark.bean;
+package com.example.unispark.bean.courses;
 
 import java.util.ArrayList;
 import java.util.List;

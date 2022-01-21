@@ -2,6 +2,8 @@ package com.example.unispark.bean;
 
 
 
+import com.example.unispark.bean.courses.BeanCourse;
+
 import java.io.Serializable;
 import java.util.List;
 

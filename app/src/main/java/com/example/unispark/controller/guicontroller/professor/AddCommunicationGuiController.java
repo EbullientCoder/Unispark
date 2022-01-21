@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.BeanProfessorCommunication;
+import com.example.unispark.bean.communications.BeanProfessorCommunication;
 import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
 import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;

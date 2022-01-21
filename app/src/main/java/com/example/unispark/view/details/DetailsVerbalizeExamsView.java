@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.controller.guicontroller.professor.VerbalizeExamGuiController;
 import com.example.unispark.viewadapter.SignedStudentsAdapter;
-import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.course;
 
-import com.example.unispark.bean.BeanCourse;
-import com.example.unispark.bean.BeanCoursesNames;
+import com.example.unispark.bean.courses.BeanCourse;
+import com.example.unispark.bean.courses.BeanCoursesNames;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CourseDAO;

@@ -3,7 +3,7 @@ package com.example.unispark;
 
 import static org.junit.Assert.assertEquals;
 
-import com.example.unispark.bean.BeanCourse;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
