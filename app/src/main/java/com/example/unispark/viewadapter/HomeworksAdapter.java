@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.homework.BeanHomework;
+import com.example.unispark.bean.BeanHomework;
 
 import java.util.List;
 

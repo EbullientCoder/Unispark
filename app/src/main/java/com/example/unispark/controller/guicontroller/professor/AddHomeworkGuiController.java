@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.homework.BeanHomework;
+import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.controller.applicationcontroller.homeworks.AddHomework;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.HomeworksAdapter;

@@ -13,7 +13,6 @@ public class BeanLink {
         this.linkAddress = linkAddress;
     }
 
-
     //Getter
     public String getLinkName() {
         return linkName;

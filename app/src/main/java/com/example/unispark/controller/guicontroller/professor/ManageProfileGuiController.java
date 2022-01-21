@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.example.unispark.bean.course.BeanCourse;
+import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.view.details.DetailsCourseView;

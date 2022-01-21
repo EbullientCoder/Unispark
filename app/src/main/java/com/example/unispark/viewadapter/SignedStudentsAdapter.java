@@ -49,7 +49,7 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         BeanStudentSignedToExam student = (BeanStudentSignedToExam) items.get(position);
-        ((SignedStudentsAdapter.StudentViewHolder) holder).setStudentDate(student);
+        ((StudentViewHolder) holder).setStudentDate(student);
     }
 
     @Override

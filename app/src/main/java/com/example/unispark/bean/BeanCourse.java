@@ -1,4 +1,4 @@
-package com.example.unispark.bean.course;
+package com.example.unispark.bean;
 
 import java.io.Serializable;
 

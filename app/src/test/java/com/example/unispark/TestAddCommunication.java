@@ -1,14 +1,14 @@
 package com.example.unispark;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import com.example.unispark.bean.BeanProfessorCommunication;
 import com.example.unispark.bean.BeanUniCommunication;
 import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
 import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;
+
+import org.junit.Test;
 
 /**
  *

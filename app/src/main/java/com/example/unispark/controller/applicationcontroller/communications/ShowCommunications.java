@@ -1,7 +1,7 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
-import com.example.unispark.bean.communication.BeanProfessorCommunication;
-import com.example.unispark.bean.communication.BeanUniCommunication;
+import com.example.unispark.bean.BeanProfessorCommunication;
+import com.example.unispark.bean.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CommunicationsDAO;

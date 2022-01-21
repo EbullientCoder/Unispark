@@ -1,13 +1,9 @@
 package com.example.unispark;
 
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
-
-import com.example.unispark.bean.BeanBookExam;
 import com.example.unispark.bean.BeanCourse;
-import com.example.unispark.bean.BeanCoursesNames;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
@@ -19,8 +15,9 @@ import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.WrongUsernameOrPasswordException;
 
+import org.junit.Test;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 /**

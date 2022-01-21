@@ -6,7 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.course.BeanCourse;
+import com.example.unispark.bean.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.exceptions.CourseAlreadyJoined;

@@ -11,7 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.homework.BeanHomework;
+import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.model.HomeworkModel;
 
 public class DetailsHomeworkView extends AppCompatActivity {
     //Attributes

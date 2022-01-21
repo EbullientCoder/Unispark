@@ -1,6 +1,6 @@
 package com.example.unispark.exceptions;
 
-import com.example.unispark.bean.lesson.BeanErrorLessonAlreadyExists;
+import com.example.unispark.bean.BeanErrorLessonAlreadyExists;
 
 /**
  *

@@ -1,8 +1,6 @@
-package com.example.unispark.bean.exam;
+package com.example.unispark.bean;
 
-import com.example.unispark.bean.exam.BeanExam;
-
-public class BeanVerbalizeExam extends BeanExam {
+public class BeanVerbalizeExam extends BeanExam{
 
     //Attributes
     private String result;

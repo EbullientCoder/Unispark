@@ -1,6 +1,4 @@
-package com.example.unispark.bean.exam;
-
-import com.example.unispark.bean.exam.BeanExam;
+package com.example.unispark.bean;
 
 public class BeanExamType {
 

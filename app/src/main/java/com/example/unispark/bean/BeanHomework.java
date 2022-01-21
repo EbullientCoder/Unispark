@@ -1,4 +1,4 @@
-package com.example.unispark.bean.homework;
+package com.example.unispark.bean;
 
 import java.io.Serializable;
 

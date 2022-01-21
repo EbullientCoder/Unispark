@@ -3,14 +3,15 @@ package com.example.unispark.controller.guicontroller.professor;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.unispark.bean.homework.BeanHomework;
-import com.example.unispark.bean.communication.BeanUniCommunication;
+import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.bean.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
 import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
 import com.example.unispark.view.details.DetailsHomeworkView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ManageProfessorHomeGuiController extends BaseProfessorGuiController {

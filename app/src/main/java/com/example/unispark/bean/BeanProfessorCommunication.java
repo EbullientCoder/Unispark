@@ -1,4 +1,4 @@
-package com.example.unispark.bean.communication;
+package com.example.unispark.bean;
 
 import java.io.Serializable;
 

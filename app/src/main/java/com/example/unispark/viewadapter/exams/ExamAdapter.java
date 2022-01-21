@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.exam.BeanBookExam;
-import com.example.unispark.bean.exam.BeanExamType;
-import com.example.unispark.bean.exam.BeanVerbalizeExam;
+import com.example.unispark.bean.BeanBookExam;
+import com.example.unispark.bean.BeanExamType;
+import com.example.unispark.bean.BeanVerbalizeExam;
 
 
 import java.util.List;
