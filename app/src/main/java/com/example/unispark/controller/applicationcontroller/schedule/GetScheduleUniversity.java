@@ -49,7 +49,7 @@ public class GetScheduleUniversity {
         }
 
         //Sort the Lessons by their Start Hour
-        LessonsSort(bLessons);
+        this.lessonsSort(bLessons);
 
         return bLessons;
     }
@@ -57,10 +57,11 @@ public class GetScheduleUniversity {
 
 
     //Sort Lessons
-    public void LessonsSort(List<BeanLesson> lessons){
+    public void lessonsSort(List<BeanLesson> lessons){
 
         if(lessons !=  null){
-            int hour1, hour2;
+            int hour1;
+            int hour2;
 
             for(int i = 0; i < lessons.size(); i++){
                 //Gets the first two elements of the string and cast them into Integers

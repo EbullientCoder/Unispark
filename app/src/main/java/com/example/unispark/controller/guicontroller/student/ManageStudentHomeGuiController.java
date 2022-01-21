@@ -49,11 +49,9 @@ public class ManageStudentHomeGuiController extends BottomNavigationMenuGuiContr
         List<BeanHomework> homeworks = null;
         //Applicative Controller
         ShowHomeworks showHomeworksController = new ShowHomeworks();
-        try {
-            homeworks = showHomeworksController.getHomework(student);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        homeworks = showHomeworksController.getHomework(student);
+
 
         return homeworks;
 

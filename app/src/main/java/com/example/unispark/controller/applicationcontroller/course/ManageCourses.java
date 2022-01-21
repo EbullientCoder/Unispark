@@ -10,6 +10,7 @@ import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.exceptions.GenericException;
+import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
 
 import java.sql.SQLException;
@@ -62,8 +63,6 @@ public class ManageCourses {
 
     public List<BeanCourse> getAvaliableCourses(BeanLoggedStudent student)  {
 
-        List<BeanCourse> bCourses = new ArrayList<>();
-
         List<CourseModel> avaliableCourses = null;
         try {
             avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), student.getCourses());
@@ -71,7 +70,7 @@ public class ManageCourses {
             throwables.printStackTrace();
         }
 
-        return listBeanCourses(avaliableCourses);
+        return CourseCreatorFacade.getInstance().listBeanCourses(avaliableCourses);
     }
 
 
@@ -135,7 +134,7 @@ public class ManageCourses {
     public List<BeanCourse> getCourses(BeanLoggedStudent student){
         List<CourseModel> courses = student.getCourses();
 
-        return this.listBeanCourses(courses);
+        return CourseCreatorFacade.getInstance().listBeanCourses(courses);
     }
 
 
@@ -148,7 +147,7 @@ public class ManageCourses {
             throwables.printStackTrace();
         }
 
-        return this.listBeanCourses(courses);
+        return CourseCreatorFacade.getInstance().listBeanCourses(courses);
     }
 
     public List<String> getCoursesNames(BeanLoggedProfessor bProfessor){
@@ -181,14 +180,5 @@ public class ManageCourses {
         return beanCourse;
     }
 
-    private List<BeanCourse> listBeanCourses(List<CourseModel> courses){
-        List<BeanCourse> bCourses = new ArrayList<>();
-        CourseModel course;
-        for (int i = 0; i < courses.size(); i++){
-            course = courses.get(i);
-            bCourses.add(this.createBeanCourse(course));
-        }
 
-        return bCourses;
-    }
 }

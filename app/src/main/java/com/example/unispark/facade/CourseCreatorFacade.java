@@ -1,6 +1,7 @@
 package com.example.unispark.facade;
 
 
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.model.CourseModel;
 
 import java.sql.ResultSet;
@@ -62,5 +63,27 @@ public class CourseCreatorFacade {
         } while (rs.next());
 
         return coursesList;
+    }
+
+
+    public List<BeanCourse> listBeanCourses(List<CourseModel> courses){
+        List<BeanCourse> beanCourseList = new ArrayList<>();
+        CourseModel course;
+        for (int i = 0; i < courses.size(); i++){
+            course = courses.get(i);
+            BeanCourse beanCourse;
+            beanCourse  = new BeanCourse();
+            beanCourse.setShortName(course.getShortName());
+            beanCourse.setFullName(course.getFullName());
+            beanCourse.setCourseYear(course.getCourseYear());
+            beanCourse.setCfu(course.getCfu());
+            beanCourse.setFaculty(course.getFaculty());
+            beanCourse.setId(course.getId());
+            beanCourse.setLink(course.getLink());
+            beanCourse.setSession(course.getSession());
+            beanCourse.setUniYear(course.getUniYear());
+            beanCourseList.add(beanCourse);
+        }
+        return beanCourseList;
     }
 }

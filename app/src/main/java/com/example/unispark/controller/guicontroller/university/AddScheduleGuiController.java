@@ -63,7 +63,7 @@ public class AddScheduleGuiController extends BaseUniGuiController{
                 //App Controller: GetScheduleUniversity
                 //Sorting the Lessons
                 GetScheduleUniversity getScheduleUniversity =  new GetScheduleUniversity();
-                getScheduleUniversity.LessonsSort(lessons);
+                getScheduleUniversity.lessonsSort(lessons);
 
                 dialog.dismiss();
             } catch (GenericException genericException) {

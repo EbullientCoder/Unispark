@@ -18,22 +18,7 @@ public class GetScheduleStudent {
 
         try{
 
-            switch(day){
-                case "TUESDAY": lessonsItem = LessonsDAO.getLessons("TUESDAY", student.getCourses());
-                    break;
-                case "WEDNESDAY": lessonsItem = LessonsDAO.getLessons("WEDNESDAY", student.getCourses());
-                    break;
-                case "THURSDAY": lessonsItem = LessonsDAO.getLessons("THURSDAY", student.getCourses());
-                    break;
-                case "FRIDAY": lessonsItem = LessonsDAO.getLessons("FRIDAY", student.getCourses());
-                    break;
-                case "SATURDAY": lessonsItem = LessonsDAO.getLessons("SATURDAY", student.getCourses());
-                    break;
-                case "SUNDAY": lessonsItem = LessonsDAO.getLessons("SUNDAY", student.getCourses());
-                    break;
-                default:
-                    lessonsItem = LessonsDAO.getLessons("MONDAY", student.getCourses());
-            }
+            lessonsItem = LessonsDAO.getLessons(day, student.getCourses());
 
             for (int i = 0; i < lessonsItem.size(); i++){
                 LessonModel lesson = lessonsItem.get(i);
@@ -46,11 +31,10 @@ public class GetScheduleStudent {
             }
 
             //Sort the Lessons by their Start Hour
-            LessonsSort(lessons);
+            this.lessonsSort(lessons);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
 
         return lessons;
     }
@@ -58,10 +42,11 @@ public class GetScheduleStudent {
 
 
     //Sort Lessons
-    private void LessonsSort(List<BeanLesson> lessons){
+    private void lessonsSort(List<BeanLesson> lessons){
 
         if(lessons !=  null){
-            int hour1, hour2;
+            int hour1;
+            int hour2;
 
             for(int i = 0; i < lessons.size(); i++){
                 //Gets the first two elements of the string and cast them into Integers
