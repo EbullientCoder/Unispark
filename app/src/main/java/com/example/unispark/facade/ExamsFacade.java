@@ -27,7 +27,7 @@ public class ExamsFacade {
         return instance;
     }
 
-    private static void removeBookedExams (List<BookExamModel> bookedExams, List<BookExamModel> exams)
+    private void removeBookedExams (List<BookExamModel> bookedExams, List<BookExamModel> exams)
     {
         int examId;
         int bookedExamId;
@@ -43,7 +43,7 @@ public class ExamsFacade {
     }
 
 
-    private static List<BookExamModel> getStudentExams(String id) throws SQLException {
+    private List<BookExamModel> getStudentExams(String id) throws SQLException {
         List<BookExamModel> examsList = new ArrayList<>();
 
         List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
@@ -57,7 +57,7 @@ public class ExamsFacade {
                 tempList = ExamsDAO.getCourseExams(courses.get(i), false);
                 if(!tempList.isEmpty()){
                     if (!bookedExams.isEmpty()) {
-                        removeBookedExams(bookedExams, tempList);
+                        this.removeBookedExams(bookedExams, tempList);
                     }
                     examsList.addAll(tempList);
                 }
@@ -66,7 +66,7 @@ public class ExamsFacade {
         return examsList;
     }
 
-    private static List<BookExamModel> getProfessorExams(String id) throws SQLException {
+    private List<BookExamModel> getProfessorExams(String id) throws SQLException {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(Integer.valueOf(id));
 
         List<BookExamModel> examsList = new ArrayList<>();
@@ -82,13 +82,13 @@ public class ExamsFacade {
     }
 
     //Select exams marked by studentID/professorId depending on boolean isProfessor
-    public static List<BookExamModel> getExams(String id, boolean isProfessor) throws SQLException {
+    public List<BookExamModel> getExams(String id, boolean isProfessor) throws SQLException {
         List<BookExamModel> exams;
         if (isProfessor) {
-            exams = getProfessorExams(id);
+            exams = this.getProfessorExams(id);
         }
         else{
-            exams = getStudentExams(id);
+            exams = this.getStudentExams(id);
         }
         return exams;
     }
