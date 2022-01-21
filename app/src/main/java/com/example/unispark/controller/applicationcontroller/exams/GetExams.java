@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowExams {
+public class GetExams {
     //Student
     //Page: Verbalized ExamModel
     public List<BeanExamType> verbalizedExams(BeanLoggedStudent student){
