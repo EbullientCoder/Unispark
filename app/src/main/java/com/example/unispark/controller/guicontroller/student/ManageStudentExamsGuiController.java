@@ -9,7 +9,7 @@ import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
-import com.example.unispark.controller.applicationcontroller.exams.GetExams;
+import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
 import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.exceptions.GenericException;
@@ -51,7 +51,7 @@ public class ManageStudentExamsGuiController extends BottomNavigationMenuGuiCont
         List<BeanExamType> exams = null;
 
         //Application Controller
-        GetExams studentExamsAppController = new GetExams();
+        ShowExams studentExamsAppController = new ShowExams();
 
         //Select the Page
         if(page == 0){
