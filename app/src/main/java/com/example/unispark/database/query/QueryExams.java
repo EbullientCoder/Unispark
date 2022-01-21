@@ -1,8 +1,5 @@
 package com.example.unispark.database.query;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +7,10 @@ import java.sql.Statement;
 
 public class QueryExams {
 
-    public static final String EXAMS = "exams";
-    public static final String EXAM_NAME = "examname";
-    public static final String STUDENT_EXAMS = "studentexams";
-    public static final String STUDENT_ID = "studentID";
-    public static final String GRADE = "grade";
-    public static final String EXAM_GRADES = "examgrades";
-    public static final String ID = "id";
-    public static final String DATE = "date";
-    public static final String EXAM_ID = "examID";
+    private static final String EXAMS = "exams";
+    private static final String EXAM_NAME = "examname";
+    private static final String DATE = "date";
+
 
     private QueryExams(){}
 
@@ -61,12 +53,7 @@ public class QueryExams {
 
     }
 
-    public static ResultSet selectExamDate(Statement statement, int examID) throws SQLException{
-        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE examID = " + examID + " AND " + DATE + " >= NOW() ;";
-        return statement.executeQuery(queryString);
 
-
-    }
 
     public static ResultSet selectExam(Statement statement, String name, String date) throws SQLException
     {

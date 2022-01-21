@@ -1,7 +1,5 @@
 package com.example.unispark.database.query;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +7,8 @@ import java.sql.Statement;
 
 public class QueryFaculties {
 
-    public static final String FACULTIES = "faculties";
-    public static final String FACULTY = "faculty";
+    private static final String FACULTIES = "faculties";
+    private static final String FACULTY = "faculty";
 
     private QueryFaculties(){}
 

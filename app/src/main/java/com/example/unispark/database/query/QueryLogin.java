@@ -2,18 +2,15 @@ package com.example.unispark.database.query;
 
 import static com.example.unispark.database.others.Password.getHash;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class QueryLogin {
     // Students, professors and University tables
-    public static final String STUDENTS_TABLE = "students";
-    public static final String PROFESSORS_TABLE = "professors";
-    public static final String UNI_TABLE = "university";
+    private static final String STUDENTS_TABLE = "students";
+    private static final String PROFESSORS_TABLE = "professors";
+    private static final String UNI_TABLE = "university";
 
     private QueryLogin(){}
 

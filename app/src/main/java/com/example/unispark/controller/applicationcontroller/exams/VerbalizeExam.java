@@ -16,7 +16,7 @@ public class VerbalizeExam {
     //Verbalize Exam
     public void verbalizeExam(BeanBookExam exam, BeanStudentSignedToExam student, String result) throws ExamNotYetOccured, GenericException {
         //Create new Verbalized Exam
-        VerbalizedExamModel vExam = new VerbalizedExamModel(exam.getId(), exam.getName(), exam.getDate(), exam.getDate(), exam.getCFU(), result);
+        VerbalizedExamModel vExam = new VerbalizedExamModel(exam.getId(), exam.getName(), exam.getDate(), exam.getDate(), exam.getCfu(), result);
 
         //Add Verbalized Exam to the DB
         try {

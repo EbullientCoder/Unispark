@@ -1,17 +1,13 @@
 package com.example.unispark.database.query;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class QueryHomework {
     //Homework table
-    public static final String HOMEWORK_TABLE = "homework";
-    public static final String COURSE_NAME = "coursename";
-    public static final String TRACK_PROFESSOR = "trackprofessor";
+    private static final String HOMEWORK_TABLE = "homework";
+    private static final String TRACK_PROFESSOR = "trackprofessor";
 
     private QueryHomework(){}
 

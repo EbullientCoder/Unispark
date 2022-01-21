@@ -31,14 +31,14 @@ public class ShowExams {
                 beanVerbalizeExam = new BeanVerbalizeExam();
                 beanVerbalizeExam.setName(vExam.getName());
                 beanVerbalizeExam.setResult(vExam.getResult());
-                beanVerbalizeExam.setCFU(vExam.getCFU());
+                beanVerbalizeExam.setCfu(vExam.getCFU());
                 beanVerbalizeExam.setDate(vExam.getDate());
                 beanVerbalizeExam.setId(vExam.getId());
                 beanVerbalizeExam.setYear(vExam.getYear());
                 BeanExamType beanExamType;
                 beanExamType = new BeanExamType();
                 beanExamType.setType(0);
-                beanExamType.setBeanExamType(beanVerbalizeExam);
+                beanExamType.setExamType(beanVerbalizeExam);
                 bExams.add(beanExamType);
             }
 
@@ -63,14 +63,14 @@ public class ShowExams {
                 beanVerbalizeExam = new BeanVerbalizeExam();
                 beanVerbalizeExam.setName(vExam.getName());
                 beanVerbalizeExam.setResult(vExam.getResult());
-                beanVerbalizeExam.setCFU(vExam.getCFU());
+                beanVerbalizeExam.setCfu(vExam.getCFU());
                 beanVerbalizeExam.setDate(vExam.getDate());
                 beanVerbalizeExam.setId(vExam.getId());
                 beanVerbalizeExam.setYear(vExam.getYear());
                 BeanExamType beanExamType;
                 beanExamType = new BeanExamType();
                 beanExamType.setType(0);
-                beanExamType.setBeanExamType(beanVerbalizeExam);
+                beanExamType.setExamType(beanVerbalizeExam);
                 bExams.add(beanExamType);
                 bExams.add(beanExamType);
             }
@@ -97,14 +97,14 @@ public class ShowExams {
                 beanBookExam.setDate(bExam.getDate());
                 beanBookExam.setYear(bExam.getYear());
                 beanBookExam.setName(bExam.getName());
-                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setCfu(bExam.getCFU());
                 beanBookExam.setId(bExam.getId());
                 beanBookExam.setBuilding(bExam.getBuilding());
                 beanBookExam.setClassroom(beanBookExam.getClassroom());
                 BeanExamType beanExamType;
                 beanExamType = new BeanExamType();
                 beanExamType.setType(2);
-                beanExamType.setBeanExamType(beanBookExam);
+                beanExamType.setExamType(beanBookExam);
 
                 bExams.add(beanExamType);
             }
@@ -130,14 +130,14 @@ public class ShowExams {
                 beanBookExam.setDate(bExam.getDate());
                 beanBookExam.setYear(bExam.getYear());
                 beanBookExam.setName(bExam.getName());
-                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setCfu(bExam.getCFU());
                 beanBookExam.setId(bExam.getId());
                 beanBookExam.setBuilding(bExam.getBuilding());
                 beanBookExam.setClassroom(beanBookExam.getClassroom());
                 BeanExamType beanExamType;
                 beanExamType = new BeanExamType();
                 beanExamType.setType(3);
-                beanExamType.setBeanExamType(beanBookExam);
+                beanExamType.setExamType(beanBookExam);
 
                 bExams.add(beanExamType);
             }
@@ -165,14 +165,14 @@ public class ShowExams {
                 beanBookExam.setDate(bExam.getDate());
                 beanBookExam.setYear(bExam.getYear());
                 beanBookExam.setName(bExam.getName());
-                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setCfu(bExam.getCFU());
                 beanBookExam.setId(bExam.getId());
                 beanBookExam.setBuilding(bExam.getBuilding());
                 beanBookExam.setClassroom(beanBookExam.getClassroom());
                 BeanExamType beanExamType;
                 beanExamType = new BeanExamType();
                 beanExamType.setType(1);
-                beanExamType.setBeanExamType(beanBookExam);
+                beanExamType.setExamType(beanBookExam);
 
                 bExams.add(beanExamType);
             }

@@ -170,6 +170,6 @@ public class ProfessorExamsView extends AppCompatActivity
     //On ViewExam Button Click
     @Override
     public void onViewBtnClick(int position) {
-        examsGuiController.showVerbalizeExam(getApplicationContext(), examsItem.get(position).getBeanExamType());
+        examsGuiController.showVerbalizeExam(getApplicationContext(), examsItem.get(position).getExamType());
     }
 }

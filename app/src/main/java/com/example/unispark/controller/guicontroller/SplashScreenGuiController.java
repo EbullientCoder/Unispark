@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.StrictMode;
 
-import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.view.LoginView;
 
-import java.sql.Connection;
 
 public class SplashScreenGuiController {
 

@@ -108,22 +108,22 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //Verbalized - Failed StudentExamsGUIController
         if(getItemViewType(position) == 0){
-            BeanVerbalizeExam vExam = (BeanVerbalizeExam) bExams.get(position).getBeanExamType();
+            BeanVerbalizeExam vExam = (BeanVerbalizeExam) bExams.get(position).getExamType();
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
         }
         //Professor: Assigned StudentExamsGUIController
         else if(getItemViewType(position) == 1){
-            BeanBookExam assignedExam = (BeanBookExam) bExams.get(position).getBeanExamType();
+            BeanBookExam assignedExam = (BeanBookExam) bExams.get(position).getExamType();
             ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
         }
         //Student: Book StudentExamsGUIController
         else if(getItemViewType(position) == 2){
-            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getBeanExamType();
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getExamType();
             ((BookExamViewHolder) holder).setBookExamDate(bookExam);
         }
         //Student: Booked StudentExamsGUIController
         else {
-            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getBeanExamType();
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getExamType();
             ((BookedExamViewHolder) holder).setBookedExamDate(bookExam);
         }
     }
@@ -164,7 +164,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCFU());
+            ExamCFU.setText(exam.getCfu());
             ExamResult.setText(exam.getResult());
         }
     }
@@ -201,7 +201,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCFU());
+            ExamCFU.setText(exam.getCfu());
             ExamClassroom.setText(exam.getClassroom());
             ExamBuilding.setText(exam.getBuilding());
         }
@@ -244,7 +244,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCFU());
+            ExamCFU.setText(exam.getCfu());
             ExamClassroom.setText(exam.getClassroom());
             ExamBuilding.setText(exam.getBuilding());
         }
@@ -286,7 +286,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ExamName.setText(exam.getName());
             ExamYear.setText(exam.getYear());
             ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCFU());
+            ExamCFU.setText(exam.getCfu());
             ExamClassroom.setText(exam.getClassroom());
             ExamBuilding.setText(exam.getBuilding());
             btnLeave.setText("LEAVE");

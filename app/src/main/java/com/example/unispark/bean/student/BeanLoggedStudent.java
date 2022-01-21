@@ -3,9 +3,7 @@ package com.example.unispark.bean.student;
 import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class BeanLoggedStudent extends BeanLoggedUser {

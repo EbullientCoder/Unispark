@@ -1,10 +1,6 @@
 package com.example.unispark.bean.professor;
 
 import com.example.unispark.bean.login.BeanLoggedUser;
-import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.exams.BookExamModel;
-
-import java.util.List;
 
 public class BeanLoggedProfessor extends BeanLoggedUser{
 

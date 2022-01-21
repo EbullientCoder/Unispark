@@ -91,7 +91,7 @@ public class ManageStudentExamsGuiController extends BottomNavigationMenuGuiCont
         BookExam bookExamAppController = new BookExam();
 
         try {
-            bookExamAppController.bookExam(student, (BeanBookExam) exams.get(position).getBeanExamType());
+            bookExamAppController.bookExam(student, (BeanBookExam) exams.get(position).getExamType());
             getBookedExamMessage(context);
 
             //Removing the Booked Exam from the List

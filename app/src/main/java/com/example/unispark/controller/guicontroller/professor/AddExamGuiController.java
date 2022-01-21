@@ -30,7 +30,7 @@ public class AddExamGuiController extends AddItemGuiController{
             bExam.setName(courseName);
             bExam.setYear(courseYear);
             bExam.setDate(date + hour);
-            bExam.setCFU(cfu);
+            bExam.setCfu(cfu);
             bExam.setClassroom(classroom);
             bExam.setBuilding(building);
 

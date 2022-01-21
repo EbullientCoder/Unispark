@@ -1,6 +1,5 @@
 package com.example.unispark.model.exams;
 
-import java.util.List;
 
 public class BookExamModel extends ExamModel{
     //Attributes

@@ -17,7 +17,7 @@ public class BookExam {
     public void bookExam(BeanLoggedStudent student, BeanBookExam exam) throws ExamAlreadyVerbalized, GenericException
     {
         List<BookExamModel> exams = student.getBookedExams();
-        BookExamModel bookExam = new BookExamModel(exam.getId(), exam.getName(), exam.getYear(), exam.getDate(), exam.getCFU(), exam.getClassroom(), exam.getBuilding());
+        BookExamModel bookExam = new BookExamModel(exam.getId(), exam.getName(), exam.getYear(), exam.getDate(), exam.getCfu(), exam.getClassroom(), exam.getBuilding());
         try {
             ExamsDAO.bookExam(bookExam, student.getId());
             exams.add(bookExam);

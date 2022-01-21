@@ -1,12 +1,10 @@
 package com.example.unispark.facade;
 
-import android.database.Cursor;
 
 import com.example.unispark.model.CourseModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

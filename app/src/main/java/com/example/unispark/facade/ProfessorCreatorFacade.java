@@ -1,7 +1,6 @@
 package com.example.unispark.facade;
 
 import com.example.unispark.database.dao.CourseDAO;
-import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 import com.example.unispark.model.exams.BookExamModel;

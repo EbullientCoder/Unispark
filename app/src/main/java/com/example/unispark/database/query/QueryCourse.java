@@ -1,10 +1,6 @@
 package com.example.unispark.database.query;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.example.unispark.exceptions.GenericException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,14 +8,10 @@ import java.sql.Statement;
 
 public class QueryCourse {
     //Courses table
-    public static final String COURSE_TABLE = "courses";
-    public static final String COURSE_NAME = "coursename";
-    public static final String STUDENTS_COURSES = "studentscourses";
-    public static final String STUDENT_ID = "studentID";
-    public static final String FACULTY = "faculty";
-    public static final String YEAR = "year";
-    public static final String CFU = "cfu";
-    public static final String UNIVERSITY_YEAR = "uniyear";
+    private static final String COURSE_TABLE = "courses";
+    private static final String COURSE_NAME = "coursename";
+    private static final String FACULTY = "faculty";
+    private static final String UNIVERSITY_YEAR = "uniyear";
 
     private QueryCourse(){}
 

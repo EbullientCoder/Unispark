@@ -1,8 +1,5 @@
 package com.example.unispark.database.query;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +7,10 @@ import java.sql.Statement;
 
 public class QueryLessons {
 
-    public static final String LESSON = "lesson";
-    public static final String LESSONS = "lessons";
-    public static final String DAY = "day";
-    public static final String HOUR = "hour";
+    private static final String LESSON = "lesson";
+    private static final String LESSONS = "lessons";
+    private static final String DAY = "day";
+    private static final String HOUR = "hour";
 
     private QueryLessons(){}
 

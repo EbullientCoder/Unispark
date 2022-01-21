@@ -1,6 +1,5 @@
 package com.example.unispark.bean.exams;
 
-import com.example.unispark.bean.exams.BeanExam;
 
 public class BeanVerbalizeExam extends BeanExam {
 
@@ -12,7 +11,6 @@ public class BeanVerbalizeExam extends BeanExam {
     public String getResult() {
         return result;
     }
-
 
     //Setter
     public void setResult(String result) {
