@@ -25,8 +25,7 @@ import java.sql.SQLException;
  *
  * @author Emanuele Valzano
  *
- * This tests aim to show that the use case manage courses is correctly
- * implemented by the controller ManageCourses
+ *
  *
  */
 public class TestManageCourses {

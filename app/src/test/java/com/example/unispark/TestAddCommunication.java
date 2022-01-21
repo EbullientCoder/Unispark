@@ -91,13 +91,4 @@ public class TestAddCommunication {
         assertEquals(code, 1);
     }
 
-
-
-
-
-
-
-
-
-
 }
