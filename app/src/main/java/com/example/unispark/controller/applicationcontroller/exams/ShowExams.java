@@ -65,26 +65,23 @@ public class ShowExams {
 
     //Page: Booked StudentExamsGUIController
     public List<BeanExamType> bookedExams(BeanLoggedStudent student){
-        List<BookExamModel> bookedExams;
+        List<BookExamModel> bookedExams = null;
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        bookedExams = student.getBookedExams();
+        try {
+            bookedExams = ExamsDAO.getBookedExams(student.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return this.listBeanBookExams(bookedExams, 3);
     }
 
 
     //Professor
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        List<BookExamModel> exams = null;
+        List<BookExamModel> exams;
+        exams = professor.getExams();
 
-
-        try {
-
-            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return this.listBeanBookExams(exams, 1);
     }
 

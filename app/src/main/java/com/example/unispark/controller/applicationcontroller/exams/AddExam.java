@@ -9,15 +9,19 @@ import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.exams.BookExamModel;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class AddExam {
     //Add Exam
-    public void addExam(BeanBookExam bExam) throws ExamAlreadyExists, GenericException
+    public void addExam(BeanBookExam bExam, BeanLoggedProfessor professor) throws ExamAlreadyExists, GenericException
     {
         //Adding it into the DB
         BookExamModel exam = new BookExamModel(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCfu(), bExam.getClassroom(), bExam.getBuilding());
         try {
             ExamsDAO.addExam(exam);
+            List<BookExamModel> professorExams = professor.getExams();
+            professorExams.add(exam);
+            professor.setExams(professorExams);
         } catch (ExamException e) {
             e.printStackTrace();
             throw new ExamAlreadyExists("Exam already exists");

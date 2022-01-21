@@ -1,6 +1,5 @@
 package com.example.unispark.bean.professor;
 
-import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.HomeworkModel;
 import com.example.unispark.model.exams.BookExamModel;
@@ -12,7 +11,7 @@ public class BeanLoggedProfessor extends BeanProfessor{
     //Attributes
 
     private List<CourseModel> courses;
-    private List<BookExamModel> bookExams;
+    private List<BookExamModel> exams;
     private List<HomeworkModel> homeworks;
 
 
@@ -20,8 +19,8 @@ public class BeanLoggedProfessor extends BeanProfessor{
         return courses;
     }
 
-    public List<BookExamModel> getBookExams() {
-        return bookExams;
+    public List<BookExamModel> getExams() {
+        return exams;
     }
 
     public List<HomeworkModel> getHomeworks() {
@@ -34,8 +33,8 @@ public class BeanLoggedProfessor extends BeanProfessor{
         this.courses = courses;
     }
 
-    public void setBookExams(List<BookExamModel> bookExams) {
-        this.bookExams = bookExams;
+    public void setExams(List<BookExamModel> exams) {
+        this.exams = exams;
     }
 
     public void setHomeworks(List<HomeworkModel> homeworks) {
