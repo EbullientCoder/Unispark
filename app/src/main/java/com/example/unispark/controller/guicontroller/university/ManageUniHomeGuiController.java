@@ -12,7 +12,7 @@ import com.example.unispark.bean.lesson.BeanLesson;
 import com.example.unispark.bean.communication.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
@@ -66,7 +66,7 @@ public class ManageUniHomeGuiController extends BaseUniGuiController{
     private List<BeanCourse> getCourses(List<String> faculties){
         List<BeanCourse> courses;
 
-        MenageCourses getCoursesAppController = new MenageCourses();
+        ManageCourses getCoursesAppController = new ManageCourses();
         courses = getCoursesAppController.getFacultyCourses(faculties);
 
 

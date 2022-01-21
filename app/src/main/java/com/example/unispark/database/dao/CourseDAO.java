@@ -3,6 +3,9 @@ package com.example.unispark.database.dao;
 import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
+import com.example.unispark.exceptions.CourseAlreadyJoined;
+import com.example.unispark.exceptions.CourseDoesNotExist;
+import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
@@ -19,7 +22,7 @@ public class CourseDAO {
     private CourseDAO(){}
 
 
-    public static void joinCourse(String studentID, String courseName) throws SQLException {
+    public static void joinCourse(String studentID, String courseName) throws SQLException, CourseDoesNotExist, CourseAlreadyJoined {
         Statement statement = null;
         Connection connection = null;
 
@@ -27,6 +30,22 @@ public class CourseDAO {
             connection = MySqlConnect.getInstance().getDBConnection();
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryCourse.selectStudentCourses(statement, studentID);
+            if(rs.first()){
+                do{
+                    if(rs.getString("coursename").equals(courseName)) {
+
+                        throw new CourseAlreadyJoined("Cannot join course, already joined");
+                    }
+
+                } while (rs.next());
+            }
+
+            rs = QueryCourse.selectCourseName(statement, courseName);
+            if(!rs.first()){
+                throw new CourseDoesNotExist("Cannot join course, does not exist");
+            }
 
             QueryCourse.addStudentCourse(statement, studentID, courseName);
 
@@ -40,7 +59,7 @@ public class CourseDAO {
 
     }
 
-    public static void leaveCourse(String studentID, String courseName) throws SQLException, ExamBookedException {
+    public static void leaveCourse(String studentID, String courseName) throws SQLException, ExamBookedException, CourseNeverJoined {
 
 
         Statement statement = null;
@@ -58,7 +77,21 @@ public class CourseDAO {
                 throw new ExamBookedException("Exam booked, cannot leave course");
             }
 
-            QueryCourse.removeStudentCourse(statement, studentID, courseName);
+            rs = QueryCourse.selectStudentCourses(statement, studentID);
+
+            Boolean isFound = false;
+            if (rs.first()){
+                String course;
+                do{
+                    course = rs.getString("coursename");
+                    if(course.equals(courseName)) {
+                        isFound = true;
+                        QueryCourse.removeStudentCourse(statement, studentID, courseName);
+                        break;
+                    }
+                } while(rs.next());
+            }
+            if (!isFound) throw new CourseNeverJoined("Cannot leave, course never joined");
 
         } finally {
             if (statement != null){

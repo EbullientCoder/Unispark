@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.course.BeanCoursesNames;
-import com.example.unispark.bean.lesson.BeanLesson;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.bean.BeanCoursesNames;
+import com.example.unispark.bean.BeanLesson;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.AddLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
 import com.example.unispark.exceptions.GenericException;
@@ -22,7 +22,7 @@ public class AddScheduleGuiController extends BaseUniGuiController{
     public BeanCoursesNames showCoursesNames(List<String> faculties){
 
         BeanCoursesNames bCoursesNames;
-        MenageCourses getCoursesAppController = new MenageCourses();
+        ManageCourses getCoursesAppController = new ManageCourses();
         bCoursesNames = getCoursesAppController.getCoursesNamesByFaculty(faculties);
 
 

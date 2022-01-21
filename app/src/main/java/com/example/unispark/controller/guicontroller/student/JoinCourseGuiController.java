@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
+import com.example.unispark.exceptions.CourseAlreadyJoined;
+import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.CoursesAdapter;
 
@@ -18,7 +20,7 @@ public class JoinCourseGuiController extends MenageStudentProfileGuiController {
 
     public List<BeanCourse> showAvaliableCourses(BeanLoggedStudent student){
         List<BeanCourse> courseList;
-        MenageCourses getCoursesController = new MenageCourses();
+        ManageCourses getCoursesController = new ManageCourses();
         courseList = getCoursesController.getAvaliableCourses(student);
 
 
@@ -28,7 +30,7 @@ public class JoinCourseGuiController extends MenageStudentProfileGuiController {
 
     public void joinCourse(Dialog dialog, Context context, BeanLoggedStudent student, List<BeanCourse> avaliableCourses, List<BeanCourse> joinedCourses, int position, CoursesAdapter coursesAdapter){
 
-        MenageCourses joinCourseAppController = new MenageCourses();
+        ManageCourses joinCourseAppController = new ManageCourses();
         BeanCourse course = avaliableCourses.get(position);
         try {
             joinCourseAppController.joinCourse(student, course);
@@ -41,7 +43,7 @@ public class JoinCourseGuiController extends MenageStudentProfileGuiController {
             avaliableCourses.remove(position);
             dialog.dismiss();
 
-        } catch ( GenericException e) {
+        } catch (GenericException | CourseDoesNotExist | CourseAlreadyJoined e) {
             e.printStackTrace();
             getErrorMessage(context, e.getMessage());
         }

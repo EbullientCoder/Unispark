@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
+import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.exceptions.GenericException;
@@ -78,7 +79,7 @@ public class MenageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
     public List<BeanCourse> showCourses(BeanLoggedStudent student){
         List<BeanCourse> courseList;
-        MenageCourses getCoursesController = new MenageCourses();
+        ManageCourses getCoursesController = new ManageCourses();
         courseList = getCoursesController.getCourses(student);
 
         return courseList;
@@ -97,13 +98,13 @@ public class MenageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
     public void leaveCourse(Context context, BeanLoggedStudent student, List<BeanCourse> courseList, int position, CoursesAdapter coursesAdapter){
 
-        MenageCourses leaveCourseAppController = new MenageCourses();
+        ManageCourses leaveCourseAppController = new ManageCourses();
         try {
             leaveCourseAppController.leaveCourse(student, courseList.get(position), position);
             courseList.remove(position);
             //Notify changed dimension to the Adapter
             coursesAdapter.notifyItemRemoved(position);
-        } catch (GenericException | ExamBookedException e) {
+        } catch (GenericException | ExamBookedException | CourseNeverJoined e) {
             e.printStackTrace();
             getErrorMessage(context, e.getMessage());
         }

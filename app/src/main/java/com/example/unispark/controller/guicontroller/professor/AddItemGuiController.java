@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class AddItemGuiController {
     public List<BeanCourse> showCourses(BeanLoggedProfessor professor){
         List<BeanCourse> courses;
 
-        MenageCourses getCoursesController = new MenageCourses();
+        ManageCourses getCoursesController = new ManageCourses();
         courses = getCoursesController.getCourses(professor);
 
         return courses;
@@ -26,7 +26,7 @@ public class AddItemGuiController {
     public List<String> getCoursesNames(BeanLoggedProfessor professor){
         List<String> coursesNames;
 
-        MenageCourses coursesGuiController = new MenageCourses();
+        ManageCourses coursesGuiController = new ManageCourses();
         coursesNames = coursesGuiController.getCoursesNames(professor);
 
         return coursesNames;

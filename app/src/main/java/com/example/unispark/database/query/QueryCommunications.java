@@ -47,4 +47,7 @@ public class QueryCommunications {
                 "INNER JOIN professors ON courses.trackprofessor = professors.professorID WHERE professorcommunications.shortname = '"+courseShortName+"';";
         return statement.executeQuery(queryString);
     }
+
+
+
 }

@@ -1,9 +1,10 @@
 package com.example.unispark.database.dao;
 
-import android.database.sqlite.SQLiteException;
-
 import com.example.unispark.database.others.MySqlConnect;
 import com.example.unispark.database.query.QueryCommunications;
+import com.example.unispark.database.query.QueryCourse;
+import com.example.unispark.exceptions.CourseAlreadyExists;
+import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.model.communications.ProfessorCommunicationModel;
 import com.example.unispark.model.communications.UniversityCommunicationModel;
 
@@ -28,6 +29,7 @@ public class CommunicationsDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
+
             QueryCommunications.insertCommunication(statement, communication.getBackground(), communication.getTitle(),
                     communication.getDate(), communication.getCommunication(), communication.getFaculty());
 
@@ -40,7 +42,7 @@ public class CommunicationsDAO {
     }
 
 
-    public static void addProfessorCommunication(ProfessorCommunicationModel communication) throws SQLException {
+    public static void addProfessorCommunication(ProfessorCommunicationModel communication) throws SQLException, CourseDoesNotExist {
         Statement statement = null;
         Connection connection = null;
 
@@ -48,6 +50,12 @@ public class CommunicationsDAO {
             connection = MySqlConnect.getInstance().getDBConnection();
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryCourse.selectCourseName(statement,communication.getFullName());
+            if (!rs.first()){
+                throw new CourseDoesNotExist("Cannot add communication, course does not exist");
+            }
+
 
             QueryCommunications.insertCommunication(statement, communication.getShortCourseName(), communication.getDate(), communication.getType(), communication.getCommunication());
 

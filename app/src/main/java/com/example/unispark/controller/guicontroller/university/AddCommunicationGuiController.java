@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import com.example.unispark.bean.communication.BeanUniCommunication;
-import com.example.unispark.controller.applicationcontroller.communications.AddUniCommunication;
+import com.example.unispark.bean.BeanUniCommunication;
+import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 
@@ -44,9 +44,9 @@ public class AddCommunicationGuiController extends BaseUniGuiController{
                     facultySelection);
 
             //Application Controller
-            AddUniCommunication addCommunicationAppController = new AddUniCommunication();
+            AddCommunication addCommunicationAppController = new AddCommunication();
             try {
-                addCommunicationAppController.addCommunication(beanUniCommunication);
+                addCommunicationAppController.addUniCommunication(beanUniCommunication);
                 communicationAddedMessage(context);
                 //Notify the Communications Adapter
                 uniCommunications.add(0, beanUniCommunication);

@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.example.unispark.bean.course.BeanCourse;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.course.MenageCourses;
+import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.view.details.DetailsCourseView;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class ManageProfileGuiController extends BaseProfessorGuiController {
 
     public List<BeanCourse> showCourses(BeanLoggedProfessor professor){
         List<BeanCourse> courseList;
-        MenageCourses getCoursesController = new MenageCourses();
+        ManageCourses getCoursesController = new ManageCourses();
         courseList = getCoursesController.getCourses(professor);
 
         return courseList;

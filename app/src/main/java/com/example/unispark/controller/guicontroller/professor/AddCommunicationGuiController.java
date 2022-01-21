@@ -4,8 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.unispark.bean.communication.BeanProfessorCommunication;
-import com.example.unispark.controller.applicationcontroller.communications.AddProfCommunication;
+import com.example.unispark.bean.BeanProfessorCommunication;
+import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
+import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;
 
 
@@ -33,12 +34,12 @@ public class AddCommunicationGuiController extends AddItemGuiController{
                     text);
 
             //Application Controller
-            AddProfCommunication addCommunicationAppController = new AddProfCommunication();
+            AddCommunication addCommunicationAppController = new AddCommunication();
             try {
                 addCommunicationAppController.addProfCommunication(bCommunication);
                 CommunicationAddedMessage(context);
                 dialog.dismiss();
-            } catch ( GenericException e) {
+            } catch (GenericException | CourseDoesNotExist e) {
                 e.printStackTrace();
                 errorMessage(context, e.getMessage());
             }

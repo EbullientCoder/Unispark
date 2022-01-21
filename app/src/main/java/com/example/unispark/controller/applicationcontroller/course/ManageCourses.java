@@ -5,6 +5,9 @@ import com.example.unispark.bean.course.BeanCoursesNames;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
 import com.example.unispark.bean.login.BeanLoggedStudent;
 import com.example.unispark.database.dao.CourseDAO;
+import com.example.unispark.exceptions.CourseAlreadyJoined;
+import com.example.unispark.exceptions.CourseDoesNotExist;
+import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.model.CourseModel;
@@ -13,10 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenageCourses {
+public class ManageCourses {
 
     //Remove Course Joined from DB
-    public void leaveCourse(BeanLoggedStudent student, BeanCourse bCourse, int position) throws ExamBookedException, GenericException {
+    public void leaveCourse(BeanLoggedStudent student, BeanCourse bCourse, int position) throws ExamBookedException, GenericException, CourseNeverJoined {
         List<CourseModel> courses = student.getCourses();
         try {
             CourseDAO.leaveCourse(student.getId(), bCourse.getFullName());
@@ -33,7 +36,7 @@ public class MenageCourses {
 
 
     //Join Course
-    public void joinCourse(BeanLoggedStudent student, BeanCourse bCourse) throws GenericException {
+    public void joinCourse(BeanLoggedStudent student, BeanCourse bCourse) throws GenericException, CourseDoesNotExist, CourseAlreadyJoined {
         try {
             CourseDAO.joinCourse(student.getId(), bCourse.getFullName());
             //Add Course to the Student's Joined Courses
