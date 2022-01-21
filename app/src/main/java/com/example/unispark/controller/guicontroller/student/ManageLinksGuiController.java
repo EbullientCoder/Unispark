@@ -48,7 +48,9 @@ public class ManageLinksGuiController extends BottomNavigationMenuGuiController 
 
         if(linkName.length() != 0 && link.length() != 0){
 
-            BeanLink newLink = new BeanLink(linkName, link);
+            BeanLink newLink = new BeanLink();
+            newLink.setLinkName(linkName);
+            newLink.setLinkAddress(link);
 
             //Application Controller
             AddLink addLinksAppController = new AddLink();

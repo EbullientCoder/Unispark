@@ -22,6 +22,11 @@ public class LessonAlreadyExists extends Exception{
     }
 
     public BeanErrorLessonAlreadyExists getMess() {
-        return new BeanErrorLessonAlreadyExists(lessonName, day, hour);
+        BeanErrorLessonAlreadyExists error;
+        error = new BeanErrorLessonAlreadyExists();
+        error.setLesson(lessonName);
+        error.setDay(day);
+        error.setHour(hour);
+        return error;
     }
 }

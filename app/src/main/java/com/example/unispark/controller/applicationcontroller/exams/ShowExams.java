@@ -27,7 +27,19 @@ public class ShowExams {
 
             for (int i = 0; verbalizedExams != null && i < verbalizedExams.size(); i++){
                 VerbalizedExamModel vExam = verbalizedExams.get(i);
-                bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+                BeanVerbalizeExam beanVerbalizeExam;
+                beanVerbalizeExam = new BeanVerbalizeExam();
+                beanVerbalizeExam.setName(vExam.getName());
+                beanVerbalizeExam.setResult(vExam.getResult());
+                beanVerbalizeExam.setCFU(vExam.getCFU());
+                beanVerbalizeExam.setDate(vExam.getDate());
+                beanVerbalizeExam.setId(vExam.getId());
+                beanVerbalizeExam.setYear(vExam.getYear());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(0);
+                beanExamType.setBeanExamType(beanVerbalizeExam);
+                bExams.add(beanExamType);
             }
 
         } catch (SQLException throwables) {
@@ -47,7 +59,20 @@ public class ShowExams {
             List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(student.getId());
             for (int i = 0; failedExams != null && i < failedExams.size(); i++){
                 VerbalizedExamModel vExam = failedExams.get(i);
-                bExams.add(new BeanExamType(0, new BeanVerbalizeExam(vExam.getId(), vExam.getName(), vExam.getYear(), vExam.getDate(), vExam.getCFU(), vExam.getResult())));
+                BeanVerbalizeExam beanVerbalizeExam;
+                beanVerbalizeExam = new BeanVerbalizeExam();
+                beanVerbalizeExam.setName(vExam.getName());
+                beanVerbalizeExam.setResult(vExam.getResult());
+                beanVerbalizeExam.setCFU(vExam.getCFU());
+                beanVerbalizeExam.setDate(vExam.getDate());
+                beanVerbalizeExam.setId(vExam.getId());
+                beanVerbalizeExam.setYear(vExam.getYear());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(0);
+                beanExamType.setBeanExamType(beanVerbalizeExam);
+                bExams.add(beanExamType);
+                bExams.add(beanExamType);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -67,7 +92,21 @@ public class ShowExams {
             List<BookExamModel> bookExams = ExamsFacade.getInstance().getExams(student.getId(), false);
             for (int i = 0; bookExams != null && i < bookExams.size(); i++){
                 BookExamModel bExam = bookExams.get(i);
-                bExams.add(new BeanExamType(2, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+                BeanBookExam beanBookExam;
+                beanBookExam = new BeanBookExam();
+                beanBookExam.setDate(bExam.getDate());
+                beanBookExam.setYear(bExam.getYear());
+                beanBookExam.setName(bExam.getName());
+                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setId(bExam.getId());
+                beanBookExam.setBuilding(bExam.getBuilding());
+                beanBookExam.setClassroom(beanBookExam.getClassroom());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(2);
+                beanExamType.setBeanExamType(beanBookExam);
+
+                bExams.add(beanExamType);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -86,7 +125,21 @@ public class ShowExams {
             List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(student.getId());
             for (int i = 0; bookedExams != null && i < bookedExams.size(); i++){
                 BookExamModel bExam = bookedExams.get(i);
-                bExams.add(new BeanExamType(3, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+                BeanBookExam beanBookExam;
+                beanBookExam = new BeanBookExam();
+                beanBookExam.setDate(bExam.getDate());
+                beanBookExam.setYear(bExam.getYear());
+                beanBookExam.setName(bExam.getName());
+                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setId(bExam.getId());
+                beanBookExam.setBuilding(bExam.getBuilding());
+                beanBookExam.setClassroom(beanBookExam.getClassroom());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(3);
+                beanExamType.setBeanExamType(beanBookExam);
+
+                bExams.add(beanExamType);
             }
 
         } catch (SQLException throwables) {
@@ -107,7 +160,21 @@ public class ShowExams {
             exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
             for (int i = 0; exams != null && i < exams.size(); i++){
                 BookExamModel bExam = exams.get(i);
-                bExams.add(new BeanExamType(1, new BeanBookExam(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCFU(), bExam.getClassroom(), bExam.getBuilding())));
+                BeanBookExam beanBookExam;
+                beanBookExam = new BeanBookExam();
+                beanBookExam.setDate(bExam.getDate());
+                beanBookExam.setYear(bExam.getYear());
+                beanBookExam.setName(bExam.getName());
+                beanBookExam.setCFU(bExam.getCFU());
+                beanBookExam.setId(bExam.getId());
+                beanBookExam.setBuilding(bExam.getBuilding());
+                beanBookExam.setClassroom(beanBookExam.getClassroom());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(1);
+                beanExamType.setBeanExamType(beanBookExam);
+
+                bExams.add(beanExamType);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

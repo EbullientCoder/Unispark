@@ -1,13 +1,12 @@
 package com.example.unispark.bean.login;
 
 public class BeanUser {
-    String email;
-    String password;
+    private String email;
+    private String password;
 
-    public BeanUser(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+
+
+
 
     public String getEmail() {
         return email;

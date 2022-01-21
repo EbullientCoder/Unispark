@@ -14,18 +14,6 @@ public class BeanProfessorCommunication implements Serializable {
     private String communication;
 
 
-    //Methods
-    //Constructor
-    public BeanProfessorCommunication(int profilePhoto, String shortCourseName, String fullName, String professorName, String date, String type, String communication) {
-        this.profilePhoto = profilePhoto;
-        this.shortCourseName = shortCourseName;
-        this.fullName = fullName;
-        this.professorName = professorName;
-        this.date = date;
-        this.type = type;
-        this.communication = communication;
-    }
-
 
     //Getter
     public int getProfilePhoto() {

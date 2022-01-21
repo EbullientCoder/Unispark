@@ -41,7 +41,10 @@ public class AddScheduleGuiController extends BaseUniGuiController{
         else{
             //Creating new Lesson
             BeanLesson bLesson;
-            bLesson = new BeanLesson(courseSelection, daySelection, hourSelection);
+            bLesson = new BeanLesson();
+            bLesson.setLessonName(courseSelection);
+            bLesson.setDay(daySelection);
+            bLesson.setHour(hourSelection);
 
             //Application Controller: Add Lesson
             AddLesson addLessonAppController = new AddLesson();

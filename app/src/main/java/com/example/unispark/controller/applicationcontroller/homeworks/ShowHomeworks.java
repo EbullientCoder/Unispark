@@ -20,14 +20,16 @@ public class ShowHomeworks{
         homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
 
         for (int i = 0; i < homeworksItem.size(); i++){
-            beanHomeworkList.add(new BeanHomework(
-                    homeworksItem.get(i).getShortName(),
-                    homeworksItem.get(i).getFullName(),
-                    homeworksItem.get(i).getTitle(),
-                    homeworksItem.get(i).getExpiration(),
-                    homeworksItem.get(i).getInstructions(),
-                    homeworksItem.get(i).getPoints(),
-                    homeworksItem.get(i).getTrackProfessor()));
+            BeanHomework beanHomework;
+            beanHomework = new BeanHomework();
+            beanHomework.setShortName(homeworksItem.get(i).getShortName());
+            beanHomework.setFullName(homeworksItem.get(i).getFullName());
+            beanHomework.setTitle(homeworksItem.get(i).getTitle());
+            beanHomework.setExpiration(homeworksItem.get(i).getExpiration());
+            beanHomework.setInstructions( homeworksItem.get(i).getInstructions());
+            beanHomework.setPoints(homeworksItem.get(i).getPoints());
+            beanHomework.setTrackProfessor(homeworksItem.get(i).getTrackProfessor());
+            beanHomeworkList.add(beanHomework);
         }
 
         return beanHomeworkList;
@@ -46,14 +48,16 @@ public class ShowHomeworks{
         }
 
         for (int i = 0; i < homeworksItem.size(); i++){
-            beanHomeworkList.add(new BeanHomework(
-                    homeworksItem.get(i).getShortName(),
-                    homeworksItem.get(i).getFullName(),
-                    homeworksItem.get(i).getTitle(),
-                    homeworksItem.get(i).getExpiration(),
-                    homeworksItem.get(i).getInstructions(),
-                    homeworksItem.get(i).getPoints(),
-                    homeworksItem.get(i).getTrackProfessor()));
+            BeanHomework beanHomework;
+            beanHomework = new BeanHomework();
+            beanHomework.setShortName(homeworksItem.get(i).getShortName());
+            beanHomework.setFullName(homeworksItem.get(i).getFullName());
+            beanHomework.setTitle(homeworksItem.get(i).getTitle());
+            beanHomework.setExpiration(homeworksItem.get(i).getExpiration());
+            beanHomework.setInstructions( homeworksItem.get(i).getInstructions());
+            beanHomework.setPoints(homeworksItem.get(i).getPoints());
+            beanHomework.setTrackProfessor(homeworksItem.get(i).getTrackProfessor());
+            beanHomeworkList.add(beanHomework);
         }
 
         return beanHomeworkList;

@@ -15,18 +15,18 @@ public class LinkModel {
         this.linkAddress = linkAddress;
     }
 
-    //Getter
     public String getLinkName() {
         return linkName;
     }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
     public String getLinkAddress() {
         return linkAddress;
     }
 
-    //Setter
-    public void setLinkName(String linkName) {
-        this.linkName = linkName;
-    }
     public void setLinkAddress(String linkAddress) {
         this.linkAddress = linkAddress;
     }

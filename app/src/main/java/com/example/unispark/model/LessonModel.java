@@ -21,27 +21,24 @@ public class LessonModel {
         return lessonName;
     }
 
-    public String getDay() {
-        return day;
-    }
-
-    public String getHour() {
-        return hour;
-    }
-
-
-
     public void setLessonName(String lessonName) {
         this.lessonName = lessonName;
+    }
+
+    public String getDay() {
+        return day;
     }
 
     public void setDay(String day) {
         this.day = day;
     }
 
+    public String getHour() {
+        return hour;
+    }
+
     public void setHour(String hour) {
         this.hour = hour;
     }
-
 }
 

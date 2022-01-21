@@ -39,7 +39,12 @@ public class GetScheduleUniversity {
             }
 
             for (int j = 0; j < lessons.size(); j++){
-                bLessons.add(new BeanLesson(lessons.get(j).getLessonName(), lessons.get(j).getDay(), lessons.get(j).getHour()));
+                BeanLesson beanLesson;
+                beanLesson = new BeanLesson();
+                beanLesson.setHour(lessons.get(j).getHour());
+                beanLesson.setLessonName(lessons.get(j).getLessonName());
+                beanLesson.setDay(lessons.get(j).getDay());
+                bLessons.add(beanLesson);
             }
         }
 

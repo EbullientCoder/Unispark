@@ -16,22 +16,6 @@ public class BeanCourse implements Serializable {
     private int uniYear;
 
 
-    //Methods
-    //Constructor
-    public BeanCourse(){}
-
-    public BeanCourse(String id, String shortName, String fullName, String courseYear, String cfu, String session, String link, String faculty, int uniYear) {
-        this.id = id;
-        this.shortName = shortName;
-        this.fullName = fullName;
-        this.courseYear = courseYear;
-        this.cfu = cfu;
-        this.session = session;
-        this.link = link;
-        this.faculty = faculty;
-        this.uniYear = uniYear;
-    }
-
 
     //Getter
     public String getId() {

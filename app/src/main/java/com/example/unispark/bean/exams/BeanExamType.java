@@ -6,12 +6,6 @@ public class BeanExamType {
     private int type;
     private BeanExam beanExamType;
 
-    //Methods
-    //Constructor
-    public BeanExamType(int type, BeanExam beanExamType) {
-        this.type = type;
-        this.beanExamType = beanExamType;
-    }
 
     public int getType() {
         return type;
@@ -19,5 +13,13 @@ public class BeanExamType {
 
     public BeanExam getBeanExamType() {
         return beanExamType;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setBeanExamType(BeanExam beanExamType) {
+        this.beanExamType = beanExamType;
     }
 }

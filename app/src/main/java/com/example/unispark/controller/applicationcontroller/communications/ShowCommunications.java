@@ -1,5 +1,6 @@
 package com.example.unispark.controller.applicationcontroller.communications;
 
+import com.example.unispark.R;
 import com.example.unispark.bean.communications.BeanProfessorCommunication;
 import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.login.BeanLoggedProfessor;
@@ -34,15 +35,16 @@ public class ShowCommunications {
                 profCommunicationsItem = CommunicationsFacade.getInstance().getAllCoursesCommunications(courseShortnames, courseFullNames);
 
                 for (int j = 0; j < profCommunicationsItem.size(); j++){
-                    beanProfCommunicationList.add(new BeanProfessorCommunication(
-                            profCommunicationsItem.get(j).getProfilePhoto(),
-                            profCommunicationsItem.get(j).getShortCourseName(),
-                            profCommunicationsItem.get(j).getFullName(),
-                            profCommunicationsItem.get(j).getProfessorName(),
-                            profCommunicationsItem.get(j).getDate(),
-                            profCommunicationsItem.get(j).getType(),
-                            profCommunicationsItem.get(j).getCommunication()
-                    ));
+                    BeanProfessorCommunication bCommunication;
+                    bCommunication = new BeanProfessorCommunication();
+                    bCommunication.setProfilePhoto(profCommunicationsItem.get(j).getProfilePhoto());
+                    bCommunication.setShortCourseName(profCommunicationsItem.get(j).getShortCourseName());
+                    bCommunication.setFullName(profCommunicationsItem.get(j).getFullName());
+                    bCommunication.setProfessorName(profCommunicationsItem.get(j).getProfessorName());
+                    bCommunication.setDate(profCommunicationsItem.get(j).getDate());
+                    bCommunication.setType(profCommunicationsItem.get(j).getType());
+                    bCommunication.setCommunication(profCommunicationsItem.get(j).getCommunication());
+                    beanProfCommunicationList.add(bCommunication);
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -62,13 +64,15 @@ public class ShowCommunications {
         try {
             uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(student.getFaculty());
             for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-                beanUniCommunicationList.add(new BeanUniCommunication(
-                        uniCommunicationsItem.get(i).getBackground(),
-                        uniCommunicationsItem.get(i).getTitle(),
-                        uniCommunicationsItem.get(i).getDate(),
-                        uniCommunicationsItem.get(i).getCommunication(),
-                        uniCommunicationsItem.get(i).getFaculty()
-                ));
+                BeanUniCommunication beanUniCommunication;
+                beanUniCommunication = new BeanUniCommunication();
+                beanUniCommunication.setBackground(uniCommunicationsItem.get(i).getBackground());
+                beanUniCommunication.setTitle(uniCommunicationsItem.get(i).getTitle());
+                beanUniCommunication.setDate(uniCommunicationsItem.get(i).getDate());
+                beanUniCommunication.setCommunication(uniCommunicationsItem.get(i).getCommunication());
+                beanUniCommunication.setFaculty(uniCommunicationsItem.get(i).getFaculty());
+
+                beanUniCommunicationList.add(beanUniCommunication);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -88,13 +92,15 @@ public class ShowCommunications {
             uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications(professor.getFaculty());
 
             for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-                beanUniCommunicationList.add(new BeanUniCommunication(
-                        uniCommunicationsItem.get(i).getBackground(),
-                        uniCommunicationsItem.get(i).getTitle(),
-                        uniCommunicationsItem.get(i).getDate(),
-                        uniCommunicationsItem.get(i).getCommunication(),
-                        uniCommunicationsItem.get(i).getFaculty()
-                ));
+                BeanUniCommunication beanUniCommunication;
+                beanUniCommunication = new BeanUniCommunication();
+                beanUniCommunication.setBackground(uniCommunicationsItem.get(i).getBackground());
+                beanUniCommunication.setTitle(uniCommunicationsItem.get(i).getTitle());
+                beanUniCommunication.setDate(uniCommunicationsItem.get(i).getDate());
+                beanUniCommunication.setCommunication(uniCommunicationsItem.get(i).getCommunication());
+                beanUniCommunication.setFaculty(uniCommunicationsItem.get(i).getFaculty());
+
+                beanUniCommunicationList.add(beanUniCommunication);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -113,13 +119,15 @@ public class ShowCommunications {
             uniCommunicationsItem = CommunicationsDAO.getUniversityCommunications("all");
 
             for (int i = 0; i < uniCommunicationsItem.size(); i ++){
-                beanUniCommunicationList.add(new BeanUniCommunication(
-                        uniCommunicationsItem.get(i).getBackground(),
-                        uniCommunicationsItem.get(i).getTitle(),
-                        uniCommunicationsItem.get(i).getDate(),
-                        uniCommunicationsItem.get(i).getCommunication(),
-                        uniCommunicationsItem.get(i).getFaculty()
-                ));
+                BeanUniCommunication beanUniCommunication;
+                beanUniCommunication = new BeanUniCommunication();
+                beanUniCommunication.setBackground(uniCommunicationsItem.get(i).getBackground());
+                beanUniCommunication.setTitle(uniCommunicationsItem.get(i).getTitle());
+                beanUniCommunication.setDate(uniCommunicationsItem.get(i).getDate());
+                beanUniCommunication.setCommunication(uniCommunicationsItem.get(i).getCommunication());
+                beanUniCommunication.setFaculty(uniCommunicationsItem.get(i).getFaculty());
+
+                beanUniCommunicationList.add(beanUniCommunication);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

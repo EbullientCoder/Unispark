@@ -21,15 +21,17 @@ public class ShowFacultyProfessors {
             professorsItem = ProfessorDAO.getFacultyProfessors(student.getFaculty());
 
             for (int i = 0; i < professorsItem.size(); i++){
-                beanProfessorDetailsList.add(new BeanProfessorDetails(
-                        professorsItem.get(i).getFirstName(),
-                        professorsItem.get(i).getLastName(),
-                        professorsItem.get(i).getProfilePicture(),
-                        professorsItem.get(i).getId(),
-                        professorsItem.get(i).getFaculty(),
-                        professorsItem.get(i).getWebsite(),
-                        getBeanCourses(professorsItem.get(i).getCourses())
-                ));
+               BeanProfessorDetails beanProfessorDetails;
+               beanProfessorDetails = new BeanProfessorDetails();
+               beanProfessorDetails.setFaculty(professorsItem.get(i).getFaculty());
+               beanProfessorDetails.setCourses(getBeanCourses(professorsItem.get(i).getCourses()));
+               beanProfessorDetails.setId(professorsItem.get(i).getId());
+               beanProfessorDetails.setProfilePicture(professorsItem.get(i).getProfilePicture());
+               beanProfessorDetails.setWebsite(professorsItem.get(i).getWebsite());
+               beanProfessorDetails.setFirstName(professorsItem.get(i).getFirstName());
+               beanProfessorDetails.setLastName(professorsItem.get(i).getLastName());
+
+               beanProfessorDetailsList.add(beanProfessorDetails);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,15 +46,18 @@ public class ShowFacultyProfessors {
         CourseModel course;
         for (int i = 0; i < courses.size(); i++){
             course = courses.get(i);
-            beanCourseList.add(new BeanCourse(course.getId(),
-                    course.getShortName(),
-                    course.getFullName(),
-                    course.getCourseYear(),
-                    course.getCfu(),
-                    course.getSession(),
-                    course.getLink(),
-                    course.getFaculty(),
-                    course.getUniYear()));
+            BeanCourse beanCourse;
+            beanCourse  = new BeanCourse();
+            beanCourse.setShortName(course.getShortName());
+            beanCourse.setFullName(course.getFullName());
+            beanCourse.setCourseYear(course.getCourseYear());
+            beanCourse.setCfu(course.getCfu());
+            beanCourse.setFaculty(course.getFaculty());
+            beanCourse.setId(course.getId());
+            beanCourse.setLink(course.getLink());
+            beanCourse.setSession(course.getSession());
+            beanCourse.setUniYear(course.getUniYear());
+            beanCourseList.add(beanCourse);
         }
         return beanCourseList;
     }

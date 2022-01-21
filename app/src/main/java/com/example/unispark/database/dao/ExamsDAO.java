@@ -268,7 +268,9 @@ public class ExamsDAO {
                     fullName = rs.getString("firstname") + " " + rs.getString("lastname");
 
                     //Create Student and add it to the list
-                    student = new BeanStudentSignedToExam(id, fullName);
+                    student = new BeanStudentSignedToExam();
+                    student.setFullName(fullName);
+                    student.setId(id);
                     studentsList.add(student);
                 } while(rs.next());
             }

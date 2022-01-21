@@ -19,26 +19,7 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     private int uniYear;
 
 
-    public BeanLoggedStudent(String firstName,
-                             String lastName,
-                             int profilePicture,
-                             String id,
-                             String faculty,
-                             String academicYear,
-                             List<CourseModel> courses,
-                             List<BookExamModel> bookedExams,
-                             int uniYear) {
 
-        super(profilePicture);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = id;
-        this.faculty = faculty;
-        this.academicYear = academicYear;
-        this.courses = courses;
-        this.bookedExams = bookedExams;
-        this.uniYear = uniYear;
-    }
 
 
     public String getFirstName() {
@@ -74,6 +55,9 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     public int getUniYear() {
         return uniYear;
     }
+
+
+
 
 
     public void setFirstName(String firstName) {

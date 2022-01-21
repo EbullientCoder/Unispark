@@ -14,17 +14,7 @@ public class BeanHomework implements Serializable {
     private int trackProfessor;
 
 
-    //Methods
-    //Constructor
-    public BeanHomework(String shortName, String fullName, String title, String expiration, String instructions, String points, int trackProfessor) {
-        this.shortName = shortName;
-        this.fullName = fullName;
-        this.title = title;
-        this.expiration = expiration;
-        this.instructions = instructions;
-        this.points = points;
-        this.trackProfessor = trackProfessor;
-    }
+    
 
     //Getter
     public String getShortName() {

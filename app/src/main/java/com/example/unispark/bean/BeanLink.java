@@ -6,12 +6,7 @@ public class BeanLink {
     private String linkName;
     private String linkAddress;
 
-    //Methods
-    //Constructor
-    public BeanLink(String linkName, String linkAddress) {
-        this.linkName = linkName;
-        this.linkAddress = linkAddress;
-    }
+
 
     //Getter
     public String getLinkName() {
@@ -20,6 +15,7 @@ public class BeanLink {
     public String getLinkAddress() {
         return linkAddress;
     }
+
 
     //Setter
     public void setLinkName(String linkName) {

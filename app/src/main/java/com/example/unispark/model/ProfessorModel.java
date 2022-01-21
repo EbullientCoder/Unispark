@@ -33,53 +33,52 @@ public class ProfessorModel extends UserModel{
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public List<CourseModel> getCourses() {
-        return courses;
-    }
-
-    public List<BookExamModel> getExams() {
-        return exams;
-    }
-
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFaculty() {
+        return faculty;
     }
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
     public void setWebsite(String website) {
         this.website = website;
     }
 
+    public List<CourseModel> getCourses() {
+        return courses;
+    }
+
     public void setCourses(List<CourseModel> courses) {
         this.courses = courses;
+    }
+
+    public List<BookExamModel> getExams() {
+        return exams;
     }
 
     public void setExams(List<BookExamModel> exams) {

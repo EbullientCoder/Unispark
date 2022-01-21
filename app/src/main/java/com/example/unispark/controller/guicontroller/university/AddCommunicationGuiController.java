@@ -37,11 +37,14 @@ public class AddCommunicationGuiController extends BaseUniGuiController{
         else{
             //Bean
             BeanUniCommunication beanUniCommunication;
-            beanUniCommunication = new BeanUniCommunication(R.drawable.blank_img,
-                    title,
-                    date,
-                    text,
-                    facultySelection);
+            beanUniCommunication = new BeanUniCommunication();
+            beanUniCommunication.setBackground(R.drawable.blank_img);
+            beanUniCommunication.setTitle(title);
+            beanUniCommunication.setDate(date);
+            beanUniCommunication.setCommunication(text);
+            beanUniCommunication.setFaculty(facultySelection);
+
+
 
             //Application Controller
             AddCommunication addCommunicationAppController = new AddCommunication();

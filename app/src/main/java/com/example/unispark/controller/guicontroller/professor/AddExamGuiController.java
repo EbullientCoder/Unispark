@@ -25,13 +25,14 @@ public class AddExamGuiController extends AddItemGuiController{
 
             //Bean Exam
             BeanBookExam bExam;
-            bExam = new BeanBookExam(10,
-                    courseName,
-                    courseYear,
-                    date + hour,
-                    cfu,
-                    classroom,
-                    building);
+            bExam = new BeanBookExam();
+            bExam.setId(1);
+            bExam.setName(courseName);
+            bExam.setYear(courseYear);
+            bExam.setDate(date + hour);
+            bExam.setCFU(cfu);
+            bExam.setClassroom(classroom);
+            bExam.setBuilding(building);
 
 
             //Application Controller

@@ -23,37 +23,42 @@ public class ExamModel implements Serializable {
     }
 
 
-    //Getter
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getYear() {
         return year;
     }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     public String getDate() {
         return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getCFU() {
         return CFU;
     }
 
-
-    //Setter
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setYear(String year) {
-        this.year = year;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
     public void setCFU(String CFU) {
         this.CFU = CFU;
     }

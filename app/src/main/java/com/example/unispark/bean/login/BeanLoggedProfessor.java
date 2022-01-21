@@ -16,21 +16,6 @@ public class BeanLoggedProfessor extends BeanLoggedUser{
     private List<CourseModel> courses;
 
 
-    //Methods
-    //Constructor
-
-
-    public BeanLoggedProfessor(String firstName, String lastName, int profilePicture, int id, String faculty, String website, List<CourseModel> courses) {
-        super(profilePicture);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = id;
-        this.faculty = faculty;
-        this.website = website;
-        this.courses = courses;
-
-    }
-
 
 
     public String getFirstName() {

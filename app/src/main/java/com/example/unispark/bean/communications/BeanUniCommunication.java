@@ -12,15 +12,6 @@ public class BeanUniCommunication implements Serializable {
     private String faculty;
 
 
-    //Methods
-    //Constructor
-    public BeanUniCommunication(int background, String title, String date, String communication, String faculty) {
-        this.background = background;
-        this.title = title;
-        this.date = date;
-        this.communication = communication;
-        this.faculty = faculty;
-    }
 
     //Getter
     public int getBackground() {

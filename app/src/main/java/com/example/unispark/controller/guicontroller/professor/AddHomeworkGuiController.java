@@ -26,14 +26,14 @@ public class AddHomeworkGuiController extends AddItemGuiController{
         else{
             //Homework Object
             BeanHomework bHomework;
-            bHomework = new BeanHomework(
-                    courseShortName,
-                    courseName,
-                    title,
-                    date,
-                    instructions,
-                    points,
-                    profId);
+            bHomework = new BeanHomework();
+            bHomework.setTrackProfessor(profId);
+            bHomework.setPoints(points);
+            bHomework.setInstructions(instructions);
+            bHomework.setFullName(courseName);
+            bHomework.setShortName(courseShortName);
+            bHomework.setExpiration(date);
+            bHomework.setTitle(title);
 
 
             //Application Controller

@@ -7,12 +7,6 @@ public class BeanBookExam extends BeanExam {
 
 
 
-    public BeanBookExam(int id, String name, String year, String date, String CFU, String classroom, String building) {
-        super(id, name, year, date, CFU);
-        this.classroom = classroom;
-        this.building = building;
-    }
-
 
     //Getter
     public String getClassroom() {

@@ -24,14 +24,14 @@ public class AddCommunicationGuiController extends AddItemGuiController{
 
             //Bean
             BeanProfessorCommunication bCommunication;
-            bCommunication = new BeanProfessorCommunication(
-                    profilePicture,
-                    courseShortName,
-                    courseName,
-                    firstName + " " + lastName,
-                    date,
-                    type,
-                    text);
+            bCommunication = new BeanProfessorCommunication();
+            bCommunication.setProfilePhoto(profilePicture );
+            bCommunication.setShortCourseName(courseShortName);
+            bCommunication.setFullName(courseName);
+            bCommunication.setProfessorName(firstName + " " + lastName);
+            bCommunication.setDate(date);
+            bCommunication.setType(type);
+            bCommunication.setCommunication(text);
 
             //Application Controller
             AddCommunication addCommunicationAppController = new AddCommunication();

@@ -39,7 +39,12 @@ public class GetScheduleStudent {
 
             for (int i = 0; i < lessonsItem.size(); i++){
                 LessonModel lesson = lessonsItem.get(i);
-                lessons.add(new BeanLesson(lesson.getLessonName(), lesson.getDay(), lesson.getHour()));
+                BeanLesson beanLesson;
+                beanLesson = new BeanLesson();
+                beanLesson.setDay(lesson.getDay());
+                beanLesson.setLessonName(lesson.getLessonName());
+                beanLesson.setHour(lesson.getHour());
+                lessons.add(beanLesson);
             }
 
             //Sort the Lessons by their Start Hour

@@ -22,36 +22,42 @@ public class UniversityCommunicationModel implements Serializable {
         this.faculty = faculty;
     }
 
-    //Getter
     public int getBackground() {
         return background;
     }
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
+
     public String getTitle() {
         return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDate() {
         return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getCommunication() {
         return communication;
     }
+
+    public void setCommunication(String communication) {
+        this.communication = communication;
+    }
+
     public String getFaculty() {
         return faculty;
     }
 
-    //Setter
-    public void setBackground(int background) {
-        this.background = background;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public void setCommunication(String communication) {
-        this.communication = communication;
-    }
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }

@@ -10,13 +10,7 @@ public class BeanExam implements Serializable {
     private String date;
     private String CFU;
 
-    public BeanExam(int id, String name, String year, String date, String CFU) {
-        this.id = id;
-        this.name = name;
-        this.year = year;
-        this.date = date;
-        this.CFU = CFU;
-    }
+
 
     public int getId() {
         return id;

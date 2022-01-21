@@ -25,45 +25,59 @@ public class HomeworkModel implements Serializable {
         this.trackProfessor = trackProfessor;
     }
 
-    //Getter
     public String getShortName() {
         return shortName;
     }
-    public String getFullName() {
-        return fullName;
-    }
-    public String getTitle(){
-        return title;
-    }
-    public String getExpiration() {
-        return expiration;
-    }
-    public String getInstructions() {
-        return instructions;
-    }
-    public String getPoints() {
-        return points;
-    }
-    public int getTrackProfessor() {return trackProfessor; }
 
-    //Setter
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getExpiration() {
+        return expiration;
+    }
+
     public void setExpiration(String expiration) {
         this.expiration = expiration;
     }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
+    public String getPoints() {
+        return points;
+    }
+
     public void setPoints(String points) {
         this.points = points;
     }
-    public void setTrackProfessor(int trackProfessor) {this.trackProfessor = trackProfessor; }
+
+    public int getTrackProfessor() {
+        return trackProfessor;
+    }
+
+    public void setTrackProfessor(int trackProfessor) {
+        this.trackProfessor = trackProfessor;
+    }
 }

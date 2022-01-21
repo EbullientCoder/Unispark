@@ -21,7 +21,11 @@ public class ShowLinks {
             throwables.printStackTrace();
         }
         for (int i = 0; i < linksItem.size(); i++){
-            beanLinkList.add(new BeanLink(linksItem.get(i).getLinkName(), linksItem.get(i).getLinkAddress()));
+            BeanLink beanLink;
+            beanLink = new BeanLink();
+            beanLink.setLinkAddress(linksItem.get(i).getLinkAddress());
+            beanLink.setLinkName(linksItem.get(i).getLinkName());
+            beanLinkList.add(beanLink);
         }
 
         return beanLinkList;

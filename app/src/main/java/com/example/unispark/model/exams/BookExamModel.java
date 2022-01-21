@@ -17,22 +17,19 @@ public class BookExamModel extends ExamModel{
     }
 
 
-    //Getter
     public String getClassroom() {
         return classroom;
     }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
+    }
+
     public String getBuilding() {
         return building;
     }
 
-
-    //Setter
-    public void setClassroom(String classroom) {
-        this.classroom = classroom;
-    }
     public void setBuilding(String building) {
         this.building = building;
     }
-
-
 }

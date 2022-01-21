@@ -26,15 +26,19 @@ public class Login {
         StudentModel student = null;
         try {
             student = StudentDAO.selectStudent(user.getEmail(), user.getPassword());
-            beanLoggedStudent = new BeanLoggedStudent(student.getFirstName(),
-                    student.getLastName(),
-                    student.getProfilePicture(),
-                    student.getId(),
-                    student.getFaculty(),
-                    student.getAcademicYear(),
-                    student.getCourses(),
-                    student.getBookedExams(),
-                    student.getUniYear());
+            beanLoggedStudent = new BeanLoggedStudent();
+
+
+            beanLoggedStudent.setFirstName(student.getFirstName());
+            beanLoggedStudent.setLastName(student.getLastName());
+            beanLoggedStudent.setProfilePicture(student.getProfilePicture());
+            beanLoggedStudent.setId(student.getId());
+            beanLoggedStudent.setFaculty(student.getFaculty());
+            beanLoggedStudent.setAcademicYear(student.getAcademicYear());
+            beanLoggedStudent.setCourses(student.getCourses());
+            beanLoggedStudent.setBookedExams(student.getBookedExams());
+            beanLoggedStudent.setUniYear(student.getUniYear());
+
         } catch (LoginException e) {
             e.printStackTrace();
             throw new WrongUsernameOrPasswordException("Wrong username or password");
@@ -50,15 +54,16 @@ public class Login {
 
         try {
             professor = ProfessorDAO.selectProfessor(user.getEmail(), user.getPassword());
-            beanLoggedProfessor = new BeanLoggedProfessor(
-                    professor.getFirstName(),
-                    professor.getLastName(),
-                    professor.getProfilePicture(),
-                    professor.getId(),
-                    professor.getFaculty(),
-                    professor.getWebsite(),
-                    professor.getCourses()
-            );
+            beanLoggedProfessor = new BeanLoggedProfessor();
+
+
+            beanLoggedProfessor.setFirstName(professor.getFirstName());
+            beanLoggedProfessor.setLastName(professor.getLastName());
+            beanLoggedProfessor.setProfilePicture(professor.getProfilePicture());
+            beanLoggedProfessor.setId(professor.getId());
+            beanLoggedProfessor.setFaculty(professor.getFaculty());
+            beanLoggedProfessor.setCourses(professor.getCourses());
+            beanLoggedProfessor.setWebsite(professor.getWebsite());
         } catch (LoginException e) {
             e.printStackTrace();
             throw new WrongUsernameOrPasswordException("Wrong username or password");
@@ -73,12 +78,11 @@ public class Login {
 
         try {
             university = UniversityDAO.selectUniversity(user.getEmail(), user.getPassword());
-            beanLoggedUniversity = new BeanLoggedUniversity(
-                    university.getName(),
-                    university.getProfilePicture(),
-                    university.getStreetAddress(),
-                    university.getFaculties()
-            );
+            beanLoggedUniversity = new BeanLoggedUniversity();
+            beanLoggedUniversity.setFaculties(university.getFaculties());
+            beanLoggedUniversity.setName(university.getName());
+            beanLoggedUniversity.setProfilePicture(university.getProfilePicture());
+            beanLoggedUniversity.setStreetAddress(university.getStreetAddress());
 
         } catch (LoginException e) {
             e.printStackTrace();

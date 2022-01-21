@@ -4,20 +4,12 @@ import java.io.Serializable;
 
 public class BeanLoggedUser implements Serializable {
 
-    int profilePicture;
-
-    public BeanLoggedUser(int profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
+    private int profilePicture;
 
 
     public int getProfilePicture() {
         return profilePicture;
     }
-
-
-
 
     public void setProfilePicture(int profilePicture) {
         this.profilePicture = profilePicture;

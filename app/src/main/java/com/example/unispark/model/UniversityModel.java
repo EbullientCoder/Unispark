@@ -20,25 +20,26 @@ public class UniversityModel extends UserModel {
     }
 
 
-    //Getter
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getStreetAddress() {
         return streetAddress;
     }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
     public List<String> getFaculties() {
         return faculties;
     }
 
-
-    //Setter
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
     public void setFaculties(List<String> faculties) {
         this.faculties = faculties;
     }

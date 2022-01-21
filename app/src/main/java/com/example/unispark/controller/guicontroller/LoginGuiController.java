@@ -26,7 +26,9 @@ public class LoginGuiController {
 
         //Checking User Credentials
         if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
-            user = new BeanUser(email, password);
+            user = new BeanUser();
+            user.setEmail(email);
+            user.setPassword(password);
 
             switch (userSelection) {
                 case "STUDENT":

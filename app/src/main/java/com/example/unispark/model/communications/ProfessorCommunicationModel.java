@@ -27,49 +27,58 @@ public class ProfessorCommunicationModel implements Serializable {
     }
 
 
-    //Getter
     public int getProfilePhoto() {
         return profilePhoto;
     }
+
+    public void setProfilePhoto(int profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
     public String getShortCourseName() {
         return shortCourseName;
     }
+
+    public void setShortCourseName(String shortCourseName) {
+        this.shortCourseName = shortCourseName;
+    }
+
     public String getFullName() {
         return fullName;
     }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getProfessorName() {
         return professorName;
     }
+
+    public void setProfessorName(String professorName) {
+        this.professorName = professorName;
+    }
+
     public String getDate() {
         return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getType() {
         return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getCommunication() {
         return communication;
     }
 
-
-    //Setter
-    public void setProfilePhoto(int profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-    public void setShortCourseName(String shortCourseName) {
-        this.shortCourseName = shortCourseName;
-    }
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-    public void setProfessorName(String professorName) {
-        this.professorName = professorName;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
     public void setCommunication(String communication) {
         this.communication = communication;
     }

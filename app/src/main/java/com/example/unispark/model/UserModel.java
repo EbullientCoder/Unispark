@@ -21,14 +21,12 @@ public abstract class UserModel implements Serializable {
         return email;
     }
 
-    public int getProfilePicture() {
-        return profilePicture;
-    }
-
-
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getProfilePicture() {
+        return profilePicture;
     }
 
     public void setProfilePicture(int profilePicture) {

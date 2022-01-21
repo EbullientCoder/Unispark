@@ -19,20 +19,6 @@ public class BeanProfessorDetails implements Serializable {
     private List<BeanCourse> courses;
 
 
-    //Methods
-    //Constructor
-
-
-    public BeanProfessorDetails(String firstName, String lastName, int profilePicture, int id, String faculty, String website, List<BeanCourse> courses) {
-        this.profilePicture = profilePicture;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = id;
-        this.faculty = faculty;
-        this.website = website;
-        this.courses = courses;
-
-    }
 
 
 
@@ -63,6 +49,8 @@ public class BeanProfessorDetails implements Serializable {
     public List<BeanCourse> getCourses() {
         return courses;
     }
+
+
 
 
 

@@ -5,19 +5,10 @@ import java.util.List;
 public class BeanLoggedUniversity extends BeanLoggedUser{
 
     //Attributes
-    String name;
-    String streetAddress;
+    private String name;
+    private String streetAddress;
     private List<String> faculties;
 
-
-    //Methods
-    //Constructor
-    public BeanLoggedUniversity(String name, int profilePicture, String streetAddress, List<String> faculties) {
-        super(profilePicture);
-        this.name = name;
-        this.streetAddress = streetAddress;
-        this.faculties = faculties;
-    }
 
 
     //Getter

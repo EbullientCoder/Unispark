@@ -42,81 +42,76 @@ public class StudentModel extends UserModel{
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public String getAcademicYear() {
-        return academicYear;
-    }
-
-    public List<CourseModel> getCourses() {
-        return courses;
-    }
-
-
-    public List<BookExamModel> getBookedExams() {
-        return bookedExams;
-    }
-
-    public List<VerbalizedExamModel> getVerbalizedExams() {
-        return verbalizedExams;
-    }
-
-    public List<VerbalizedExamModel> getFailedExams() {
-        return failedExams;
-    }
-
-    public int getUniYear() {
-        return uniYear;
-    }
-
-
-
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getFaculty() {
+        return faculty;
     }
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
 
+    public String getAcademicYear() {
+        return academicYear;
+    }
+
     public void setAcademicYear(String academicYear) {
         this.academicYear = academicYear;
+    }
+
+    public List<CourseModel> getCourses() {
+        return courses;
     }
 
     public void setCourses(List<CourseModel> courses) {
         this.courses = courses;
     }
 
+    public List<BookExamModel> getBookedExams() {
+        return bookedExams;
+    }
 
     public void setBookedExams(List<BookExamModel> bookedExams) {
         this.bookedExams = bookedExams;
+    }
+
+    public List<VerbalizedExamModel> getVerbalizedExams() {
+        return verbalizedExams;
     }
 
     public void setVerbalizedExams(List<VerbalizedExamModel> verbalizedExams) {
         this.verbalizedExams = verbalizedExams;
     }
 
+    public List<VerbalizedExamModel> getFailedExams() {
+        return failedExams;
+    }
+
     public void setFailedExams(List<VerbalizedExamModel> failedExams) {
         this.failedExams = failedExams;
+    }
+
+    public int getUniYear() {
+        return uniYear;
     }
 
     public void setUniYear(int uniYear) {

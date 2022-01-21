@@ -6,15 +6,6 @@ public class BeanLesson {
     private String day;
     private String hour;
 
-    //Methods
-    //Constructor
-
-
-    public BeanLesson(String lessonName, String day, String hour) {
-        this.lessonName = lessonName;
-        this.day = day;
-        this.hour = hour;
-    }
 
 
     public String getLessonName() {
