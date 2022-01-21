@@ -71,19 +71,24 @@ public class CourseCreatorFacade {
         CourseModel course;
         for (int i = 0; i < courses.size(); i++){
             course = courses.get(i);
-            BeanCourse beanCourse;
-            beanCourse  = new BeanCourse();
-            beanCourse.setShortName(course.getShortName());
-            beanCourse.setFullName(course.getFullName());
-            beanCourse.setCourseYear(course.getCourseYear());
-            beanCourse.setCfu(course.getCfu());
-            beanCourse.setFaculty(course.getFaculty());
-            beanCourse.setId(course.getId());
-            beanCourse.setLink(course.getLink());
-            beanCourse.setSession(course.getSession());
-            beanCourse.setUniYear(course.getUniYear());
-            beanCourseList.add(beanCourse);
+            beanCourseList.add(this.createBeanCourse(course));
         }
         return beanCourseList;
+    }
+
+    public BeanCourse createBeanCourse(CourseModel course){
+        BeanCourse beanCourse;
+        beanCourse  = new BeanCourse();
+        beanCourse.setShortName(course.getShortName());
+        beanCourse.setFullName(course.getFullName());
+        beanCourse.setCourseYear(course.getCourseYear());
+        beanCourse.setCfu(course.getCfu());
+        beanCourse.setFaculty(course.getFaculty());
+        beanCourse.setId(course.getId());
+        beanCourse.setLink(course.getLink());
+        beanCourse.setSession(course.getSession());
+        beanCourse.setUniYear(course.getUniYear());
+
+        return beanCourse;
     }
 }
