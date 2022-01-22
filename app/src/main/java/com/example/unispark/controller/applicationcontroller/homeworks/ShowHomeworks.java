@@ -28,7 +28,6 @@ public class ShowHomeworks{
 
     //Professor
     public List<BeanHomework> getHomework(BeanLoggedProfessor professor){
-        List<BeanHomework> beanHomeworkList = new ArrayList<>();
 
         List<HomeworkModel> homeworksItem;
         homeworksItem = professor.getHomeworks();

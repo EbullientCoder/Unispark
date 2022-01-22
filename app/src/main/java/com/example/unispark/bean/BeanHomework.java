@@ -45,17 +45,44 @@ public class BeanHomework implements Serializable {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public boolean setTitle(String title) {
+        //Return True and set Title if the string isn't empty
+        if(emptyCheck(title)){
+            this.title = title;
+            return true;
+        }
+        else return false;
     }
-    public void setExpiration(String expiration) {
-        this.expiration = expiration;
+    public boolean setExpiration(String expiration) {
+        //Return True and set Expiration if the string isn't empty
+        if(emptyCheck(expiration)){
+            this.expiration = expiration;
+            return true;
+        }
+        else return false;
     }
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public boolean setInstructions(String instructions) {
+        //Return True and set Instructions if the string isn't empty
+        if(emptyCheck(instructions)){
+            this.instructions = instructions;
+            return true;
+        }
+        else return false;
     }
-    public void setPoints(String points) {
-        this.points = points;
+    public boolean setPoints(String points) {
+        //Return True and set Expiration if the string isn't empty
+        if(emptyCheck(points)){
+            this.points = points;
+            return true;
+        }
+        else return false;
     }
     public void setTrackProfessor(int trackProfessor) {this.trackProfessor = trackProfessor; }
+
+
+    //Syntactic Validation
+    private boolean emptyCheck(String text){
+        if(text.isEmpty()) return false;
+        else return true;
+    }
 }

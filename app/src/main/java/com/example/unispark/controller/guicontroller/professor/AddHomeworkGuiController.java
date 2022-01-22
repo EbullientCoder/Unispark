@@ -19,24 +19,21 @@ public class AddHomeworkGuiController extends AddItemGuiController{
     public void addHomework(Context context, Dialog dialog, String courseSelection, String title,
                             String instructions, String points, String courseShortName, String courseName,
                             String date, BeanLoggedProfessor professor, HomeworksAdapter homeworksAdapter, List<BeanHomework> homeworkList){
-        if (courseSelection.equals("") || title.equals("") || instructions.equals("") || points.equals("")){
+
+
+        //Homework Object
+        BeanHomework bHomework;
+        bHomework = new BeanHomework();
+        bHomework.setTrackProfessor(professor.getId());
+        bHomework.setFullName(courseName);
+        bHomework.setShortName(courseShortName);
+
+        //Syntactic Error check
+        if (courseSelection.equals("") || !bHomework.setPoints(points) || !bHomework.setInstructions(instructions) || !bHomework.setExpiration(date) || !bHomework.setTitle(title)){
 
             getInvalidMessagge(context);
         }
-
         else{
-            //Homework Object
-            BeanHomework bHomework;
-            bHomework = new BeanHomework();
-            bHomework.setTrackProfessor(professor.getId());
-            bHomework.setPoints(points);
-            bHomework.setInstructions(instructions);
-            bHomework.setFullName(courseName);
-            bHomework.setShortName(courseShortName);
-            bHomework.setExpiration(date);
-            bHomework.setTitle(title);
-
-
             //Application Controller
             AddHomework addHomeworkAppController = new AddHomework();
             try {

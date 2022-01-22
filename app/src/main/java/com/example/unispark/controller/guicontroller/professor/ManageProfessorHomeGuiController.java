@@ -16,8 +16,6 @@ import java.util.List;
 public class ManageProfessorHomeGuiController extends BaseProfessorGuiController {
 
 
-
-
     public List<BeanUniCommunication> showUniCommunications(BeanLoggedProfessor professor){
         List<BeanUniCommunication> uniCommunications;
 
