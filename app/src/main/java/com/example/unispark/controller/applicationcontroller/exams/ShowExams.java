@@ -18,32 +18,30 @@ public class ShowExams {
     //Student
     //Page: Verbalized ExamModel
     public List<BeanExamType> verbalizedExams(BeanLoggedStudent student){
-        List<VerbalizedExamModel> verbalizedExams = null;
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
-            verbalizedExams = ExamsDAO.getVerbalizedExams(student.getId());
+            student.setVerbalizedExams(ExamsDAO.getVerbalizedExams(student.getId()));
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return this.listBeanVerbalizedExams(verbalizedExams, 0);
+        return this.listBeanVerbalizedExams(student.getVerbalizedExams(), 0);
     }
 
 
     //Page: Failed ExamModel
     public List<BeanExamType> failedExams(BeanLoggedStudent student){
-        List<VerbalizedExamModel> failedExams = null;
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
-            failedExams = ExamsDAO.getFailedExams(student.getId());
+            student.setFailedExams(ExamsDAO.getFailedExams(student.getId()));
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return this.listBeanVerbalizedExams(failedExams, 0);
+        return this.listBeanVerbalizedExams(student.getFailedExams(), 0);
     }
 
 
@@ -65,28 +63,28 @@ public class ShowExams {
 
     //Page: Booked StudentExamsGUIController
     public List<BeanExamType> bookedExams(BeanLoggedStudent student){
-        List<BookExamModel> bookedExams = null;
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-        try {
-            bookedExams = ExamsDAO.getBookedExams(student.getId());
+        try{
+            student.setBookedExams(ExamsDAO.getBookedExams(student.getId()));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return this.listBeanBookExams(bookedExams, 3);
+        return this.listBeanBookExams(student.getBookedExams(), 3);
     }
 
 
     //Professor
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        List<BookExamModel> exams = null;
         try {
-            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
+            professor.setExams(ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return this.listBeanBookExams(exams, 1);
+        return this.listBeanBookExams(professor.getExams(), 1);
     }
 
 

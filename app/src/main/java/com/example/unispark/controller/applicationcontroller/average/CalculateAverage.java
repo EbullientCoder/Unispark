@@ -13,14 +13,13 @@ public class CalculateAverage {
     public float arithmeticAverage(BeanLoggedStudent student){
         float average = 0;
         try {
-            List<VerbalizedExamModel> exams;
-            exams = ExamsDAO.getVerbalizedExams(student.getId());
+            student.setVerbalizedExams(ExamsDAO.getVerbalizedExams(student.getId()));
 
             //Calculating the Average if the Student has Verbalized StudentExamsGUIController
-            if(exams != null){
-                for(int i = 0; i < exams.size(); i++) average += Double.parseDouble(exams.get(i).getResult());
+            if(student.getVerbalizedExams() != null){
+                for(int i = 0; i < student.getVerbalizedExams().size(); i++) average += Double.parseDouble(student.getVerbalizedExams().get(i).getResult());
 
-                average = average / exams.size();
+                average = average / student.getVerbalizedExams().size();
             }
 
         } catch (SQLException throwables) {
@@ -49,8 +48,8 @@ public class CalculateAverage {
         float cfu = 0;
 
         try {
-            List<VerbalizedExamModel> exams;
-            exams = ExamsDAO.getVerbalizedExams(student.getId());
+            student.setVerbalizedExams(ExamsDAO.getVerbalizedExams(student.getId()));
+            List<VerbalizedExamModel> exams =  student.getVerbalizedExams();
             //Calculating the Weighted Average if the Student has Verbalized StudentExamsGUIController
             if(exams != null){
                 for(int i = 0; i < exams.size(); i++){

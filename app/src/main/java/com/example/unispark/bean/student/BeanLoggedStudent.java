@@ -3,6 +3,7 @@ package com.example.unispark.bean.student;
 import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     private String academicYear;
     private List<CourseModel> courses;
     private List<BookExamModel> bookedExams;
+    private List<VerbalizedExamModel> verbalizedExams;
+    private List<VerbalizedExamModel> failedExams;
     private int uniYear;
 
 
@@ -50,6 +53,13 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         return bookedExams;
     }
 
+    public List<VerbalizedExamModel> getVerbalizedExams() {
+        return verbalizedExams;
+    }
+
+    public List<VerbalizedExamModel> getFailedExams() {
+        return failedExams;
+    }
 
     public int getUniYear() {
         return uniYear;
@@ -89,6 +99,13 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         this.bookedExams = bookedExams;
     }
 
+    public void setVerbalizedExams(List<VerbalizedExamModel> verbalizedExams) {
+        this.verbalizedExams = verbalizedExams;
+    }
+
+    public void setFailedExams(List<VerbalizedExamModel> failedExams) {
+        this.failedExams = failedExams;
+    }
 
     public void setUniYear(int uniYear) {
         this.uniYear = uniYear;
