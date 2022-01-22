@@ -79,8 +79,12 @@ public class ShowExams {
 
     //Professor
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        List<BookExamModel> exams;
-        exams = professor.getExams();
+        List<BookExamModel> exams = null;
+        try {
+            exams = ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         return this.listBeanBookExams(exams, 1);
     }
