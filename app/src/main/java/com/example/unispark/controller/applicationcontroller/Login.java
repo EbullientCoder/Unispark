@@ -41,7 +41,7 @@ public class Login {
             beanLoggedStudent.setBookedExams(student.getBookedExams());
             beanLoggedStudent.setVerbalizedExams(student.getVerbalizedExams());
             beanLoggedStudent.setFailedExams(student.getFailedExams());
-            beanLoggedStudent.setUniYear(student.getUniYear());
+            beanLoggedStudent.setYear(student.getUniYear());
 
         } catch (LoginException e) {
             e.printStackTrace();

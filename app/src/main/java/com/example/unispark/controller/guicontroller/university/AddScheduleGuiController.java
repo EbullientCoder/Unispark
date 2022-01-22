@@ -51,7 +51,7 @@ public class AddScheduleGuiController extends BaseUniGuiController{
 
             try {
                 addLessonAppController.addLesson(bLesson);
-                ScheduleUpdatedMessage(context);
+                scheduleUpdatedMessage(context);
 
                 if (onDay.equals(daySelection)){
                     lessons.add(0, bLesson);
@@ -82,7 +82,7 @@ public class AddScheduleGuiController extends BaseUniGuiController{
 
 
 
-    private void ScheduleUpdatedMessage(Context context){
+    private void scheduleUpdatedMessage(Context context){
         Toast.makeText(context, "Schedule updated", Toast.LENGTH_SHORT).show();
     }
 

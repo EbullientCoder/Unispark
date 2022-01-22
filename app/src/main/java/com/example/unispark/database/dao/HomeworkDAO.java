@@ -1,7 +1,8 @@
 package com.example.unispark.database.dao;
 
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryHomework;
+import com.example.unispark.facade.HomeworkCreatorFacade;
 import com.example.unispark.model.HomeworkModel;
 
 import java.sql.Connection;
@@ -31,26 +32,10 @@ public class HomeworkDAO {
             ResultSet rs = QueryHomework.selectHomeworks(statement, studentID);
 
             if (rs.first()){
-                String shortName;
-                String fullName;
-                String title;
-                String expiration;
-                String instructions;
-                String points;
-                int trackProfessor;
 
                 do{
 
-                    shortName = rs.getString("shortname");
-                    fullName = rs.getString("coursename");
-                    title = rs.getString("title");
-                    expiration = rs.getString("expiration");
-                    instructions = rs.getString("instructions");
-                    points = rs.getString("points");
-                    trackProfessor = rs.getInt("trackprofessor");
-                    //Create a new homework and add it to the homework list
-                    HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                    homeworkList.add(newHomework);
+                    homeworkList.add(HomeworkCreatorFacade.getInstance().createHomework(rs));
 
                 } while (rs.next());
 
@@ -85,25 +70,9 @@ public class HomeworkDAO {
             ResultSet rs = QueryHomework.selectProfessorHomework(statement, professorID);
 
             if (rs.first()){
-                //Homework attributes
-                String shortName;
-                String fullName;
-                String title;
-                String expiration;
-                String instructions;
-                String points;
-                int trackProfessor;
+
                 do{
-                    shortName = rs.getString("shortname");
-                    fullName = rs.getString("coursename");
-                    title = rs.getString("title");
-                    expiration = rs.getString("expiration");
-                    instructions = rs.getString("instructions");
-                    points = rs.getString("points");
-                    trackProfessor = rs.getInt("trackprofessor");
-                    //Create a new homework and add it to the homework list
-                    HomeworkModel newHomework = new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
-                    homeworkList.add(newHomework);
+                    homeworkList.add(HomeworkCreatorFacade.getInstance().createHomework(rs));
                 } while (rs.next());
                 //Reverse Homeworks List
                 Collections.reverse(homeworkList);
@@ -139,6 +108,8 @@ public class HomeworkDAO {
             }
         }
     }
+
+
 
 
 }

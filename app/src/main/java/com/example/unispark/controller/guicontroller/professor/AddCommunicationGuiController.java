@@ -37,7 +37,7 @@ public class AddCommunicationGuiController extends AddItemGuiController{
             AddCommunication addCommunicationAppController = new AddCommunication();
             try {
                 addCommunicationAppController.addProfCommunication(bCommunication);
-                CommunicationAddedMessage(context);
+                communicationAddedMessage(context);
                 dialog.dismiss();
             } catch (GenericException | CourseDoesNotExist e) {
                 e.printStackTrace();
@@ -49,7 +49,7 @@ public class AddCommunicationGuiController extends AddItemGuiController{
 
 
 
-    private void CommunicationAddedMessage(Context context){
+    private void communicationAddedMessage(Context context){
 
         Toast.makeText(context, "Communication added", Toast.LENGTH_SHORT).show();
     }

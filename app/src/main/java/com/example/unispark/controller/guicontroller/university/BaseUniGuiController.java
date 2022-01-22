@@ -12,7 +12,7 @@ public class BaseUniGuiController {
 
 
     //Open Button
-    public boolean expandButton(Boolean isOpen, FloatingActionButton btnCommunication, FloatingActionButton btnSchedule,
+    public boolean expandButton(boolean isOpen, FloatingActionButton btnCommunication, FloatingActionButton btnSchedule,
                              TextView txtCommunication, TextView txtSchedule, FloatingActionButton btnAdd){
         if(!isOpen){
             //Show Buttons

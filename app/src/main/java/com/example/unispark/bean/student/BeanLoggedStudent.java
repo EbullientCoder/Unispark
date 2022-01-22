@@ -14,11 +14,12 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     private String id;
     private String faculty;
     private String academicYear;
+    private int year;
     private List<CourseModel> courses;
     private List<BookExamModel> bookedExams;
     private List<VerbalizedExamModel> verbalizedExams;
     private List<VerbalizedExamModel> failedExams;
-    private int uniYear;
+
 
 
 
@@ -61,8 +62,8 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         return failedExams;
     }
 
-    public int getUniYear() {
-        return uniYear;
+    public int getYear() {
+        return year;
     }
 
 
@@ -107,8 +108,8 @@ public class BeanLoggedStudent extends BeanLoggedUser {
         this.failedExams = failedExams;
     }
 
-    public void setUniYear(int uniYear) {
-        this.uniYear = uniYear;
+    public void setYear(int year) {
+        this.year = year;
     }
 }
 

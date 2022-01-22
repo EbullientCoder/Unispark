@@ -1,7 +1,7 @@
 package com.example.unispark.database.dao;
 
 
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryLessons;
 import com.example.unispark.exceptions.LessonAlreadyExists;
 import com.example.unispark.model.CourseModel;

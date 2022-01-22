@@ -38,7 +38,7 @@ public class AddHomeworkGuiController extends AddItemGuiController{
             AddHomework addHomeworkAppController = new AddHomework();
             try {
                 addHomeworkAppController.addHomework(bHomework, professor);
-                HomeworkAddedMessage(context);
+                homeworkAddedMessage(context);
 
                 //Notify the Homework Adapter
                 if(homeworkList != null && homeworksAdapter != null){
@@ -54,7 +54,7 @@ public class AddHomeworkGuiController extends AddItemGuiController{
     }
 
 
-    private void HomeworkAddedMessage(Context context){
+    private void homeworkAddedMessage(Context context){
         Toast.makeText(context, "Homework added", Toast.LENGTH_SHORT).show();
     }
 

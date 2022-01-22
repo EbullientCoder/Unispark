@@ -115,8 +115,6 @@ public class ManageUniHomeGuiController extends BaseUniGuiController{
         String day = null;
 
         switch (index){
-            case 0: day = "MONDAY";
-                break;
             case 1: day = "TUESDAY";
                 break;
             case 2: day = "WEDNESDAY";
@@ -125,6 +123,7 @@ public class ManageUniHomeGuiController extends BaseUniGuiController{
                 break;
             case 4: day = "FRIDAY";
                 break;
+            default: day = "MONDAY";
         }
 
         txtScheduleTitle.setText("SCHEDULE: " + day);

@@ -7,17 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class QueryCourse {
-    //Courses table
-    private static final String COURSE_TABLE = "courses";
-    private static final String COURSE_NAME = "coursename";
-    private static final String FACULTY = "faculty";
-    private static final String UNIVERSITY_YEAR = "uniyear";
 
     private QueryCourse(){}
 
     //Look for course marked by course name
     public static ResultSet selectCourseName(Statement statement, String courseName) throws SQLException {
-        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + COURSE_NAME + " = '" + courseName + "';";
+        String queryString = "SELECT * FROM courses WHERE coursename = '" + courseName + "';";
         return statement.executeQuery(queryString);
     }
 
@@ -33,7 +28,7 @@ public class QueryCourse {
     //Look for courses marked by professorID
     public static ResultSet selectProfessorCourses(Statement statement, int professorID) throws SQLException
     {
-        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE trackprofessor = " + professorID + ";";
+        String queryString = "SELECT * FROM courses WHERE trackprofessor = " + professorID + ";";
         return statement.executeQuery(queryString);
     }
 
@@ -41,15 +36,14 @@ public class QueryCourse {
     public static ResultSet selectFacultyCourses(Statement statement, String faculty, int uniYear) throws SQLException {
         String queryString = null;
         if (uniYear == 1){
-            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + UNIVERSITY_YEAR + " = " + uniYear
-                     + " AND " + FACULTY + " = '" + faculty + "';";
+            queryString = "SELECT * FROM courses WHERE uniyear = " + uniYear
+                     + " AND faculty = '" + faculty + "';";
         }
         else if (uniYear == 2){
-            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE (" + UNIVERSITY_YEAR + " = 1 OR "
-                    + UNIVERSITY_YEAR + " = 2)" + " AND " + FACULTY + " = '" + faculty + "';";
+            queryString = "SELECT * FROM courses WHERE (uniyear = 1 OR uniyear = 2) AND faculty = '" + faculty + "';";
         }
         else if (uniYear == 3){
-            queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+            queryString = "SELECT * FROM courses WHERE faculty = '" + faculty + "';";
         }
 
         return statement.executeQuery(queryString);
@@ -60,7 +54,7 @@ public class QueryCourse {
 
     public static ResultSet selectFacultyCourses(Statement statement, String faculty) throws SQLException
     {
-        String queryString = "SELECT * FROM " + COURSE_TABLE + " WHERE " + FACULTY + " = '" + faculty + "';";
+        String queryString = "SELECT * FROM courses WHERE faculty = '" + faculty + "';";
 
         return statement.executeQuery(queryString);
     }

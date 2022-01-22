@@ -1,7 +1,7 @@
 package com.example.unispark.database.dao;
 
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.exceptions.ExamException;
 import com.example.unispark.facade.ExamsFacade;
@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamsDAO {
+
+    public static final String GRADE = "grade";
 
     private ExamsDAO(){}
 
@@ -120,7 +122,7 @@ public class ExamsDAO {
                 String result;
                 do {
                     takenExam = rs.getString("examname");
-                    result = rs.getString("grade");
+                    result = rs.getString(GRADE);
                     if (exam.getName().equals(takenExam) && Double.valueOf(result) >= 18) throw new ExamException(2);
                 } while (rs.next());
             }
@@ -187,8 +189,8 @@ public class ExamsDAO {
             ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
-                    String result = rs.getString("grade");
-                    double numberResult = Double.valueOf(result);
+                    String result = rs.getString(GRADE);
+                    double numberResult = Double.parseDouble(result);
                     if (numberResult >= 18){
                         gradesList.add(ExamsFacade.getInstance().examGrade(rs, result));
                     }
@@ -222,8 +224,8 @@ public class ExamsDAO {
             ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
-                    String result = rs.getString("grade");
-                    double numberResult = Double.valueOf(result);
+                    String result = rs.getString(GRADE);
+                    double numberResult = Double.parseDouble(result);
                     if (numberResult < 18){
                         gradesList.add(ExamsFacade.getInstance().examGrade(rs, result));
                     }

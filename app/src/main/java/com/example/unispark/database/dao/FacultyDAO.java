@@ -1,6 +1,6 @@
 package com.example.unispark.database.dao;
 
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryFaculties;
 
 import java.sql.Connection;
@@ -12,8 +12,7 @@ import java.util.List;
 
 public class FacultyDAO {
 
-    public static final String FACULTIES = "faculties";
-    public static final String FACULTY = "faculty";
+
 
     private FacultyDAO(){}
 

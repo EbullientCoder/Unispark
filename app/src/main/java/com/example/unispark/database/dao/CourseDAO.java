@@ -1,6 +1,6 @@
 package com.example.unispark.database.dao;
 
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryCourse;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.exceptions.CourseAlreadyJoined;
@@ -79,7 +79,7 @@ public class CourseDAO {
 
             rs = QueryCourse.selectStudentCourses(statement, studentID);
 
-            Boolean isFound = false;
+            boolean isFound = false;
             if (rs.first()){
                 String course;
                 do{

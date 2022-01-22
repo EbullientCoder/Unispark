@@ -65,7 +65,7 @@ public class ManageCourses {
 
         List<CourseModel> avaliableCourses = null;
         try {
-            avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getUniYear(), student.getCourses());
+            avaliableCourses = CourseDAO.selectAvailableCourses(student.getFaculty(), student.getYear(), student.getCourses());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

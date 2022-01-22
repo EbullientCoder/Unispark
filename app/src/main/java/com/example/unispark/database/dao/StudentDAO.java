@@ -1,7 +1,7 @@
 package com.example.unispark.database.dao;
 
 
-import com.example.unispark.database.others.MySqlConnect;
+import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryLogin;
 import com.example.unispark.facade.StudentCreatorFacade;
 import com.example.unispark.model.StudentModel;
