@@ -82,7 +82,7 @@ public class BeanHomework implements Serializable {
 
     //Syntactic Validation
     private boolean emptyCheck(String text){
-        if(text.isEmpty()) return false;
-        else return true;
+        return !text.isEmpty();
+
     }
 }

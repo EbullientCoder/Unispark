@@ -40,9 +40,10 @@ public class BottomNavigationMenuGuiController {
             break;
             case R.id.professor_exams: intent = new Intent(context, ProfessorExamsView.class);
             break;
+            default: //Do nothing
         }
         intent.putExtra("UserObject", user);
-        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 

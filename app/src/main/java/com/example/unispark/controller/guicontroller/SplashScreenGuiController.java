@@ -16,7 +16,7 @@ public class SplashScreenGuiController {
 
         new Handler().postDelayed(() -> {
             Intent i = new Intent(context, LoginView.class);
-            i.setFlags(i.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }, 2000);
 

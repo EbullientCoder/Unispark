@@ -19,13 +19,13 @@ import java.sql.SQLException;
 public class LoginGuiController {
 
     public void login(Context context, String userSelection, String email, String password){
-
+        String key = "UserObject";
         BeanUser user;
         Login loginAppController = new Login();
         Intent intent;
 
         //Checking User Credentials
-        if (!userSelection.equals("") && !email.equals("") && !password.equals("")) {
+        if (!email.equals("") && !password.equals("")) {
             user = new BeanUser();
             user.setEmail(email);
             user.setPassword(password);
@@ -37,8 +37,8 @@ public class LoginGuiController {
                     try {
                         student = loginAppController.studentLogin(user);
                         intent = new Intent(context, StudentHomeView.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("UserObject", student);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(key, student);
                         context.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
@@ -52,8 +52,8 @@ public class LoginGuiController {
                     try {
                         professor = loginAppController.professorLogin(user);
                         intent = new Intent(context, ProfessorHomeView.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("UserObject", professor);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(key, professor);
                         context.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
@@ -67,14 +67,16 @@ public class LoginGuiController {
                     try {
                         university = loginAppController.universityLogin(user);
                         intent = new Intent(context, UniversityHomeView.class);
-                        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("UserObject", university);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(key, university);
                         context.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
                         getErrorMessage(context, e.getMessage());
                     }
                     break;
+                default:
+                    Toast.makeText(context, "Select a user", Toast.LENGTH_SHORT).show();
             }
         }
         else getEmptyFieldsMessage(context);
