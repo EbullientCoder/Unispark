@@ -57,21 +57,16 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
         return beanUniCommunicationList.size();
     }
 
-    /*@Override
-    public int getItemViewType(int position) {
-        return items.get(position).getType();
-    }*/
-
 
     static class UniCommunicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private ImageView imgCommunication;
-        private int imageID;
-        private TextView txtTitle;
-        private String date;
-        private String communication;
-        private String faculty;
-        private OnUniComClickListener onUniComClickListener;
+        ImageView imgCommunication;
+        int imageID;
+        TextView txtTitle;
+        String date;
+        String communication;
+        String faculty;
+        OnUniComClickListener onUniComClickListener;
 
         //Methods
         //Constructor

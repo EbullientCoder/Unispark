@@ -17,17 +17,16 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginView extends AppCompatActivity {
 
-
         //User Selector
         private String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
-        private AutoCompleteTextView autoCompleteTxt;
-        private ArrayAdapter<String> adapterItems;
+        AutoCompleteTextView autoCompleteTxt;
+        ArrayAdapter<String> adapterItems;
         private String userSelection;
         //Email & Password
-        private TextInputLayout txtEmail;
-        private TextInputLayout txtPassword;
+        TextInputLayout txtEmail;
+        TextInputLayout txtPassword;
         //Login Button
-        private Button loginButton;
+        Button loginButton;
 
 
         private LoginGuiController loginGuiController;

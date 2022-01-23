@@ -98,7 +98,7 @@ public class ShowExams {
             beanVerbalizeExam = new BeanVerbalizeExam();
             beanVerbalizeExam.setName(vExam.getName());
             beanVerbalizeExam.setResult(vExam.getResult());
-            beanVerbalizeExam.setCfu(vExam.getCFU());
+            beanVerbalizeExam.setCfu(vExam.getCfu());
             beanVerbalizeExam.setDate(vExam.getDate());
             beanVerbalizeExam.setId(vExam.getId());
             beanVerbalizeExam.setYear(vExam.getYear());
@@ -122,7 +122,7 @@ public class ShowExams {
             beanBookExam.setDate(bExam.getDate());
             beanBookExam.setYear(bExam.getYear());
             beanBookExam.setName(bExam.getName());
-            beanBookExam.setCfu(bExam.getCFU());
+            beanBookExam.setCfu(bExam.getCfu());
             beanBookExam.setId(bExam.getId());
             beanBookExam.setBuilding(bExam.getBuilding());
             beanBookExam.setClassroom(beanBookExam.getClassroom());

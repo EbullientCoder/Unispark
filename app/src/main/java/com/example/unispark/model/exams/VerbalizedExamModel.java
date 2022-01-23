@@ -7,8 +7,8 @@ public class VerbalizedExamModel extends ExamModel{
 
     //Methods
     //Constructor
-    public VerbalizedExamModel(int id, String name, String year, String date, String CFU, String result) {
-        super(id, name, year, date, CFU);
+    public VerbalizedExamModel(int id, String name, String year, String date, String cfu, String result) {
+        super(id, name, year, date, cfu);
         this.result = result;
     }
 

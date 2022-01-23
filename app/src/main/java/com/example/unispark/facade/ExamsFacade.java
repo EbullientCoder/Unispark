@@ -107,16 +107,12 @@ public class ExamsFacade {
         String classroom = rs.getString("class");
 
         //Create new bookExam model
-        BookExamModel exam = new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
-
-        return exam;
+        return new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
     }
 
 
     //Create a new examGrade
     public VerbalizedExamModel examGrade(ResultSet rs, String result) throws SQLException {
-
-        List<VerbalizedExamModel> examGrades = new ArrayList<>();
 
         int id = rs.getInt("examID");
         String name = rs.getString("examname");
@@ -126,9 +122,6 @@ public class ExamsFacade {
         String cfu = rs.getString("cfu");
 
         //Create new ExamGrade
-        VerbalizedExamModel examGrade = new VerbalizedExamModel(id, name, year, date, cfu, result);
-
-
-        return examGrade;
+        return new VerbalizedExamModel(id, name, year, date, cfu, result);
     }
 }

@@ -143,54 +143,54 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //0: Verbalized - Failed StudentExamsGUIController
     static class VerbalizedExamViewHolder extends RecyclerView.ViewHolder{
         //Attributes
-        private TextView ExamName;
-        private TextView ExamYear;
-        private TextView ExamDate;
-        private TextView ExamCFU;
-        private TextView ExamResult;
+        TextView txtExamName;
+        TextView txtExamYear;
+        TextView txtExamDate;
+        TextView txtExamCFU;
+        TextView txtExamResult;
 
         //Methods
         //Constructor
         public VerbalizedExamViewHolder(@NonNull View itemView) {
             super(itemView);
-            ExamName = itemView.findViewById(R.id.txt_verbalized_exam_subject_name);
-            ExamYear = itemView.findViewById(R.id.txt_verbalized_exam_aa);
-            ExamDate = itemView.findViewById(R.id.txt_verbalized_exam_date);
-            ExamCFU = itemView.findViewById(R.id.txt_verbalized_exam_cfu);
-            ExamResult = itemView.findViewById(R.id.txt_verbalized_exam_result);
+            txtExamName = itemView.findViewById(R.id.txt_verbalized_exam_subject_name);
+            txtExamYear = itemView.findViewById(R.id.txt_verbalized_exam_aa);
+            txtExamDate = itemView.findViewById(R.id.txt_verbalized_exam_date);
+            txtExamCFU = itemView.findViewById(R.id.txt_verbalized_exam_cfu);
+            txtExamResult = itemView.findViewById(R.id.txt_verbalized_exam_result);
         }
 
         void setVerbalizedExamDate(BeanVerbalizeExam exam){
-            ExamName.setText(exam.getName());
-            ExamYear.setText(exam.getYear());
-            ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCfu());
-            ExamResult.setText(exam.getResult());
+            txtExamName.setText(exam.getName());
+            txtExamYear.setText(exam.getYear());
+            txtExamDate.setText(exam.getDate());
+            txtExamCFU.setText(exam.getCfu());
+            txtExamResult.setText(exam.getResult());
         }
     }
 
     //1: Professor Assigned StudentExamsGUIController
     static class UpcomingExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private TextView ExamName;
-        private TextView ExamYear;
-        private TextView ExamDate;
-        private TextView ExamCFU;
-        private TextView ExamBuilding;
-        private TextView ExamClassroom;
-        private Button btnView;
+        TextView txtExamName;
+        TextView txtExamYear;
+        TextView txtExamDate;
+        TextView txtExamCFU;
+        TextView txtExamBuilding;
+        TextView txtExamClassroom;
+        Button btnView;
 
-        private OnViewExamClickListener onViewExamClickListener;
+        OnViewExamClickListener onViewExamClickListener;
 
 
         public UpcomingExamViewHolder(@NonNull View itemView, OnViewExamClickListener onViewExamClickListener) {
             super(itemView);
-            ExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
-            ExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
-            ExamDate = itemView.findViewById(R.id.txt_upcoming_exam_date);
-            ExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
-            ExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
-            ExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
+            txtExamName = itemView.findViewById(R.id.txt_upcoming_exam_subject_name);
+            txtExamYear = itemView.findViewById(R.id.txt_upcoming_exam_aa);
+            txtExamDate = itemView.findViewById(R.id.txt_upcoming_exam_date);
+            txtExamCFU = itemView.findViewById(R.id.txt_upcoming_exam_cfu);
+            txtExamClassroom = itemView.findViewById(R.id.txt_upcoming_exam_classroom);
+            txtExamBuilding = itemView.findViewById(R.id.txt_upcoming_exam_building);
             btnView = itemView.findViewById(R.id.btn_upcoming_exam_view);
 
             this.onViewExamClickListener = onViewExamClickListener;
@@ -198,12 +198,12 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
 
         void setUpcomingExamDate(BeanBookExam exam){
-            ExamName.setText(exam.getName());
-            ExamYear.setText(exam.getYear());
-            ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCfu());
-            ExamClassroom.setText(exam.getClassroom());
-            ExamBuilding.setText(exam.getBuilding());
+            txtExamName.setText(exam.getName());
+            txtExamYear.setText(exam.getYear());
+            txtExamDate.setText(exam.getDate());
+            txtExamCFU.setText(exam.getCfu());
+            txtExamClassroom.setText(exam.getClassroom());
+            txtExamBuilding.setText(exam.getBuilding());
         }
 
         @Override
@@ -215,25 +215,25 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //2: Student Book Exam
     static class BookExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private TextView ExamName;
-        private TextView ExamYear;
-        private TextView ExamDate;
-        private TextView ExamCFU;
-        private TextView ExamClassroom;
-        private TextView ExamBuilding;
-        private Button btnBook;
+        TextView txtExamName;
+        TextView txtExamYear;
+        TextView txtExamDate;
+        TextView txtExamCFU;
+        TextView txtExamClassroom;
+        TextView txtExamBuilding;
+        Button btnBook;
 
-        private OnBookExamClickListener onBookExamClickListener;
+        OnBookExamClickListener onBookExamClickListener;
 
 
         public BookExamViewHolder(@NonNull View itemView, OnBookExamClickListener onBookExamClickListener) {
             super(itemView);
-            ExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
-            ExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
-            ExamDate = itemView.findViewById(R.id.txt_book_exam_date);
-            ExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
-            ExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
-            ExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
+            txtExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
+            txtExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
+            txtExamDate = itemView.findViewById(R.id.txt_book_exam_date);
+            txtExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
+            txtExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
+            txtExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
             btnBook = itemView.findViewById(R.id.btn_book_exam_book);
 
             this.onBookExamClickListener = onBookExamClickListener;
@@ -241,12 +241,12 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
 
         void setBookExamDate(BeanBookExam exam){
-            ExamName.setText(exam.getName());
-            ExamYear.setText(exam.getYear());
-            ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCfu());
-            ExamClassroom.setText(exam.getClassroom());
-            ExamBuilding.setText(exam.getBuilding());
+            txtExamName.setText(exam.getName());
+            txtExamYear.setText(exam.getYear());
+            txtExamDate.setText(exam.getDate());
+            txtExamCFU.setText(exam.getCfu());
+            txtExamClassroom.setText(exam.getClassroom());
+            txtExamBuilding.setText(exam.getBuilding());
         }
 
         @Override
@@ -258,24 +258,24 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //3: Student Booked Exam
     static class BookedExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //Attributes
-        private TextView ExamName;
-        private TextView ExamYear;
-        private TextView ExamDate;
-        private TextView ExamCFU;
-        private TextView ExamClassroom;
-        private TextView ExamBuilding;
-        private Button btnLeave;
+        TextView txtExamName;
+        TextView txtExamYear;
+        TextView txtExamDate;
+        TextView txtExamCFU;
+        TextView txtExamClassroom;
+        TextView txtExamBuilding;
+        Button btnLeave;
 
-        private OnLeaveExamClickListener onLeaveExamClickListener;
+        OnLeaveExamClickListener onLeaveExamClickListener;
 
         public BookedExamViewHolder(@NonNull View itemView, OnLeaveExamClickListener onLeaveExamClickListener) {
             super(itemView);
-            ExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
-            ExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
-            ExamDate = itemView.findViewById(R.id.txt_book_exam_date);
-            ExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
-            ExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
-            ExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
+            txtExamName = itemView.findViewById(R.id.txt_book_exam_subject_name);
+            txtExamYear = itemView.findViewById(R.id.txt_book_exam_aa);
+            txtExamDate = itemView.findViewById(R.id.txt_book_exam_date);
+            txtExamCFU = itemView.findViewById(R.id.txt_book_exam_cfu);
+            txtExamClassroom = itemView.findViewById(R.id.txt_book_exam_classroom);
+            txtExamBuilding = itemView.findViewById(R.id.txt_book_exam_building);
             btnLeave = itemView.findViewById(R.id.btn_book_exam_book);
 
             this.onLeaveExamClickListener = onLeaveExamClickListener;
@@ -283,12 +283,12 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
 
         void setBookedExamDate(BeanBookExam exam){
-            ExamName.setText(exam.getName());
-            ExamYear.setText(exam.getYear());
-            ExamDate.setText(exam.getDate());
-            ExamCFU.setText(exam.getCfu());
-            ExamClassroom.setText(exam.getClassroom());
-            ExamBuilding.setText(exam.getBuilding());
+            txtExamName.setText(exam.getName());
+            txtExamYear.setText(exam.getYear());
+            txtExamDate.setText(exam.getDate());
+            txtExamCFU.setText(exam.getCfu());
+            txtExamClassroom.setText(exam.getClassroom());
+            txtExamBuilding.setText(exam.getBuilding());
             btnLeave.setText("LEAVE");
         }
 

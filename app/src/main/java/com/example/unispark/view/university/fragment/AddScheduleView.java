@@ -58,8 +58,8 @@ public class AddScheduleView extends DialogFragment {
 
     private AddScheduleGuiController scheduleGuiController;
 
-    String DAYS[] = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
-    String HOURS[] = {"08:30 - 09:15", "09:30 - 10:15", "10:30 - 11:15", "11:30 - 12:15", "12:30 - 13:15", "14:00 - 14:45", "15:00 - 15:45", "16:00 - 16:45", "17:00 - 17:45"};
+    String[] daysOfLesson = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
+    String[] hoursOfLesson = {"08:30 - 09:15", "09:30 - 10:15", "10:30 - 11:15", "11:30 - 12:15", "12:30 - 13:15", "14:00 - 14:45", "15:00 - 15:45", "16:00 - 16:45", "17:00 - 17:45"};
 
 
     //Methods
@@ -107,7 +107,7 @@ public class AddScheduleView extends DialogFragment {
 
         //Days
         autoCompleteTxtDay = rootView.findViewById(R.id.add_schedule_day);
-        adapterItemsDay = new ArrayAdapter<>(getContext(), R.layout.item_container_item, DAYS);
+        adapterItemsDay = new ArrayAdapter<>(getContext(), R.layout.item_container_item, daysOfLesson);
         autoCompleteTxtDay.setAdapter(adapterItemsDay);
         autoCompleteTxtDay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -118,7 +118,7 @@ public class AddScheduleView extends DialogFragment {
 
         //Hours
         autoCompleteTxtHour = rootView.findViewById(R.id.add_schedule_hour);
-        adapterItemsHour = new ArrayAdapter<>(getContext(), R.layout.item_container_item, HOURS);
+        adapterItemsHour = new ArrayAdapter<>(getContext(), R.layout.item_container_item, hoursOfLesson);
         autoCompleteTxtHour.setAdapter(adapterItemsHour);
         autoCompleteTxtHour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -135,7 +135,7 @@ public class AddScheduleView extends DialogFragment {
             @Override
             public void onClick(View view) {
 
-                scheduleGuiController.addSchedule(getContext(), getDialog(), DAYS[indexDay], courseSelection, daySelection, hourSelection, schedulesItem, lessonAdapter);
+                scheduleGuiController.addSchedule(getContext(), getDialog(), daysOfLesson[indexDay], courseSelection, daySelection, hourSelection, schedulesItem, lessonAdapter);
             }
         });
 

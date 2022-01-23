@@ -30,6 +30,9 @@ import java.sql.SQLException;
  */
 public class TestManageCourses {
 
+    private static String password = "password";
+    private static String date = "2021/2022";
+    private static String winter = "Winter";
 
 
     @Test
@@ -39,25 +42,22 @@ public class TestManageCourses {
         // Create a student
         Login loginController;
         loginController = new Login();
+
+        // Create a course that does not exist
+        BeanCourse beanCourse = createBean("https://testcourse.com",
+                "1",
+                "12.0",
+                "TEST COURSE",
+                "TEST",
+                "Ingegneria Informatica");
+
         BeanLoggedStudent beanStudent;
         BeanUser beanUser;
         beanUser = new BeanUser();
         beanUser.setEmail("andrea.lapiana");
-        beanUser.setPassword("password");
+        beanUser.setPassword(password);
         beanStudent = loginController.studentLogin(beanUser);
 
-        // Create a course that does not exist
-        BeanCourse beanCourse;
-        beanCourse = new BeanCourse();
-        beanCourse.setUniYear(1);
-        beanCourse.setCourseYear("2021/2022");
-        beanCourse.setSession("Winter");
-        beanCourse.setLink("https://testcourse.com");
-        beanCourse.setId("1");
-        beanCourse.setCfu("12.0");
-        beanCourse.setFullName("TEST COURSE");
-        beanCourse.setShortName("TEST");
-        beanCourse.setFaculty("Ingegneria Informatica");
 
 
         ManageCourses controller;
@@ -92,21 +92,16 @@ public class TestManageCourses {
         BeanUser beanUser;
         beanUser = new BeanUser();
         beanUser.setEmail("mario.rossi");
-        beanUser.setPassword("password");
+        beanUser.setPassword(password);
         beanStudent = loginController.studentLogin(beanUser);
 
         //Create a course already joined by the student
-        BeanCourse beanCourse;
-        beanCourse = new BeanCourse();
-        beanCourse.setUniYear(1);
-        beanCourse.setCourseYear("2021/2022");
-        beanCourse.setSession("Winter");
-        beanCourse.setLink("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/");
-        beanCourse.setId("4");
-        beanCourse.setCfu("12.0");
-        beanCourse.setFullName("MATEMATICA GENERALE");
-        beanCourse.setShortName("MAT");
-        beanCourse.setFaculty("Economia");
+        BeanCourse beanCourse = createBean("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/",
+                "4",
+                "12.0",
+                "MATEMATICA GENERALE",
+                "MAT",
+                "Economia");
 
 
         ManageCourses controller;
@@ -135,6 +130,14 @@ public class TestManageCourses {
     public void testExamBookedCannotLeaveCourse() throws WrongUsernameOrPasswordException, SQLException {
         int code = 1;
 
+        //Create a course that is associated to the exam the student has booked
+        BeanCourse beanCourse = createBean("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/",
+                "4",
+                "12.0",
+                "MATEMATICA GENERALE",
+                "MAT",
+                "Economia");
+
         // Create a student
         Login loginController;
         loginController = new Login();
@@ -142,21 +145,8 @@ public class TestManageCourses {
         BeanUser beanUser;
         beanUser = new BeanUser();
         beanUser.setEmail("mario.rossi");
-        beanUser.setPassword("password");
+        beanUser.setPassword(password);
         beanStudent = loginController.studentLogin(beanUser);
-
-        //Create a course that is associated to the exam the student has booked
-        BeanCourse beanCourse;
-        beanCourse = new BeanCourse();
-        beanCourse.setUniYear(1);
-        beanCourse.setCourseYear("2021/2022");
-        beanCourse.setSession("Winter");
-        beanCourse.setLink("https://economia.uniroma2.it/cdl/triennio/clem/corso/206/");
-        beanCourse.setId("4");
-        beanCourse.setCfu("12.0");
-        beanCourse.setFullName("MATEMATICA GENERALE");
-        beanCourse.setShortName("MAT");
-        beanCourse.setFaculty("Economia");
 
 
         int position = 0;
@@ -185,4 +175,21 @@ public class TestManageCourses {
 
     }
 
+
+
+    //Create the Course Bean
+    private static BeanCourse createBean(String link, String id, String cfu, String fullName, String shortName, String faculty){
+        BeanCourse beanCourse = new BeanCourse();
+        beanCourse.setUniYear(1);
+        beanCourse.setCourseYear(date);
+        beanCourse.setSession(winter);
+        beanCourse.setLink(link);
+        beanCourse.setId(id);
+        beanCourse.setCfu(cfu);
+        beanCourse.setFullName(fullName);
+        beanCourse.setShortName(shortName);
+        beanCourse.setFaculty(faculty);
+
+        return beanCourse;
+    }
 }

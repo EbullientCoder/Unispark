@@ -70,16 +70,16 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     //Homeworks ViewHolder
     static class HomeworkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private String shortName;
-        private String title;
-        private String instructions;
-        private String points;
-        private int id;
+        String shortName;
+        String title;
+        String instructions;
+        String points;
+        int id;
 
-        private TextView txtCourse;
-        private TextView txtExpiration;
-        private Button btnView;
-        private OnHomeworkBtnClickListener onHomeworkBtnClickListener;
+        TextView txtCourse;
+        TextView txtExpiration;
+        Button btnView;
+        OnHomeworkBtnClickListener onHomeworkBtnClickListener;
 
         //Methods
         //Constructor

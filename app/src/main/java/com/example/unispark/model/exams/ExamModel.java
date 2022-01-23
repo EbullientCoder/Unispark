@@ -9,17 +9,17 @@ public class ExamModel implements Serializable {
     private String name;
     private String year;
     private String date;
-    private String CFU;
+    private String cfu;
 
 
     //Methods
     //Constructor
-    public ExamModel(int id, String name, String year, String date, String CFU) {
+    public ExamModel(int id, String name, String year, String date, String cfu) {
         this.id = id;
         this.name = name;
         this.year = year;
         this.date = date;
-        this.CFU = CFU;
+        this.cfu = cfu;
     }
 
 
@@ -55,11 +55,11 @@ public class ExamModel implements Serializable {
         this.date = date;
     }
 
-    public String getCFU() {
-        return CFU;
+    public String getCfu() {
+        return cfu;
     }
 
-    public void setCFU(String CFU) {
-        this.CFU = CFU;
+    public void setCfu(String cfu) {
+        this.cfu = cfu;
     }
 }

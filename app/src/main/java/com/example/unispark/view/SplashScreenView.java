@@ -14,7 +14,7 @@ import com.example.unispark.controller.guicontroller.SplashScreenGuiController;
 
 public class SplashScreenView extends AppCompatActivity {
 
-    private SplashScreenGuiController splashScreenGuiController;
+    SplashScreenGuiController splashScreenGuiController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

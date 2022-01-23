@@ -52,29 +52,29 @@ public class DetailsCourseView extends AppCompatActivity {
         //Get Intent Extras Data
         extras = getIntent().getExtras();
         //Get Text
-        BeanCourse course = (BeanCourse) extras.getSerializable("Course");
+        BeanCourse bCourse = (BeanCourse) extras.getSerializable("Course");
         //Set Text
         txtShortName = findViewById(R.id.txt_course_short_name);
-        txtShortName.setText(course.getShortName());
+        txtShortName.setText(bCourse.getShortName());
         txtLongName = findViewById(R.id.txt_course_full_name);
-        txtLongName.setText(course.getFullName());
+        txtLongName.setText(bCourse.getFullName());
         txtAA = findViewById(R.id.txt_course_aa);
-        txtAA.setText(course.getCourseYear());
+        txtAA.setText(bCourse.getCourseYear());
         txtCFU = findViewById(R.id.txt_course_cfu);
-        txtCFU.setText(course.getCfu());
+        txtCFU.setText(bCourse.getCfu());
         txtID = findViewById(R.id.txt_course_id);
-        txtID.setText(course.getId());
+        txtID.setText(bCourse.getId());
         txtFaculty = findViewById(R.id.txt_course_prof1);
-        txtFaculty.setText(course.getFaculty());
+        txtFaculty.setText(bCourse.getFaculty());
         txtSession = findViewById(R.id.txt_course_session);
-        txtSession.setText(course.getSession());
+        txtSession.setText(bCourse.getSession());
         txtLink = findViewById(R.id.txt_course_link);
-        txtLink.setText(course.getLink());
+        txtLink.setText(bCourse.getLink());
         //Clickable Link
         txtLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                detailsCourseGuiController.goToLink(getApplicationContext(), course.getLink());
+                detailsCourseGuiController.goToLink(getApplicationContext(), bCourse.getLink());
             }
         });
     }

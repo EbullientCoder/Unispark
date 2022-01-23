@@ -10,13 +10,6 @@ public class QueryProfessor {
 
     //Professor table
     private static final String PROFESSORS_TABLE = "professors";
-    private static final String PROF_ID = "professorID";
-    private static final String TRACK_PROFESSOR = "trackprofessor";
-    private static final String IMAGE = "image";
-    private static final String COURSE_TABLE = "courses";
-    private static final String SHORTNAME = "shortname";
-    private static final String FIRSTNAME = "firstname";
-    private static final String LASTNAME = "lastname";
     private static final String FACULTY = "faculty";
 
 

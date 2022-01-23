@@ -53,8 +53,8 @@ public class CalculateAverage {
             //Calculating the Weighted Average if the Student has Verbalized StudentExamsGUIController
             if(exams != null){
                 for(int i = 0; i < exams.size(); i++){
-                    average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCFU()));
-                    cfu += Double.parseDouble(exams.get(i).getCFU());
+                    average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCfu()));
+                    cfu += Double.parseDouble(exams.get(i).getCfu());
                 }
 
                 average = average / cfu;

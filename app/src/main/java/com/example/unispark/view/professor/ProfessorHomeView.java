@@ -30,6 +30,11 @@ public class ProfessorHomeView extends AppCompatActivity implements
 
     //Menu
     ImageButton menuButton;
+    //Bottom Menu Elements
+    BottomNavigationView bottomNavigationView;
+    //Communications
+    RecyclerView rvUniCommunications;
+    UniCommunicationsAdapter uniCommunicationsAdapter;
     //Floating Button
     FloatingActionButton btnAdd;
     FloatingActionButton btnExam;
@@ -39,12 +44,6 @@ public class ProfessorHomeView extends AppCompatActivity implements
     FloatingActionButton btnCommunication;
     TextView txtCommunication;
     Boolean isOpen;
-    //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
-    //Communications
-    RecyclerView rvUniCommunications;
-    UniCommunicationsAdapter uniCommunicationsAdapter;
-
     //Homeworks
     RecyclerView rvHomeworks;
     HomeworksAdapter homeworkAdapter;

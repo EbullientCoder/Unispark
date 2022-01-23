@@ -106,7 +106,6 @@ public class AddUniCommunicationView extends DialogFragment {
 
         //DropDown Selector
         faculties = bUniversity.getFaculties();
-        //faculties.add("All");
         autoCompleteTxt = rootView.findViewById(R.id.add_uni_communication_select_faculty);
         adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, faculties);
         autoCompleteTxt.setAdapter(adapterItems);

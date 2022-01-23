@@ -28,15 +28,6 @@ public class ProfessorExamsView extends AppCompatActivity
 
     //Menu
     ImageButton menuButton;
-    //Floating Button
-    FloatingActionButton btnAdd;
-    FloatingActionButton btnExam;
-    TextView txtExam;
-    FloatingActionButton btnHomework;
-    TextView txtHomework;
-    FloatingActionButton btnCommunication;
-    TextView txtCommunication;
-    Boolean isOpen;
     //Bottom Menu Elements
     BottomNavigationView bottomNavigationView;
     //Menu ExamModel Page
@@ -46,6 +37,15 @@ public class ProfessorExamsView extends AppCompatActivity
     //ExamModel
     RecyclerView rvExams;
     ExamAdapter examAdapter;
+    //Floating Button
+    FloatingActionButton btnAdd;
+    FloatingActionButton btnExam;
+    TextView txtExam;
+    FloatingActionButton btnHomework;
+    TextView txtHomework;
+    FloatingActionButton btnCommunication;
+    TextView txtCommunication;
+    Boolean isOpen;
 
 
 

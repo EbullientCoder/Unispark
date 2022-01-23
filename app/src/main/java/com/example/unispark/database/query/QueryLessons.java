@@ -11,18 +11,19 @@ public class QueryLessons {
     private static final String LESSONS = "lessons";
     private static final String DAY = "day";
     private static final String HOUR = "hour";
+    private static final String AND = "' AND ";
 
     private QueryLessons(){}
 
     public static ResultSet selectLessons(Statement statement, String day, String courseName) throws SQLException {
-        String queryString = "SELECT " + LESSON + ", " + DAY + ", " + HOUR + " FROM " + LESSONS + " WHERE " + DAY + " = '" + day + "' AND " + LESSON + " = '" + courseName + "';";
+        String queryString = "SELECT " + LESSON + ", " + DAY + ", " + HOUR + " FROM " + LESSONS + " WHERE " + DAY + " = '" + day + AND + LESSON + " = '" + courseName + "';";
         return statement.executeQuery(queryString);
     }
 
 
 
     public static ResultSet selectLessons(Statement statement, String day, String courseName, String hour) throws SQLException {
-        String queryString = "SELECT " + LESSON + ", " + DAY + ", " + HOUR + " FROM " + LESSONS + " WHERE " + DAY + " = '" + day + "' AND " + LESSON + " = '" + courseName + "' AND " + HOUR + " = '" + hour + "';";
+        String queryString = "SELECT " + LESSON + ", " + DAY + ", " + HOUR + " FROM " + LESSONS + " WHERE " + DAY + " = '" + day + AND + LESSON + " = '" + courseName + AND + HOUR + " = '" + hour + "';";
         return statement.executeQuery(queryString);
     }
 

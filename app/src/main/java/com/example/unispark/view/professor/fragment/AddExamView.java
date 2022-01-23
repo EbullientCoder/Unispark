@@ -91,6 +91,12 @@ public class AddExamView extends DialogFragment{
 
 
 
+        //Date Picker
+        calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         //DropDown Selector
         //Gui Controller
         bCourses = examGuiController.showCourses(bProfessor);
@@ -111,12 +117,6 @@ public class AddExamView extends DialogFragment{
         });
 
 
-
-        //Date Picker
-        calendar = Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         txtDisplayDate = rootView.findViewById(R.id.txt_add_exam_selected_date);
         OffsetDateTime offset = OffsetDateTime.now();

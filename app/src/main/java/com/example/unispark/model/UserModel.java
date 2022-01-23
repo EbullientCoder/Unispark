@@ -12,7 +12,7 @@ public abstract class UserModel implements Serializable {
     //Constructor
 
 
-    public UserModel(String email, int profilePicture) {
+    protected UserModel(String email, int profilePicture) {
         this.email = email;
         this.profilePicture = profilePicture;
     }

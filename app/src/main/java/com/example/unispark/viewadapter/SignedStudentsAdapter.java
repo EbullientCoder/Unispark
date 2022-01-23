@@ -61,13 +61,13 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     static class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
-        private TextView fullname;
-        private TextView id;
-        private EditText txtGrade;
-        private String result;
-        private Button btnAddGrade;
+        TextView fullname;
+        TextView id;
+        EditText txtGrade;
+        Button btnAddGrade;
 
-        private OnAddBtnClickListener onAddBtnClickListener;
+        String result;
+        OnAddBtnClickListener onAddBtnClickListener;
 
         //Methods
         //Constructor

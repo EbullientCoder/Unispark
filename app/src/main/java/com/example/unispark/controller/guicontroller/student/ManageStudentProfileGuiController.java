@@ -23,8 +23,6 @@ import java.util.List;
 
 public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiController {
 
-
-
     public float calculateArithmeticAverage(BeanLoggedStudent student){
         float average;
         CalculateAverage calculateAverageController = new CalculateAverage();

@@ -13,6 +13,9 @@ public class QueryLogin {
     private static final String STUDENTS_TABLE = "students";
     private static final String PROFESSORS_TABLE = "professors";
     private static final String UNI_TABLE = "university";
+    private static final String SELECT = "SELECT * FROM ";
+    private static final String EMAIL = " where email = '";
+    private static final String AND = "' AND password = '";
 
     private QueryLogin(){}
 
@@ -21,8 +24,8 @@ public class QueryLogin {
     {
 
         String queryString;
-        queryString = "SELECT * FROM " + STUDENTS_TABLE + " where email = '" + email
-                + "' AND password = '" + getHash(password) + "';";
+        queryString = SELECT + STUDENTS_TABLE + EMAIL + email
+                + AND + getHash(password) + "';";
 
         return statement.executeQuery(queryString);
     }
@@ -34,8 +37,8 @@ public class QueryLogin {
     {
 
         String queryString;
-        queryString = "SELECT * FROM " + PROFESSORS_TABLE + " where email = '" + email
-                + "' AND password = '" + getHash(password) + "';";
+        queryString = SELECT + PROFESSORS_TABLE + EMAIL + email
+                + AND + getHash(password) + "';";
         return statement.executeQuery(queryString);
     }
 
@@ -43,8 +46,8 @@ public class QueryLogin {
     //Look for a University account in the database, marked by email and password
     public static ResultSet loginUniversity(Statement statement, String email, String password) throws SQLException {
 
-        String queryString = "SELECT * FROM " + UNI_TABLE + " where email = '" + email
-                + "' AND password = '" + getHash(password) + "';";
+        String queryString = SELECT + UNI_TABLE + EMAIL + email
+                + AND + getHash(password) + "';";
         return statement.executeQuery(queryString);
     }
 

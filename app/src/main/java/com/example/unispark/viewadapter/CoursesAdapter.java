@@ -97,18 +97,18 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     //First Row
     static class CourseViewHolder extends RecyclerView.ViewHolder{
         //Attributes
-        private String shortName;
-        private String id;
-        private String session;
-        private String link;
-        private OnCourseClickListener onCourseClickListener;
-        private OnCourseBtnClickListener onCourseBtnClickListener;
+        String shortName;
+        String id;
+        String session;
+        String link;
+        OnCourseClickListener onCourseClickListener;
+        OnCourseBtnClickListener onCourseBtnClickListener;
 
-        private TextView fullName;
-        private TextView aa;
-        private TextView cfu;
-        private Button btnJoinLeave;
-        private LinearLayout lyt_button;
+        TextView fullName;
+        TextView aa;
+        TextView cfu;
+        Button btnJoinLeave;
+        LinearLayout buttonLayout;
 
 
         //Constructor
@@ -118,7 +118,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             fullName = itemView.findViewById(R.id.txt_course_subject_name);
             aa = itemView.findViewById(R.id.txt_course_aa_date);
             cfu = itemView.findViewById(R.id.txt_course_cfu);
-            lyt_button = itemView.findViewById(R.id.lyt_contain_course_button);
+            buttonLayout = itemView.findViewById(R.id.lyt_contain_course_button);
 
             this.onCourseClickListener = onCourseClickListener;
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +170,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             session = courseModel.getSession();
             link = courseModel.getLink();
             btnJoinLeave.setVisibility(View.INVISIBLE);
-            lyt_button.setVisibility(View.INVISIBLE);
+            buttonLayout.setVisibility(View.INVISIBLE);
         }
     }
 }

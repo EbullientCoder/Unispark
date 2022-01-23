@@ -56,9 +56,6 @@ public class ExamsDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            //ResultSet rs = QueryExams.selectExamDate(statement, examGrade.getId());
-            //if (rs.first()) throw new ExamException(1);
-
             QueryExams.insertGrade(statement, examGrade.getId(), examGrade.getName(), studentID, examGrade.getResult());
             removeBookedExam(examGrade.getId(), studentID);
 
@@ -180,13 +177,12 @@ public class ExamsDAO {
 
         Statement statement = null;
         Connection connection = null;
+        ResultSet rs = null;
 
         try {
-            connection = MySqlConnect.getInstance().getDBConnection();
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            doConnect(statement,connection);
 
-            ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
+            rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
                     String result = rs.getString(GRADE);
@@ -215,16 +211,15 @@ public class ExamsDAO {
 
         Statement statement = null;
         Connection connection = null;
+        ResultSet rs = null;
 
         try {
-            connection = MySqlConnect.getInstance().getDBConnection();
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            doConnect(statement,connection);
 
-            ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
+            rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
-                    String result = rs.getString(GRADE);
+                    String result = rs.getString("GRADE");
                     double numberResult = Double.parseDouble(result);
                     if (numberResult < 18){
                         gradesList.add(ExamsFacade.getInstance().examGrade(rs, result));
@@ -242,6 +237,15 @@ public class ExamsDAO {
 
         return gradesList;
     }
+
+
+    private static void doConnect(Statement statement, Connection connection) throws SQLException {
+
+        connection = MySqlConnect.getInstance().getDBConnection();
+        statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+    }
+
 
 
 

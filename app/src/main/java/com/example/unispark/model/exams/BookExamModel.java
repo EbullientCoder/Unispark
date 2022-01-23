@@ -9,8 +9,8 @@ public class BookExamModel extends ExamModel{
 
     //Methods
     //Constructor
-    public BookExamModel(int id, String name, String year, String date, String CFU, String classroom, String building) {
-        super(id, name, year, date, CFU);
+    public BookExamModel(int id, String name, String year, String date, String cfu, String classroom, String building) {
+        super(id, name, year, date, cfu);
         this.classroom = classroom;
         this.building = building;
     }
