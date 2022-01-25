@@ -15,7 +15,7 @@ import com.example.unispark.viewadapter.LessonAdapter;
 
 import java.util.List;
 
-public class AddScheduleGuiController extends BaseUniGuiController{
+public class AddScheduleGuiController extends UniBaseGuiController {
 
 
 

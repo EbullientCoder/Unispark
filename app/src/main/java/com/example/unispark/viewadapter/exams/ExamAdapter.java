@@ -45,17 +45,13 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Methods
     //Constructor
-    public ExamAdapter(List<BeanExamType> bExams,
-                       OnBookExamClickListener onBookExamClickListener,
+    public ExamAdapter(OnBookExamClickListener onBookExamClickListener,
                        OnLeaveExamClickListener onLeaveExamClickListener) {
-        this.bExams = bExams;
         this.onBookExamClickListener = onBookExamClickListener;
         this.onLeaveExamClickListener = onLeaveExamClickListener;
     }
 
-    public ExamAdapter(List<BeanExamType> bExams,
-                       OnViewExamClickListener onViewExamClickListener) {
-        this.bExams = bExams;
+    public ExamAdapter(OnViewExamClickListener onViewExamClickListener) {
         this.onViewExamClickListener = onViewExamClickListener;
     }
 
@@ -296,5 +292,10 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         public void onClick(View view) {
             onLeaveExamClickListener.onLeaveBtnClick(getAdapterPosition());
         }
+    }
+
+
+    public void setbExams(List<BeanExamType> bExams) {
+        this.bExams = bExams;
     }
 }

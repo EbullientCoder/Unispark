@@ -27,7 +27,7 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
 
     //Methods
-    public ProfCommunicationsAdapter(List<BeanProfessorCommunication> beanProfCommunicationList, OnProfComClickListener onProfComClickListener){
+    public ProfCommunicationsAdapter(OnProfComClickListener onProfComClickListener){
 
         this.beanProfCommunicationList = beanProfCommunicationList;
         this.onProfComClickListener = onProfComClickListener;
@@ -88,6 +88,11 @@ public class ProfCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView
 
             onProfComClickListener.onProfClick(getAdapterPosition());
         }
+    }
+
+
+    public void setBeanProfCommunicationList(List<BeanProfessorCommunication> beanProfCommunicationList) {
+        this.beanProfCommunicationList = beanProfCommunicationList;
     }
 }
 

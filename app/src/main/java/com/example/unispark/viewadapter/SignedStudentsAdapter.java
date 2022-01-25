@@ -29,7 +29,7 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     //Methods
-    public SignedStudentsAdapter(List<BeanStudentSignedToExam> items, OnAddBtnClickListener onAddBtnClickListener){
+    public SignedStudentsAdapter(OnAddBtnClickListener onAddBtnClickListener){
         this.items = items;
         this.onAddBtnClickListener = onAddBtnClickListener;
     }
@@ -93,5 +93,10 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             result = String.valueOf(txtGrade.getText());
             onAddBtnClickListener.onAddBtnClick(getAdapterPosition(), result);
         }
+    }
+
+
+    public void setItems(List<BeanStudentSignedToExam> items) {
+        this.items = items;
     }
 }

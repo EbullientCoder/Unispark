@@ -9,38 +9,36 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.controller.guicontroller.DetailsGuiController;
-import com.example.unispark.model.CourseModel;
+import com.example.unispark.controller.guicontroller.details.DetailsCourseGuiController;
+import com.example.unispark.controller.guicontroller.details.DetailsGuiController;
 
 public class DetailsCourseView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    ImageView btnGoBack;
-    //Get Intent Extras
-    Bundle extras;
-    CourseModel course;
-    //Set Interface Text
-    TextView txtShortName;
-    TextView txtLongName;
-    TextView txtAA;
-    TextView txtCFU;
-    TextView txtID;
-    TextView txtFaculty;
-    TextView txtSession;
-    TextView txtLink;
+    private ImageView btnGoBack;
+    // Interface Text
+    private TextView txtShortName;
+    private TextView txtLongName;
+    private TextView txtAA;
+    private TextView txtCFU;
+    private TextView txtID;
+    private TextView txtFaculty;
+    private TextView txtSession;
+    private TextView txtLink;
 
-    private DetailsGuiController detailsCourseGuiController;
+
+    private DetailsCourseGuiController detailsGuiController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_course);
 
-        this.detailsCourseGuiController = new DetailsGuiController();
+        this.detailsGuiController = new DetailsCourseGuiController(this, (BeanCourse) getIntent().getExtras().getSerializable("Course"));
 
         //GoBack Button
-        btnGoBack = findViewById(R.id.btn_detail_course_goback);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        this.btnGoBack = findViewById(R.id.btn_detail_course_goback);
+        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -49,33 +47,56 @@ public class DetailsCourseView extends AppCompatActivity {
 
 
 
-        //Get Intent Extras Data
-        extras = getIntent().getExtras();
-        //Get Text
-        BeanCourse bCourse = (BeanCourse) extras.getSerializable("Course");
-        //Set Text
-        txtShortName = findViewById(R.id.txt_course_short_name);
-        txtShortName.setText(bCourse.getShortName());
-        txtLongName = findViewById(R.id.txt_course_full_name);
-        txtLongName.setText(bCourse.getFullName());
-        txtAA = findViewById(R.id.txt_course_aa);
-        txtAA.setText(bCourse.getCourseYear());
-        txtCFU = findViewById(R.id.txt_course_cfu);
-        txtCFU.setText(bCourse.getCfu());
-        txtID = findViewById(R.id.txt_course_id);
-        txtID.setText(bCourse.getId());
-        txtFaculty = findViewById(R.id.txt_course_prof1);
-        txtFaculty.setText(bCourse.getFaculty());
-        txtSession = findViewById(R.id.txt_course_session);
-        txtSession.setText(bCourse.getSession());
-        txtLink = findViewById(R.id.txt_course_link);
-        txtLink.setText(bCourse.getLink());
+        //Show
+        this.txtShortName = findViewById(R.id.txt_course_short_name);
+        this.txtLongName = findViewById(R.id.txt_course_full_name);
+        this.txtAA = findViewById(R.id.txt_course_aa);
+        this.txtCFU = findViewById(R.id.txt_course_cfu);
+        this.txtID = findViewById(R.id.txt_course_id);
+        this.txtFaculty = findViewById(R.id.txt_course_prof1);
+        this.txtSession = findViewById(R.id.txt_course_session);
+        this.txtLink = findViewById(R.id.txt_course_link);
+
+        //Gui Controller
+        this.detailsGuiController.showDetails();
         //Clickable Link
-        txtLink.setOnClickListener(new View.OnClickListener() {
+        this.txtLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                detailsCourseGuiController.goToLink(getApplicationContext(), bCourse.getLink());
+                detailsGuiController.goToLink();
             }
         });
+    }
+
+    public void setTxtShortName(String content) {
+        this.txtShortName.setText(content);
+    }
+
+    public void setTxtLongName(String content) {
+        this.txtLongName.setText(content);
+    }
+
+    public void setTxtAA(String content) {
+        this.txtAA.setText(content);
+    }
+
+    public void setTxtCFU(String content) {
+        this.txtCFU.setText(content);
+    }
+
+    public void setTxtID(String content) {
+        this.txtID.setText(content);
+    }
+
+    public void setTxtFaculty(String content) {
+        this.txtFaculty.setText(content);
+    }
+
+    public void setTxtSession(String content) {
+        this.txtSession.setText(content);
+    }
+
+    public void setTxtLink(String content) {
+        this.txtLink.setText(content);
     }
 }

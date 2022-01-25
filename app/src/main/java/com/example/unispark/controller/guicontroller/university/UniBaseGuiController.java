@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-public class BaseUniGuiController {
+public class UniBaseGuiController {
 
 
     //Open Button

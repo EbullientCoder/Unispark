@@ -12,36 +12,31 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.student.ShowScheduleGuiController;
 import com.example.unispark.viewadapter.LessonAdapter;
 import com.example.unispark.bean.BeanLesson;
-import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class StudentScheduleView extends AppCompatActivity{
 
 
     //Menu
-    ImageButton menuButton;
+    private ImageButton menuButton;
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Calendar
-    TextView txtDay;
-    TextView txtDate;
+    private TextView txtDay;
+    private TextView txtDate;
     //Lessons
-    RecyclerView rvLessons;
-    LessonAdapter lessonAdapter;
-    //Get Intent Extras
-    Bundle extras;
+    private RecyclerView rvLessons;
+    private LessonAdapter lessonAdapter;
 
-    //Bean
-    BeanLoggedStudent bStudent;
-    List<BeanLesson> lessonsItem;
+
 
     //Gui Controller
-    ShowScheduleGuiController scheduleGuiController;
+    private ShowScheduleGuiController scheduleGuiController;
 
 
     //Constructor
@@ -51,48 +46,57 @@ public class StudentScheduleView extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_schedule);
 
-        this.scheduleGuiController = new ShowScheduleGuiController();
-
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
+        this.scheduleGuiController = new ShowScheduleGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.lessonAdapter = new LessonAdapter("STUDENT");
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.schedule);
+        this.bottomNavigationView.setSelectedItemId(R.id.schedule);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Gui Controller
-                scheduleGuiController.selectNextView(bStudent, getApplicationContext(), item.getItemId());
+                scheduleGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
         });
 
 
-
         //Calendar
-        OffsetDateTime offset = OffsetDateTime.now();
-        txtDay = findViewById(R.id.txt_calendar_day);
-        txtDay.setText(String.valueOf(offset.getDayOfWeek()));
-        txtDate = findViewById(R.id.txt_calendar_date);
-        txtDate.setText(offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth());
 
+        this.txtDay = findViewById(R.id.txt_calendar_day);
+        this.txtDate = findViewById(R.id.txt_calendar_date);
 
         //Lessons
-        rvLessons = findViewById(R.id.rv_lessons);
+        this.rvLessons = findViewById(R.id.rv_lessons);
         //Gui Controller
-        lessonsItem = scheduleGuiController.showSchedule(bStudent,String.valueOf(offset.getDayOfWeek()));
-        lessonAdapter = new LessonAdapter(lessonsItem, "STUDENT");
-        rvLessons.setAdapter(lessonAdapter);
+        this.scheduleGuiController.showSchedule();
+
+    }
+
+
+
+
+
+    public void setLessonAdapter(List<BeanLesson> beanLessons) {
+        this.lessonAdapter.setLessonItem(beanLessons);
+        this.rvLessons.setAdapter(this.lessonAdapter);
+    }
+
+    public void setTxtDay(String content) {
+        this.txtDay.setText(content);
+    }
+
+    public void setTxtDate(String content) {
+        this.txtDate.setText(content);
     }
 }

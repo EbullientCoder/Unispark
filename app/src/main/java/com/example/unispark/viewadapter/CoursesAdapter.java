@@ -40,19 +40,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     //Methods
     //Professor
-    public CoursesAdapter(List<BeanCourse> bCourses, OnCourseClickListener onCourseClickListener, String type){
-        //If the Course List is empty:
-        this.bCourses = bCourses;
-
+    public CoursesAdapter(OnCourseClickListener onCourseClickListener, String type){
         this.onCourseClickListener = onCourseClickListener;
         this.type = type;
     }
 
     //Student
-    public CoursesAdapter(List<BeanCourse> bCourses, OnCourseClickListener onCourseClickListener,
+    public CoursesAdapter(OnCourseClickListener onCourseClickListener,
                           OnCourseBtnClickListener onCourseBtnClickListener, String type){
-
-        this.bCourses = bCourses;
 
         this.onCourseClickListener = onCourseClickListener;
         this.onCourseBtnClickListener = onCourseBtnClickListener;
@@ -172,6 +167,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             btnJoinLeave.setVisibility(View.INVISIBLE);
             buttonLayout.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    public void setbCourses(List<BeanCourse> bCourses) {
+        this.bCourses = bCourses;
     }
 }
 

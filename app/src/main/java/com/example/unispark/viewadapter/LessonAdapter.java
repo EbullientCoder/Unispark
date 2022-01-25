@@ -29,8 +29,7 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     //Methods
     //Constructor
-    public LessonAdapter(List<BeanLesson> lessonItem, String type){
-        this.lessonItem = lessonItem;
+    public LessonAdapter(String type){
         this.type = type;
     }
 
@@ -130,5 +129,9 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             lessonName.setText(lesson.getLessonName());
             lessonTime.setText(lesson.getHour());
         }
+    }
+
+    public void setLessonItem(List<BeanLesson> lessonItem) {
+        this.lessonItem = lessonItem;
     }
 }

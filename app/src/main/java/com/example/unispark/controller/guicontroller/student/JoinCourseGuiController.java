@@ -2,55 +2,80 @@ package com.example.unispark.controller.guicontroller.student;
 
 
 
-import android.app.Dialog;
-import android.content.Context;
-import android.widget.Toast;
 
+import android.content.Intent;
+
+import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.exceptions.CourseAlreadyJoined;
 import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.viewadapter.CoursesAdapter;
+import com.example.unispark.view.details.DetailsCourseView;
+import com.example.unispark.view.student.fragment.JoinCourseView;
 
 import java.util.List;
 
-public class JoinCourseGuiController extends ManageStudentProfileGuiController {
+public class JoinCourseGuiController extends StudentBaseGuiController {
 
-    public List<BeanCourse> showAvaliableCourses(BeanLoggedStudent student){
-        List<BeanCourse> courseList;
+    private JoinCourseView joinCourseView;
+    private List<BeanCourse> beanCourses;
+    private List<BeanCourse> beanJoinedCourses;
+
+
+    public JoinCourseGuiController(Session session, List<BeanCourse> beanJoinedCourses, JoinCourseView joinCourseView) {
+        super(session, joinCourseView.getContext());
+        this.joinCourseView = joinCourseView;
+        this.beanJoinedCourses = beanJoinedCourses;
+    }
+
+
+    public void showAvaliableCourses(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         ManageCourses getCoursesController = new ManageCourses();
-        courseList = getCoursesController.getAvaliableCourses(student);
-
-
-        return courseList;
+        this.beanCourses = getCoursesController.getAvaliableCourses(student);
+        this.joinCourseView.setCoursesAdapter(this.getBeanCourses());
 
     }
 
-    public void joinCourse(Dialog dialog, Context context, BeanLoggedStudent student, List<BeanCourse> avaliableCourses, List<BeanCourse> joinedCourses, int position, CoursesAdapter coursesAdapter){
-
+    public void joinCourse(int position){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         ManageCourses joinCourseAppController = new ManageCourses();
-        BeanCourse course = avaliableCourses.get(position);
+        BeanCourse course = this.beanCourses.get(position);
         try {
             joinCourseAppController.joinCourse(student, course);
 
             //Notify the Joined Courses Adapter
-            joinedCourses.add(0, course);
-            coursesAdapter.notifyDataSetChanged();
+            this.beanJoinedCourses.add(0, course);
+            this.joinCourseView.setJoinedCoursesAdapter(this.getBeanJoinedCourses());
+            this.joinCourseView.notifyDataChanged();
 
             //Remove Course from the Available Courses
-            avaliableCourses.remove(position);
-            dialog.dismiss();
+            this.beanCourses.remove(position);
+            this.joinCourseView.dismiss();
 
         } catch (GenericException | CourseDoesNotExist | CourseAlreadyJoined e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.joinCourseView.setErrorMessage(e.getMessage());
         }
     }
 
 
-    public void getErrorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public void showCourseDetails(int position){
+        Intent intent = new Intent(this.joinCourseView.getContext(), DetailsCourseView.class);
+        intent.putExtra("Course", this.beanCourses.get(position));
+        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+        this.joinCourseView.getContext().startActivity(intent);
+    }
+
+
+
+    public List<BeanCourse> getBeanCourses() {
+        return beanCourses;
+    }
+
+    public List<BeanCourse> getBeanJoinedCourses() {
+        return beanJoinedCourses;
     }
 }

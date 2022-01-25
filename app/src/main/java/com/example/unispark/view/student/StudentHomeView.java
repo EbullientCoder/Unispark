@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.student.ManageStudentHomeGuiController;
 import com.example.unispark.viewadapter.communications.ProfCommunicationsAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.communications.BeanProfessorCommunication;
 import com.example.unispark.bean.communications.BeanUniCommunication;
-import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,29 +31,21 @@ public class StudentHomeView extends AppCompatActivity
         ProfCommunicationsAdapter.OnProfComClickListener,
         HomeworksAdapter.OnHomeworkBtnClickListener{
 
-
         //Menu
-        ImageButton menuButton;
+        private ImageButton menuButton;
         //Bottom Menu Elements
-        BottomNavigationView bottomNavigationView;
+        private BottomNavigationView bottomNavigationView;
         //University Communications
-        RecyclerView rvUniCommunications;
-        UniCommunicationsAdapter uniCommunicationsAdapter;
+        private RecyclerView rvUniCommunications;
+        private UniCommunicationsAdapter uniCommunicationsAdapter;
         //Professor Communications
-        RecyclerView rvProfCommunications;
-        ProfCommunicationsAdapter profCommunicationsAdapter;
+        private RecyclerView rvProfCommunications;
+        private ProfCommunicationsAdapter profCommunicationsAdapter;
         //Homeworks
-        RecyclerView rvHomeworks;
-        HomeworksAdapter homeworksAdapter;
+        private RecyclerView rvHomeworks;
+        private HomeworksAdapter homeworksAdapter;
 
-        //Get Intent Extras
-        Bundle extras;
 
-        //Bean
-        BeanLoggedStudent bStudent;
-        List<BeanUniCommunication> beanUniCommunications;
-        List<BeanProfessorCommunication> beanProfessorCommunications;
-        List<BeanHomework> beanHomeworks;
 
         //Gui controller
         private ManageStudentHomeGuiController homeGuiController;
@@ -65,15 +57,18 @@ public class StudentHomeView extends AppCompatActivity
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_student_home);
 
-                this.homeGuiController = new ManageStudentHomeGuiController();
+                Session session = (Session) getIntent().getExtras().getSerializable("session");
 
-                //Getting User Bean
-                extras = getIntent().getExtras();
-                bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
+                this.homeGuiController = new ManageStudentHomeGuiController(session, this);
+                //View Adapters
+                this.uniCommunicationsAdapter = new UniCommunicationsAdapter(this);
+                this.profCommunicationsAdapter = new ProfCommunicationsAdapter(this);
+                this.homeworksAdapter = new HomeworksAdapter(this, "STUDENT");
+
 
                 //Menu
-                menuButton = findViewById(R.id.btn_menu);
-                menuButton.setOnClickListener(new View.OnClickListener() {
+                this.menuButton = findViewById(R.id.btn_menu);
+                this.menuButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                                 Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
@@ -81,20 +76,20 @@ public class StudentHomeView extends AppCompatActivity
                 });
 
                 //Bottom Navigation Menu
-                bottomNavigationView = findViewById(R.id.bottomMenuView);
+                this.bottomNavigationView = findViewById(R.id.bottomMenuView);
                 //Remove Menu View's background
-                bottomNavigationView.setBackground(null);
+                this.bottomNavigationView.setBackground(null);
                 //Remove Menu View's icons tint
-                bottomNavigationView.setItemIconTintList(null);
+                this.bottomNavigationView.setItemIconTintList(null);
                 //Set StudentHomeGUIController button
-                bottomNavigationView.setSelectedItemId(R.id.home);
+                this.bottomNavigationView.setSelectedItemId(R.id.home);
                 //Click Listener
-                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                                //Menu Gui Controller
-                                homeGuiController.selectNextView(bStudent, getApplicationContext(), item.getItemId());
+                                //Gui Controller
+                                homeGuiController.selectNextView(item.getItemId());
                                 overridePendingTransition(0,0);
                                 return true;
                         }
@@ -102,29 +97,22 @@ public class StudentHomeView extends AppCompatActivity
 
 
                 //Uni Communications
-                rvUniCommunications = findViewById(R.id.rv_uni_communications);
-                //Gui Controller
-                beanUniCommunications = homeGuiController.getUniCommunications(bStudent);
-                uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunications, this);
-                rvUniCommunications.setAdapter(uniCommunicationsAdapter);
-
+                this.rvUniCommunications = findViewById(R.id.rv_uni_communications);
+                //Gui Controller(Show Communications)
+                this.homeGuiController.showUniCommunications();
 
 
                 //Prof Communications
-                rvProfCommunications =  findViewById(R.id.rv_prof_communications);
-                //Gui Controller
-                beanProfessorCommunications = homeGuiController.getProfessorsCommunications(bStudent);
-                profCommunicationsAdapter = new ProfCommunicationsAdapter(beanProfessorCommunications, this);
-                rvProfCommunications.setAdapter(profCommunicationsAdapter);
+                this.rvProfCommunications =  findViewById(R.id.rv_prof_communications);
+                //Gui Controller(show Professors communications)
+                this.homeGuiController.showProfessorCommunications();
 
 
 
                 //Homeworks
-                rvHomeworks = findViewById(R.id.rv_homeworks);
-                //Gui Controller
-                beanHomeworks = homeGuiController.getHomeworks(bStudent);
-                homeworksAdapter = new HomeworksAdapter(beanHomeworks, this, "STUDENT");
-                rvHomeworks.setAdapter(homeworksAdapter);
+                this.rvHomeworks = findViewById(R.id.rv_homeworks);
+                //Gui Controller(Show homework)
+                this.homeGuiController.showHomeworks();
         }
 
 
@@ -132,20 +120,45 @@ public class StudentHomeView extends AppCompatActivity
         @Override
         public void onUniClick(int position) {
 
-                homeGuiController.showDetailsCommunication(getApplicationContext(), beanUniCommunications.get(position));
+               this.homeGuiController.showDetailsUniCommunication(position);
         }
 
 
         //On ProfessorCommunications Click
         @Override
         public void onProfClick(int position) {
-                homeGuiController.showDetailsCommunication(getApplicationContext(), beanProfessorCommunications.get(position));
+
+                this.homeGuiController.showDetailsProfCommunication(position);
         }
 
         //On Homework Click
         @Override
         public void onBtnClick(int position) {
-                homeGuiController.showHomeworkDetails(getApplicationContext(), beanHomeworks.get(position));
+                this.homeGuiController.showHomeworkDetails(position);
+        }
+
+
+
+
+        //Getters and Setters
+
+        public void setUniCommunicationsAdapter(List<BeanUniCommunication> beanUniCommunications) {
+                this.uniCommunicationsAdapter.setBeanUniCommunicationList(beanUniCommunications);
+                this.rvUniCommunications.setAdapter(this.uniCommunicationsAdapter);
+        }
+
+
+
+        public void setProfCommunicationsAdapter(List<BeanProfessorCommunication> beanProfessorCommunications) {
+                this.profCommunicationsAdapter.setBeanProfCommunicationList(beanProfessorCommunications);
+                this.rvProfCommunications.setAdapter(this.profCommunicationsAdapter);
+        }
+
+
+
+        public void setHomeworksAdapter(List<BeanHomework> beanHomeworks) {
+                this.homeworksAdapter.setBeanHomeworkList(beanHomeworks);
+                this.rvHomeworks.setAdapter(this.homeworksAdapter);
         }
 
 

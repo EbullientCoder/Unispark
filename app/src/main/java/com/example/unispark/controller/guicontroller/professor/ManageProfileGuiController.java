@@ -1,40 +1,134 @@
 package com.example.unispark.controller.guicontroller.professor;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
 
+import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.view.details.DetailsCourseView;
+import com.example.unispark.view.professor.ProfessorProfileView;
+import com.example.unispark.view.professor.fragment.AddExamView;
+import com.example.unispark.view.professor.fragment.AddHomeworkView;
+import com.example.unispark.view.professor.fragment.AddProfCommunicationView;
 
 import java.util.List;
 
-public class ManageProfileGuiController extends BaseProfessorGuiController {
+public class ManageProfileGuiController extends ProfBaseGuiController {
 
 
-    public void goToLink(Context context, String link){
+    private ProfessorProfileView profileView;
+
+
+    public ManageProfileGuiController(Session session, ProfessorProfileView profileView) {
+        super(session, profileView);
+        this.profileView = profileView;
+    }
+
+    public void  navigateToLink(){
+        BeanLoggedProfessor bProfessor = (BeanLoggedProfessor) this.session.getUser();
+        this.goToLink(bProfessor.getWebsite());
+    }
+
+    private void goToLink(String link){
         Uri uri = Uri.parse(link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.profileView.startActivity(intent);
     }
 
-    public List<BeanCourse> showCourses(BeanLoggedProfessor professor){
+    public void showCourses(){
+        BeanLoggedProfessor bProfessor = (BeanLoggedProfessor) this.session.getUser();
+
+        //Get Parameters
+        int imageID = bProfessor.getProfilePicture();
+        String firstname = bProfessor.getFirstName();
+        String lastname = bProfessor.getLastName();
+        String website = bProfessor.getWebsite();
+        this.profileView.setImgProfImage(imageID);
+        this.profileView.setTxtProfName(firstname + ' ' + lastname);
+        this.profileView.setTxtWebsite(website);
+
         List<BeanCourse> courseList;
         ManageCourses getCoursesController = new ManageCourses();
-        courseList = getCoursesController.getCourses(professor);
+        courseList = getCoursesController.getCourses(bProfessor);
+        this.profileView.setCoursesAdapter(courseList);
 
-        return courseList;
     }
 
 
-    public void showCourseDetails(Context context, BeanCourse course){
-        Intent intent = new Intent(context, DetailsCourseView.class);
+    public void showCourseDetails(int position){
+        BeanLoggedProfessor bProfessor = (BeanLoggedProfessor) this.session.getUser();
+        ManageCourses getCoursesController = new ManageCourses();
+        BeanCourse course = getCoursesController.getCourses(bProfessor).get(position);
+
+        Intent intent = new Intent(this.getProfileView(), DetailsCourseView.class);
         intent.putExtra("Course", course);
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.profileView.startActivity(intent);
     }
 
+
+
+    //Open Button
+    public void expandButton(){
+        if(!this.isOpen()){
+            //Show Buttons
+            this.profileView.setBtnExam();
+            this.profileView.setBtnCommunication();
+            this.profileView.setBtnHomework();
+
+            //Expand Floating Button
+            this.profileView.setTxtExam();
+            this.profileView.setTxtCommunication();
+            this.profileView.setTxtHomework();
+
+            //Rotate
+            this.profileView.setBtnAdd();
+
+            //Opened
+            this.setOpen(true);
+        }
+        else{
+            //Hide Buttons
+            this.profileView.unsSetBtnExam();
+            this.profileView.unSetBtnCommunication();
+            this.profileView.unSetBtnHomework();
+
+            //Expand Floating Button
+            this.profileView.unSetTxtExam();
+            this.profileView.unSetTxtCommunication();
+            this.profileView.unSetTxtHomework();
+
+            //Rotate
+            this.profileView.unSetBtnAdd();
+
+            this.setOpen(false);
+        }
+
+    }
+
+
+    public void showAddExam(){
+        AddExamView fragment = new AddExamView(this.session);
+        fragment.show(this.profileView.getSupportFragmentManager(), "AddExam");
+    }
+
+    public void showAddHomework(){
+
+        AddHomeworkView fragment= new AddHomeworkView(this.session, null, null);
+        fragment.show(this.profileView.getSupportFragmentManager(), "AddHomework");
+    }
+
+
+    public void showAddCommunication(){
+        AddProfCommunicationView fragment= new AddProfCommunicationView(this.session);
+        fragment.show(this.profileView.getSupportFragmentManager(), "AddCommunication");
+    }
+
+    public ProfessorProfileView getProfileView() {
+        return profileView;
+    }
 }

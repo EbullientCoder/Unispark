@@ -14,7 +14,7 @@ import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 
 import java.util.List;
 
-public class AddCommunicationGuiController extends BaseUniGuiController{
+public class AddCommunicationGuiController extends UniBaseGuiController {
 
     public void showAddMedia(Activity activity){
         Intent i = new Intent(Intent.ACTION_PICK,

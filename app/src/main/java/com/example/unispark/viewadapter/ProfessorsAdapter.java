@@ -29,8 +29,7 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     //Methods
-    public ProfessorsAdapter(List<BeanProfessorDetails> beanProfessorDetails, OnProfessorClickListener onProfessorClickListener){
-        this.beanLoggedProfessorList = beanProfessorDetails;
+    public ProfessorsAdapter(OnProfessorClickListener onProfessorClickListener){
         this.onProfessorClickListener = onProfessorClickListener;
     }
 
@@ -90,5 +89,8 @@ public class ProfessorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    public void setBeanLoggedProfessorList(List<BeanProfessorDetails> beanLoggedProfessorList) {
+        this.beanLoggedProfessorList = beanLoggedProfessorList;
+    }
 }
 

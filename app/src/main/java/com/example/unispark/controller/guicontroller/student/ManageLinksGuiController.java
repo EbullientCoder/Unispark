@@ -1,10 +1,11 @@
 package com.example.unispark.controller.guicontroller.student;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
 
+
+import com.example.unispark.Session;
 import com.example.unispark.bean.BeanLink;
 import com.example.unispark.bean.professor.BeanProfessorDetails;
 import com.example.unispark.bean.student.BeanLoggedStudent;
@@ -14,37 +15,42 @@ import com.example.unispark.controller.applicationcontroller.links.ShowLinks;
 import com.example.unispark.controller.applicationcontroller.professor.ShowFacultyProfessors;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.exceptions.LinkAlreadyExists;
-import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.view.details.DetailsProfessorView;
-import com.example.unispark.viewadapter.LinksAdapter;
+import com.example.unispark.view.student.StudentLinksView;
+
 
 import java.util.List;
 
-public class ManageLinksGuiController extends BottomNavigationMenuGuiController {
+public class ManageLinksGuiController extends StudentBaseGuiController {
 
 
-    public List<BeanProfessorDetails> showProfessorDetails(BeanLoggedStudent student){
-        List<BeanProfessorDetails> professorDetails = null;
+    private StudentLinksView linksView;
+    private List<BeanLink> beanLinks;
+    private List<BeanProfessorDetails> beanProfessorDetails;
 
+    public ManageLinksGuiController(Session session, StudentLinksView linksView) {
+        super(session, linksView);
+        this.linksView = linksView;
+    }
+
+    public void showProfessorDetails(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
         ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
-        professorDetails = facultyProfessorsAppController.setFacultyProfessors(student);
-
-
-        return professorDetails;
+        this.beanProfessorDetails = facultyProfessorsAppController.setFacultyProfessors(student);
+        this.linksView.setProfessorsAdapter(this.getBeanProfessorDetails());
     }
 
-    public List<BeanLink> showLinks(BeanLoggedStudent student){
-        List<BeanLink> beanLinks;
+    public void showLinks(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
 
         ShowLinks linksAppController = new ShowLinks();
-        beanLinks = linksAppController.showLinks(student);
-
-        return beanLinks;
+        this.beanLinks = linksAppController.showLinks(student);
+        this.linksView.setLinkAdapter(this.getBeanLinks());
     }
 
-    public void addLink(Context context, String linkName, String link, BeanLoggedStudent student, List<BeanLink> links, LinksAdapter linksAdapter){
-
+    public void addLink(String linkName, String link){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         if(linkName.length() != 0 && link.length() != 0){
 
             BeanLink newLink = new BeanLink();
@@ -55,56 +61,60 @@ public class ManageLinksGuiController extends BottomNavigationMenuGuiController 
             AddLink addLinksAppController = new AddLink();
             try {
                 addLinksAppController.addLink(student, newLink);
-                links.add(newLink);
-                linksAdapter.notifyItemInserted(links.size());
+                this.beanLinks.add(newLink);
+                this.linksView.notifyDataChanged(this.beanLinks.size(), false);
             } catch (LinkAlreadyExists | GenericException e) {
                 e.printStackTrace();
-                getErrorMessage(context, e.getMessage());
+                this.linksView.setErrorMessage(e.getMessage());
             }
 
         }
-        else getEmptyErrorMessage(context);
-    }
-
-    private void getErrorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        else this.linksView.setErrorMessage("Link cannot be empty");
     }
 
 
-    private void getEmptyErrorMessage(Context context){
-        Toast.makeText(context, "EMPTY LINK", Toast.LENGTH_SHORT).show();
-    }
 
-    public void showProfessorDetails(Context context, BeanProfessorDetails professorDetails){
 
-        Intent intent = new Intent(context, DetailsProfessorView.class);
-        intent.putExtra("Professor", professorDetails);
+    public void showProfessorDetails(int position){
+
+        Intent intent = new Intent(this.getLinksView(), DetailsProfessorView.class);
+        intent.putExtra("Professor", this.beanProfessorDetails.get(position));
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.linksView.startActivity(intent);
     }
 
-    public void goToLink(Context context, String link){
+    public void goToLink(String link){
         Uri uri = Uri.parse(link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.linksView.startActivity(intent);
     }
 
-    public void removeLink(Context context, List<BeanLink> links, int position, LinksAdapter linksAdapter){
+    public void removeLink(int position){
 
         //Application Controller: Delete Link
         DeleteLink deleteLinkAppController = new DeleteLink();
 
         try {
-            deleteLinkAppController.deleteLink(links.get(position));
+            deleteLinkAppController.deleteLink(this.beanLinks.get(position));
             //Removing link from the List
-            links.remove(position);
-            linksAdapter.notifyItemRemoved(position);
+            this.beanLinks.remove(position);
+            this.linksView.notifyDataChanged(position, true);
         } catch (GenericException e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.linksView.setErrorMessage(e.getMessage());
         }
     }
 
+    public StudentLinksView getLinksView() {
+        return linksView;
+    }
 
+    public List<BeanLink> getBeanLinks() {
+        return beanLinks;
+    }
+
+    public List<BeanProfessorDetails> getBeanProfessorDetails() {
+        return beanProfessorDetails;
+    }
 }

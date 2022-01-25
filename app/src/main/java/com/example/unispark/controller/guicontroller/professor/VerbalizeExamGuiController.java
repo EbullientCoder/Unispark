@@ -1,7 +1,5 @@
 package com.example.unispark.controller.guicontroller.professor;
 
-import android.content.Context;
-import android.widget.Toast;
 
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
@@ -9,50 +7,55 @@ import com.example.unispark.controller.applicationcontroller.exams.ShowSignedToE
 import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
 import com.example.unispark.exceptions.ExamNotYetOccured;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.viewadapter.SignedStudentsAdapter;
+import com.example.unispark.view.professor.VerbalizeExamsView;
+
 
 import java.util.List;
 
-public class VerbalizeExamGuiController {
+public class VerbalizeExamGuiController{
+
+    private VerbalizeExamsView verbalizeExamsView;
+    private BeanBookExam beanBookExam;
+    private List<BeanStudentSignedToExam> beanStudentSignedToExams;
 
 
-    public List<BeanStudentSignedToExam> showStudents(Context context, BeanBookExam bookExam){
-        List<BeanStudentSignedToExam> studentSignedToExams;
+    public VerbalizeExamGuiController(BeanBookExam beanBookExam, VerbalizeExamsView verbalizeExamsView) {
+        this.verbalizeExamsView = verbalizeExamsView;
+        this.beanBookExam = beanBookExam;
+    }
+
+    public void showStudents(){
+
+        this.verbalizeExamsView.setTxtCourseName(this.getBeanBookExam().getName());
+        this.verbalizeExamsView.setTxtCourseDate(this.getBeanBookExam().getDate());
 
         //Application Controller
         ShowSignedToExamStudents bookedStudentAppController = new ShowSignedToExamStudents();
-        studentSignedToExams = bookedStudentAppController.showBookedStudents(bookExam);
+        this.beanStudentSignedToExams = bookedStudentAppController.showBookedStudents(this.getBeanBookExam());
 
-        if(studentSignedToExams.isEmpty()) getMessage(context);
+        if(this.getBeanStudentSignedToExams().isEmpty()) this.verbalizeExamsView.setMessage("No students signed");
+        else this.verbalizeExamsView.setStudentsAdapter(this.getBeanStudentSignedToExams());
 
-        return studentSignedToExams;
-    }
-
-
-    private void getMessage(Context context){
-
-        Toast.makeText(context, "NO STUDENTS SIGNED", Toast.LENGTH_SHORT).show();
     }
 
 
 
 
-    public void verbalizeExam(Context context, String result, BeanBookExam bookExam,
-                              List<BeanStudentSignedToExam> studentSignedToExams, int position,
-                              SignedStudentsAdapter studentsAdapter){
+
+    public void verbalizeExam(String result, int position){
 
         //Application Controller
         VerbalizeExam verbalizeExamAppController = new VerbalizeExam();
         try {
             double doubleResult = Double.parseDouble(result);
             if (doubleResult < 0 || doubleResult > 30){
-                getResultInvalidMessage(context);
+                this.verbalizeExamsView.setMessage("Grade must be a number between 0 and 30");
             }
             else{
-                verbalizeExamAppController.verbalizeExam(bookExam, studentSignedToExams.get(position), result);
+                verbalizeExamAppController.verbalizeExam(this.getBeanBookExam(), this.getBeanStudentSignedToExams().get(position), result);
                 //Remove Verbalized Exam
-                studentSignedToExams.remove(position);
-                studentsAdapter.notifyItemRemoved(position);
+                this.beanStudentSignedToExams.remove(position);
+                this.verbalizeExamsView.notifyDataChanged(position);
             }
 
 
@@ -60,23 +63,21 @@ public class VerbalizeExamGuiController {
 
         } catch (ExamNotYetOccured | GenericException e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.verbalizeExamsView.setMessage(e.getMessage());
         } catch (NumberFormatException numberFormatException){
-            getResultInvalidMessage(context);
+            this.verbalizeExamsView.setMessage(numberFormatException.getMessage());
         }
     }
 
 
 
 
-    private void getResultInvalidMessage(Context context){
 
-        Toast.makeText(context, "Result format not valid, insert a number between 0 and 30", Toast.LENGTH_SHORT).show();
+    public BeanBookExam getBeanBookExam() {
+        return beanBookExam;
     }
 
-
-
-    private void getErrorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public List<BeanStudentSignedToExam> getBeanStudentSignedToExams() {
+        return beanStudentSignedToExams;
     }
 }

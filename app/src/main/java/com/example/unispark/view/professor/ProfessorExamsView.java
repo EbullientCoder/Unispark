@@ -9,14 +9,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
+import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.controller.guicontroller.professor.ManageExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
-import com.example.unispark.bean.exams.BeanExamType;
-import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,32 +26,25 @@ public class ProfessorExamsView extends AppCompatActivity
         implements ExamAdapter.OnViewExamClickListener{
 
 
-    //Menu
-    ImageButton menuButton;
+
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Menu ExamModel Page
-    TextView examsTitle;
+    private TextView examsTitle;
     //Get Intent Extras
-    Bundle extras;
+    private Bundle extras;
     //ExamModel
-    RecyclerView rvExams;
-    ExamAdapter examAdapter;
+    private RecyclerView rvExams;
+    private ExamAdapter examAdapter;
     //Floating Button
-    FloatingActionButton btnAdd;
-    FloatingActionButton btnExam;
-    TextView txtExam;
-    FloatingActionButton btnHomework;
-    TextView txtHomework;
-    FloatingActionButton btnCommunication;
-    TextView txtCommunication;
-    Boolean isOpen;
+    private FloatingActionButton btnAdd;
+    private FloatingActionButton btnExam;
+    private TextView txtExam;
+    private FloatingActionButton btnHomework;
+    private TextView txtHomework;
+    private FloatingActionButton btnCommunication;
+    private TextView txtCommunication;
 
-
-
-    //Bean
-    BeanLoggedProfessor bProfessor;
-    List<BeanExamType> examsItem;
 
 
     //Gui Controller
@@ -63,29 +56,25 @@ public class ProfessorExamsView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_exams);
 
-        this.examsGuiController = new ManageExamsGuiController();
-
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
-
+        this.examsGuiController = new ManageExamsGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.examAdapter = new ExamAdapter(this);
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.professor_exams);
+        this.bottomNavigationView.setSelectedItemId(R.id.professor_exams);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Gui Controller
-                examsGuiController.selectNextView(bProfessor, getApplicationContext(), item.getItemId());
+                examsGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
@@ -93,74 +82,67 @@ public class ProfessorExamsView extends AppCompatActivity
 
 
         //ExamModel Page Title
-        examsTitle = findViewById(R.id.txt_professor_exams_title);
+        this.examsTitle = findViewById(R.id.txt_professor_exams_title);
 
         //ExamModel List
-        rvExams = findViewById(R.id.rv_professor_exams);
+        this.rvExams = findViewById(R.id.rv_professor_exams);
 
 
         //Gui Controller
-        examsItem = examsGuiController.showExams(bProfessor);
-        examAdapter = new ExamAdapter(examsItem, this);
-        rvExams.setAdapter(examAdapter);
+        this.examsGuiController.showExams();
 
 
-
-        //Button: Add Homework - Communication
-        isOpen = false;
-
-        btnAdd = findViewById(R.id.btn_add);
-        btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        this.btnAdd = findViewById(R.id.btn_add);
+        this.btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
+        this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isOpen = examsGuiController.expandButton(isOpen, btnExam, btnCommunication, btnHomework,
-                        txtExam, txtCommunication, txtHomework, btnAdd);
+                examsGuiController.expandButton();
             }
         });
 
 
         //Button: Add Exam
-        txtExam = findViewById(R.id.txt_add_exam);
-        txtExam.setVisibility(View.GONE);
+        this.txtExam = findViewById(R.id.txt_add_exam);
+        this.txtExam.setVisibility(View.GONE);
 
-        btnExam = findViewById(R.id.btn_add_exam);
-        btnExam.setImageTintList(null);
-        btnExam.setVisibility(View.GONE);
-        btnExam.setOnClickListener(new View.OnClickListener() {
+        this.btnExam = findViewById(R.id.btn_add_exam);
+        this.btnExam.setImageTintList(null);
+        this.btnExam.setVisibility(View.GONE);
+        this.btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                examsGuiController.showAddExam(getSupportFragmentManager(), bProfessor);
+                examsGuiController.showAddExam();
             }
         });
 
 
         //Button: Add Homework
-        txtHomework = findViewById(R.id.txt_add_homework);
-        txtHomework.setVisibility(View.GONE);
+        this.txtHomework = findViewById(R.id.txt_add_homework);
+        this.txtHomework.setVisibility(View.GONE);
 
-        btnHomework = findViewById(R.id.btn_add_homework);
-        btnHomework.setImageTintList(null);
-        btnHomework.setVisibility(View.GONE);
-        btnHomework.setOnClickListener(new View.OnClickListener() {
+        this.btnHomework = findViewById(R.id.btn_add_homework);
+        this.btnHomework.setImageTintList(null);
+        this.btnHomework.setVisibility(View.GONE);
+        this.btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                examsGuiController.showAddHomework(getSupportFragmentManager(), bProfessor);
+                examsGuiController.showAddHomework();
             }
         });
 
 
         //Button: Add Communication
-        txtCommunication = findViewById(R.id.txt_add_communication);
-        txtCommunication.setVisibility(View.GONE);
+        this.txtCommunication = findViewById(R.id.txt_add_communication);
+        this.txtCommunication.setVisibility(View.GONE);
 
-        btnCommunication = findViewById(R.id.btn_add_communication);
-        btnCommunication.setImageTintList(null);
-        btnCommunication.setVisibility(View.GONE);
-        btnCommunication.setOnClickListener(new View.OnClickListener() {
+        this.btnCommunication = findViewById(R.id.btn_add_communication);
+        this.btnCommunication.setImageTintList(null);
+        this.btnCommunication.setVisibility(View.GONE);
+        this.btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                examsGuiController.showAddCommunication(getSupportFragmentManager(), bProfessor);
+                examsGuiController.showAddCommunication();
             }
         });
     }
@@ -170,6 +152,70 @@ public class ProfessorExamsView extends AppCompatActivity
     //On ViewExam Button Click
     @Override
     public void onViewBtnClick(int position) {
-        examsGuiController.showVerbalizeExam(getApplicationContext(), examsItem.get(position).getExamType());
+        this.examsGuiController.showVerbalizeExam(position);
+    }
+
+
+
+
+
+
+    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
+        this.examAdapter.setbExams(beanExamTypes);
+        this.rvExams.setAdapter(this.getExamAdapter());
+
+    }
+
+    public ExamAdapter getExamAdapter() {
+        return examAdapter;
+    }
+
+    public void setBtnExam() {
+        this.btnExam.show();
+    }
+    public void unsSetBtnExam() {
+        this.btnExam.hide();
+    }
+
+    public void setBtnAdd() {
+        this.btnAdd.setRotation(45);
+    }
+    public void unSetBtnAdd() {
+        this.btnAdd.setRotation(0);
+    }
+
+    public void setTxtExam() {
+        this.txtExam.setVisibility(View.VISIBLE);
+    }
+    public void unSetTxtExam() {
+        this.txtExam.setVisibility(View.GONE);
+    }
+
+    public void setBtnHomework() {
+        this.btnHomework.show();
+    }
+    public void unSetBtnHomework() {
+        this.btnHomework.hide();
+    }
+
+    public void setTxtHomework() {
+        this.txtHomework.setVisibility(View.VISIBLE);
+    }
+    public void unSetTxtHomework() {
+        this.txtHomework.setVisibility(View.GONE);
+    }
+
+    public void setBtnCommunication() {
+        this.btnCommunication.show();
+    }
+    public void unSetBtnCommunication() {
+        this.btnCommunication.hide();
+    }
+
+    public void setTxtCommunication() {
+        this.txtCommunication.setVisibility(View.VISIBLE);
+    }
+    public void unSetTxtCommunication() {
+        this.txtCommunication.setVisibility(View.GONE);
     }
 }

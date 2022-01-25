@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.professor.ManageProfileGuiController;
 import com.example.unispark.viewadapter.CoursesAdapter;
 import com.example.unispark.bean.courses.BeanCourse;
@@ -28,33 +29,26 @@ public class ProfessorProfileView extends AppCompatActivity
 
     //Attributes
     //Menu
-    ImageButton menuButton;
+    private ImageButton menuButton;
     //Floating Button
-    FloatingActionButton btnAdd;
-    FloatingActionButton btnExam;
-    TextView txtExam;
-    FloatingActionButton btnHomework;
-    TextView txtHomework;
-    FloatingActionButton btnCommunication;
-    TextView txtCommunication;
-    Boolean isOpen;
+    private FloatingActionButton btnAdd;
+    private FloatingActionButton btnExam;
+    private TextView txtExam;
+    private FloatingActionButton btnHomework;
+    private TextView txtHomework;
+    private FloatingActionButton btnCommunication;
+    private TextView txtCommunication;
+
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
-    //Get Intent Extras
-    Bundle extras;
-    //Set Intent Extras
-    ImageView imgProfImage;
-    TextView txtProfName;
-    TextView txtWebsite;
+    private BottomNavigationView bottomNavigationView;
+
+    private ImageView imgProfImage;
+    private TextView txtProfName;
+    private TextView txtWebsite;
     //Courses
-    RecyclerView rvCourses;
-    CoursesAdapter coursesAdapter;
+    private RecyclerView rvCourses;
+    private CoursesAdapter coursesAdapter;
 
-
-
-    //Bean
-    BeanLoggedProfessor bProfessor;
-    List<BeanCourse> beanCourseList;
 
 
     //Gui Controller
@@ -67,123 +61,107 @@ public class ProfessorProfileView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_profile);
 
-        this.profileGuiController = new ManageProfileGuiController();
+        this.profileGuiController = new ManageProfileGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.coursesAdapter = new CoursesAdapter(this, "PROFESSOR");
 
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.professor_profile);
+        this.bottomNavigationView.setSelectedItemId(R.id.professor_profile);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Gui Controller
-                profileGuiController.selectNextView(bProfessor, getApplicationContext(), item.getItemId());
+                profileGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
         });
 
 
-
-        //Button: Add Homework - Communication
-        isOpen = false;
-
-        btnAdd = findViewById(R.id.btn_add);
-        btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        this.btnAdd = findViewById(R.id.btn_add);
+        this.btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
+        this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                isOpen = profileGuiController.expandButton(isOpen, btnExam, btnCommunication, btnHomework,
-                        txtExam, txtCommunication, txtHomework, btnAdd);
+                profileGuiController.expandButton();
             }
         });
 
 
         //Button: Add Exam
-        txtExam = findViewById(R.id.txt_add_exam);
-        txtExam.setVisibility(View.GONE);
+        this.txtExam = findViewById(R.id.txt_add_exam);
+        this.txtExam.setVisibility(View.GONE);
 
-        btnExam = findViewById(R.id.btn_add_exam);
-        btnExam.setImageTintList(null);
-        btnExam.setVisibility(View.GONE);
-        btnExam.setOnClickListener(new View.OnClickListener() {
+        this.btnExam = findViewById(R.id.btn_add_exam);
+        this.btnExam.setImageTintList(null);
+        this.btnExam.setVisibility(View.GONE);
+        this.btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileGuiController.showAddExam(getSupportFragmentManager(), bProfessor);
+                profileGuiController.showAddExam();
             }
         });
         //Button: Add Homework
-        txtHomework = findViewById(R.id.txt_add_homework);
-        txtHomework.setVisibility(View.GONE);
+        this.txtHomework = findViewById(R.id.txt_add_homework);
+        this.txtHomework.setVisibility(View.GONE);
 
-        btnHomework = findViewById(R.id.btn_add_homework);
-        btnHomework.setImageTintList(null);
-        btnHomework.setVisibility(View.GONE);
-        btnHomework.setOnClickListener(new View.OnClickListener() {
+        this.btnHomework = findViewById(R.id.btn_add_homework);
+        this.btnHomework.setImageTintList(null);
+        this.btnHomework.setVisibility(View.GONE);
+        this.btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileGuiController.showAddHomework(getSupportFragmentManager(), bProfessor);
+                profileGuiController.showAddHomework();
             }
         });
 
 
         //Button: Add Communication
-        txtCommunication = findViewById(R.id.txt_add_communication);
-        txtCommunication.setVisibility(View.GONE);
+        this.txtCommunication = findViewById(R.id.txt_add_communication);
+        this.txtCommunication.setVisibility(View.GONE);
 
-        btnCommunication = findViewById(R.id.btn_add_communication);
-        btnCommunication.setImageTintList(null);
-        btnCommunication.setVisibility(View.GONE);
-        btnCommunication.setOnClickListener(new View.OnClickListener() {
+        this.btnCommunication = findViewById(R.id.btn_add_communication);
+        this.btnCommunication.setImageTintList(null);
+        this.btnCommunication.setVisibility(View.GONE);
+        this.btnCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileGuiController.showAddCommunication(getSupportFragmentManager(), bProfessor);
+                profileGuiController.showAddCommunication();
             }
         });
 
-
-
-        //Get Parameters
-        int imageID = bProfessor.getProfilePicture();
-        String firstname = bProfessor.getFirstName();
-        String lastname = bProfessor.getLastName();
-        String website = bProfessor.getWebsite();
 
         //Display Parameters
-        imgProfImage = findViewById(R.id.img_professor_profile_image);
-        imgProfImage.setImageResource(imageID);
-        txtProfName = findViewById(R.id.txt_professor_fullname);
-        txtProfName.setText(firstname + ' ' + lastname);
-        txtWebsite = findViewById(R.id.txt_professor_website);
-        txtWebsite.setText(website);
+        this.imgProfImage = findViewById(R.id.img_professor_profile_image);
+        this.txtProfName = findViewById(R.id.txt_professor_fullname);
+        this.txtWebsite = findViewById(R.id.txt_professor_website);
+
+
+
+        //Courses
+        this.rvCourses = findViewById(R.id.rv_professor_courses);
+        //Gui Controller
+        this.profileGuiController.showCourses();
+
+
         //Clickable Website
-        txtWebsite.setOnClickListener(new View.OnClickListener() {
+        this.txtWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                profileGuiController.goToLink(getApplicationContext(), website);
+                profileGuiController.navigateToLink();
             }
         });
 
-        //Courses
-        rvCourses = findViewById(R.id.rv_professor_courses);
-
-        //Gui Controller
-        beanCourseList = profileGuiController.showCourses(bProfessor);
-
-        coursesAdapter = new CoursesAdapter(beanCourseList, this, "PROFESSOR");
-        rvCourses.setAdapter(coursesAdapter);
     }
 
 
@@ -191,6 +169,100 @@ public class ProfessorProfileView extends AppCompatActivity
     //Course Click
     @Override
     public void onCourseClick(int position) {
-        profileGuiController.showCourseDetails(getApplicationContext(), beanCourseList.get(position));
+        this.profileGuiController.showCourseDetails(position);
     }
+
+
+
+
+    public void setCoursesAdapter(List<BeanCourse> beanCourses) {
+        this.coursesAdapter.setbCourses(beanCourses);
+        this.rvCourses.setAdapter(this.getCoursesAdapter());
+    }
+
+    public CoursesAdapter getCoursesAdapter() {
+        return coursesAdapter;
+    }
+
+    public void setImgProfImage(int content) {
+        this.imgProfImage.setImageResource(content);
+    }
+
+    public void setTxtProfName(String content) {
+        this.txtProfName.setText(content);
+    }
+
+    public void setTxtWebsite(String content) {
+        this.txtWebsite.setText(content);
+    }
+
+
+
+
+
+    public void setBtnExam() {
+        this.btnExam.show();
+    }
+
+
+    public void setBtnAdd() {
+        this.btnAdd.setRotation(45);
+    }
+
+
+    public void setTxtExam() {
+        this.txtExam.setVisibility(View.VISIBLE);
+    }
+
+
+    public void setBtnHomework() {
+        this.btnHomework.show();
+    }
+
+
+    public void unSetTxtExam() {
+        this.txtExam.setVisibility(View.GONE);
+    }
+
+
+    public void setTxtHomework() {
+        this.txtHomework.setVisibility(View.VISIBLE);
+    }
+
+    public void unSetBtnAdd() {
+        this.btnAdd.setRotation(0);
+    }
+
+    public void setBtnCommunication() {
+        this.btnCommunication.show();
+    }
+
+
+    public void unsSetBtnExam() {
+        this.btnExam.hide();
+    }
+
+    public void setTxtCommunication() {
+        this.txtCommunication.setVisibility(View.VISIBLE);
+    }
+
+    public void unSetTxtHomework() {
+        this.txtHomework.setVisibility(View.GONE);
+    }
+
+
+    public void unSetTxtCommunication() {
+        this.txtCommunication.setVisibility(View.GONE);
+    }
+
+    public void unSetBtnHomework() {
+        this.btnHomework.hide();
+    }
+
+
+    public void unSetBtnCommunication() {
+        this.btnCommunication.hide();
+    }
+
+
 }

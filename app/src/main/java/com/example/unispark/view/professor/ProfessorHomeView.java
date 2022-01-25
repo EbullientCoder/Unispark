@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.professor.ManageProfessorHomeGuiController;
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
@@ -28,34 +29,25 @@ public class ProfessorHomeView extends AppCompatActivity implements
         HomeworksAdapter.OnHomeworkBtnClickListener,
         UniCommunicationsAdapter.OnUniComClickListener{
 
-    //Menu
-    ImageButton menuButton;
+
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Communications
-    RecyclerView rvUniCommunications;
-    UniCommunicationsAdapter uniCommunicationsAdapter;
+    private RecyclerView rvUniCommunications;
+    private UniCommunicationsAdapter uniCommunicationsAdapter;
     //Floating Button
-    FloatingActionButton btnAdd;
-    FloatingActionButton btnExam;
-    TextView txtExam;
-    FloatingActionButton btnHomework;
-    TextView txtHomework;
-    FloatingActionButton btnCommunication;
-    TextView txtCommunication;
-    Boolean isOpen;
+    private FloatingActionButton btnAdd;
+    private FloatingActionButton btnExam;
+    private TextView txtExam;
+    private FloatingActionButton btnHomework;
+    private TextView txtHomework;
+    private FloatingActionButton btnCommunication;
+    private TextView txtCommunication;
+    private boolean isOpen;
     //Homeworks
-    RecyclerView rvHomeworks;
-    HomeworksAdapter homeworkAdapter;
+    private RecyclerView rvHomeworks;
+    private HomeworksAdapter homeworkAdapter;
 
-    //Get Intent Extras
-    Bundle extras;
-
-
-    //Bean
-    BeanLoggedProfessor bProfessor;
-    List<BeanHomework> beanHomeworkList;
-    List<BeanUniCommunication> beanUniCommunicationList;
 
 
     //Gui Controller
@@ -68,29 +60,27 @@ public class ProfessorHomeView extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_home);
 
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bProfessor = (BeanLoggedProfessor) extras.getSerializable("UserObject");
 
-
-        this.professorHomeGuiController = new ManageProfessorHomeGuiController();
+        this.professorHomeGuiController = new ManageProfessorHomeGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.uniCommunicationsAdapter = new UniCommunicationsAdapter(this);
+        this.homeworkAdapter = new HomeworksAdapter(this, "PROFESSOR");
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.professor_home);
+        this.bottomNavigationView.setSelectedItemId(R.id.professor_home);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Menu Gui Controller
-                professorHomeGuiController.selectNextView(bProfessor, getApplicationContext(), item.getItemId());
+                professorHomeGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
@@ -98,91 +88,171 @@ public class ProfessorHomeView extends AppCompatActivity implements
 
 
 
-        //Button: Add Homework - Communication
-        isOpen = false;
 
-        btnAdd = findViewById(R.id.btn_add);
-        btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        this.btnAdd = findViewById(R.id.btn_add);
+        this.btnAdd.setImageTintList(ColorStateList.valueOf(Color.parseColor("#272b2f")));
+        this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isOpen = professorHomeGuiController.expandButton(isOpen, btnExam, btnCommunication, btnHomework,
-                txtExam, txtCommunication, txtHomework, btnAdd);
+                professorHomeGuiController.expandButton();
             }
         });
         //Button: Add Exam
-        txtExam = findViewById(R.id.txt_add_exam);
-        txtExam.setVisibility(View.GONE);
+        this.txtExam = findViewById(R.id.txt_add_exam);
+        this.txtExam.setVisibility(View.GONE);
 
-        btnExam = findViewById(R.id.btn_add_exam);
-        btnExam.setImageTintList(null);
-        btnExam.setVisibility(View.GONE);
-        btnExam.setOnClickListener(new View.OnClickListener() {
+        this.btnExam = findViewById(R.id.btn_add_exam);
+        this.btnExam.setImageTintList(null);
+        this.btnExam.setVisibility(View.GONE);
+        this.btnExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                professorHomeGuiController.showAddExam(getSupportFragmentManager(), bProfessor);
+                professorHomeGuiController.showAddExam();
             }
         });
 
         //Button: Add Homework
-        txtHomework = findViewById(R.id.txt_add_homework);
-        txtHomework.setVisibility(View.GONE);
+        this.txtHomework = findViewById(R.id.txt_add_homework);
+        this.txtHomework.setVisibility(View.GONE);
 
-        btnHomework = findViewById(R.id.btn_add_homework);
-        btnHomework.setImageTintList(null);
-        btnHomework.setVisibility(View.GONE);
-        btnHomework.setOnClickListener(new View.OnClickListener() {
+        this.btnHomework = findViewById(R.id.btn_add_homework);
+        this.btnHomework.setImageTintList(null);
+        this.btnHomework.setVisibility(View.GONE);
+        this.btnHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                professorHomeGuiController.showAddHomework(getSupportFragmentManager(), bProfessor, beanHomeworkList, homeworkAdapter);
+                professorHomeGuiController.showAddHomework();
             }
         });
         //Button: Add Communication
-        txtCommunication = findViewById(R.id.txt_add_communication);
-        txtCommunication.setVisibility(View.GONE);
+        this.txtCommunication = findViewById(R.id.txt_add_communication);
+        this.txtCommunication.setVisibility(View.GONE);
 
-        btnCommunication = findViewById(R.id.btn_add_communication);
-        btnCommunication.setImageTintList(null);
-        btnCommunication.setVisibility(View.GONE);
-        btnCommunication.setOnClickListener(new View.OnClickListener() {
+        this.btnCommunication = findViewById(R.id.btn_add_communication);
+        this.btnCommunication.setImageTintList(null);
+        this.btnCommunication.setVisibility(View.GONE);
+        this.btnCommunication.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 //Gui Controller
-                professorHomeGuiController.showAddCommunication(getSupportFragmentManager(), bProfessor);
+                professorHomeGuiController.showAddCommunication();
             }
         });
 
 
 
         //Uni Communications
-        rvUniCommunications = findViewById(R.id.rv_uni_communications);
+        this.rvUniCommunications = findViewById(R.id.rv_uni_communications);
         //Gui Controller
-        beanUniCommunicationList = professorHomeGuiController.showUniCommunications(bProfessor);
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
-        rvUniCommunications.setAdapter(uniCommunicationsAdapter);
+        this.professorHomeGuiController.showUniCommunications();
+
 
 
 
         //Homeworks
-        rvHomeworks = findViewById(R.id.rv_homeworks);
+        this.rvHomeworks = findViewById(R.id.rv_homeworks);
         //Gui Controller
-        beanHomeworkList = professorHomeGuiController.showHomeworks(bProfessor);
-        homeworkAdapter = new HomeworksAdapter(beanHomeworkList, this, "PROFESSOR");
-        rvHomeworks.setAdapter(homeworkAdapter);
+        this.professorHomeGuiController.showHomeworks();
+
+
     }
 
     //University Communication Click
     @Override
     public void onUniClick(int position) {
-        professorHomeGuiController.showDetailsCommunication(getApplicationContext(), beanUniCommunicationList.get(position));
+        this.professorHomeGuiController.showDetailsCommunication(position);
     }
 
     //Homework Button Click
     @Override
     public void onBtnClick(int position) {
 
-        professorHomeGuiController.showHomeworkDetails(getApplicationContext(), beanHomeworkList.get(position));
+        professorHomeGuiController.showHomeworkDetails(position);
     }
 
+
+
+
+
+
+
+    public void setUniCommunicationsAdapter(List<BeanUniCommunication> beanUniCommunications) {
+        this.uniCommunicationsAdapter.setBeanUniCommunicationList(beanUniCommunications);
+        this.rvUniCommunications.setAdapter(this.uniCommunicationsAdapter);
+    }
+
+
+    public void setHomeworkAdapter(List<BeanHomework> beanHomeworkList) {
+        this.homeworkAdapter.setBeanHomeworkList(beanHomeworkList);
+        this.rvHomeworks.setAdapter(this.homeworkAdapter);
+    }
+
+
+
+    public void setBtnExam() {
+        this.btnExam.show();
+    }
+
+    public void setBtnAdd() {
+        this.btnAdd.setRotation(45);
+    }
+
+    public void setTxtExam() {
+        this.txtExam.setVisibility(View.VISIBLE);
+    }
+
+    public void setBtnHomework() {
+        this.btnHomework.show();
+    }
+
+    public void setTxtHomework() {
+        this.txtHomework.setVisibility(View.VISIBLE);
+    }
+
+    public void setBtnCommunication() {
+        this.btnCommunication.show();
+    }
+
+    public void setTxtCommunication() {
+        this.txtCommunication.setVisibility(View.VISIBLE);
+    }
+
+
+    public void unsSetBtnExam() {
+        this.btnExam.hide();
+    }
+
+    public void unSetBtnAdd() {
+        this.btnAdd.setRotation(0);
+    }
+
+    public void unSetTxtExam() {
+        this.txtExam.setVisibility(View.GONE);
+    }
+
+    public void unSetBtnHomework() {
+        this.btnHomework.hide();
+    }
+
+    public void unSetTxtHomework() {
+        this.txtHomework.setVisibility(View.GONE);
+    }
+
+    public void unSetBtnCommunication() {
+        this.btnCommunication.hide();
+    }
+
+    public void unSetTxtCommunication() {
+        this.txtCommunication.setVisibility(View.GONE);
+    }
+
+
+    public UniCommunicationsAdapter getUniCommunicationsAdapter() {
+        return uniCommunicationsAdapter;
+    }
+
+    public HomeworksAdapter getHomeworkAdapter() {
+        return homeworkAdapter;
+    }
 }

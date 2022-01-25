@@ -10,22 +10,25 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.communications.BeanProfessorCommunication;
+import com.example.unispark.controller.guicontroller.details.DetailsProfCommunicationGuiController;
 
 
 public class DetailsProfCommunicationView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    ImageButton btnGoBack;
-    //Get Intent Extras
-    Bundle extras;
+    private ImageButton btnGoBack;
+
     //Display Parameters
-    TextView txtShortName;
-    ImageView imgProfProfile;
-    TextView txtFullName;
-    TextView txtProfName;
-    TextView txtDate;
-    TextView txtType;
-    TextView txtCommunication;
+    private TextView txtShortName;
+    private ImageView imgProfProfile;
+    private TextView txtFullName;
+    private TextView txtProfName;
+    private TextView txtDate;
+    private TextView txtType;
+    private TextView txtCommunication;
+
+
+    private DetailsProfCommunicationGuiController detailsGuiController;
 
 
     @Override
@@ -33,9 +36,11 @@ public class DetailsProfCommunicationView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_prof_communication);
 
+        this.detailsGuiController = new DetailsProfCommunicationGuiController(this, (BeanProfessorCommunication) getIntent().getExtras().getSerializable("Communication"));
+
         //GoBack Button
-        btnGoBack = findViewById(R.id.btn_detail_prof_goback);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        this.btnGoBack = findViewById(R.id.btn_detail_prof_goback);
+        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -43,25 +48,46 @@ public class DetailsProfCommunicationView extends AppCompatActivity {
         });
 
 
-
-        //Get Intent Extras Data
-        extras = getIntent().getExtras();
-        //Get Parameters
-        BeanProfessorCommunication communication = (BeanProfessorCommunication) extras.getSerializable("Communication");
-        //Set Parameters
+        //Show
         txtShortName = findViewById(R.id.txt_prof_com_shortname);
-        txtShortName.setText(communication.getShortCourseName());
         txtFullName = findViewById(R.id.txt_prof_com_fullname);
-        txtFullName.setText(communication.getFullName());
         imgProfProfile = findViewById(R.id.img_prof_com_image);
-        imgProfProfile.setImageResource(communication.getProfilePhoto());
         txtProfName = findViewById(R.id.txt_prof_com_name);
-        txtProfName.setText(communication.getProfessorName());
         txtDate = findViewById(R.id.txt_prof_com_date);
-        txtDate.setText(communication.getDate());
         txtType = findViewById(R.id.txt_prof_com_type);
-        txtType.setText(communication.getType());
         txtCommunication = findViewById(R.id.txt_prof_com_communication);
-        txtCommunication.setText(communication.getCommunication());
+
+        //Gui Controller
+        this.detailsGuiController.showDetails();
+
+    }
+
+
+    public void setTxtShortName(String content) {
+        txtShortName.setText(content);
+    }
+
+    public void setImgProfProfile(int content) {
+        imgProfProfile.setImageResource(content);
+    }
+
+    public void setTxtFullName(String content) {
+        txtFullName.setText(content);
+    }
+
+    public void setTxtProfName(String content) {
+        txtProfName.setText(content);
+    }
+
+    public void setTxtDate(String content) {
+        txtDate.setText(content);
+    }
+
+    public void setTxtType(String content) {
+        txtType.setText(content);
+    }
+
+    public void setTxtCommunication(String content) {
+        txtCommunication.setText(content);
     }
 }

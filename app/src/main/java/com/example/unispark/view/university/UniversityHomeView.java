@@ -137,7 +137,7 @@ public class UniversityHomeView extends AppCompatActivity implements
         rvUniCommunications = findViewById(R.id.rv_assigned_communications);
         //Gui Controller
         beanUniCommunicationList = uniHomeGuiController.showCommunications();
-        uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
+        //uniCommunicationsAdapter = new UniCommunicationsAdapter(beanUniCommunicationList, this);
         rvUniCommunications.setAdapter(uniCommunicationsAdapter);
 
 

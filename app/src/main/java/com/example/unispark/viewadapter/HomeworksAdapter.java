@@ -28,8 +28,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     //Methods
-    public HomeworksAdapter(List<BeanHomework> beanHomeworkList, OnHomeworkBtnClickListener onHomeworkBtnClickListener, String type){
-        this.beanHomeworkList = beanHomeworkList;
+    public HomeworksAdapter(OnHomeworkBtnClickListener onHomeworkBtnClickListener, String type){
         this.onHomeworkBtnClickListener = onHomeworkBtnClickListener;
         this.type = type;
     }
@@ -120,6 +119,10 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void onClick(View view) {
             onHomeworkBtnClickListener.onBtnClick(getAdapterPosition());
         }
+    }
+
+    public void setBeanHomeworkList(List<BeanHomework> beanHomeworkList) {
+        this.beanHomeworkList = beanHomeworkList;
     }
 }
 

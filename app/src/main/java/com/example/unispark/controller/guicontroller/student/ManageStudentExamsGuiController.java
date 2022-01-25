@@ -1,9 +1,7 @@
 package com.example.unispark.controller.guicontroller.student;
 
-import android.content.Context;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.student.BeanLoggedStudent;
@@ -11,30 +9,37 @@ import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
 import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
-import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.viewadapter.exams.ExamAdapter;
+import com.example.unispark.view.student.StudentExamsView;
 
 import java.util.List;
 
-public class ManageStudentExamsGuiController extends BottomNavigationMenuGuiController {
+public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
 
+    private StudentExamsView examsView;
+    private List<BeanExamType> beanExams;
+    private int page;
 
-    public int getNextPageExams(int page){
 
-        int newPage = page + 1;
-        newPage = getCorrectPage(newPage);
-
-        return newPage;
+    public ManageStudentExamsGuiController(Session session, StudentExamsView examsView) {
+        super(session, examsView);
+        this.examsView = examsView;
+        this.page = 0;
     }
 
-    public int getPrevPageExams(int page){
+    public void showNextPageExams(){
+        int newPage = this.page+1;
+        this.page = this.getCorrectPage(newPage);
+        this.showExams();
 
-        int newPage = page - 1;
-        newPage = getCorrectPage(newPage);
 
-        return newPage;
+    }
+
+    public void showPrevPageExams(){
+        int newPage = this.page-1;
+        this.page = this.getCorrectPage(newPage);
+        this.showExams();
     }
 
 
@@ -46,93 +51,88 @@ public class ManageStudentExamsGuiController extends BottomNavigationMenuGuiCont
 
 
     //Page Menu
-    public List<BeanExamType> showExams(int page, TextView examsTitle, BeanLoggedStudent student){
-
+    public void showExams(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         List<BeanExamType> exams = null;
 
         //Application Controller
         ShowExams studentExamsAppController = new ShowExams();
 
         //Select the Page
-        if(page == 0){
+        if(this.page == 0){
             //Set Title
-            examsTitle.setText("VERBALIZED EXAMS");
+            this.examsView.setExamsTitle("VERBALIZED EXAMS");
             //Exams Item
-            exams = studentExamsAppController.verbalizedExams(student);
+            this.beanExams = studentExamsAppController.verbalizedExams(student);
         }
-        if(page == 1 || page == -3) {
+        if(this.page == 1 || this.page == -3) {
             //Set Title
-            examsTitle.setText("FAILED EXAMS");
+            this.examsView.setExamsTitle("FAILED EXAMS");
             //Exams Item
-            exams = studentExamsAppController.failedExams(student);
+            this.beanExams = studentExamsAppController.failedExams(student);
         }
         if(page == 2 || page == -2) {
             //Set Title
-            examsTitle.setText("BOOK UPCOMING EXAMS");
+            this.examsView.setExamsTitle("BOOK UPCOMING EXAMS");
             //Exams Item
-            exams = studentExamsAppController.bookExams(student);
+            this.beanExams = studentExamsAppController.bookExams(student);
 
 
         }
         if(page == 3 || page == -1) {
             //Set Title
-            examsTitle.setText("BOOKED EXAMS");
+            this.examsView.setExamsTitle("BOOKED EXAMS");
             //Exams Item
-            exams = studentExamsAppController.bookedExams(student);
+            this.beanExams = studentExamsAppController.bookedExams(student);
         }
 
-        return exams;
+        this.examsView.setExamAdapter(this.getBeanExams());
+
     }
 
 
-    public void bookExam(Context context, BeanLoggedStudent student, List<BeanExamType> exams, int position, ExamAdapter examAdapter){
 
+    public void bookExam(int position){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
         BookExam bookExamAppController = new BookExam();
 
         try {
-            bookExamAppController.bookExam(student, (BeanBookExam) exams.get(position).getExamType());
-            getBookedExamMessage(context);
+            bookExamAppController.bookExam(student, (BeanBookExam) this.beanExams.get(position).getExamType());
+            this.examsView.setMessage("Exam booked");
 
             //Removing the Booked Exam from the List
-            exams.remove(position);
-            examAdapter.notifyItemRemoved(position);
+            this.beanExams.remove(position);
+            this.examsView.notifyDataChanged(position);
         } catch (ExamAlreadyVerbalized | GenericException e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.examsView.setMessage(e.getMessage());
         }
     }
 
 
-    public void leaveExam(Context context, BeanLoggedStudent student, List<BeanExamType> exams, int position, ExamAdapter examAdapter){
-
+    public void leaveExam(int position){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
         try{
 
             LeaveExam leaveExamAppController = new LeaveExam();
             leaveExamAppController.removeExam(student, position);
             //Removing the Booked Exam from the List
-            exams.remove(position);
-            examAdapter.notifyItemRemoved(position);
+            this.beanExams.remove(position);
+            this.examsView.notifyDataChanged(position);
 
         } catch (GenericException e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.examsView.setMessage(e.getMessage());
         }
-
-
     }
 
-
-    private void getErrorMessage(Context context, String message){
-
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public StudentExamsView getExamsView() {
+        return examsView;
     }
 
-    private void getBookedExamMessage(Context context){
-
-        Toast.makeText(context, "Exam booked", Toast.LENGTH_SHORT).show();
+    public List<BeanExamType> getBeanExams() {
+        return beanExams;
     }
-
-
 }

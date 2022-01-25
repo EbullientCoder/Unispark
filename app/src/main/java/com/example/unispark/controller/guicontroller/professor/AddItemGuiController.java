@@ -1,58 +1,100 @@
 package com.example.unispark.controller.guicontroller.professor;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.widget.Toast;
 
+import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
+import com.example.unispark.view.professor.fragment.AddExamView;
+import com.example.unispark.view.professor.fragment.AddHomeworkView;
+import com.example.unispark.view.professor.fragment.AddProfCommunicationView;
 
 import java.util.List;
 
-public class AddItemGuiController {
+public class AddItemGuiController extends ProfBaseGuiController{
 
-    public List<BeanCourse> showCourses(BeanLoggedProfessor professor){
-        List<BeanCourse> courses;
+    private AddExamView addExamView;
+    private AddHomeworkView addHomeworkView;
+    private AddProfCommunicationView addProfCommunicationView;
+
+    //Selector
+    private int coursePosition;
+
+    public AddItemGuiController(Session session, AddExamView addExamView, AddHomeworkView addHomeworkView, AddProfCommunicationView addProfCommunicationView) {
+        super(session, null);
+        if (addExamView != null){
+            this.setView(addExamView.getContext());
+            this.addExamView = addExamView;
+        }
+        if (addHomeworkView != null){
+            this.setView(addHomeworkView.getContext());
+            this.addHomeworkView = addHomeworkView;
+        }
+        if (addProfCommunicationView != null){
+            this.setView(addProfCommunicationView.getContext());
+            this.addProfCommunicationView = addProfCommunicationView;
+        }
+    }
+
+
+    public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
 
         ManageCourses getCoursesController = new ManageCourses();
-        courses = getCoursesController.getCourses(professor);
-
-        return courses;
+        return getCoursesController.getCourses(professor);
     }
 
-    public List<String> getCoursesNames(BeanLoggedProfessor professor){
+    public void coursesNamesSelector(){
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) this.session.getUser();
         List<String> coursesNames;
-
         ManageCourses coursesGuiController = new ManageCourses();
         coursesNames = coursesGuiController.getCoursesNames(professor);
+        if (addExamView != null){
+            this.addExamView.setAdapterItems(coursesNames);
+        }
+        if (addHomeworkView != null){
+            this.addHomeworkView.setAdapterItems(coursesNames);
+        }
+        if (addProfCommunicationView != null){
+            this.addProfCommunicationView.setAdapterItems(coursesNames);
+        }
 
-        return coursesNames;
     }
 
-    public void showDateDialog(Context context, DatePickerDialog.OnDateSetListener dateListener, int year, int month, int day){
+    public void showDateDialog(int year, int month, int day){
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                context,
-                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                dateListener,
-                year,
-                month,
-                day);
+        DatePickerDialog datePickerDialog = null;
+        if (addExamView != null){
+            datePickerDialog = new DatePickerDialog(
+                    this.addExamView.getContext(),
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    this.addExamView.getDateListener(),
+                    year,
+                    month,
+                    day);
+        }
+        if (addHomeworkView != null){
+            datePickerDialog = new DatePickerDialog(
+                    this.addHomeworkView.getContext(),
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    this.addHomeworkView.getDateListener(),
+                    year,
+                    month,
+                    day);
+        }
+
 
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
     }
 
-
-    public void getInvalidMessagge(Context context){
-        Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show();
+    public void selectPosition(int position){
+        this.coursePosition = position;
     }
 
-
-    public void errorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public int getCoursePosition() {
+        return coursePosition;
     }
 }

@@ -1,25 +1,34 @@
 package com.example.unispark.controller.guicontroller;
 
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
 
+import android.content.Intent;
+
+
+import com.example.unispark.Session;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.bean.login.BeanUser;
 import com.example.unispark.controller.applicationcontroller.Login;
 import com.example.unispark.exceptions.WrongUsernameOrPasswordException;
+import com.example.unispark.view.LoginView;
 import com.example.unispark.view.professor.ProfessorHomeView;
 import com.example.unispark.view.student.StudentHomeView;
 import com.example.unispark.view.university.UniversityHomeView;
 
 import java.sql.SQLException;
 
-public class LoginGuiController {
+public class LoginGuiController extends UserBaseGuiController{
 
-    public void login(Context context, String userSelection, String email, String password){
-        String key = "UserObject";
+    private String key = "session";
+    private LoginView loginView;
+
+    public LoginGuiController(Session session, LoginView loginView) {
+        super(session);
+        this.loginView = loginView;
+    }
+
+    public void login(String userSelection, String email, String password){
         BeanUser user;
         Login loginAppController = new Login();
         Intent intent;
@@ -36,13 +45,14 @@ public class LoginGuiController {
                     BeanLoggedStudent student = null;
                     try {
                         student = loginAppController.studentLogin(user);
-                        intent = new Intent(context, StudentHomeView.class);
+                        this.session.setUser(student);
+                        intent = new Intent(this.loginView, StudentHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(key, student);
-                        context.startActivity(intent);
+                        intent.putExtra(this.key, this.session);
+                        this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        getErrorMessage(context, e.getMessage());
+                        this.loginView.setErrorMessage(e.getMessage());
                     }
                     break;
 
@@ -51,13 +61,14 @@ public class LoginGuiController {
                     BeanLoggedProfessor professor = null;
                     try {
                         professor = loginAppController.professorLogin(user);
-                        intent = new Intent(context, ProfessorHomeView.class);
+                        this.session.setUser(professor);
+                        intent = new Intent(this.loginView, ProfessorHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(key, professor);
-                        context.startActivity(intent);
+                        intent.putExtra(this.key, this.session);
+                        this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        getErrorMessage(context, e.getMessage());
+                        this.loginView.setErrorMessage(e.getMessage());
                     }
                     break;
 
@@ -66,28 +77,29 @@ public class LoginGuiController {
                     BeanLoggedUniversity university = null;
                     try {
                         university = loginAppController.universityLogin(user);
-                        intent = new Intent(context, UniversityHomeView.class);
+                        this.session.setUser(university);
+                        intent = new Intent(this.loginView, UniversityHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(key, university);
-                        context.startActivity(intent);
+                        intent.putExtra(this.key, this.session);
+                        this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        getErrorMessage(context, e.getMessage());
+                        this.loginView.setErrorMessage(e.getMessage());
                     }
                     break;
                 default:
-                    Toast.makeText(context, "Select a user", Toast.LENGTH_SHORT).show();
+                    loginView.setErrorMessage("Select user");
             }
         }
-        else getEmptyFieldsMessage(context);
+        else loginView.setErrorMessage("All fields are required");
 
     }
 
-    private void getErrorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+    public void showUserSelector(){
+        String[] users = {"STUDENT","PROFESSOR","UNIVERSITY"};
+        this.loginView.setAdapterItems(users);
     }
 
-    private void getEmptyFieldsMessage(Context context){
-        Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show();
-    }
+
 }

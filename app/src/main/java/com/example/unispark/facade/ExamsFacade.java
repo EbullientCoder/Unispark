@@ -43,18 +43,16 @@ public class ExamsFacade {
     }
 
 
-    private List<BookExamModel> getStudentExams(String id) throws SQLException {
+    public List<BookExamModel> getStudentExams(String id, List<CourseModel> studentCourses) throws SQLException {
         List<BookExamModel> examsList = new ArrayList<>();
 
-        List<CourseModel> courses = CourseDAO.selectStudentCourses(id);
-
-        if (!courses.isEmpty()){
+        if (!studentCourses.isEmpty()){
 
             List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
             List<BookExamModel> tempList;
-            for (int i = 0; i < courses.size(); i++)
+            for (int i = 0; i < studentCourses.size(); i++)
             {
-                tempList = ExamsDAO.getCourseExams(courses.get(i), false);
+                tempList = ExamsDAO.getCourseExams(studentCourses.get(i), false);
                 if(!tempList.isEmpty()){
                     if (!bookedExams.isEmpty()) {
                         this.removeBookedExams(bookedExams, tempList);
@@ -66,31 +64,18 @@ public class ExamsFacade {
         return examsList;
     }
 
-    private List<BookExamModel> getProfessorExams(String id) throws SQLException {
-        List<CourseModel> courses = CourseDAO.selectProfessorCourses(Integer.valueOf(id));
+    public List<BookExamModel> getProfessorExams(List<CourseModel> professorCourses) throws SQLException {
 
         List<BookExamModel> examsList = new ArrayList<>();
         List<BookExamModel> tempList;
-        for (int i = 0; i < courses.size(); i++)
+        for (int i = 0; i < professorCourses.size(); i++)
         {
-            tempList = ExamsDAO.getCourseExams(courses.get(i), true);
+            tempList = ExamsDAO.getCourseExams(professorCourses.get(i), true);
             if(tempList != null){
                 examsList.addAll(tempList);
             }
         }
         return examsList;
-    }
-
-    //Select exams marked by studentID/professorId depending on boolean isProfessor
-    public List<BookExamModel> getExams(String id, boolean isProfessor) throws SQLException {
-        List<BookExamModel> exams;
-        if (isProfessor) {
-            exams = this.getProfessorExams(id);
-        }
-        else{
-            exams = this.getStudentExams(id);
-        }
-        return exams;
     }
 
 

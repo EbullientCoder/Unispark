@@ -55,7 +55,7 @@
             android:name=".view.professor.ProfessorProfileView"
             android:exported="true" />
         <activity
-            android:name=".view.details.DetailsVerbalizeExamsView"
+            android:name=".view.professor.VerbalizeExamsView"
             android:exported="true" />
 
 

@@ -7,44 +7,41 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.unispark.R;
-import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.professor.BeanProfessorDetails;
-import com.example.unispark.controller.guicontroller.DetailsGuiController;
+import com.example.unispark.controller.guicontroller.details.DetailsProfessorGuiController;
 
 
-import java.util.List;
 
 public class DetailsProfessorView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    ImageView btnGoBack;
+    private ImageView btnGoBack;
     //Get Intent Extras
-    Bundle extras;
+    private Bundle extras;
     //Set Interface Text
-    ImageView imgProfImage;
-    TextView txtProfName;
-    TextView txtWebsite;
-    TextView txtCourse1;
-    TextView txtLink1;
-    TextView txtCourse2;
-    TextView txtLink2;
-    TextView txtCourse3;
-    TextView txtLink3;
+    private ImageView imgProfImage;
+    private TextView txtProfName;
+    private TextView txtWebsite;
+    private TextView txtCourse1;
+    private TextView txtLink1;
+    private TextView txtCourse2;
+    private TextView txtLink2;
+    private TextView txtCourse3;
+    private TextView txtLink3;
 
-    private DetailsGuiController professorDetailsGuiController;
+    private DetailsProfessorGuiController professorDetailsGuiController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_professor);
 
-        this.professorDetailsGuiController = new DetailsGuiController();
 
-
+        this.professorDetailsGuiController = new DetailsProfessorGuiController(this, (BeanProfessorDetails) getIntent().getExtras().getSerializable("Professor"));
 
         //GoBack Button
-        btnGoBack = findViewById(R.id.btn_detail_professor_goback);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        this.btnGoBack = findViewById(R.id.btn_detail_professor_goback);
+        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -52,80 +49,105 @@ public class DetailsProfessorView extends AppCompatActivity {
         });
 
 
-
-        //Get Intent Extras Data
-        extras = getIntent().getExtras();
-        //Get Parameters
-        BeanProfessorDetails professor = (BeanProfessorDetails) extras.getSerializable("Professor");
-
-        int imageID = professor.getProfilePicture();
-        String firstname = professor.getFirstName();
-        String lastname = professor.getLastName();
-        String website = professor.getWebsite();
-        List<BeanCourse> courses = professor.getCourses();
-
-
-
         //Display Parameters
-        imgProfImage = findViewById(R.id.img_professor_detail_image);
-        imgProfImage.setImageResource(imageID);
-        txtProfName = findViewById(R.id.txt_professor_detail_fullname);
-        txtProfName.setText(firstname + ' ' + lastname);
-        txtWebsite = findViewById(R.id.txt_professor_detail_website);
-        txtWebsite.setText(website);
+        this.imgProfImage = findViewById(R.id.img_professor_detail_image);
+        this.txtProfName = findViewById(R.id.txt_professor_detail_fullname);
+        this.txtWebsite = findViewById(R.id.txt_professor_detail_website);
+
+        //Gui Controller
+        this.professorDetailsGuiController.showDetails();
+
         //Clickable Website
-        txtWebsite.setOnClickListener(new View.OnClickListener() {
+        this.txtWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                professorDetailsGuiController.goToLink(getApplicationContext(), website);
+                professorDetailsGuiController.goToLink();
             }
         });
-        txtCourse1 = findViewById(R.id.txt_professor_detail_course1);
-        txtCourse1.setText(courses.get(0).getFullName());
-        txtLink1 = findViewById(R.id.txt_professor_detail_link1);
-        txtLink1.setText(courses.get(0).getLink());
+
+
+        this.txtCourse1 = findViewById(R.id.txt_professor_detail_course1);
+        this.txtLink1 = findViewById(R.id.txt_professor_detail_link1);
+        this.professorDetailsGuiController.showCourseFirstLink();
+
         //Clickable Link1
-        txtLink1.setOnClickListener(new View.OnClickListener() {
+        this.txtLink1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                professorDetailsGuiController.goToLink(getApplicationContext(), courses.get(0).getLink());
+                professorDetailsGuiController.selectFirstLink();
             }
         });
+
+
         //Course 2
-        txtCourse2 = findViewById(R.id.txt_professor_detail_course2);
-        txtLink2 = findViewById(R.id.txt_professor_detail_link2);
-        if(courses.size() == 2){
-            txtCourse2.setText(courses.get(1).getFullName());
-            txtLink2.setText(courses.get(1).getLink());
+        this.txtCourse2 = findViewById(R.id.txt_professor_detail_course2);
+        this.txtLink2 = findViewById(R.id.txt_professor_detail_link2);
+
+        if(this.professorDetailsGuiController.showCourseSecondLink()){
+
             //Clickable Link2
-            txtLink2.setOnClickListener(new View.OnClickListener() {
+            this.txtLink2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    professorDetailsGuiController.goToLink(getApplicationContext(), courses.get(1).getLink());
+                    professorDetailsGuiController.selectSecondLink();
                 }
             });
         }
-        else{
-            txtCourse2.setText("//");
-            txtLink2.setText("//");
-        }
+
+
         //Course 3
-        txtCourse3 = findViewById(R.id.txt_professor_detail_course3);
-        txtLink3 = findViewById(R.id.txt_professor_detail_link3);
-        if(courses.size() == 3){
-            txtCourse3.setText(courses.get(2).getFullName());
-            txtLink3.setText(courses.get(2).getLink());
+        this.txtCourse3 = findViewById(R.id.txt_professor_detail_course3);
+        this.txtLink3 = findViewById(R.id.txt_professor_detail_link3);
+        if(this.professorDetailsGuiController.showCourseThirdLink()){
+
             //Clickable Link3
-            txtLink3.setOnClickListener(new View.OnClickListener() {
+            this.txtLink3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    professorDetailsGuiController.goToLink(getApplicationContext(), courses.get(2).getLink());
+                    professorDetailsGuiController.selectThirdLink();
                 }
             });
         }
-        else{
-            txtCourse3.setText("//");
-            txtLink3.setText("//");
-        }
+    }
+
+
+
+
+
+    public void setImgProfImage(int content) {
+        this.imgProfImage.setImageResource(content);
+    }
+
+    public void setTxtProfName(String content) {
+        this.txtProfName.setText(content);
+    }
+
+    public void setTxtWebsite(String content) {
+        this.txtWebsite.setText(content);
+    }
+
+    public void setTxtCourse1(String content) {
+        this.txtCourse1.setText(content);
+    }
+
+    public void setTxtLink1(String content) {
+        this.txtLink1.setText(content);
+    }
+
+
+    public void setTxtCourse2(String content) {
+        this.txtCourse2.setText(content);
+    }
+
+    public void setTxtLink2(String content) {
+        this.txtLink2.setText(content);
+    }
+
+    public void setTxtCourse3(String content) {
+        this.txtCourse3.setText(content);
+    }
+
+    public void setTxtLink3(String content) {
+        this.txtLink3.setText(content);
     }
 }

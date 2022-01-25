@@ -12,23 +12,25 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.BeanHomework;
+import com.example.unispark.controller.guicontroller.details.DetailsHomeworkGuiController;
 import com.example.unispark.model.HomeworkModel;
 
 public class DetailsHomeworkView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    ImageButton btnGoBack;
-    //Get Intent Extras
-    Bundle extras;
+    private ImageButton btnGoBack;
     //Set Interface Text
-    TextView txtShortName;
-    TextView txtTitle;
-    TextView txtExpiration;
-    TextView txtInstructions;
-    TextView txtPoints;
+    private TextView txtShortName;
+    private TextView txtTitle;
+    private TextView txtExpiration;
+    private TextView txtInstructions;
+    private TextView txtPoints;
     //Submit Button
-    LinearLayout submitLayout;
-    Button btnSubmit;
+    private LinearLayout submitLayout;
+    private Button btnSubmit;
+
+    //Gui Controller
+    private DetailsHomeworkGuiController detailsGuiController;
 
 
     @Override
@@ -36,9 +38,12 @@ public class DetailsHomeworkView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_homework);
 
+
+        this.detailsGuiController = new DetailsHomeworkGuiController(this, (BeanHomework) getIntent().getExtras().getSerializable("Homework"));
+
         //GoBack Button
-        btnGoBack = findViewById(R.id.btn_detail_homework_goback);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        this.btnGoBack = findViewById(R.id.btn_detail_homework_goback);
+        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -46,8 +51,8 @@ public class DetailsHomeworkView extends AppCompatActivity {
         });
 
         //Submit Button
-        btnSubmit = findViewById(R.id.btn_homework_detail_submit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        this.btnSubmit = findViewById(R.id.btn_homework_detail_submit);
+        this.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "WORK IN PROGRESS", Toast.LENGTH_SHORT);
@@ -55,29 +60,42 @@ public class DetailsHomeworkView extends AppCompatActivity {
         });
 
 
-        //Get Intent Extras Data
-        extras = getIntent().getExtras();
-        //Get Text
-        BeanHomework homework = (BeanHomework) extras.getSerializable("Homework");
-        //Set Text
-        txtShortName = findViewById(R.id.txt_homework_detail_subject);
-        txtShortName.setText(homework.getShortName());
-        txtTitle = findViewById(R.id.txt_homework_detail_title);
-        txtTitle.setText(homework.getTitle());
-        txtTitle.setAllCaps(true);
-        txtExpiration = findViewById(R.id.txt_homework_detail_expiration);
-        txtExpiration.setText(homework.getExpiration());
-        txtInstructions = findViewById(R.id.txt_homework_detail_instructions);
-        txtInstructions.setText(homework.getInstructions());
-        txtPoints = findViewById(R.id.txt_homework_detail_points);
-        txtPoints.setText(homework.getPoints());
-        //Get StudentHomeView
-        String home = extras.getString("StudentHomeView");
+        //Show
+        this.txtShortName = findViewById(R.id.txt_homework_detail_subject);
+        this.txtTitle = findViewById(R.id.txt_homework_detail_title);
+        this.txtTitle.setAllCaps(true);
+        this.txtExpiration = findViewById(R.id.txt_homework_detail_expiration);
+        this.txtInstructions = findViewById(R.id.txt_homework_detail_instructions);
+        this.txtPoints = findViewById(R.id.txt_homework_detail_points);
 
-        //ProfessorHomework
-        if(home.equals("ProfessorHome")){
-            submitLayout = findViewById(R.id.submit_layout);
-            submitLayout.setVisibility(View.INVISIBLE);
-        }
+        //Gui Controller
+        this.detailsGuiController.showDetails((String) getIntent().getExtras().getSerializable("HomeView"));
+
+    }
+
+
+    public void setTxtShortName(String content) {
+        txtShortName.setText(content);
+    }
+
+    public void setTxtTitle(String content) {
+        txtTitle.setText(content);
+    }
+
+    public void setTxtExpiration(String content) {
+        txtExpiration.setText(content);
+    }
+
+    public void setTxtInstructions(String content) {
+        txtInstructions.setText(content);
+    }
+
+    public void setTxtPoints(String content) {
+        txtPoints.setText(content);
+    }
+
+    public void setSubmitLayout() {
+        this.submitLayout = findViewById(R.id.submit_layout);
+        this.submitLayout.setVisibility(View.INVISIBLE);
     }
 }

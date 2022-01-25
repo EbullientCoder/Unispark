@@ -7,6 +7,7 @@ import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.facade.ExamsFacade;
+import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
@@ -51,7 +52,8 @@ public class ShowExams {
 
         try{
             //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
-            bookExams = ExamsFacade.getInstance().getExams(student.getId(), false);
+            List<CourseModel> studentCourses = student.getCourses();
+            bookExams = ExamsFacade.getInstance().getStudentExams(student.getId(), studentCourses);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -78,7 +80,7 @@ public class ShowExams {
     //Professor
     public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
         try {
-            professor.setExams(ExamsFacade.getInstance().getExams(String.valueOf(professor.getId()), true));
+            professor.setExams(ExamsFacade.getInstance().getProfessorExams(professor.getCourses()));
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -125,7 +127,7 @@ public class ShowExams {
             beanBookExam.setCfu(bExam.getCfu());
             beanBookExam.setId(bExam.getId());
             beanBookExam.setBuilding(bExam.getBuilding());
-            beanBookExam.setClassroom(beanBookExam.getClassroom());
+            beanBookExam.setClassroom(bExam.getClassroom());
             BeanExamType beanExamType;
             beanExamType = new BeanExamType();
             beanExamType.setType(type);

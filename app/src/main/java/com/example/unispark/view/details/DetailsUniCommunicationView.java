@@ -11,18 +11,21 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.communications.BeanUniCommunication;
+import com.example.unispark.controller.guicontroller.details.DetailsUniCommunicationGuiController;
 
 public class DetailsUniCommunicationView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    ImageButton btnGoBack;
+    private ImageButton btnGoBack;
     //Get Intent Extras
-    Bundle extras;
     //Display Parameters
-    ImageView imgComBackground;
-    TextView txtTitle;
-    TextView txtDate;
-    TextView txtCommunication;
+    private ImageView imgComBackground;
+    private TextView txtTitle;
+    private TextView txtDate;
+    private TextView txtCommunication;
+
+    //Gui Controller
+    private DetailsUniCommunicationGuiController detailsGuiController;
 
 
     @Override
@@ -30,9 +33,11 @@ public class DetailsUniCommunicationView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_uni_communication);
 
+        this.detailsGuiController = new DetailsUniCommunicationGuiController(this, (BeanUniCommunication) getIntent().getExtras().getSerializable("Communication"));
+
         //GoBack Button
-        btnGoBack = findViewById(R.id.btn_detail_uni_goback);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        this.btnGoBack = findViewById(R.id.btn_detail_uni_goback);
+        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -40,21 +45,31 @@ public class DetailsUniCommunicationView extends AppCompatActivity {
         });
 
 
-
-        //Get Intent Extras Data
-        extras = getIntent().getExtras();
-        //Get Parameters
-        BeanUniCommunication communication = (BeanUniCommunication) extras.getSerializable("Communication");
         //Set Parameters
-        imgComBackground = findViewById(R.id.img_uni_com_background);
-        imgComBackground.setImageResource(communication.getBackground());
-        txtTitle = findViewById(R.id.txt_uni_com_title);
-        txtTitle.setText(communication.getTitle());
-        txtDate = findViewById(R.id.txt_uni_com_date);
-        txtDate.setText(communication.getDate());
-        txtCommunication = findViewById(R.id.txt_uni_com_text);
-        txtCommunication.setText(communication.getCommunication());
-        //Scrolling Communication
-        txtCommunication.setMovementMethod(new ScrollingMovementMethod());
+        this.imgComBackground = findViewById(R.id.img_uni_com_background);
+        this.txtTitle = findViewById(R.id.txt_uni_com_title);
+        this.txtDate = findViewById(R.id.txt_uni_com_date);
+        this.txtCommunication = findViewById(R.id.txt_uni_com_text);
+
+        //Gui Controller
+        this.detailsGuiController.showDetails();
+    }
+
+
+    public void setImgComBackground(int content) {
+        this.imgComBackground.setImageResource(content);
+    }
+
+    public void setTxtTitle(String content) {
+        this.txtTitle.setText(content);
+    }
+
+    public void setTxtDate(String content) {
+        this.txtDate.setText(content);
+    }
+
+    public void setTxtCommunication(String content) {
+        this.txtCommunication.setText(content);
+        this.txtCommunication.setMovementMethod(new ScrollingMovementMethod());
     }
 }

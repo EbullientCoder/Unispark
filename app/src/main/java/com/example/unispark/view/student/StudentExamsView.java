@@ -9,13 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.student.ManageStudentExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 import com.example.unispark.bean.exams.BeanExamType;
-import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -25,24 +26,19 @@ implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
     //Menu
-    ImageButton menuButton;
+    private ImageButton menuButton;
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Menu ExamModel Page
-    ImageButton btnPageRight;
-    ImageButton btnPageLeft;
+    private ImageButton btnPageRight;
+    private ImageButton btnPageLeft;
     //Exams List
-    TextView examsTitle;
-    RecyclerView rvExams;
-    ExamAdapter examAdapter;
-    //Get Intent Extras
-    Bundle extras;
+    private TextView examsTitle;
+    private RecyclerView rvExams;
+    private ExamAdapter examAdapter;
 
-    //Bean
-    BeanLoggedStudent bStudent;
-    List<BeanExamType> bExams;
-    int page;
 
+    //Gui Controller
     private ManageStudentExamsGuiController examsGuiController;
 
 
@@ -52,75 +48,60 @@ implements ExamAdapter.OnBookExamClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_exams);
 
-        this.examsGuiController  = new ManageStudentExamsGuiController();
-
-
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
+        this.examsGuiController  = new ManageStudentExamsGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.examAdapter = new ExamAdapter(this, this);
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.exams);
+        this.bottomNavigationView.setSelectedItemId(R.id.exams);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Menu Gui Controller
-                examsGuiController.selectNextView(bStudent, getApplicationContext(), item.getItemId());
+                examsGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
-
                 return true;
             }
         });
 
 
-        //ExamModel Page Title
-        examsTitle = findViewById(R.id.txt_exams_title);
-        //ExamModel List
-        rvExams = findViewById(R.id.rv_exams);
+        //Exam Page Title
+        this.examsTitle = findViewById(R.id.txt_exams_title);
+        //Exam List
+        this.rvExams = findViewById(R.id.rv_exams);
 
 
-        page = 0;
+        //Gui Controller
+        this.examsGuiController.showExams();
+
         //Right Click
-        btnPageRight = findViewById(R.id.btn_exams_next);
-        btnPageRight.setOnClickListener(new View.OnClickListener() {
+        this.btnPageRight = findViewById(R.id.btn_exams_next);
+        this.btnPageRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                page = examsGuiController.getNextPageExams(page);
-                pageMenu(bStudent);
+                examsGuiController.showNextPageExams();
             }
         });
         //Left Click
-        btnPageLeft = findViewById(R.id.btn_exams_previusly);
-        btnPageLeft.setOnClickListener(new View.OnClickListener() {
+        this.btnPageLeft = findViewById(R.id.btn_exams_previusly);
+        this.btnPageLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                page = examsGuiController.getPrevPageExams(page);
-                pageMenu(bStudent);
+                examsGuiController.showPrevPageExams();
             }
         });
 
-        pageMenu(bStudent);
-    }
 
-
-    //Gui Controller and Adapter
-    private void pageMenu(BeanLoggedStudent bStudent){
-
-        bExams = examsGuiController.showExams(page, examsTitle, bStudent);
-
-        examAdapter = new ExamAdapter(bExams, this, this);
-        rvExams.setAdapter(examAdapter);
     }
 
 
@@ -129,7 +110,7 @@ implements ExamAdapter.OnBookExamClickListener,
     public void onBookBtnClick(int position) {
 
         //Gui controller
-        examsGuiController.bookExam(getApplicationContext(), bStudent, bExams, position, examAdapter);
+        this.examsGuiController.bookExam(position);
     }
 
     //On LeaveExam Click
@@ -137,7 +118,27 @@ implements ExamAdapter.OnBookExamClickListener,
     public void onLeaveBtnClick(int position) {
 
         //Gui Controller
-        examsGuiController.leaveExam(getApplicationContext(), bStudent, bExams, position, examAdapter);
+        this.examsGuiController.leaveExam(position);
 
     }
+
+    public void setExamsTitle(String content) {
+        this.examsTitle.setText(content);
+    }
+
+    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
+        this.examAdapter.setbExams(beanExamTypes);
+        this.rvExams.setAdapter(this.examAdapter);
+    }
+
+    public void notifyDataChanged(int position){
+        this.examAdapter.notifyItemRemoved(position);
+    }
+
+    public void setMessage(String message){
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

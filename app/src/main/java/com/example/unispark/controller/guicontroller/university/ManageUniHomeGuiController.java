@@ -23,7 +23,7 @@ import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 
 import java.util.List;
 
-public class ManageUniHomeGuiController extends BaseUniGuiController{
+public class ManageUniHomeGuiController extends UniBaseGuiController {
 
 
 

@@ -28,7 +28,7 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     //Methods
-    public UniCommunicationsAdapter(List<BeanUniCommunication> beanUniCommunicationList, OnUniComClickListener onUniComClickListener){
+    public UniCommunicationsAdapter(OnUniComClickListener onUniComClickListener){
 
         this.beanUniCommunicationList = beanUniCommunicationList;
         this.onUniComClickListener = onUniComClickListener;
@@ -92,6 +92,10 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
         public void onClick(View view) {
             onUniComClickListener.onUniClick(getAdapterPosition());
         }
+    }
+
+    public void setBeanUniCommunicationList(List<BeanUniCommunication> beanUniCommunicationList) {
+        this.beanUniCommunicationList = beanUniCommunicationList;
     }
 }
 

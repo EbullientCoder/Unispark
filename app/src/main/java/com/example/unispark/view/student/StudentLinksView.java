@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.student.ManageLinksGuiController;
 import com.example.unispark.viewadapter.LinksAdapter;
 import com.example.unispark.bean.BeanLink;
@@ -29,31 +32,25 @@ public class StudentLinksView extends AppCompatActivity
 
 
     //Menu
-    ImageButton menuButton;
+    private ImageButton menuButton;
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Professors
-    RecyclerView rvProfessors;
-    ProfessorsAdapter professorsAdapter;
+    private RecyclerView rvProfessors;
+    private ProfessorsAdapter professorsAdapter;
     //Link
-    EditText txtAddLinkName;
-    EditText txtAddLink;
+    private EditText txtAddLinkName;
+    private EditText txtAddLink;
     //Button Add Link
-    ImageButton addButton;
+    private ImageButton addButton;
     //Links
-    RecyclerView rvLinks;
-    LinksAdapter linkAdapter;
-    //Get Intent Extras
-    Bundle extras;
+    private RecyclerView rvLinks;
+    private LinksAdapter linkAdapter;
 
-    //Bean
-    BeanLoggedStudent bStudent;
-    List<BeanLink> beanLinkList;
-    List<BeanProfessorDetails> beanProfessorDetailsList;
+
 
     //Gui controller
     private ManageLinksGuiController linksGuiController;
-
 
 
 
@@ -63,32 +60,26 @@ public class StudentLinksView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_links);
 
-        this.linksGuiController = new ManageLinksGuiController();
-
-
-
-        //Getting User Object
-        extras = getIntent().getExtras();
-        bStudent = (BeanLoggedStudent) extras.getSerializable("UserObject");
-
+        this.linksGuiController = new ManageLinksGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.professorsAdapter = new ProfessorsAdapter(this);
+        this.linkAdapter = new LinksAdapter(this, this);
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.links);
+        this.bottomNavigationView.setSelectedItemId(R.id.links);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
-                //Menu Gui controller
-                linksGuiController.selectNextView(bStudent, getApplicationContext(), item.getItemId());
+                //Gui controller
+                linksGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
@@ -97,61 +88,77 @@ public class StudentLinksView extends AppCompatActivity
 
 
         //Professors
-        rvProfessors = findViewById(R.id.rv_professors);
+        this.rvProfessors = findViewById(R.id.rv_professors);
         //Gui Controller
-        beanProfessorDetailsList = linksGuiController.showProfessorDetails(bStudent);
-        professorsAdapter = new ProfessorsAdapter(beanProfessorDetailsList, this);
-        rvProfessors.setAdapter(professorsAdapter);
+        this.linksGuiController.showProfessorDetails();
 
 
-
-        //StudentLinksGUIController
-        rvLinks = findViewById(R.id.rv_links);
+        this.rvLinks = findViewById(R.id.rv_links);
         //Gui Controller
-        beanLinkList = linksGuiController.showLinks(bStudent);
-        linkAdapter = new LinksAdapter(beanLinkList, this, this);
-        rvLinks.setAdapter(linkAdapter);
-
+        this.linksGuiController.showLinks();
 
 
         //Add Link Button
-        txtAddLinkName = findViewById(R.id.txt_input_link_name);
-        txtAddLink = findViewById(R.id.txt_input_link);
-        addButton = findViewById(R.id.btn_link_add);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        this.txtAddLinkName = findViewById(R.id.txt_input_link_name);
+        this.txtAddLink = findViewById(R.id.txt_input_link);
+        this.addButton = findViewById(R.id.btn_link_add);
+        this.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String linkName = txtAddLinkName.getText().toString();
                 String link = "https://" + txtAddLink.getText().toString();
 
                 //Gui controller
-                linksGuiController.addLink(getApplicationContext(), linkName, link, bStudent, beanLinkList, linkAdapter);
+                linksGuiController.addLink(linkName, link);
             }
         });
     }
 
 
 
-
     //Clickable Items Methods
     @Override
     public void onProfessorClick(int position) {
-        linksGuiController.showProfessorDetails(getApplicationContext(), beanProfessorDetailsList.get(position));
+        this.linksGuiController.showProfessorDetails(position);
     }
 
     //On Link Click
     @Override
     public void onLinkClick(String url) {
-        linksGuiController.goToLink(getApplicationContext(), url);
+        this.linksGuiController.goToLink(url);
     }
 
     //On DeleteLink Click
     @Override
     public void onDelBtnClick(int position) {
-
         //Gui Controller
-        linksGuiController.removeLink(getApplicationContext(), beanLinkList, position, linkAdapter);
+        this.linksGuiController.removeLink(position);
     }
 
 
+
+
+
+
+    public void setProfessorsAdapter(List<BeanProfessorDetails> beanProfessorDetails) {
+        this.professorsAdapter.setBeanLoggedProfessorList(beanProfessorDetails);
+        this.rvProfessors.setAdapter(this.professorsAdapter);
+    }
+
+    public void setLinkAdapter(List<BeanLink> beanLinks) {
+        this.linkAdapter.setBeanLinkList(beanLinks);
+        this.rvLinks.setAdapter(this.linkAdapter);
+    }
+
+    public void notifyDataChanged(int position, boolean isRemoved){
+        if(isRemoved) this.linkAdapter.notifyItemRemoved(position);
+        else this.linkAdapter.notifyItemInserted(position);
+
+
+    }
+
+
+    public void setErrorMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

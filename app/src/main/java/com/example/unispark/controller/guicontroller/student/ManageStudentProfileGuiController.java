@@ -1,29 +1,59 @@
 package com.example.unispark.controller.guicontroller.student;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
 
+import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.average.CalculateAverage;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
-import com.example.unispark.controller.guicontroller.BottomNavigationMenuGuiController;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.view.details.DetailsCourseView;
+import com.example.unispark.view.student.StudentProfileView;
 import com.example.unispark.view.student.fragment.JoinCourseView;
-import com.example.unispark.viewadapter.CoursesAdapter;
+
 
 import java.util.List;
 
 
-public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiController {
+public class ManageStudentProfileGuiController extends StudentBaseGuiController {
 
-    public float calculateArithmeticAverage(BeanLoggedStudent student){
+    private StudentProfileView profileView;
+    public List<BeanCourse> beanCourses;
+
+
+    public ManageStudentProfileGuiController(Session session, StudentProfileView profileView) {
+        super(session, profileView);
+        this.profileView = profileView;
+    }
+
+
+
+    public void showProfile(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
+        this.profileView.setTxtFullName(student.getFirstName() + " " + student.getLastName());
+        this.profileView.setImgProfile(student.getProfilePicture());
+    }
+
+
+
+    public void showAverages(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
+        float aAverage = this.calculateArithmeticAverage(student);
+        int cAverage = this.calculateGraphicArithmeticAverage(aAverage);
+        float wAverage = this.calculateWeightedAverage(student);
+        int wCaverage = this.calculateGraphicWeightedAverage(wAverage);
+        this.profileView.setAverage(String.format("%.02f", aAverage), cAverage, String.format("%.02f", wAverage), wCaverage);
+
+    }
+
+
+
+    private float calculateArithmeticAverage(BeanLoggedStudent student){
         float average;
         CalculateAverage calculateAverageController = new CalculateAverage();
         average = calculateAverageController.arithmeticAverage(student);
@@ -33,7 +63,7 @@ public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
 
 
-    public int calculateGraphicArithmeticAverage(float average){
+    private int calculateGraphicArithmeticAverage(float average){
         int cAverage;
         CalculateAverage calculateAverageController = new CalculateAverage();
         cAverage = calculateAverageController.graphicArithmeticAverage(average);
@@ -44,7 +74,7 @@ public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
 
 
-    public float calculateWeightedAverage(BeanLoggedStudent student){
+    private float calculateWeightedAverage(BeanLoggedStudent student){
 
         float average;
         CalculateAverage calculateAverageController = new CalculateAverage();
@@ -56,7 +86,7 @@ public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
 
     //Circular Weighted Average
-    public int calculateGraphicWeightedAverage(float average){
+    private int calculateGraphicWeightedAverage(float average){
         int circularAverage;
         CalculateAverage calculateAverageController = new CalculateAverage();
         circularAverage = calculateAverageController.graphicWeightedAverage(average);
@@ -66,52 +96,57 @@ public class ManageStudentProfileGuiController extends BottomNavigationMenuGuiCo
 
 
 
-    public void showJoinCourses(FragmentManager fragmentManager, BeanLoggedStudent student, CoursesAdapter coursesAdapter, List<BeanCourse> courseList){
-
-        JoinCourseView joinCourseFragment;
-        joinCourseFragment = new JoinCourseView(student, coursesAdapter, courseList);
-        joinCourseFragment.show(fragmentManager, "Search Course");
+    public void showJoinCourses(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
+        JoinCourseView joinCourseFragment = new JoinCourseView(this.session, this.beanCourses, this.profileView.getCoursesAdapter());
+        joinCourseFragment.show(this.profileView.getSupportFragmentManager(), "Search Course");
     }
 
 
 
-    public List<BeanCourse> showCourses(BeanLoggedStudent student){
-        List<BeanCourse> courseList;
+    public void showCourses(){
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         ManageCourses getCoursesController = new ManageCourses();
-        courseList = getCoursesController.getCourses(student);
+        this.beanCourses = getCoursesController.getCourses(student);
+        this.profileView.setCoursesAdapter(this.getBeanCourses());
 
-        return courseList;
     }
 
 
 
-    public void showCourseDetails(Context context, BeanCourse course){
-        Intent intent = new Intent(context, DetailsCourseView.class);
-        intent.putExtra("Course", course);
+    public void showCourseDetails(int position){
+        Intent intent = new Intent(this.getProfileView(), DetailsCourseView.class);
+        intent.putExtra("Course", this.beanCourses.get(position));
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.profileView.startActivity(intent);
     }
 
 
 
-    public void leaveCourse(Context context, BeanLoggedStudent student, List<BeanCourse> courseList, int position, CoursesAdapter coursesAdapter){
+    public void leaveCourse(int position){
 
         ManageCourses leaveCourseAppController = new ManageCourses();
-        try {
-            leaveCourseAppController.leaveCourse(student, courseList.get(position), position);
-            courseList.remove(position);
-            //Notify changed dimension to the Adapter
-            coursesAdapter.notifyItemRemoved(position);
+        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
+         try {
+            leaveCourseAppController.leaveCourse(student, this.beanCourses.get(position), position);
+            this.beanCourses.remove(position);
+            this.profileView.notifyDataChanged(position);
         } catch (GenericException | ExamBookedException | CourseNeverJoined e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.profileView.setErrorMessage(e.getMessage());
         }
-
     }
 
 
+    public void setBeanCourses(List<BeanCourse> beanCourses) {
+        this.beanCourses = beanCourses;
+    }
 
-    public void getErrorMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    public List<BeanCourse> getBeanCourses() {
+        return beanCourses;
+    }
+
+    public StudentProfileView getProfileView() {
+        return profileView;
     }
 }

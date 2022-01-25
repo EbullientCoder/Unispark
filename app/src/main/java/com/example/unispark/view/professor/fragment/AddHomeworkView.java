@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.OffsetDateTime;
 
@@ -20,6 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.controller.guicontroller.professor.AddHomeworkGuiController;
 import com.example.unispark.viewadapter.HomeworksAdapter;
 import com.example.unispark.bean.courses.BeanCourse;
@@ -35,53 +37,40 @@ public class AddHomeworkView extends DialogFragment{
 
 
     //Dismiss Button
-    ImageButton btnDismiss;
+    private ImageButton btnDismiss;
     //Add Homework Button
-    Button btnAddHomework;
+    private Button btnAddHomework;
     //Title
-    TextInputLayout txtTitle;
+    private TextInputLayout txtTitle;
     //Instructions
-    TextInputLayout txtInstructions;
+    private TextInputLayout txtInstructions;
     //Date Picker
-    TextView txtDisplayDate;
-    ImageButton btnSelectDate;
-    DatePickerDialog.OnDateSetListener dateListener;
-    Calendar calendar;
-    String date = "";
+    private TextView txtDisplayDate;
+    private ImageButton btnSelectDate;
+    private DatePickerDialog.OnDateSetListener dateListener;
+    private Calendar calendar;
+
     //Points
-    TextInputLayout txtPoints;
+    private TextInputLayout txtPoints;
     //Course Selector
-    List<String> courses;
+    private AutoCompleteTextView autoCompleteTxt;
+    private ArrayAdapter adapterItems;
+
+    private HomeworksAdapter homeworksAdapter;
+
+
+    //Gui Controller
+    private AddHomeworkGuiController homeworkGuiController;
+
+    String date = "";
     String courseSelection = "";
-    AutoCompleteTextView autoCompleteTxt;
-    ArrayAdapter<String> adapterItems;
 
 
-    //Bean
-    BeanLoggedProfessor bProfessor;
-    List<BeanCourse> bCourses;
-    List<BeanHomework> bHomeworkList;
-    HomeworksAdapter homeworksAdapter;
 
-
-    int i;
-
-
-    AddHomeworkGuiController homeworkGuiController;
-
-
-    //Constructor
-    public AddHomeworkView(BeanLoggedProfessor bProfessor){
-        this.bProfessor = bProfessor;
-        this.homeworkGuiController = new AddHomeworkGuiController();
-    }
-
-    public AddHomeworkView(BeanLoggedProfessor bProfessor, List<BeanHomework> bHomeworkList, HomeworksAdapter homeworksAdapter) {
+    public AddHomeworkView(Session session, List<BeanHomework> bHomeworkList, HomeworksAdapter homeworksAdapter) {
         //Getting Professor Object
-        this.bProfessor = bProfessor;
-        this.bHomeworkList = bHomeworkList;
         this.homeworksAdapter = homeworksAdapter;
-        this.homeworkGuiController = new AddHomeworkGuiController();
+        this.homeworkGuiController = new AddHomeworkGuiController(session, this, bHomeworkList);
     }
 
 
@@ -91,9 +80,11 @@ public class AddHomeworkView extends DialogFragment{
         View rootView = inflater.inflate(R.layout.fragment_add_homework, container, false);
         getDialog().setTitle("Simple Dialog");
 
+        this.adapterItems = new ArrayAdapter(this.getContext(), R.layout.item_container_item);
+
         //Dismiss Button
-        btnDismiss = rootView.findViewById(R.id.btn_goback);
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
+        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
+        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -103,43 +94,38 @@ public class AddHomeworkView extends DialogFragment{
 
 
         //DropDown Selector
+        this.autoCompleteTxt = rootView.findViewById(R.id.select_course);
         //Gui controller
-        bCourses = homeworkGuiController.showCourses(bProfessor);
-        courses = homeworkGuiController.getCoursesNames(bProfessor);
+        this.homeworkGuiController.coursesNamesSelector();
 
-        autoCompleteTxt = rootView.findViewById(R.id.select_course);
-        adapterItems = new ArrayAdapter<>(getContext(), R.layout.item_container_item, courses);
-        autoCompleteTxt.setAdapter(adapterItems);
-        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 courseSelection = (String)parent.getItemAtPosition(position);
 
                 //Getting the selected Course position
-                i = position;
+                homeworkGuiController.selectPosition(position);
             }
         });
-
-
 
         //Date Picker
-        calendar = Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        this.calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        txtDisplayDate = rootView.findViewById(R.id.txt_selected_date);
+        this.txtDisplayDate = rootView.findViewById(R.id.txt_selected_date);
         OffsetDateTime offset = OffsetDateTime.now();
-        txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
+        this.txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
 
-        btnSelectDate = rootView.findViewById(R.id.btn_select_date);
-        btnSelectDate.setOnClickListener(new View.OnClickListener() {
+        this.btnSelectDate = rootView.findViewById(R.id.btn_select_date);
+        this.btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeworkGuiController.showDateDialog(getContext(), dateListener, year, month, day);
+                homeworkGuiController.showDateDialog(year, month, day);
             }
         });
-        dateListener = new DatePickerDialog.OnDateSetListener() {
+        this.dateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
@@ -153,28 +139,58 @@ public class AddHomeworkView extends DialogFragment{
 
 
         //Title
-        txtTitle = rootView.findViewById(R.id.txt_add_homework_title);
+        this.txtTitle = rootView.findViewById(R.id.txt_add_homework_title);
         //Instructions
-        txtInstructions = rootView.findViewById(R.id.txt_add_homework_instructions);
+        this.txtInstructions = rootView.findViewById(R.id.txt_add_homework_instructions);
         //Points
-        txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
+        this.txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
 
         //Add Homework
-        btnAddHomework = rootView.findViewById(R.id.btn_add_homework_add);
-        btnAddHomework.setOnClickListener(new View.OnClickListener() {
+        this.btnAddHomework = rootView.findViewById(R.id.btn_add_homework_add);
+        this.btnAddHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = txtTitle.getEditText().getText().toString();
                 String instructions = txtInstructions.getEditText().getText().toString();
                 String points = txtPoints.getEditText().getText().toString();
 
-                homeworkGuiController.addHomework(getContext(), getDialog(), courseSelection, title, instructions,
-                        points, bCourses.get(i).getShortName(), bCourses.get(i).getFullName(), date, bProfessor,
-                        homeworksAdapter, bHomeworkList);
+                homeworkGuiController.addHomework(courseSelection, title, instructions,
+                        points, date);
             }
         });
 
 
         return rootView;
+    }
+
+
+
+
+    public ArrayAdapter<String> getAdapterItems() {
+        return adapterItems;
+    }
+
+
+    public void setAdapterItems(List<String> coursesNames) {
+        this.adapterItems.addAll(coursesNames);
+        this.autoCompleteTxt.setAdapter(this.getAdapterItems());
+    }
+
+    public void setMessage(String message){
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    public HomeworksAdapter getHomeworksAdapter() {
+        return homeworksAdapter;
+    }
+
+    public void notifyDataChanged(){
+        this.homeworksAdapter.notifyDataSetChanged();
+    }
+
+
+    public DatePickerDialog.OnDateSetListener getDateListener() {
+        return dateListener;
     }
 }

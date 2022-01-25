@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 
@@ -27,29 +30,23 @@ public class StudentProfileView extends AppCompatActivity
         CoursesAdapter.OnCourseBtnClickListener{
 
     //Menu
-    ImageButton menuButton;
+    private ImageButton menuButton;
     //Bottom Menu Elements
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     //Student
-    ImageView imgProfile;
-    TextView txtFullName;
+    private ImageView imgProfile;
+    private TextView txtFullName;
     //Averages
-    TextView aAverage;
-    CircularProgressIndicator aCircleAverage;
-    TextView wAverage;
-    CircularProgressIndicator wCircleAverage;
+    private TextView aAverage;
+    private CircularProgressIndicator aCircleAverage;
+    private TextView wAverage;
+    private CircularProgressIndicator wCircleAverage;
     //Courses
-    RecyclerView rvCourses;
-    CoursesAdapter coursesAdapter;
+    private RecyclerView rvCourses;
+    private CoursesAdapter coursesAdapter;
     //Search Course
-    ImageButton addCourse;
+    private ImageButton addCourse;
 
-    //Get Intent Extras
-    Bundle extras;
-
-    //Bean
-    BeanLoggedStudent student;
-    List<BeanCourse> bCourses;
 
     //Gui Controller
     private ManageStudentProfileGuiController profileGuiController;
@@ -61,30 +58,26 @@ public class StudentProfileView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
 
-        this.profileGuiController = new ManageStudentProfileGuiController();
+        this.profileGuiController = new ManageStudentProfileGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.coursesAdapter = new CoursesAdapter(this, this, "LEAVE");
 
-        //Getting User Object
-        extras = getIntent().getExtras();
-
-
-        student = (BeanLoggedStudent) extras.getSerializable("UserObject");
 
 
         //Bottom Navigation Menu
-        bottomNavigationView = findViewById(R.id.bottomMenuView);
+        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        bottomNavigationView.setBackground(null);
+        this.bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        bottomNavigationView.setItemIconTintList(null);
+        this.bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        bottomNavigationView.setSelectedItemId(R.id.profile);
+        this.bottomNavigationView.setSelectedItemId(R.id.profile);
         //Click Listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                //Menu Gui Controller
-                profileGuiController.selectNextView(student, getApplicationContext(), item.getItemId());
+                //Gui Controller
+                profileGuiController.selectNextView(item.getItemId());
                 overridePendingTransition(0,0);
                 return true;
             }
@@ -93,51 +86,39 @@ public class StudentProfileView extends AppCompatActivity
 
 
         //Student Picture
-        imgProfile = findViewById(R.id.img_user_image);
-        imgProfile.setImageResource(student.getProfilePicture());
-
+        this.imgProfile = findViewById(R.id.img_user_image);
         //Student Name
-        txtFullName = findViewById(R.id.txt_user_fullname);
-        txtFullName.setText(student.getFirstName() + " " + student.getLastName());
+        this.txtFullName = findViewById(R.id.txt_user_fullname);
 
+        //Gui Controller
+        this.profileGuiController.showProfile();
 
 
         //Use Case: Calculate Averages
         //Arithmetic Average
-        aAverage = findViewById(R.id.txt_arithmetic_average_number);
-        aCircleAverage = findViewById(R.id.avg_arithmetic_average);
-        //Gui Controller
-        float average = profileGuiController.calculateArithmeticAverage(student);
-        int cAverage = profileGuiController.calculateGraphicArithmeticAverage(average);
-        aAverage.setText(String.format("%.02f", average));
-        aCircleAverage.setProgress(cAverage, false);
-
+        this.aAverage = findViewById(R.id.txt_arithmetic_average_number);
+        this.aCircleAverage = findViewById(R.id.avg_arithmetic_average);
         //Weighted Average
-        wAverage = findViewById(R.id.txt_weighted_average_number);
-        wCircleAverage = findViewById(R.id.avg_weighted_average);
-        //Application Controller
-        average = profileGuiController.calculateWeightedAverage(student);
-        cAverage = profileGuiController.calculateGraphicWeightedAverage(average);
-        wAverage.setText(String.format("%.02f", average));
-        wCircleAverage.setProgress(cAverage, false);
+        this.wAverage = findViewById(R.id.txt_weighted_average_number);
+        this.wCircleAverage = findViewById(R.id.avg_weighted_average);
 
-
-        //Student Courses
-        rvCourses = findViewById(R.id.rv_courses);
         //Gui Controller
-        bCourses = profileGuiController.showCourses(student);
-        coursesAdapter = new CoursesAdapter(bCourses, this, this, "LEAVE");
-        rvCourses.setAdapter(coursesAdapter);
+        this.profileGuiController.showAverages();
+
+        //Show student Courses
+        this.rvCourses = findViewById(R.id.rv_courses);
+        //Gui Controller
+        this.profileGuiController.showCourses();
 
 
 
         //Open SearchCourse Fragment
-        addCourse = findViewById(R.id.btn_add_course);
-        addCourse.setOnClickListener(new View.OnClickListener() {
+        this.addCourse = findViewById(R.id.btn_add_course);
+        this.addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Gui controller
-                profileGuiController.showJoinCourses(getSupportFragmentManager(), student, coursesAdapter, bCourses);
+                profileGuiController.showJoinCourses();
 
             }
         });
@@ -145,10 +126,11 @@ public class StudentProfileView extends AppCompatActivity
     }
 
 
+
     //On Course Click
     @Override
     public void onCourseClick(int position) {
-        profileGuiController.showCourseDetails(getApplicationContext(), bCourses.get(position));
+        this.profileGuiController.showCourseDetails(position);
     }
 
 
@@ -157,6 +139,45 @@ public class StudentProfileView extends AppCompatActivity
     public void onButtonClick(int position) {
 
         //Gui Controller
-        profileGuiController.leaveCourse(getApplicationContext(), student, bCourses, position, coursesAdapter);
+        this.profileGuiController.leaveCourse(position);
+    }
+
+
+
+
+
+
+    //Getters and setters
+    public void setImgProfile(int content) {
+        this.imgProfile.setImageResource(content);
+    }
+
+    public void setTxtFullName(String fullName) {
+        this.txtFullName.setText(fullName);
+    }
+
+    public void setAverage(String aAverage, int aCircularAverage, String wAverage, int wCircularAverage){
+        this.aAverage.setText(aAverage);
+        this.aCircleAverage.setProgress(aCircularAverage, false);
+        this.wAverage.setText(wAverage);
+        this.wCircleAverage.setProgress(wCircularAverage, false);
+    }
+
+    public void setCoursesAdapter(List<BeanCourse> beanCourses) {
+        this.coursesAdapter.setbCourses(beanCourses);
+        this.rvCourses.setAdapter(this.coursesAdapter);
+    }
+
+    public void notifyDataChanged(int position){
+        this.coursesAdapter.notifyItemRemoved(position);
+    }
+
+    public CoursesAdapter getCoursesAdapter() {
+        return coursesAdapter;
+    }
+
+
+    public void setErrorMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

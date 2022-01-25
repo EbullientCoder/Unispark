@@ -177,12 +177,14 @@ public class ExamsDAO {
 
         Statement statement = null;
         Connection connection = null;
-        ResultSet rs = null;
+
 
         try {
-            doConnect(statement,connection);
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-            rs = QueryExams.selectExamGrades(statement, studentID);
+            ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
                     String result = rs.getString(GRADE);
@@ -211,12 +213,14 @@ public class ExamsDAO {
 
         Statement statement = null;
         Connection connection = null;
-        ResultSet rs = null;
+
 
         try {
-            doConnect(statement,connection);
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
 
-            rs = QueryExams.selectExamGrades(statement, studentID);
+            ResultSet rs = QueryExams.selectExamGrades(statement, studentID);
             if (rs.first()) {
                 do {
                     String result = rs.getString("GRADE");
@@ -237,15 +241,6 @@ public class ExamsDAO {
 
         return gradesList;
     }
-
-
-    private static void doConnect(Statement statement, Connection connection) throws SQLException {
-
-        connection = MySqlConnect.getInstance().getDBConnection();
-        statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
-    }
-
 
 
 

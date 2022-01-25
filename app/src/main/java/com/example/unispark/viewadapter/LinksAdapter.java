@@ -32,7 +32,7 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     //Methods
-    public LinksAdapter(List<BeanLink> beanLinkList, OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
+    public LinksAdapter(OnLinkClickListener onLinkClickListener, OnDelBtnClickListener onDelBtnClickListener){
         this.beanLinkList = beanLinkList;
         this.onLinkClickListener = onLinkClickListener;
         this.onDelBtnClickListener = onDelBtnClickListener;
@@ -99,5 +99,8 @@ public class LinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
+    public void setBeanLinkList(List<BeanLink> beanLinkList) {
+        this.beanLinkList = beanLinkList;
+    }
 }
 

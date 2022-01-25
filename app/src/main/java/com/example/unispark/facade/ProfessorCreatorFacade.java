@@ -29,7 +29,7 @@ public class ProfessorCreatorFacade {
     public ProfessorModel getProfessor(String firstName, String lastName, String email, int profilePicture, int professorId, String faculty, String website) throws SQLException
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(professorId);
-        List<BookExamModel> exams = ExamsFacade.getInstance().getExams(String.valueOf(professorId), true);
+        List<BookExamModel> exams = ExamsFacade.getInstance().getProfessorExams(courses);
         List<HomeworkModel> homeworks = HomeworkDAO.getAssignedHomework(professorId);
 
         return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams, homeworks);
