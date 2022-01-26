@@ -60,7 +60,7 @@ public class CourseCreatorFacade {
                 }
             }
             if (!equals) {
-                coursesList.add(createCourse(rs));
+                coursesList.add(this.createCourse(rs));
             }
             equals = false;
         } while (rs.next());

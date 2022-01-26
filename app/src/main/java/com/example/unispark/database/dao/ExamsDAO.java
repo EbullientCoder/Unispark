@@ -19,6 +19,7 @@ import java.util.List;
 public class ExamsDAO {
 
     public static final String GRADE = "grade";
+    public static final String EXAMNAME = "examname";
 
     private ExamsDAO(){}
 
@@ -87,7 +88,7 @@ public class ExamsDAO {
 
             if (rs.first()){
                 do {
-                    examsList.add(ExamsFacade.getInstance().bookingExam(rs));
+                    examsList.add(bookingExam(rs));
                 } while(rs.next());
             }
 
@@ -121,7 +122,7 @@ public class ExamsDAO {
                 String takenExam;
                 String result;
                 do {
-                    takenExam = rs.getString("examname");
+                    takenExam = rs.getString(EXAMNAME);
                     result = rs.getString(GRADE);
                     if (exam.getName().equals(takenExam) && Double.valueOf(result) >= 18) throw new ExamException(2);
                 } while (rs.next());
@@ -155,7 +156,7 @@ public class ExamsDAO {
             if (rs.first()) {
                 do {
 
-                    bookedExamsList.add(ExamsFacade.getInstance().bookingExam(rs));
+                    bookedExamsList.add(bookingExam(rs));
 
                 } while(rs.next());
             }
@@ -193,7 +194,7 @@ public class ExamsDAO {
                     String result = rs.getString(GRADE);
                     double numberResult = Double.parseDouble(result);
                     if (numberResult >= 18){
-                        gradesList.add(ExamsFacade.getInstance().examGrade(rs, result));
+                        gradesList.add(examGrade(rs, result));
                     }
                 } while(rs.next());
             }
@@ -229,7 +230,7 @@ public class ExamsDAO {
                     String result = rs.getString("GRADE");
                     double numberResult = Double.parseDouble(result);
                     if (numberResult < 18){
-                        gradesList.add(ExamsFacade.getInstance().examGrade(rs, result));
+                        gradesList.add(examGrade(rs, result));
                     }
                 } while(rs.next());
             }
@@ -309,6 +310,37 @@ public class ExamsDAO {
                 statement.close();
             }
         }
+    }
+
+
+    //Create a new Booking Exam model
+    public static BookExamModel bookingExam(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("examID");
+        String name = rs.getString(EXAMNAME);
+        String year = rs.getString( "year");
+        String dateTime = rs.getString("date");
+        String cfu = rs.getString("cfu");
+        String building = rs.getString("building");
+        String classroom = rs.getString("class");
+
+        //Create new bookExam model
+        return new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
+    }
+
+
+    //Create a new examGrade
+    public static VerbalizedExamModel examGrade(ResultSet rs, String result) throws SQLException {
+
+        int id = rs.getInt("examID");
+        String name = rs.getString(EXAMNAME);
+
+        String year = rs.getString("year");
+        String date = rs.getString("date");
+        String cfu = rs.getString("cfu");
+
+        //Create new ExamGrade
+        return new VerbalizedExamModel(id, name, year, date, cfu, result);
     }
 
 }

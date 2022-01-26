@@ -2,7 +2,6 @@ package com.example.unispark.database.dao;
 
 import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryHomework;
-import com.example.unispark.facade.HomeworkCreatorFacade;
 import com.example.unispark.model.HomeworkModel;
 
 import java.sql.Connection;
@@ -35,7 +34,7 @@ public class HomeworkDAO {
 
                 do{
 
-                    homeworkList.add(HomeworkCreatorFacade.getInstance().createHomework(rs));
+                    homeworkList.add(createHomework(rs));
 
                 } while (rs.next());
 
@@ -72,7 +71,7 @@ public class HomeworkDAO {
             if (rs.first()){
 
                 do{
-                    homeworkList.add(HomeworkCreatorFacade.getInstance().createHomework(rs));
+                    homeworkList.add(createHomework(rs));
                 } while (rs.next());
                 //Reverse Homeworks List
                 Collections.reverse(homeworkList);
@@ -110,6 +109,21 @@ public class HomeworkDAO {
                 statement.close();
             }
         }
+    }
+
+
+    public static HomeworkModel createHomework(ResultSet rs) throws SQLException {
+        //Homework attributes
+        String shortName = rs.getString("shortname");
+        String fullName = rs.getString("coursename");
+        String title = rs.getString("title");
+        String expiration = rs.getString("expiration");
+        String  instructions = rs.getString("instructions");
+        String points = rs.getString("points");
+        int trackProfessor = rs.getInt("trackprofessor");
+
+        //Create a new homework and add it to the homework list
+        return new HomeworkModel(shortName, fullName, title, expiration, instructions, points, trackProfessor);
     }
 
 

@@ -71,42 +71,11 @@ public class ExamsFacade {
         for (int i = 0; i < professorCourses.size(); i++)
         {
             tempList = ExamsDAO.getCourseExams(professorCourses.get(i), true);
-            if(tempList != null){
+            if(!tempList.isEmpty()){
                 examsList.addAll(tempList);
             }
         }
         return examsList;
     }
 
-
-
-    //Create a new Booking Exam model
-    public BookExamModel bookingExam(ResultSet rs) throws SQLException {
-
-        int id = rs.getInt("examID");
-        String name = rs.getString("examname");
-        String year = rs.getString( "year");
-        String dateTime = rs.getString("date");
-        String cfu = rs.getString("cfu");
-        String building = rs.getString("building");
-        String classroom = rs.getString("class");
-
-        //Create new bookExam model
-        return new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
-    }
-
-
-    //Create a new examGrade
-    public VerbalizedExamModel examGrade(ResultSet rs, String result) throws SQLException {
-
-        int id = rs.getInt("examID");
-        String name = rs.getString("examname");
-
-        String year = rs.getString("year");
-        String date = rs.getString("date");
-        String cfu = rs.getString("cfu");
-
-        //Create new ExamGrade
-        return new VerbalizedExamModel(id, name, year, date, cfu, result);
-    }
 }
