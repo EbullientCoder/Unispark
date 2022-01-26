@@ -46,9 +46,9 @@ public class LoginGuiController extends UserBaseGuiController{
                     try {
                         student = loginAppController.studentLogin(user);
                         this.session.setUser(student);
-                        intent = new Intent(this.loginView, StudentHomeView.class);
+                        intent = new Intent(this.getLoginView(), StudentHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.key, this.session);
+                        intent.putExtra(this.getKey(), this.getSession());
                         this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
@@ -62,9 +62,9 @@ public class LoginGuiController extends UserBaseGuiController{
                     try {
                         professor = loginAppController.professorLogin(user);
                         this.session.setUser(professor);
-                        intent = new Intent(this.loginView, ProfessorHomeView.class);
+                        intent = new Intent(this.getLoginView(), ProfessorHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.key, this.session);
+                        intent.putExtra(this.getKey(), this.getSession());
                         this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
@@ -78,9 +78,9 @@ public class LoginGuiController extends UserBaseGuiController{
                     try {
                         university = loginAppController.universityLogin(user);
                         this.session.setUser(university);
-                        intent = new Intent(this.loginView, UniversityHomeView.class);
+                        intent = new Intent(this.getLoginView(), UniversityHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.key, this.session);
+                        intent.putExtra(this.getKey(), this.getSession());
                         this.loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
@@ -101,5 +101,11 @@ public class LoginGuiController extends UserBaseGuiController{
         this.loginView.setAdapterItems(users);
     }
 
+    public LoginView getLoginView() {
+        return loginView;
+    }
 
+    public String getKey() {
+        return key;
+    }
 }

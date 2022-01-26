@@ -1,37 +1,55 @@
 package com.example.unispark.controller.guicontroller.university;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.example.unispark.R;
+import com.example.unispark.Session;
 import com.example.unispark.bean.communications.BeanUniCommunication;
+import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.AddCommunication;
+import com.example.unispark.controller.guicontroller.UserBaseGuiController;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
+import com.example.unispark.view.university.fragment.AddUniCommunicationView;
 
 import java.util.List;
 
-public class AddCommunicationGuiController extends UniBaseGuiController {
+public class AddCommunicationGuiController extends UserBaseGuiController {
 
-    public void showAddMedia(Activity activity){
+    private AddUniCommunicationView uniCommunicationView;
+    private List<BeanUniCommunication> beanUniCommunications;
+
+
+
+    public AddCommunicationGuiController(Session session, List<BeanUniCommunication> beanUniCommunications, AddUniCommunicationView uniCommunicationView) {
+        super(session);
+        this.uniCommunicationView = uniCommunicationView;
+        this.beanUniCommunications = beanUniCommunications;
+    }
+
+    public void showAddMedia(){
         Intent i = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         i.setFlags(i.FLAG_ACTIVITY_NEW_TASK);
         final int ACTIVITY_SELECT_IMAGE = 1234;
-        activity.startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
+        this.uniCommunicationView.startActivityForResult(i, ACTIVITY_SELECT_IMAGE);
+    }
+
+
+
+
+    public void showFaculties(){
+        BeanLoggedUniversity university = (BeanLoggedUniversity) this.session.getUser();
+        List<String> faculties = university.getFaculties();
+        this.uniCommunicationView.setAdapterItems(faculties);
     }
 
 
 
     //Creating the Communication & Adding it into the Database
-    public void addCommunication(Context context, Dialog dialog, String title, String text, String facultySelection, String date,
-                                 List<BeanUniCommunication> uniCommunications, UniCommunicationsAdapter uniCommunicationsAdapter){
+    public void addCommunication(String title, String text, String facultySelection, String date){
 
         if (title.equals("") || text.equals("") || facultySelection.equals("")){
-            getInvalidMessagge(context);
+            this.uniCommunicationView.setMessage("All fields required");
         }
 
         else{
@@ -50,22 +68,16 @@ public class AddCommunicationGuiController extends UniBaseGuiController {
             AddCommunication addCommunicationAppController = new AddCommunication();
             try {
                 addCommunicationAppController.addUniCommunication(beanUniCommunication);
-                communicationAddedMessage(context);
+                this.uniCommunicationView.setMessage("Communication added");
                 //Notify the Communications Adapter
-                uniCommunications.add(0, beanUniCommunication);
-                uniCommunicationsAdapter.notifyDataSetChanged();
+                this.beanUniCommunications.add(0, beanUniCommunication);
+                this.uniCommunicationView.notifyDataChanged();
 
-                dialog.dismiss();
+                this.uniCommunicationView.dismiss();
             } catch (GenericException e) {
                 e.printStackTrace();
-                getErrorMessage(context, e.getMessage());
+                this.uniCommunicationView.setMessage(e.getMessage());
             }
         }
-    }
-
-
-
-    private void communicationAddedMessage(Context context){
-        Toast.makeText(context, "Communication added", Toast.LENGTH_SHORT).show();
     }
 }

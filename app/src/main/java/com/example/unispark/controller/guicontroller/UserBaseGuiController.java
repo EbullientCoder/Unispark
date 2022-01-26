@@ -9,4 +9,8 @@ public class UserBaseGuiController {
     protected UserBaseGuiController(Session session) {
         this.session = session;
     }
+
+    public Session getSession() {
+        return session;
+    }
 }

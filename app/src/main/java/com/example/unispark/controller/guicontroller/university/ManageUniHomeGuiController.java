@@ -1,65 +1,102 @@
 package com.example.unispark.controller.guicontroller.university;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.unispark.bean.courses.BeanCourse;
+import com.example.unispark.Session;
 import com.example.unispark.bean.BeanLesson;
 import com.example.unispark.bean.communications.BeanUniCommunication;
+import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.university.BeanLoggedUniversity;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
 import com.example.unispark.controller.applicationcontroller.course.ManageCourses;
 import com.example.unispark.controller.applicationcontroller.schedule.DeleteLesson;
 import com.example.unispark.controller.applicationcontroller.schedule.GetScheduleUniversity;
+import com.example.unispark.controller.guicontroller.UserBaseGuiController;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
+import com.example.unispark.view.university.UniversityHomeView;
 import com.example.unispark.view.university.fragment.AddScheduleView;
 import com.example.unispark.view.university.fragment.AddUniCommunicationView;
-import com.example.unispark.viewadapter.LessonAdapter;
-import com.example.unispark.viewadapter.communications.UniCommunicationsAdapter;
 
 import java.util.List;
 
-public class ManageUniHomeGuiController extends UniBaseGuiController {
+public class ManageUniHomeGuiController extends UserBaseGuiController {
+
+
+    private UniversityHomeView universityHomeView;
+
+    private boolean isOpen;
+    private int lessonIndex;
+    private List<BeanUniCommunication> beanUniCommunications;
+    private List<BeanLesson> beanLessons;
+
+
+    public ManageUniHomeGuiController(Session session, UniversityHomeView universityHomeView) {
+        super(session);
+        this.universityHomeView = universityHomeView;
+        this.lessonIndex = 0;
+    }
 
 
 
-    public void showAddCommunication(FragmentManager fragmentManager, BeanLoggedUniversity university,
-                                     UniCommunicationsAdapter uniCommunicationsAdapter, List<BeanUniCommunication> communications){
+    //Open Button
+    public void expandButton(){
+        if(!this.isOpen){
+            //Show Buttons
 
-        AddUniCommunicationView fragment = new AddUniCommunicationView(university, communications, uniCommunicationsAdapter);
-        fragment.show(fragmentManager, "AddUniCommunication");
+            this.universityHomeView.setBtnCommunication();
+            this.universityHomeView.setBtnSchedule();
+            //Expand Floating Button
+            this.universityHomeView.setTxtCommunication();
+            this.universityHomeView.setTxtSchedule();
+            //Rotate
+            this.universityHomeView.setBtnAdd();
+            this.isOpen = true;
+        }
+
+        else{
+            //Hide Buttons
+            this.universityHomeView.unSetBtnCommunication();
+            this.universityHomeView.unSetBtnSchedule();
+
+            //Hide text
+            this.universityHomeView.unSetTxtCommunication();
+            this.universityHomeView.unSetTxtSchedule();
+
+            //Rotate
+            this.universityHomeView.unSetBtnAdd();
+
+            this.isOpen = false;
+        }
+
+    }
+
+
+    public void showAddCommunication(){
+
+        AddUniCommunicationView fragment = new AddUniCommunicationView(this.session, this.getBeanUniCommunications(), this.universityHomeView.getUniCommunicationsAdapter());
+        fragment.show(this.universityHomeView.getSupportFragmentManager(), "AddUniCommunication");
     }
 
 
 
 
-    public List<BeanUniCommunication> showCommunications(){
-        List<BeanUniCommunication> communications = null;
-
+    public void showCommunications(){
         ShowCommunications uniCommunicationsAppController = new ShowCommunications();
-        communications = uniCommunicationsAppController.showUniversityCommunications();
-
-
-        return communications;
+        this.beanUniCommunications = uniCommunicationsAppController.showUniversityCommunications();
+        this.universityHomeView.setUniCommunicationsAdapter(this.getBeanUniCommunications());
     }
 
 
 
 
-
-
-    public void showDetailsCommunication(Context context, BeanUniCommunication communication){
-        Intent intent = new Intent(context, DetailsUniCommunicationView.class);
+    public void showDetailsCommunication(int position){
+        Intent intent = new Intent(this.getUniversityHomeView(), DetailsUniCommunicationView.class);
         //Pass Items to the new Activity
-        intent.putExtra("Communication", communication);
+        intent.putExtra("Communication", this.beanUniCommunications.get(position));
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        this.universityHomeView.startActivity(intent);
     }
-
 
 
 
@@ -90,19 +127,18 @@ public class ManageUniHomeGuiController extends UniBaseGuiController {
 
 
 
-    public void deleteLesson(Context context, List<BeanLesson> lessons, int position, LessonAdapter lessonAdapter, RecyclerView rvSchedules){
+    public void deleteLesson(int position){
 
         //Application Controller
         DeleteLesson deleteLessonAppController = new DeleteLesson();
         try {
-            deleteLessonAppController.deleteLesson(lessons.get(position));
+            deleteLessonAppController.deleteLesson(this.beanLessons.get(position));
             //Show Removed StudentSchedule
-            lessons.remove(position);
-            lessonAdapter.notifyItemRemoved(position);
-            rvSchedules.setAdapter(lessonAdapter);
+            this.beanLessons.remove(position);
+            this.universityHomeView.notifyDataChanged(position);
         } catch (Exception e) {
             e.printStackTrace();
-            getErrorMessage(context, e.getMessage());
+            this.universityHomeView.setMessage(e.getMessage());
         }
     }
 
@@ -110,11 +146,11 @@ public class ManageUniHomeGuiController extends UniBaseGuiController {
 
 
     //Show StudentScheduleGUIController
-    public List<BeanLesson> showSchedule(int index, TextView txtScheduleTitle, List<String> faculties, TextView txtSchedule, RecyclerView rvSchedules){
-
+    public void showSchedule(){
+        BeanLoggedUniversity university = (BeanLoggedUniversity) this.session.getUser();
         String day = null;
 
-        switch (index){
+        switch (this.lessonIndex){
             case 1: day = "TUESDAY";
                 break;
             case 2: day = "WEDNESDAY";
@@ -126,37 +162,57 @@ public class ManageUniHomeGuiController extends UniBaseGuiController {
             default: day = "MONDAY";
         }
 
-        txtScheduleTitle.setText("SCHEDULE: " + day);
+        this.getUniversityHomeView().setTxtScheduleTitle("SCHEDULE: " + day);
 
         //Lessons
         //Get Courses
         List<BeanCourse> courses;
-        courses = getCourses(faculties);
+        courses = this.getCourses(university.getFaculties());
         //Get Lessons
         List<BeanLesson> lessons;
-        lessons = getLessons(day, courses);
+        lessons = this.getLessons(day, courses);
+        this.beanLessons = lessons;
+        this.universityHomeView.setLessonAdapter(this.getBeanLessons());
 
-        return lessons;
+    }
+
+
+
+    public void correctIndex(){
+
+        if(this.lessonIndex == 4) this.lessonIndex = 0;
+        else this.lessonIndex++;
+
     }
 
 
 
-    public int getCorrectIndex(int index){
-
-        if(index == 4) index = 0;
-        else index++;
-
-        return index;
-    }
-
-
-
-    public void showAddSchedule(FragmentManager fragmentManager, BeanLoggedUniversity university,
-                                LessonAdapter lessonAdapter, List<BeanLesson> lessons, int indexDay){
-        AddScheduleView fragment = new AddScheduleView(university, lessonAdapter, lessons, indexDay);
-        fragment.show(fragmentManager, "AddSchedule");
+    public void showAddSchedule(){
+        AddScheduleView fragment = new AddScheduleView(this.session, this.universityHomeView.getLessonAdapter(), this.getBeanLessons(), this.getLessonIndex());
+        fragment.show(this.universityHomeView.getSupportFragmentManager(), "AddSchedule");
 
 
     }
+
+
+
+
+    public List<BeanUniCommunication> getBeanUniCommunications() {
+        return beanUniCommunications;
+    }
+
+    public int getLessonIndex() {
+        return lessonIndex;
+    }
+
+    public List<BeanLesson> getBeanLessons() {
+        return beanLessons;
+    }
+
+    public UniversityHomeView getUniversityHomeView() {
+        return universityHomeView;
+    }
+
+
 
 }

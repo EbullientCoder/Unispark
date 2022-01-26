@@ -23,7 +23,7 @@ import java.util.List;
 public class ManageStudentProfileGuiController extends StudentBaseGuiController {
 
     private StudentProfileView profileView;
-    public List<BeanCourse> beanCourses;
+    private List<BeanCourse> beanCourses;
 
 
     public ManageStudentProfileGuiController(Session session, StudentProfileView profileView) {
@@ -98,7 +98,7 @@ public class ManageStudentProfileGuiController extends StudentBaseGuiController 
 
     public void showJoinCourses(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
-        JoinCourseView joinCourseFragment = new JoinCourseView(this.session, this.beanCourses, this.profileView.getCoursesAdapter());
+        JoinCourseView joinCourseFragment = new JoinCourseView(this.getSession(), this.getBeanCourses(), this.profileView.getCoursesAdapter());
         joinCourseFragment.show(this.profileView.getSupportFragmentManager(), "Search Course");
     }
 

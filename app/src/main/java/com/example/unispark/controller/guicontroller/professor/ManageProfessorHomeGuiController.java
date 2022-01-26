@@ -24,8 +24,8 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
 
 
     private ProfessorHomeView professorHomeView;
-    public List<BeanHomework> beanHomeworks;
-    public List<BeanUniCommunication> beanUniCommunications;
+    private List<BeanHomework> beanHomeworks;
+    private List<BeanUniCommunication> beanUniCommunications;
 
     public ManageProfessorHomeGuiController(Session session, ProfessorHomeView professorHomeView) {
         super(session, professorHomeView);
@@ -118,13 +118,13 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
 
     public void showAddHomework(){
 
-        AddHomeworkView fragment= new AddHomeworkView(this.session, this.beanHomeworks, this.professorHomeView.getHomeworkAdapter());
+        AddHomeworkView fragment= new AddHomeworkView(this.getSession(), this.getBeanHomeworks(), this.professorHomeView.getHomeworkAdapter());
         fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddHomework");
     }
 
 
     public void showAddCommunication(){
-        AddProfCommunicationView fragment= new AddProfCommunicationView(this.session);
+        AddProfCommunicationView fragment= new AddProfCommunicationView(this.getSession());
         fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddCommunication");
     }
 
