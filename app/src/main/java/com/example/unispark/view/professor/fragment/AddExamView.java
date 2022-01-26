@@ -126,7 +126,7 @@ public class AddExamView extends DialogFragment{
             }
         };
 
-        this.btnSelectDate.setOnClickListener(new View.OnClickListener() {
+        btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 examGuiController.showDateDialog(year, month, day);

@@ -44,6 +44,13 @@ public class QueryExams {
         return statement.executeQuery(queryString);
     }
 
+    public static ResultSet selectExamDate(Statement statement, int examID) throws SQLException{
+        String queryString = "SELECT " + DATE + " FROM " + EXAMS + " WHERE examID = " + examID + " AND " + DATE + " >= NOW() ;";
+        return statement.executeQuery(queryString);
+
+
+    }
+
 
 
     public static ResultSet selectStudents(Statement statement, int examID) throws SQLException

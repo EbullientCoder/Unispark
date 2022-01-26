@@ -56,6 +56,9 @@ public class ExamsDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
+            ResultSet rs = QueryExams.selectExamDate(statement, examGrade.getId());
+            if (rs.first()) throw new ExamException(1);
+
             QueryExams.insertGrade(statement, examGrade.getId(), examGrade.getName(), studentID, examGrade.getResult());
             removeBookedExam(examGrade.getId(), studentID);
 

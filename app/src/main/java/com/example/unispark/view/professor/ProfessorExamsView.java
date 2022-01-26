@@ -25,7 +25,8 @@ import java.util.List;
 public class ProfessorExamsView extends AppCompatActivity
         implements ExamAdapter.OnViewExamClickListener{
 
-    //Exams Page Menu
+
+    //Exams Page
     private RecyclerView rvExams;
     private ExamAdapter examAdapter;
     //Floating Button
@@ -74,10 +75,8 @@ public class ProfessorExamsView extends AppCompatActivity
         });
 
 
-        //ExamModel Page Title
-        this.examsTitle = findViewById(R.id.txt_professor_exams_title);
 
-        //ExamModel List
+        //Exam List
         this.rvExams = findViewById(R.id.rv_professor_exams);
 
 
@@ -108,7 +107,6 @@ public class ProfessorExamsView extends AppCompatActivity
                 examsGuiController.showAddExam();
             }
         });
-
 
         //Button: Add Homework
         this.txtHomework = findViewById(R.id.txt_add_homework);

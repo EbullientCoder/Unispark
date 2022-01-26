@@ -18,8 +18,6 @@ public class CourseModel implements Serializable {
 
     public CourseModel(String id, String courseYear, String cfu, String session, String link, String faculty, int uniYear) {
         this.id = id;
-        this.shortName = shortName;
-        this.fullName = fullName;
         this.courseYear = courseYear;
         this.cfu = cfu;
         this.session = session;
