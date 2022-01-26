@@ -7,7 +7,7 @@ import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
+import com.example.unispark.controller.applicationcontroller.exams.ManageProfessorExams;
 import com.example.unispark.view.professor.VerbalizeExamsView;
 import com.example.unispark.view.professor.ProfessorExamsView;
 import com.example.unispark.view.professor.fragment.AddExamView;
@@ -29,7 +29,7 @@ public class ManageExamsGuiController extends ProfBaseGuiController {
     public void showExams(){
         BeanLoggedProfessor professor = (BeanLoggedProfessor) this.session.getUser();
 
-        ShowExams showExamsAppController = new ShowExams();
+        ManageProfessorExams showExamsAppController = new ManageProfessorExams();
         this.beanExams = showExamsAppController.assignedExams(professor);
         this.examsView.setExamAdapter(this.getBeanExams());
 

@@ -5,9 +5,8 @@ import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.student.BeanLoggedStudent;
-import com.example.unispark.controller.applicationcontroller.exams.BookExam;
-import com.example.unispark.controller.applicationcontroller.exams.LeaveExam;
-import com.example.unispark.controller.applicationcontroller.exams.ShowExams;
+import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
+import com.example.unispark.controller.applicationcontroller.exams.ManageStudentExams;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.view.student.StudentExamsView;
@@ -55,7 +54,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         
         //Application Controller
-        ShowExams studentExamsAppController = new ShowExams();
+        ManageStudentExams studentExamsAppController = new ManageStudentExams();
 
         //Select the Page
         if(this.page == 0){
@@ -94,7 +93,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
     public void bookExam(int position){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
-        BookExam bookExamAppController = new BookExam();
+        ManageStudentExams bookExamAppController = new ManageStudentExams();
 
         try {
             bookExamAppController.bookExam(student, (BeanBookExam) this.beanExams.get(position).getExamType());
@@ -115,7 +114,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
         //Application Controller
         try{
 
-            LeaveExam leaveExamAppController = new LeaveExam();
+            ManageStudentExams leaveExamAppController = new ManageStudentExams();
             leaveExamAppController.removeExam(student, position);
             //Removing the Booked Exam from the List
             this.beanExams.remove(position);

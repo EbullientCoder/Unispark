@@ -3,9 +3,11 @@ package com.example.unispark.controller.applicationcontroller.exams;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.exams.BeanVerbalizeExam;
-import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.exceptions.ExamAlreadyVerbalized;
+import com.example.unispark.exceptions.ExamException;
+import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.facade.ExamsFacade;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
@@ -15,9 +17,44 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowExams {
-    //Student
-    //Page: Verbalized ExamModel
+public class ManageStudentExams extends ManageExams{
+
+
+    public void bookExam(BeanLoggedStudent student, BeanBookExam exam) throws ExamAlreadyVerbalized, GenericException
+    {
+        List<BookExamModel> exams = student.getBookedExams();
+        BookExamModel bookExam = new BookExamModel(exam.getId(), exam.getName(), exam.getYear(), exam.getDate(), exam.getCfu(), exam.getClassroom(), exam.getBuilding());
+        try {
+            ExamsDAO.bookExam(bookExam, student.getId());
+            exams.add(bookExam);
+            student.setBookedExams(exams);
+        } catch (ExamException e) {
+            e.printStackTrace();
+            throw new ExamAlreadyVerbalized("Exam verbalized, cannot book");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
+        }
+    }
+
+
+    //Remove the Connection inside the DB
+    public void removeExam(BeanLoggedStudent student, int position) throws GenericException {
+        List<BookExamModel> bookedExams = student.getBookedExams();
+        BookExamModel leaveExam = bookedExams.get(position);
+        try {
+            ExamsDAO.removeBookedExam(leaveExam.getId(), student.getId());
+            //Remove the Booked Exam from Student's Attributes
+            bookedExams.remove(position);
+            student.setBookedExams(bookedExams);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new GenericException("Try again");
+        }
+    }
+
+
+
     public List<BeanExamType> verbalizedExams(BeanLoggedStudent student){
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
@@ -77,17 +114,6 @@ public class ShowExams {
     }
 
 
-    //Professor
-    public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        try {
-            professor.setExams(ExamsFacade.getInstance().getProfessorExams(professor.getCourses()));
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return this.listBeanBookExams(professor.getExams(), 1);
-    }
 
 
 
@@ -114,28 +140,5 @@ public class ShowExams {
         return bExams;
     }
 
-    private List<BeanExamType> listBeanBookExams(List<BookExamModel> bookExams, int type){
-        List<BeanExamType> bExams = new ArrayList<>();
 
-        for (int i = 0; bookExams != null && i < bookExams.size(); i++){
-            BookExamModel bExam = bookExams.get(i);
-            BeanBookExam beanBookExam;
-            beanBookExam = new BeanBookExam();
-            beanBookExam.setDate(bExam.getDate());
-            beanBookExam.setYear(bExam.getYear());
-            beanBookExam.setName(bExam.getName());
-            beanBookExam.setCfu(bExam.getCfu());
-            beanBookExam.setId(bExam.getId());
-            beanBookExam.setBuilding(bExam.getBuilding());
-            beanBookExam.setClassroom(bExam.getClassroom());
-            BeanExamType beanExamType;
-            beanExamType = new BeanExamType();
-            beanExamType.setType(type);
-            beanExamType.setExamType(beanBookExam);
-
-            bExams.add(beanExamType);
-        }
-
-        return bExams;
-    }
 }
