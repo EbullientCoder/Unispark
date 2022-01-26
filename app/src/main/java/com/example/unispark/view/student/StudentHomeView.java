@@ -31,10 +31,7 @@ public class StudentHomeView extends AppCompatActivity
         ProfCommunicationsAdapter.OnProfComClickListener,
         HomeworksAdapter.OnHomeworkBtnClickListener{
 
-        //Menu
-        private ImageButton menuButton;
-        //Bottom Menu Elements
-        private BottomNavigationView bottomNavigationView;
+
         //University Communications
         private RecyclerView rvUniCommunications;
         private UniCommunicationsAdapter uniCommunicationsAdapter;
@@ -67,8 +64,9 @@ public class StudentHomeView extends AppCompatActivity
 
 
                 //Menu
-                this.menuButton = findViewById(R.id.btn_menu);
-                this.menuButton.setOnClickListener(new View.OnClickListener() {
+                ImageButton menuButton;
+                menuButton = findViewById(R.id.btn_menu);
+                menuButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                                 Toast.makeText(getApplicationContext(), "Work In Progress", Toast.LENGTH_SHORT).show();
@@ -76,15 +74,16 @@ public class StudentHomeView extends AppCompatActivity
                 });
 
                 //Bottom Navigation Menu
-                this.bottomNavigationView = findViewById(R.id.bottomMenuView);
+                BottomNavigationView bottomNavigationView;
+                bottomNavigationView = findViewById(R.id.bottomMenuView);
                 //Remove Menu View's background
-                this.bottomNavigationView.setBackground(null);
+                bottomNavigationView.setBackground(null);
                 //Remove Menu View's icons tint
-                this.bottomNavigationView.setItemIconTintList(null);
+                bottomNavigationView.setItemIconTintList(null);
                 //Set StudentHomeGUIController button
-                this.bottomNavigationView.setSelectedItemId(R.id.home);
+                bottomNavigationView.setSelectedItemId(R.id.home);
                 //Click Listener
-                this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

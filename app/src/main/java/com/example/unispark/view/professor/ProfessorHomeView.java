@@ -30,8 +30,7 @@ public class ProfessorHomeView extends AppCompatActivity implements
         UniCommunicationsAdapter.OnUniComClickListener{
 
 
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
+
     //Communications
     private RecyclerView rvUniCommunications;
     private UniCommunicationsAdapter uniCommunicationsAdapter;
@@ -43,7 +42,6 @@ public class ProfessorHomeView extends AppCompatActivity implements
     private TextView txtHomework;
     private FloatingActionButton btnCommunication;
     private TextView txtCommunication;
-    private boolean isOpen;
     //Homeworks
     private RecyclerView rvHomeworks;
     private HomeworksAdapter homeworkAdapter;
@@ -67,15 +65,16 @@ public class ProfessorHomeView extends AppCompatActivity implements
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.professor_home);
+        bottomNavigationView.setSelectedItemId(R.id.professor_home);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

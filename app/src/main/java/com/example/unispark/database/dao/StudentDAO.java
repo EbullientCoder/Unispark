@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
@@ -46,7 +48,11 @@ public class StudentDAO {
             String studentId = rs.getString("studentID");
             int uniYear = rs.getInt("uniyear");
             //Compose the student entity
-            student = StudentCreatorFacade.getInstance().getStudent(firstName, lastName, studentEmail, profilePicture, studentId, faculty, academicYear, uniYear);
+            List<String> nameEmail = new ArrayList<>();
+            nameEmail.add(firstName);
+            nameEmail.add(lastName);
+            nameEmail.add(studentEmail);
+            student = StudentCreatorFacade.getInstance().getStudent(nameEmail, profilePicture, studentId, faculty, academicYear, uniYear);
 
             rs.close();
 

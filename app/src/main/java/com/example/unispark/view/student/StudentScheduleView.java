@@ -22,10 +22,6 @@ import java.util.List;
 public class StudentScheduleView extends AppCompatActivity{
 
 
-    //Menu
-    private ImageButton menuButton;
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
     //Calendar
     private TextView txtDay;
     private TextView txtDate;
@@ -51,15 +47,16 @@ public class StudentScheduleView extends AppCompatActivity{
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.schedule);
+        bottomNavigationView.setSelectedItemId(R.id.schedule);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

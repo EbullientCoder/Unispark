@@ -30,7 +30,6 @@ public class UniCommunicationsAdapter extends RecyclerView.Adapter<RecyclerView.
     //Methods
     public UniCommunicationsAdapter(OnUniComClickListener onUniComClickListener){
 
-        this.beanUniCommunicationList = beanUniCommunicationList;
         this.onUniComClickListener = onUniComClickListener;
     }
 

@@ -29,10 +29,7 @@ public class StudentProfileView extends AppCompatActivity
         implements CoursesAdapter.OnCourseClickListener,
         CoursesAdapter.OnCourseBtnClickListener{
 
-    //Menu
-    private ImageButton menuButton;
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
+
     //Student
     private ImageView imgProfile;
     private TextView txtFullName;
@@ -44,8 +41,7 @@ public class StudentProfileView extends AppCompatActivity
     //Courses
     private RecyclerView rvCourses;
     private CoursesAdapter coursesAdapter;
-    //Search Course
-    private ImageButton addCourse;
+
 
 
     //Gui Controller
@@ -64,15 +60,16 @@ public class StudentProfileView extends AppCompatActivity
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.profile);
+        bottomNavigationView.setSelectedItemId(R.id.profile);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -113,8 +110,9 @@ public class StudentProfileView extends AppCompatActivity
 
 
         //Open SearchCourse Fragment
-        this.addCourse = findViewById(R.id.btn_add_course);
-        this.addCourse.setOnClickListener(new View.OnClickListener() {
+        ImageButton addCourse;
+        addCourse = findViewById(R.id.btn_add_course);
+        addCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Gui controller

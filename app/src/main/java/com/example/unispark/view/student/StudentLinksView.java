@@ -31,10 +31,7 @@ public class StudentLinksView extends AppCompatActivity
         LinksAdapter.OnDelBtnClickListener {
 
 
-    //Menu
-    private ImageButton menuButton;
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
+
     //Professors
     private RecyclerView rvProfessors;
     private ProfessorsAdapter professorsAdapter;
@@ -42,7 +39,6 @@ public class StudentLinksView extends AppCompatActivity
     private EditText txtAddLinkName;
     private EditText txtAddLink;
     //Button Add Link
-    private ImageButton addButton;
     //Links
     private RecyclerView rvLinks;
     private LinksAdapter linkAdapter;
@@ -66,15 +62,16 @@ public class StudentLinksView extends AppCompatActivity
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.links);
+        bottomNavigationView.setSelectedItemId(R.id.links);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -101,8 +98,9 @@ public class StudentLinksView extends AppCompatActivity
         //Add Link Button
         this.txtAddLinkName = findViewById(R.id.txt_input_link_name);
         this.txtAddLink = findViewById(R.id.txt_input_link);
-        this.addButton = findViewById(R.id.btn_link_add);
-        this.addButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton addButton;
+        addButton = findViewById(R.id.btn_link_add);
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String linkName = txtAddLinkName.getText().toString();

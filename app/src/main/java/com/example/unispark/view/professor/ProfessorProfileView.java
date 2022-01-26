@@ -28,8 +28,7 @@ public class ProfessorProfileView extends AppCompatActivity
         implements CoursesAdapter.OnCourseClickListener{
 
     //Attributes
-    //Menu
-    private ImageButton menuButton;
+
     //Floating Button
     private FloatingActionButton btnAdd;
     private FloatingActionButton btnExam;
@@ -39,8 +38,6 @@ public class ProfessorProfileView extends AppCompatActivity
     private FloatingActionButton btnCommunication;
     private TextView txtCommunication;
 
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
 
     private ImageView imgProfImage;
     private TextView txtProfName;
@@ -67,15 +64,16 @@ public class ProfessorProfileView extends AppCompatActivity
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.professor_profile);
+        bottomNavigationView.setSelectedItemId(R.id.professor_profile);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

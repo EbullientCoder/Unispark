@@ -20,15 +20,18 @@ public class GetScheduleUniversity {
 
             List<CourseModel> courses = new ArrayList<>();
             for (int i = 0; i < bCourses.size(); i++){
-                courses.add(new CourseModel(bCourses.get(i).getId(),
-                        bCourses.get(i).getShortName(),
-                        bCourses.get(i).getFullName(),
+                CourseModel courseModel = new CourseModel(bCourses.get(i).getId(),
                         bCourses.get(i).getCourseYear(),
                         bCourses.get(i).getCfu(),
                         bCourses.get(i).getSession(),
                         bCourses.get(i).getLink(),
                         bCourses.get(i).getFaculty(),
-                        bCourses.get(i).getUniYear()));
+                        bCourses.get(i).getUniYear());
+
+                courseModel.setShortName(bCourses.get(i).getShortName());
+                courseModel.setFullName(bCourses.get(i).getFullName());
+
+                courses.add(courseModel);
             }
 
             List<LessonModel> lessons = null;

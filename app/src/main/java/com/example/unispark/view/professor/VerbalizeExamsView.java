@@ -21,8 +21,6 @@ import java.util.List;
 public class VerbalizeExamsView extends AppCompatActivity
         implements SignedStudentsAdapter.OnAddBtnClickListener {
 
-    //Button: GoBack
-    private ImageView btnGoBack;
 
     //Exam Data
     private TextView txtCourseName;
@@ -47,8 +45,9 @@ public class VerbalizeExamsView extends AppCompatActivity
         this.studentsAdapter = new SignedStudentsAdapter(this);
 
         //GoBack Button
-        this.btnGoBack = findViewById(R.id.btn_verbalize_exam_goback);
-        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
+        ImageView btnGoBack;
+        btnGoBack = findViewById(R.id.btn_verbalize_exam_goback);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

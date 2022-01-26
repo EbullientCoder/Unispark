@@ -53,8 +53,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
     //Page Menu
     public void showExams(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
-        List<BeanExamType> exams = null;
-
+        
         //Application Controller
         ShowExams studentExamsAppController = new ShowExams();
 

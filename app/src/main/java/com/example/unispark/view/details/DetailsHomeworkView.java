@@ -18,19 +18,15 @@ import com.example.unispark.model.HomeworkModel;
 public class DetailsHomeworkView extends AppCompatActivity {
     //Attributes
     //Button: GoBack
-    private ImageButton btnGoBack;
     //Set Interface Text
     private TextView txtShortName;
     private TextView txtTitle;
     private TextView txtExpiration;
     private TextView txtInstructions;
     private TextView txtPoints;
-    //Submit Button
-    private LinearLayout submitLayout;
-    private Button btnSubmit;
 
     //Gui Controller
-    private DetailsHomeworkGuiController detailsGuiController;
+    DetailsHomeworkGuiController detailsGuiController;
 
 
     @Override
@@ -42,8 +38,9 @@ public class DetailsHomeworkView extends AppCompatActivity {
         this.detailsGuiController = new DetailsHomeworkGuiController(this, (BeanHomework) getIntent().getExtras().getSerializable("Homework"));
 
         //GoBack Button
-        this.btnGoBack = findViewById(R.id.btn_detail_homework_goback);
-        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnGoBack;
+        btnGoBack = findViewById(R.id.btn_detail_homework_goback);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -51,8 +48,9 @@ public class DetailsHomeworkView extends AppCompatActivity {
         });
 
         //Submit Button
-        this.btnSubmit = findViewById(R.id.btn_homework_detail_submit);
-        this.btnSubmit.setOnClickListener(new View.OnClickListener() {
+        Button btnSubmit;
+        btnSubmit = findViewById(R.id.btn_homework_detail_submit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "WORK IN PROGRESS", Toast.LENGTH_SHORT);
@@ -95,7 +93,8 @@ public class DetailsHomeworkView extends AppCompatActivity {
     }
 
     public void setSubmitLayout() {
-        this.submitLayout = findViewById(R.id.submit_layout);
-        this.submitLayout.setVisibility(View.INVISIBLE);
+        LinearLayout submitLayout;
+        submitLayout = findViewById(R.id.submit_layout);
+        submitLayout.setVisibility(View.INVISIBLE);
     }
 }

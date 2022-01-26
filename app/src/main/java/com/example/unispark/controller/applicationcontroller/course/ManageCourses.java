@@ -42,15 +42,17 @@ public class ManageCourses {
             CourseDAO.joinCourse(student.getId(), bCourse.getFullName());
             //Add Course to the Student's Joined Courses
             List<CourseModel> joinedCourses = student.getCourses();
-            joinedCourses.add(0, new CourseModel(bCourse.getId(),
-                    bCourse.getShortName(),
-                    bCourse.getFullName(),
+            CourseModel courseModel = new CourseModel(bCourse.getId(),
                     bCourse.getCourseYear(),
                     bCourse.getCfu(),
                     bCourse.getSession(),
                     bCourse.getLink(),
                     bCourse.getFaculty(),
-                    bCourse.getUniYear()));
+                    bCourse.getUniYear());
+            courseModel.setShortName(bCourse.getShortName());
+            courseModel.setFullName(bCourse.getFullName());
+
+            joinedCourses.add(0, courseModel);
 
             student.setCourses(joinedCourses);
 

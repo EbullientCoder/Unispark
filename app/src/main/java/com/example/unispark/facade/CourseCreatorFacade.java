@@ -36,7 +36,10 @@ public class CourseCreatorFacade {
         String facultyCourse = rs.getString("faculty");
         int uniYear = rs.getInt("uniyear");
 
-        return new CourseModel(courseId, shortName, fullName, courseYear, cfu, session, link, facultyCourse, uniYear);
+        CourseModel courseModel = new CourseModel(courseId, courseYear, cfu, session, link, facultyCourse, uniYear);
+        courseModel.setShortName(shortName);
+        courseModel.setFullName(fullName);
+        return courseModel;
     }
 
     public List<CourseModel> getAvaliableCourses(ResultSet rs, List<CourseModel> courses) throws SQLException {

@@ -25,8 +25,7 @@ public class JoinCourseView extends DialogFragment
         implements CoursesAdapter.OnCourseClickListener,
         CoursesAdapter.OnCourseBtnClickListener {
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
+
     //Courses
     private RecyclerView rvCourses;
     private CoursesAdapter coursesAdapter;
@@ -54,7 +53,8 @@ public class JoinCourseView extends DialogFragment
 
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_goback);
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

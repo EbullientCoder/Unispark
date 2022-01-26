@@ -26,10 +26,7 @@ public class UniversityHomeView extends AppCompatActivity implements
         UniCommunicationsAdapter.OnUniComClickListener,
         LessonAdapter.OnDelBtnClickListener {
 
-    //Menu
-    private ImageButton menuButton;
-    //Next Course
-    private ImageButton btnNextCourse;
+
     //Floating Button
     private FloatingActionButton btnAdd;
     private FloatingActionButton btnCommunication;
@@ -64,8 +61,9 @@ public class UniversityHomeView extends AppCompatActivity implements
 
 
         //Menu
-        this.menuButton = findViewById(R.id.btn_menu);
-        this.menuButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton menuButton;
+        menuButton = findViewById(R.id.btn_menu);
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Work in Progress", Toast.LENGTH_SHORT).show();
@@ -130,8 +128,9 @@ public class UniversityHomeView extends AppCompatActivity implements
         this.uniHomeGuiController.showSchedule();
 
         //Button: Next Course
-        this.btnNextCourse = findViewById(R.id.btn_course_next);
-        this.btnNextCourse.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnNextCourse;
+        btnNextCourse = findViewById(R.id.btn_course_next);
+        btnNextCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

@@ -25,10 +25,6 @@ import java.util.List;
 public class AddScheduleView extends DialogFragment {
 
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
-    //Add StudentScheduleGUIController Button
-    private Button btnAddSchedule;
     //Course Selector
     private AutoCompleteTextView autoCompleteTxtCourse;
     private ArrayAdapter adapterItemsCourse;
@@ -74,8 +70,9 @@ public class AddScheduleView extends DialogFragment {
 
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_schedule_goback);
-        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_schedule_goback);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -118,8 +115,9 @@ public class AddScheduleView extends DialogFragment {
 
 
         //Add StudentScheduleGUIController
-        this.btnAddSchedule = rootView.findViewById(R.id.btn_add_schedule_add);
-        this.btnAddSchedule.setOnClickListener(new View.OnClickListener() {
+        Button btnAddSchedule;
+        btnAddSchedule = rootView.findViewById(R.id.btn_add_schedule_add);
+        btnAddSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

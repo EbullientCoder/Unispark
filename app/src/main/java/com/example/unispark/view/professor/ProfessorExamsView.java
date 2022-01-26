@@ -25,15 +25,7 @@ import java.util.List;
 public class ProfessorExamsView extends AppCompatActivity
         implements ExamAdapter.OnViewExamClickListener{
 
-
-
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
-    //Menu ExamModel Page
-    private TextView examsTitle;
-    //Get Intent Extras
-    private Bundle extras;
-    //ExamModel
+    //Exams Page Menu
     private RecyclerView rvExams;
     private ExamAdapter examAdapter;
     //Floating Button
@@ -61,15 +53,16 @@ public class ProfessorExamsView extends AppCompatActivity
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.professor_bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.professor_exams);
+        bottomNavigationView.setSelectedItemId(R.id.professor_exams);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

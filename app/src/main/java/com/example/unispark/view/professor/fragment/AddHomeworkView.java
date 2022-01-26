@@ -36,19 +36,14 @@ import java.util.List;
 public class AddHomeworkView extends DialogFragment{
 
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
-    //Add Homework Button
-    private Button btnAddHomework;
+
     //Title
     private TextInputLayout txtTitle;
     //Instructions
     private TextInputLayout txtInstructions;
     //Date Picker
     private TextView txtDisplayDate;
-    private ImageButton btnSelectDate;
     private DatePickerDialog.OnDateSetListener dateListener;
-    private Calendar calendar;
 
     //Points
     private TextInputLayout txtPoints;
@@ -83,8 +78,9 @@ public class AddHomeworkView extends DialogFragment{
         this.adapterItems = new ArrayAdapter(this.getContext(), R.layout.item_container_item);
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
-        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_goback);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -109,7 +105,8 @@ public class AddHomeworkView extends DialogFragment{
         });
 
         //Date Picker
-        this.calendar = Calendar.getInstance();
+        Calendar calendar;
+        calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -118,8 +115,10 @@ public class AddHomeworkView extends DialogFragment{
         OffsetDateTime offset = OffsetDateTime.now();
         this.txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
 
-        this.btnSelectDate = rootView.findViewById(R.id.btn_select_date);
-        this.btnSelectDate.setOnClickListener(new View.OnClickListener() {
+
+        ImageButton btnSelectDate;
+        btnSelectDate = rootView.findViewById(R.id.btn_select_date);
+        btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 homeworkGuiController.showDateDialog(year, month, day);
@@ -146,8 +145,9 @@ public class AddHomeworkView extends DialogFragment{
         this.txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
 
         //Add Homework
-        this.btnAddHomework = rootView.findViewById(R.id.btn_add_homework_add);
-        this.btnAddHomework.setOnClickListener(new View.OnClickListener() {
+        Button btnAddHomework;
+        btnAddHomework = rootView.findViewById(R.id.btn_add_homework_add);
+        btnAddHomework.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = txtTitle.getEditText().getText().toString();

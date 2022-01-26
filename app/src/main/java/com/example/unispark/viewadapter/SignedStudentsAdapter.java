@@ -30,7 +30,6 @@ public class SignedStudentsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Methods
     public SignedStudentsAdapter(OnAddBtnClickListener onAddBtnClickListener){
-        this.items = items;
         this.onAddBtnClickListener = onAddBtnClickListener;
     }
 

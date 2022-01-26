@@ -25,13 +25,7 @@ public class StudentExamsView extends AppCompatActivity
 implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
-    //Menu
-    private ImageButton menuButton;
-    //Bottom Menu Elements
-    private BottomNavigationView bottomNavigationView;
-    //Menu ExamModel Page
-    private ImageButton btnPageRight;
-    private ImageButton btnPageLeft;
+
     //Exams List
     private TextView examsTitle;
     private RecyclerView rvExams;
@@ -53,15 +47,16 @@ implements ExamAdapter.OnBookExamClickListener,
 
 
         //Bottom Navigation Menu
-        this.bottomNavigationView = findViewById(R.id.bottomMenuView);
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = findViewById(R.id.bottomMenuView);
         //Remove Menu View's background
-        this.bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);
         //Remove Menu View's icons tint
-        this.bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         //Set StudentHomeGUIController button
-        this.bottomNavigationView.setSelectedItemId(R.id.exams);
+        bottomNavigationView.setSelectedItemId(R.id.exams);
         //Click Listener
-        this.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -83,8 +78,9 @@ implements ExamAdapter.OnBookExamClickListener,
         this.examsGuiController.showExams();
 
         //Right Click
-        this.btnPageRight = findViewById(R.id.btn_exams_next);
-        this.btnPageRight.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnPageRight;
+        btnPageRight = findViewById(R.id.btn_exams_next);
+        btnPageRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -92,8 +88,9 @@ implements ExamAdapter.OnBookExamClickListener,
             }
         });
         //Left Click
-        this.btnPageLeft = findViewById(R.id.btn_exams_previusly);
-        this.btnPageLeft.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnPageLeft;
+        btnPageLeft = findViewById(R.id.btn_exams_previusly);
+        btnPageLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

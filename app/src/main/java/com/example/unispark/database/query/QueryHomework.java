@@ -3,6 +3,7 @@ package com.example.unispark.database.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class QueryHomework {
     //Homework table
@@ -27,10 +28,10 @@ public class QueryHomework {
     }
 
 
-    public static void insertHomework(Statement stmt, String shortName, String courseName, String title, String expiration, String instructions,
+    public static void insertHomework(Statement stmt, List<String> name, String title, String expiration, String instructions,
                                       String points, int trackProfessor) throws SQLException {
         stmt.executeUpdate("INSERT INTO homework(shortname, coursename, title, expiration, instructions, points, trackprofessor) " +
-                "VALUES('" +shortName+ "', '" +courseName+ "', '" +title+ "', '" +expiration+ "', '" +instructions+ "', '" +points+ "', " +trackProfessor+ ")");
+                "VALUES('" +name.get(0)+ "', '" +name.get(1)+ "', '" +title+ "', '" +expiration+ "', '" +instructions+ "', '" +points+ "', " +trackProfessor+ ")");
     }
 
 }

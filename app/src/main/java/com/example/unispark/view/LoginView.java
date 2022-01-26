@@ -28,7 +28,7 @@ public class LoginView extends AppCompatActivity {
     private TextInputLayout txtEmail;
     private TextInputLayout txtPassword;
     //Login Button
-    private Button loginButton;
+
 
 
     //Gui Controller
@@ -65,8 +65,10 @@ public class LoginView extends AppCompatActivity {
             }
         });
 
-        this.loginButton = (Button) findViewById(R.id.btn_homework_detail_submit);
-        this.loginButton.setOnClickListener(new View.OnClickListener() {
+        Button loginButton;
+
+        loginButton = (Button) findViewById(R.id.btn_homework_detail_submit);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = txtEmail.getEditText().getText().toString();

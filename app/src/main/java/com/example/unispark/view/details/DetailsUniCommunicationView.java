@@ -15,9 +15,7 @@ import com.example.unispark.controller.guicontroller.details.DetailsUniCommunica
 
 public class DetailsUniCommunicationView extends AppCompatActivity {
     //Attributes
-    //Button: GoBack
-    private ImageButton btnGoBack;
-    //Get Intent Extras
+
     //Display Parameters
     private ImageView imgComBackground;
     private TextView txtTitle;
@@ -25,7 +23,7 @@ public class DetailsUniCommunicationView extends AppCompatActivity {
     private TextView txtCommunication;
 
     //Gui Controller
-    private DetailsUniCommunicationGuiController detailsGuiController;
+    DetailsUniCommunicationGuiController detailsGuiController;
 
 
     @Override
@@ -36,8 +34,9 @@ public class DetailsUniCommunicationView extends AppCompatActivity {
         this.detailsGuiController = new DetailsUniCommunicationGuiController(this, (BeanUniCommunication) getIntent().getExtras().getSerializable("Communication"));
 
         //GoBack Button
-        this.btnGoBack = findViewById(R.id.btn_detail_uni_goback);
-        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnGoBack;
+        btnGoBack = findViewById(R.id.btn_detail_uni_goback);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

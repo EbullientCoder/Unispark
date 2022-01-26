@@ -26,12 +26,6 @@ import java.util.List;
 public class AddUniCommunicationView extends DialogFragment {
 
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
-    //Add Communication Button
-    private Button btnAddCommunication;
-    //Add Photo Button
-    private ImageButton btnPhoto;
     //Title
     private TextInputLayout txtTitle;
     //Instructions
@@ -74,8 +68,9 @@ public class AddUniCommunicationView extends DialogFragment {
         this.adapterItems = new ArrayAdapter(getContext(), R.layout.item_container_item);
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
-        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_goback);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -85,8 +80,9 @@ public class AddUniCommunicationView extends DialogFragment {
 
 
         //Button: Add Photo
-        this.btnPhoto = rootView.findViewById(R.id.btn_add_uni_communication_photo);
-        this.btnPhoto.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnPhoto;
+        btnPhoto = rootView.findViewById(R.id.btn_add_uni_communication_photo);
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -120,8 +116,9 @@ public class AddUniCommunicationView extends DialogFragment {
         this.txtCommunication = rootView.findViewById(R.id.txt_add_uni_communication_communication);
 
         //Add Communication
-        this.btnAddCommunication = rootView.findViewById(R.id.btn_add_uni_communication_add);
-        this.btnAddCommunication.setOnClickListener(new View.OnClickListener() {
+        Button btnAddCommunication;
+        btnAddCommunication = rootView.findViewById(R.id.btn_add_uni_communication_add);
+        btnAddCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 title = txtTitle.getEditText().getText().toString();

@@ -34,7 +34,6 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public LessonAdapter(OnDelBtnClickListener onDelBtnClickListener, String type) {
-        this.lessonItem = lessonItem;
         this.onDelBtnClickListener = onDelBtnClickListener;
         this.type = type;
     }

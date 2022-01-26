@@ -27,10 +27,6 @@ import java.util.List;
 public class AddProfCommunicationView extends DialogFragment{
 
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
-    //Add Communication Button
-    private Button btnAddCommunication;
     //Title
     private TextInputLayout txtType;
     //Instructions
@@ -62,8 +58,9 @@ public class AddProfCommunicationView extends DialogFragment{
         this.adapterItems = new ArrayAdapter(this.getContext(), R.layout.item_container_item);
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
-        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_goback);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -102,8 +99,9 @@ public class AddProfCommunicationView extends DialogFragment{
 
 
         //Add Communication
-        this.btnAddCommunication = rootView.findViewById(R.id.btn_add_communciation_add);
-        this.btnAddCommunication.setOnClickListener(new View.OnClickListener() {
+        Button btnAddCommunication;
+        btnAddCommunication = rootView.findViewById(R.id.btn_add_communciation_add);
+        btnAddCommunication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String type = txtType.getEditText().getText().toString();

@@ -14,10 +14,6 @@ import com.example.unispark.controller.guicontroller.details.DetailsProfessorGui
 
 public class DetailsProfessorView extends AppCompatActivity {
     //Attributes
-    //Button: GoBack
-    private ImageView btnGoBack;
-    //Get Intent Extras
-    private Bundle extras;
     //Set Interface Text
     private ImageView imgProfImage;
     private TextView txtProfName;
@@ -40,8 +36,9 @@ public class DetailsProfessorView extends AppCompatActivity {
         this.professorDetailsGuiController = new DetailsProfessorGuiController(this, (BeanProfessorDetails) getIntent().getExtras().getSerializable("Professor"));
 
         //GoBack Button
-        this.btnGoBack = findViewById(R.id.btn_detail_professor_goback);
-        this.btnGoBack.setOnClickListener(new View.OnClickListener() {
+        ImageView btnGoBack;
+        btnGoBack = findViewById(R.id.btn_detail_professor_goback);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

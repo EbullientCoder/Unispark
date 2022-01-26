@@ -99,8 +99,11 @@ public class HomeworkDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            QueryHomework.insertHomework(statement, homework.getShortName(), homework.getFullName(),
-                    homework.getTitle(), homework.getExpiration(), homework.getInstructions(), homework.getPoints(), homework.getTrackProfessor());
+            List<String> name = new ArrayList<>();
+            name.add(homework.getShortName());
+            name.add(homework.getFullName());
+
+            QueryHomework.insertHomework(statement, name, homework.getTitle(), homework.getExpiration(), homework.getInstructions(), homework.getPoints(), homework.getTrackProfessor());
 
         } finally {
             if (statement != null){

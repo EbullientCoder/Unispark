@@ -34,19 +34,13 @@ import java.util.List;
 public class AddExamView extends DialogFragment{
 
 
-    //Dismiss Button
-    private ImageButton btnDismiss;
-    //Btn Add Exam
-    private Button btnAddExam;
     //Course Selector
     private AutoCompleteTextView autoCompleteTxt;
     private ArrayAdapter adapterItems;
 
     //Date Picker
     private TextView txtDisplayDate;
-    private ImageButton btnSelectDate;
     private DatePickerDialog.OnDateSetListener dateListener;
-    private Calendar calendar;
     //Hour
     private TextInputLayout txtHour;
 
@@ -83,8 +77,9 @@ public class AddExamView extends DialogFragment{
         this.adapterItems = new ArrayAdapter(this.getContext(), R.layout.item_container_item);
 
         //Dismiss Button
-        this.btnDismiss = rootView.findViewById(R.id.btn_goback);
-        this.btnDismiss.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnDismiss;
+        btnDismiss = rootView.findViewById(R.id.btn_goback);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -93,7 +88,8 @@ public class AddExamView extends DialogFragment{
 
 
         //Date Picker
-        this.calendar = Calendar.getInstance();
+        Calendar calendar;
+        calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -117,7 +113,8 @@ public class AddExamView extends DialogFragment{
         OffsetDateTime offset = OffsetDateTime.now();
         this.txtDisplayDate.setText(offset.getDayOfMonth() + "/" + offset.getMonthValue() + "/" + offset.getYear());
 
-        this.btnSelectDate = rootView.findViewById(R.id.btn_add_exam_select_date);
+        ImageButton btnSelectDate;
+        btnSelectDate = rootView.findViewById(R.id.btn_add_exam_select_date);
 
 
         this.dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -147,8 +144,9 @@ public class AddExamView extends DialogFragment{
         this.txtClassroom = rootView.findViewById(R.id.txt_add_exam_classroom);
 
         //Add Exam
-        this.btnAddExam = rootView.findViewById(R.id.btn_add_exam_add);
-        this.btnAddExam.setOnClickListener(new View.OnClickListener() {
+        Button btnAddExam;
+        btnAddExam = rootView.findViewById(R.id.btn_add_exam_add);
+        btnAddExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
