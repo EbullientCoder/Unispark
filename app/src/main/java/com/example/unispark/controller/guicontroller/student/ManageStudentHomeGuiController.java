@@ -64,7 +64,7 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
     }
 
     public void showDetailsUniCommunication(int position){
-        Intent intent = new Intent(this.studentHomeView, DetailsUniCommunicationView.class);
+        Intent intent = new Intent(this.getStudentHomeView(), DetailsUniCommunicationView.class);
         //Pass Items to the new Activity
         BeanUniCommunication beanUniCommunication = this.beanUniCommunications.get(position);
         intent.putExtra("Communication", beanUniCommunication);
@@ -75,7 +75,7 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
 
 
     public void showDetailsProfCommunication(int position){
-        Intent intent = new Intent(this.studentHomeView, DetailsProfCommunicationView.class);
+        Intent intent = new Intent(this.getStudentHomeView(), DetailsProfCommunicationView.class);
         //Pass Items to the new Activity
         BeanProfessorCommunication beanProfessorCommunication = this.beanProfessorCommunications.get(position);
         intent.putExtra("Communication", beanProfessorCommunication);

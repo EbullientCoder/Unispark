@@ -41,7 +41,7 @@ public class ProfBaseGuiController extends UserBaseGuiController {
                 break;
             default: break;
         }
-        intent.putExtra("session", this.session);
+        intent.putExtra("session", this.getSession());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         contextView.startActivity(intent);
     }

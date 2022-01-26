@@ -80,7 +80,7 @@ public class AddScheduleGuiController extends UserBaseGuiController {
                 //App Controller: GetScheduleUniversity
                 //Sorting the Lessons
                 GetScheduleUniversity getScheduleUniversity =  new GetScheduleUniversity();
-                getScheduleUniversity.lessonsSort(this.beanLessons);
+                getScheduleUniversity.lessonsSort(this.getBeanLessons());
 
                 this.addScheduleView.dismiss();
             } catch (GenericException genericException) {
@@ -97,7 +97,9 @@ public class AddScheduleGuiController extends UserBaseGuiController {
     }
 
 
-
+    public List<BeanLesson> getBeanLessons() {
+        return beanLessons;
+    }
 
     public String[] getDaysOfLesson() {
         return daysOfLesson;

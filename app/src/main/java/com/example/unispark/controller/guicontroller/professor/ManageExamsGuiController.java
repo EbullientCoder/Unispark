@@ -85,19 +85,19 @@ public class ManageExamsGuiController extends ProfBaseGuiController {
     }
 
     public void showAddExam(){
-        AddExamView fragment = new AddExamView(this.session);
+        AddExamView fragment = new AddExamView(this.getSession());
         fragment.show(this.examsView.getSupportFragmentManager(), "AddExam");
     }
 
     public void showAddHomework(){
 
-        AddHomeworkView fragment= new AddHomeworkView(this.session, null, null);
+        AddHomeworkView fragment= new AddHomeworkView(this.getSession(), null, null);
         fragment.show(this.examsView.getSupportFragmentManager(), "AddHomework");
     }
 
 
     public void showAddCommunication(){
-        AddProfCommunicationView fragment = new AddProfCommunicationView(this.session);
+        AddProfCommunicationView fragment = new AddProfCommunicationView(this.getSession());
         fragment.show(this.examsView.getSupportFragmentManager(), "AddCommunication");
     }
 

@@ -15,7 +15,7 @@ public class DetailsGuiController {
     }
 
     public void goToLink(){
-        Uri uri = Uri.parse(this.link);
+        Uri uri = Uri.parse(this.getLink());
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.view.startActivity(intent);
@@ -25,4 +25,7 @@ public class DetailsGuiController {
         this.link = link;
     }
 
+    public String getLink() {
+        return link;
+    }
 }

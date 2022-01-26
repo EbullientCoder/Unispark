@@ -43,7 +43,7 @@ public class SplashScreenGuiController {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         new Handler().postDelayed(() -> {
-            Intent i = new Intent(this.splashScreenView, LoginView.class);
+            Intent i = new Intent(this.getSplashScreenView(), LoginView.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.putExtra("session", new Session());
             this.splashScreenView.startActivity(i);
@@ -53,4 +53,7 @@ public class SplashScreenGuiController {
 
     }
 
+    public SplashScreenView getSplashScreenView() {
+        return splashScreenView;
+    }
 }

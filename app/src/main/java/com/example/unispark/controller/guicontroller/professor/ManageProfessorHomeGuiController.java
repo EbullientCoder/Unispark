@@ -112,7 +112,7 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
 
 
     public void showAddExam(){
-        AddExamView fragment = new AddExamView(this.session);
+        AddExamView fragment = new AddExamView(this.getSession());
         fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddExam");
     }
 
