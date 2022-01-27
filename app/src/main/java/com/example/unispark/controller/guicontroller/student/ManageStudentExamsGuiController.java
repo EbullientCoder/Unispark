@@ -73,7 +73,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             //Set Title
             this.examsView.setExamsTitle("BOOK UPCOMING EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.bookExams(student);
+            this.beanExams = studentExamsAppController.showBookExams(student);
 
 
         }
@@ -81,7 +81,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             //Set Title
             this.examsView.setExamsTitle("BOOKED EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.bookedExams(student);
+            this.beanExams = studentExamsAppController.showBookedExams(student);
         }
 
         this.examsView.setExamAdapter(this.getBeanExams());

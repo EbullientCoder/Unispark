@@ -84,7 +84,7 @@ public class ManageStudentExams extends ManageExams{
 
 
     //Page: Upcoming StudentExamsGUIController
-    public List<BeanExamType> bookExams(BeanLoggedStudent student){
+    public List<BeanExamType> showBookExams(BeanLoggedStudent student){
         List<BookExamModel> bookExams = null;
 
         try{
@@ -101,7 +101,7 @@ public class ManageStudentExams extends ManageExams{
 
 
     //Page: Booked StudentExamsGUIController
-    public List<BeanExamType> bookedExams(BeanLoggedStudent student){
+    public List<BeanExamType> showBookedExams(BeanLoggedStudent student){
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
         try{
