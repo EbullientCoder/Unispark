@@ -5,6 +5,7 @@ import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.student.BeanLoggedStudent;
+import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
 import com.example.unispark.controller.applicationcontroller.exams.ManageStudentExams;
 import com.example.unispark.exceptions.ExamAlreadyVerbalized;
@@ -70,10 +71,11 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             this.beanExams = studentExamsAppController.failedExams(student);
         }
         if(page == 2 || page == -2) {
+            BookExam bookExamController = new BookExam();
             //Set Title
             this.examsView.setExamsTitle("BOOK UPCOMING EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.showBookExams(student);
+            this.beanExams = bookExamController.showBookExams(student);
 
 
         }
@@ -93,10 +95,10 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
     public void bookExam(int position){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
-        ManageStudentExams bookExamAppController = new ManageStudentExams();
+        BookExam bookExamController = new BookExam();
 
         try {
-            bookExamAppController.bookExam(student, (BeanBookExam) this.beanExams.get(position).getExamType());
+            bookExamController.bookExam(student, (BeanBookExam) this.beanExams.get(position).getExamType());
             this.examsView.setMessage("Exam booked");
 
             //Removing the Booked Exam from the List
