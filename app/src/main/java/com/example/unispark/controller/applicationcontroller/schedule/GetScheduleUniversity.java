@@ -20,7 +20,7 @@ public class GetScheduleUniversity {
 
             List<CourseModel> courses = new ArrayList<>();
             for (int i = 0; i < bCourses.size(); i++){
-                CourseModel courseModel = new CourseModel(bCourses.get(i).getId(),
+                CourseModel courseModel = new CourseModel(Integer.parseInt(bCourses.get(i).getId()),
                         bCourses.get(i).getCourseYear(),
                         bCourses.get(i).getCfu(),
                         bCourses.get(i).getSession(),

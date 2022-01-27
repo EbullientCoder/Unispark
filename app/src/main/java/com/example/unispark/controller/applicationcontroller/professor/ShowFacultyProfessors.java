@@ -50,7 +50,7 @@ public class ShowFacultyProfessors {
         course.setCourseYear(courseModel.getCourseYear());
         course.setCfu(courseModel.getCfu());
         course.setFaculty(courseModel.getFaculty());
-        course.setId(courseModel.getId());
+        course.setId(String.valueOf(courseModel.getId()));
         course.setLink(courseModel.getLink());
         course.setSession(courseModel.getSession());
         course.setUniYear(courseModel.getUniYear());

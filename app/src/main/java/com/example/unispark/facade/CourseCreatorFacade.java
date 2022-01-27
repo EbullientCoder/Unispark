@@ -25,7 +25,7 @@ public class CourseCreatorFacade {
     }
 
     public CourseModel createCourse(ResultSet rs) throws SQLException {
-        String courseId = String.valueOf(rs.getInt("trackprofessor"));
+        int courseId = rs.getInt("trackprofessor");
         String shortName = rs.getString("shortname");
         String fullName = rs.getString("coursename");
         String courseYear = rs.getString("year");

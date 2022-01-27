@@ -42,7 +42,7 @@ public class ManageCourses {
             CourseDAO.joinCourse(student.getId(), bCourse.getFullName());
             //Add Course to the Student's Joined Courses
             List<CourseModel> joinedCourses = student.getCourses();
-            CourseModel courseModel = new CourseModel(bCourse.getId(),
+            CourseModel courseModel = new CourseModel(Integer.parseInt(bCourse.getId()),
                     bCourse.getCourseYear(),
                     bCourse.getCfu(),
                     bCourse.getSession(),
@@ -177,7 +177,7 @@ public class ManageCourses {
         beanCourse.setCourseYear(course.getCourseYear());
         beanCourse.setCfu(course.getCfu());
         beanCourse.setFaculty(course.getFaculty());
-        beanCourse.setId(course.getId());
+        beanCourse.setId(String.valueOf(course.getId()));
         beanCourse.setLink(course.getLink());
         beanCourse.setSession(course.getSession());
         beanCourse.setUniYear(course.getUniYear());
