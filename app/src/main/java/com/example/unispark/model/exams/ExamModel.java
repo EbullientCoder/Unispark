@@ -2,7 +2,7 @@ package com.example.unispark.model.exams;
 
 import java.io.Serializable;
 
-public class ExamModel implements Serializable {
+public class ExamModel {
 
     //Attributes
     private int id;

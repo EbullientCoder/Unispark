@@ -1,8 +1,7 @@
 package com.example.unispark.model;
 
-import java.io.Serializable;
 
-public class CourseModel implements Serializable {
+public class CourseModel {
     //Attributes
     private String id;
     private String shortName;

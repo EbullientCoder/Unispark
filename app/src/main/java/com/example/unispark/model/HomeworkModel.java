@@ -1,8 +1,7 @@
 package com.example.unispark.model;
 
-import java.io.Serializable;
 
-public class HomeworkModel implements Serializable {
+public class HomeworkModel {
     //Attributes
     private String shortName;
     private String fullName;
