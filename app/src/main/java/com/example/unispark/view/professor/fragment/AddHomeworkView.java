@@ -35,8 +35,6 @@ import java.util.List;
 
 public class AddHomeworkView extends DialogFragment{
 
-
-
     //Title
     private TextInputLayout txtTitle;
     //Instructions
@@ -44,24 +42,22 @@ public class AddHomeworkView extends DialogFragment{
     //Date Picker
     private TextView txtDisplayDate;
     private DatePickerDialog.OnDateSetListener dateListener;
-
     //Points
     private TextInputLayout txtPoints;
     //Course Selector
     private AutoCompleteTextView autoCompleteTxt;
     private ArrayAdapter adapterItems;
 
+
+    //Homeworks
     private HomeworksAdapter homeworksAdapter;
-
-
-    //Gui Controller
     private AddHomeworkGuiController homeworkGuiController;
 
     String date = "";
     String courseSelection = "";
 
 
-
+    //Constructor
     public AddHomeworkView(Session session, List<BeanHomework> bHomeworkList, HomeworksAdapter homeworksAdapter) {
         //Getting Professor Object
         this.homeworksAdapter = homeworksAdapter;
@@ -90,11 +86,11 @@ public class AddHomeworkView extends DialogFragment{
 
 
         //DropDown Selector
-        this.autoCompleteTxt = rootView.findViewById(R.id.select_course);
+        autoCompleteTxt = rootView.findViewById(R.id.select_course);
         //Gui controller
-        this.homeworkGuiController.coursesNamesSelector();
+        homeworkGuiController.coursesNamesSelector();
 
-        this.autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 courseSelection = (String)parent.getItemAtPosition(position);
@@ -111,9 +107,9 @@ public class AddHomeworkView extends DialogFragment{
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        this.txtDisplayDate = rootView.findViewById(R.id.txt_selected_date);
+        txtDisplayDate = rootView.findViewById(R.id.txt_selected_date);
         OffsetDateTime offset = OffsetDateTime.now();
-        this.txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
+        txtDisplayDate.setText(offset.getDayOfMonth() + " / " + offset.getMonthValue() + " / " + offset.getYear());
 
 
         ImageButton btnSelectDate;
@@ -124,7 +120,7 @@ public class AddHomeworkView extends DialogFragment{
                 homeworkGuiController.showDateDialog(year, month, day);
             }
         });
-        this.dateListener = new DatePickerDialog.OnDateSetListener() {
+        dateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
@@ -138,11 +134,11 @@ public class AddHomeworkView extends DialogFragment{
 
 
         //Title
-        this.txtTitle = rootView.findViewById(R.id.txt_add_homework_title);
+        txtTitle = rootView.findViewById(R.id.txt_add_homework_title);
         //Instructions
-        this.txtInstructions = rootView.findViewById(R.id.txt_add_homework_instructions);
+        txtInstructions = rootView.findViewById(R.id.txt_add_homework_instructions);
         //Points
-        this.txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
+        txtPoints = rootView.findViewById(R.id.txt_add_homework_points);
 
         //Add Homework
         Button btnAddHomework;
@@ -165,28 +161,24 @@ public class AddHomeworkView extends DialogFragment{
 
 
 
-
-    public ArrayAdapter<String> getAdapterItems() {
-        return adapterItems;
-    }
-
-
+    //Gui Controller Methods
     public void setAdapterItems(List<String> coursesNames) {
-        this.adapterItems.addAll(coursesNames);
-        this.autoCompleteTxt.setAdapter(this.getAdapterItems());
+        adapterItems.addAll(coursesNames);
+        autoCompleteTxt.setAdapter(adapterItems);
     }
 
     public void setMessage(String message){
         Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-
+    //Homeworks Adapter from the HomeView
     public HomeworksAdapter getHomeworksAdapter() {
         return homeworksAdapter;
     }
 
+    //Method to notify the adapter about the added bean
     public void notifyDataChanged(){
-        this.homeworksAdapter.notifyDataSetChanged();
+        homeworksAdapter.notifyDataSetChanged();
     }
 
 

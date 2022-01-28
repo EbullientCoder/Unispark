@@ -26,39 +26,39 @@ public class AddItemGuiController extends ProfBaseGuiController{
     public AddItemGuiController(Session session, AddExamView addExamView, AddHomeworkView addHomeworkView, AddProfCommunicationView addProfCommunicationView) {
         super(session, null);
         if (addExamView != null){
-            this.setView(addExamView.getContext());
+            setView(addExamView.getContext());
             this.addExamView = addExamView;
         }
         if (addHomeworkView != null){
-            this.setView(addHomeworkView.getContext());
+            setView(addHomeworkView.getContext());
             this.addHomeworkView = addHomeworkView;
         }
         if (addProfCommunicationView != null){
-            this.setView(addProfCommunicationView.getContext());
+            setView(addProfCommunicationView.getContext());
             this.addProfCommunicationView = addProfCommunicationView;
         }
     }
 
 
     public List<BeanCourse> getCourses(BeanLoggedProfessor professor){
-
         ManageCourses getCoursesController = new ManageCourses();
+
         return getCoursesController.getCourses(professor);
     }
 
     public void coursesNamesSelector(){
-        BeanLoggedProfessor professor = (BeanLoggedProfessor) this.session.getUser();
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) session.getUser();
         List<String> coursesNames;
         ManageCourses coursesGuiController = new ManageCourses();
         coursesNames = coursesGuiController.getCoursesNames(professor);
         if (addExamView != null){
-            this.addExamView.setAdapterItems(coursesNames);
+            addExamView.setAdapterItems(coursesNames);
         }
         if (addHomeworkView != null){
-            this.addHomeworkView.setAdapterItems(coursesNames);
+            addHomeworkView.setAdapterItems(coursesNames);
         }
         if (addProfCommunicationView != null){
-            this.addProfCommunicationView.setAdapterItems(coursesNames);
+            addProfCommunicationView.setAdapterItems(coursesNames);
         }
 
     }
@@ -68,18 +68,18 @@ public class AddItemGuiController extends ProfBaseGuiController{
         DatePickerDialog datePickerDialog = null;
         if (addExamView != null){
             datePickerDialog = new DatePickerDialog(
-                    this.addExamView.getContext(),
+                    addExamView.getContext(),
                     android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                    this.addExamView.getDateListener(),
+                    addExamView.getDateListener(),
                     year,
                     month,
                     day);
         }
         if (addHomeworkView != null){
             datePickerDialog = new DatePickerDialog(
-                    this.addHomeworkView.getContext(),
+                    addHomeworkView.getContext(),
                     android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                    this.addHomeworkView.getDateListener(),
+                    addHomeworkView.getDateListener(),
                     year,
                     month,
                     day);

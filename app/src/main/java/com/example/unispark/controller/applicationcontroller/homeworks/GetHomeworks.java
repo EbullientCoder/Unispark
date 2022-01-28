@@ -8,13 +8,13 @@ import com.example.unispark.model.HomeworkModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ShowHomeworks{
-    //Student
+public class GetHomeworks {
+
+    //Student: Needs a DB connection to get the Homeworks at every refresh of the HomePage
     public List<BeanHomework> getHomework(BeanLoggedStudent student) {
-
-
         List<HomeworkModel> homeworksItem = null;
         try {
             homeworksItem = HomeworkDAO.getStudentHomework(student.getId());
@@ -22,23 +22,21 @@ public class ShowHomeworks{
             throwables.printStackTrace();
         }
 
-        return this.listBeanHomeworks(homeworksItem);
-
+        return listBeanHomeworks(homeworksItem);
     }
 
-    //Professor
+    //Professor: Doesn't need a DB connection to get the Homeworks
     public List<BeanHomework> getHomework(BeanLoggedProfessor professor){
-
         List<HomeworkModel> homeworksItem;
         homeworksItem = professor.getHomeworks();
 
-        return this.listBeanHomeworks(homeworksItem);
-
+        return listBeanHomeworks(homeworksItem);
     }
 
-
+    //Create a BeanHomeworkList from the ModelHomeworkList
     private List<BeanHomework> listBeanHomeworks(List<HomeworkModel> homeworksItem){
         List<BeanHomework> beanHomeworkList = new ArrayList<>();
+
         for (int i = 0; i < homeworksItem.size(); i++){
             BeanHomework beanHomework;
             beanHomework = new BeanHomework();
@@ -51,6 +49,7 @@ public class ShowHomeworks{
             beanHomework.setTrackProfessor(homeworksItem.get(i).getTrackProfessor());
             beanHomeworkList.add(beanHomework);
         }
+        Collections.reverse(beanHomeworkList);
 
         return beanHomeworkList;
     }

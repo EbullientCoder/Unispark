@@ -8,13 +8,14 @@ import com.example.unispark.bean.communications.BeanProfessorCommunication;
 import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
-import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
+import com.example.unispark.controller.applicationcontroller.homeworks.GetHomeworks;
 import com.example.unispark.view.details.DetailsHomeworkView;
 import com.example.unispark.view.details.DetailsProfCommunicationView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 import com.example.unispark.view.student.StudentHomeView;
 
 
+import java.util.Collections;
 import java.util.List;
 
 public class ManageStudentHomeGuiController extends StudentBaseGuiController {
@@ -57,8 +58,10 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
 
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Applicative Controller
-        ShowHomeworks showHomeworksController = new ShowHomeworks();
+        GetHomeworks showHomeworksController = new GetHomeworks();
         this.beanHomeworks = showHomeworksController.getHomework(student);
+        Collections.reverse(this.beanHomeworks);
+
         this.studentHomeView.setHomeworksAdapter(this.getBeanHomeworks());
 
     }

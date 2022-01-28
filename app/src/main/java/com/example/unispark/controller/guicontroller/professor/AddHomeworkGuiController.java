@@ -31,8 +31,10 @@ public class AddHomeworkGuiController extends AddItemGuiController{
     public void addHomework(String courseSelection, String title,
                             String instructions, String points, String date){
 
-        BeanLoggedProfessor professor  = (BeanLoggedProfessor) this.session.getUser();
-        BeanCourse beanCourse = this.getCourses(professor).get(this.getCoursePosition());
+        //Get the LoggedProfessor from the Session
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) session.getUser();
+        BeanCourse beanCourse = getCourses(professor).get(getCoursePosition());
+
         //Homework Object
         BeanHomework bHomework;
         bHomework = new BeanHomework();
@@ -40,27 +42,31 @@ public class AddHomeworkGuiController extends AddItemGuiController{
         bHomework.setFullName(beanCourse.getFullName());
         bHomework.setShortName(beanCourse.getShortName());
 
-        //Syntactic Error check
-        if (courseSelection.equals("") || !bHomework.setPoints(points) || !bHomework.setInstructions(instructions) || !bHomework.setExpiration(date) || !bHomework.setTitle(title)){
+        //Syntactic Error check through the BeanHomework private methods
+        if (courseSelection.equals("") ||
+                !bHomework.setPoints(points) ||
+                !bHomework.setInstructions(instructions) ||
+                !bHomework.setExpiration(date) ||
+                !bHomework.setTitle(title)){
 
-            this.addHomeworkView.setMessage("All fields are required");
+            addHomeworkView.setMessage("All fields are required");
         }
         else{
             //Application Controller
             AddHomework addHomeworkAppController = new AddHomework();
             try {
                 addHomeworkAppController.addHomework(bHomework, professor);
-                this.addHomeworkView.setMessage("Homework added");
+                addHomeworkView.setMessage("Homework added");
 
                 //Notify the Homework Adapter
-                if(this.beanHomeworks != null && this.addHomeworkView.getHomeworksAdapter() != null){
-                    this.beanHomeworks.add(0, bHomework);
-                    this.addHomeworkView.notifyDataChanged();
+                if(beanHomeworks != null && addHomeworkView.getHomeworksAdapter() != null){
+                    beanHomeworks.add(0, bHomework);
+                    addHomeworkView.notifyDataChanged();
                 }
-                this.addHomeworkView.dismiss();
+                addHomeworkView.dismiss();
             } catch (GenericException e) {
                 e.printStackTrace();
-                this.addHomeworkView.setMessage(e.getMessage());
+                addHomeworkView.setMessage(e.getMessage());
             }
         }
     }

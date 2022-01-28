@@ -16,13 +16,13 @@ import com.example.unispark.view.professor.fragment.AddProfCommunicationView;
 
 import java.util.List;
 
-public class ManageProfileGuiController extends ProfBaseGuiController {
+public class ManageProfessorProfileGuiController extends ProfBaseGuiController {
 
 
     private ProfessorProfileView profileView;
 
 
-    public ManageProfileGuiController(Session session, ProfessorProfileView profileView) {
+    public ManageProfessorProfileGuiController(Session session, ProfessorProfileView profileView) {
         super(session, profileView);
         this.profileView = profileView;
     }
@@ -112,19 +112,19 @@ public class ManageProfileGuiController extends ProfBaseGuiController {
 
 
     public void showAddExam(){
-        AddExamView fragment = new AddExamView(this.getSession());
+        AddExamView fragment = new AddExamView(session);
         fragment.show(this.profileView.getSupportFragmentManager(), "AddExam");
     }
 
     public void showAddHomework(){
 
-        AddHomeworkView fragment= new AddHomeworkView(this.getSession(), null, null);
+        AddHomeworkView fragment= new AddHomeworkView(session, null, null);
         fragment.show(this.profileView.getSupportFragmentManager(), "AddHomework");
     }
 
 
     public void showAddCommunication(){
-        AddProfCommunicationView fragment= new AddProfCommunicationView(this.getSession());
+        AddProfCommunicationView fragment= new AddProfCommunicationView(session);
         fragment.show(this.profileView.getSupportFragmentManager(), "AddCommunication");
     }
 

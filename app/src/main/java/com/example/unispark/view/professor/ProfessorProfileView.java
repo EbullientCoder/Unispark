@@ -9,16 +9,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.Session;
-import com.example.unispark.controller.guicontroller.professor.ManageProfileGuiController;
+import com.example.unispark.controller.guicontroller.professor.ManageProfessorProfileGuiController;
 import com.example.unispark.viewadapter.CoursesAdapter;
 import com.example.unispark.bean.courses.BeanCourse;
-import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,7 +47,7 @@ public class ProfessorProfileView extends AppCompatActivity
 
 
     //Gui Controller
-    private ManageProfileGuiController profileGuiController;
+    private ManageProfessorProfileGuiController profileGuiController;
 
 
     //Methods
@@ -58,7 +56,7 @@ public class ProfessorProfileView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_profile);
 
-        this.profileGuiController = new ManageProfileGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.profileGuiController = new ManageProfessorProfileGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
         this.coursesAdapter = new CoursesAdapter(this, "PROFESSOR");
 
 

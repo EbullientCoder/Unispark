@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanExamType;
-import com.example.unispark.controller.guicontroller.professor.ManageExamsGuiController;
+import com.example.unispark.controller.guicontroller.professor.ManageProfessorExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +41,7 @@ public class ProfessorExamsView extends AppCompatActivity
 
 
     //Gui Controller
-    private ManageExamsGuiController examsGuiController;
+    private ManageProfessorExamsGuiController examsGuiController;
 
 
     @Override
@@ -49,7 +49,7 @@ public class ProfessorExamsView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_exams);
 
-        this.examsGuiController = new ManageExamsGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.examsGuiController = new ManageProfessorExamsGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
         this.examAdapter = new ExamAdapter(this);
 
 

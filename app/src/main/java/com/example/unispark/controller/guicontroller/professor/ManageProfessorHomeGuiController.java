@@ -9,7 +9,7 @@ import com.example.unispark.bean.BeanHomework;
 import com.example.unispark.bean.communications.BeanUniCommunication;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.communications.ShowCommunications;
-import com.example.unispark.controller.applicationcontroller.homeworks.ShowHomeworks;
+import com.example.unispark.controller.applicationcontroller.homeworks.GetHomeworks;
 import com.example.unispark.view.details.DetailsHomeworkView;
 import com.example.unispark.view.details.DetailsUniCommunicationView;
 import com.example.unispark.view.professor.ProfessorHomeView;
@@ -22,121 +22,118 @@ import java.util.List;
 
 public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
 
-
+    //Attributes
     private ProfessorHomeView professorHomeView;
-    private List<BeanHomework> beanHomeworks;
-    private List<BeanUniCommunication> beanUniCommunications;
+    List<BeanHomework> beanHomeworks;
+    List<BeanUniCommunication> beanUniCommunications;
 
+    //Constructor
     public ManageProfessorHomeGuiController(Session session, ProfessorHomeView professorHomeView) {
         super(session, professorHomeView);
-        this.professorHomeView= professorHomeView;
-        this.setOpen(false);
+
+        this.professorHomeView = professorHomeView;
+        setOpen(false);
     }
 
-
+    //Show University Communications
     public void showUniCommunications(){
-        BeanLoggedProfessor professor = (BeanLoggedProfessor) this.session.getUser();
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) session.getUser();
+
         //Application Controller
         ShowCommunications uniCommunicationsAppController = new ShowCommunications();
         this.beanUniCommunications = uniCommunicationsAppController.showUniversityCommunications(professor);
-        this.professorHomeView.setUniCommunicationsAdapter(this.getBeanUniCommunications());
-
+        professorHomeView.setUniCommunicationsAdapter(beanUniCommunications);
 
     }
 
+    //Show Homeworks
     public void showHomeworks(){
-        BeanLoggedProfessor professor = (BeanLoggedProfessor) this.session.getUser();
-        ShowHomeworks homeworksAppController = new ShowHomeworks();
+        BeanLoggedProfessor professor = (BeanLoggedProfessor) session.getUser();
+
+        //Application Controller
+        GetHomeworks homeworksAppController = new GetHomeworks();
         this.beanHomeworks = homeworksAppController.getHomework(professor);
-        this.professorHomeView.setHomeworkAdapter(this.getBeanHomeworks());
+        professorHomeView.setHomeworkAdapter(beanHomeworks);
 
     }
 
+    //Click on a University Communication
     public void showDetailsCommunication(int position){
-        Intent intent = new Intent(this.getProfessorHomeView(), DetailsUniCommunicationView.class);
+        Intent intent = new Intent(professorHomeView, DetailsUniCommunicationView.class);
+
         //Pass Items to the new Activity
-        intent.putExtra("Communication", this.getBeanUniCommunications().get(position));
+        intent.putExtra("Communication", beanUniCommunications.get(position));
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        this.getProfessorHomeView().startActivity(intent);
+        professorHomeView.startActivity(intent);
     }
 
-
+    //Click on a Homework: Called by the interface "OnBtnCLick"
     public void showHomeworkDetails(int position){
+        Intent intent = new Intent(professorHomeView, DetailsHomeworkView.class);
 
-        Intent intent = new Intent(this.getProfessorHomeView(), DetailsHomeworkView.class);
         //Pass Items to the new Activity
-        intent.putExtra("Homework", this.getBeanHomeworks().get(position));
+        intent.putExtra("Homework", beanHomeworks.get(position));
         intent.putExtra("HomeView", "ProfessorHome");
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-        this.getProfessorHomeView().startActivity(intent);
+        professorHomeView.startActivity(intent);
     }
 
 
-    //Open Button
+    //Open Button: Add Item
     public void expandButton(){
-        if(!this.isOpen()){
+        if(!isOpen()){
             //Show Buttons
-            this.professorHomeView.setBtnExam();
-            this.professorHomeView.setBtnCommunication();
-            this.professorHomeView.setBtnHomework();
+            professorHomeView.setBtnExam();
+            professorHomeView.setBtnCommunication();
+            professorHomeView.setBtnHomework();
 
             //Expand Floating Button
-            this.professorHomeView.setTxtExam();
-            this.professorHomeView.setTxtCommunication();
-            this.professorHomeView.setTxtHomework();
+            professorHomeView.setTxtExam();
+            professorHomeView.setTxtCommunication();
+            professorHomeView.setTxtHomework();
 
             //Rotate
-            this.professorHomeView.setBtnAdd();
+            professorHomeView.setBtnAdd();
 
             //Opened
-            this.setOpen(true);
+            setOpen(true);
         }
         else{
             //Hide Buttons
-            this.professorHomeView.unsSetBtnExam();
-            this.professorHomeView.unSetBtnCommunication();
-            this.professorHomeView.unSetBtnHomework();
+            professorHomeView.unsSetBtnExam();
+            professorHomeView.unSetBtnCommunication();
+            professorHomeView.unSetBtnHomework();
 
             //Expand Floating Button
-            this.professorHomeView.unSetTxtExam();
-            this.professorHomeView.unSetTxtCommunication();
-            this.professorHomeView.unSetTxtHomework();
+            professorHomeView.unSetTxtExam();
+            professorHomeView.unSetTxtCommunication();
+            professorHomeView.unSetTxtHomework();
 
             //Rotate
-            this.professorHomeView.unSetBtnAdd();
+            professorHomeView.unSetBtnAdd();
 
-            this.setOpen(false);
+            setOpen(false);
         }
 
     }
 
 
+    //Open fragment: Add Exam
     public void showAddExam(){
-        AddExamView fragment = new AddExamView(this.getSession());
-        fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddExam");
+        AddExamView fragment = new AddExamView(session);
+        fragment.show(professorHomeView.getSupportFragmentManager(), "AddExam");
     }
 
+    //Open fragment: Add Homework
     public void showAddHomework(){
-
-        AddHomeworkView fragment= new AddHomeworkView(this.getSession(), this.getBeanHomeworks(), this.professorHomeView.getHomeworkAdapter());
-        fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddHomework");
+        AddHomeworkView fragment= new AddHomeworkView(session, beanHomeworks, professorHomeView.getHomeworkAdapter());
+        fragment.show(professorHomeView.getSupportFragmentManager(), "AddHomework");
     }
 
-
+    //Open fragment: Add Communication
     public void showAddCommunication(){
-        AddProfCommunicationView fragment= new AddProfCommunicationView(this.getSession());
-        fragment.show(this.professorHomeView.getSupportFragmentManager(), "AddCommunication");
+        AddProfCommunicationView fragment= new AddProfCommunicationView(session);
+        fragment.show(professorHomeView.getSupportFragmentManager(), "AddCommunication");
     }
 
-    public ProfessorHomeView getProfessorHomeView() {
-        return professorHomeView;
-    }
-
-    public List<BeanHomework> getBeanHomeworks() {
-        return beanHomeworks;
-    }
-
-    public List<BeanUniCommunication> getBeanUniCommunications() {
-        return beanUniCommunications;
-    }
 }

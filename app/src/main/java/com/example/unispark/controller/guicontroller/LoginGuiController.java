@@ -45,14 +45,14 @@ public class LoginGuiController extends UserBaseGuiController{
                     BeanLoggedStudent student = null;
                     try {
                         student = loginAppController.studentLogin(user);
-                        this.session.setUser(student);
-                        intent = new Intent(this.getLoginView(), StudentHomeView.class);
+                        session.setUser(student);
+                        intent = new Intent(getLoginView(), StudentHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.getKey(), this.getSession());
-                        this.loginView.startActivity(intent);
+                        intent.putExtra(getKey(), session);
+                        loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        this.loginView.setErrorMessage(e.getMessage());
+                        loginView.setErrorMessage(e.getMessage());
                     }
                     break;
 
@@ -61,14 +61,14 @@ public class LoginGuiController extends UserBaseGuiController{
                     BeanLoggedProfessor professor = null;
                     try {
                         professor = loginAppController.professorLogin(user);
-                        this.session.setUser(professor);
-                        intent = new Intent(this.getLoginView(), ProfessorHomeView.class);
+                        session.setUser(professor);
+                        intent = new Intent(getLoginView(), ProfessorHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.getKey(), this.getSession());
-                        this.loginView.startActivity(intent);
+                        intent.putExtra(getKey(), session);
+                        loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        this.loginView.setErrorMessage(e.getMessage());
+                        loginView.setErrorMessage(e.getMessage());
                     }
                     break;
 
@@ -77,14 +77,14 @@ public class LoginGuiController extends UserBaseGuiController{
                     BeanLoggedUniversity university = null;
                     try {
                         university = loginAppController.universityLogin(user);
-                        this.session.setUser(university);
-                        intent = new Intent(this.getLoginView(), UniversityHomeView.class);
+                        session.setUser(university);
+                        intent = new Intent(getLoginView(), UniversityHomeView.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(this.getKey(), this.getSession());
-                        this.loginView.startActivity(intent);
+                        intent.putExtra(getKey(), session);
+                        loginView.startActivity(intent);
                     } catch (WrongUsernameOrPasswordException | SQLException e) {
                         e.printStackTrace();
-                        this.loginView.setErrorMessage(e.getMessage());
+                        loginView.setErrorMessage(e.getMessage());
                     }
                     break;
                 default:
