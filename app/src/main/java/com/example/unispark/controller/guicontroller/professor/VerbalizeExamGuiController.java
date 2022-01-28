@@ -3,7 +3,7 @@ package com.example.unispark.controller.guicontroller.professor;
 
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.controller.applicationcontroller.exams.ShowSignedToExamStudents;
+import com.example.unispark.controller.applicationcontroller.exams.ManageProfessorExams;
 import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
 import com.example.unispark.exceptions.ExamNotYetOccured;
 import com.example.unispark.exceptions.GenericException;
@@ -30,8 +30,8 @@ public class VerbalizeExamGuiController{
         this.verbalizeExamsView.setTxtCourseDate(this.getBeanBookExam().getDate());
 
         //Application Controller
-        ShowSignedToExamStudents bookedStudentAppController = new ShowSignedToExamStudents();
-        this.beanStudentSignedToExams = bookedStudentAppController.showBookedStudents(this.getBeanBookExam());
+        VerbalizeExam verbalizeExamController = new VerbalizeExam();
+        this.beanStudentSignedToExams = verbalizeExamController.showBookedStudents(this.getBeanBookExam());
 
         if(this.getBeanStudentSignedToExams().isEmpty()) this.verbalizeExamsView.setMessage("No students signed");
         else this.verbalizeExamsView.setStudentsAdapter(this.getBeanStudentSignedToExams());

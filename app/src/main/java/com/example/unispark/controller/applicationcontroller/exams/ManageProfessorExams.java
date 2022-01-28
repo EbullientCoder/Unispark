@@ -1,17 +1,37 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
+import com.example.unispark.bean.BeanStudentSignedToExam;
 import com.example.unispark.bean.exams.BeanBookExam;
+import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.ExamException;
 import com.example.unispark.exceptions.GenericException;
+import com.example.unispark.facade.ExamsFacade;
 import com.example.unispark.model.exams.BookExamModel;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddExam {
+public class ManageProfessorExams extends ManageExams{
+
+
+
+    //Professor
+    public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
+        try {
+            professor.setExams(ExamsFacade.getInstance().getProfessorExams(professor.getCourses()));
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return this.listBeanBookExams(professor.getExams(), 1);
+    }
+
+
+
     //Add Exam
     public void addExam(BeanBookExam bExam, BeanLoggedProfessor professor) throws ExamAlreadyExists, GenericException
     {
@@ -30,4 +50,6 @@ public class AddExam {
             throw new GenericException("Try again");
         }
     }
+
+
 }

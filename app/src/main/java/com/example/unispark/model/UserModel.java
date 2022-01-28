@@ -1,8 +1,7 @@
 package com.example.unispark.model;
 
-import java.io.Serializable;
 
-public abstract class UserModel implements Serializable {
+public abstract class UserModel {
     //Attributes
     private String email;
     private int profilePicture;

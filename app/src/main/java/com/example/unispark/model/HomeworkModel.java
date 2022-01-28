@@ -1,5 +1,6 @@
 package com.example.unispark.model;
 
+
 import java.io.Serializable;
 
 public class HomeworkModel implements Serializable {

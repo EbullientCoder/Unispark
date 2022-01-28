@@ -1,10 +1,11 @@
 package com.example.unispark.model;
 
+
 import java.io.Serializable;
 
 public class CourseModel implements Serializable {
     //Attributes
-    private String id;
+    private int id;
     private String shortName;
     private String fullName;
     private String courseYear;
@@ -16,7 +17,7 @@ public class CourseModel implements Serializable {
 
 
 
-    public CourseModel(String id, String courseYear, String cfu, String session, String link, String faculty, int uniYear) {
+    public CourseModel(int id, String courseYear, String cfu, String session, String link, String faculty, int uniYear) {
         this.id = id;
         this.courseYear = courseYear;
         this.cfu = cfu;
@@ -27,11 +28,11 @@ public class CourseModel implements Serializable {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
