@@ -34,13 +34,11 @@ public class BookExam {
         }
     }
 
-    //Page: Upcoming StudentExamsGUIController
     public List<BeanExamType> generateBookingExams(BeanLoggedStudent student){
         List<BookExamModel> bookExams = null;
         List<BeanExamType> beanExamsTypeList = new ArrayList<>();
 
         try{
-            //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
             List<BookExamModel> bookedExams = student.getBookedExams();
             List<CourseModel> studentCourses = student.getCourses();
             bookExams = ExamsFacade.getInstance().getStudentExams(studentCourses, bookedExams);
