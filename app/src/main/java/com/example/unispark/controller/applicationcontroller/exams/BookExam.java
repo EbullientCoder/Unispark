@@ -12,9 +12,10 @@ import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class BookExam extends ManageExams{
+public class BookExam {
 
     public void bookExam(BeanLoggedStudent student, BeanBookExam exam) throws ExamAlreadyVerbalized, GenericException
     {
@@ -33,21 +34,48 @@ public class BookExam extends ManageExams{
         }
     }
 
-
-
     //Page: Upcoming StudentExamsGUIController
-    public List<BeanExamType> showBookExams(BeanLoggedStudent student){
+    public List<BeanExamType> generateBookingExams(BeanLoggedStudent student){
         List<BookExamModel> bookExams = null;
+        List<BeanExamType> beanExamsTypeList = new ArrayList<>();
 
         try{
             //Types: 0 = Verbalized - Failed Exam | 1 = Professor Assigned Exam | 2 = Book Exam | 3 = Booked Exam
+            List<BookExamModel> bookedExams = student.getBookedExams();
             List<CourseModel> studentCourses = student.getCourses();
-            bookExams = ExamsFacade.getInstance().getStudentExams(student.getId(), studentCourses);
+            bookExams = ExamsFacade.getInstance().getStudentExams(studentCourses, bookedExams);
+
+            for (int i = 0; i < bookExams.size(); i++){
+                BookExamModel bookExam = bookExams.get(i);
+                BeanBookExam beanBookExam;
+                beanBookExam = new BeanBookExam();
+                beanBookExam.setDate(bookExam.getDate());
+                beanBookExam.setYear(bookExam.getYear());
+                beanBookExam.setName(bookExam.getName());
+                beanBookExam.setCfu(bookExam.getCfu());
+                beanBookExam.setId(bookExam.getId());
+                beanBookExam.setBuilding(bookExam.getBuilding());
+                beanBookExam.setClassroom(bookExam.getClassroom());
+                BeanExamType beanExamType;
+                beanExamType = new BeanExamType();
+                beanExamType.setType(2);
+                beanExamType.setExamType(beanBookExam);
+
+                beanExamsTypeList.add(beanExamType);
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return this.listBeanBookExams(bookExams, 2);
+        return beanExamsTypeList;
+
+
     }
+
+
+
+
+
+
 }

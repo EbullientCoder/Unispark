@@ -28,13 +28,11 @@ public class VerbalizeExam {
             throwables.printStackTrace();
             throw new GenericException("Try again");
         }
-
     }
 
 
-
     //Show the Students that have booked an Exam
-    public List<BeanStudentSignedToExam> showBookedStudents(BeanBookExam exam){
+    public List<BeanStudentSignedToExam> getStudentsVerbalizeExam(BeanBookExam exam){
         List<BeanStudentSignedToExam> studentsItem = null;
         try {
             studentsItem = ExamsDAO.getStudentsBookedExam(exam.getId());
@@ -45,4 +43,5 @@ public class VerbalizeExam {
         return studentsItem;
 
     }
+
 }

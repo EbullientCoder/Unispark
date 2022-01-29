@@ -43,12 +43,10 @@ public class ExamsFacade {
     }
 
 
-    public List<BookExamModel> getStudentExams(String id, List<CourseModel> studentCourses) throws SQLException {
+    public List<BookExamModel> getStudentExams(List<CourseModel> studentCourses, List<BookExamModel> bookedExams) throws SQLException {
         List<BookExamModel> examsList = new ArrayList<>();
 
         if (!studentCourses.isEmpty()){
-
-            List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(id);
             List<BookExamModel> tempList;
             for (int i = 0; i < studentCourses.size(); i++)
             {

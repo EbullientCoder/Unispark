@@ -97,7 +97,7 @@ public class ManageStudentProfileGuiController extends StudentBaseGuiController 
 
 
     public void showJoinCourses(){
-        JoinCourseView joinCourseFragment = new JoinCourseView(this.getSession(), this.getBeanCourses(), this.profileView.getCoursesAdapter());
+        JoinCourseView joinCourseFragment = new JoinCourseView(this.session, this.getBeanCourses(), this.profileView.getCoursesAdapter());
         joinCourseFragment.show(this.profileView.getSupportFragmentManager(), "Search Course");
     }
 

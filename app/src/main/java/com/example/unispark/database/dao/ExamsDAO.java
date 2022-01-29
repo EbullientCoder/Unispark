@@ -1,6 +1,7 @@
 package com.example.unispark.database.dao;
 
 import com.example.unispark.bean.BeanStudentSignedToExam;
+import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.exceptions.ExamException;
@@ -326,6 +327,7 @@ public class ExamsDAO {
 
         //Create new bookExam model
         return new BookExamModel(id, name, year, dateTime, cfu, classroom, building);
+
     }
 
 

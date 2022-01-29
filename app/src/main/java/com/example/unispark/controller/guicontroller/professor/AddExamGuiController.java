@@ -4,7 +4,7 @@ import com.example.unispark.Session;
 import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
-import com.example.unispark.controller.applicationcontroller.exams.ManageProfessorExams;
+import com.example.unispark.controller.applicationcontroller.exams.AddExam;
 import com.example.unispark.exceptions.ExamAlreadyExists;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.view.professor.fragment.AddExamView;
@@ -43,7 +43,7 @@ public class AddExamGuiController extends AddItemGuiController{
             bExam.setBuilding(building);
 
             //Application Controller
-            ManageProfessorExams addExamAppController = new ManageProfessorExams();
+            AddExam addExamAppController = new AddExam();
             try {
 
                 addExamAppController.addExam(bExam, professor);

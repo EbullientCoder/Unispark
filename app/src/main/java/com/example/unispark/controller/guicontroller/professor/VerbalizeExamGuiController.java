@@ -3,7 +3,7 @@ package com.example.unispark.controller.guicontroller.professor;
 
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.controller.applicationcontroller.exams.ManageProfessorExams;
+import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
 import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
 import com.example.unispark.exceptions.ExamNotYetOccured;
 import com.example.unispark.exceptions.GenericException;
@@ -26,12 +26,12 @@ public class VerbalizeExamGuiController{
 
     public void showStudents(){
 
-        this.verbalizeExamsView.setTxtCourseName(this.getBeanBookExam().getName());
-        this.verbalizeExamsView.setTxtCourseDate(this.getBeanBookExam().getDate());
+        this.verbalizeExamsView.setTxtCourseName(this.beanBookExam.getName());
+        this.verbalizeExamsView.setTxtCourseDate(this.beanBookExam.getDate());
 
         //Application Controller
-        VerbalizeExam verbalizeExamController = new VerbalizeExam();
-        this.beanStudentSignedToExams = verbalizeExamController.showBookedStudents(this.getBeanBookExam());
+        VerbalizeExam studentsSignedToExam = new VerbalizeExam();
+        this.beanStudentSignedToExams = studentsSignedToExam.getStudentsVerbalizeExam(this.getBeanBookExam());
 
         if(this.getBeanStudentSignedToExams().isEmpty()) this.verbalizeExamsView.setMessage("No students signed");
         else this.verbalizeExamsView.setStudentsAdapter(this.getBeanStudentSignedToExams());

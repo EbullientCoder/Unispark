@@ -14,24 +14,7 @@ import com.example.unispark.model.exams.BookExamModel;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ManageProfessorExams extends ManageExams{
-
-
-
-    //Professor
-    public List<BeanExamType> assignedExams(BeanLoggedProfessor professor){
-        try {
-            professor.setExams(ExamsFacade.getInstance().getProfessorExams(professor.getCourses()));
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return this.listBeanBookExams(professor.getExams(), 1);
-    }
-
-
-
+public class AddExam {
     //Add Exam
     public void addExam(BeanBookExam bExam, BeanLoggedProfessor professor) throws ExamAlreadyExists, GenericException
     {
