@@ -26,17 +26,16 @@ implements ExamAdapter.OnBookExamClickListener,
         ExamAdapter.OnLeaveExamClickListener {
 
 
-    //Exams List
+    //Exams
     private TextView examsTitle;
     private RecyclerView rvExams;
     private ExamAdapter examAdapter;
-
 
     //Gui Controller
     private ManageStudentExamsGuiController examsGuiController;
 
 
-    //Constructor
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +69,8 @@ implements ExamAdapter.OnBookExamClickListener,
 
         //Exam Page Title
         this.examsTitle = findViewById(R.id.txt_exams_title);
-        //Exam List
-        this.rvExams = findViewById(R.id.rv_exams);
 
+        this.rvExams = findViewById(R.id.rv_exams);
 
         //Gui Controller
         this.examsGuiController.showExams();
@@ -106,7 +104,7 @@ implements ExamAdapter.OnBookExamClickListener,
     @Override
     public void onBookBtnClick(int position) {
 
-        //Gui controller
+        //Book Exam
         this.examsGuiController.bookExam(position);
     }
 
@@ -114,18 +112,15 @@ implements ExamAdapter.OnBookExamClickListener,
     @Override
     public void onLeaveBtnClick(int position) {
 
-        //Gui Controller
+        //Leave Exam
         this.examsGuiController.leaveExam(position);
 
     }
 
+
+   //Setters used by the GuiController in order to set the information of the View
     public void setExamsTitle(String content) {
         this.examsTitle.setText(content);
-    }
-
-    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
-        this.examAdapter.setbExams(beanExamTypes);
-        this.rvExams.setAdapter(this.examAdapter);
     }
 
     public void notifyDataChanged(int position){
@@ -138,5 +133,8 @@ implements ExamAdapter.OnBookExamClickListener,
     }
 
 
-
+    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
+        this.examAdapter.setbExams(beanExamTypes);
+        this.rvExams.setAdapter(this.examAdapter);
+    }
 }

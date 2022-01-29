@@ -17,7 +17,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
 
     private StudentExamsView examsView;
-    private List<BeanExamType> beanExams;
+    List<BeanExamType> beanExams;
     private int page;
 
 
@@ -49,25 +49,25 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
 
 
-    //Page Menu
+    //Show Exams Page
     public void showExams(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         
         //Application Controller
-        ManageExams studentExamsAppController = new ManageExams();
+        ManageExams manageExams = new ManageExams();
 
         //Select the Page
         if(this.page == 0){
             //Set Title
             this.examsView.setExamsTitle("VERBALIZED EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.verbalizedExams(student);
+            this.beanExams = manageExams.verbalizedExams(student);
         }
         if(this.page == 1 || this.page == -3) {
             //Set Title
             this.examsView.setExamsTitle("FAILED EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.failedExams(student);
+            this.beanExams = manageExams.failedExams(student);
         }
         if(this.page == 2 || this.page == -2) {
             BookExam bookExamController = new BookExam();
@@ -82,7 +82,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             //Set Title
             this.examsView.setExamsTitle("BOOKED EXAMS");
             //Exams Item
-            this.beanExams = studentExamsAppController.showBookedExams(student);
+            this.beanExams = manageExams.showBookedExams(student);
         }
 
         this.examsView.setExamAdapter(this.beanExams);
@@ -93,7 +93,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
     public void bookExam(int position){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
-        //Application Controller
+        //Book Exam Controller
         BookExam bookExamController = new BookExam();
 
         try {
@@ -112,7 +112,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
     public void leaveExam(int position){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
-        //Application Controller
+
         try{
 
             ManageExams leaveExamAppController = new ManageExams();
@@ -126,6 +126,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             this.examsView.setMessage(e.getMessage());
         }
     }
+
 
     public StudentExamsView getExamsView() {
         return examsView;
