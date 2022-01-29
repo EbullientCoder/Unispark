@@ -19,13 +19,13 @@ import com.example.unispark.view.professor.ProfessorProfileView;
 public class ProfBaseGuiController extends UserBaseGuiController {
 
     //Attributes
-    private Context view;
+    private Context context;
     private boolean isOpen;
 
     //Constructor
     protected ProfBaseGuiController(Session session, Context view) {
         super(session);
-        this.view = view;
+        this.context = view;
     }
 
     //Select the next Activity through BottomNavigationMenu
@@ -35,11 +35,11 @@ public class ProfBaseGuiController extends UserBaseGuiController {
         //Use the ID to select the activity
         switch (selectedID){
             //Professor
-            case R.id.professor_home: intent = new Intent(view, ProfessorHomeView.class);
+            case R.id.professor_home: intent = new Intent(context, ProfessorHomeView.class);
                 break;
-            case R.id.professor_profile: intent = new Intent(view, ProfessorProfileView.class);
+            case R.id.professor_profile: intent = new Intent(context, ProfessorProfileView.class);
                 break;
-            case R.id.professor_exams: intent = new Intent(view, ProfessorExamsView.class);
+            case R.id.professor_exams: intent = new Intent(context, ProfessorExamsView.class);
                 break;
             default: break;
         }
@@ -50,7 +50,7 @@ public class ProfBaseGuiController extends UserBaseGuiController {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         //Start the Activity
-        view.startActivity(intent);
+        context.startActivity(intent);
     }
 
 
@@ -58,11 +58,12 @@ public class ProfBaseGuiController extends UserBaseGuiController {
         isOpen = open;
     }
 
-    public void setView(Context view) {
-        this.view = view;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public boolean isOpen() {
         return isOpen;
     }
+
 }

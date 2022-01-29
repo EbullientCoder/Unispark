@@ -3,8 +3,7 @@ package com.example.unispark.controller.guicontroller.professor;
 
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
-import com.example.unispark.controller.applicationcontroller.exams.VerbalizeExam;
+import com.example.unispark.controller.applicationcontroller.exams.AddExamGrade;
 import com.example.unispark.exceptions.ExamNotYetOccured;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.view.professor.VerbalizeExamsView;
@@ -30,7 +29,7 @@ public class VerbalizeExamGuiController{
         this.verbalizeExamsView.setTxtCourseDate(this.beanBookExam.getDate());
 
         //Application Controller
-        VerbalizeExam studentsSignedToExam = new VerbalizeExam();
+        AddExamGrade studentsSignedToExam = new AddExamGrade();
         this.beanStudentSignedToExams = studentsSignedToExam.getStudentsVerbalizeExam(this.getBeanBookExam());
 
         if(this.getBeanStudentSignedToExams().isEmpty()) this.verbalizeExamsView.setMessage("No students signed");
@@ -45,7 +44,7 @@ public class VerbalizeExamGuiController{
     public void verbalizeExam(String result, int position){
 
         //Application Controller
-        VerbalizeExam verbalizeExamAppController = new VerbalizeExam();
+        AddExamGrade verbalizeExamAppController = new AddExamGrade();
         try {
             double doubleResult = Double.parseDouble(result);
             if (doubleResult < 0 || doubleResult > 30){

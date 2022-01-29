@@ -26,15 +26,15 @@ public class AddItemGuiController extends ProfBaseGuiController{
     public AddItemGuiController(Session session, AddExamView addExamView, AddHomeworkView addHomeworkView, AddProfCommunicationView addProfCommunicationView) {
         super(session, null);
         if (addExamView != null){
-            setView(addExamView.getContext());
+            setContext(addExamView.getContext());
             this.addExamView = addExamView;
         }
         if (addHomeworkView != null){
-            setView(addHomeworkView.getContext());
+            setContext(addHomeworkView.getContext());
             this.addHomeworkView = addHomeworkView;
         }
         if (addProfCommunicationView != null){
-            setView(addProfCommunicationView.getContext());
+            setContext(addProfCommunicationView.getContext());
             this.addProfCommunicationView = addProfCommunicationView;
         }
     }

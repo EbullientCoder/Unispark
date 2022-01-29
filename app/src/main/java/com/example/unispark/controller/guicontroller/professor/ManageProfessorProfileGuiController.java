@@ -110,14 +110,12 @@ public class ManageProfessorProfileGuiController extends ProfBaseGuiController {
 
     }
 
-
     public void showAddExam(){
         AddExamView fragment = new AddExamView(session);
         fragment.show(this.profileView.getSupportFragmentManager(), "AddExam");
     }
 
     public void showAddHomework(){
-
         AddHomeworkView fragment= new AddHomeworkView(session, null, null);
         fragment.show(this.profileView.getSupportFragmentManager(), "AddHomework");
     }

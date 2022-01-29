@@ -11,7 +11,7 @@ import com.example.unispark.model.exams.VerbalizedExamModel;
 import java.sql.SQLException;
 import java.util.List;
 
-public class VerbalizeExam {
+public class AddExamGrade {
 
     //Verbalize Exam
     public void verbalizeExam(BeanBookExam exam, BeanStudentSignedToExam student, String result) throws ExamNotYetOccured, GenericException {

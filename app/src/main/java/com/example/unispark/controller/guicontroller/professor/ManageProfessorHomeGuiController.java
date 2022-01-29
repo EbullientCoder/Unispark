@@ -43,8 +43,8 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
         ShowCommunications uniCommunicationsAppController = new ShowCommunications();
         this.beanUniCommunications = uniCommunicationsAppController.showUniversityCommunications(professor);
         professorHomeView.setUniCommunicationsAdapter(beanUniCommunications);
-
     }
+
 
     //Show Homeworks
     public void showHomeworks(){
@@ -54,7 +54,6 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
         GetHomeworks homeworksAppController = new GetHomeworks();
         this.beanHomeworks = homeworksAppController.getHomework(professor);
         professorHomeView.setHomeworkAdapter(beanHomeworks);
-
     }
 
     //Click on a University Communication

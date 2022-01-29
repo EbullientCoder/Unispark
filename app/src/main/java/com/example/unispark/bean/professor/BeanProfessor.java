@@ -7,9 +7,9 @@ public class BeanProfessor extends BeanLoggedUser {
     //Attributes
     private String firstName;
     private String lastName;
-    private int id;
     private String faculty;
     private String website;
+    private int id;
 
     public String getFirstName() {
         return firstName;
@@ -19,16 +19,16 @@ public class BeanProfessor extends BeanLoggedUser {
         return lastName;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getFaculty() {
         return faculty;
     }
 
     public String getWebsite() {
         return website;
+    }
+
+    public int getId() {
+        return id;
     }
 
 
@@ -40,15 +40,15 @@ public class BeanProfessor extends BeanLoggedUser {
         this.lastName = lastName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

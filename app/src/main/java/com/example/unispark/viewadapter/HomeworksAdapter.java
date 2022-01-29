@@ -67,7 +67,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     //Homeworks ViewHolder
-    static class HomeworkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class HomeworkViewHolder extends RecyclerView.ViewHolder{
         //Attributes
         String shortName;
         String title;
@@ -78,6 +78,7 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView txtCourse;
         TextView txtExpiration;
         Button btnView;
+
         OnHomeworkBtnClickListener onHomeworkBtnClickListener;
 
         //Methods
@@ -89,7 +90,12 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             btnView = itemView.findViewById(R.id.btn_homework_view);
 
             this.onHomeworkBtnClickListener = onHomeworkBtnClickListener;
-            btnView.setOnClickListener(this);
+            btnView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onHomeworkBtnClickListener.onBtnClick(getAdapterPosition());
+                }
+            });
         }
 
         //Student
@@ -115,11 +121,8 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             id = 1;
         }
 
-        @Override
-        public void onClick(View view) {
-            onHomeworkBtnClickListener.onBtnClick(getAdapterPosition());
-        }
     }
+
 
     public void setBeanHomeworkList(List<BeanHomework> beanHomeworkList) {
         this.beanHomeworkList = beanHomeworkList;
