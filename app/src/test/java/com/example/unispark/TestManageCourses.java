@@ -31,12 +31,9 @@ import java.sql.SQLException;
 public class TestManageCourses {
 
     private static String password = "password";
-    private static String date = "2021/2022";
-    private static String winter = "Winter";
-
 
     @Test
-    public void testCourseDoesNotExist() throws WrongUsernameOrPasswordException, SQLException {
+    public void testJoinCourseDoesNotExist() throws WrongUsernameOrPasswordException, SQLException {
         int code = 1;
 
         // Create a student
@@ -82,7 +79,7 @@ public class TestManageCourses {
 
 
     @Test
-    public void testCourseAlreadyJoined() throws WrongUsernameOrPasswordException, SQLException {
+    public void testJoinCourseAlreadyJoined() throws WrongUsernameOrPasswordException, SQLException {
         int code = 1;
 
         // Create a student
@@ -127,7 +124,7 @@ public class TestManageCourses {
 
 
     @Test
-    public void testExamBookedCannotLeaveCourse() throws WrongUsernameOrPasswordException, SQLException {
+    public void testLeaveCourseExamBooked() throws WrongUsernameOrPasswordException, SQLException {
         int code = 1;
 
         //Create a course that is associated to the exam the student has booked
@@ -181,8 +178,8 @@ public class TestManageCourses {
     private static BeanCourse createBean(String link, String id, String cfu, String fullName, String shortName, String faculty){
         BeanCourse beanCourse = new BeanCourse();
         beanCourse.setUniYear(1);
-        beanCourse.setCourseYear(date);
-        beanCourse.setSession(winter);
+        beanCourse.setCourseYear("2021/2022");
+        beanCourse.setSession("Winter");
         beanCourse.setLink(link);
         beanCourse.setId(id);
         beanCourse.setCfu(cfu);
