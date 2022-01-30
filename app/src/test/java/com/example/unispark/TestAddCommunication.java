@@ -91,8 +91,8 @@ public class TestAddCommunication {
         communicationController = new AddCommunication();
 
         BeanProfessorCommunication communication = createBean(
-                "Lezioni",
-                "Le lezioni sono rinviate alla prossima settimana",
+                "JUNIT TEST: Lezioni",
+                "JUNIT TEST: Le lezioni sono rinviate alla prossima settimana",
                 "Francesco Manzini",
                 data,
                 "TEST COURSE",
