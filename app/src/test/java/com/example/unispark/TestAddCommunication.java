@@ -34,8 +34,8 @@ public class TestAddCommunication {
 
         BeanUniCommunication communication;
         communication = new BeanUniCommunication();
-        communication.setTitle("Pubblicazione lezioni");
-        communication.setCommunication("Sono state aggiunte le lezioni per il secondo semestre");
+        communication.setTitle("JUNIT TEST: Lezioni");
+        communication.setCommunication("JUNIT TEST: Aggiunti gli orari delle lezioni.");
         communication.setFaculty("Economia");
         communication.setDate(data);
         communication.setBackground(R.id.img_uni_com_background);
@@ -61,8 +61,8 @@ public class TestAddCommunication {
         AddCommunication communicationController;
         communicationController = new AddCommunication();
         BeanProfessorCommunication communication = createBean(
-                "Esami",
-                "Gli esami verranno verbalizzati a breve",
+                "JUNIT TEST: Esami",
+                "JUNIT TEST: Risultati degli esami disponibili.",
                 "Francesco Manzini",
                 data,
                 "MATEMATICA GENERALE",
