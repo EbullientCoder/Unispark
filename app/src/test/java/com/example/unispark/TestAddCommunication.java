@@ -23,13 +23,15 @@ public class TestAddCommunication {
     String data = "2022-01-20";
 
 
+    //Assert that the method "addUniCommunication" succeeded
     @Test
-    public void testAddUniCommunication(){
+    public void testAddUniCommunicationSuccess(){
         int code = 0;
 
-        //Communication
+        //App Controller: Add UniCommunication
         AddCommunication communicationController;
         communicationController = new AddCommunication();
+
         BeanUniCommunication communication;
         communication = new BeanUniCommunication();
         communication.setTitle("Pubblicazione lezioni");
@@ -50,43 +52,9 @@ public class TestAddCommunication {
     }
 
 
-
-
+    //Assert that the method "addProfCommunication" succeeded
     @Test
-    public void testCannotAddProfCommunication(){
-        int code = 1;
-
-        //Communication
-        AddCommunication communicationController;
-        communicationController = new AddCommunication();
-        BeanProfessorCommunication communication = createBean(
-                "Lezioni",
-                "Le lezioni sono rinviate alla prossima settimana",
-                "Francesco Manzini",
-                data,
-                "TEST COURSE",
-                "TES");
-
-        try {
-            communicationController.addProfCommunication(communication);
-            code = 2;
-        } catch (GenericException genericException) {
-            genericException.printStackTrace();
-            code = 3;
-        } catch (CourseDoesNotExist courseDoesNotExist) {
-            courseDoesNotExist.printStackTrace();
-            code = 0;
-        }
-
-        assertEquals(code, 0);
-    }
-
-
-
-
-
-    @Test
-    public void testAddProfCommunication(){
+    public void testAddProfCommunicationSuccess(){
         int code = 0;
 
         //Communication
@@ -109,6 +77,39 @@ public class TestAddCommunication {
         }
 
         assertEquals(code, 1);
+    }
+
+
+
+    //Assert that the "addProfCommunication" method fails cause the Course indicated doesn't exist
+    @Test
+    public void testAddProfCommunicationFailure(){
+        int code = 1;
+
+        //App Controller: Add ProfCommunication
+        AddCommunication communicationController;
+        communicationController = new AddCommunication();
+
+        BeanProfessorCommunication communication = createBean(
+                "Lezioni",
+                "Le lezioni sono rinviate alla prossima settimana",
+                "Francesco Manzini",
+                data,
+                "TEST COURSE",
+                "TEST");
+
+        try {
+            communicationController.addProfCommunication(communication);
+            code = 2;
+        } catch (GenericException genericException) {
+            genericException.printStackTrace();
+            code = 3;
+        } catch (CourseDoesNotExist courseDoesNotExist) {
+            courseDoesNotExist.printStackTrace();
+            code = 0;
+        }
+
+        assertEquals(code, 0);
     }
 
 
