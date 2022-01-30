@@ -40,6 +40,7 @@ public class AddCommunicationGuiController extends UserBaseGuiController {
     public void showFaculties(){
         BeanLoggedUniversity university = (BeanLoggedUniversity) this.session.getUser();
         List<String> faculties = university.getFaculties();
+        faculties.add("All");
         this.uniCommunicationView.setAdapterItems(faculties);
     }
 

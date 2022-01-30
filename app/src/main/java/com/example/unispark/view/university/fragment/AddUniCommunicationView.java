@@ -103,7 +103,6 @@ public class AddUniCommunicationView extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 facultySelection = (String)parent.getItemAtPosition(position);
-
             }
         });
 

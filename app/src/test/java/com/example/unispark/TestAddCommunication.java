@@ -114,7 +114,7 @@ public class TestAddCommunication {
 
 
 
-    //Create the Communication Bean
+    //Create the ProfessorCommunication Bean
     private static BeanProfessorCommunication createBean(String type, String text, String profName, String data, String fullName, String shortName){
         BeanProfessorCommunication communication;
         communication= new BeanProfessorCommunication();
