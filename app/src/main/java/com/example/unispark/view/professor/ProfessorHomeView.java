@@ -179,15 +179,12 @@ public class ProfessorHomeView extends AppCompatActivity implements
         rvHomeworks.setAdapter(homeworkAdapter);
     }
 
-    //The Adapter is a private attributes of the view, so it can't be passed to the GUI controller
-    //as a method's parameter. The GUI Controller must take it from this public getter of the VIEW
+
+
     public HomeworksAdapter getHomeworkAdapter() {
         return homeworkAdapter;
     }
 
-
-    //Same thing can be said for these elements.
-    //The gui controller can set and unset them from view's methods.
     public void setBtnExam() {
         btnExam.show();
     }
