@@ -24,8 +24,8 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
 
     //Attributes
     private ProfessorHomeView professorHomeView;
-    List<BeanHomework> beanHomeworks;
-    List<BeanUniCommunication> beanUniCommunications;
+    private List<BeanHomework> beanHomeworks;
+    private List<BeanUniCommunication> beanUniCommunications;
 
     //Constructor
     public ManageProfessorHomeGuiController(Session session, ProfessorHomeView professorHomeView) {
