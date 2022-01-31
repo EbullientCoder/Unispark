@@ -29,7 +29,7 @@ public class AddHomework {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            throw new GenericException("Try again");
+            throw new GenericException("EXCEPTION: Try again");
         }
     }
 }

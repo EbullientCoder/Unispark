@@ -134,5 +134,4 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
         AddProfCommunicationView fragment= new AddProfCommunicationView(session);
         fragment.show(professorHomeView.getSupportFragmentManager(), "AddCommunication");
     }
-
 }
