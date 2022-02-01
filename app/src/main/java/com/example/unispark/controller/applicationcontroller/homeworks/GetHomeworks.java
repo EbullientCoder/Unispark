@@ -46,7 +46,6 @@ public class GetHomeworks {
             beanHomework.setExpiration(homeworksItem.get(i).getExpiration());
             beanHomework.setInstructions( homeworksItem.get(i).getInstructions());
             beanHomework.setPoints(homeworksItem.get(i).getPoints());
-            beanHomework.setTrackProfessor(homeworksItem.get(i).getTrackProfessor());
             beanHomeworkList.add(beanHomework);
         }
         Collections.reverse(beanHomeworkList);

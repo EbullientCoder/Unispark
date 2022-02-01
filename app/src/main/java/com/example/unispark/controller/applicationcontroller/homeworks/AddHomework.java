@@ -19,7 +19,7 @@ public class AddHomework {
                 homework.getExpiration(),
                 homework.getInstructions(),
                 homework.getPoints(),
-                homework.getTrackProfessor());
+                professor.getId());
 
         try {
             HomeworkDAO.addHomework(homeworkModel);

@@ -11,7 +11,6 @@ public class BeanHomework implements Serializable {
     private String expiration;
     private String instructions;
     private String points;
-    private int trackProfessor;
 
 
     
@@ -35,7 +34,6 @@ public class BeanHomework implements Serializable {
     public String getPoints() {
         return points;
     }
-    public int getTrackProfessor() {return trackProfessor; }
 
 
     //Setter
@@ -77,7 +75,6 @@ public class BeanHomework implements Serializable {
         }
         else return false;
     }
-    public void setTrackProfessor(int trackProfessor) {this.trackProfessor = trackProfessor; }
 
 
     //Syntactic Validation
