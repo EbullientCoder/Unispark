@@ -10,7 +10,6 @@ import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
 
 import java.sql.SQLException;

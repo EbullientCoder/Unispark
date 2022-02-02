@@ -4,7 +4,6 @@ import com.example.unispark.bean.courses.BeanCourse;
 import com.example.unispark.bean.professor.BeanProfessorDetails;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.ProfessorDAO;
-import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.ProfessorModel;
 

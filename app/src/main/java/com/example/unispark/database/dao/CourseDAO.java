@@ -7,7 +7,6 @@ import com.example.unispark.exceptions.CourseAlreadyJoined;
 import com.example.unispark.exceptions.CourseDoesNotExist;
 import com.example.unispark.exceptions.CourseNeverJoined;
 import com.example.unispark.exceptions.ExamBookedException;
-import com.example.unispark.facade.CourseCreatorFacade;
 import com.example.unispark.model.CourseModel;
 
 import java.sql.Connection;
@@ -18,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDAO {
+
+    private static final String COURSENAME = "coursename";
 
     private CourseDAO(){}
 
@@ -34,7 +35,7 @@ public class CourseDAO {
             ResultSet rs = QueryCourse.selectStudentCourses(statement, studentID);
             if(rs.first()){
                 do{
-                    if(rs.getString("coursename").equals(courseName)) {
+                    if(rs.getString(COURSENAME).equals(courseName)) {
 
                         throw new CourseAlreadyJoined("Cannot join course, already joined");
                     }
@@ -83,7 +84,7 @@ public class CourseDAO {
             if (rs.first()){
                 String course;
                 do{
-                    course = rs.getString("coursename");
+                    course = rs.getString(COURSENAME);
                     if(course.equals(courseName)) {
                         isFound = true;
                         QueryCourse.removeStudentCourse(statement, studentID, courseName);
@@ -117,7 +118,7 @@ public class CourseDAO {
             if (rs.first()){
                 do{
 
-                    coursesList.add(CourseCreatorFacade.getInstance().createCourse(rs));
+                    coursesList.add(createCourse(rs));
 
                 } while (rs.next());
             }
@@ -150,7 +151,7 @@ public class CourseDAO {
 
             if (rs.first()){
                 do {
-                    coursesList.add(CourseCreatorFacade.getInstance().createCourse(rs));
+                    coursesList.add(createCourse(rs));
                 } while (rs.next());
             }
 
@@ -181,7 +182,7 @@ public class CourseDAO {
             ResultSet rs = QueryCourse.selectFacultyCourses(statement, faculty, uniYear);
 
             if (rs.first()){
-                coursesList = CourseCreatorFacade.getInstance().getAvaliableCourses(rs, courses);
+                coursesList = getAvaliableCourses(rs, courses);
             }
             rs.close();
 
@@ -212,7 +213,7 @@ public class CourseDAO {
 
             if (rs.first()){
                 do{
-                    coursesList.add(CourseCreatorFacade.getInstance().createCourse(rs));
+                    coursesList.add(createCourse(rs));
                 } while(rs.next());
             }
             rs.close();
@@ -224,6 +225,53 @@ public class CourseDAO {
             }
         }
 
+
+        return coursesList;
+    }
+
+
+
+
+    private static CourseModel createCourse(ResultSet rs) throws SQLException {
+        int courseId = rs.getInt("trackprofessor");
+        String shortName = rs.getString("shortname");
+        String fullName = rs.getString(COURSENAME);
+        String courseYear = rs.getString("year");
+        String cfu = rs.getString("cfu");
+        String session = rs.getString("session");
+        String link = rs.getString("link");
+        String facultyCourse = rs.getString("faculty");
+        int uniYear = rs.getInt("uniyear");
+
+        CourseModel courseModel = new CourseModel(courseId, courseYear, cfu, session, link, facultyCourse, uniYear);
+        courseModel.setShortName(shortName);
+        courseModel.setFullName(fullName);
+        return courseModel;
+    }
+
+
+    private static List<CourseModel> getAvaliableCourses(ResultSet rs, List<CourseModel> courses) throws SQLException {
+
+        List<CourseModel> coursesList = new ArrayList<>();
+        String courseName;
+
+        boolean equals = false;
+        do {
+            courseName = rs.getString(COURSENAME);
+
+            if (!courses.isEmpty()) {
+                for (int i = 0; i < courses.size(); i++) {
+                    if (courseName.equals(courses.get(i).getFullName())) {
+                        equals = true;
+                        break;
+                    }
+                }
+            }
+            if (!equals) {
+                coursesList.add(createCourse(rs));
+            }
+            equals = false;
+        } while (rs.next());
 
         return coursesList;
     }
