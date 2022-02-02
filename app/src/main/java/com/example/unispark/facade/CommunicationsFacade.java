@@ -14,7 +14,7 @@ public class CommunicationsFacade {
     {
 
     }
-    public static synchronized CommunicationsFacade getInstance()
+    public static CommunicationsFacade getInstance()
     {
         if(instance==null)
         {

@@ -18,7 +18,7 @@ public class StudentCreatorFacade {
     {
 
     }
-    public static synchronized StudentCreatorFacade getInstance()
+    public static StudentCreatorFacade getInstance()
     {
         if(instance==null)
         {

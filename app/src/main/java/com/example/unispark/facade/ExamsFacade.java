@@ -18,7 +18,7 @@ public class ExamsFacade {
     {
 
     }
-    public static synchronized ExamsFacade getInstance()
+    public static ExamsFacade getInstance()
     {
         if(instance==null)
         {

@@ -17,7 +17,7 @@ public class ProfessorCreatorFacade {
     {
 
     }
-    public static synchronized ProfessorCreatorFacade getInstance()
+    public static ProfessorCreatorFacade getInstance()
     {
         if(instance==null)
         {

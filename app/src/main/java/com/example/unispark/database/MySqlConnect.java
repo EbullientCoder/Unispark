@@ -22,7 +22,7 @@ public class MySqlConnect {
     }
 
     //Get a readable SQLiteDatabase ("unispark.db")
-    public synchronized Connection getDBConnection() throws SQLException {
+    public Connection getDBConnection() throws SQLException {
 
         if (this.conn == null){
             this.conn = DriverManager.getConnection("jdbc:mysql://unispark-db.cmh7hqdc7yex.us-east-1.rds.amazonaws.com:3306/Unispark-DB", "admin", "passwordUnispark");
