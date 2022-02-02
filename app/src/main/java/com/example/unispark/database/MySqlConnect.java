@@ -6,16 +6,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class MySqlConnect {
-
-
-    private static MySqlConnect instance=null;
+    private static MySqlConnect instance = null;
     private Connection conn = null;
 
     protected MySqlConnect() {}
 
-    public static synchronized MySqlConnect getInstance() {
-
+    public static MySqlConnect getInstance() {
         if(MySqlConnect.instance==null) {
             MySqlConnect.instance = new MySqlConnect();
         }
