@@ -1,11 +1,9 @@
 package com.example.unispark.database.dao;
 
 import com.example.unispark.bean.BeanStudentSignedToExam;
-import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.database.MySqlConnect;
 import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.exceptions.ExamException;
-import com.example.unispark.facade.ExamsFacade;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
