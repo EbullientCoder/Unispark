@@ -2,7 +2,7 @@ package com.example.unispark.bean.exams;
 
 import java.io.Serializable;
 
-public class BeanExam implements Serializable {
+public abstract class BeanExam implements Serializable {
 
     private int id;
     private String name;
