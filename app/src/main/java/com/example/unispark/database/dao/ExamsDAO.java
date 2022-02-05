@@ -6,6 +6,7 @@ import com.example.unispark.database.query.QueryExams;
 import com.example.unispark.exceptions.ExamException;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.ExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.sql.Connection;
@@ -70,10 +71,8 @@ public class ExamsDAO {
     }
 
 
-
-    //Select exams marked my courseName
-    public static List<BookExamModel> getCourseExams(CourseModel course, boolean isProfessor) throws SQLException {
-        List<BookExamModel> examsList = new ArrayList<>();
+    public static List<ExamModel> getProfessorExams(int professorId) throws SQLException {
+        List<ExamModel> examsList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -83,7 +82,39 @@ public class ExamsDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet rs = QueryExams.selectExams(statement, course.getFullName(), isProfessor);
+            ResultSet rs = QueryExams.selectProfessorExams(statement, professorId);
+
+            if (rs.first()){
+                do {
+                    examsList.add(bookingExam(rs));
+                } while(rs.next());
+            }
+
+            rs.close();
+
+        } finally {
+            if (statement != null){
+                statement.close();
+            }
+        }
+
+        return examsList;
+    }
+
+
+    //Select exams marked my courseName
+    public static List<ExamModel> getCourseStudentExams(CourseModel course) throws SQLException {
+        List<ExamModel> examsList = new ArrayList<>();
+
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            connection = MySqlConnect.getInstance().getDBConnection();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = QueryExams.selectExams(statement, course.getFullName());
 
             if (rs.first()){
                 do {
@@ -139,8 +170,8 @@ public class ExamsDAO {
 
 
     //Get booked exams marked by studentID
-    public static List<BookExamModel> getBookedExams(String studentID) throws SQLException {
-        List<BookExamModel> bookedExamsList = new ArrayList<>();
+    public static List<ExamModel> getBookedExams(String studentID) throws SQLException {
+        List<ExamModel> bookedExamsList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -175,8 +206,8 @@ public class ExamsDAO {
 
 
     //Get verbalized exams
-    public static List<VerbalizedExamModel> getVerbalizedExams(String studentID) throws SQLException {
-        List<VerbalizedExamModel> gradesList = new ArrayList<>();
+    public static List<ExamModel> getVerbalizedExams(String studentID) throws SQLException {
+        List<ExamModel> gradesList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -211,8 +242,8 @@ public class ExamsDAO {
 
 
     //Get Not passed exams List
-    public static List<VerbalizedExamModel> getFailedExams(String studentID) throws SQLException {
-        List<VerbalizedExamModel> gradesList = new ArrayList<>();
+    public static List<ExamModel> getFailedExams(String studentID) throws SQLException {
+        List<ExamModel> gradesList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;

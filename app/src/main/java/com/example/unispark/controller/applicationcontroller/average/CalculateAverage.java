@@ -2,6 +2,7 @@ package com.example.unispark.controller.applicationcontroller.average;
 
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
+import com.example.unispark.model.exams.ExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.sql.SQLException;
@@ -17,7 +18,10 @@ public class CalculateAverage {
 
             //Calculating the Average if the Student has Verbalized StudentExamsGUIController
             if(student.getVerbalizedExams() != null){
-                for(int i = 0; i < student.getVerbalizedExams().size(); i++) average += Double.parseDouble(student.getVerbalizedExams().get(i).getResult());
+                for(int i = 0; i < student.getVerbalizedExams().size(); i++) {
+                    VerbalizedExamModel vExam = (VerbalizedExamModel) student.getVerbalizedExams().get(i);
+                    average += Double.parseDouble(vExam.getResult());
+                }
 
                 average = average / student.getVerbalizedExams().size();
             }
@@ -49,11 +53,12 @@ public class CalculateAverage {
 
         try {
             student.setVerbalizedExams(ExamsDAO.getVerbalizedExams(student.getId()));
-            List<VerbalizedExamModel> exams =  student.getVerbalizedExams();
+            List<ExamModel> exams =  student.getVerbalizedExams();
             //Calculating the Weighted Average if the Student has Verbalized StudentExamsGUIController
             if(exams != null){
                 for(int i = 0; i < exams.size(); i++){
-                    average += (Double.parseDouble(exams.get(i).getResult()) * Double.parseDouble(exams.get(i).getCfu()));
+                    VerbalizedExamModel vExam = (VerbalizedExamModel) student.getVerbalizedExams().get(i);
+                    average += (Double.parseDouble(vExam.getResult()) * Double.parseDouble(exams.get(i).getCfu()));
                     cfu += Double.parseDouble(exams.get(i).getCfu());
                 }
 

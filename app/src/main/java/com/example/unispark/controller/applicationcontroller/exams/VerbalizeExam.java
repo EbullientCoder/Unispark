@@ -23,7 +23,7 @@ public class VerbalizeExam {
             ExamsDAO.addExamGrade(vExam, student.getId());
         } catch (ExamException e) {
             e.printStackTrace();
-            throw new ExamNotYetOccured("Exam has not yet occured");
+            throw new ExamNotYetOccured(e.getMessage());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new GenericException("Try again");

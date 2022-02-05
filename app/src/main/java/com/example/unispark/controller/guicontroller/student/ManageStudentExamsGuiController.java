@@ -3,7 +3,7 @@ package com.example.unispark.controller.guicontroller.student;
 
 import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanBookExam;
-import com.example.unispark.bean.exams.BeanExamType;
+import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.controller.applicationcontroller.exams.BookExam;
 import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
@@ -17,7 +17,7 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
 
     private StudentExamsView examsView;
-    List<BeanExamType> beanExams;
+    private List<BeanExam> beanExams;
     private int page;
 
 
@@ -28,21 +28,21 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
     }
 
     public void showNextPageExams(){
-        int newPage = this.page+1;
-        this.page = this.getCorrectPage(newPage);
-        this.showExams();
+        int newPage = page+1;
+        this.page = getCorrectPage(newPage);
+        showExams();
 
 
     }
 
     public void showPrevPageExams(){
-        int newPage = this.page-1;
-        this.page = this.getCorrectPage(newPage);
-        this.showExams();
+        int newPage = page-1;
+        this.page = getCorrectPage(newPage);
+        showExams();
     }
 
 
-    private int getCorrectPage(int page){
+    private static int getCorrectPage(int page){
         if(page > 3 || page < -3) page = 0;
         return page;
     }
@@ -51,41 +51,50 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
 
     //Show Exams Page
     public void showExams(){
-        BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
+        BeanLoggedStudent student = (BeanLoggedStudent) session.getUser();
         
-        //Application Controller
-        ManageExams manageExams = new ManageExams();
 
         //Select the Page
-        if(this.page == 0){
+        if(page == 0){
+            //Application Controller
+            ManageExams manageExams = new ManageExams();
             //Set Title
-            this.examsView.setExamsTitle("VERBALIZED EXAMS");
-            //Exams Item
+            examsView.setExamsTitle("VERBALIZED EXAMS");
+
             this.beanExams = manageExams.verbalizedExams(student);
+            examsView.setExamType(0);
         }
-        if(this.page == 1 || this.page == -3) {
+        if(page == 1 || page == -3) {
+            //Application Controller
+            ManageExams manageExams = new ManageExams();
             //Set Title
-            this.examsView.setExamsTitle("FAILED EXAMS");
-            //Exams Item
+            examsView.setExamsTitle("FAILED EXAMS");
+
             this.beanExams = manageExams.failedExams(student);
+            examsView.setExamType(0);
         }
-        if(this.page == 2 || this.page == -2) {
+        if(page == 2 || page == -2) {
+            //Application Controller
             BookExam bookExamController = new BookExam();
             //Set Title
-            this.examsView.setExamsTitle("BOOK UPCOMING EXAMS");
-            //Exams Item
+            examsView.setExamsTitle("BOOK UPCOMING EXAMS");
+
             this.beanExams = bookExamController.generateBookingExams(student);
+            examsView.setExamType(1);
 
 
         }
         if(page == 3 || page == -1) {
+            //Application Controller
+            ManageExams manageExams = new ManageExams();
             //Set Title
-            this.examsView.setExamsTitle("BOOKED EXAMS");
-            //Exams Item
-            this.beanExams = manageExams.showBookedExams(student);
+            examsView.setExamsTitle("BOOKED EXAMS");
+
+            this.beanExams = manageExams.getBookedExams(student);
+            examsView.setExamType(2);
         }
 
-        this.examsView.setExamAdapter(this.beanExams);
+        examsView.setExamAdapter(beanExams);
 
     }
 
@@ -97,15 +106,15 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
         BookExam bookExamController = new BookExam();
 
         try {
-            bookExamController.bookExam(student, (BeanBookExam) this.beanExams.get(position).getExamType());
-            this.examsView.setMessage("Exam booked");
+            bookExamController.bookExam(student, (BeanBookExam) beanExams.get(position));
+            examsView.setMessage("Exam booked");
 
             //Removing the Booked Exam from the List
-            this.beanExams.remove(position);
-            this.examsView.notifyDataChanged(position);
+            beanExams.remove(position);
+            examsView.notifyDataChanged(position);
         } catch (ExamAlreadyVerbalized | GenericException e) {
             e.printStackTrace();
-            this.examsView.setMessage(e.getMessage());
+            examsView.setMessage(e.getMessage());
         }
     }
 
@@ -118,21 +127,12 @@ public class ManageStudentExamsGuiController extends StudentBaseGuiController {
             ManageExams leaveExamAppController = new ManageExams();
             leaveExamAppController.removeExam(student, position);
             //Removing the Booked Exam from the List
-            this.beanExams.remove(position);
-            this.examsView.notifyDataChanged(position);
+            beanExams.remove(position);
+            examsView.notifyDataChanged(position);
 
         } catch (GenericException e) {
             e.printStackTrace();
-            this.examsView.setMessage(e.getMessage());
+            examsView.setMessage(e.getMessage());
         }
-    }
-
-
-    public StudentExamsView getExamsView() {
-        return examsView;
-    }
-
-    public List<BeanExamType> getBeanExams() {
-        return beanExams;
     }
 }

@@ -2,8 +2,7 @@ package com.example.unispark.bean.student;
 
 import com.example.unispark.bean.login.BeanLoggedUser;
 import com.example.unispark.model.CourseModel;
-import com.example.unispark.model.exams.BookExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
+import com.example.unispark.model.exams.ExamModel;
 
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     private String academicYear;
     private int year;
     private List<CourseModel> courses;
-    private List<BookExamModel> bookedExams;
-    private List<VerbalizedExamModel> verbalizedExams;
-    private List<VerbalizedExamModel> failedExams;
+    private List<ExamModel> bookedExams;
+    private List<ExamModel> verbalizedExams;
+    private List<ExamModel> failedExams;
 
 
 
@@ -50,15 +49,15 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     }
 
 
-    public List<BookExamModel> getBookedExams() {
+    public List<ExamModel> getBookedExams() {
         return bookedExams;
     }
 
-    public List<VerbalizedExamModel> getVerbalizedExams() {
+    public List<ExamModel> getVerbalizedExams() {
         return verbalizedExams;
     }
 
-    public List<VerbalizedExamModel> getFailedExams() {
+    public List<ExamModel> getFailedExams() {
         return failedExams;
     }
 
@@ -96,15 +95,15 @@ public class BeanLoggedStudent extends BeanLoggedUser {
     }
 
 
-    public void setBookedExams(List<BookExamModel> bookedExams) {
+    public void setBookedExams(List<ExamModel> bookedExams) {
         this.bookedExams = bookedExams;
     }
 
-    public void setVerbalizedExams(List<VerbalizedExamModel> verbalizedExams) {
+    public void setVerbalizedExams(List<ExamModel> verbalizedExams) {
         this.verbalizedExams = verbalizedExams;
     }
 
-    public void setFailedExams(List<VerbalizedExamModel> failedExams) {
+    public void setFailedExams(List<ExamModel> failedExams) {
         this.failedExams = failedExams;
     }
 

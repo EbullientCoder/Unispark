@@ -4,6 +4,7 @@ package com.example.unispark.facade;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.ExamModel;
 
 
 import java.sql.SQLException;
@@ -26,11 +27,11 @@ public class ExamsFacade {
         return instance;
     }
 
-    private void removeBookedExams (List<BookExamModel> bookedExams, List<BookExamModel> exams)
+    private void removeBookedExams (List<ExamModel> bookedExams, List<ExamModel> exams)
     {
         int examId;
         int bookedExamId;
-        List<BookExamModel> removeExams = new ArrayList<>();
+        List<ExamModel> removeExams = new ArrayList<>();
         for (int i = 0; i < exams.size(); i++){
             examId = exams.get(i).getId();
             for (int j = 0; j < bookedExams.size(); j++){
@@ -42,14 +43,14 @@ public class ExamsFacade {
     }
 
 
-    public List<BookExamModel> getStudentExams(List<CourseModel> studentCourses, List<BookExamModel> bookedExams) throws SQLException {
-        List<BookExamModel> examsList = new ArrayList<>();
+    public List<ExamModel> getStudentExams(List<CourseModel> studentCourses, List<ExamModel> bookedExams) throws SQLException {
+        List<ExamModel> examsList = new ArrayList<>();
 
         if (!studentCourses.isEmpty()){
-            List<BookExamModel> tempList;
+            List<ExamModel> tempList;
             for (int i = 0; i < studentCourses.size(); i++)
             {
-                tempList = ExamsDAO.getCourseExams(studentCourses.get(i), false);
+                tempList = ExamsDAO.getCourseStudentExams(studentCourses.get(i));
                 if(!tempList.isEmpty()){
                     if (!bookedExams.isEmpty()) {
                         this.removeBookedExams(bookedExams, tempList);
@@ -61,18 +62,5 @@ public class ExamsFacade {
         return examsList;
     }
 
-    public List<BookExamModel> getProfessorExams(List<CourseModel> professorCourses) throws SQLException {
-
-        List<BookExamModel> examsList = new ArrayList<>();
-        List<BookExamModel> tempList;
-        for (int i = 0; i < professorCourses.size(); i++)
-        {
-            tempList = ExamsDAO.getCourseExams(professorCourses.get(i), true);
-            if(!tempList.isEmpty()){
-                examsList.addAll(tempList);
-            }
-        }
-        return examsList;
-    }
 
 }

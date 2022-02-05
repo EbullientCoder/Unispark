@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unispark.R;
 import com.example.unispark.bean.exams.BeanBookExam;
-import com.example.unispark.bean.exams.BeanExamType;
+import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.bean.exams.BeanVerbalizeExam;
 
 
@@ -20,7 +20,8 @@ import java.util.List;
 public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     //Attributes
-    private List<BeanExamType> bExams;
+    private List<BeanExam> bExams;
+    private int examType;
     private OnViewExamClickListener onViewExamClickListener;
     private OnBookExamClickListener onBookExamClickListener;
     private OnLeaveExamClickListener onLeaveExamClickListener;
@@ -58,7 +59,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Verbalized - Failed ExamModel
+        //Verbalized - Failed Exams
         if(viewType == 0){
             return new VerbalizedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
@@ -68,18 +69,9 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     )
             );
         }
-        //Professor: View Assigned StudentExamsGUIController
+
         else if(viewType == 1){
-            return new UpcomingExamViewHolder(
-                    LayoutInflater.from(parent.getContext()).inflate(
-                            R.layout.item_container_professor_assigned_exams,
-                            parent,
-                            false
-                    ), onViewExamClickListener
-            );
-        }
-        //Student: Book StudentExamsGUIController
-        else if(viewType == 2){
+            //Book Exams
             return new BookExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                             R.layout.item_container_book_exams,
@@ -88,8 +80,8 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     ), onBookExamClickListener
             );
         }
-        //Student: Booked StudentExamsGUIController
-        else{
+        //Student: Booked Exams
+        else if(viewType == 2){
             return new BookedExamViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                             R.layout.item_container_book_exams,
@@ -98,29 +90,42 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     ), onLeaveExamClickListener
             );
         }
+        //Professor: View Assigned Exams
+        else{
+            return new UpcomingExamViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.item_container_professor_assigned_exams,
+                            parent,
+                            false
+                    ), onViewExamClickListener
+            );
+        }
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //Verbalized - Failed StudentExamsGUIController
-        if(getItemViewType(position) == 0){
-            BeanVerbalizeExam vExam = (BeanVerbalizeExam) bExams.get(position).getExamType();
+        //Verbalized - Failed
+        if(examType == 0){
+            BeanVerbalizeExam vExam = (BeanVerbalizeExam) bExams.get(position);
             ((VerbalizedExamViewHolder) holder).setVerbalizedExamDate(vExam);
         }
-        //Professor: Assigned StudentExamsGUIController
-        else if(getItemViewType(position) == 1){
-            BeanBookExam assignedExam = (BeanBookExam) bExams.get(position).getExamType();
-            ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
-        }
-        //Student: Book StudentExamsGUIController
-        else if(getItemViewType(position) == 2){
-            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getExamType();
+
+        //Student: Book
+        else if(examType == 1){
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position);
             ((BookExamViewHolder) holder).setBookExamDate(bookExam);
         }
-        //Student: Booked StudentExamsGUIController
-        else {
-            BeanBookExam bookExam = (BeanBookExam) bExams.get(position).getExamType();
+        //Student: Booked
+        else if(examType == 2){
+            BeanBookExam bookExam = (BeanBookExam) bExams.get(position);
             ((BookedExamViewHolder) holder).setBookedExamDate(bookExam);
+        }
+        //Professor: Assigned
+        else {
+            BeanBookExam assignedExam = (BeanBookExam) bExams.get(position);
+            ((UpcomingExamViewHolder) holder).setUpcomingExamDate(assignedExam);
         }
     }
 
@@ -131,7 +136,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public int getItemViewType(int position){
-        return bExams.get(position).getType();
+        return examType;
     }
 
 
@@ -165,7 +170,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    //1: Professor Assigned StudentExamsGUIController
+    //3: Professor Assigned StudentExamsGUIController
     static class UpcomingExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         TextView txtExamName;
@@ -208,7 +213,7 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    //2: Student Book Exam
+    //1: Student Book Exam
     static class BookExamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Attributes
         TextView txtExamName;
@@ -295,7 +300,11 @@ public class ExamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
 
-    public void setbExams(List<BeanExamType> bExams) {
+    public void setbExams(List<BeanExam> bExams) {
         this.bExams = bExams;
+    }
+
+    public void setExamType(int examType) {
+        this.examType = examType;
     }
 }

@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import com.example.unispark.Session;
+import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.controller.guicontroller.student.ManageStudentExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
-import com.example.unispark.bean.exams.BeanExamType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -73,7 +73,7 @@ implements ExamAdapter.OnBookExamClickListener,
         this.rvExams = findViewById(R.id.rv_exams);
 
         //Gui Controller
-        this.examsGuiController.showExams();
+        examsGuiController.showExams();
 
         //Right Click
         ImageButton btnPageRight;
@@ -105,7 +105,7 @@ implements ExamAdapter.OnBookExamClickListener,
     public void onBookBtnClick(int position) {
 
         //Book Exam
-        this.examsGuiController.bookExam(position);
+        examsGuiController.bookExam(position);
     }
 
     //On LeaveExam Click
@@ -113,18 +113,18 @@ implements ExamAdapter.OnBookExamClickListener,
     public void onLeaveBtnClick(int position) {
 
         //Leave Exam
-        this.examsGuiController.leaveExam(position);
+        examsGuiController.leaveExam(position);
 
     }
 
 
    //Setters used by the GuiController in order to set the information of the View
     public void setExamsTitle(String content) {
-        this.examsTitle.setText(content);
+        examsTitle.setText(content);
     }
 
     public void notifyDataChanged(int position){
-        this.examAdapter.notifyItemRemoved(position);
+        examAdapter.notifyItemRemoved(position);
     }
 
     public void setMessage(String message){
@@ -133,8 +133,12 @@ implements ExamAdapter.OnBookExamClickListener,
     }
 
 
-    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
-        this.examAdapter.setbExams(beanExamTypes);
-        this.rvExams.setAdapter(this.examAdapter);
+    public void setExamAdapter(List<BeanExam> beanExams) {
+        examAdapter.setbExams(beanExams);
+        rvExams.setAdapter(examAdapter);
+    }
+
+    public void setExamType(int type){
+        examAdapter.setExamType(type);
     }
 }

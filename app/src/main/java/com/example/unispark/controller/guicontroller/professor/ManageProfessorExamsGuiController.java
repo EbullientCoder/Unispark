@@ -5,7 +5,6 @@ import android.content.Intent;
 import com.example.unispark.Session;
 import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExam;
-import com.example.unispark.bean.exams.BeanExamType;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.controller.applicationcontroller.exams.ManageExams;
 import com.example.unispark.view.professor.VerbalizeExamsView;
@@ -19,7 +18,7 @@ import java.util.List;
 public class ManageProfessorExamsGuiController extends ProfBaseGuiController {
 
     private ProfessorExamsView examsView;
-    private List<BeanExamType> beanExams;
+    private List<BeanExam> beanExams;
 
     public ManageProfessorExamsGuiController(Session session, ProfessorExamsView examsView) {
         super(session, examsView);
@@ -31,12 +30,13 @@ public class ManageProfessorExamsGuiController extends ProfBaseGuiController {
 
         ManageExams getExamsAppController = new ManageExams();
         this.beanExams = getExamsAppController.assignedExams(professor);
-        this.examsView.setExamAdapter(this.getBeanExams());
+        this.examsView.setExamAdapter(this.beanExams);
+        this.examsView.setExamType(3);
 
     }
 
     public void showVerbalizeExam(int position){
-        BeanExam beanExam = this.getBeanExams().get(position).getExamType();
+        BeanExam beanExam = this.beanExams.get(position);
 
         Intent intent = new Intent(this.getExamsView(), VerbalizeExamsView.class);
         intent.putExtra("Exam", (BeanBookExam) beanExam);
@@ -101,9 +101,7 @@ public class ManageProfessorExamsGuiController extends ProfBaseGuiController {
     }
 
 
-    public List<BeanExamType> getBeanExams() {
-        return beanExams;
-    }
+
 
     public ProfessorExamsView getExamsView() {
         return examsView;

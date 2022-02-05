@@ -15,13 +15,17 @@ public class QueryExams {
     private QueryExams(){}
 
     //Look for exams marked by courseName
-    public static ResultSet selectExams(Statement statement, String courseName, boolean isProfessor) throws SQLException
+    public static ResultSet selectExams(Statement statement, String courseName) throws SQLException
     {
-        String queryString;
-        if (isProfessor) queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.coursename = '" + courseName + "';";
+        String queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.coursename = '" + courseName + "' AND " + DATE + " >= NOW();";
 
-        else queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.coursename = '" + courseName + "' AND " + DATE + " >= NOW();";
+        return statement.executeQuery(queryString);
+    }
 
+    //Look for exams marked by courseName
+    public static ResultSet selectProfessorExams(Statement statement, int professorId) throws SQLException
+    {
+        String queryString = "SELECT * FROM exams INNER JOIN courses ON exams.examname = courses.coursename WHERE courses.trackprofessor = " + professorId + ";";
         return statement.executeQuery(queryString);
     }
 

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import com.example.unispark.Session;
-import com.example.unispark.bean.exams.BeanExamType;
+import com.example.unispark.bean.exams.BeanExam;
 import com.example.unispark.controller.guicontroller.professor.ManageProfessorExamsGuiController;
 import com.example.unispark.viewadapter.exams.ExamAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -151,7 +151,7 @@ public class ProfessorExamsView extends AppCompatActivity
 
 
 
-    public void setExamAdapter(List<BeanExamType> beanExamTypes) {
+    public void setExamAdapter(List<BeanExam> beanExamTypes) {
         this.examAdapter.setbExams(beanExamTypes);
         this.rvExams.setAdapter(this.getExamAdapter());
 
@@ -208,5 +208,9 @@ public class ProfessorExamsView extends AppCompatActivity
     }
     public void unSetTxtCommunication() {
         this.txtCommunication.setVisibility(View.GONE);
+    }
+
+    public void setExamType(int type){
+        examAdapter.setExamType(type);
     }
 }

@@ -5,6 +5,7 @@ import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.StudentModel;
 import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.model.exams.ExamModel;
 import com.example.unispark.model.exams.VerbalizedExamModel;
 
 
@@ -31,10 +32,9 @@ public class StudentCreatorFacade {
     {
 
         List<CourseModel> coursesList = CourseDAO.selectStudentCourses(studentId);
-        List<BookExamModel> bookedExams = ExamsDAO.getBookedExams(studentId);
-        List<VerbalizedExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(studentId);
-        List<VerbalizedExamModel> failedExams = ExamsDAO.getFailedExams(studentId);
+        List<ExamModel> bookedExams = ExamsDAO.getBookedExams(studentId);
 
-        return new StudentModel(nameEmail.get(0), nameEmail.get(1), nameEmail.get(2), profilePicture, studentId, faculty, academicYear, coursesList, bookedExams, verbalizedExams, failedExams, uniYear);
+
+        return new StudentModel(nameEmail.get(0), nameEmail.get(1), nameEmail.get(2), profilePicture, studentId, faculty, academicYear, coursesList, bookedExams, uniYear);
     }
 }

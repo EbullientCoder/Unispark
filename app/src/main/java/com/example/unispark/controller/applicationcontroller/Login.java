@@ -39,8 +39,6 @@ public class Login {
             beanLoggedStudent.setAcademicYear(student.getAcademicYear());
             beanLoggedStudent.setCourses(student.getCourses());
             beanLoggedStudent.setBookedExams(student.getBookedExams());
-            beanLoggedStudent.setVerbalizedExams(student.getVerbalizedExams());
-            beanLoggedStudent.setFailedExams(student.getFailedExams());
             beanLoggedStudent.setYear(student.getUniYear());
 
         } catch (LoginException e) {
