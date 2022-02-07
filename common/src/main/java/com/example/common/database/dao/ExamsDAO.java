@@ -136,7 +136,7 @@ public class ExamsDAO {
 
 
 
-    public static void bookExam(BookExamModel exam, String studentID) throws ExamException, SQLException {
+    public static void bookExam(ExamModel exam, String studentID) throws ExamException, SQLException {
 
         Statement statement = null;
         Connection connection = null;
