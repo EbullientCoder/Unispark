@@ -21,21 +21,24 @@ public class ExamException extends Exception{
 
 
     private final int code;
-    private String message;
+    private final String message;
     private static final long serialVersionUID = 1L;
 
     public ExamException(int code) {
 
         this.code = code;
+
+        String message = "";
         if (code == 0){
-            this.message = "Exam already exists";
+            message = "Exam already exists";
         }
         else if (code == 1){
-            this.message = "Exam has not yet occured";
+            message = "Exam has not yet occured";
         }
         else if (code == 2){
-            this.message = "Exam verbalized, cannot book";
+            message = "Exam verbalized, cannot book";
         }
+        this.message = message;
     }
 
     public int getCode() {
