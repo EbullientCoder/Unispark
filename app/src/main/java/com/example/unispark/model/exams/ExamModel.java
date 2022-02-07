@@ -14,7 +14,7 @@ public abstract class ExamModel implements Serializable{
 
     //Methods
     //Constructor
-    public ExamModel(int id, String name, String year, String date, String cfu) {
+    protected ExamModel(int id, String name, String year, String date, String cfu) {
         this.id = id;
         this.name = name;
         this.year = year;
