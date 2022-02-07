@@ -28,17 +28,17 @@ public class ExamException extends Exception{
 
         this.code = code;
 
-        String message = "";
+        String mess = "";
         if (code == 0){
-            message = "Exam already exists";
+            mess = "Exam already exists";
         }
         else if (code == 1){
-            message = "Exam has not yet occured";
+            mess = "Exam has not yet occured";
         }
         else if (code == 2){
-            message = "Exam verbalized, cannot book";
+            mess = "Exam verbalized, cannot book";
         }
-        this.message = message;
+        this.message = mess;
     }
 
     public int getCode() {
