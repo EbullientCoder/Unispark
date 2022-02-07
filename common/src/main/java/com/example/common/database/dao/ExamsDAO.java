@@ -142,6 +142,7 @@ public class ExamsDAO {
         Connection connection = null;
 
         try {
+
             connection = MySqlConnect.getInstance().getDBConnection();
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
