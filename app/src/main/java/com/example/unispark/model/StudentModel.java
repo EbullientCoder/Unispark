@@ -22,8 +22,9 @@ public class StudentModel extends UserModel{
 
     //Methods
     //Constructor
-    public StudentModel(String firstName, String lastName, String email, int profilePicture, String id, String faculty,
-                        String academicYear, List<CourseModel> courses, List<ExamModel> bookedExams, int uniYear) {
+
+
+    public StudentModel(String email, int profilePicture, String firstName, String lastName, String id, String faculty, String academicYear, List<CourseModel> courses, List<ExamModel> bookedExams, List<ExamModel> verbalizedExams, List<ExamModel> failedExams, int uniYear) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,9 +33,10 @@ public class StudentModel extends UserModel{
         this.academicYear = academicYear;
         this.courses = courses;
         this.bookedExams = bookedExams;
+        this.verbalizedExams = verbalizedExams;
+        this.failedExams = failedExams;
         this.uniYear = uniYear;
     }
-
 
     public String getFirstName() {
         return firstName;

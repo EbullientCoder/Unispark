@@ -37,7 +37,7 @@ public class ExamsFacade {
                 tempList = ExamsDAO.getCourseStudentExams(studentCourses.get(i));
                 if(!tempList.isEmpty()){
                     if (!bookedExams.isEmpty()) {
-                        this.removeBookedExams(bookedExams, tempList);
+                        removeBookedExams(bookedExams, tempList);
                     }
                     examsList.addAll(tempList);
                 }
@@ -47,7 +47,7 @@ public class ExamsFacade {
     }
 
 
-    private void removeBookedExams (List<ExamModel> bookedExams, List<ExamModel> exams)
+    private static void removeBookedExams (List<ExamModel> bookedExams, List<ExamModel> exams)
     {
         int examId;
         int bookedExamId;

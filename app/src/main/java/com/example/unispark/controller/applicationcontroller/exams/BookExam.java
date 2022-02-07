@@ -8,13 +8,12 @@ import com.example.unispark.exceptions.ExamAlreadyVerbalized;
 import com.example.unispark.exceptions.ExamException;
 import com.example.unispark.exceptions.GenericException;
 import com.example.unispark.facade.ExamsFacade;
-import com.example.unispark.factory.FactoryMethodExams;
+import com.example.unispark.factory.FactoryExams;
 import com.example.unispark.model.CourseModel;
 import com.example.unispark.model.exams.BookExamModel;
 import com.example.unispark.model.exams.ExamModel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookExam {
@@ -51,8 +50,7 @@ public class BookExam {
             throwables.printStackTrace();
         }
 
-        return FactoryMethodExams.getInstance().createBeanExams(bookExams, 1);
-
+        return FactoryExams.getInstance().createBeanBookExams(bookExams);
 
     }
 

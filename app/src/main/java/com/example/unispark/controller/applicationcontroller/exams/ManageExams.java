@@ -1,20 +1,14 @@
 package com.example.unispark.controller.applicationcontroller.exams;
 
-import com.example.unispark.bean.exams.BeanBookExam;
 import com.example.unispark.bean.exams.BeanExam;
-import com.example.unispark.bean.exams.BeanVerbalizeExam;
 import com.example.unispark.bean.professor.BeanLoggedProfessor;
 import com.example.unispark.bean.student.BeanLoggedStudent;
 import com.example.unispark.database.dao.ExamsDAO;
 import com.example.unispark.exceptions.GenericException;
-import com.example.unispark.facade.ExamsFacade;
-import com.example.unispark.factory.FactoryMethodExams;
-import com.example.unispark.model.exams.BookExamModel;
+import com.example.unispark.factory.FactoryExams;
 import com.example.unispark.model.exams.ExamModel;
-import com.example.unispark.model.exams.VerbalizedExamModel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManageExams {
@@ -49,7 +43,7 @@ public class ManageExams {
             throwables.printStackTrace();
         }
 
-        return FactoryMethodExams.getInstance().createBeanExams(student.getVerbalizedExams(), 0);
+        return FactoryExams.getInstance().createBeanVerbalizedExams(student.getVerbalizedExams());
     }
 
 
@@ -65,7 +59,7 @@ public class ManageExams {
             throwables.printStackTrace();
         }
 
-        return FactoryMethodExams.getInstance().createBeanExams(student.getFailedExams(), 0);
+        return FactoryExams.getInstance().createBeanVerbalizedExams(student.getFailedExams());
     }
 
 
@@ -75,7 +69,7 @@ public class ManageExams {
     public List<BeanExam> getBookedExams(BeanLoggedStudent student){
 
         //Types: 0 = Verbalized - Failed Exam | 1 = Book Exam | 2 = Booked Exam | 3 = Professor Assigned Exams
-        return FactoryMethodExams.getInstance().createBeanExams(student.getBookedExams(), 2);
+        return FactoryExams.getInstance().createBeanBookExams(student.getBookedExams());
     }
 
 
@@ -90,7 +84,7 @@ public class ManageExams {
             throwables.printStackTrace();
         }
 
-        return FactoryMethodExams.getInstance().createBeanExams(professor.getExams(), 3);
+        return FactoryExams.getInstance().createBeanBookExams(professor.getExams());
     }
 
 

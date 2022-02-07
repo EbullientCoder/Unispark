@@ -33,8 +33,10 @@ public class StudentCreatorFacade {
 
         List<CourseModel> coursesList = CourseDAO.selectStudentCourses(studentId);
         List<ExamModel> bookedExams = ExamsDAO.getBookedExams(studentId);
+        List<ExamModel> verbalizedExams = ExamsDAO.getVerbalizedExams(studentId);
+        List<ExamModel> failedExams = ExamsDAO.getFailedExams(studentId);
 
 
-        return new StudentModel(nameEmail.get(0), nameEmail.get(1), nameEmail.get(2), profilePicture, studentId, faculty, academicYear, coursesList, bookedExams, uniYear);
+        return new StudentModel(nameEmail.get(0), profilePicture, nameEmail.get(1), nameEmail.get(2), studentId, faculty, academicYear, coursesList, bookedExams, verbalizedExams, failedExams, uniYear);
     }
 }
