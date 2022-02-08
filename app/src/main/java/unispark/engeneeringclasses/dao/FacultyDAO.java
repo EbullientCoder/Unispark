@@ -1,6 +1,6 @@
 package unispark.engeneeringclasses.dao;
 
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryFaculties;
 
 import java.sql.Connection;

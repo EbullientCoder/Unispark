@@ -1,0 +1,66 @@
+
+\unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists#getMessage()Ljava/lang/String;™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java ("1*Å
+1™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java (Œ
+‰
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java ($
+%0java.lang.String"__id*M*K?
+=unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists"
+lessonë
+è
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java ($
+%1java.lang.String"__concat*
+
+Lesson ** *
+
+%0java.lang.String÷
+ô
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java (?
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+ ** already exists on ‰
+†
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.javaB (E
+%3java.lang.String"__id*J*H?
+=unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists"
+dayõ
+ò
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java (E
+%4java.lang.String"__concat*
+
+%2java.lang.String*
+
+%3java.lang.Stringê
+ç
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java (S
+%5java.lang.String"__concat*
+
+%4java.lang.String*
+	 at hour Š
+‡
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.javaV (Z
+%6java.lang.String"__id*K*I?
+=unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists"
+hourõ
+ò
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java (Z
+%7java.lang.String"__concat*
+
+%5java.lang.String*
+
+%6java.lang.String"¶
+™
+Ž/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanErrorLessonAlreadyExists.java ([
+
+%7java.lang.StringBA?
+=unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists

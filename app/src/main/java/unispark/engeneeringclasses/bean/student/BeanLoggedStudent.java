@@ -1,10 +1,8 @@
 package unispark.engeneeringclasses.bean.student;
 
 import unispark.engeneeringclasses.bean.login.BeanLoggedUser;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.exams.BookExamModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
-import unispark.engeneeringclasses.model.exams.VerbalizedExamModel;
+import unispark.model.CourseModel;
+import unispark.model.exams.ExamModel;
 
 import java.util.List;
 

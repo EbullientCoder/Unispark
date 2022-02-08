@@ -3,10 +3,10 @@ package unispark.engeneeringclasses.facade;
 import unispark.engeneeringclasses.dao.CourseDAO;
 import unispark.engeneeringclasses.dao.ExamsDAO;
 import unispark.engeneeringclasses.dao.HomeworkDAO;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.HomeworkModel;
-import unispark.engeneeringclasses.model.ProfessorModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
+import unispark.model.CourseModel;
+import unispark.model.HomeworkModel;
+import unispark.model.ProfessorModel;
+import unispark.model.exams.ExamModel;
 
 import java.sql.SQLException;
 import java.util.List;

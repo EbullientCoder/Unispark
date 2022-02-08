@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup" >
         <activity
-            android:name="unispark.mobile.view.SplashScreenView"
+            android:name="unispark.view.mobileview.SplashScreenView"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,60 +24,60 @@
 
 
         <activity
-            android:name="unispark.mobile.view.LoginView"
+            android:name="unispark.view.mobileview.LoginView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.mobile.view.student.StudentHomeView"
+            android:name="unispark.view.mobileview.student.StudentHomeView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.student.StudentExamsView"
+            android:name="unispark.view.mobileview.student.StudentExamsView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.student.StudentLinksView"
+            android:name="unispark.view.mobileview.student.StudentLinksView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.student.StudentProfileView"
+            android:name="unispark.view.mobileview.student.StudentProfileView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.student.StudentScheduleView"
-            android:exported="true" />
-
-
-        <activity
-            android:name="unispark.mobile.view.professor.ProfessorHomeView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.mobile.view.professor.ProfessorExamsView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.mobile.view.professor.ProfessorProfileView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.mobile.view.professor.VerbalizeExamsView"
+            android:name="unispark.view.mobileview.student.StudentScheduleView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.mobile.view.university.UniversityHomeView"
+            android:name="unispark.view.mobileview.professor.ProfessorHomeView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.mobileview.professor.ProfessorExamsView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.mobileview.professor.ProfessorProfileView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.mobileview.professor.VerbalizeExamsView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.mobile.view.details.DetailsCourseView"
+            android:name="unispark.view.mobileview.university.UniversityHomeView"
+            android:exported="true" />
+
+
+        <activity
+            android:name="unispark.view.mobileview.details.DetailsCourseView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.details.DetailsHomeworkView"
+            android:name="unispark.view.mobileview.details.DetailsHomeworkView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.details.DetailsProfCommunicationView"
+            android:name="unispark.view.mobileview.details.DetailsProfCommunicationView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.details.DetailsProfessorView"
+            android:name="unispark.view.mobileview.details.DetailsProfessorView"
             android:exported="true" />
         <activity
-            android:name="unispark.mobile.view.details.DetailsUniCommunicationView"
+            android:name="unispark.view.mobileview.details.DetailsUniCommunicationView"
             android:exported="true" />
 
 

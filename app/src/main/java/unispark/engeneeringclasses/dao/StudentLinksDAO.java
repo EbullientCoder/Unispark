@@ -1,9 +1,9 @@
 package unispark.engeneeringclasses.dao;
 
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryStudentLinks;
 import unispark.engeneeringclasses.exceptions.LinkAlreadyExists;
-import unispark.engeneeringclasses.model.LinkModel;
+import unispark.model.LinkModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

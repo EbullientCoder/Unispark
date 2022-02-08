@@ -1,13 +1,13 @@
 package unispark.engeneeringclasses.dao;
 
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryCourse;
 import unispark.engeneeringclasses.query.QueryExams;
 import unispark.engeneeringclasses.exceptions.CourseAlreadyJoined;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
 import unispark.engeneeringclasses.exceptions.CourseNeverJoined;
 import unispark.engeneeringclasses.exceptions.ExamBookedException;
-import unispark.engeneeringclasses.model.CourseModel;
+import unispark.model.CourseModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

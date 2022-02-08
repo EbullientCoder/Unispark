@@ -1,11 +1,11 @@
 package unispark.engeneeringclasses.dao;
 
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryCommunications;
 import unispark.engeneeringclasses.query.QueryCourse;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
-import unispark.engeneeringclasses.model.communications.ProfessorCommunicationModel;
-import unispark.engeneeringclasses.model.communications.UniversityCommunicationModel;
+import unispark.model.communications.ProfessorCommunicationModel;
+import unispark.model.communications.UniversityCommunicationModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

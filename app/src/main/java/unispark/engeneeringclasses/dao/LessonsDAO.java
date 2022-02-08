@@ -1,11 +1,11 @@
 package unispark.engeneeringclasses.dao;
 
 
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryLessons;
 import unispark.engeneeringclasses.exceptions.LessonAlreadyExists;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.LessonModel;
+import unispark.model.CourseModel;
+import unispark.model.LessonModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

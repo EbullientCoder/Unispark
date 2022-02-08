@@ -3,9 +3,9 @@ package unispark.engeneeringclasses.factory;
 import unispark.engeneeringclasses.bean.exams.BeanBookExam;
 import unispark.engeneeringclasses.bean.exams.BeanExam;
 import unispark.engeneeringclasses.bean.exams.BeanVerbalizeExam;
-import unispark.engeneeringclasses.model.exams.BookExamModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
-import unispark.engeneeringclasses.model.exams.VerbalizedExamModel;
+import unispark.model.exams.BookExamModel;
+import unispark.model.exams.ExamModel;
+import unispark.model.exams.VerbalizedExamModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,46 @@
+
+Œunispark.engeneeringclasses.query.QueryCommunications#selectCourseCommunications(Ljava/sql/Statement;Ljava/lang/String;)Ljava/sql/ResultSet;‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java* *(6"1*™
+1’
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java, ,(’­
+ª
+’
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java, -(†
+%0java.lang.String"__concat*wu
+sSELECT *  FROM professorcommunications INNER JOIN courses ON professorcommunications.shortname = courses.shortname *xv
+tINNER JOIN professors ON courses.trackprofessor = professors.professorID WHERE professorcommunications.shortname = 'û
+ø
+’
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java, -(–
+%1java.lang.String"__concat*
+
+%0java.lang.String*%
+#
+courseShortNamejava.lang.StringÜ
+Ù
+’
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java, -(›
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+';Ù
+Ö
+’
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java, -(œ
+queryStringjava.lang.String"__id*
+
+%2java.lang.Stringâß
+‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java. .(2
+%3java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
+
+	statementjava.sql.Statement*!
+
+queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"°
+‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryCommunications.java. .(3
+
+%3java.sql.ResultSet:
+	statementjava.sql.Statement:#
+courseShortNamejava.lang.StringB9"7
+5unispark.engeneeringclasses.query.QueryCommunications

@@ -1,0 +1,165 @@
+
+Funispark.cli.clicontroller.generic.Schedule#getDay()Ljava/lang/String;†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java< <("10*Ö
+2†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaA A(ê
+ç
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaA A(
+%11java.io.PrintStream"__id*:*8-
++unispark.cli.clicontroller.generic.Schedule"
+write§¤
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaA A(8
+%12void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%11java.io.PrintStream*
+\n\n\nERROR: day not found.2println(Ljava/lang/String;)ê
+ç
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaC C(
+%13java.io.PrintStream"__id*:*8-
++unispark.cli.clicontroller.generic.Schedule"
+writeŠ
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaC C( 
+%14void".java.io.PrintStream#print(Ljava/lang/String;)V*
+
+%13java.io.PrintStream*	
+Day: 2print(Ljava/lang/String;)å
+â
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaD D(
+%15java.util.Scanner"__id*7*5-
++unispark.cli.clicontroller.generic.Schedule"
+scýú
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaD D(
+%16java.lang.String".java.util.Scanner#nextLine()Ljava/lang/String;*
+
+%15java.util.Scanner2
+nextLine()Æ
+Ã
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaD D(
+dayjava.lang.String"__id*
+
+%16java.lang.String*
+9*¨
+3ˆ
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@­ @(°Œ
+ˆ
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@­ @(Á
+%10boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+
+sunday2equals(Ljava/lang/Object;)*
+2
+1*©
+4ˆ
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@’ @(•
+ˆ
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@’ @(¨
+%9boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+
+saturday2equals(Ljava/lang/Object;)*
+3
+1*¤
+5†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@y @(|Š
+‡
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@y @(
+%8boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+
+friday2equals(Ljava/lang/Object;)*
+4
+1*¥
+6†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@^ @(aŽ‹
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@^ @(t
+%7boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+
+thursday2equals(Ljava/lang/Object;)*
+5
+1*¦
+7†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@B @(EŒ
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@B @(Y
+%6boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+	wednesday2equals(Ljava/lang/Object;)*
+6
+1*¤
+8†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@( @(+Š
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@( @(=
+%5boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*	
+tuesday2equals(Ljava/lang/Object;)*
+7
+1*£
+9†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@ @(Œ‰
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java@ @(#
+%4boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+dayjava.lang.String*
+
+monday2equals(Ljava/lang/Object;)*
+8
+1*¿
+
+10†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java> >(é
+æ
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java> >(
+%0java.io.PrintStream"__id*:*8-
++unispark.cli.clicontroller.generic.Schedule"
+write‘Ž
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java> >("
+
+%1void".java.io.PrintStream#print(Ljava/lang/String;)V*
+
+%0java.io.PrintStream*
+\n\n\nDay: 2print(Ljava/lang/String;)ä
+á
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java? ?(
+%2java.util.Scanner"__id*7*5-
++unispark.cli.clicontroller.generic.Schedule"
+scûø
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java? ?("
+%3java.lang.String".java.util.Scanner#nextLine()Ljava/lang/String;*
+
+%2java.util.Scanner2
+nextLine()Å
+Â
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.java? ?(#
+dayjava.lang.String"__id*
+
+%3java.lang.String*
+9*³
+1†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaG G("¤
+†
+|/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/cli/clicontroller/generic/Schedule.javaG G(
+
+dayjava.lang.StringB/-
++unispark.cli.clicontroller.generic.Schedule

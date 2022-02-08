@@ -3,11 +3,11 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
-import unispark.engeneeringclasses.applicationcontroller.LoginAppController;
+import unispark.controller.appcontroller.LoginAppController;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.engeneeringclasses.bean.login.BeanUser;
-import unispark.engeneeringclasses.applicationcontroller.course.ManageCourses;
+import unispark.controller.appcontroller.course.ManageCourses;
 import unispark.engeneeringclasses.exceptions.CourseAlreadyJoined;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
 import unispark.engeneeringclasses.exceptions.CourseNeverJoined;

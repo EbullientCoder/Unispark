@@ -1,13 +1,13 @@
 package unispark.engeneeringclasses.dao;
 
 import unispark.engeneeringclasses.bean.BeanStudentSignedToExam;
-import unispark.engeneeringclasses.MySqlConnect;
+import unispark.engeneeringclasses.others.MySqlConnect;
 import unispark.engeneeringclasses.query.QueryExams;
 import unispark.engeneeringclasses.exceptions.ExamException;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.exams.BookExamModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
-import unispark.engeneeringclasses.model.exams.VerbalizedExamModel;
+import unispark.model.CourseModel;
+import unispark.model.exams.BookExamModel;
+import unispark.model.exams.ExamModel;
+import unispark.model.exams.VerbalizedExamModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

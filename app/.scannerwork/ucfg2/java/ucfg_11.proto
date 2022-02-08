@@ -1,0 +1,100 @@
+
+Šunispark.engeneeringclasses.query.QueryLogin#loginUniversity(Ljava/sql/Statement;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/ResultSet;‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java/ /(+"1*é
+1‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 1(#³
+°
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 1(#
+%0java.lang.String"__id*
+""³
+°
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1& 1(/
+%1java.lang.String"__id*
+""ã
+à
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 1(/
+%2java.lang.String"__concat*
+
+%0java.lang.String*
+
+%1java.lang.String³
+°
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java12 1(7
+%3java.lang.String"__id*
+""ã
+à
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 1(7
+%4java.lang.String"__concat*
+
+%2java.lang.String*
+
+%3java.lang.Stringæ
+ã
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 1(?
+%5java.lang.String"__concat*
+
+%4java.lang.String*
+
+emailjava.lang.String³
+°
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java2 2(
+%6java.lang.String"__id*
+""ã
+à
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 2(
+%7java.lang.String"__concat*
+
+%5java.lang.String*
+
+%6java.lang.StringÓ
+Ð
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java2 2()
+%8java.lang.String"Zunispark.engeneeringclasses.query.QueryLogin#getHash(Ljava/lang/String;)Ljava/lang/String;*0".
+,unispark.engeneeringclasses.query.QueryLogin*
+
+passwordjava.lang.Stringã
+à
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 2()
+%9java.lang.String"__concat*
+
+%7java.lang.String*
+
+%8java.lang.StringÒ
+Ï
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 2(0
+%10java.lang.String"__concat*
+
+%9java.lang.String*
+';Ï
+Ì
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java1 2(1
+queryStringjava.lang.String"__id*
+
+%10java.lang.StringÙÖ
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java3 3(2
+%11java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
+
+	statementjava.sql.Statement*!
+
+queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"§
+‡
+}/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLogin.java3 3(3
+
+%11java.sql.ResultSet:
+	statementjava.sql.Statement:
+emailjava.lang.String:
+passwordjava.lang.StringB0".
+,unispark.engeneeringclasses.query.QueryLogin

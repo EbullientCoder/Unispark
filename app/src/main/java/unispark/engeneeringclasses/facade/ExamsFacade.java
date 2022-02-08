@@ -2,8 +2,8 @@ package unispark.engeneeringclasses.facade;
 
 
 import unispark.engeneeringclasses.dao.ExamsDAO;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
+import unispark.model.CourseModel;
+import unispark.model.exams.ExamModel;
 
 
 import java.sql.SQLException;

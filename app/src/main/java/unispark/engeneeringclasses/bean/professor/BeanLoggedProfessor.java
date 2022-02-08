@@ -1,10 +1,8 @@
 package unispark.engeneeringclasses.bean.professor;
 
-import unispark.engeneeringclasses.bean.login.BeanLoggedUser;
-import unispark.engeneeringclasses.model.CourseModel;
-import unispark.engeneeringclasses.model.HomeworkModel;
-import unispark.engeneeringclasses.model.exams.BookExamModel;
-import unispark.engeneeringclasses.model.exams.ExamModel;
+import unispark.model.CourseModel;
+import unispark.model.HomeworkModel;
+import unispark.model.exams.ExamModel;
 
 import java.util.List;
 

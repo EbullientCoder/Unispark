@@ -1,7 +1,7 @@
 package unispark.engeneeringclasses.facade;
 
 import unispark.engeneeringclasses.dao.CommunicationsDAO;
-import unispark.engeneeringclasses.model.communications.ProfessorCommunicationModel;
+import unispark.model.communications.ProfessorCommunicationModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

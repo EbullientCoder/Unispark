@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="unispark.mobile.view.student.StudentScheduleView"
+    tools:context="unispark.view.mobileview.student.StudentScheduleView"
     android:background="#212529">
 
     <LinearLayout

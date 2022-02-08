@@ -6,7 +6,7 @@ import com.example.unispark.R;
 
 import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunication;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
-import unispark.engeneeringclasses.applicationcontroller.communications.AddCommunication;
+import unispark.controller.appcontroller.communications.AddCommunication;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
 import unispark.engeneeringclasses.exceptions.GenericException;
 
