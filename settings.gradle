@@ -8,6 +8,4 @@ dependencyResolutionManagement {
     
 }
 rootProject.name = "uniSpark"
-include ':common'
-include ':mobile'
-include ':cli'
+include ':app'
