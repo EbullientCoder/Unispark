@@ -1,8 +1,6 @@
 package unispark.view;
 
 
-
-
 import java.io.IOException;
 
 
@@ -12,10 +10,8 @@ public class MainCLIView {
 
     public static void main(String[] args) throws IOException {
 
-
         //Console View
         CLI cli = new CLI();
         cli.start();
-
     }
 }

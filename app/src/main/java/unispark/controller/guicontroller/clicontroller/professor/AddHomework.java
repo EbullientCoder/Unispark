@@ -69,7 +69,6 @@ public class AddHomework {
                 homework.setExpiration(date);
                 homework.setInstructions(instructions);
                 homework.setPoints(points);
-                //homework.setTrackProfessor(professor.getId());
 
 
                 //Application Controller
