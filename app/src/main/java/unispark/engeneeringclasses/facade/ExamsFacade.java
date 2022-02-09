@@ -3,6 +3,7 @@ package unispark.engeneeringclasses.facade;
 
 import unispark.engeneeringclasses.dao.ExamsDAO;
 import unispark.model.CourseModel;
+import unispark.model.exams.BookExamModel;
 import unispark.model.exams.ExamModel;
 
 
@@ -27,11 +28,11 @@ public class ExamsFacade {
     }
 
 
-    public List<ExamModel> getStudentExams(List<CourseModel> studentCourses, List<ExamModel> bookedExams) throws SQLException {
-        List<ExamModel> examsList = new ArrayList<>();
+    public List<BookExamModel> getStudentExams(List<CourseModel> studentCourses, List<BookExamModel> bookedExams) throws SQLException {
+        List<BookExamModel> examsList = new ArrayList<>();
 
         if (!studentCourses.isEmpty()){
-            List<ExamModel> tempList;
+            List<BookExamModel> tempList;
             for (int i = 0; i < studentCourses.size(); i++)
             {
                 tempList = ExamsDAO.getCourseStudentExams(studentCourses.get(i));
@@ -47,7 +48,7 @@ public class ExamsFacade {
     }
 
 
-    private static void removeBookedExams (List<ExamModel> bookedExams, List<ExamModel> exams)
+    private static void removeBookedExams (List<BookExamModel> bookedExams, List<BookExamModel> exams)
     {
         int examId;
         int bookedExamId;

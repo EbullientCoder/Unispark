@@ -6,6 +6,7 @@ import unispark.engeneeringclasses.dao.HomeworkDAO;
 import unispark.model.CourseModel;
 import unispark.model.HomeworkModel;
 import unispark.model.ProfessorModel;
+import unispark.model.exams.BookExamModel;
 import unispark.model.exams.ExamModel;
 
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class ProfessorCreatorFacade {
     public ProfessorModel getProfessor(String firstName, String lastName, String email, int profilePicture, int professorId, String faculty, String website) throws SQLException
     {
         List<CourseModel> courses = CourseDAO.selectProfessorCourses(professorId);
-        List<ExamModel> exams = ExamsDAO.getProfessorExams(professorId);
+        List<BookExamModel> exams = ExamsDAO.getProfessorExams(professorId);
         List<HomeworkModel> homeworks = HomeworkDAO.getAssignedHomework(professorId);
 
         return new ProfessorModel(firstName, lastName, email, profilePicture, professorId, faculty, website, courses, exams, homeworks);

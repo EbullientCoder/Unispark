@@ -1,17 +1,9 @@
 
-Ounispark.engeneeringclasses.model.CourseModel#getCourseYear()Ljava/lang/String;ˆ
-~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/CourseModel.java7 7("1*¨
-1ˆ
-~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/CourseModel.java8 8(ï
-ì
-ˆ
-~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/CourseModel.java8 8(
-%0java.lang.String"__id*A*?/
--unispark.engeneeringclasses.model.CourseModel"
-
-courseYear"¥
-ˆ
-~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/CourseModel.java8 8(
-
-%0java.lang.StringB1/
--unispark.engeneeringclasses.model.CourseModel
+Kunispark.model.communications.UniversityCommunicationModel#getBackground()I–
+‹/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/UniversityCommunicationModel.java ("1*À
+1–
+‹/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/UniversityCommunicationModel.java ("¡
+–
+‹/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/UniversityCommunicationModel.java (
+""B><
+:unispark.model.communications.UniversityCommunicationModel

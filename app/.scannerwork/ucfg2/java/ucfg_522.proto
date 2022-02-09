@@ -1,16 +1,16 @@
 
-\unispark.engeneeringclasses.bean.university.BeanLoggedUniversity#getName()Ljava/lang/String;œ
-‘/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/university/BeanLoggedUniversity.java ("1*ñ
-1œ
-‘/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/university/BeanLoggedUniversity.java (
-
-œ
-‘/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/university/BeanLoggedUniversity.java (
-%0java.lang.String"__id*N*LB
-@unispark.engeneeringclasses.bean.university.BeanLoggedUniversity"
-name"¹
-œ
-‘/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/university/BeanLoggedUniversity.java (
+Uunispark.model.communications.ProfessorCommunicationModel#getDate()Ljava/lang/String;•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java> >("1*Õ
+1•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java? ?(‚
+ÿ
+•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java? ?(
+%0java.lang.String"__id*G*E;
+9unispark.model.communications.ProfessorCommunicationModel"
+date"²
+•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java? ?(
 
-%0java.lang.StringBDB
-@unispark.engeneeringclasses.bean.university.BeanLoggedUniversity
+%0java.lang.StringB=;
+9unispark.model.communications.ProfessorCommunicationModel

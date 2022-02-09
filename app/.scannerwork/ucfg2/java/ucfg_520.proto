@@ -1,16 +1,16 @@
 
-Yunispark.engeneeringclasses.model.exams.VerbalizedExamModel#getResult()Ljava/lang/String;—
-Œ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/VerbalizedExamModel.java ("1*ß
-1—
-Œ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/VerbalizedExamModel.java (ˆ
-…
-—
-Œ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/VerbalizedExamModel.java (
-%0java.lang.String"__id*K*I=
-;unispark.engeneeringclasses.model.exams.VerbalizedExamModel"
-result"´
-—
-Œ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/VerbalizedExamModel.java (
+^unispark.model.communications.ProfessorCommunicationModel#getProfessorName()Ljava/lang/String;•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java6 6(""1*Þ
+1•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java7 7(‹
+ˆ
+•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java7 7(
+%0java.lang.String"__id*P*N;
+9unispark.model.communications.ProfessorCommunicationModel"
+professorName"²
+•
+Š/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/communications/ProfessorCommunicationModel.java7 7(
 
-%0java.lang.StringB?=
-;unispark.engeneeringclasses.model.exams.VerbalizedExamModel
+%0java.lang.StringB=;
+9unispark.model.communications.ProfessorCommunicationModel

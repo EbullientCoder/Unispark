@@ -1,16 +1,17 @@
 
-Munispark.engeneeringclasses.bean.courses.BeanCourse#getId()Ljava/lang/String;è
-Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java ("1*ª
+Uunispark.engeneeringclasses.bean.courses.BeanCourse#getCourseYear()Ljava/lang/String;è
+Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java ("1*√
 1è
-Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (Ù
-Ò
+Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (¸
+˘
 è
-Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (
-%0java.lang.String"__id*?*=5
-3unispark.engeneeringclasses.bean.courses.BeanCourse"
-id"¨
+Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (
+%0java.lang.String"__id*G*E5
+3unispark.engeneeringclasses.bean.courses.BeanCourse"
+
+courseYear"¨
 è
-Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (
+Ñ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/courses/BeanCourse.java (
 
 %0java.lang.StringB75
 3unispark.engeneeringclasses.bean.courses.BeanCourse

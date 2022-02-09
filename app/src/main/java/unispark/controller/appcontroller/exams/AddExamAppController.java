@@ -20,7 +20,7 @@ public class AddExamAppController {
         BookExamModel exam = new BookExamModel(bExam.getId(), bExam.getName(), bExam.getYear(), bExam.getDate(), bExam.getCfu(), bExam.getClassroom(), bExam.getBuilding());
         try {
             ExamsDAO.addExam(exam);
-            List<ExamModel> professorExams = professor.getExams();
+            List<BookExamModel> professorExams = professor.getExams();
             professorExams.add(exam);
             professor.setExams(professorExams);
         } catch (ExamException e) {

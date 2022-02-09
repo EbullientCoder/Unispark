@@ -1,6 +1,8 @@
 package unispark.model;
 
+import unispark.model.exams.BookExamModel;
 import unispark.model.exams.ExamModel;
+import unispark.model.exams.VerbalizedExamModel;
 
 import java.util.List;
 
@@ -13,16 +15,16 @@ public class StudentModel extends UserModel{
     private String faculty;
     private String academicYear;
     private List<CourseModel> courses;
-    private List<ExamModel> bookedExams;
-    private List<ExamModel> verbalizedExams;
-    private List<ExamModel> failedExams;
+    private List<BookExamModel> bookedExams;
+    private List<VerbalizedExamModel> verbalizedExams;
+    private List<VerbalizedExamModel> failedExams;
     private int uniYear;
 
     //Methods
     //Constructor
 
 
-    public StudentModel(String email, int profilePicture, String firstName, String lastName, String id, String faculty, String academicYear, List<CourseModel> courses, List<ExamModel> bookedExams, List<ExamModel> verbalizedExams, List<ExamModel> failedExams, int uniYear) {
+    public StudentModel(String email, int profilePicture, String firstName, String lastName, String id, String faculty, String academicYear, List<CourseModel> courses, List<BookExamModel> bookedExams, List<VerbalizedExamModel> verbalizedExams, List<VerbalizedExamModel> failedExams, int uniYear) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -84,27 +86,27 @@ public class StudentModel extends UserModel{
         this.courses = courses;
     }
 
-    public List<ExamModel> getBookedExams() {
+    public List<BookExamModel> getBookedExams() {
         return bookedExams;
     }
 
-    public void setBookedExams(List<ExamModel> bookedExams) {
+    public void setBookedExams(List<BookExamModel> bookedExams) {
         this.bookedExams = bookedExams;
     }
 
-    public List<ExamModel> getVerbalizedExams() {
+    public List<VerbalizedExamModel> getVerbalizedExams() {
         return verbalizedExams;
     }
 
-    public void setVerbalizedExams(List<ExamModel> verbalizedExams) {
+    public void setVerbalizedExams(List<VerbalizedExamModel> verbalizedExams) {
         this.verbalizedExams = verbalizedExams;
     }
 
-    public List<ExamModel> getFailedExams() {
+    public List<VerbalizedExamModel> getFailedExams() {
         return failedExams;
     }
 
-    public void setFailedExams(List<ExamModel> failedExams) {
+    public void setFailedExams(List<VerbalizedExamModel> failedExams) {
         this.failedExams = failedExams;
     }
 

@@ -1,17 +1,48 @@
 
-junispark.engeneeringclasses.bean.communications.BeanProfessorCommunication#getFullName()Ljava/lang/String;¶
-õ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/communications/BeanProfessorCommunication.java ("1*ù
-1¶
-õ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/communications/BeanProfessorCommunication.java (®
-•
-¶
-õ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/communications/BeanProfessorCommunication.java (
-%0java.lang.String"__id*\*ZL
-Junispark.engeneeringclasses.bean.communications.BeanProfessorCommunication"
+~unispark.engeneeringclasses.facade.StudentCreatorFacade#getInstance()Lunispark/engeneeringclasses/facade/StudentCreatorFacade;ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java' (2"3*Ñ
+2ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (/ëé
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (-=
+%17unispark.engeneeringclasses.facade.StudentCreatorFacade"7unispark.engeneeringclasses.facade.StudentCreatorFacade£
+†
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (/
+%2"Aunispark.engeneeringclasses.facade.StudentCreatorFacade#<init>()V*?
+=
+%17unispark.engeneeringclasses.facade.StudentCreatorFacade©
+¶
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (/G9
+7unispark.engeneeringclasses.facade.StudentCreatorFacade"
 
-fullName"√
-¶
-õ/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/communications/BeanProfessorCommunication.java (
-
-%0java.lang.StringBNL
-Junispark.engeneeringclasses.bean.communications.BeanProfessorCommunication
+instance"__id*?
+=
+%17unispark.engeneeringclasses.facade.StudentCreatorFacade*
+1*Õ
+3ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (©
+¶
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (=
+%07unispark.engeneeringclasses.facade.StudentCreatorFacade"__id*I*G9
+7unispark.engeneeringclasses.facade.StudentCreatorFacade"
+
+instance*
+2
+1*ü
+1ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (©
+¶
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (=
+%37unispark.engeneeringclasses.facade.StudentCreatorFacade"__id*I*G9
+7unispark.engeneeringclasses.facade.StudentCreatorFacade"
+
+instance"◊
+ì
+à/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/facade/StudentCreatorFacade.java (?
+=
+%37unispark.engeneeringclasses.facade.StudentCreatorFacadeB;"9
+7unispark.engeneeringclasses.facade.StudentCreatorFacade

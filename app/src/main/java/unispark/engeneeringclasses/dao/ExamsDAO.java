@@ -71,8 +71,8 @@ public class ExamsDAO {
     }
 
 
-    public static List<ExamModel> getProfessorExams(int professorId) throws SQLException {
-        List<ExamModel> examsList = new ArrayList<>();
+    public static List<BookExamModel> getProfessorExams(int professorId) throws SQLException {
+        List<BookExamModel> examsList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -103,8 +103,8 @@ public class ExamsDAO {
 
 
     //Select exams marked my courseName
-    public static List<ExamModel> getCourseStudentExams(CourseModel course) throws SQLException {
-        List<ExamModel> examsList = new ArrayList<>();
+    public static List<BookExamModel> getCourseStudentExams(CourseModel course) throws SQLException {
+        List<BookExamModel> examsList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -171,8 +171,8 @@ public class ExamsDAO {
 
 
     //Get booked exams marked by studentID
-    public static List<ExamModel> getBookedExams(String studentID) throws SQLException {
-        List<ExamModel> bookedExamsList = new ArrayList<>();
+    public static List<BookExamModel> getBookedExams(String studentID) throws SQLException {
+        List<BookExamModel> bookedExamsList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -207,8 +207,8 @@ public class ExamsDAO {
 
 
     //Get verbalized exams
-    public static List<ExamModel> getVerbalizedExams(String studentID) throws SQLException {
-        List<ExamModel> gradesList = new ArrayList<>();
+    public static List<VerbalizedExamModel> getVerbalizedExams(String studentID) throws SQLException {
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;
@@ -243,8 +243,8 @@ public class ExamsDAO {
 
 
     //Get Not passed exams List
-    public static List<ExamModel> getFailedExams(String studentID) throws SQLException {
-        List<ExamModel> gradesList = new ArrayList<>();
+    public static List<VerbalizedExamModel> getFailedExams(String studentID) throws SQLException {
+        List<VerbalizedExamModel> gradesList = new ArrayList<>();
 
         Statement statement = null;
         Connection connection = null;

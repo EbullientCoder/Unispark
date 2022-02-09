@@ -26,12 +26,12 @@ public class FactoryExams {
     }
 
 
-    public List<BeanExam> createBeanVerbalizedExams(List<ExamModel> exams) {
+    public List<BeanExam> createBeanVerbalizedExams(List<VerbalizedExamModel> exams) {
         List<BeanExam> bExams = new ArrayList<>();
 
         //BeanVerbalizeExams
         for (int i = 0; i < exams.size(); i++) {
-            VerbalizedExamModel vExam = (VerbalizedExamModel) exams.get(i);
+            VerbalizedExamModel vExam = exams.get(i);
             BeanVerbalizeExam beanVerbalizeExam;
             beanVerbalizeExam = new BeanVerbalizeExam();
             beanVerbalizeExam.setName(vExam.getName());
@@ -49,11 +49,11 @@ public class FactoryExams {
     }
 
 
-    public List<BeanExam> createBeanBookExams(List<ExamModel> exams){
+    public List<BeanExam> createBeanBookExams(List<BookExamModel> exams){
         List<BeanExam> bExams = new ArrayList<>();
         //BeanBookExams
         for (int i = 0; i < exams.size(); i++) {
-            BookExamModel bExam = (BookExamModel) exams.get(i);
+            BookExamModel bExam = exams.get(i);
             BeanBookExam beanBookExam;
             beanBookExam = new BeanBookExam();
             beanBookExam.setDate(bExam.getDate());

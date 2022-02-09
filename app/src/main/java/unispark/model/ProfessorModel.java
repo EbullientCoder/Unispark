@@ -1,5 +1,6 @@
 package unispark.model;
 
+import unispark.model.exams.BookExamModel;
 import unispark.model.exams.ExamModel;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class ProfessorModel extends UserModel{
     private String faculty;
     private String website;
     private List<CourseModel> courses;
-    private List<ExamModel> exams;
+    private List<BookExamModel> exams;
     private List<HomeworkModel> homeworks;
 
     //Methods
@@ -21,7 +22,7 @@ public class ProfessorModel extends UserModel{
 
     public ProfessorModel(String firstName, String lastName, String email, int profilePicture, int id,
                           String faculty, String website, List<CourseModel> courses,
-                          List<ExamModel> exams, List<HomeworkModel> homeworks) {
+                          List<BookExamModel> exams, List<HomeworkModel> homeworks) {
         super(email, profilePicture);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,11 +82,11 @@ public class ProfessorModel extends UserModel{
         this.courses = courses;
     }
 
-    public List<ExamModel> getExams() {
+    public List<BookExamModel> getExams() {
         return exams;
     }
 
-    public void setExams(List<ExamModel> exams) {
+    public void setExams(List<BookExamModel> exams) {
         this.exams = exams;
     }
 

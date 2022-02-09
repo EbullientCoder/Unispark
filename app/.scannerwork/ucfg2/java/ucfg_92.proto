@@ -1,16 +1,17 @@
 
-Vunispark.engeneeringclasses.model.exams.BookExamModel#getClassroom()Ljava/lang/String;‘
-†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/BookExamModel.java ("1*Ê
-1‘
-†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/BookExamModel.java (ÿ
-ü
-‘
-†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/BookExamModel.java (
-%0java.lang.String"__id*H*F7
-5unispark.engeneeringclasses.model.exams.BookExamModel"
-	classroom"®
-‘
-†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/exams/BookExamModel.java (
+=unispark.model.ProfessorModel#getLastName()Ljava/lang/String;x
+n/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/ProfessorModel.java, ,("1*ã
+1x
+n/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/ProfessorModel.java- -(Ì
+É
+x
+n/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/ProfessorModel.java- -(
+%0java.lang.String"__id*/*-
+unispark.model.ProfessorModel"
+
+lastName"”
+x
+n/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/ProfessorModel.java- -(
 
-%0java.lang.StringB97
-5unispark.engeneeringclasses.model.exams.BookExamModel
+%0java.lang.StringB!
+unispark.model.ProfessorModel

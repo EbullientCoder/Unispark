@@ -1,184 +1,9 @@
 
-Šunispark.engeneeringclasses.query.QueryLessons#selectLessons(Ljava/sql/Statement;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/ResultSet;‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java ()"1*¤-
-1‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (&µ
-²
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java) (/
-%0java.lang.String"__id*
-""Ø
-Õ
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (/
-%1java.lang.String"__concat*	
-SELECT *
-
-%0java.lang.StringÓ
-Ð
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (6
-%2java.lang.String"__concat*
-
-%1java.lang.String*
-, µ
-²
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java9 (<
-%3java.lang.String"__id*
-""å
-â
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (<
-%4java.lang.String"__concat*
-
-%2java.lang.String*
-
-%3java.lang.StringÓ
-Ð
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (C
-%5java.lang.String"__concat*
-
-%4java.lang.String*
-, µ
-²
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.javaF (J
-%6java.lang.String"__id*
-""å
-â
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (J
-%7java.lang.String"__concat*
-
-%5java.lang.String*
-
-%6java.lang.String×
-Ô
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (U
-%8java.lang.String"__concat*
-
-%7java.lang.String*
-
- FROM µ
-²
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.javaX (_
-%9java.lang.String"__id*
-""æ
-ã
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (_
-%10java.lang.String"__concat*
-
-%8java.lang.String*
-
-%9java.lang.StringÚ
-×
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (k
-%11java.lang.String"__concat*
-
-%10java.lang.String*	
- WHERE ¶
-³
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.javan (q
-%12java.lang.String"__id*
-""è
-å
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (q
-%13java.lang.String"__concat*
-
-%11java.lang.String*
-
-%12java.lang.String×
-Ô
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (z
-%14java.lang.String"__concat*
-
-%13java.lang.String*
- = 'é
-æ
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (€
-%15java.lang.String"__concat*
-
-%14java.lang.String*
-
-dayjava.lang.String¸
-µ
-‹
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.javaƒ (†
-%16java.lang.String"__id*
-""é
-æ
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (†
-%17java.lang.String"__concat*
-
-%15java.lang.String*
-
-%16java.lang.String¸
-µ
-‹
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java‰ (
-%18java.lang.String"__id*
-""é
-æ
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (
-%19java.lang.String"__concat*
-
-%17java.lang.String*
-
-%18java.lang.StringØ
-Õ
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (˜
-%20java.lang.String"__concat*
-
-%19java.lang.String*
- = 'ð
-í
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (¥
-%21java.lang.String"__concat*
-
-%20java.lang.String* 
-
-
-courseNamejava.lang.StringÖ
-Ó
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (¬
-%22java.lang.String"__concat*
-
-%21java.lang.String*
-';Ò
-Ï
-Š
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (­
-queryStringjava.lang.String"__id*
-
-%22java.lang.StringÛØ
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (2
-%23java.sql.ResultSet"Gjava.sql.Statement#executeQuery(Ljava/lang/String;)Ljava/sql/ResultSet;*!
-
-	statementjava.sql.Statement*!
-
-queryStringjava.lang.String2 executeQuery(Ljava/lang/String;)"©
-‰
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/query/QueryLessons.java (3
-
-%23java.sql.ResultSet:
-	statementjava.sql.Statement:
-dayjava.lang.String:
-
-courseNamejava.lang.StringB2"0
-.unispark.engeneeringclasses.query.QueryLessons
+Eunispark.view.mobileview.viewadapter.HomeworksAdapter#getItemCount()I‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/view/mobileview/viewadapter/HomeworksAdapter.java? ?("1*¶
+1‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/view/mobileview/viewadapter/HomeworksAdapter.java@ @("œ
+‘
+†/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/view/mobileview/viewadapter/HomeworksAdapter.java@ @('
+""B97
+5unispark.view.mobileview.viewadapter.HomeworksAdapter

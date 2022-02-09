@@ -19,7 +19,7 @@ public class CalculateAverage {
             //Calculating the Average if the Student has Verbalized StudentExamsGUIController
             if(student.getVerbalizedExams() != null){
                 for(int i = 0; i < student.getVerbalizedExams().size(); i++) {
-                    VerbalizedExamModel vExam = (VerbalizedExamModel) student.getVerbalizedExams().get(i);
+                    VerbalizedExamModel vExam =  student.getVerbalizedExams().get(i);
                     average += Double.parseDouble(vExam.getResult());
                 }
 
@@ -53,11 +53,11 @@ public class CalculateAverage {
 
         try {
             student.setVerbalizedExams(ExamsDAO.getVerbalizedExams(student.getId()));
-            List<ExamModel> exams =  student.getVerbalizedExams();
+            List<VerbalizedExamModel> exams =  student.getVerbalizedExams();
             //Calculating the Weighted Average if the Student has Verbalized StudentExamsGUIController
             if(exams != null){
                 for(int i = 0; i < exams.size(); i++){
-                    VerbalizedExamModel vExam = (VerbalizedExamModel) student.getVerbalizedExams().get(i);
+                    VerbalizedExamModel vExam =  student.getVerbalizedExams().get(i);
                     average += (Double.parseDouble(vExam.getResult()) * Double.parseDouble(exams.get(i).getCfu()));
                     cfu += Double.parseDouble(exams.get(i).getCfu());
                 }

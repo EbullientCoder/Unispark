@@ -1,16 +1,9 @@
 
-Hunispark.engeneeringclasses.model.StudentModel#getId()Ljava/lang/String;â
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/StudentModel.java9 9("1*§
-1â
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/StudentModel.java: :(È
-Ê
-â
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/StudentModel.java: :(
-%0java.lang.String"__id*:*80
-.unispark.engeneeringclasses.model.StudentModel"
-id"¶
-â
-/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/model/StudentModel.java: :(
-
-%0java.lang.StringB20
-.unispark.engeneeringclasses.model.StudentModel
+?unispark.engeneeringclasses.exceptions.ExamException#getCode()Iê
+Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java- -("1*¥
+1ê
+Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java. .("õ
+ê
+Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java. .(
+""B86
+4unispark.engeneeringclasses.exceptions.ExamException

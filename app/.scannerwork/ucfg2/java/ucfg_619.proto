@@ -1,16 +1,16 @@
 
-Sunispark.engeneeringclasses.exceptions.ExamException#getMessage()Ljava/lang/String;ê
-Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java3 3("1*ƒ
-1ê
-Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java4 4(˚
-¯
-ê
-Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java4 4(
-%0java.lang.String"__id*E*C6
-4unispark.engeneeringclasses.exceptions.ExamException"	
-message"≠
-ê
-Ö/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/exceptions/ExamException.java4 4(
+Junispark.engeneeringclasses.bean.BeanHomework#getTitle()Ljava/lang/String;à
+~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanHomework.java ("1*£
+1à
+~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanHomework.java (Í
+Á
+à
+~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanHomework.java (
+%0java.lang.String"__id*<*:/
+-unispark.engeneeringclasses.bean.BeanHomework"
+title"•
+à
+~/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/engeneeringclasses/bean/BeanHomework.java (
 
-%0java.lang.StringB86
-4unispark.engeneeringclasses.exceptions.ExamException
+%0java.lang.StringB1/
+-unispark.engeneeringclasses.bean.BeanHomework

@@ -6,6 +6,7 @@ import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.engeneeringclasses.dao.ExamsDAO;
 import unispark.engeneeringclasses.exceptions.GenericException;
 import unispark.engeneeringclasses.factory.FactoryExams;
+import unispark.model.exams.BookExamModel;
 import unispark.model.exams.ExamModel;
 
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class ManageExams {
 
     //Remove the Connection inside the DB
     public void removeExam(BeanLoggedStudent student, int position) throws GenericException {
-        List<ExamModel> bookedExams = student.getBookedExams();
+        List<BookExamModel> bookedExams = student.getBookedExams();
         ExamModel leaveExam = bookedExams.get(position);
         try {
             ExamsDAO.removeBookedExam(leaveExam.getId(), student.getId());
