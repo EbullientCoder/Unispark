@@ -30,8 +30,6 @@ public class ManageCourses {
             e.printStackTrace();
             throw new GenericException("Try again");
         }
-
-
     }
 
 
