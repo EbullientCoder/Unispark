@@ -68,13 +68,6 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     //Homeworks ViewHolder
     static class HomeworkViewHolder extends RecyclerView.ViewHolder{
-        //Attributes
-        String shortName;
-        String title;
-        String instructions;
-        String points;
-        int id;
-
         TextView txtCourse;
         TextView txtExpiration;
         Button btnView;
@@ -102,23 +95,12 @@ public class HomeworksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void setHomeworkDate(BeanHomework homework){
             txtCourse.setText(homework.getFullName());
             txtExpiration.setText(homework.getExpiration());
-
-            shortName = homework.getShortName();
-            title = homework.getTitle();
-            instructions = homework.getInstructions();
-            points = homework.getPoints();
         }
 
         //Professor
         void setProfessorHomeworkDate(BeanHomework homework){
             txtCourse.setText(homework.getTitle().toUpperCase());
             txtExpiration.setText(homework.getExpiration());
-
-            shortName = homework.getShortName();
-            title = homework.getTitle();
-            instructions = homework.getInstructions();
-            points = homework.getPoints();
-            id = 1;
         }
 
     }

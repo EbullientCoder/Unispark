@@ -37,7 +37,6 @@ public class GetSelectedExam {
                 write.println("\n\n\nEXAM VERBALIZED\n\n\n");
             }
         } catch (ExamNotYetOccured | GenericException e) {
-            e.printStackTrace();
             write.println(e.getMessage());
         } catch (NumberFormatException numberFormatException) {
             write.println("\n\n\nERROR\n\n\n");

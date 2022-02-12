@@ -12,15 +12,6 @@ import androidx.annotation.Nullable;
 
 public class ExamException extends Exception{
 
-    /*
-     * The code represents the operation that caused the error managing exams
-     * add exam -> 0
-     * add exam grade -> 1
-     * book exam -> 2
-     */
-
-
-
     private final int code;
     private final String message;
     private static final long serialVersionUID = 1L;

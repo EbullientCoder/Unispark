@@ -57,9 +57,6 @@ public class VerbalizeExamGuiController{
                 this.verbalizeExamsView.notifyDataChanged(position);
             }
 
-
-
-
         } catch (ExamNotYetOccured | GenericException e) {
             e.printStackTrace();
             this.verbalizeExamsView.setMessage(e.getMessage());

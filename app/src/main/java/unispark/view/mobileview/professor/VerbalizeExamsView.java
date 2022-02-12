@@ -82,7 +82,6 @@ public class VerbalizeExamsView extends AppCompatActivity
     }
 
 
-
     public void setMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

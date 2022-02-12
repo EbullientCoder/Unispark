@@ -22,7 +22,6 @@ public class VerbalizeExam {
         try {
             ExamsDAO.addExamGrade(vExam, student.getId());
         } catch (ExamException e) {
-            e.printStackTrace();
             throw new ExamNotYetOccured(e.getMessage());
         } catch (SQLException throwables) {
             throwables.printStackTrace();

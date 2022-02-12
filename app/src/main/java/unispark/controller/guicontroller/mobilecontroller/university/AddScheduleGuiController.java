@@ -84,14 +84,12 @@ public class AddScheduleGuiController extends UserBaseGuiController {
 
                 this.addScheduleView.dismiss();
             } catch (GenericException genericException) {
-
                 genericException.printStackTrace();
                 this.addScheduleView.setMessage(genericException.getMessage());
 
             } catch (LessonAlreadyExists lessonAlreadyExists) {
                 lessonAlreadyExists.printStackTrace();
                 this.addScheduleView.setMessage(lessonAlreadyExists.getMess().getMessage());
-
             }
         }
     }

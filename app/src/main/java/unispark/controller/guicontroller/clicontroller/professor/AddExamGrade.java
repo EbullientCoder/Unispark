@@ -43,7 +43,6 @@ public class AddExamGrade {
         //Check if position is in the range of available courses
         if (position >= assignedExamsList.size()){
             write.println("\n\n\nERROR: Course not found. Redirecting to menu.\n\n\n");
-
         }
         else{
             //Get the Student of the selected exams
@@ -63,7 +62,6 @@ public class AddExamGrade {
             //Check if position is in the range of signed students
             if (position >= studentsSignedToExams.size()){
                 write.println("\n\n\nERROR: Student not found. Redirecting to menu.\n\n\n");
-
             }
             else{
                 GetSelectedExam.getSelectedExam(assignedExamsList, position, studentsSignedToExams);
