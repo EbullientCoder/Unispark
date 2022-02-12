@@ -1,11 +1,9 @@
 package unispark.engeneeringclasses.bean.exams;
 
 public class BeanBookExam extends BeanExam {
-
+    //Attributes
     private String classroom;
     private String building;
-
-
 
 
     //Getter

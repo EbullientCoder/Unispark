@@ -57,7 +57,9 @@ public class UniversityCommunications {
         for(int i = 0; i < uniCommunicationsList.size(); i++){
             bld.append(uniCommunicationsList.get(i).getTitle() + "\n");
             bld.append(uniCommunicationsList.get(i).getDate() + "\n");
-            bld.append(uniCommunicationsList.get(i).getCommunication() + "\n\n");
+            bld.append(uniCommunicationsList.get(i).getFaculty() + "\n");
+            bld.append(uniCommunicationsList.get(i).getCommunication() + "\n");
+            bld.append(uniCommunicationsList.get(i).getBackground() + "\n\n");
         }
         System.out.println(bld.toString());
     }

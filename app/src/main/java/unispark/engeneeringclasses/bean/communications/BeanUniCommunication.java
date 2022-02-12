@@ -11,8 +11,6 @@ public class BeanUniCommunication implements Serializable {
     private String communication;
     private String faculty;
 
-
-
     //Getter
     public int getBackground() {
         return background;

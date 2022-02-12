@@ -28,6 +28,8 @@ public class AssignedExams {
 
             bld.append(aExam.getName() + "\n");
             bld.append(aExam.getDate() + "\n");
+            bld.append(aExam.getYear() + "\n");
+            bld.append("ID: " + aExam.getId() + "\n");
             bld.append("Classroom: " + aExam.getClassroom() + " Building: " + aExam.getBuilding() + "\n");
             bld.append("Position: " + Integer.toString(i) + "\n\n");
         }
