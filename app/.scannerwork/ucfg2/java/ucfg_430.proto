@@ -1,16 +1,16 @@
 
 5unispark.model.StudentModel#getId()Ljava/lang/String;v
-l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java7 7("1*Õ
+l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java9 9("1*Õ
 1v
-l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java8 8(Â
+l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java: :(Â
 ¿
 v
-l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java8 8(
+l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java: :(
 %0java.lang.String"__id*'*%
 unispark.model.StudentModel"
 id"’
 v
-l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java8 8(
+l/Users/emanuele-macos/AndroidStudioProjects/uniSpark_Code/app/src/main/java/unispark/model/StudentModel.java: :(
 
 %0java.lang.StringB
 unispark.model.StudentModel

@@ -25,8 +25,8 @@ public class BookStudentExam {
 
         //Application Controller
         //Generate Booking Exams
-        BookExam upcomingExamsAppController = new BookExam();
-        upcomingExamsList = upcomingExamsAppController.generateBookingExams(student);
+        BookExam bookExamAppController = new BookExam();
+        upcomingExamsList = bookExamAppController.generateBookingExams(student);
 
 
         //Show Available Exams
@@ -61,15 +61,16 @@ public class BookStudentExam {
             write.println("\n\n\nERROR: Exam not found. Redirecting to menu.\n\n\n");
 
         }
+
         else{
-            //Application Controller
-            BookExam bookExamAppController = new BookExam();
+
             try {
                 bookExamAppController.bookExam(student, (BeanBookExam) upcomingExamsList.get(position));
 
                 write.println("\n\n\nEXAM BOOKED\n\n\n");
             } catch (ExamAlreadyVerbalized | GenericException e) {
                 e.printStackTrace();
+                write.println("\n\n\n" + e.getMessage()+ "\n\n\n");
 
             }
         }
