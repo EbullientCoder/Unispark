@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GetHomeworks {
+public class ManageHomeworks {
 
     //Student: Needs a DB connection to get the Homeworks at every refresh of the HomePage
     public List<BeanHomework> getHomework(BeanLoggedStudent student) {

@@ -8,7 +8,7 @@ import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunication;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
-import unispark.controller.appcontroller.homeworks.GetHomeworks;
+import unispark.controller.appcontroller.homeworks.ManageHomeworks;
 import unispark.view.mobileview.details.DetailsHomeworkView;
 import unispark.view.mobileview.details.DetailsProfCommunicationView;
 import unispark.view.mobileview.details.DetailsUniCommunicationView;
@@ -58,7 +58,7 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
 
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Applicative Controller
-        GetHomeworks showHomeworksController = new GetHomeworks();
+        ManageHomeworks showHomeworksController = new ManageHomeworks();
         this.beanHomeworks = showHomeworksController.getHomework(student);
         Collections.reverse(this.beanHomeworks);
 

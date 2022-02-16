@@ -5,11 +5,11 @@ import android.content.Intent;
 
 
 import unispark.controller.appcontroller.communications.ManageCommunications;
+import unispark.controller.appcontroller.homeworks.ManageHomeworks;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
-import unispark.controller.appcontroller.homeworks.GetHomeworks;
 import unispark.view.mobileview.details.DetailsHomeworkView;
 import unispark.view.mobileview.details.DetailsUniCommunicationView;
 import unispark.view.mobileview.professor.ProfessorHomeView;
@@ -51,7 +51,7 @@ public class ManageProfessorHomeGuiController extends ProfBaseGuiController {
         BeanLoggedProfessor professor = (BeanLoggedProfessor) session.getUser();
 
         //Application Controller
-        GetHomeworks homeworksAppController = new GetHomeworks();
+        ManageHomeworks homeworksAppController = new ManageHomeworks();
         this.beanHomeworks = homeworksAppController.getHomework(professor);
         professorHomeView.setHomeworkAdapter(beanHomeworks);
     }

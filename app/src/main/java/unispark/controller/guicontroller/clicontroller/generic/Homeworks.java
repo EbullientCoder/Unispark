@@ -2,7 +2,7 @@ package unispark.controller.guicontroller.clicontroller.generic;
 
 
 
-import unispark.controller.appcontroller.homeworks.GetHomeworks;
+import unispark.controller.appcontroller.homeworks.ManageHomeworks;
 import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
@@ -18,7 +18,7 @@ public class Homeworks {
         List<BeanHomework> homeworksList;
 
         //Application Controller
-        GetHomeworks homeworksAppController = new GetHomeworks();
+        ManageHomeworks homeworksAppController = new ManageHomeworks();
         homeworksList = homeworksAppController.getHomework(student);
 
         showHomeworks(homeworksList);
@@ -30,7 +30,7 @@ public class Homeworks {
         List<BeanHomework> homeworksList;
 
         //Application Controller
-        GetHomeworks homeworksAppController = new GetHomeworks();
+        ManageHomeworks homeworksAppController = new ManageHomeworks();
         homeworksList = homeworksAppController.getHomework(professor);
 
         showHomeworks(homeworksList);
