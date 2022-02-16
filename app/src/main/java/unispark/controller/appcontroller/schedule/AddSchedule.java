@@ -8,7 +8,7 @@ import unispark.model.LessonModel;
 
 import java.sql.SQLException;
 
-public class AddLesson {
+public class AddSchedule {
     //Add Lesson
     public void addLesson(BeanLesson bLesson) throws GenericException, LessonAlreadyExists {
         //Adding Lesson to the DB

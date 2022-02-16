@@ -2,10 +2,9 @@ package unispark.controller.guicontroller.clicontroller.university;
 
 
 
+import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.controller.guicontroller.clicontroller.generic.Schedule;
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.controller.appcontroller.schedule.DeleteLesson;
-import unispark.controller.appcontroller.schedule.GetScheduleUniversity;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
@@ -33,7 +32,7 @@ public class DeleteSchedule {
         String day = schedule.getDay();
 
         //Application Controller
-        GetScheduleUniversity getScheduleUniversity = new GetScheduleUniversity();
+        ManageSchedule getScheduleUniversity = new ManageSchedule();
         lessons = getScheduleUniversity.getLessons(day, courses);
         //Show schedule
         schedule.showSchedule(lessons);
@@ -58,7 +57,7 @@ public class DeleteSchedule {
         else{
             try {
                 //App Controller: Delete Lesson
-                DeleteLesson deleteLesson = new DeleteLesson();
+                ManageSchedule deleteLesson = new ManageSchedule();
                 deleteLesson.deleteLesson(lessons.get(position));
 
                 write.println("\n\n\nLESSON DELETED\n\n\n");

@@ -1,10 +1,10 @@
 package unispark.controller.guicontroller.mobilecontroller.student;
 
 
+import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
-import unispark.controller.appcontroller.schedule.GetScheduleStudent;
 import unispark.view.mobileview.student.StudentScheduleView;
 
 import java.time.OffsetDateTime;
@@ -26,7 +26,7 @@ public class ShowScheduleGuiController extends StudentBaseGuiController {
 
         this.scheduleView.setTxtDay(String.valueOf(offset.getDayOfWeek()));
         this.scheduleView.setTxtDate(offset.getYear() + "-" + offset.getMonthValue() + "-" + offset.getDayOfMonth());
-        GetScheduleStudent getScheduleStudentAppController = new GetScheduleStudent();
+        ManageSchedule getScheduleStudentAppController = new ManageSchedule();
 
         List<BeanLesson> beanLessons = getScheduleStudentAppController.getLessons(student, String.valueOf(offset.getDayOfWeek()));
         this.scheduleView.setLessonAdapter(beanLessons);

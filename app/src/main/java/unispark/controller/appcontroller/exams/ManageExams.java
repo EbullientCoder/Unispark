@@ -16,8 +16,6 @@ public class ManageExams {
 
 
 
-
-
     //Remove the Connection inside the DB
     public void removeExam(BeanLoggedStudent student, int position) throws GenericException {
         List<BookExamModel> bookedExams = student.getBookedExams();

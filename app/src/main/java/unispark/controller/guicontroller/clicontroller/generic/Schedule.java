@@ -2,8 +2,7 @@ package unispark.controller.guicontroller.clicontroller.generic;
 
 
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.controller.appcontroller.schedule.GetScheduleStudent;
-import unispark.controller.appcontroller.schedule.GetScheduleUniversity;
+import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
@@ -27,7 +26,7 @@ public class Schedule {
         String day = getDay();
 
         //Application Controller
-        GetScheduleStudent studentScheduleAppController = new GetScheduleStudent();
+        ManageSchedule studentScheduleAppController = new ManageSchedule();
         lessons = studentScheduleAppController.getLessons(student, day);
 
         //Show
@@ -47,7 +46,7 @@ public class Schedule {
         String day = getDay();
 
         //Application Controller
-        GetScheduleUniversity getScheduleUniversity = new GetScheduleUniversity();
+        ManageSchedule getScheduleUniversity = new ManageSchedule();
         lessons = getScheduleUniversity.getLessons(day, courses);
 
         //Show
@@ -76,7 +75,7 @@ public class Schedule {
     public void showSchedule(List<BeanLesson> lessons){
         //App Controller: GetScheduleUniversity
         //Sorting the Lessons
-        GetScheduleUniversity getScheduleUniversity = new GetScheduleUniversity();
+        ManageSchedule getScheduleUniversity = new ManageSchedule();
         getScheduleUniversity.lessonsSort(lessons);
 
         //Show Schedule

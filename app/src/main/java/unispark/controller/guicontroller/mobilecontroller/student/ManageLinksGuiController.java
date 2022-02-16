@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 
 
+import unispark.controller.appcontroller.links.ManageLinks;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLink;
 import unispark.engeneeringclasses.bean.professor.BeanProfessorDetails;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
-import unispark.controller.appcontroller.links.AddLink;
-import unispark.controller.appcontroller.links.DeleteLink;
-import unispark.controller.appcontroller.links.ShowLinks;
-import unispark.controller.appcontroller.professor.ShowFacultyProfessors;
 import unispark.engeneeringclasses.exceptions.GenericException;
 import unispark.engeneeringclasses.exceptions.LinkAlreadyExists;
 import unispark.view.mobileview.details.DetailsProfessorView;
@@ -36,7 +33,7 @@ public class ManageLinksGuiController extends StudentBaseGuiController {
     public void showProfessorDetails(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Application Controller
-        ShowFacultyProfessors facultyProfessorsAppController = new ShowFacultyProfessors();
+        ManageLinks facultyProfessorsAppController = new ManageLinks();
         this.beanProfessorDetails = facultyProfessorsAppController.setFacultyProfessors(student);
         this.linksView.setProfessorsAdapter(this.getBeanProfessorDetails());
     }
@@ -44,7 +41,7 @@ public class ManageLinksGuiController extends StudentBaseGuiController {
     public void showLinks(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
 
-        ShowLinks linksAppController = new ShowLinks();
+        ManageLinks linksAppController = new ManageLinks();
         this.beanLinks = linksAppController.showLinks(student);
         this.linksView.setLinkAdapter(this.getBeanLinks());
     }
@@ -58,7 +55,7 @@ public class ManageLinksGuiController extends StudentBaseGuiController {
             newLink.setLinkAddress(link);
 
             //Application Controller
-            AddLink addLinksAppController = new AddLink();
+            ManageLinks addLinksAppController = new ManageLinks();
             try {
                 addLinksAppController.addLink(student, newLink);
                 this.beanLinks.add(newLink);
@@ -93,7 +90,7 @@ public class ManageLinksGuiController extends StudentBaseGuiController {
     public void removeLink(int position){
 
         //Application Controller: Delete Link
-        DeleteLink deleteLinkAppController = new DeleteLink();
+        ManageLinks deleteLinkAppController = new ManageLinks();
 
         try {
             deleteLinkAppController.deleteLink(this.beanLinks.get(position));

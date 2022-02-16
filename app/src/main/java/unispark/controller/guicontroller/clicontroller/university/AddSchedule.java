@@ -3,7 +3,6 @@ package unispark.controller.guicontroller.clicontroller.university;
 
 
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.controller.appcontroller.schedule.AddLesson;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.courses.BeanCoursesNames;
 import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
@@ -68,7 +67,7 @@ public class AddSchedule {
                 bLesson.setHour(hour);
 
                 //Application Controller: Add Lesson
-                AddLesson addLessonAppController = new AddLesson();
+                unispark.controller.appcontroller.schedule.AddSchedule addLessonAppController = new unispark.controller.appcontroller.schedule.AddSchedule();
                 try {
                     addLessonAppController.addLesson(bLesson);
 

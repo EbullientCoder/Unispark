@@ -1,7 +1,7 @@
 package unispark.controller.guicontroller.clicontroller.generic;
 
 
-import unispark.controller.appcontroller.communications.ShowCommunications;
+import unispark.controller.appcontroller.communications.ManageCommunications;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
@@ -16,7 +16,7 @@ public class UniversityCommunications {
         List<BeanUniCommunication> uniCommunicationsList;
 
         //Application Controller
-        ShowCommunications uniCommunicationsAppController = new ShowCommunications();
+        ManageCommunications uniCommunicationsAppController = new ManageCommunications();
         uniCommunicationsList = uniCommunicationsAppController.showUniversityCommunications(student);
 
         showCommunications(uniCommunicationsList);
@@ -28,7 +28,7 @@ public class UniversityCommunications {
         List<BeanUniCommunication> uniCommunicationsList;
 
         //Application Controller
-        ShowCommunications uniCommunicationsAppController = new ShowCommunications();
+        ManageCommunications uniCommunicationsAppController = new ManageCommunications();
         uniCommunicationsList = uniCommunicationsAppController.showUniversityCommunications(professor);
 
         showCommunications(uniCommunicationsList);
@@ -40,7 +40,7 @@ public class UniversityCommunications {
         List<BeanUniCommunication> uniCommunicationsList;
 
         //Application Controller
-        ShowCommunications uniCommunicationsAppController = new ShowCommunications();
+        ManageCommunications uniCommunicationsAppController = new ManageCommunications();
         uniCommunicationsList = uniCommunicationsAppController.showUniversityCommunications();
 
         showCommunications(uniCommunicationsList);

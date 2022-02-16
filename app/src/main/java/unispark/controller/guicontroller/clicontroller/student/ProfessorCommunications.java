@@ -1,7 +1,7 @@
 package unispark.controller.guicontroller.clicontroller.student;
 
 
-import unispark.controller.appcontroller.communications.ShowCommunications;
+import unispark.controller.appcontroller.communications.ManageCommunications;
 import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunication;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 
@@ -14,7 +14,7 @@ public class ProfessorCommunications {
         List<BeanProfessorCommunication> profCommunicationsList;
 
         //Application Controller
-        ShowCommunications profCommunicationsAppController = new ShowCommunications();
+        ManageCommunications profCommunicationsAppController = new ManageCommunications();
         profCommunicationsList = profCommunicationsAppController.showProfessorCommunications(student);
 
         //Show Professor Communications

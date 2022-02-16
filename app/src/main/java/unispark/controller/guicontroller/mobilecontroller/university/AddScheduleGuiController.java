@@ -1,12 +1,12 @@
 package unispark.controller.guicontroller.mobilecontroller.university;
 
+import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.courses.BeanCoursesNames;
 import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.controller.appcontroller.schedule.AddLesson;
-import unispark.controller.appcontroller.schedule.GetScheduleUniversity;
+import unispark.controller.appcontroller.schedule.AddSchedule;
 import unispark.controller.guicontroller.mobilecontroller.UserBaseGuiController;
 import unispark.engeneeringclasses.exceptions.GenericException;
 import unispark.engeneeringclasses.exceptions.LessonAlreadyExists;
@@ -65,7 +65,7 @@ public class AddScheduleGuiController extends UserBaseGuiController {
             bLesson.setHour(hourSelection);
 
             //Application Controller: Add Lesson
-            AddLesson addLessonAppController = new AddLesson();
+            AddSchedule addLessonAppController = new AddSchedule();
 
             try {
                 addLessonAppController.addLesson(bLesson);
@@ -79,7 +79,7 @@ public class AddScheduleGuiController extends UserBaseGuiController {
 
                 //App Controller: GetScheduleUniversity
                 //Sorting the Lessons
-                GetScheduleUniversity getScheduleUniversity =  new GetScheduleUniversity();
+                ManageSchedule getScheduleUniversity =  new ManageSchedule();
                 getScheduleUniversity.lessonsSort(this.getBeanLessons());
 
                 this.addScheduleView.dismiss();

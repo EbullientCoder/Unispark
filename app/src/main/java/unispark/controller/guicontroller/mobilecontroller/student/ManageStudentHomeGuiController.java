@@ -2,12 +2,12 @@ package unispark.controller.guicontroller.mobilecontroller.student;
 
 import android.content.Intent;
 
+import unispark.controller.appcontroller.communications.ManageCommunications;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunication;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
-import unispark.controller.appcontroller.communications.ShowCommunications;
 import unispark.controller.appcontroller.homeworks.GetHomeworks;
 import unispark.view.mobileview.details.DetailsHomeworkView;
 import unispark.view.mobileview.details.DetailsProfCommunicationView;
@@ -35,7 +35,7 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
     public void showUniCommunications(){
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Applicative Controller
-        ShowCommunications communicationsController = new ShowCommunications();
+        ManageCommunications communicationsController = new ManageCommunications();
         this.beanUniCommunications = communicationsController.showUniversityCommunications(student);
         this.studentHomeView.setUniCommunicationsAdapter(this.getBeanUniCommunications());
 
@@ -47,7 +47,7 @@ public class ManageStudentHomeGuiController extends StudentBaseGuiController {
 
         BeanLoggedStudent student = (BeanLoggedStudent) this.session.getUser();
         //Applicative Controller
-        ShowCommunications communicationsController = new ShowCommunications();
+        ManageCommunications communicationsController = new ManageCommunications();
         this.beanProfessorCommunications = communicationsController.showProfessorCommunications(student);
         this.studentHomeView.setProfCommunicationsAdapter(this.getBeanProfessorCommunications());
 

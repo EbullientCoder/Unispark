@@ -3,15 +3,14 @@ package unispark.controller.guicontroller.mobilecontroller.university;
 
 import android.content.Intent;
 
+import unispark.controller.appcontroller.communications.ManageCommunications;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
-import unispark.controller.appcontroller.communications.ShowCommunications;
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.controller.appcontroller.schedule.DeleteLesson;
-import unispark.controller.appcontroller.schedule.GetScheduleUniversity;
+import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.controller.guicontroller.mobilecontroller.UserBaseGuiController;
 import unispark.view.mobileview.details.DetailsUniCommunicationView;
 import unispark.view.mobileview.university.UniversityHomeView;
@@ -82,7 +81,7 @@ public class ManageUniHomeGuiController extends UserBaseGuiController {
 
 
     public void showCommunications(){
-        ShowCommunications uniCommunicationsAppController = new ShowCommunications();
+        ManageCommunications uniCommunicationsAppController = new ManageCommunications();
         this.beanUniCommunications = uniCommunicationsAppController.showUniversityCommunications();
         this.universityHomeView.setUniCommunicationsAdapter(this.getBeanUniCommunications());
     }
@@ -117,7 +116,7 @@ public class ManageUniHomeGuiController extends UserBaseGuiController {
     private List<BeanLesson> getLessons(String day, List<BeanCourse> courses){
         List<BeanLesson> lessons;
 
-        GetScheduleUniversity getScheduleUniversityAppController = new GetScheduleUniversity();
+        ManageSchedule getScheduleUniversityAppController = new ManageSchedule();
         lessons = getScheduleUniversityAppController.getLessons(day, courses);
 
         return lessons;
@@ -130,7 +129,7 @@ public class ManageUniHomeGuiController extends UserBaseGuiController {
     public void deleteLesson(int position){
 
         //Application Controller
-        DeleteLesson deleteLessonAppController = new DeleteLesson();
+        ManageSchedule deleteLessonAppController = new ManageSchedule();
         try {
             deleteLessonAppController.deleteLesson(this.beanLessons.get(position));
             //Show Removed StudentSchedule
