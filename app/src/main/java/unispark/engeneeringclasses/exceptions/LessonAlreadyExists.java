@@ -2,11 +2,6 @@ package unispark.engeneeringclasses.exceptions;
 
 import unispark.engeneeringclasses.bean.BeanErrorLessonAlreadyExists;
 
-/**
- *
- * @author Emanuele Valzano
- *
- */
 
 public class LessonAlreadyExists extends Exception{
 

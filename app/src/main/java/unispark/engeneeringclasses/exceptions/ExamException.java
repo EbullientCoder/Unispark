@@ -1,13 +1,6 @@
 package unispark.engeneeringclasses.exceptions;
 
-
 import androidx.annotation.Nullable;
-
-/**
- *
- * @author Emanuele Valzano
- *
- */
 
 
 public class ExamException extends Exception{

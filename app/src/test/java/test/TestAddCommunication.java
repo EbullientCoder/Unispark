@@ -12,13 +12,6 @@ import unispark.engeneeringclasses.exceptions.GenericException;
 
 import org.junit.Test;
 
-/**
- *
- *
- * @author Andrea Lapiana
- *
- *
- */
 
 public class TestAddCommunication {
 

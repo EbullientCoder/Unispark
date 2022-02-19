@@ -20,14 +20,6 @@ import org.junit.Test;
 import java.sql.SQLException;
 
 
-/**
- *
- *
- * @author Emanuele Valzano
- *
- *
- *
- */
 public class TestManageCourses {
 
     private static String password = "password";
