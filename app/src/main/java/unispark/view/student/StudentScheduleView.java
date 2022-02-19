@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.student.ShowScheduleGuiController;
+import unispark.controller.guicontroller.student.ManageStudentScheduleGuiController;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.view.viewadapter.LessonAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,7 +31,7 @@ public class StudentScheduleView extends AppCompatActivity{
 
 
     //Gui Controller
-    private ShowScheduleGuiController scheduleGuiController;
+    private ManageStudentScheduleGuiController scheduleGuiController;
 
 
     //Constructor
@@ -41,7 +41,7 @@ public class StudentScheduleView extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_schedule);
 
-        this.scheduleGuiController = new ShowScheduleGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
+        this.scheduleGuiController = new ManageStudentScheduleGuiController((Session) getIntent().getExtras().getSerializable("session"), this);
         this.lessonAdapter = new LessonAdapter("STUDENT");
 
 

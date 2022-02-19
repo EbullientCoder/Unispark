@@ -35,9 +35,6 @@
             android:name="unispark.view.student.StudentExamsView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.student.StudentLinksView"
-            android:exported="true" />
-        <activity
             android:name="unispark.view.student.StudentProfileView"
             android:exported="true" />
         <activity
@@ -72,9 +69,6 @@
             android:exported="true" />
         <activity
             android:name="unispark.view.details.DetailsProfCommunicationView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.view.details.DetailsProfessorView"
             android:exported="true" />
         <activity
             android:name="unispark.view.details.DetailsUniCommunicationView"

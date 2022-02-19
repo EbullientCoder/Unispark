@@ -8,7 +8,6 @@ import unispark.engeneeringclasses.others.Session;
 import unispark.controller.guicontroller.UserBaseGuiController;
 import unispark.view.student.StudentExamsView;
 import unispark.view.student.StudentHomeView;
-import unispark.view.student.StudentLinksView;
 import unispark.view.student.StudentProfileView;
 import unispark.view.student.StudentScheduleView;
 
@@ -32,8 +31,6 @@ public class StudentBaseGuiController extends UserBaseGuiController {
             case R.id.profile: intent = new Intent(contextView, StudentProfileView.class);
             break;
             case R.id.exams: intent = new Intent(contextView, StudentExamsView.class);
-            break;
-            case R.id.links: intent =  new Intent(contextView, StudentLinksView.class);
             break;
             case R.id.schedule: intent = new Intent(contextView, StudentScheduleView.class);
             break;

@@ -10,11 +10,11 @@ import unispark.view.student.StudentScheduleView;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class ShowScheduleGuiController extends StudentBaseGuiController {
+public class ManageStudentScheduleGuiController extends StudentBaseGuiController {
 
     private StudentScheduleView scheduleView;
 
-    public ShowScheduleGuiController(Session session, StudentScheduleView scheduleView) {
+    public ManageStudentScheduleGuiController(Session session, StudentScheduleView scheduleView) {
         super(session, scheduleView);
         this.scheduleView = scheduleView;
     }
