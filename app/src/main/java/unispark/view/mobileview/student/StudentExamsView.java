@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.exams.BeanExam;
-import unispark.controller.guicontroller.mobilecontroller.student.ManageStudentExamsGuiController;
+import unispark.controller.guicontroller.student.ManageStudentExamsGuiController;
 import unispark.view.mobileview.viewadapter.exams.ExamAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

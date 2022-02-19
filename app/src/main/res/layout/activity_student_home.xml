@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="unispark.controller.guicontroller.mobilecontroller.student.StudentHomeGUIController"
+    tools:context="unispark.controller.guicontroller.student.StudentHomeGUIController"
     android:background="#212529">
 
     <!-- Main -->

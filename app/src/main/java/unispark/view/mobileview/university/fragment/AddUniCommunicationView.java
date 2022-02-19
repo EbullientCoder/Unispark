@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
-import unispark.controller.guicontroller.mobilecontroller.university.AddCommunicationGuiController;
+import unispark.controller.guicontroller.university.AddCommunicationGuiController;
 import unispark.view.mobileview.viewadapter.communications.UniCommunicationsAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 

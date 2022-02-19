@@ -17,7 +17,7 @@ import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 
 
-import unispark.controller.guicontroller.mobilecontroller.professor.AddCommunicationGuiController;
+import unispark.controller.guicontroller.professor.AddCommunicationGuiController;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.OffsetDateTime;

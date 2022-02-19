@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.unispark.R;
-import unispark.controller.guicontroller.mobilecontroller.SplashScreenGuiController;
+import unispark.controller.guicontroller.SplashScreenGuiController;
 
 public class SplashScreenView extends AppCompatActivity {
 

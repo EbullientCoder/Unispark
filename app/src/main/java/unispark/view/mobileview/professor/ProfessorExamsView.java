@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.exams.BeanExam;
-import unispark.controller.guicontroller.mobilecontroller.professor.ManageProfessorExamsGuiController;
+import unispark.controller.guicontroller.professor.ManageProfessorExamsGuiController;
 import unispark.view.mobileview.viewadapter.exams.ExamAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

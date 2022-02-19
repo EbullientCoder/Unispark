@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
-import unispark.controller.guicontroller.mobilecontroller.details.DetailsUniCommunicationGuiController;
+import unispark.controller.guicontroller.details.DetailsUniCommunicationGuiController;
 
 public class DetailsUniCommunicationView extends AppCompatActivity {
     //Attributes

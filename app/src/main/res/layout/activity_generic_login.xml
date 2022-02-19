@@ -7,7 +7,7 @@
     android:background="#212529"
     android:paddingHorizontal="15dp"
     android:paddingVertical="20dp"
-    tools:context="unispark.controller.guicontroller.mobilecontroller.LoginGUIController">
+    tools:context="unispark.controller.guicontroller.LoginGUIController">
 
     <!-- Logo - Welcome -->
     <LinearLayout

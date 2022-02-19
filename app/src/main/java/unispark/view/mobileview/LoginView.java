@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.LoginGuiController;
+import unispark.controller.guicontroller.LoginGuiController;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginView extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class LoginView extends AppCompatActivity {
     //Email & Password
     private TextInputLayout txtEmail;
     private TextInputLayout txtPassword;
-    //LoginAppController Button
+    //LoginApp Button
 
 
 

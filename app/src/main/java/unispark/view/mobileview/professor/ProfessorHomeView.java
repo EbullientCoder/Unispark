@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.professor.ManageProfessorHomeGuiController;
+import unispark.controller.guicontroller.professor.ManageProfessorHomeGuiController;
 import unispark.view.mobileview.viewadapter.HomeworksAdapter;
 import unispark.view.mobileview.viewadapter.communications.UniCommunicationsAdapter;
 import unispark.engeneeringclasses.bean.BeanHomework;

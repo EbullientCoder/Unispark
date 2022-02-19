@@ -16,7 +16,7 @@ import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 
-import unispark.controller.guicontroller.mobilecontroller.student.ManageStudentProfileGuiController;
+import unispark.controller.guicontroller.student.ManageStudentProfileGuiController;
 import unispark.view.mobileview.viewadapter.CoursesAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;

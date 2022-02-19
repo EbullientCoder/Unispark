@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
-import unispark.controller.guicontroller.mobilecontroller.university.AddScheduleGuiController;
+import unispark.controller.guicontroller.university.AddScheduleGuiController;
 import unispark.view.mobileview.viewadapter.LessonAdapter;
 
 import java.util.List;

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.professor.ManageProfessorProfileGuiController;
+import unispark.controller.guicontroller.professor.ManageProfessorProfileGuiController;
 import unispark.view.mobileview.viewadapter.CoursesAdapter;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

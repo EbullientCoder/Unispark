@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.bean.BeanHomework;
-import unispark.controller.guicontroller.mobilecontroller.details.DetailsHomeworkGuiController;
+import unispark.controller.guicontroller.details.DetailsHomeworkGuiController;
 
 public class DetailsHomeworkView extends AppCompatActivity {
     //Attributes

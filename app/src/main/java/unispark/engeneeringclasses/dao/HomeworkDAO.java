@@ -98,6 +98,7 @@ public class HomeworkDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
+            //To fix Code Smell
             List<String> name = new ArrayList<>();
             name.add(homework.getShortName());
             name.add(homework.getFullName());

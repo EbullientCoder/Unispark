@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.unispark.R;
-import unispark.controller.guicontroller.mobilecontroller.professor.VerbalizeExamGuiController;
+import unispark.controller.guicontroller.professor.VerbalizeExamGuiController;
 import unispark.view.mobileview.viewadapter.SignedStudentsAdapter;
 import unispark.engeneeringclasses.bean.exams.BeanBookExam;
 import unispark.engeneeringclasses.bean.BeanStudentSignedToExam;

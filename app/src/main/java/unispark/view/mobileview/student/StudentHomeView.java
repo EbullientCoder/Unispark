@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.unispark.R;
 
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.student.ManageStudentHomeGuiController;
+import unispark.controller.guicontroller.student.ManageStudentHomeGuiController;
 import unispark.view.mobileview.viewadapter.communications.ProfCommunicationsAdapter;
 import unispark.view.mobileview.viewadapter.communications.UniCommunicationsAdapter;
 import unispark.engeneeringclasses.bean.BeanHomework;

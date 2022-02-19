@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.student.ManageLinksGuiController;
+import unispark.controller.guicontroller.student.ManageLinksGuiController;
 import unispark.view.mobileview.viewadapter.LinksAdapter;
 import unispark.engeneeringclasses.bean.BeanLink;
 import unispark.engeneeringclasses.bean.professor.BeanProfessorDetails;

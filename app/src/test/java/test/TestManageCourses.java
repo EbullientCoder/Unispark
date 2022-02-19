@@ -3,7 +3,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
-import unispark.controller.appcontroller.LoginAppController;
+import unispark.controller.appcontroller.LoginApp;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.engeneeringclasses.bean.login.BeanUser;
@@ -37,8 +37,8 @@ public class TestManageCourses {
         int code = 1;
 
         // Create a student
-        LoginAppController loginController;
-        loginController = new LoginAppController();
+        LoginApp loginController;
+        loginController = new LoginApp();
 
         // Create a course that does not exist
         BeanCourse beanCourse = createBean("https://testcourse.com",
@@ -83,8 +83,8 @@ public class TestManageCourses {
         int code = 1;
 
         // Create a student
-        LoginAppController loginController;
-        loginController = new LoginAppController();
+        LoginApp loginController;
+        loginController = new LoginApp();
         BeanLoggedStudent beanStudent;
         BeanUser beanUser;
         beanUser = new BeanUser();
@@ -136,8 +136,8 @@ public class TestManageCourses {
                 "Economia");
 
         // Create a student
-        LoginAppController loginController;
-        loginController = new LoginAppController();
+        LoginApp loginController;
+        loginController = new LoginApp();
         BeanLoggedStudent beanStudent;
         BeanUser beanUser;
         beanUser = new BeanUser();

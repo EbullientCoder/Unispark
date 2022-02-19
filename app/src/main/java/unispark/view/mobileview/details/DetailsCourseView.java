@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
-import unispark.controller.guicontroller.mobilecontroller.details.DetailsCourseGuiController;
+import unispark.controller.guicontroller.details.DetailsCourseGuiController;
 
 public class DetailsCourseView extends AppCompatActivity {
     //Attributes

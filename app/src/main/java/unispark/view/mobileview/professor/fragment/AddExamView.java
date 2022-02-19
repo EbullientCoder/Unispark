@@ -21,7 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 
-import unispark.controller.guicontroller.mobilecontroller.professor.AddExamGuiController;
+import unispark.controller.guicontroller.professor.AddExamGuiController;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.OffsetDateTime;

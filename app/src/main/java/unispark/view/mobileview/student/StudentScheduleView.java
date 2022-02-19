@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
-import unispark.controller.guicontroller.mobilecontroller.student.ShowScheduleGuiController;
+import unispark.controller.guicontroller.student.ShowScheduleGuiController;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.view.mobileview.viewadapter.LessonAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

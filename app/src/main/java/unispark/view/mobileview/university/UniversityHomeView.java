@@ -15,7 +15,7 @@ import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
-import unispark.controller.guicontroller.mobilecontroller.university.ManageUniHomeGuiController;
+import unispark.controller.guicontroller.university.ManageUniHomeGuiController;
 import unispark.view.mobileview.viewadapter.LessonAdapter;
 import unispark.view.mobileview.viewadapter.communications.UniCommunicationsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
