@@ -7,11 +7,11 @@ import unispark.engeneeringclasses.bean.exams.BeanBookExam;
 import unispark.engeneeringclasses.bean.exams.BeanExam;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.controller.appcontroller.exams.ManageExams;
-import unispark.view.mobileview.professor.VerbalizeExamsView;
-import unispark.view.mobileview.professor.ProfessorExamsView;
-import unispark.view.mobileview.professor.fragment.AddExamView;
-import unispark.view.mobileview.professor.fragment.AddHomeworkView;
-import unispark.view.mobileview.professor.fragment.AddProfCommunicationView;
+import unispark.view.professor.VerbalizeExamsView;
+import unispark.view.professor.ProfessorExamsView;
+import unispark.view.professor.fragment.AddExamView;
+import unispark.view.professor.fragment.AddHomeworkView;
+import unispark.view.professor.fragment.AddProfCommunicationView;
 
 import java.util.List;
 

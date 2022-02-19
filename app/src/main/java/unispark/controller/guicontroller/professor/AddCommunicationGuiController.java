@@ -9,7 +9,7 @@ import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.controller.appcontroller.communications.AddCommunication;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.professor.fragment.AddProfCommunicationView;
+import unispark.view.professor.fragment.AddProfCommunicationView;
 
 
 public class AddCommunicationGuiController extends AddItemGuiController{

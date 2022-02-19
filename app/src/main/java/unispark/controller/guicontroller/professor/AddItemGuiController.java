@@ -8,9 +8,9 @@ import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.controller.appcontroller.course.ManageCourses;
-import unispark.view.mobileview.professor.fragment.AddExamView;
-import unispark.view.mobileview.professor.fragment.AddHomeworkView;
-import unispark.view.mobileview.professor.fragment.AddProfCommunicationView;
+import unispark.view.professor.fragment.AddExamView;
+import unispark.view.professor.fragment.AddHomeworkView;
+import unispark.view.professor.fragment.AddProfCommunicationView;
 
 import java.util.List;
 

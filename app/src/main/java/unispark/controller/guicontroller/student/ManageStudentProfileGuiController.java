@@ -12,9 +12,9 @@ import unispark.controller.appcontroller.course.ManageCourses;
 import unispark.engeneeringclasses.exceptions.CourseNeverJoined;
 import unispark.engeneeringclasses.exceptions.ExamBookedException;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.details.DetailsCourseView;
-import unispark.view.mobileview.student.StudentProfileView;
-import unispark.view.mobileview.student.fragment.JoinCourseView;
+import unispark.view.details.DetailsCourseView;
+import unispark.view.student.StudentProfileView;
+import unispark.view.student.fragment.JoinCourseView;
 
 
 import java.util.List;

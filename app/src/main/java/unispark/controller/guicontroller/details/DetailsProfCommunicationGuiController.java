@@ -3,7 +3,7 @@ package unispark.controller.guicontroller.details;
 
 
 import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunication;
-import unispark.view.mobileview.details.DetailsProfCommunicationView;
+import unispark.view.details.DetailsProfCommunicationView;
 
 
 

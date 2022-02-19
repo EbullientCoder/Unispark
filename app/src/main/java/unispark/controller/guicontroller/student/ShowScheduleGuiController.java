@@ -5,7 +5,7 @@ import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanLesson;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
-import unispark.view.mobileview.student.StudentScheduleView;
+import unispark.view.student.StudentScheduleView;
 
 import java.time.OffsetDateTime;
 import java.util.List;

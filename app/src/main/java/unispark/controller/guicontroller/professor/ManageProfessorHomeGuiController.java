@@ -10,12 +10,12 @@ import unispark.engeneeringclasses.others.Session;
 import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
-import unispark.view.mobileview.details.DetailsHomeworkView;
-import unispark.view.mobileview.details.DetailsUniCommunicationView;
-import unispark.view.mobileview.professor.ProfessorHomeView;
-import unispark.view.mobileview.professor.fragment.AddExamView;
-import unispark.view.mobileview.professor.fragment.AddHomeworkView;
-import unispark.view.mobileview.professor.fragment.AddProfCommunicationView;
+import unispark.view.details.DetailsHomeworkView;
+import unispark.view.details.DetailsUniCommunicationView;
+import unispark.view.professor.ProfessorHomeView;
+import unispark.view.professor.fragment.AddExamView;
+import unispark.view.professor.fragment.AddHomeworkView;
+import unispark.view.professor.fragment.AddProfCommunicationView;
 
 
 import java.util.List;

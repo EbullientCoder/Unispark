@@ -6,11 +6,11 @@ import android.content.Intent;
 import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 import unispark.controller.guicontroller.UserBaseGuiController;
-import unispark.view.mobileview.student.StudentExamsView;
-import unispark.view.mobileview.student.StudentHomeView;
-import unispark.view.mobileview.student.StudentLinksView;
-import unispark.view.mobileview.student.StudentProfileView;
-import unispark.view.mobileview.student.StudentScheduleView;
+import unispark.view.student.StudentExamsView;
+import unispark.view.student.StudentHomeView;
+import unispark.view.student.StudentLinksView;
+import unispark.view.student.StudentProfileView;
+import unispark.view.student.StudentScheduleView;
 
 
 public class StudentBaseGuiController extends UserBaseGuiController {

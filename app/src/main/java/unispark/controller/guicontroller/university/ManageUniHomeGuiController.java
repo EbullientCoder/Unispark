@@ -12,10 +12,10 @@ import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
 import unispark.controller.appcontroller.course.ManageCourses;
 import unispark.controller.appcontroller.schedule.ManageSchedule;
 import unispark.controller.guicontroller.UserBaseGuiController;
-import unispark.view.mobileview.details.DetailsUniCommunicationView;
-import unispark.view.mobileview.university.UniversityHomeView;
-import unispark.view.mobileview.university.fragment.AddScheduleView;
-import unispark.view.mobileview.university.fragment.AddUniCommunicationView;
+import unispark.view.details.DetailsUniCommunicationView;
+import unispark.view.university.UniversityHomeView;
+import unispark.view.university.fragment.AddScheduleView;
+import unispark.view.university.fragment.AddUniCommunicationView;
 
 import java.util.List;
 

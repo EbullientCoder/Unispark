@@ -12,8 +12,8 @@ import unispark.engeneeringclasses.bean.professor.BeanProfessorDetails;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.engeneeringclasses.exceptions.GenericException;
 import unispark.engeneeringclasses.exceptions.LinkAlreadyExists;
-import unispark.view.mobileview.details.DetailsProfessorView;
-import unispark.view.mobileview.student.StudentLinksView;
+import unispark.view.details.DetailsProfessorView;
+import unispark.view.student.StudentLinksView;
 
 
 import java.util.List;

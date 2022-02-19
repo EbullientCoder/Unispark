@@ -9,7 +9,7 @@ import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
 import unispark.controller.appcontroller.communications.AddCommunication;
 import unispark.controller.guicontroller.UserBaseGuiController;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.university.fragment.AddUniCommunicationView;
+import unispark.view.university.fragment.AddUniCommunicationView;
 
 import java.util.List;
 

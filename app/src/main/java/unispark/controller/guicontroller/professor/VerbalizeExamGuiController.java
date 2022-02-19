@@ -6,7 +6,7 @@ import unispark.engeneeringclasses.bean.BeanStudentSignedToExam;
 import unispark.controller.appcontroller.exams.VerbalizeExam;
 import unispark.engeneeringclasses.exceptions.ExamNotYetOccured;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.professor.VerbalizeExamsView;
+import unispark.view.professor.VerbalizeExamsView;
 
 
 import java.util.List;

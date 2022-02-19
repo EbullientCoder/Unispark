@@ -3,7 +3,7 @@ package unispark.controller.guicontroller.details;
 
 
 import unispark.engeneeringclasses.bean.BeanHomework;
-import unispark.view.mobileview.details.DetailsHomeworkView;
+import unispark.view.details.DetailsHomeworkView;
 
 public class DetailsHomeworkGuiController{
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#272b2f"
     android:paddingEnd="15dp"
-    tools:context="unispark.view.mobileview.details.DetailsProfCommunicationView">
+    tools:context="unispark.view.details.DetailsProfCommunicationView">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout

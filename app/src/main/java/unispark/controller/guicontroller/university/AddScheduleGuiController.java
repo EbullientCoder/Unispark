@@ -10,7 +10,7 @@ import unispark.controller.appcontroller.schedule.AddSchedule;
 import unispark.controller.guicontroller.UserBaseGuiController;
 import unispark.engeneeringclasses.exceptions.GenericException;
 import unispark.engeneeringclasses.exceptions.LessonAlreadyExists;
-import unispark.view.mobileview.university.fragment.AddScheduleView;
+import unispark.view.university.fragment.AddScheduleView;
 
 import java.util.List;
 

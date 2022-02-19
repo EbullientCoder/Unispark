@@ -5,7 +5,7 @@
     android:background="#272b2f"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="unispark.view.mobileview.details.DetailsUniCommunicationView">
+    tools:context="unispark.view.details.DetailsUniCommunicationView">
 
     <!-- Image -->
     <androidx.cardview.widget.CardView

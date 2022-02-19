@@ -6,7 +6,7 @@ import unispark.engeneeringclasses.bean.BeanHomework;
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.professor.fragment.AddHomeworkView;
+import unispark.view.professor.fragment.AddHomeworkView;
 
 import java.util.List;
 

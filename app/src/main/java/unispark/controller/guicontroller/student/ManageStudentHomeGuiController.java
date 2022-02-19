@@ -9,10 +9,10 @@ import unispark.engeneeringclasses.bean.communications.BeanProfessorCommunicatio
 import unispark.engeneeringclasses.bean.communications.BeanUniCommunication;
 import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.controller.appcontroller.homeworks.ManageHomeworks;
-import unispark.view.mobileview.details.DetailsHomeworkView;
-import unispark.view.mobileview.details.DetailsProfCommunicationView;
-import unispark.view.mobileview.details.DetailsUniCommunicationView;
-import unispark.view.mobileview.student.StudentHomeView;
+import unispark.view.details.DetailsHomeworkView;
+import unispark.view.details.DetailsProfCommunicationView;
+import unispark.view.details.DetailsUniCommunicationView;
+import unispark.view.student.StudentHomeView;
 
 
 import java.util.Collections;

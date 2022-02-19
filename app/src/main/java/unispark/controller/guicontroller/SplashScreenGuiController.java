@@ -9,8 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import unispark.engeneeringclasses.others.Session;
-import unispark.view.mobileview.LoginView;
-import unispark.view.mobileview.SplashScreenView;
+import unispark.view.LoginView;
+import unispark.view.SplashScreenView;
 
 
 public class SplashScreenGuiController {

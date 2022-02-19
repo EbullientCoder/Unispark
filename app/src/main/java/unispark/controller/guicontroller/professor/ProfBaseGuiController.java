@@ -11,9 +11,9 @@ import com.example.unispark.R;
 import unispark.engeneeringclasses.others.Session;
 
 import unispark.controller.guicontroller.UserBaseGuiController;
-import unispark.view.mobileview.professor.ProfessorExamsView;
-import unispark.view.mobileview.professor.ProfessorHomeView;
-import unispark.view.mobileview.professor.ProfessorProfileView;
+import unispark.view.professor.ProfessorExamsView;
+import unispark.view.professor.ProfessorHomeView;
+import unispark.view.professor.ProfessorProfileView;
 
 
 public class ProfBaseGuiController extends UserBaseGuiController {

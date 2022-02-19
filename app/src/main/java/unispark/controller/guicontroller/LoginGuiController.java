@@ -11,10 +11,10 @@ import unispark.engeneeringclasses.bean.student.BeanLoggedStudent;
 import unispark.engeneeringclasses.bean.university.BeanLoggedUniversity;
 import unispark.engeneeringclasses.bean.login.BeanUser;
 import unispark.engeneeringclasses.exceptions.WrongUsernameOrPasswordException;
-import unispark.view.mobileview.LoginView;
-import unispark.view.mobileview.professor.ProfessorHomeView;
-import unispark.view.mobileview.student.StudentHomeView;
-import unispark.view.mobileview.university.UniversityHomeView;
+import unispark.view.LoginView;
+import unispark.view.professor.ProfessorHomeView;
+import unispark.view.student.StudentHomeView;
+import unispark.view.university.UniversityHomeView;
 
 import java.sql.SQLException;
 

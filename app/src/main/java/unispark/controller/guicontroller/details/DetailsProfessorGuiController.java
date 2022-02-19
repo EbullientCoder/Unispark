@@ -3,7 +3,7 @@ package unispark.controller.guicontroller.details;
 
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
 import unispark.engeneeringclasses.bean.professor.BeanProfessorDetails;
-import unispark.view.mobileview.details.DetailsProfessorView;
+import unispark.view.details.DetailsProfessorView;
 
 import java.util.List;
 

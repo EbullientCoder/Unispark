@@ -12,8 +12,8 @@ import unispark.controller.appcontroller.course.ManageCourses;
 import unispark.engeneeringclasses.exceptions.CourseAlreadyJoined;
 import unispark.engeneeringclasses.exceptions.CourseDoesNotExist;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.details.DetailsCourseView;
-import unispark.view.mobileview.student.fragment.JoinCourseView;
+import unispark.view.details.DetailsCourseView;
+import unispark.view.student.fragment.JoinCourseView;
 
 import java.util.List;
 

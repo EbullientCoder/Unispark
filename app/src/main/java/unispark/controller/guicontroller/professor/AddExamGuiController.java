@@ -7,7 +7,7 @@ import unispark.engeneeringclasses.bean.exams.BeanBookExam;
 import unispark.engeneeringclasses.bean.professor.BeanLoggedProfessor;
 import unispark.engeneeringclasses.exceptions.ExamAlreadyExists;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.professor.fragment.AddExamView;
+import unispark.view.professor.fragment.AddExamView;
 
 public class AddExamGuiController extends AddItemGuiController{
 

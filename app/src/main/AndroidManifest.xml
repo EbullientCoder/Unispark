@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Try"
         tools:replace="android:allowBackup" >
         <activity
-            android:name="unispark.view.mobileview.SplashScreenView"
+            android:name="unispark.view.SplashScreenView"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,60 +24,60 @@
 
 
         <activity
-            android:name="unispark.view.mobileview.LoginView"
+            android:name="unispark.view.LoginView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.view.mobileview.student.StudentHomeView"
+            android:name="unispark.view.student.StudentHomeView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.student.StudentExamsView"
+            android:name="unispark.view.student.StudentExamsView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.student.StudentLinksView"
+            android:name="unispark.view.student.StudentLinksView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.student.StudentProfileView"
+            android:name="unispark.view.student.StudentProfileView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.student.StudentScheduleView"
-            android:exported="true" />
-
-
-        <activity
-            android:name="unispark.view.mobileview.professor.ProfessorHomeView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.view.mobileview.professor.ProfessorExamsView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.view.mobileview.professor.ProfessorProfileView"
-            android:exported="true" />
-        <activity
-            android:name="unispark.view.mobileview.professor.VerbalizeExamsView"
+            android:name="unispark.view.student.StudentScheduleView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.view.mobileview.university.UniversityHomeView"
+            android:name="unispark.view.professor.ProfessorHomeView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.professor.ProfessorExamsView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.professor.ProfessorProfileView"
+            android:exported="true" />
+        <activity
+            android:name="unispark.view.professor.VerbalizeExamsView"
             android:exported="true" />
 
 
         <activity
-            android:name="unispark.view.mobileview.details.DetailsCourseView"
+            android:name="unispark.view.university.UniversityHomeView"
+            android:exported="true" />
+
+
+        <activity
+            android:name="unispark.view.details.DetailsCourseView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.details.DetailsHomeworkView"
+            android:name="unispark.view.details.DetailsHomeworkView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.details.DetailsProfCommunicationView"
+            android:name="unispark.view.details.DetailsProfCommunicationView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.details.DetailsProfessorView"
+            android:name="unispark.view.details.DetailsProfessorView"
             android:exported="true" />
         <activity
-            android:name="unispark.view.mobileview.details.DetailsUniCommunicationView"
+            android:name="unispark.view.details.DetailsUniCommunicationView"
             android:exported="true" />
 
 

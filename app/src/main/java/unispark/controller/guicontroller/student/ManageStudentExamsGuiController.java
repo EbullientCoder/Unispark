@@ -9,7 +9,7 @@ import unispark.controller.appcontroller.exams.BookExam;
 import unispark.controller.appcontroller.exams.ManageExams;
 import unispark.engeneeringclasses.exceptions.ExamAlreadyVerbalized;
 import unispark.engeneeringclasses.exceptions.GenericException;
-import unispark.view.mobileview.student.StudentExamsView;
+import unispark.view.student.StudentExamsView;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:windowSoftInputMode="adjustPan"
-    tools:context="unispark.view.mobileview.student.StudentLinksView"
+    tools:context="unispark.view.student.StudentLinksView"
     android:background="#212529">
 
     <!-- Main -->

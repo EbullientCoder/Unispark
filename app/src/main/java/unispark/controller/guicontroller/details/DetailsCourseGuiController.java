@@ -3,7 +3,7 @@ package unispark.controller.guicontroller.details;
 
 
 import unispark.engeneeringclasses.bean.courses.BeanCourse;
-import unispark.view.mobileview.details.DetailsCourseView;
+import unispark.view.details.DetailsCourseView;
 
 public class DetailsCourseGuiController extends DetailsGuiController{
 
